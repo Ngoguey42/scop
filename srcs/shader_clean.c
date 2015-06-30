@@ -1,23 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   shader_init.c                                      :+:      :+:    :+:   */
+/*   shader_clean.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/06/30 15:42:41 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/06/30 16:15:31 by ngoguey          ###   ########.fr       */
+/*   Created: 2015/06/30 16:49:56 by ngoguey           #+#    #+#             */
+/*   Updated: 2015/06/30 16:52:54 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
 
-int				sp_init_shaders(t_env *e)
+void				sp_clean_shaders(t_env *e)
 {
-	if (sp_create_shader(VSHADER_PATH, GL_VERTEX_SHADER, &e->vert_shader))
-		return (DEBUG("Error while loading vertex shader"), 1);
-	if (sp_create_shader(FSHADER_PATH, GL_FRAGMENT_SHADER, &e->frag_shader))
-		return (DEBUG("Error while loading fragment shader"), 1);
-	
-	return (0);
+	glDetachShader(e->program_shader, e->vert_shader);
+	glDeleteShader(e->vert_shader);
+	glDetachShader(e->program_shader, e->frag_shader);
+	glDeleteShader(e->frag_shader);
+	glDeleteProgram(e->program_shader);
 }

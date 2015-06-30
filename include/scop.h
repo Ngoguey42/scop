@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 12:07:31 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/06/30 16:14:52 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/06/30 16:50:26 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ t_env				*sp_instance(void);
 int					sp_create_shader(char const *filepath, GLenum type,
 									GLuint *ptr);
 int					sp_init_shaders(t_env *e);
+void				sp_clean_shaders(t_env *e);
 
 /*
 ** ERRORS

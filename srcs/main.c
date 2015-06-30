@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 11:48:41 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/06/30 16:05:33 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/06/30 16:50:11 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ void					hellotriangle(void)
 	return ;
 }
 
-#include <fcntl.h>
 int						main(int ac, char *av[])
 {
 	t_env		e[1];
@@ -44,7 +43,7 @@ int						main(int ac, char *av[])
 		return (DEBUG("Scop: Could not init shaders"), 1);
 	(void)ac;
 	(void)av;
-	while (e->loop && !glfwWindowShouldClose(e->win))
+	while (!glfwWindowShouldClose(e->win))
 	{
 		glClearColor(0.3f, 0.3f, 0.3f, 1.f);
 		glClear(GL_COLOR_BUFFER_BIT);
@@ -57,6 +56,8 @@ int						main(int ac, char *av[])
 		glfwSwapBuffers(e->win);
 		glfwPollEvents();
 	}
+	sp_clean_shaders(e);
 	sp_disable_glfw(e);
+	ft_leaks();
 	return (0);
 }

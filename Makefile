@@ -46,8 +46,9 @@ O_FILES := obj/srcs/env_init.o \
 	obj/srcs/error.o \
 	obj/srcs/ft_glfw_core.o \
 	obj/srcs/main.o \
+	obj/srcs/shader_clean.o \
 	obj/srcs/shader_create.o \
-	obj/srcs/shader_init.o
+	obj/srcs/shaders_init.o
 
 MSG_0 := printf '\033[0;32m%-24.24s\033[0;0m\r'
 MSG_1 := printf '\033[0;31m%-24.24s\033[0;0m\n'
@@ -77,11 +78,15 @@ obj/srcs/main.o: srcs/main.c include/ftmath.h include/scop.h include/scop_struct
 	@mkdir -p obj/srcs 2> /dev/null || true
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
+obj/srcs/shader_clean.o: srcs/shader_clean.c include/ftmath.h include/scop.h include/scop_structs.h
+	@mkdir -p obj/srcs 2> /dev/null || true
+	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
+
 obj/srcs/shader_create.o: srcs/shader_create.c include/ftmath.h include/scop.h include/scop_structs.h
 	@mkdir -p obj/srcs 2> /dev/null || true
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
-obj/srcs/shader_init.o: srcs/shader_init.c include/ftmath.h include/scop.h include/scop_structs.h
+obj/srcs/shaders_init.o: srcs/shaders_init.c include/ftmath.h include/scop.h include/scop_structs.h
 	@mkdir -p obj/srcs 2> /dev/null || true
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
