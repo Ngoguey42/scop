@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 13:06:40 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/06/30 13:55:22 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/06/30 13:58:07 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ t_env			*sp_instance(void)
 int				sp_init_env(t_env *e)
 {
 	ft_bzero(e, sizeof(*e));
+	sp_register_instance(e);
 	e->loop = true;
 	return (0);
 }
