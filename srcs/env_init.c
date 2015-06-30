@@ -1,33 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   env_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/06/30 11:48:41 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/06/30 13:19:16 by ngoguey          ###   ########.fr       */
+/*   Created: 2015/06/30 13:06:40 by ngoguey           #+#    #+#             */
+/*   Updated: 2015/06/30 13:09:09 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
 
-int						main(int ac, char *av[])
+int				sp_init_env(t_env *e)
 {
-	t_env		e[1];
-
-	if (sp_init_env(e))
-		return (DEBUG("Could not init env"), 1);
-	if (sp_init_glfw(e))
-		return (DEBUG("Could not init glfw"), 1);
-	(void)ac;
-	(void)av;
-	while (e->loop && !glfwWindowShouldClose(e->win))
-	{
-		
-		/* glfwSwapBuffers(window); */
-		glfwPollEvents();
-	}
-	sp_disable_glfw(e);
+	ft_bzero(e, sizeof(*e));
+	e->loop = true;
 	return (0);
 }

@@ -33,7 +33,7 @@ LD_CC := clang
 C_FLAGS := -Wall -Wextra -O2 -g
 
 # Linking flags
-LD_FLAGS := -L ~/.brew/lib -lglfw3 -L libft -lft
+LD_FLAGS := -L ~/.brew/lib -lglfw3 -L libft -lft -framework OpenGL
 
 # C include flags
 C_HEADS := -I include -I libft/includes -I ~/.brew/include
@@ -43,11 +43,11 @@ C_HEADS := -I include -I libft/includes -I ~/.brew/include
 #
 
 O_FILES := obj/srcs/env_init.o \
-	obj/srcs/ft_glfw.o \
+	obj/srcs/ft_glfw_core.o \
 	obj/srcs/main.o
 
-MSG_0 := printf '\033[0;32m%-19.19s\033[0;0m\r'
-MSG_1 := printf '\033[0;31m%-19.19s\033[0;0m\n'
+MSG_0 := printf '\033[0;32m%-23.23s\033[0;0m\r'
+MSG_1 := printf '\033[0;31m%-23.23s\033[0;0m\n'
 MSG_END := printf '\n'
 
 .SILENT:
@@ -62,7 +62,7 @@ obj/srcs/env_init.o: srcs/env_init.c include/ftmath.h include/scop.h include/sco
 	@mkdir -p obj/srcs 2> /dev/null || true
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
-obj/srcs/ft_glfw.o: srcs/ft_glfw.c include/ftmath.h include/scop.h include/scop_structs.h
+obj/srcs/ft_glfw_core.o: srcs/ft_glfw_core.c include/ftmath.h include/scop.h include/scop_structs.h
 	@mkdir -p obj/srcs 2> /dev/null || true
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
