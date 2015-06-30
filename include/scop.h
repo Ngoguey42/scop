@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 12:07:31 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/06/30 13:53:35 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/06/30 16:14:52 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,21 @@
 ** DEBUG
 */
 # include "ft_debug.h"
-# define DEBUG(ARG) lprintf("%s", (ARG))
-# define DEBUGF(...) lprintf(__VA_ARGS__)
+# define DEBUG(ARG) qprintf("%s\n", (ARG))
+# define DEBUGF(...) qprintf(__VA_ARGS__), ft_putchar_fd('\n', 2)
+
+/*
+** ERROR
+*/
 
 /*
 ** CONFIG MACROES
 */
 #define WIN_WIDTHI 1000
 #define WIN_RATIOF (4.f / 3.f)
+#define SHADERS_PATH "srcs/shaders/"
+#define VSHADER_PATH (SHADERS_PATH "scop.vert")
+#define FSHADER_PATH (SHADERS_PATH "scop.frag")
 
 /*
 ** CALCULATED MACROES
@@ -49,5 +56,16 @@ int					sp_init_glfw(t_env *e);
 void				sp_disable_glfw(t_env *e);
 t_env				*sp_instance(void);
 
+/*
+** SHADER FUNCTIONS
+*/
+int					sp_create_shader(char const *filepath, GLenum type,
+									GLuint *ptr);
+int					sp_init_shaders(t_env *e);
+
+/*
+** ERRORS
+*/
+void				sp_enomem(void);
 
 #endif

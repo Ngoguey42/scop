@@ -1,30 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   scop_structs.h                                     :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/06/30 12:48:16 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/06/30 15:47:04 by ngoguey          ###   ########.fr       */
+/*   Created: 2015/06/30 15:07:55 by ngoguey           #+#    #+#             */
+/*   Updated: 2015/06/30 15:10:17 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SCOP_STRUCTS_H
-# define SCOP_STRUCTS_H
+#include "scop.h"
+#include <stdlib.h>
 
-# include "libft.h"
-# include <GLFW/glfw3.h>
-
-typedef struct				s_env
+void				sp_enomem(void)
 {
-	t_bool					loop;
-	GLFWwindow				*win;
-
-	
-	GLuint	program_shader;
-	GLuint	vert_shader;
-	GLuint	frag_shader;
-}							t_env;
-
-#endif
+	ft_putendl_fd("ENOMEM", 2);
+	exit(1);
+}

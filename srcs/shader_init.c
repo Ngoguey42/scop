@@ -1,30 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   scop_structs.h                                     :+:      :+:    :+:   */
+/*   shader_init.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/06/30 12:48:16 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/06/30 15:47:04 by ngoguey          ###   ########.fr       */
+/*   Created: 2015/06/30 15:42:41 by ngoguey           #+#    #+#             */
+/*   Updated: 2015/06/30 16:15:31 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SCOP_STRUCTS_H
-# define SCOP_STRUCTS_H
+#include "scop.h"
 
-# include "libft.h"
-# include <GLFW/glfw3.h>
-
-typedef struct				s_env
+int				sp_init_shaders(t_env *e)
 {
-	t_bool					loop;
-	GLFWwindow				*win;
-
+	if (sp_create_shader(VSHADER_PATH, GL_VERTEX_SHADER, &e->vert_shader))
+		return (DEBUG("Error while loading vertex shader"), 1);
+	if (sp_create_shader(FSHADER_PATH, GL_FRAGMENT_SHADER, &e->frag_shader))
+		return (DEBUG("Error while loading fragment shader"), 1);
 	
-	GLuint	program_shader;
-	GLuint	vert_shader;
-	GLuint	frag_shader;
-}							t_env;
-
-#endif
+	return (0);
+}

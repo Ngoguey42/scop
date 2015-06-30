@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 13:18:23 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/06/30 13:57:44 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/06/30 16:11:53 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,13 @@ static void key_callback(GLFWwindow* window, int key, int a, int action, int b)
 	(void)b;
 }
 
+#include <fcntl.h>
+#include <stdlib.h>
+
 int			sp_init_glfw(t_env *e)
 {
 	glfwSetErrorCallback(error_callback);
-	if (!glfwInit())
-		return (DEBUG("Could not init glfw"), 1);
+	glfwInit();
 	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 	glfwWindowHint(GLFW_SAMPLES, 8);
 	glfwWindowHint(GLFW_DOUBLEBUFFER, GL_TRUE);
