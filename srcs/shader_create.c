@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 15:14:42 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/06/30 17:45:54 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/06/30 17:46:54 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,9 @@ static int		sp_load_shader(char const *filepath, char **ptr)
 		return (DEBUGF("Could not open %s \"\033[35m%s\033[0m\"",
 					   filepath, strerror(errno)), 1);
 	*ptr = NULL;
-	while (bzero(buffer, sizeof(buffer)),
-			(ret = read(fd, buffer, sizeof(buffer) - 1)) > 0)
+	while ((ret = read(fd, buffer, sizeof(buffer) - 1)) > 0)
 	{
+		buffer[ret] = '\0';
 		if (*ptr == NULL)
 			*ptr = ft_strdup(buffer);
 		else

@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 12:48:16 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/06/30 15:47:04 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/06/30 17:56:10 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ typedef struct				s_env
 	GLuint	program_shader;
 	GLuint	vert_shader;
 	GLuint	frag_shader;
+	GLuint	vao;
+	GLuint	vab;
 }							t_env;
 
 #endif

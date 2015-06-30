@@ -6,13 +6,14 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 12:07:31 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/06/30 16:50:26 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/06/30 18:15:25 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SCOP_H
 # define SCOP_H
 
+# define GLFW_INCLUDE_GLCOREARB
 # include <GLFW/glfw3.h>
 
 # include "libft.h"
