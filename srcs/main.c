@@ -6,42 +6,26 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 11:48:41 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/06/30 12:57:02 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/06/30 13:12:39 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include <GLFW/glfw3.h>
-
-# include "scop.h"
-
-static void error_callback(int error, const char* description)
-{
-	(void)error;
-	(void)description;
-}
-
-static void key_callback(GLFWwindow* window, int key, int a, int action, int b)
-{
-	(void)window;
-	(void)key;
-	(void)action;
-	(void)a;
-	(void)b;
-}
+#include "scop.h"
 
 int						main(int ac, char *av[])
 {
 	t_env		e[1];
 
-	glfwSetErrorCallback(error_callback);
-	if (!glfwInit())
-		return (1);
-	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
-	glfwWindowHint(GLFW_SAMPLES, 8);
-	(void)glfwCreateWindow(WIN_WIDTHI, WIN_HEIGHTI, "Scop", NULL, NULL);
+	if (sp_init_env(e))
+		return (DEBUG("Could not init env"), 1);
+	if (sp_init_glfw(e))
+		return (DEBUG("Could not init glfw"), 1);
 	(void)ac;
 	(void)av;
-	while (e->loop);
-	
+	while (e->loop)
+	{
+		
+	}
+	sp_disable_glfw(e);
 	return (0);
 }

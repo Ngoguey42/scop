@@ -42,10 +42,12 @@ C_HEADS := -I include -I libft/includes -I ~/.brew/include
 # Internal
 #
 
-O_FILES := obj/srcs/main.o
+O_FILES := obj/srcs/env_init.o \
+	obj/srcs/ft_glfw.o \
+	obj/srcs/main.o
 
-MSG_0 := printf '\033[0;32m%-15.15s\033[0;0m\r'
-MSG_1 := printf '\033[0;31m%-15.15s\033[0;0m\n'
+MSG_0 := printf '\033[0;32m%-19.19s\033[0;0m\r'
+MSG_1 := printf '\033[0;31m%-19.19s\033[0;0m\n'
 MSG_END := printf '\n'
 
 .SILENT:
@@ -55,6 +57,14 @@ all: $(LIBS) $(NAME)
 
 $(NAME): $(O_FILES)
 	@$(MSG_0) $@ ; $(LD_CC) -o $@ $(O_FILES) $(LD_FLAGS) && $(MSG_END) || $(MSG_1) $@
+
+obj/srcs/env_init.o: srcs/env_init.c include/ftmath.h include/scop.h include/scop_structs.h
+	@mkdir -p obj/srcs 2> /dev/null || true
+	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
+
+obj/srcs/ft_glfw.o: srcs/ft_glfw.c include/ftmath.h include/scop.h include/scop_structs.h
+	@mkdir -p obj/srcs 2> /dev/null || true
+	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
 obj/srcs/main.o: srcs/main.c include/ftmath.h include/scop.h include/scop_structs.h
 	@mkdir -p obj/srcs 2> /dev/null || true
