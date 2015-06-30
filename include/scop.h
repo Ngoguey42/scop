@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 12:07:31 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/06/30 13:12:50 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/06/30 13:53:35 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@
 int					sp_init_env(t_env *e);
 int					sp_init_glfw(t_env *e);
 void				sp_disable_glfw(t_env *e);
+t_env				*sp_instance(void);
 
 
 #endif

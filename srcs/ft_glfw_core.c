@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 13:18:23 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/06/30 13:43:42 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/06/30 13:56:51 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,13 @@ static void error_callback(int error, const char* description)
 
 static void key_callback(GLFWwindow* window, int key, int a, int action, int b)
 {
-	(void)window;
-	(void)key;
+	t_env		*e;
+
+	e = sp_instance();
+	if (key == GLFW_KEY_ESCAPE || key == GLFW_KEY_Q)
+		glfwSetWindowShouldClose(window, GL_TRUE);
 	(void)action;
+	(void)e;
 	(void)a;
 	(void)b;
 }
@@ -45,6 +49,7 @@ int			sp_init_glfw(t_env *e)
 	e->win = glfwCreateWindow(WIN_WIDTHI, WIN_HEIGHTI, "Scop", NULL, NULL);
 	if (!e->win)
 		return (glfwTerminate(), DEBUG("Could not create window"), 1);
+	glfwSetKeyCallback(e->win, key_callback);
 	glfwMakeContextCurrent(e->win);
 	glViewport(0, 0, WIN_WIDTHI, WIN_HEIGHTI);
 	return (0);
