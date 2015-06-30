@@ -6,14 +6,19 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 12:07:31 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/06/30 12:21:51 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/06/30 12:49:53 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SCOP_H
 # define SCOP_H
 
+
+# include "libft.h"
+
 # include "ftmath.h"
+# include "scop_structs.h"
+
 
 /*
 ** CONFIG MACROES

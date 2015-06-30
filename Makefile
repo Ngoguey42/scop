@@ -18,7 +18,7 @@ DIRS := srcs include
 O_DIR := obj
 
 # Makefiles to call
-LIBS := 
+LIBS := libft
 
 # Number of threads
 THREADS := 1
@@ -33,10 +33,10 @@ LD_CC := clang
 C_FLAGS := -Wall -Wextra -O2 -g
 
 # Linking flags
-LD_FLAGS := -L ~/.brew/lib -lglfw3
+LD_FLAGS := -L ~/.brew/lib -lglfw3 -L libft -lft
 
 # C include flags
-C_HEADS := -I include -I ~/.brew/include 
+C_HEADS := -I include -I libft/includes -I ~/.brew/include
 
 #
 # Internal
@@ -56,7 +56,7 @@ all: $(LIBS) $(NAME)
 $(NAME): $(O_FILES)
 	@$(MSG_0) $@ ; $(LD_CC) -o $@ $(O_FILES) $(LD_FLAGS) && $(MSG_END) || $(MSG_1) $@
 
-obj/srcs/main.o: srcs/main.c include/ftmath.h include/scop.h
+obj/srcs/main.o: srcs/main.c include/ftmath.h include/scop.h include/scop_structs.h
 	@mkdir -p obj/srcs 2> /dev/null || true
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 

@@ -1,29 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ftmath.h                                           :+:      :+:    :+:   */
+/*   scop_structs.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/06/30 12:16:50 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/06/30 12:52:55 by ngoguey          ###   ########.fr       */
+/*   Created: 2015/06/30 12:48:16 by ngoguey           #+#    #+#             */
+/*   Updated: 2015/06/30 12:53:17 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FTMATH_H
-# define FTMATH_H
+#ifndef SCOP_STRUCTS_H
+# define SCOP_STRUCTS_H
 
 # include "libft.h"
 
-/*
-** Macroes
-*/
-/* #define MIN(A, B) () */
-/* #define MAX(A, B) () */
-/* #define ABS(A) () */
-
-#define FLOORF(A) ()
-#define CEILF(A) ()
-#define ROUND_FTOI(A) ((A) > 0.f ? (int)((A) + 0.5f) : (int)((A) - 0.5f))
+typedef struct				s_env
+{
+	t_bool					loop;
+}							t_env;
 
 #endif
