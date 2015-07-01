@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 12:48:16 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/06/30 17:56:10 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/01 13:08:08 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,36 @@
 # include "libft.h"
 # include <GLFW/glfw3.h>
 
+
+/*
+** SHADERS
+*/
+typedef struct				s_shader_metadata
+{
+	char					*filepath;
+	GLenum					type;
+}							t_shader_metadata;
+
+/*
+** PROGRAMS
+*/
+typedef struct				s_program_metadata
+{
+	GLuint					vertex_shaderid;
+	GLuint					fragment_shaderid;
+	int						num_attrib_locations;
+	char					*attrib_locations[64];
+}							t_program_metadata;
+
 typedef struct				s_env
 {
 	t_bool					loop;
 	GLFWwindow				*win;
 
-	
-	GLuint	program_shader;
-	GLuint	vert_shader;
-	GLuint	frag_shader;
-	GLuint	vao;
-	GLuint	vab;
+	GLuint					shaders[sc_num_shaders];
+	GLuint					programs[sc_num_programs];
+	GLuint					vao;
+	GLuint					vab;
 }							t_env;
 
 #endif

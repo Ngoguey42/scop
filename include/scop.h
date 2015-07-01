@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 12:07:31 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/06/30 18:15:25 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/01 13:00:06 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include "libft.h"
 
 # include "ftmath.h"
+# include "config.h"
 # include "scop_structs.h"
 
 /*
@@ -33,22 +34,6 @@
 */
 
 /*
-** CONFIG MACROES
-*/
-#define WIN_WIDTHI 1000
-#define WIN_RATIOF (4.f / 3.f)
-#define SHADERS_PATH "srcs/shaders/"
-#define VSHADER_PATH (SHADERS_PATH "scop.vert")
-#define FSHADER_PATH (SHADERS_PATH "scop.frag")
-
-/*
-** CALCULATED MACROES
-*/
-#define WIN_WIDTHF ((float)WIN_WIDTHI)
-#define WIN_HEIGHTF (WIN_WIDTHF / WIN_RATIOF)
-#define WIN_HEIGHTI ROUND_FTOI(WIN_HEIGHTF)
-
-/*
 ** PROTOTYPES
 ** CORE FUNCTIONS
 */
@@ -60,10 +45,13 @@ t_env				*sp_instance(void);
 /*
 ** SHADER FUNCTIONS
 */
-int					sp_create_shader(char const *filepath, GLenum type,
-									GLuint *ptr);
 int					sp_init_shaders(t_env *e);
-void				sp_clean_shaders(t_env *e);
+void				sp_delete_shaders(t_env *e);
+
+int					sp_init_programs(t_env *e);
+void				sp_delete_programs(t_env *e);
+
+
 
 /*
 ** ERRORS

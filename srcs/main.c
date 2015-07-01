@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 11:48:41 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/06/30 18:16:17 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/01 13:09:11 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,13 @@ int						main(int ac, char *av[])
 	t_env		e[1];
 
 	if (sp_init_env(e))
-		return (DEBUG("Scop: Could not init env"), 1);
+		return (DEBUG("Scop: sp_init_env failed..."), 1);
 	if (sp_init_glfw(e))
-		return (DEBUG("Scop: Could not init glfw"), 1);
+		return (DEBUG("Scop: sp_init_glfw failed..."), 1);
 	if (sp_init_shaders(e))
-		return (DEBUG("Scop: Could not init shaders"), 1);
+		return (DEBUG("Scop: sp_init_shaders failed..."), 1);
+	if (sp_init_programs(e))
+		return (DEBUG("Scop: sp_init_programs failed..."), 1);
 	(void)ac;
 	(void)av;
 
@@ -31,16 +33,14 @@ int						main(int ac, char *av[])
 		0.0f,  0.5f, 0.0f
 	};
 
-	glUseProgram(e->program_shader);
-	/* glGenVertexArrays(1, &vertex_array_id); */
+	glUseProgram(e->programs[sc_basic_program]);
+
 	glGenVertexArrays(1, &e->vao);
 	glBindVertexArray(e->vao);
 	{
 		glGenBuffers(1, &e->vab);
 		glBindBuffer(GL_ARRAY_BUFFER, e->vab);
 		glBufferData(GL_ARRAY_BUFFER,
-					 /* npoints, */
-					 /* sizeof(GLfloat) * 3 * npoints, */
 					 sizeof(vertices),
 					 vertices,
 					 GL_STATIC_DRAW
@@ -68,8 +68,9 @@ int						main(int ac, char *av[])
 		glfwSwapBuffers(e->win);
 		glfwPollEvents();
 	}
-	sp_clean_shaders(e);
+	sp_delete_programs(e);
+	sp_delete_shaders(e);
 	sp_disable_glfw(e);
-	ft_leaks();
+	/* ft_leaks(); */
 	return (0);
 }
