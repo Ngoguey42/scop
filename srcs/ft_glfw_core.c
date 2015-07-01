@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 13:18:23 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/06/30 17:26:17 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/01 19:08:25 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ int			sp_init_glfw(t_env *e)
 	glfwSetKeyCallback(e->win, key_callback);
 	glfwMakeContextCurrent(e->win);
 	glViewport(0, 0, WIN_WIDTHI, WIN_HEIGHTI);
+	glEnable(GL_DEPTH_TEST);
 	return (0);
 }
 

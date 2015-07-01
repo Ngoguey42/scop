@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 12:48:16 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/01 13:13:25 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/01 18:35:20 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ typedef struct				s_env
 	GLuint					programs[sc_num_programs];
 	GLuint					vao;
 	GLuint					vab;
+	GLuint					ebo;
 }							t_env;
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/01 12:09:19 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/01 17:16:35 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/01 18:32:22 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ typedef enum				s_program_index
 	sc_num_programs
 }							t_program_index;
 
-# define PROGATT1 {sc_basic_vertex, sc_basic_fragment, 1, {"position"}},
+# define PROGATT1 {sc_basic_vertex, sc_basic_fragment, 2, {"position", "color"}},
 # define PROGRAMS_ATTRIBUTES_LIST PROGATT1
 
 /*
