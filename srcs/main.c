@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 11:48:41 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/01 13:27:52 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/01 15:09:01 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,22 @@ int						main(int ac, char *av[])
 
 	glUseProgram(PROG0);
 	GLuint transformLoc = glGetUniformLocation(PROG0, "transform");
-	GLfloat mat[] = {
-		0.5f, 0.0f, 0.0f, 0.0f,
-		0.0f, 1.0f, 0.0f, 0.0f,
-		0.0f, 0.0f, 1.0f, 0.0f,
-		0.0f, 0.0f, 0.0f, 1.0f		
-	};
-	glUniformMatrix4fv(transformLoc, 1, GL_FALSE, mat);
+	/* GLfloat mat[] = { */
+	/* 	0.5f, 0.0f, 0.0f, 0.0f, */
+	/* 	0.0f, 1.0f, 0.0f, 0.0f, */
+	/* 	0.0f, 0.0f, 1.0f, 0.0f, */
+	/* 	0.0f, 0.0f, 0.0f, 1.0f		 */
+	/* }; */
+	t_matrix4		mat;
+	/* mat = m4_scale_uniform(0.5f); */
+	/* mat = m4_scaleref_uniform(&mat, 1.g5f); */
+	/* mat = m4_translate_uniform(0.f); */
+	mat = m4_translate_nonuniform((float [3]){-0.25f, 0.0f, 0.0f});
+	/* mat = m4_translate_nonuniform((float [3]){0.0f, 0.0f, 0.9f}); */
+	m4_print(mat);
+	/* mat = m4_translate_nonuniform((float [3]){0.5f, 0.f, 0.f}); */
+	glUniformMatrix4fv(transformLoc, 1, GL_TRUE, (float*)&mat);
+	/* glUniformMatrix4fv(transformLoc, 1, GL_FALSE, (float*)&mat); */
 	
 	
 	build_mesh(e);
