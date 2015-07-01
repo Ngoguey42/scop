@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 12:07:31 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/01 13:24:11 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/01 17:53:56 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ void				sp_delete_shaders(t_env *e);
 
 int					sp_init_programs(t_env *e);
 void				sp_delete_programs(t_env *e);
-
 
 
 /*

@@ -6,12 +6,13 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 11:48:41 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/01 15:39:39 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/01 17:59:42 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
 #include <math.h>
+/* #include <glm/glm.hpp> */
 
 void					build_mesh(t_env *e)
 {
@@ -54,26 +55,7 @@ int						main(int ac, char *av[])
 	(void)ac;
 	(void)av;
 
-	glUseProgram(PROG0);
-	GLuint transformLoc = glGetUniformLocation(PROG0, "transform");
-	/* GLfloat mat[] = { */
-	/* 	0.5f, 0.0f, 0.0f, 0.0f, */
-	/* 	0.0f, 1.0f, 0.0f, 0.0f, */
-	/* 	0.0f, 0.0f, 1.0f, 0.0f, */
-	/* 	0.0f, 0.0f, 0.0f, 1.0f		 */
-	/* }; */
-	t_matrix4		mat = m4_scale_uniform(1.f);
 
-	/* mat = m4_scaleref_uniform(&mat, 1.5f); */
-	mat = m4_scaleref_uniform(&mat, 0.25f);
-
-	mat = m4_rotationref_axis(&mat, x_axis, M_PI / 2);
-	
-	mat = m4_translateref_nonuniform(&mat, (float [3]){-0.55f, 0.0f, 0.0f});
-
-	m4_print(mat);
-	glUniformMatrix4fv(transformLoc, 1, GL_TRUE, (float*)&mat);
-	
 	
 	build_mesh(e);
 	
@@ -81,7 +63,21 @@ int						main(int ac, char *av[])
 	{
 		glClearColor(0.3f, 0.3f, 0.3f, 1.f);
 		glClear(GL_COLOR_BUFFER_BIT);
+		glUseProgram(PROG0);
+	
+		t_matrix4		mat = m4_scale_uniform(1.f);
+		mat = m4_translateref_nonuniform(&mat, (float [3]){-0.55f, 0.0f, 0.0f});
 		
+		mat = m4_rotationref_axis(&mat, x_axis, 1.2 * (GLfloat)glfwGetTime());
+		/* mat = m4_rotationref_axis(&mat, y_axis, 1.4 * (GLfloat)glfwGetTime()); */
+		/* mat = m4_rotationref_axis(&mat, z_axis, 1.6 * (GLfloat)glfwGetTime()); */
+	
+		mat = m4_scaleref_uniform(&mat, 0.25f);
+		
+		GLuint transformLoc = glGetUniformLocation(PROG0, "transform");
+		glUniformMatrix4fv(transformLoc, 1, GL_TRUE, (float*)&mat);
+	
+
 		/* draw mesh */
 		glBindVertexArray(e->vao);
 		glDrawArrays(GL_TRIANGLES, 0, 3);

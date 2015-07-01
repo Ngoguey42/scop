@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/01 12:09:19 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/01 13:13:32 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/01 17:16:35 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ typedef enum				s_program_index
 ** CONFIG MACROES
 */
 # define WIN_WIDTHI 1000
-# define WIN_RATIOF (4.f / 3.f)
+# define WIN_RATIOF (4.f / 4.f)
+/* # define WIN_RATIOF (4.f / 3.f) */
 
 /*
 ** CALCULATED MACROES
