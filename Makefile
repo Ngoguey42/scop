@@ -47,6 +47,7 @@ O_FILES := obj/srcs/env_init.o \
 	obj/srcs/ft_glfw_core.o \
 	obj/srcs/main.o \
 	obj/srcs/matrix4.o \
+	obj/srcs/matrix4_rotation.o \
 	obj/srcs/matrix4_scale.o \
 	obj/srcs/matrix4_translate.o \
 	obj/srcs/program_operations.o \
@@ -81,6 +82,10 @@ obj/srcs/main.o: srcs/main.c include/config.h include/ftmath.h include/scop.h in
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
 obj/srcs/matrix4.o: srcs/matrix4.c include/config.h include/ftmath.h include/scop.h include/scop_structs.h
+	@mkdir -p obj/srcs 2> /dev/null || true
+	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
+
+obj/srcs/matrix4_rotation.o: srcs/matrix4_rotation.c include/config.h include/ftmath.h include/scop.h include/scop_structs.h
 	@mkdir -p obj/srcs 2> /dev/null || true
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
