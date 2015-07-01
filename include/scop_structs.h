@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 12:48:16 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/01 13:08:08 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/01 13:13:25 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,9 @@ typedef struct				s_program_metadata
 	char					*attrib_locations[64];
 }							t_program_metadata;
 
+/*
+** ENV
+*/
 typedef struct				s_env
 {
 	t_bool					loop;

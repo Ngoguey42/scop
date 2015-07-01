@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/01 12:32:53 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/01 13:03:55 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/01 13:10:54 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ static int		new_program(int index, GLuint *ptr, t_env const *e)
 	glValidateProgram(*ptr);
 	if (check_program_error(*ptr, GL_LINK_STATUS))
 		return (DEBUG("glValidateProgram failed"), 1);
-	
 	return (0);
 }
 
@@ -73,7 +72,7 @@ void			sp_delete_programs(t_env *e)
 
 int				sp_init_programs(t_env *e)
 {
-	int     i;
+	int		i;
 
 	i = 0;
 	while (i < sc_num_programs)

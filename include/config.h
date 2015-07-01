@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/01 12:09:19 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/01 13:06:47 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/01 13:13:32 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,6 @@ typedef enum				s_program_index
 */
 # define WIN_WIDTHI 1000
 # define WIN_RATIOF (4.f / 3.f)
-# define VSHADER_PATH (SHADERS_PATH "scop.vert")
-# define FSHADER_PATH (SHADERS_PATH "scop.frag")
 
 /*
 ** CALCULATED MACROES
