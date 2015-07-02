@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/02 12:23:45 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/02 13:50:27 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/02 17:44:47 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,11 @@
 
 int			sp_init_objs(t_env *e)
 {
-	t_objmodel		*const models = e->models.data;
+	t_objmodel		*models;
 	t_objmodel		*m;
 	size_t			i;
 
+	models = e->models.data;
 	i = 0;
 	while (i < e->models.size)
 	{
@@ -44,9 +45,16 @@ int			sp_init_objs(t_env *e)
 
 void		sp_clean_models(void *modelptr)
 {
-	t_objmodel		*const m = modelptr;
+	t_objmodel		*m;
 
+	m = modelptr;
 	free(m->filepath);
+	if (m->mtllib)
+		free(m->mtllib);
+	if (m->name)
+		free(m->name);
+	if (m->usemtl)
+		free(m->usemtl);
 	ftv_release(&m->vertices, NULL);
 	ftv_release(&m->faces, NULL);
 	return ;
@@ -56,6 +64,7 @@ void		sp_register_obj(t_env *e, char const *filepath)
 {
 	t_objmodel		m;
 
+	bzero(&m, sizeof(m));
 	m.filepath = strdup(filepath);
 	if (m.filepath == NULL)
 		sp_enomem();

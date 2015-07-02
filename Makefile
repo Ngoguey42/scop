@@ -53,6 +53,7 @@ O_FILES := obj/srcs/env_operations.o \
 	obj/srcs/matrix4_translate.o \
 	obj/srcs/model_operations.o \
 	obj/srcs/obj_parsing.o \
+	obj/srcs/obj_parsing_units.o \
 	obj/srcs/program_operations.o \
 	obj/srcs/shader_operations.o
 
@@ -108,15 +109,19 @@ obj/srcs/model_operations.o: srcs/model_operations.c include/config.h include/ft
 	@mkdir -p obj/srcs 2> /dev/null || true
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
-obj/srcs/obj_parsing.o: srcs/obj_parsing.c include/config.h include/ftmath.h include/scop.h include/scop_structs.h
+obj/srcs/obj_parsing.o: srcs/obj_parsing.c include/config.h include/ftmath.h include/obj_parsing.h include/scop.h include/scop_structs.h
 	@mkdir -p obj/srcs 2> /dev/null || true
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
-obj/srcs/program_operations.o: srcs/program_operations.c include/config.h include/ftmath.h include/scop.h include/scop_structs.h
+obj/srcs/obj_parsing_units.o: srcs/obj_parsing_units.c include/config.h include/ftmath.h include/obj_parsing.h include/scop.h include/scop_structs.h
 	@mkdir -p obj/srcs 2> /dev/null || true
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
-obj/srcs/shader_operations.o: srcs/shader_operations.c include/config.h include/ftmath.h include/scop.h include/scop_structs.h
+obj/srcs/program_operations.o: srcs/program_operations.c include/config.h include/ftmath.h include/obj_parsing.h include/scop.h include/scop_structs.h
+	@mkdir -p obj/srcs 2> /dev/null || true
+	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
+
+obj/srcs/shader_operations.o: srcs/shader_operations.c include/config.h include/ftmath.h include/obj_parsing.h include/scop.h include/scop_structs.h
 	@mkdir -p obj/srcs 2> /dev/null || true
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 

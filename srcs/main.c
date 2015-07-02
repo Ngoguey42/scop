@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 11:48:41 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/02 14:20:11 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/02 16:56:17 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ int						main(int ac, char *av[])
 		return (DEBUG("Scop: sp_init_shaders failed..."), 1);
 	if (sp_init_programs(e))
 		return (DEBUG("Scop: sp_init_programs failed..."), 1);
-	sp_register_obj(e, OBJ_PATH "teapot.obj");
+	sp_register_obj(e, OBJ_PATH "teapot2.obj");
 	if (sp_init_objs(e))
 		return (DEBUG("Scop: sp_init_objs failed..."), 1);
 
@@ -148,7 +148,6 @@ int						main(int ac, char *av[])
 	
 		/* mat = m4_scaleref_uniform(&mat, 4.f); */
 
-		m4_print(mat);
 		GLuint modelLoc = glGetUniformLocation(PROG0, "model");
 		GLuint viewLoc = glGetUniformLocation(PROG0, "view");
 		GLuint projectionLoc = glGetUniformLocation(PROG0, "projection");
