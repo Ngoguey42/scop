@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/02 13:21:56 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/02 17:46:31 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/02 17:48:38 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ static int		find_match(FILE *stream, t_token *match, size_t *p)
 	bufi = -1;
 	while (bufi < 15)
 	{
+		T;
+		qprintf("%s\n", buf);
 		if (bufi > 0 && ft_isspace(buf[bufi]))
 			*p += 1;
 		else
@@ -72,7 +74,7 @@ static int		find_match(FILE *stream, t_token *match, size_t *p)
 			if (STREAM_STATUS_BAD2)
 				return (STREAM_ERR_MSG, 1);
 		}
-		if (*phase >= g_num_phases)
+		if (*p >= g_num_phases)
 			return (1);
 		else if ((matchi = match_index(buf, g_phases[*p])) >= 0)
 			return (memcpy(match, g_phases[*p] + matchi, sizeof(t_token)), 0);
