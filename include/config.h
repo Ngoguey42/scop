@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/01 12:09:19 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/01 18:32:22 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/02 11:48:03 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,9 @@ typedef enum				s_program_index
 */
 # define WIN_WIDTHI 1000
 # define WIN_RATIOF (4.f / 4.f)
+# define WIN_FOVF 45.f
+# define WIN_NEAR 0.1f
+# define WIN_FAR 100.f
 /* # define WIN_RATIOF (4.f / 3.f) */
 
 /*

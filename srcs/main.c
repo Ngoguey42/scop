@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 11:48:41 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/01 19:27:31 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/02 11:48:28 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,13 @@ void					build_mesh(t_env *e)
 		
 	};
 
-	#define NUMINDICES 9
+	#define NUMINDICES 12
 	
 	GLuint indices[] = {
 		0, 1, 2,
 		3, 4, 5,
 		0, 3, 4,
+		4, 0, 1,
 	};
 
 	
@@ -88,7 +89,8 @@ int						main(int ac, char *av[])
 
 	
 	build_mesh(e);
-	
+	t_matrix4 const	projection_mat = m4_fovprojection(WIN_FOVF, WIN_RATIOF,
+													  WIN_NEAR, WIN_FAR);	
 	while (!glfwWindowShouldClose(e->win))
 	{
 		glClearColor(0.3f, 0.3f, 0.3f, 1.f);
@@ -111,14 +113,9 @@ int						main(int ac, char *av[])
 		GLuint projectionLoc = glGetUniformLocation(PROG0, "projection");
 
 		t_matrix4 view_mat =  m4_scale_uniform(1.f);
-		t_matrix4 projection_mat =  m4_scale_uniform(1.f);
 
 
-		projection_mat = (t_matrix4)
-			{{1.792591, 0.000000f, 0.000000f, 0.000000f,
-			  0.000000f, 1.792591f, 0.000000f, 0.000000f,
-			  0.000000f, 0.000000f, -1.002002f, -0.200200f,
-			  0.000000f, 0.000000f, -1.000000f, 0.000000f}};
+
 
 		view_mat = m4_translateref_nonuniform(
 			&view_mat, (float [3]){0.0f, 0.0f, -3.0f});
