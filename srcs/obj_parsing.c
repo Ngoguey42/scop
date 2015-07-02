@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/02 13:21:56 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/02 13:55:32 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/02 14:17:18 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,11 @@ int				sp_parse_obj(t_objmodel *m)
 	float		f[3];
 	unsigned int		ui[3];
 	unsigned int		nv;
-	
+
 	stream = fopen(m->filepath, "r");
 	if (stream == NULL)
 		return (DEBUGF(BADLOAD_FMT, m->filepath, strerror(errno)), 1);
-
-	while (fscanf(stream, "v %f %f %f\n", f, f + 1, f + 2) > 0)
+	while (fscanf(stream, "v %f %f %f\n", f, f + 1, f + 2) == 3)
 	{
 		if (ftv_push_back(&m->vertices, f))
 			sp_enomem();
@@ -41,7 +40,7 @@ int				sp_parse_obj(t_objmodel *m)
 		return (DEBUGF(BADREAD_FMT, m->filepath, strerror(errno)), 1);
 	nv = m->vertices.size;
 	qprintf("Found %u vertices\n", m->vertices.size);
-	while (fscanf(stream, "f %u %u %u\n", ui, ui + 1, ui + 2) > 0)
+	while (fscanf(stream, "f %u %u %u\n", ui, ui + 1, ui + 2) == 3)
 	{
 		if (ui[0] == 0 || ui[1] == 0 || ui[2] == 0 ||
 			ui[0] > nv || ui[1] > nv || ui[2] > nv)

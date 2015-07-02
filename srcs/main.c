@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 11:48:41 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/02 13:21:31 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/02 14:20:11 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <math.h>
 /* #include <glm/glm.hpp> */
 
-void					build_mesh(t_env *e)
+void					build_mesh_cube(t_env *e)
 {
 	GLfloat vertices[] = {
 		-0.1f,  0.1f,  0.1f,	1.0f, 0.0f, 0.0f,		//F	TL
@@ -28,7 +28,6 @@ void					build_mesh(t_env *e)
 		
 	};
 
-	#define NUMINDICES 12
 	
 	GLuint indices[] = {
 		0, 1, 2,
@@ -69,6 +68,43 @@ void					build_mesh(t_env *e)
 	glBindVertexArray(0);
 	return ;
 }
+#define NUMINDICES ((t_objmodel*)e->models.data)->faces.size * 3
+/* #define NUMINDICES (e->faces.size * 3) */
+void					build_mesh(t_env *e)
+{
+	t_objmodel	*m = e->models.data;
+	GLfloat		*vertices = m->vertices.data;
+	GLuint		*indices = m->faces.data;
+	
+	glGenVertexArrays(1, &e->vao);	// array object
+	glGenBuffers(1, &e->vab); // vab = vbo array buffer / buffer object
+	glGenBuffers(1, &e->ebo); //
+	
+	
+	glBindVertexArray(e->vao);
+	{		
+		glBindBuffer(GL_ARRAY_BUFFER, e->vab);
+		glBufferData(GL_ARRAY_BUFFER,
+					 sizeof(float) * 3 * m->vertices.size,
+					 vertices,
+					 GL_STATIC_DRAW
+			);
+		
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, e->ebo);
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER,
+					 sizeof(unsigned int) * 3 * m->faces.size,
+					 indices,
+					 GL_STATIC_DRAW
+			);
+		
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat),
+							  (GLvoid*)0);
+		glEnableVertexAttribArray(0);
+	}
+	glBindVertexArray(0);
+	
+	return ;
+}
 
 
 int						main(int ac, char *av[])
@@ -106,12 +142,13 @@ int						main(int ac, char *av[])
 		
 		/* mat = m4_translateref_nonuniform(&mat, (float [3]){-0.55f, 0.0f, 0.0f}); */
 		
-		/* mat = m4_rotationref_axis(&mat, z_axis, 1.2 * (GLfloat)glfwGetTime()); */
-		mat = m4_rotationref_axis(&mat, x_axis, 1.4 * (GLfloat)glfwGetTime());
+		mat = m4_rotationref_axis(&mat, y_axis, 1.2 * (GLfloat)glfwGetTime());
+		/* mat = m4_rotationref_axis(&mat, z_axis, 1.4 * (GLfloat)glfwGetTime()); */
 		/* mat = m4_rotationref_axis(&mat, z_axis, 1.6 * (GLfloat)glfwGetTime()); */
 	
-		mat = m4_scaleref_uniform(&mat, 4.f);
-		
+		/* mat = m4_scaleref_uniform(&mat, 4.f); */
+
+		m4_print(mat);
 		GLuint modelLoc = glGetUniformLocation(PROG0, "model");
 		GLuint viewLoc = glGetUniformLocation(PROG0, "view");
 		GLuint projectionLoc = glGetUniformLocation(PROG0, "projection");
@@ -122,7 +159,7 @@ int						main(int ac, char *av[])
 
 
 		view_mat = m4_translateref_nonuniform(
-			&view_mat, (float [3]){0.0f, 0.0f, -3.0f});
+			&view_mat, (float [3]){0.0f, -2.0f, -6.0f});
 		
 		glUniformMatrix4fv(modelLoc, 1, GL_TRUE, (float*)&mat);
 		glUniformMatrix4fv(viewLoc, 1, GL_TRUE, (float*)&view_mat);
