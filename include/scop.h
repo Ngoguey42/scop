@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 12:07:31 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/01 17:53:56 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/02 12:35:19 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,12 @@ int					sp_init_env(t_env *e);
 int					sp_init_glfw(t_env *e);
 void				sp_disable_glfw(t_env *e);
 t_env				*sp_instance(void);
+int					sp_init_objs(t_env *e);
+int         sp_init_objs(t_env *e);
+void        sp_clean_models(void *modelptr);
+void            sp_clean_env(t_env *e);
+
+
 
 /*
 ** SHADER FUNCTIONS

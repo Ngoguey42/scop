@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 12:48:16 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/01 18:35:20 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/02 12:33:38 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "libft.h"
 # include <GLFW/glfw3.h>
+# include "ft_vector.h"
 
 
 /*
@@ -38,6 +39,16 @@ typedef struct				s_program_metadata
 }							t_program_metadata;
 
 /*
+** OBJ 
+*/
+typedef struct				s_objmodel
+{
+	char					*filename;
+	t_ftvector				vertices;
+	t_ftvector				faces;
+}							t_objmodel;
+
+/*
 ** ENV
 */
 typedef struct				s_env
@@ -47,6 +58,7 @@ typedef struct				s_env
 
 	GLuint					shaders[sc_num_shaders];
 	GLuint					programs[sc_num_programs];
+	t_ftvector				models;
 	GLuint					vao;
 	GLuint					vab;
 	GLuint					ebo;

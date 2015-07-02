@@ -1,45 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env_init.c                                         :+:      :+:    :+:   */
+/*   model_operations.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/06/30 13:06:40 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/02 12:28:42 by ngoguey          ###   ########.fr       */
+/*   Created: 2015/07/02 12:23:45 by ngoguey           #+#    #+#             */
+/*   Updated: 2015/07/02 12:34:54 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
-#include <string.h>
+#include <stdlib.h>
 
-static t_env	*sp_register_instance(t_env *e)
+/*
+** 'sp_init_objs'	init the #(e->models.size) models.
+**						'm->filename' must already be allocated
+*/
+
+void		sp_clean_models(void *modelptr)
 {
-	static t_env		*ptr = NULL;
+	t_objmodel		*const m = modelptr;
 
-	if (e != NULL)
-		ptr = e;
-	return (ptr);
-}
-
-t_env			*sp_instance(void)
-{
-	return (sp_register_instance(NULL));
-}
-
-void			sp_clean_env(t_env *e)
-{
-	ftv_release(&e->models, &sp_clean_models);
+	free(m->filename);
+	ftv_release(&m->vertices, NULL);
+	ftv_release(&m->faces, NULL);
 	return ;
 }
 
-int				sp_init_env(t_env *e)
+int			sp_init_objs(t_env *e)
 {
-	bzero(e, sizeof(*e));
-	sp_register_instance(e);
-	e->loop = true;
-	if (ftv_init_instance(&e->models, sizeof(t_objmodel)))
-		sp_enomem();
+	t_objmodel		*const models = e->models.data;
+	size_t			i;
+
+	i = 0;
+	while (i < e->models.size)
+	{
+		
+	}
 	return (0);
 }
-
