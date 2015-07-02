@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/01 12:09:19 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/02 11:51:05 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/02 13:07:49 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,12 @@ typedef enum				s_program_index
 
 # define PROGATT1 {sc_basic_vertex, sc_basic_fragment, 2, {"position", "color"}},
 # define PROGRAMS_ATTRIBUTES_LIST PROGATT1
+
+/*
+** OBJ
+*/
+# define OBJ_PATH "res/"
+
 
 /*
 ** CONFIG MACROES

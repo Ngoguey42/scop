@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 12:48:16 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/02 12:33:38 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/02 13:10:57 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ typedef struct				s_program_metadata
 */
 typedef struct				s_objmodel
 {
-	char					*filename;
+	char					*filepath;
 	t_ftvector				vertices;
 	t_ftvector				faces;
 }							t_objmodel;
