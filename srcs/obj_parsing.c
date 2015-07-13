@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/02 13:21:56 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/13 10:25:22 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/13 10:42:42 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,6 @@
 #include "obj_parsing.h"
 
 #define OFFSET(P) (offsetof(struct s_objmodel, P))
-#define OP_COMMENT (t_token){"#", &skip_line, 0}
-#define OP_MTLLIB (t_token){"mtllib", &parse_word, OFFSET(mtllib)}
-#define OP_O (t_token){"o", &parse_word, OFFSET(name)}
-#define OP_USEMTL (t_token){"usemtl", &parse_word, OFFSET(usemtl)}
-#define OP_S (t_token){"s", &parse_state, OFFSET(smooth)}
-#define OP_V (t_token){"v", &parse_3float, 0}
-#define OP_F (t_token){"f", &parse_3uint, 0}
-#define OP_NONE(t_token){"", NULL, 0}
 
 static const t_token	g_tokens[] =
 {
@@ -38,6 +30,8 @@ static const t_token	g_tokens[] =
 	(t_token){"o", &op_match_str, OFFSET(name)},
 	(t_token){"usemtl", &op_match_str, OFFSET(usemtl)},
 };
+
+#undef OFFSET
 
 /*
 ** ** Comparing functions:
@@ -82,16 +76,16 @@ int     sp_parse_obj(t_objmodel *m)
 		i = 0;
 		while (i < sizeof(g_tokens) / sizeof(t_token))
 		{
-			/* DEBUGF("trying '%s'", g_tokens[i].h); */
+			DEBUGF("trying '%s'", g_tokens[i].h);
 			ret = g_tokens[i].fun(stream, g_tokens[i].h, (void*)m +
 									g_tokens[i].pad);
 			if (ret == -1)
 				return (DEBUGF("Error while matching '%s'", g_tokens[i].h), 1);
 			if (ret == 1)
-			/* { */
-				/* DEBUGF("ENDLOOP MATCHED '%s'", g_tokens[i].h); */
+			{
+				DEBUGF("ENDLOOP MATCHED '%s'", g_tokens[i].h);
 				break;
-			/* } */
+			}
 			i++;
 		}
 		if (feof(stream))

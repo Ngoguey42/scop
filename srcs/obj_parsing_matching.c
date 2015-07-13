@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/13 08:48:45 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/13 10:17:32 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/13 10:46:31 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ int		op_match_str(FILE *stream, char const *h, char **dst)
 
 int		op_match_comment(FILE *stream)
 {
-	int		ret;
 	fpos_t	pos;
 
 	if (fgetpos(stream, &pos))
@@ -118,8 +117,8 @@ int		op_match_faces(FILE *stream, char const *h, t_objmodel *m)
 	char			hbuf[64];
 	unsigned int	buf[4];
 	int				ret;
-	fpos_t	pos;
-	
+	fpos_t			pos;
+
 	if (fgetpos(stream, &pos))
 		return (-1); // error on file stream (pos)
 	ret = fscanf(stream, "%63s %u %u %u %u\n", hbuf, buf, buf + 1,
@@ -128,15 +127,20 @@ int		op_match_faces(FILE *stream, char const *h, t_objmodel *m)
 		return (fsetpos(stream, &pos) || 0); // does not match
 	if (ferror(stream))
 		return (-1); // error on file stream
-	if (buf[0] == 0u || buf[0] > m->vertices.size ||
-		buf[1] == 0u || buf[1] > m->vertices.size ||
-		buf[2] == 0u || buf[2] > m->vertices.size)
+	buf[0] -= 1;
+	buf[1] -= 1;
+	buf[2] -= 1;
+	buf[3] -= 1;
+	if (buf[0] > m->vertices.size ||
+		buf[1] > m->vertices.size ||
+		buf[2] > m->vertices.size)
 		return (-1); //wrong index
 	if (ftv_push_back(&m->faces, buf))
 		sp_enomem();
 	if (ret == 5)
 	{
-		if (buf[3] == 0u || buf[3] > m->vertices.size)
+		buf[1] = buf[0];
+		if (buf[3] > m->vertices.size)
 			return (-1); //wrong index
 		if (ftv_push_back(&m->faces, buf + 1))
 			sp_enomem();

@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 11:48:41 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/13 10:17:59 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/13 10:31:27 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,8 +119,8 @@ int						main(int ac, char *av[])
 		return (DEBUG("Scop: sp_init_shaders failed..."), 1);
 	if (sp_init_programs(e))
 		return (DEBUG("Scop: sp_init_programs failed..."), 1);
-	/* sp_register_obj(e, OBJ_PATH "42.obj"); */
-	sp_register_obj(e, OBJ_PATH "teapot.obj");
+	sp_register_obj(e, OBJ_PATH "42.obj");
+	/* sp_register_obj(e, OBJ_PATH "teapot.obj"); */
 	/* sp_register_obj(e, OBJ_PATH "teapot2.obj"); */
 	if (sp_init_objs(e))
 		return (DEBUG("Scop: sp_init_objs failed..."), 1);
