@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/13 12:53:24 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/13 12:54:18 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/13 14:48:30 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,30 @@ static void	error_callback(int error, const char *description)
 
 static void	key_callback(GLFWwindow *w, int k, int sc, int a, int m)
 {
+	t_env	*e;
+
 	if (a == GLFW_PRESS)
-		sp_keydown(sp_instance(), w, k, m);
+	{
+		e = sp_instance();
+		sp_keystate(e, k, true);
+		if (k == GLFW_KEY_TAB)
+			sp_toggle_mouse_state(w, e);
+			
+	}
 	if (a == GLFW_RELEASE)
-		sp_keyup(sp_instance(), w, k, m);
+	{
+		sp_keystate(sp_instance(), k, false);
+		if (k == GLFW_KEY_ESCAPE || k == GLFW_KEY_Q)
+			glfwSetWindowShouldClose(w, GL_TRUE);
+		/* if (k == GLFW_KEY_RIGHT) */
+		/* 	sp_update_angles(sp_instance(), MOUSE_SENSITIVITY, 0.f); */
+		/* if (k == GLFW_KEY_LEFT) */
+		/* 	sp_update_angles(sp_instance(), -MOUSE_SENSITIVITY, 0.f); */
+		/* if (k == GLFW_KEY_RIGHT) */
+		/* 	sp_update_angles(sp_instance(), MOUSE_SENSITIVITY, 0.f); */
+		/* if (k == GLFW_KEY_LEFT) */
+		/* 	sp_update_angles(sp_instance(), -MOUSE_SENSITIVITY, 0.f); */
+	}
 	(void)sc;
 	return ;
 }

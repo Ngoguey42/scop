@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/01 14:35:20 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/01 18:00:48 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/13 14:34:05 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,5 +65,3 @@ t_matrix4		m4_dotprod(t_matrix4 mata, t_matrix4 matb)
 	ret.i[3].j[3] = MULT(mata.raw, matb.raw, 12, 13, 14, 15, 3, 7, 11, 15);
 	return (ret);
 }
-
-#undef MULT

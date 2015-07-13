@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 12:48:16 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/13 12:51:10 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/13 14:48:54 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,10 @@ enum						e_keyindex
 	sp_d_key,
 	sp_space_key,
 	sp_c_key,
+	sp_up_key,
+	sp_down_key,
+	sp_left_key,
+	sp_right_key,
 	/* sp__key, */
 	sp_num_keys
 };
@@ -90,6 +94,8 @@ typedef struct				s_env
 	GLuint					ebo;
 	int						states[sp_num_keys];
 	float					pos[3];
+	double					mpos[2];
+	float					cangles[2];				
 }							t_env;
 
 #endif

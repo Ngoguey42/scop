@@ -6,12 +6,13 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 13:06:40 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/13 12:55:50 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/13 15:02:59 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
 #include <string.h>
+#include <math.h>
 
 static t_env	*sp_register_instance(t_env *e)
 {
@@ -39,6 +40,8 @@ int				sp_init_env(t_env *e)
 	e->pos[0] = 0.f;
 	e->pos[1] = 2.f;
 	e->pos[2] = 6.f;
+	e->cangles[0] = -(M_PI / 2);
+	e->cangles[1] = 0.f;
 	sp_register_instance(e);
 	e->loop = true;
 	if (ftv_init_instance(&e->models, sizeof(t_objmodel)))

@@ -46,6 +46,7 @@ O_FILES := obj/srcs/env_operations.o \
 	obj/srcs/error.o \
 	obj/srcs/glfw_operations.o \
 	obj/srcs/keys_handling.o \
+	obj/srcs/keys_mics_handling.o \
 	obj/srcs/main.o \
 	obj/srcs/matrix4.o \
 	obj/srcs/matrix4_invtranslate.o \
@@ -57,7 +58,8 @@ O_FILES := obj/srcs/env_operations.o \
 	obj/srcs/obj_parsing.o \
 	obj/srcs/obj_parsing_matching.o \
 	obj/srcs/program_operations.o \
-	obj/srcs/shader_operations.o
+	obj/srcs/shader_operations.o \
+	obj/srcs/vector3.o
 
 MSG_0 := printf '\033[0;32m%-31.31s\033[0;0m\r'
 MSG_1 := printf '\033[0;31m%-31.31s\033[0;0m\n'
@@ -84,6 +86,10 @@ obj/srcs/glfw_operations.o: srcs/glfw_operations.c include/config.h include/ftma
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
 obj/srcs/keys_handling.o: srcs/keys_handling.c include/config.h include/ftmath.h include/scop.h include/scop_structs.h
+	@mkdir -p obj/srcs 2> /dev/null || true
+	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
+
+obj/srcs/keys_mics_handling.o: srcs/keys_mics_handling.c include/config.h include/ftmath.h include/scop.h include/scop_structs.h
 	@mkdir -p obj/srcs 2> /dev/null || true
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
@@ -132,6 +138,10 @@ obj/srcs/program_operations.o: srcs/program_operations.c include/config.h includ
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
 obj/srcs/shader_operations.o: srcs/shader_operations.c include/config.h include/ftmath.h include/obj_parsing.h include/scop.h include/scop_structs.h
+	@mkdir -p obj/srcs 2> /dev/null || true
+	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
+
+obj/srcs/vector3.o: srcs/vector3.c include/config.h include/ftmath.h include/obj_parsing.h include/scop.h include/scop_structs.h
 	@mkdir -p obj/srcs 2> /dev/null || true
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 

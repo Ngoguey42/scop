@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/02 11:42:05 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/02 11:49:15 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/13 16:17:18 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,19 @@ t_matrix4	m4_fovprojection(float fov, float ratio, float near, float far)
 	result.i[3].j[2] = -1;
 	result.i[3].j[3] = 0;
 	return (result);
+}
+
+t_matrix4	m4_lookat(t_vector3 eye, t_vector3 at)
+{
+	t_vector3 const		up = (t_vector3){0.f, 1.f, 0.f};
+	t_vector3 const		z = v3_normalize(v3_sub(eye, at));
+	t_vector3 const		x = v3_normalize(v3_cross(up, z));
+	t_vector3 const		y = v3_cross(z, x);
+
+	return ((t_matrix4)
+		{
+			x.x, x.y, x.z, -(x.x * eye.x + x.y * eye.y + x.z * eye.z),
+				y.x, y.y,y.z,-(y.x * eye.x + y.y * eye.y + y.z * eye.z),
+				z.x,z.y,z.z,-(z.x * eye.x + z.y * eye.y + z.z * eye.z),
+				0, 0, 0, 1});
 }
