@@ -1,39 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_glfw_core.c                                     :+:      :+:    :+:   */
+/*   glfw_operations.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/06/30 13:18:23 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/01 19:08:25 by ngoguey          ###   ########.fr       */
+/*   Created: 2015/07/13 12:53:24 by ngoguey           #+#    #+#             */
+/*   Updated: 2015/07/13 12:54:18 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
 
-static void error_callback(int error, const char* description)
+static void	error_callback(int error, const char *description)
 {
 	qprintf("GLFW ERROR(%d): \"\033[35m%s\033[0m\"\n", error, description);
 	(void)error;
 	(void)description;
 }
 
-static void key_callback(GLFWwindow* window, int key, int a, int action, int b)
+static void	key_callback(GLFWwindow *w, int k, int sc, int a, int m)
 {
-	t_env		*e;
-
-	e = sp_instance();
-	if (key == GLFW_KEY_ESCAPE || key == GLFW_KEY_Q)
-		glfwSetWindowShouldClose(window, GL_TRUE);
-	(void)action;
-	(void)e;
-	(void)a;
-	(void)b;
+	if (a == GLFW_PRESS)
+		sp_keydown(sp_instance(), w, k, m);
+	if (a == GLFW_RELEASE)
+		sp_keyup(sp_instance(), w, k, m);
+	(void)sc;
+	return ;
 }
-
-#include <fcntl.h>
-#include <stdlib.h>
 
 int			sp_init_glfw(t_env *e)
 {

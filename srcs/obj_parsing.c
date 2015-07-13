@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/02 13:21:56 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/13 10:42:42 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/13 12:54:53 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,17 +34,6 @@ static const t_token	g_tokens[] =
 #undef OFFSET
 
 /*
-** ** Comparing functions:
-** Compare unary	char*A		A==NULL
-** Compare unary	uintA		A==0u
-** Compare binary	uintA uintB	A!=0u && A>=B
-** Compare unary	triboolA	A==undefined
-** **
-** ** Saving functions:
-** objmodel *m		char **dst			char const *src
-** objmodel *m		t_tribool *dst		char const *src
-** objmodel *m		t_ftvertex *dst		char const *src
-** **
 ** ** Matching functions:
 ** 
 **
@@ -76,14 +65,14 @@ int     sp_parse_obj(t_objmodel *m)
 		i = 0;
 		while (i < sizeof(g_tokens) / sizeof(t_token))
 		{
-			DEBUGF("trying '%s'", g_tokens[i].h);
+			/* DEBUGF("trying '%s'", g_tokens[i].h); */
 			ret = g_tokens[i].fun(stream, g_tokens[i].h, (void*)m +
 									g_tokens[i].pad);
 			if (ret == -1)
 				return (DEBUGF("Error while matching '%s'", g_tokens[i].h), 1);
 			if (ret == 1)
 			{
-				DEBUGF("ENDLOOP MATCHED '%s'", g_tokens[i].h);
+				/* DEBUGF("ENDLOOP MATCHED '%s'", g_tokens[i].h); */
 				break;
 			}
 			i++;
@@ -93,7 +82,6 @@ int     sp_parse_obj(t_objmodel *m)
 		if (i >= sizeof(g_tokens) / sizeof(t_token))
 			return (1); //no match
 	}
-
 	qprintf("Found %u vertices\n", m->vertices.size);
 	qprintf("Found %u faces\n", m->faces.size);
 	fclose(stream);

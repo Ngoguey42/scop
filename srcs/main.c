@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 11:48:41 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/13 10:31:27 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/13 12:33:04 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,9 @@ void					build_mesh(t_env *e)
 int						main(int ac, char *av[])
 {
 	t_env		e[1];
+	double		last_time;
+	double		cur_time;
+	double		el_time;
 
 	if (sp_init_env(e))
 		return (DEBUG("Scop: sp_init_env failed..."), 1);
@@ -119,8 +122,8 @@ int						main(int ac, char *av[])
 		return (DEBUG("Scop: sp_init_shaders failed..."), 1);
 	if (sp_init_programs(e))
 		return (DEBUG("Scop: sp_init_programs failed..."), 1);
-	sp_register_obj(e, OBJ_PATH "42.obj");
-	/* sp_register_obj(e, OBJ_PATH "teapot.obj"); */
+	/* sp_register_obj(e, OBJ_PATH "42.obj"); */
+	sp_register_obj(e, OBJ_PATH "teapot.obj");
 	/* sp_register_obj(e, OBJ_PATH "teapot2.obj"); */
 	if (sp_init_objs(e))
 		return (DEBUG("Scop: sp_init_objs failed..."), 1);
@@ -133,9 +136,13 @@ int						main(int ac, char *av[])
 	
 	build_mesh(e);
 	t_matrix4 const	projection_mat = m4_fovprojection(WIN_FOVF, WIN_RATIOF,
-													  WIN_NEAR, WIN_FAR);	
+													  WIN_NEAR, WIN_FAR);
+	last_time = glfwGetTime();
 	while (!glfwWindowShouldClose(e->win))
 	{
+		cur_time = glfwGetTime();
+		el_time = cur_time - last_time;
+		sp_update_states(e, el_time);
 		glClearColor(0.3f, 0.3f, 0.3f, 1.f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glUseProgram(PROG0);
@@ -145,7 +152,7 @@ int						main(int ac, char *av[])
 		
 		/* mat = m4_translateref_nonuniform(&mat, (float [3]){-0.55f, 0.0f, 0.0f}); */
 		
-		mat = m4_rotationref_axis(&mat, y_axis, 1.2 * (GLfloat)glfwGetTime());
+		/* mat = m4_rotationref_axis(&mat, y_axis, 1.2 * (GLfloat)glfwGetTime()); */
 		/* mat = m4_rotationref_axis(&mat, z_axis, 1.4 * (GLfloat)glfwGetTime()); */
 		/* mat = m4_rotationref_axis(&mat, z_axis, 1.6 * (GLfloat)glfwGetTime()); */
 	
@@ -160,8 +167,8 @@ int						main(int ac, char *av[])
 
 
 
-		view_mat = m4_translateref_nonuniform(
-			&view_mat, (float [3]){0.0f, -2.0f, -6.0f});
+		view_mat = m4_invtranslateref_nonuniform(
+			&view_mat, e->pos);
 		
 		glUniformMatrix4fv(modelLoc, 1, GL_TRUE, (float*)&mat);
 		glUniformMatrix4fv(viewLoc, 1, GL_TRUE, (float*)&view_mat);
@@ -178,6 +185,7 @@ int						main(int ac, char *av[])
 		
 		glfwSwapBuffers(e->win);
 		glfwPollEvents();
+		last_time = cur_time;
 	}
 	sp_delete_programs(e);
 	sp_delete_shaders(e);

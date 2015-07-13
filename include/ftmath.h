@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 12:16:50 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/02 11:46:23 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/13 12:32:47 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,11 @@ t_matrix4	m4_translate_nonuniform(float vect[3]);
 t_matrix4	m4_translate_uniform(float fact);
 t_matrix4	m4_translateref_nonuniform(t_matrix4 const *ref, float vect[3]);
 t_matrix4	m4_translateref_uniform(t_matrix4 const *ref, float fact);
+
+t_matrix4	m4_invtranslate_nonuniform(float vect[3]);
+t_matrix4	m4_invtranslate_uniform(float fact);
+t_matrix4	m4_invtranslateref_nonuniform(t_matrix4 const *ref, float vect[3]);
+t_matrix4	m4_invtranslateref_uniform(t_matrix4 const *ref, float fact);
 
 t_matrix4	m4_rotation_axis(t_axis a, float fact);
 t_matrix4	m4_rotationref_axis(t_matrix4 const *ref, t_axis a, float fact);

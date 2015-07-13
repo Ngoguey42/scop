@@ -45,8 +45,10 @@ C_HEADS := -I include -I libft/includes -I ~/.brew/include
 O_FILES := obj/srcs/env_operations.o \
 	obj/srcs/error.o \
 	obj/srcs/glfw_operations.o \
+	obj/srcs/keys_handling.o \
 	obj/srcs/main.o \
 	obj/srcs/matrix4.o \
+	obj/srcs/matrix4_invtranslate.o \
 	obj/srcs/matrix4_misc.o \
 	obj/srcs/matrix4_rotation.o \
 	obj/srcs/matrix4_scale.o \
@@ -81,11 +83,19 @@ obj/srcs/glfw_operations.o: srcs/glfw_operations.c include/config.h include/ftma
 	@mkdir -p obj/srcs 2> /dev/null || true
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
+obj/srcs/keys_handling.o: srcs/keys_handling.c include/config.h include/ftmath.h include/scop.h include/scop_structs.h
+	@mkdir -p obj/srcs 2> /dev/null || true
+	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
+
 obj/srcs/main.o: srcs/main.c include/config.h include/ftmath.h include/scop.h include/scop_structs.h
 	@mkdir -p obj/srcs 2> /dev/null || true
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
 obj/srcs/matrix4.o: srcs/matrix4.c include/config.h include/ftmath.h include/scop.h include/scop_structs.h
+	@mkdir -p obj/srcs 2> /dev/null || true
+	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
+
+obj/srcs/matrix4_invtranslate.o: srcs/matrix4_invtranslate.c include/config.h include/ftmath.h include/scop.h include/scop_structs.h
 	@mkdir -p obj/srcs 2> /dev/null || true
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 

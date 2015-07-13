@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 12:48:16 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/02 17:43:16 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/13 12:51:10 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,28 @@ typedef struct				s_objmodel
 }							t_objmodel;
 
 /*
+** KEYS
+*/
+enum						e_keyindex
+{
+	sp_w_key,
+	sp_s_key,
+	sp_a_key,
+	sp_d_key,
+	sp_space_key,
+	sp_c_key,
+	/* sp__key, */
+	sp_num_keys
+};
+
+typedef struct				s_keymap
+{
+	size_t					state;
+	size_t					dst;
+	double					delta;
+}							t_keymap;
+
+/*
 ** ENV
 */
 typedef struct				s_env
@@ -66,6 +88,8 @@ typedef struct				s_env
 	GLuint					vao;
 	GLuint					vab;
 	GLuint					ebo;
+	int						states[sp_num_keys];
+	float					pos[3];
 }							t_env;
 
 #endif
