@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/02 13:21:56 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/02 17:48:38 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/13 10:25:22 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,91 +18,88 @@
 #include "scop.h"
 #include "obj_parsing.h"
 
-#define BADLOAD_FMT "Could not open %s \"\033[35m%s\033[0m\""
-
 #define OFFSET(P) (offsetof(struct s_objmodel, P))
 #define OP_COMMENT (t_token){"#", &skip_line, 0}
-#define OP_MTLLIB (t_token){"mtllib ", &parse_word, OFFSET(mtllib)}
-#define OP_O (t_token){"o ", &parse_word, OFFSET(name)}
-#define OP_USEMTL (t_token){"usemtl ", &parse_word, OFFSET(usemtl)}
-#define OP_S (t_token){"s ", &parse_state, OFFSET(smooth)}
-#define OP_V (t_token){"v ", &parse_3float, OFFSET(vertices)}
-#define OP_F (t_token){"f ", &parse_3uint, OFFSET(faces)}
-#define OP_NONE	(t_token){"", NULL, 0}
+#define OP_MTLLIB (t_token){"mtllib", &parse_word, OFFSET(mtllib)}
+#define OP_O (t_token){"o", &parse_word, OFFSET(name)}
+#define OP_USEMTL (t_token){"usemtl", &parse_word, OFFSET(usemtl)}
+#define OP_S (t_token){"s", &parse_state, OFFSET(smooth)}
+#define OP_V (t_token){"v", &parse_3float, 0}
+#define OP_F (t_token){"f", &parse_3uint, 0}
+#define OP_NONE(t_token){"", NULL, 0}
 
-static const t_token	g_phases[4][4] =
+static const t_token	g_tokens[] =
 {
-	{OP_COMMENT, OP_MTLLIB, OP_O, OP_NONE},
-	{OP_COMMENT, OP_V, OP_NONE, OP_NONE},
-	{OP_COMMENT, OP_USEMTL, OP_S, OP_NONE},
-	{OP_COMMENT, OP_F, OP_NONE, OP_NONE},
+	(t_token){"#", &op_match_comment, 0},
+	(t_token){"s", &op_match_bool, OFFSET(smooth)},
+	(t_token){"v", &op_match_vertices, 0},
+	(t_token){"f", &op_match_faces, 0},
+	(t_token){"mtllib", &op_match_str, OFFSET(mtllib)},
+	(t_token){"o", &op_match_str, OFFSET(name)},
+	(t_token){"usemtl", &op_match_str, OFFSET(usemtl)},
 };
 
-static const size_t		g_num_phases = sizeof(g_phases) / sizeof(*g_phases);
+/*
+** ** Comparing functions:
+** Compare unary	char*A		A==NULL
+** Compare unary	uintA		A==0u
+** Compare binary	uintA uintB	A!=0u && A>=B
+** Compare unary	triboolA	A==undefined
+** **
+** ** Saving functions:
+** objmodel *m		char **dst			char const *src
+** objmodel *m		t_tribool *dst		char const *src
+** objmodel *m		t_ftvertex *dst		char const *src
+** **
+** ** Matching functions:
+** 
+**
+** ** Tokens traces:
+** #comments
+** mtllib	name			if filenamePtr == NULL
+** usemtl	name			if numUsemtlPtr == NULL
+** o		name			if numOPtr == NULL
+** s		state			if numS == undefined
+** v		3floats			if numF == 0u
+** f		N(3 to 4 uint)	if N <= numV
+** *
+** Converting faces to triangles
+** Vertices must be 3floats
+*/
 
-static int		match_index(char const *buf, t_token const *phase_tokens)
+int     sp_parse_obj(t_objmodel *m)
 {
-	int		i;
-
-	i = 0;
-	while (phase_tokens[i].fun != NULL)
-	{
-		if (!strcmp(phase_tokens[i].header, buf))
-			return (i);
-		i++;
-	}
-	return (-1);
-}
-
-static int		find_match(FILE *stream, t_token *match, size_t *p)
-{
-	char	buf[16];
-	int		bufi;
-	int		matchi;
-
-	bzero(buf, sizeof(buf));
-	bufi = -1;
-	while (bufi < 15)
-	{
-		T;
-		qprintf("%s\n", buf);
-		if (bufi > 0 && ft_isspace(buf[bufi]))
-			*p += 1;
-		else
-		{
-			buf[++bufi] = fgetc(stream);
-			if (STREAM_STATUS_BAD2)
-				return (STREAM_ERR_MSG, 1);
-		}
-		if (*p >= g_num_phases)
-			return (1);
-		else if ((matchi = match_index(buf, g_phases[*p])) >= 0)
-			return (memcpy(match, g_phases[*p] + matchi, sizeof(t_token)), 0);
-	}
-	return (DEBUG("Left keyword too long"), 1);
-}
-
-int				sp_parse_obj(t_objmodel *m)
-{
-	FILE		*stream;
-	size_t		phase;
-	t_token		match;
+	FILE*	stream;
+	size_t	i;
+	int		ret;
 
 	stream = fopen(m->filepath, "r");
 	if (stream == NULL)
-		return (DEBUGF(BADLOAD_FMT, m->filepath, strerror(errno)), 1);
-	phase = 0;
-	while (!feof(stream))
+		return (1); //could not open file
+	while (1)
 	{
-		if (find_match(stream, &match, &phase))
-			return (DEBUG("Could not find match in obj file"), 1);
-		if (match.fun(stream, (void*)m + match.pad))
-			return (DEBUG("Matching function failed"), 1);
+		/* qprintf("START LOOP\n"); */
+		i = 0;
+		while (i < sizeof(g_tokens) / sizeof(t_token))
+		{
+			/* DEBUGF("trying '%s'", g_tokens[i].h); */
+			ret = g_tokens[i].fun(stream, g_tokens[i].h, (void*)m +
+									g_tokens[i].pad);
+			if (ret == -1)
+				return (DEBUGF("Error while matching '%s'", g_tokens[i].h), 1);
+			if (ret == 1)
+			/* { */
+				/* DEBUGF("ENDLOOP MATCHED '%s'", g_tokens[i].h); */
+				break;
+			/* } */
+			i++;
+		}
+		if (feof(stream))
+			break ;
+		if (i >= sizeof(g_tokens) / sizeof(t_token))
+			return (1); //no match
 	}
-	if (m->vertices.size <= 0)
-		return (DEBUG("No vertices found in file"), 1);
-	if (m->faces.size <= 0)
-		return (DEBUG("No faces found in file"), 1);
+
 	qprintf("Found %u vertices\n", m->vertices.size);
 	qprintf("Found %u faces\n", m->faces.size);
 	fclose(stream);

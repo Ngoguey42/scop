@@ -53,12 +53,12 @@ O_FILES := obj/srcs/env_operations.o \
 	obj/srcs/matrix4_translate.o \
 	obj/srcs/model_operations.o \
 	obj/srcs/obj_parsing.o \
-	obj/srcs/obj_parsing_units.o \
+	obj/srcs/obj_parsing_matching.o \
 	obj/srcs/program_operations.o \
 	obj/srcs/shader_operations.o
 
-MSG_0 := printf '\033[0;32m%-29.29s\033[0;0m\r'
-MSG_1 := printf '\033[0;31m%-29.29s\033[0;0m\n'
+MSG_0 := printf '\033[0;32m%-31.31s\033[0;0m\r'
+MSG_1 := printf '\033[0;31m%-31.31s\033[0;0m\n'
 MSG_END := printf '\n'
 
 .SILENT:
@@ -113,7 +113,7 @@ obj/srcs/obj_parsing.o: srcs/obj_parsing.c include/config.h include/ftmath.h inc
 	@mkdir -p obj/srcs 2> /dev/null || true
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
-obj/srcs/obj_parsing_units.o: srcs/obj_parsing_units.c include/config.h include/ftmath.h include/obj_parsing.h include/scop.h include/scop_structs.h
+obj/srcs/obj_parsing_matching.o: srcs/obj_parsing_matching.c include/config.h include/ftmath.h include/obj_parsing.h include/scop.h include/scop_structs.h
 	@mkdir -p obj/srcs 2> /dev/null || true
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 

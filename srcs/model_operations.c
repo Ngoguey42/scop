@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/02 12:23:45 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/02 17:44:47 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/13 09:48:52 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ void		sp_register_obj(t_env *e, char const *filepath)
 
 	bzero(&m, sizeof(m));
 	m.filepath = strdup(filepath);
+	m.smooth = undefined;
 	if (m.filepath == NULL)
 		sp_enomem();
 	if (ftv_push_back(&e->models, &m))
