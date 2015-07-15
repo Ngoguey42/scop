@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 12:07:31 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/15 09:06:01 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/15 11:46:56 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ void				sp_keystate(t_env *e, int a, t_bool newstate);
 /* void				sp_keyup(t_env *e, GLFWwindow *w, int a, int m); */
 void                sp_update_states(t_env *e, double el);
 void        sp_toggle_mouse_state(GLFWwindow *w, t_env *e);
-void            sp_update_angles(t_env *e, float offx, float offy);
 
 /*
 ** SHADER FUNCTIONS

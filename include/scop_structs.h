@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 12:48:16 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/13 14:48:54 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/15 11:49:23 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,13 +70,6 @@ enum						e_keyindex
 	/* sp__key, */
 	sp_num_keys
 };
-
-typedef struct				s_keymap
-{
-	size_t					state;
-	size_t					dst;
-	double					delta;
-}							t_keymap;
 
 /*
 ** ENV

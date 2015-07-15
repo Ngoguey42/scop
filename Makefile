@@ -43,11 +43,10 @@ C_HEADS := -I include -I libft/includes -I ~/.brew/include
 #
 
 O_FILES := obj/srcs/controls_apply.o \
+	obj/srcs/controls_inputs.o \
 	obj/srcs/env_operations.o \
 	obj/srcs/error.o \
 	obj/srcs/glfw_operations.o \
-	obj/srcs/keys_handling.o \
-	obj/srcs/keys_mics_handling.o \
 	obj/srcs/main.o \
 	obj/srcs/program_operations.o \
 	obj/srcs/shader_operations.o \
@@ -80,6 +79,10 @@ obj/srcs/controls_apply.o: srcs/controls_apply.c include/config.h include/ftmath
 	@mkdir -p obj/srcs 2> /dev/null || true
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
+obj/srcs/controls_inputs.o: srcs/controls_inputs.c include/config.h include/ftmath.h include/scop.h include/scop_structs.h
+	@mkdir -p obj/srcs 2> /dev/null || true
+	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
+
 obj/srcs/env_operations.o: srcs/env_operations.c include/config.h include/ftmath.h include/scop.h include/scop_structs.h
 	@mkdir -p obj/srcs 2> /dev/null || true
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
@@ -89,14 +92,6 @@ obj/srcs/error.o: srcs/error.c include/config.h include/ftmath.h include/scop.h 
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
 obj/srcs/glfw_operations.o: srcs/glfw_operations.c include/config.h include/ftmath.h include/scop.h include/scop_structs.h
-	@mkdir -p obj/srcs 2> /dev/null || true
-	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
-
-obj/srcs/keys_handling.o: srcs/keys_handling.c include/config.h include/ftmath.h include/scop.h include/scop_structs.h
-	@mkdir -p obj/srcs 2> /dev/null || true
-	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
-
-obj/srcs/keys_mics_handling.o: srcs/keys_mics_handling.c include/config.h include/ftmath.h include/scop.h include/scop_structs.h
 	@mkdir -p obj/srcs 2> /dev/null || true
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
