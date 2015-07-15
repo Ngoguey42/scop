@@ -19,23 +19,24 @@ static void		updade_pos(t_env *e, float elms)
 	int const	mvx = e->states[sp_a_key] - e->states[sp_d_key];
 	int const	mvy = e->states[sp_space_key] - e->states[sp_c_key];
 	int const	mvz = e->states[sp_w_key] - e->states[sp_s_key];
+	float const	nb = float(mvx * mvx + mvy * mvy + mvz * mvz);
 	float		fact;
 
 	if (mvx)
 	{
-		fact = elms / (float)(mvz * mvz + mvy * mvy + 1) * (float)mvx;
+		fact = elms / nb * (float)mvx;
 		e->cpos.z += sin(e->cangles[0] - (M_PI / 2)) * fact;
 		e->cpos.x += cos(e->cangles[0] - (M_PI / 2)) * fact;
 	}
 	if (mvz)
 	{
-		fact = elms / (float)(mvx * mvx + mvy * mvy + 1) * (float)mvz;
+		fact = elms / nb * (float)mvz;
 		e->cpos.z += sin(e->cangles[0]) * fact;
 		e->cpos.x += cos(e->cangles[0]) * fact;
 	}
 	if (mvy)
 	{
-		fact = elms / (float)(mvx * mvx + mvz * mvz + 1) * (float)mvy;
+		fact = elms / nb * (float)mvy;
 		e->cpos.y += fact;
 	}
 	return ;
