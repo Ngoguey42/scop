@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 12:07:31 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/13 14:45:43 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/15 09:06:01 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,17 @@
 ** ERROR
 */
 
+
+
+/*
+** OBJMODEL
+*/
+int					sp_init_objmodels(t_env *e);
+void				sp_clean_objmodels(void *modelptr);
+void				sp_register_objmodel(t_env *e, char const *filepath);
+int					op_parse_obj(t_objmodel *m);
+
+
 /*
 ** PROTOTYPES
 ** CORE FUNCTIONS
@@ -44,10 +55,6 @@ t_env				*sp_instance(void);
 int					sp_init_glfw(t_env *e);
 void				sp_disable_glfw(t_env *e);
 
-int					sp_init_objs(t_env *e);
-void				sp_clean_models(void *modelptr);
-void				sp_register_obj(t_env *e, char const *filepath);
-int					sp_parse_obj(t_objmodel *m);
 
 void				sp_keystate(t_env *e, int a, t_bool newstate);
 /* void				sp_keyup(t_env *e, GLFWwindow *w, int a, int m); */
@@ -71,5 +78,13 @@ void				sp_delete_programs(t_env *e);
 ** ERRORS
 */
 void				sp_enomem(void);
+# define PERR_H qprintf("Error l%d: ", __LINE__)
+# define PERRNO_ENDL qprintf(", (%s)\n", strerror(errno))
+
+# define ERRORF(...) PERR_H, qprintf(__VA_ARGS__), ft_putchar_fd('\n', 2)
+# define ERROR(ARG) ERRORF("%s", (ARG))
+
+# define ERRORNOF(...) PERR_H, qprintf(__VA_ARGS__), PERRNO_ENDL
+# define ERRORNO(ARG) ERRORNOF("%s", (ARG))
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/13 11:49:04 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/13 16:16:18 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/15 08:23:40 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@
 
 static const t_keymap		g_keymap[] =
 {
-	(t_keymap){STATE_OFFSET(sp_w_key), POS_OFFSET(0), -1.},
-	(t_keymap){STATE_OFFSET(sp_s_key), POS_OFFSET(0), 1.},
-	(t_keymap){STATE_OFFSET(sp_a_key), POS_OFFSET(2), -1.},
-	(t_keymap){STATE_OFFSET(sp_d_key), POS_OFFSET(2), 1.},
-	(t_keymap){STATE_OFFSET(sp_space_key), POS_OFFSET(1), 1.},
-	(t_keymap){STATE_OFFSET(sp_c_key), POS_OFFSET(1), -1.},
+	(t_keymap){STATE_OFFSET(sp_w_key), POS_OFFSET(0), -MOVEMENT_SPEEDF},
+	(t_keymap){STATE_OFFSET(sp_s_key), POS_OFFSET(0), MOVEMENT_SPEEDF},
+	(t_keymap){STATE_OFFSET(sp_a_key), POS_OFFSET(2), -MOVEMENT_SPEEDF},
+	(t_keymap){STATE_OFFSET(sp_d_key), POS_OFFSET(2), MOVEMENT_SPEEDF},
+	(t_keymap){STATE_OFFSET(sp_space_key), POS_OFFSET(1), MOVEMENT_SPEEDF},
+	(t_keymap){STATE_OFFSET(sp_c_key), POS_OFFSET(1), -MOVEMENT_SPEEDF},
 
 	(t_keymap){STATE_OFFSET(sp_up_key), ANG_OFFSET(1), 0.5f},
 	(t_keymap){STATE_OFFSET(sp_down_key), ANG_OFFSET(1), -0.5f},
@@ -38,12 +38,12 @@ void			sp_update_angles(t_env *e, float offx, float offy)
 {
 	// X changes the yaw		LEFTRIGHT	0
 	// Y changes the pitch		UPDOWN		1
-	e->cangles[0] += offx * MOUSE_SENSITIVITY; //yaw
-	e->cangles[1] -= offy * MOUSE_SENSITIVITY; //pitch
-	if (e->cangles[1] > CAMERA_POSBOUND)
-		e->cangles[1] = CAMERA_POSBOUND;
-	if (e->cangles[1] < -CAMERA_POSBOUND)
-		e->cangles[1] = -CAMERA_POSBOUND;
+	e->cangles[0] += offx * MOUSE_SENSITIVITYF; //yaw
+	e->cangles[1] -= offy * MOUSE_SENSITIVITYF; //pitch
+	if (e->cangles[1] > CAMERA_POSBOUNDF)
+		e->cangles[1] = CAMERA_POSBOUNDF;
+	if (e->cangles[1] < -CAMERA_POSBOUNDF)
+		e->cangles[1] = -CAMERA_POSBOUNDF;
 	return ;
 }
 

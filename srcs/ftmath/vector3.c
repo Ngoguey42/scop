@@ -6,12 +6,15 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/13 14:09:03 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/13 15:44:00 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/15 09:53:00 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ftmath.h"
+#include "ft_debug.h"
 #include <math.h>
+
+#define ATOV3N(...) v3_normalize(ATOV3(__VA_ARGS__))
 
 void		v3_print(t_vector3 v)
 {
@@ -29,42 +32,7 @@ t_vector3	v3_normalize(t_vector3 v)
 	return (v);
 }
 
-t_vector3	v3_frontnormed(float const angles[2])
+t_vector3	v3_frontnormed(float const a[2])
 {
-	return (v3_normalize((t_vector3){
-				cos(angles[0]) * cos(angles[1]),
-					sin(angles[1]),
-					sin(angles[0]) * cos(angles[1]),
-					}));
+	return (ATOV3N(cos(a[0]) * cos(a[1]), sin(a[1]), sin(a[0]) * cos(a[1])));
 }
-
-/*
- */
-
-t_vector3	v3_cross(t_vector3 a, t_vector3 b)
-{	
-	return ((t_vector3){
-			a.y * b.z - a.z * b.y,
-				a.z * b.x - a.x * b.z,
-				a.x * b.y - a.y * b.x
-				});
-}
-
-t_vector3	v3_add(t_vector3 a, t_vector3 b)
-{	
-	return ((t_vector3){
-			a.x + b.x,
-			a.y + b.y,
-			a.z + b.z,
-				});
-}
-
-t_vector3	v3_sub(t_vector3 a, t_vector3 b)
-{	
-	return ((t_vector3){
-			a.x - b.x,
-			a.y - b.y,
-			a.z - b.z,
-				});
-}
-

@@ -6,37 +6,17 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/02 13:21:56 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/13 12:54:53 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/15 09:27:00 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include <errno.h>
-#include <unistd.h>
 #include <string.h>
-#include <stddef.h>
-#include "scop.h"
-#include "obj_parsing.h"
+#include "objmodel_parsing.h"
 
 #define OFFSET(P) (offsetof(struct s_objmodel, P))
 
-static const t_token	g_tokens[] =
-{
-	(t_token){"#", &op_match_comment, 0},
-	(t_token){"s", &op_match_bool, OFFSET(smooth)},
-	(t_token){"v", &op_match_vertices, 0},
-	(t_token){"f", &op_match_faces, 0},
-	(t_token){"mtllib", &op_match_str, OFFSET(mtllib)},
-	(t_token){"o", &op_match_str, OFFSET(name)},
-	(t_token){"usemtl", &op_match_str, OFFSET(usemtl)},
-};
-
-#undef OFFSET
-
 /*
-** ** Matching functions:
-** 
-**
 ** ** Tokens traces:
 ** #comments
 ** mtllib	name			if filenamePtr == NULL
@@ -50,40 +30,42 @@ static const t_token	g_tokens[] =
 ** Vertices must be 3floats
 */
 
-int     sp_parse_obj(t_objmodel *m)
+static const t_token	g_tokens[] =
 {
-	FILE*	stream;
+	(t_token){"#", &op_match_comment, 0},
+	(t_token){"s", &op_match_bool, OFFSET(smooth)},
+	(t_token){"v", &op_match_vertices, 0},
+	(t_token){"f", &op_match_faces, 0},
+	(t_token){"mtllib", &op_match_str, OFFSET(mtllib)},
+	(t_token){"o", &op_match_str, OFFSET(name)},
+	(t_token){"usemtl", &op_match_str, OFFSET(usemtl)},
+};
+
+int		op_parse_obj(t_objmodel *m)
+{
+	FILE	*stream;
 	size_t	i;
 	int		ret;
 
-	stream = fopen(m->filepath, "r");
-	if (stream == NULL)
-		return (1); //could not open file
+	if ((stream = fopen(m->filepath, "r")) == NULL)
+		return (ERRORNOF("fopen(\"%s\")", m->filepath), 1);
 	while (1)
 	{
-		/* qprintf("START LOOP\n"); */
 		i = 0;
 		while (i < sizeof(g_tokens) / sizeof(t_token))
 		{
-			/* DEBUGF("trying '%s'", g_tokens[i].h); */
 			ret = g_tokens[i].fun(stream, g_tokens[i].h, (void*)m +
 									g_tokens[i].pad);
 			if (ret == -1)
-				return (DEBUGF("Error while matching '%s'", g_tokens[i].h), 1);
+				return (ERRORF("g_tokens[%d].fun", i), 1);
 			if (ret == 1)
-			{
-				/* DEBUGF("ENDLOOP MATCHED '%s'", g_tokens[i].h); */
-				break;
-			}
+				break ;
 			i++;
 		}
 		if (feof(stream))
 			break ;
 		if (i >= sizeof(g_tokens) / sizeof(t_token))
-			return (1); //no match
+			return (ERROR("no matching token"), 1);
 	}
-	qprintf("Found %u vertices\n", m->vertices.size);
-	qprintf("Found %u faces\n", m->faces.size);
-	fclose(stream);
-	return (0);
+	return (fclose(stream), 0);
 }

@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 13:06:40 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/13 15:02:59 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/15 08:29:02 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_env			*sp_instance(void)
 
 void			sp_clean_env(t_env *e)
 {
-	ftv_release(&e->models, &sp_clean_models);
+	ftv_release(&e->models, &sp_clean_objmodels);
 	return ;
 }
 

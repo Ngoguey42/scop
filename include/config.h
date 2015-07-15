@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/01 12:09:19 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/13 16:15:14 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/15 08:23:22 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,12 @@ typedef enum				s_program_index
 /* # define WIN_RATIOF (16.f / 9.f) */
 # define WIN_RATIOF (4.f / 3.f)
 # define WIN_FOVF 45.f
-# define WIN_NEAR 0.1f
-# define WIN_FAR 100.f
+# define WIN_NEARF 0.1f
+# define WIN_FARF 100.f
 
-# define MOUSE_SENSITIVITY 0.005f 
-# define CAMERA_POSBOUND (M_PI / 2 * 0.98)
+# define MOUSE_SENSITIVITYF 0.005f 
+# define CAMERA_POSBOUNDF (M_PI / 2 * 0.98)
+# define MOVEMENT_SPEEDF 2.f
 
 /*
 ** CALCULATED MACROES

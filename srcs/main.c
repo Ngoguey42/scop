@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 11:48:41 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/13 15:47:51 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/15 09:42:55 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,18 +115,19 @@ int						main(int ac, char *av[])
 	double		el_time;
 
 	if (sp_init_env(e))
-		return (DEBUG("Scop: sp_init_env failed..."), 1);
+		return (ERROR("sp_init_env()"), 1);
 	if (sp_init_glfw(e))
-		return (DEBUG("Scop: sp_init_glfw failed..."), 1);
+		return (ERROR("sp_init_glfw()"), 1);
 	if (sp_init_shaders(e))
-		return (DEBUG("Scop: sp_init_shaders failed..."), 1);
+		return (ERROR("sp_init_shaders()"), 1);
 	if (sp_init_programs(e))
-		return (DEBUG("Scop: sp_init_programs failed..."), 1);
-	/* sp_register_obj(e, OBJ_PATH "42.obj"); */
-	sp_register_obj(e, OBJ_PATH "teapot.obj");
-	/* sp_register_obj(e, OBJ_PATH "teapot2.obj"); */
-	if (sp_init_objs(e))
-		return (DEBUG("Scop: sp_init_objs failed..."), 1);
+		return (ERROR("sp_init_programs()"), 1);
+	/* sp_register_objmodel(e, OBJ_PATH "42.obj"); */
+	/* sp_register_objmodel(e, OBJ_PATH "teapot.obj"); */
+	sp_register_objmodel(e, OBJ_PATH "teapot2.obj");
+	/* sp_register_objmodel(e, OBJ_PATH "teapot2.obj"); */
+	if (sp_init_objmodels(e))
+		return (ERROR("sp_init_objmodels()"), 1);
 	T;
 	/* exit(0); */
 	(void)ac;
@@ -144,7 +145,7 @@ int						main(int ac, char *av[])
 	
 	build_mesh(e);
 	t_matrix4 const	projection_mat = m4_fovprojection(WIN_FOVF, WIN_RATIOF,
-													  WIN_NEAR, WIN_FAR);
+													  WIN_NEARF, WIN_FARF);
 	last_time = glfwGetTime();
 	while (!glfwWindowShouldClose(e->win))
 	{

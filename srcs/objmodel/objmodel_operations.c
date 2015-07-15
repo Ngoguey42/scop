@@ -1,27 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   model_operations.c                                 :+:      :+:    :+:   */
+/*   objmodel_operations.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/07/02 12:23:45 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/13 09:48:52 by ngoguey          ###   ########.fr       */
+/*   Created: 2015/07/15 08:26:17 by ngoguey           #+#    #+#             */
+/*   Updated: 2015/07/15 08:59:08 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
 #include <stdlib.h>
 #include <string.h>
+#include "objmodel_parsing.h"
 
 /*
-** 'sp_init_objs'	init the #(e->models.size) models.
-**						'm->filename' must already be allocated
+** 'sp_init_objmodels'			Initializes the #(e->models.size) models.
+**							'm->filename' must already be allocated.
 ** *
-** 'sp_register_obj'	registers a new uninitialized model.
+** 'sp_clean_objmodels'			Releases ressources allocated in register/init
+** 							phases.
+** *
+** 'sp_register_objmodel'		Registers a new uninitialized model
+** 							for initialization.
 */
 
-int			sp_init_objs(t_env *e)
+int			sp_init_objmodels(t_env *e)
 {
 	t_objmodel		*models;
 	t_objmodel		*m;
@@ -36,14 +41,14 @@ int			sp_init_objs(t_env *e)
 			sp_enomem();
 		if (ftv_init_instance(&m->faces, sizeof(unsigned int) * 3))
 			sp_enomem();
-		if (sp_parse_obj(m))
-			return (DEBUGF("Error in sp_parse_obj(%s)", m->filepath), 1);
+		if (op_parse_obj(m))
+			return (ERRORF("op_parse_obj(%s)", m->filepath), 1);
 		i++;
 	}
 	return (0);
 }
 
-void		sp_clean_models(void *modelptr)
+void		sp_clean_objmodels(void *modelptr)
 {
 	t_objmodel		*m;
 
@@ -60,7 +65,7 @@ void		sp_clean_models(void *modelptr)
 	return ;
 }
 
-void		sp_register_obj(t_env *e, char const *filepath)
+void		sp_register_objmodel(t_env *e, char const *filepath)
 {
 	t_objmodel		m;
 
