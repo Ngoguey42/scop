@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 12:48:16 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/15 11:49:23 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/15 13:18:55 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,20 @@ typedef struct				s_shader_metadata
 /*
 ** PROGRAMS
 */
+typedef struct				s_program_uniform
+{
+	char					*name;
+	void					(*fun)();
+}							t_program_uniform;
+
 typedef struct				s_program_metadata
 {
 	GLuint					vertex_shaderid;
 	GLuint					fragment_shaderid;
-	int						num_attrib_locations;
-	char					*attrib_locations[64];
+	int						num_locations;
+	char					*locations[16];
+	int						num_uniforms;
+	t_program_uniform		uniforms[16];
 }							t_program_metadata;
 
 /*
@@ -86,6 +94,10 @@ typedef struct				s_env
 	GLuint					vab;
 	GLuint					ebo;
 	int						states[sp_num_keys];
+
+	t_matrix4				projection;
+	t_matrix4				view;
+	
 	float					pos[3];
 	double					mpos[2];
 	float					cangles[2];				

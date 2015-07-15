@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/01 12:32:53 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/01 13:10:54 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/15 13:27:30 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ static int		new_program(int index, GLuint *ptr, t_env const *e)
 	glAttachShader(*ptr, e->shaders[dat->vertex_shaderid]);
 	glAttachShader(*ptr, e->shaders[dat->fragment_shaderid]);
 	i = 0;
-	while (i < g_data[index].num_attrib_locations)
+	while (i < g_data[index].num_locations)
 	{
-		glBindAttribLocation(*ptr, i, g_data[index].attrib_locations[i]);
+		glBindAttribLocation(*ptr, i, g_data[index].locations[i]);
 		i++;
 	}
 	glLinkProgram(*ptr);
@@ -82,4 +82,18 @@ int				sp_init_programs(t_env *e)
 		i++;
 	}
 	return (0);
+}
+
+void			sp_update_uniforms(t_env const *e, int prid, GLuint prog)
+{
+	t_program_metadata const	*d = g_data + prid;
+	int							i;
+
+	i = 0;
+	while (i < d->num_uniforms)
+	{
+		d->uniforms[i].fun(e, glGetUniformLocation(prog, d->uniforms[i].name));
+		i++;
+	}
+	return ;
 }

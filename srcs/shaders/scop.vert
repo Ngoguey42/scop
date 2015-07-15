@@ -6,7 +6,7 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/06/30 17:43:59 by ngoguey           #+#    #+#             //
-//   Updated: 2015/07/13 11:20:28 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/07/15 12:51:18 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -24,11 +24,25 @@ uniform mat4 projection;
 
 void main()
 {
-	gl_Position = projection * view * model * vec4(position, 1.0);
-	if (gl_VertexID % 3 == 0)
+	gl_Position = model * vec4(position, 1.0);
+	if (gl_Position.y > 2.f)
+	{
+		if (gl_VertexID % 3 == 0)
+			ourColor = vec3(1.f, 0.f, 0.f);
+		else if (gl_VertexID % 3 == 1)
+			ourColor = vec3(0.f, 1.f, 0.f);
+		else
+			ourColor = vec3(0.f, 0.f, 1.f);
+	}
+	else if (gl_Position.y > 1.f)
 		ourColor = vec3(1.f, 0.f, 0.f);
-	else if (gl_VertexID % 3 == 1)
+	else if (gl_Position.y < -1.f)
 		ourColor = vec3(0.f, 1.f, 0.f);
 	else
-		ourColor = vec3(0.f, 0.f, 1.f);
+	{
+		float ratio = (gl_Position.y + 1.f) / 2.f;
+		ourColor = vec3(ratio, 1.f - ratio, 0.f);
+	}
+
+	gl_Position = projection * view * gl_Position;
 }

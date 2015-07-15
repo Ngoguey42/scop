@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/13 12:53:24 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/13 14:48:30 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/15 12:16:14 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,6 @@ static void	key_callback(GLFWwindow *w, int k, int sc, int a, int m)
 		sp_keystate(sp_instance(), k, false);
 		if (k == GLFW_KEY_ESCAPE || k == GLFW_KEY_Q)
 			glfwSetWindowShouldClose(w, GL_TRUE);
-		/* if (k == GLFW_KEY_RIGHT) */
-		/* 	sp_update_angles(sp_instance(), MOUSE_SENSITIVITY, 0.f); */
-		/* if (k == GLFW_KEY_LEFT) */
-		/* 	sp_update_angles(sp_instance(), -MOUSE_SENSITIVITY, 0.f); */
-		/* if (k == GLFW_KEY_RIGHT) */
-		/* 	sp_update_angles(sp_instance(), MOUSE_SENSITIVITY, 0.f); */
-		/* if (k == GLFW_KEY_LEFT) */
-		/* 	sp_update_angles(sp_instance(), -MOUSE_SENSITIVITY, 0.f); */
 	}
 	(void)sc;
 	return ;

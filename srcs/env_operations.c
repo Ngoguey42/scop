@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 13:06:40 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/15 08:29:02 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/15 13:10:32 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int				sp_init_env(t_env *e)
 	e->cangles[1] = 0.f;
 	sp_register_instance(e);
 	e->loop = true;
+	e->projection = m4_fovprojection(WIN_FOVF, WIN_RATIOF, WIN_NEARF, WIN_FARF);
 	if (ftv_init_instance(&e->models, sizeof(t_objmodel)))
 		sp_enomem();
 	return (0);
