@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/15 11:35:09 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/15 12:10:50 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/15 13:44:13 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,19 @@ static void		updade_pos(t_env *e, float elms)
 	if (mvx)
 	{
 		fact = elms / (float)(mvz * mvz + mvy * mvy + 1) * (float)mvx;
-		e->pos[2] += sin(e->cangles[0] - (M_PI / 2)) * fact;
-		e->pos[0] += cos(e->cangles[0] - (M_PI / 2)) * fact;
+		e->cpos.z += sin(e->cangles[0] - (M_PI / 2)) * fact;
+		e->cpos.x += cos(e->cangles[0] - (M_PI / 2)) * fact;
 	}
 	if (mvz)
 	{
 		fact = elms / (float)(mvx * mvx + mvy * mvy + 1) * (float)mvz;
-		e->pos[2] += sin(e->cangles[0]) * fact;
-		e->pos[0] += cos(e->cangles[0]) * fact;
+		e->cpos.z += sin(e->cangles[0]) * fact;
+		e->cpos.x += cos(e->cangles[0]) * fact;
 	}
 	if (mvy)
 	{
 		fact = elms / (float)(mvx * mvx + mvz * mvz + 1) * (float)mvy;
-		e->pos[1] += fact;
+		e->cpos.y += fact;
 	}
 	return ;
 }

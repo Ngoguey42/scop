@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 11:48:41 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/15 13:30:04 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/15 13:47:41 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,34 +76,32 @@ int						main(int ac, char *av[])
 	/* exit(0); */
 	(void)ac;
 	(void)av;
-
-	
 	build_mesh(e);
-
-	
-
 	last_time = glfwGetTime();
 	while (!glfwWindowShouldClose(e->win))
 	{
+		/* env update */
 		cur_time = glfwGetTime();
 		el_time = cur_time - last_time;
 		sp_update_states(e, el_time);
-		glClearColor(0.3f, 0.3f, 0.3f, 1.f);
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		glUseProgram(PROG0);
-		/* update lookat */
 		e->view = m4_lookat(
-			(t_vector3){e->pos[0], e->pos[1], e->pos[2]},
-			v3_add((t_vector3){e->pos[0], e->pos[1], e->pos[2]},
+			ATOV3(e->cpos.x, e->cpos.y, e->cpos.z),
+			v3_add(ATOV3(e->cpos.x, e->cpos.y, e->cpos.z),
 				   v3_frontnormed(e->cangles))
 			);
-		/* update uniforms */
+		
+		/* opengl buffers cleaning */
+		glClearColor(0.3f, 0.3f, 0.3f, 1.f);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+		/* program operations */
+		glUseProgram(PROG0);
 		sp_update_uniforms(e, 0, PROG0);
-		/* draw mesh */
 		glBindVertexArray(e->vao);
 		glDrawElements(GL_TRIANGLES, NUMINDICES, GL_UNSIGNED_INT, 0);
 		glBindVertexArray(0);
-		/* /draw mesh */
+
+		/* image validation */
 		glfwSwapBuffers(e->win);
 		glfwPollEvents();
 		last_time = cur_time;

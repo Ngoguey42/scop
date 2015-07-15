@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 12:48:16 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/15 13:18:55 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/15 13:43:33 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,23 +84,23 @@ enum						e_keyindex
 */
 typedef struct				s_env
 {
-	t_bool					loop;
 	GLFWwindow				*win;
 
 	GLuint					shaders[sc_num_shaders];
 	GLuint					programs[sc_num_programs];
 	t_ftvector				models;
-	GLuint					vao;
-	GLuint					vab;
-	GLuint					ebo;
 	int						states[sp_num_keys];
-
 	t_matrix4				projection;
 	t_matrix4				view;
 	
-	float					pos[3];
+	GLuint					vao;
+	GLuint					vab;
+	GLuint					ebo;
+
 	double					mpos[2];
-	float					cangles[2];				
+	float					cangles[2];
+	t_vector3				cpos;
+	/* float					pos[3]; */
 }							t_env;
 
 #endif

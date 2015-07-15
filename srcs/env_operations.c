@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env_init.c                                         :+:      :+:    :+:   */
+/*   env_operations.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/06/30 13:06:40 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/15 13:10:32 by ngoguey          ###   ########.fr       */
+/*   Created: 2015/07/15 13:44:48 by ngoguey           #+#    #+#             */
+/*   Updated: 2015/07/15 13:45:55 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,10 @@ void			sp_clean_env(t_env *e)
 int				sp_init_env(t_env *e)
 {
 	bzero(e, sizeof(*e));
-	e->pos[0] = 0.f;
-	e->pos[1] = 2.f;
-	e->pos[2] = 6.f;
+	e->cpos = ATOV3(0.f, 2.f, 6.f);
 	e->cangles[0] = -(M_PI / 2);
 	e->cangles[1] = 0.f;
 	sp_register_instance(e);
-	e->loop = true;
 	e->projection = m4_fovprojection(WIN_FOVF, WIN_RATIOF, WIN_NEARF, WIN_FARF);
 	if (ftv_init_instance(&e->models, sizeof(t_objmodel)))
 		sp_enomem();
