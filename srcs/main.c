@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 11:48:41 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/15 09:42:55 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/15 10:44:24 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,13 +133,13 @@ int						main(int ac, char *av[])
 	(void)ac;
 	(void)av;
 
-	t_vector3	test;
-	test.x = 1.f;
-	test.y = 2.f;
-	test.z = 3.f;
-	v3_print(test);
-	test = v3_normalize(test);
-	v3_print(test);
+	/* t_vector3	test; */
+	/* test.x = 1.f; */
+	/* test.y = 2.f; */
+	/* test.z = 3.f; */
+	/* v3_print(test); */
+	/* test = v3_normalize(test); */
+	/* v3_print(test); */
 
 	
 	
@@ -179,19 +179,19 @@ int						main(int ac, char *av[])
 		view_mat = m4_invtranslateref_nonuniform(
 			&view_mat, e->pos);
 
-		qprintf("Yaw %f ", e->cangles[0]);
-		qprintf("Pitch %f\n", e->cangles[1]);
+		/* qprintf("Yaw %f ", e->cangles[0]); */
+		/* qprintf("Pitch %f\n", e->cangles[1]); */
 		/* t_vector3	test2 = 	v3_frontnormed(e->cangles); */
 		/* v3_print(test2); */
 		
-		m4_print(view_mat);
+		/* m4_print(view_mat); */
 		view_mat = m4_lookat(
 			(t_vector3){e->pos[0], e->pos[1], e->pos[2]},
 			v3_add((t_vector3){e->pos[0], e->pos[1], e->pos[2]},
 				   v3_frontnormed(e->cangles))
 			);
-		qprintf("\n");
-		m4_print(view_mat);
+		/* qprintf("\n"); */
+		/* m4_print(view_mat); */
 		/* view_mat = m4_rotationref_axis(&view_mat, x_axis, */
 		/* 0.2 * (GLfloat)glfwGetTime()); */
 		

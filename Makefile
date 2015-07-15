@@ -42,7 +42,8 @@ C_HEADS := -I include -I libft/includes -I ~/.brew/include
 # Internal
 #
 
-O_FILES := obj/srcs/env_operations.o \
+O_FILES := obj/srcs/controls_apply.o \
+	obj/srcs/env_operations.o \
 	obj/srcs/error.o \
 	obj/srcs/glfw_operations.o \
 	obj/srcs/keys_handling.o \
@@ -74,6 +75,10 @@ all: $(LIBS) $(NAME)
 
 $(NAME): $(O_FILES)
 	@$(MSG_0) $@ ; $(LD_CC) -o $@ $(O_FILES) $(LD_FLAGS) && $(MSG_END) || $(MSG_1) $@
+
+obj/srcs/controls_apply.o: srcs/controls_apply.c include/config.h include/ftmath.h include/scop.h include/scop_structs.h
+	@mkdir -p obj/srcs 2> /dev/null || true
+	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
 obj/srcs/env_operations.o: srcs/env_operations.c include/config.h include/ftmath.h include/scop.h include/scop_structs.h
 	@mkdir -p obj/srcs 2> /dev/null || true

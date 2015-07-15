@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/01 12:09:19 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/15 08:23:22 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/15 10:38:30 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ typedef enum				s_program_index
 
 # define MOUSE_SENSITIVITYF 0.005f 
 # define CAMERA_POSBOUNDF (M_PI / 2 * 0.98)
-# define MOVEMENT_SPEEDF 2.f
+# define MOVEMENT_SPEEDF 4.f
 
 /*
 ** CALCULATED MACROES
