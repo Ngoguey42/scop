@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 11:48:41 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/17 12:57:10 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/17 15:06:29 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,14 +55,23 @@ void					build_mesh(t_env *e)
 void	build_triangle_mesh(GLuint tri[3])
 {
 	GLfloat vertices[] = {
-		-0.5f, -0.5f, 0.0f,
-		0.5f, -0.5f, 0.0f,
-		0.0f,  0.5f, 0.0f
+		// Positions          // Colors           // Texture Coords
+		0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f, // Top Right
+		0.5f, -0.5f, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f, // Bottom Right
+		-0.5f, -0.5f, 0.0f,  0.0f, 0.0f, 1.0f,   0.0f, 0.0f, // Bottom Left
+		-0.5f,  0.5f, 0.0f,  1.0f, 1.0f, 0.0f,   0.0f, 1.0f  // Top Left
 	};
+
+	GLuint indices[] = {  // Note that we start from 0!
+		0, 1, 3, // First Triangle
+		1, 2, 3  // Second Triangle
+	};
+
 	
 	glGenVertexArrays(1, tri);	// array object
 	glGenBuffers(1, tri + 1); // vab = vbo array buffer / buffer object
-
+	glGenBuffers(1, tri + 2);
+	
 	glBindVertexArray(*tri);
 	{		
 		glBindBuffer(GL_ARRAY_BUFFER, tri[1]);
@@ -71,10 +80,25 @@ void	build_triangle_mesh(GLuint tri[3])
 					 vertices,
 					 GL_STATIC_DRAW
 			);
-		
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat),
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, tri[2]);
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER,
+					 sizeof(indices),
+					 indices,
+					 GL_STATIC_DRAW
+			);
+
+
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat),
 							  (GLvoid*)0);
 		glEnableVertexAttribArray(0);
+
+		glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat),
+							  (GLvoid*)(3 * sizeof(GLfloat)));
+		glEnableVertexAttribArray(1);
+		glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat),
+							  (GLvoid*)(6 * sizeof(GLfloat)));
+		glEnableVertexAttribArray(2);
+		
 	}
 	glBindVertexArray(0);
 	
@@ -108,12 +132,9 @@ int						main(int ac, char *av[])
 	build_mesh(e);
 
 
-	t_ftvector	tex;
-	if (ftv_init_instance(&tex, sizeof(t_byte) * 4))
-		sp_enomem();
-	if (parse_tga(WALL_PATH, &tex))
-		return (1);
-	qprintf("%d pixels in texture / %d\n", tex.size);
+	if (sp_load_texture(WALL_PATH, &e->tex))
+		return (T, 1);
+	qprintf("gl descriptor: %u\n", e->tex);
 	
 	GLuint	tri[3];
 
@@ -121,6 +142,7 @@ int						main(int ac, char *av[])
 	build_triangle_mesh(tri);
 	
 	last_time = glfwGetTime();
+	e->itempos = ATOV3(0.f, 6.f, 0.f);
 	while (!glfwWindowShouldClose(e->win))
 	{
 		/* env update */
@@ -140,18 +162,26 @@ int						main(int ac, char *av[])
 		/* program operations */
 		glUseProgram(PROG0);
 		glBindVertexArray(e->vao);
-		e->itempos = ATOV3(0.f, 6.f, 0.f);
 		sp_update_uniforms(e, 0, PROG0);
 		glDrawElements(GL_TRIANGLES, NUMINDICES, GL_UNSIGNED_INT, 0);
 		glBindVertexArray(0);
 
+
+
+		
+		glUseProgram(PROG1);		
+		
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, e->tex);
+		
+		glUniform1i(glGetUniformLocation(PROG1, "ourTexture"), 0);
 		
 		glBindVertexArray(tri[0]);
-		e->itempos = ATOV3(0.f, 4.f, 0.f);
-		sp_update_uniforms(e, 0, PROG0);
-		glDrawArrays(GL_TRIANGLES, 0, 3);
+		sp_update_uniforms(e, 1, PROG1);
+		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 		glBindVertexArray(0);  
-
+		
+		
 		
 		/* image validation */
 		glfwSwapBuffers(e->win);

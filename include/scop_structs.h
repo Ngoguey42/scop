@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 12:48:16 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/17 08:25:49 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/17 14:11:04 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,8 @@ typedef struct				s_env
 	t_matrix4				projection;
 	t_matrix4				view;
 	t_vector3				itempos;
+
+	GLuint					tex;
 	
 	GLuint					vao;
 	GLuint					vab;

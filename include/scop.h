@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 12:07:31 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/17 12:44:19 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/17 14:27:49 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ t_env		*sp_instance(void);
 
 int			sp_init_glfw(t_env *e);
 void		sp_disable_glfw(t_env *e);
-int         parse_tga(char const *filepath, t_ftvector *v);
+int     sp_load_texture(char const *filepath, GLuint *desc);
+int         parse_tga(char const *filepath, t_ftvector *v, int dim[2]);
 
 /*
 ** CONTROLS
@@ -61,6 +62,7 @@ void		sp_toggle_mouse_state(GLFWwindow *w, t_env *e);
 ** SHADER FUNCTIONS
 */
 #define PROG0 (e->programs[0])
+#define PROG1 (e->programs[1])
 
 int			sp_init_shaders(t_env *e);
 void		sp_delete_shaders(t_env *e);
@@ -71,6 +73,10 @@ void		sp_delete_programs(t_env *e);
 void        item_unif_projection(t_env const *e, GLuint loc);
 void        item_unif_view(t_env const *e, GLuint loc);
 void        item_unif_model(t_env const *e, GLuint loc);
+
+void        item_tex_projection(t_env const *e, GLuint loc);
+void        item_tex_view(t_env const *e, GLuint loc);
+void        item_tex_model(t_env const *e, GLuint loc);
 
 void            sp_update_uniforms(t_env const *e, int prid, GLuint prog);
 
