@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/17 14:27:18 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/17 14:29:37 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/17 15:37:36 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void		item_tex_model(t_env const *e, GLuint loc)
 
 void		item_tex_view(t_env const *e, GLuint loc)
 {
-	glUniformMatrix4fv(loc, 1, GL_TRUE, (float*)&e->view);	
+	glUniformMatrix4fv(loc, 1, GL_TRUE, (float*)&e->view);
 	return ;
 }
 

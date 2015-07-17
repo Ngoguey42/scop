@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/01 12:09:19 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/17 15:29:05 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/17 15:32:39 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,11 @@ typedef enum				s_program_index
 # define UNIF1 {UNIF1A, UNIF1B, UNIF1C}
 # define PROGATT1 {sc_basic_vertex, sc_basic_fragment, 2, LOCS1, 3, UNIF1},
 
-/* # define LOCS2 {"position", "color"} */
 # define LOCS2 {"position", "color", "texCoord"}
 # define UNIF2A {"model", &item_tex_model}
 # define UNIF2B {"view", &item_tex_view}
 # define UNIF2C {"projection", &item_tex_projection}
 # define UNIF2 {UNIF2A, UNIF2B, UNIF2C}
-/* # define PROGATT2 {sc_tex_vertex, sc_tex_fragment, 2, LOCS2, 3, UNIF2}, */
 # define PROGATT2 {sc_tex_vertex, sc_tex_fragment, 3, LOCS2, 3, UNIF2},
 
 # define PROGRAMS_ATTRIBUTES_LIST PROGATT1 PROGATT2
@@ -71,10 +69,7 @@ typedef enum				s_program_index
 ** TEXTURES
 */
 # define OBJ_PATH "res/"
-/* # define WALL_PATH (OBJ_PATH "Untitled.tga") */
 # define WALL_PATH (OBJ_PATH "Wall.tga")
-
-
 
 /*
 ** CONFIG MACROES

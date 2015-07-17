@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 11:48:41 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/17 15:06:29 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/17 15:37:10 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void					build_mesh(t_env *e)
 	t_objmodel	*m = e->models.data;
 	GLfloat		*vertices = m->vertices.data;
 	GLuint		*indices = m->faces.data;
-	
+
 	glGenVertexArrays(1, &e->vao);	// array object
 	glGenBuffers(1, &e->vab); // vab = vbo array buffer / buffer object
 	glGenBuffers(1, &e->ebo); //
@@ -126,7 +126,6 @@ int						main(int ac, char *av[])
 	if (sp_init_objmodels(e))
 		return (ERROR("sp_init_objmodels()"), 1);
 	T;
-	/* exit(0); */
 	(void)ac;
 	(void)av;
 	build_mesh(e);
@@ -134,11 +133,8 @@ int						main(int ac, char *av[])
 
 	if (sp_load_texture(WALL_PATH, &e->tex))
 		return (T, 1);
-	qprintf("gl descriptor: %u\n", e->tex);
 	
 	GLuint	tri[3];
-
-	
 	build_triangle_mesh(tri);
 	
 	last_time = glfwGetTime();
