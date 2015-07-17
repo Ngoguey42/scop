@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 12:48:16 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/15 13:43:33 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/17 08:25:49 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ typedef struct				s_env
 	int						states[sp_num_keys];
 	t_matrix4				projection;
 	t_matrix4				view;
+	t_vector3				itempos;
 	
 	GLuint					vao;
 	GLuint					vab;

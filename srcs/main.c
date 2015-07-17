@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 11:48:41 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/15 13:47:41 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/17 12:57:10 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,42 @@ void					build_mesh(t_env *e)
 	return ;
 }
 
+void	build_triangle_mesh(GLuint tri[3])
+{
+	GLfloat vertices[] = {
+		-0.5f, -0.5f, 0.0f,
+		0.5f, -0.5f, 0.0f,
+		0.0f,  0.5f, 0.0f
+	};
+	
+	glGenVertexArrays(1, tri);	// array object
+	glGenBuffers(1, tri + 1); // vab = vbo array buffer / buffer object
+
+	glBindVertexArray(*tri);
+	{		
+		glBindBuffer(GL_ARRAY_BUFFER, tri[1]);
+		glBufferData(GL_ARRAY_BUFFER,
+					 sizeof(vertices),
+					 vertices,
+					 GL_STATIC_DRAW
+			);
+		
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat),
+							  (GLvoid*)0);
+		glEnableVertexAttribArray(0);
+	}
+	glBindVertexArray(0);
+	
+	return ;
+}
+
 int						main(int ac, char *av[])
 {
 	t_env		e[1];
 	double		last_time;
 	double		cur_time;
 	double		el_time;
-
+	
 	if (sp_init_env(e))
 		return (ERROR("sp_init_env()"), 1);
 	if (sp_init_glfw(e))
@@ -77,6 +106,20 @@ int						main(int ac, char *av[])
 	(void)ac;
 	(void)av;
 	build_mesh(e);
+
+
+	t_ftvector	tex;
+	if (ftv_init_instance(&tex, sizeof(t_byte) * 4))
+		sp_enomem();
+	if (parse_tga(WALL_PATH, &tex))
+		return (1);
+	qprintf("%d pixels in texture / %d\n", tex.size);
+	
+	GLuint	tri[3];
+
+	
+	build_triangle_mesh(tri);
+	
 	last_time = glfwGetTime();
 	while (!glfwWindowShouldClose(e->win))
 	{
@@ -96,11 +139,20 @@ int						main(int ac, char *av[])
 
 		/* program operations */
 		glUseProgram(PROG0);
-		sp_update_uniforms(e, 0, PROG0);
 		glBindVertexArray(e->vao);
+		e->itempos = ATOV3(0.f, 6.f, 0.f);
+		sp_update_uniforms(e, 0, PROG0);
 		glDrawElements(GL_TRIANGLES, NUMINDICES, GL_UNSIGNED_INT, 0);
 		glBindVertexArray(0);
 
+		
+		glBindVertexArray(tri[0]);
+		e->itempos = ATOV3(0.f, 4.f, 0.f);
+		sp_update_uniforms(e, 0, PROG0);
+		glDrawArrays(GL_TRIANGLES, 0, 3);
+		glBindVertexArray(0);  
+
+		
 		/* image validation */
 		glfwSwapBuffers(e->win);
 		glfwPollEvents();

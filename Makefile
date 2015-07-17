@@ -62,7 +62,8 @@ O_FILES := obj/srcs/controls_apply.o \
 	obj/srcs/objmodel/obj_parsing.o \
 	obj/srcs/objmodel/obj_parsing_multiple_units.o \
 	obj/srcs/objmodel/obj_parsing_unique_units.o \
-	obj/srcs/objmodel/objmodel_operations.o
+	obj/srcs/objmodel/objmodel_operations.o \
+	obj/srcs/tga/parse_tga.o
 
 MSG_0 := printf '\033[0;32m%-46.46s\033[0;0m\r'
 MSG_1 := printf '\033[0;31m%-46.46s\033[0;0m\n'
@@ -160,13 +161,17 @@ obj/srcs/objmodel/objmodel_operations.o: srcs/objmodel/objmodel_operations.c inc
 	@mkdir -p obj/srcs/objmodel 2> /dev/null || true
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
+obj/srcs/tga/parse_tga.o: srcs/tga/parse_tga.c include/config.h include/ftmath.h include/objmodel_parsing.h include/scop.h include/scop_structs.h
+	@mkdir -p obj/srcs/tga 2> /dev/null || true
+	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
+
 $(LIBS):
 	@make -C $@
 .PHONY: $(LIBS)
 
 clean:
 	@rm -f $(O_FILES) 2> /dev/null || true
-	@rmdir -p obj/srcs/objmodel obj/srcs/item obj/srcs/ftmath obj/srcs $(O_DIR) 2> /dev/null || true
+	@rmdir -p obj/srcs/tga obj/srcs/objmodel obj/srcs/item obj/srcs/ftmath obj/srcs $(O_DIR) 2> /dev/null || true
 .PHONY: clean
 
 fclean: clean

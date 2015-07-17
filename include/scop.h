@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 12:07:31 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/15 13:26:54 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/17 12:44:19 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ t_env		*sp_instance(void);
 
 int			sp_init_glfw(t_env *e);
 void		sp_disable_glfw(t_env *e);
-
+int         parse_tga(char const *filepath, t_ftvector *v);
 
 /*
 ** CONTROLS

@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/01 12:09:19 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/15 13:41:54 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/17 12:45:15 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,13 @@ typedef enum				s_program_index
 ** OBJ
 */
 # define OBJ_PATH "res/"
+
+/*
+** TEXTURES
+*/
+# define OBJ_PATH "res/"
+# define WALL_PATH (OBJ_PATH "Wall.tga")
+
 
 
 /*
