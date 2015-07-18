@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 11:48:41 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/18 14:29:54 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/18 14:47:44 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int						main(int ac, char *av[])
 	sp_register_objmodel(e, OBJ_PATH "teapot2.obj");
 	if (sp_init_objmodels(e))
 		return (ERROR("sp_init_objmodels()"), 1);
-	/* sp_wrap_texture_planxy(e->models.data, 1.f, 442.f / 405.f); */
+	sp_wrap_texture_planxy(e->models.data, 1.f, 442.f / 405.f);
 	
 	T;
 	(void)ac;

@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 12:07:31 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/18 14:26:37 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/18 14:42:13 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ void		sp_delete_programs(t_env *e);
 void        item_unif_projection(t_env const *e, GLuint loc);
 void        item_unif_view(t_env const *e, GLuint loc);
 void        item_unif_model(t_env const *e, GLuint loc);
+void        item_unif_texture(t_env const *e, GLuint loc);
 
 
 void        tex_unif_projection(t_env const *e, GLuint loc);

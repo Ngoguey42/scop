@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/18 13:59:15 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/18 14:30:36 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/18 15:01:02 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,20 @@
 static int		create_item(t_env *e)
 {
 	t_drawable		d[1];
-	
+
 	bzero(d, sizeof(t_drawable));
-	d->prog = sc_basic_program;
+	d->prog = sc_item_program;
 	d->n_textures = 0;
-	d->mesh.n_floats = ((t_objmodel*)e->models.data)->vertices.size * 3;
+	d->mesh.n_floats = ((t_objmodel*)e->models.data)->vertices.size * 5;
 	d->mesh.floats = ((t_objmodel*)e->models.data)->vertices.data;
 	d->mesh.n_indices = ((t_objmodel*)e->models.data)->faces.size * 3;
 	d->mesh.indices = ((t_objmodel*)e->models.data)->faces.data;
-	ps_build_mesh(&d->mesh, (t_meshattribs){1, (GLuint[1]){3}, true});
+
+	
+	qprintf("nm de points %d\n", ((t_objmodel*)e->models.data)->vertices.size);
+	
+	
+	ps_build_mesh(&d->mesh, (t_meshattribs){2, (GLuint[2]){3, 2}, true});
 	ftv_push_back(&e->drawables, d);
 	return (0);
 }
@@ -41,7 +46,6 @@ static int					create_square(t_env *e)
 	d->textures = ft_memdup((void*)textures, sizeof(textures));
 	if (d->textures == NULL)
 		sp_enomem();
-
 	d->mesh.n_floats = 4 * 8;
 	d->mesh.floats = (GLfloat[]){
 		0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f,
@@ -56,7 +60,6 @@ static int					create_square(t_env *e)
 	};
 	ps_build_mesh(&d->mesh, (t_meshattribs)
 				  {3, (GLuint[3]){3, 3, 2}, true});
-	
 	ftv_push_back(&e->drawables, d);	
 	return (0);
 }

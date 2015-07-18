@@ -6,12 +6,13 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/18 10:52:20 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/18 11:58:55 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/18 15:16:58 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
 #include "texture_mapping.h"
+#include <string.h>
 
 static void		calc_bounds(float const *vert, size_t nvert,
 							float bx[2], float by[2])
@@ -42,15 +43,14 @@ static void		calc_bounds(float const *vert, size_t nvert,
 static void		fill(t_ftvector *new, t_ftvector const *old, float fact[2])
 {
 	float const	*ptr = old->data;
-	float const *end = ((float*)old->data) + old->size;
-	float		tmp[1];
+	float const *end = old->data + old->size * old->chunk_size;
+	float		tmp[5];
 
 	while (ptr < end)
 	{
-		ftv_push_backn(new, ptr, 3);
-		*tmp = ptr[0] * fact[0];
-		ftv_push_back(new, tmp);
-		*tmp = ptr[1] * fact[1];
+		memcpy(tmp, ptr, sizeof(*tmp) * 3);
+		tmp[3] = ptr[0] * fact[0];
+		tmp[4] = ptr[1] * fact[1];
 		ftv_push_back(new, tmp);
 		ptr += 3;
 	}
@@ -63,37 +63,9 @@ void	sp_wrap_texture_planxy(t_objmodel *m, float scale, float imgratio)
 
 	ftv_init_instance(newv, sizeof(float) * 5);
 	ftv_reserve(newv, m->vertices.size / 3 * 5);
-
-	/* 0.f / 0.f =>	0.f / 0.f; */
-
-	/* scale 1.f, ratio 1.5f; */
-	/* 1.f / 0.f =>	0.66f / 0.f; */
-	/* 0.f / 1.f =>	0.f   / 1.f; */
-	
-
-	
-	/* 3.0 / 2.0; */
-
-	
-	
-	/* 1.f / scale */
-
-	
 	fill(newv, &m->vertices, (float[2]){1 / (scale * imgratio), 1 / scale});
-	/* float   boundsx[2]; */
-	/* float   boundsy[2]; */
-	/* float	objratio; */
-	/* float	 */
-	
-	/* calc_bounds(m->vertices.data, m->vertices.size, boundsx, boundsy); */
-	/* objratio = (boundsx[1] - boundsx[0]) / (boundsy[1] - boundsy[0]); */
-	/* qprintf("Found: %u vert\n", m->vertices.size); */
-	/* qprintf("Found: %f ratio vs %f\n", imgratio, objratio); */
-	/* qprintf("Found: x: %f -> %f\n", boundsx[0], boundsx[1]); */
-	/* qprintf("Found: y: %f -> %f\n", boundsy[0], boundsy[1]); */
-	/* qprintf("midx = %f\n", boundsx[0] / 2 + boundsx[1] / 2); */
-	/* qprintf("midy = %f\n", boundsy[0] / 2 + boundsy[1] / 2); */
-	
-	
+	ftv_release(&m->vertices, NULL);
+	m->vertices = *newv;
+	(void)calc_bounds;
 	return ;
 }

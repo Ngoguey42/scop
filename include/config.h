@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/01 12:09:19 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/18 13:48:25 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/18 14:46:19 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ typedef enum				s_shader_index
 	sc_basic_fragment,
 	sc_tex_vertex,
 	sc_tex_fragment,
+	sc_item_vertex,
+	sc_item_fragment,
 	sc_num_shaders
 }							t_shader_index;
 
@@ -32,7 +34,9 @@ typedef enum				s_shader_index
 # define SHDATT2 {SHADERS_PATH "scop.frag", GL_FRAGMENT_SHADER},
 # define SHDATT3 {SHADERS_PATH "tex.vert", GL_VERTEX_SHADER},
 # define SHDATT4 {SHADERS_PATH "tex.frag", GL_FRAGMENT_SHADER},
-# define SHADERS_ATTRIBUTES_LIST SHDATT1 SHDATT2 SHDATT3 SHDATT4
+# define SHDATT5 {SHADERS_PATH "item.vert", GL_VERTEX_SHADER},
+# define SHDATT6 {SHADERS_PATH "item.frag", GL_FRAGMENT_SHADER},
+# define SHADERS_ATTRIBUTES_LIST SHDATT1 SHDATT2 SHDATT3 SHDATT4 SHDATT5 SHDATT6
 
 /*
 ** PROGRAMS ATTRIBUTES
@@ -41,6 +45,7 @@ typedef enum				s_program_index
 {
 	sc_basic_program,
 	sc_tex_program,
+	sc_item_program,
 	sc_num_programs
 }							t_program_index;
 
@@ -59,7 +64,16 @@ typedef enum				s_program_index
 # define UNIF2 {UNIF2A, UNIF2B, UNIF2C, UNIF2D}
 # define PROGATT2 {sc_tex_vertex, sc_tex_fragment, 3, LOCS2, 4, UNIF2},
 
-# define PROGRAMS_ATTRIBUTES_LIST PROGATT1 PROGATT2
+/* # define LOCS3 {"position"} */
+# define LOCS3 {"position", "texCoord"}
+# define UNIF3A {"model", &item_unif_model}
+# define UNIF3B {"view", &item_unif_view}
+# define UNIF3C {"projection", &item_unif_projection}
+# define UNIF3D {"ourTexture", &item_unif_texture}
+# define UNIF3 {UNIF3A, UNIF3B, UNIF3C, UNIF3D}
+# define PROGATT3 {sc_item_vertex, sc_item_fragment, 2, LOCS3, 4, UNIF3},
+
+# define PROGRAMS_ATTRIBUTES_LIST PROGATT1 PROGATT2 PROGATT3
 
 /*
 ** OBJ

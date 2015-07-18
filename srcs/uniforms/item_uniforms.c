@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/15 13:06:52 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/17 15:38:02 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/18 14:42:02 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,12 @@ void		item_unif_view(t_env const *e, GLuint loc)
 void		item_unif_projection(t_env const *e, GLuint loc)
 {
 	glUniformMatrix4fv(loc, 1, GL_TRUE, (float*)&e->projection);
+	return ;
+}
+
+void		item_unif_texture(t_env const *e, GLuint loc)
+{
+	glUniform1i(loc, 0);
+	(void)e;
 	return ;
 }

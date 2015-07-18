@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/18 12:01:22 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/18 13:21:16 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/18 14:32:30 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,4 +59,3 @@ int				ps_build_mesh(t_mesh *me, t_meshattribs att)
 	glBindVertexArray(0);
 	return (0);
 }
-
