@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 12:07:31 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/18 12:44:29 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/18 14:26:37 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,14 +74,21 @@ void        item_unif_projection(t_env const *e, GLuint loc);
 void        item_unif_view(t_env const *e, GLuint loc);
 void        item_unif_model(t_env const *e, GLuint loc);
 
-void        item_tex_projection(t_env const *e, GLuint loc);
-void        item_tex_view(t_env const *e, GLuint loc);
-void        item_tex_model(t_env const *e, GLuint loc);
+
+void        tex_unif_projection(t_env const *e, GLuint loc);
+void        tex_unif_view(t_env const *e, GLuint loc);
+void        tex_unif_model(t_env const *e, GLuint loc);
+void        tex_unif_texture(t_env const *e, GLuint loc);
+
+int             sp_create_drawables(t_env *e);
+void            sp_release_drawable(void *ptr);
 
 void            sp_update_uniforms(t_env const *e, int prid, GLuint prog);
 
 void    sp_wrap_texture_planxy(t_objmodel *m, float scale, float imgratio);
 int             ps_build_mesh(t_mesh *me, t_meshattribs att);
+
+void    sp_render_drawables(t_env *e);
 
 /*
 ** ERRORS

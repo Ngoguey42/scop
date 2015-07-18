@@ -52,6 +52,8 @@ O_FILES := obj/srcs/env_operations.o \
 	obj/srcs/shader_operations.o \
 	obj/srcs/controls/controls_apply.o \
 	obj/srcs/controls/controls_inputs.o \
+	obj/srcs/drawables/drawables_init.o \
+	obj/srcs/drawables/drawables_render.o \
 	obj/srcs/ftmath/matrix4.o \
 	obj/srcs/ftmath/matrix4_invtranslate.o \
 	obj/srcs/ftmath/matrix4_miscop.o \
@@ -119,6 +121,14 @@ obj/srcs/controls/controls_apply.o: srcs/controls/controls_apply.c include/confi
 
 obj/srcs/controls/controls_inputs.o: srcs/controls/controls_inputs.c include/config.h include/ftmath.h include/scop.h include/scop_structs.h
 	@mkdir -p obj/srcs/controls 2> /dev/null || true
+	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
+
+obj/srcs/drawables/drawables_init.o: srcs/drawables/drawables_init.c include/config.h include/ftmath.h include/scop.h include/scop_structs.h
+	@mkdir -p obj/srcs/drawables 2> /dev/null || true
+	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
+
+obj/srcs/drawables/drawables_render.o: srcs/drawables/drawables_render.c include/config.h include/ftmath.h include/scop.h include/scop_structs.h
+	@mkdir -p obj/srcs/drawables 2> /dev/null || true
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
 obj/srcs/ftmath/matrix4.o: srcs/ftmath/matrix4.c include/config.h include/ftmath.h include/scop.h include/scop_structs.h
@@ -191,7 +201,7 @@ $(LIBS):
 
 clean:
 	@rm -f $(O_FILES) 2> /dev/null || true
-	@rmdir -p obj/srcs/uniforms obj/srcs/tga obj/srcs/textures obj/srcs/objmodel obj/srcs/ftmath obj/srcs/controls obj/srcs $(O_DIR) 2> /dev/null || true
+	@rmdir -p obj/srcs/uniforms obj/srcs/tga obj/srcs/textures obj/srcs/objmodel obj/srcs/ftmath obj/srcs/drawables obj/srcs/controls obj/srcs $(O_DIR) 2> /dev/null || true
 .PHONY: clean
 
 fclean: clean

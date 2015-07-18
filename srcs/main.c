@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 11:48:41 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/18 13:18:24 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/18 14:29:54 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,41 +34,14 @@ int						main(int ac, char *av[])
 	sp_register_objmodel(e, OBJ_PATH "teapot2.obj");
 	if (sp_init_objmodels(e))
 		return (ERROR("sp_init_objmodels()"), 1);
-	sp_wrap_texture_planxy(e->models.data, 1.f, 442.f / 405.f);
+	/* sp_wrap_texture_planxy(e->models.data, 1.f, 442.f / 405.f); */
 	
 	T;
 	(void)ac;
 	(void)av;
-
-	t_mesh		me[2];
-
-	me[0].n_floats = ((t_objmodel*)e->models.data)->vertices.size * 3;
-	me[0].floats = ((t_objmodel*)e->models.data)->vertices.data;
-	me[0].has_indices = true;
-	me[0].n_indices = ((t_objmodel*)e->models.data)->faces.size * 3;
-	me[0].indices = ((t_objmodel*)e->models.data)->faces.data;
-	ps_build_mesh(me + 0, (t_meshattribs){1, (GLuint[1]){3}});
-
-	
-	me[1].n_floats = 4 * 8;
-	me[1].floats = (GLfloat[]){
-		0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f,
-		0.5f, -0.5f, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f,
-		-0.5f, -0.5f, 0.0f,  0.0f, 0.0f, 1.0f,   0.0f, 0.0f,
-		-0.5f,  0.5f, 0.0f,  1.0f, 1.0f, 0.0f,   0.0f, 1.0f
-	};
-	me[1].has_indices = true;
-	me[1].n_indices = 6;
-	me[1].indices = (GLuint[]){
-		0, 1, 3,
-		1, 2, 3
-	};
-	ps_build_mesh(me + 1, (t_meshattribs){3, (GLuint[3]){3, 3, 2}});
-
-	
 	if (sp_load_texture(PORCELAIN_PATH, &e->tex))
-		return (T, 1);
-	
+		return (T, 1);	
+	sp_create_drawables(e);
 	
 	last_time = glfwGetTime();
 	e->itempos = ATOV3(0.f, 6.f, 0.f);
@@ -83,29 +56,12 @@ int						main(int ac, char *av[])
 			v3_add(ATOV3(e->cpos.x, e->cpos.y, e->cpos.z),
 				   v3_frontnormed(e->cangles))
 			);
-		
+
 		/* opengl buffers cleaning */
 		glClearColor(0.3f, 0.3f, 0.3f, 1.f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		/* mesh item */
-		glUseProgram(PROG0);
-		glBindVertexArray(me[0].desc[0]);
-		sp_update_uniforms(e, 0, PROG0);
-		glDrawElements(GL_TRIANGLES, me[0].n_indices, GL_UNSIGNED_INT, 0);
-		glBindVertexArray(0);
-		
-		/* mesh square */
-		glUseProgram(PROG1);
-		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, e->tex);
-		glUniform1i(glGetUniformLocation(PROG1, "ourTexture"), 0);
-		
-		glBindVertexArray(me[1].desc[0]);
-		sp_update_uniforms(e, 1, PROG1);
-		glDrawElements(GL_TRIANGLES, me[1].n_indices, GL_UNSIGNED_INT, 0);
-		glBindVertexArray(0);  
-		
+		sp_render_drawables(e);
 		
 		/* image validation */
 		glfwSwapBuffers(e->win);

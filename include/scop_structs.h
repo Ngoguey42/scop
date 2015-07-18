@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 12:48:16 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/18 13:11:37 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/18 14:13:45 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,17 +66,28 @@ typedef struct				s_objmodel
 typedef struct				s_meshattribs
 {
 	GLuint					size;
-	GLuint					*data;
+	GLuint const			*data;
+	t_bool					has_indices;
 }							t_meshattribs;
 typedef struct				s_mesh
 {
 	GLuint					desc[3];
 	GLuint					n_floats;
 	GLfloat const			*floats;
-	t_bool					has_indices;
 	GLuint					n_indices;
 	GLuint const			*indices;
 }							t_mesh;
+
+/*
+** DRAWABLES
+*/
+typedef struct				s_drawable
+{
+	t_program_index			prog;
+	size_t					n_textures;
+	GLuint					*textures;
+	t_mesh					mesh;
+}							t_drawable;
 
 
 /*
@@ -113,6 +124,8 @@ typedef struct				s_env
 	t_matrix4				view;
 	t_vector3				itempos;
 
+	t_ftvector				drawables;
+	
 	GLuint					tex;
 	
 

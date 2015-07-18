@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/18 12:01:22 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/18 13:11:51 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/18 13:21:16 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int				ps_build_mesh(t_mesh *me, t_meshattribs att)
 	glBindVertexArray(me->desc[0]);
 	gen_buffer(me->desc + 1, GL_ARRAY_BUFFER, (GLvoid*)me->floats,
 			   me->n_floats * sizeof(*me->floats));
-	if (me->has_indices)
+	if (att.has_indices)
 		gen_buffer(me->desc + 2, GL_ELEMENT_ARRAY_BUFFER, (GLvoid*)me->indices,
 				   me->n_indices * sizeof(*me->indices));
 	gen_attribs(att);

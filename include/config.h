@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/01 12:09:19 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/18 10:23:56 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/18 13:48:25 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,12 @@ typedef enum				s_program_index
 # define PROGATT1 {sc_basic_vertex, sc_basic_fragment, 2, LOCS1, 3, UNIF1},
 
 # define LOCS2 {"position", "color", "texCoord"}
-# define UNIF2A {"model", &item_tex_model}
-# define UNIF2B {"view", &item_tex_view}
-# define UNIF2C {"projection", &item_tex_projection}
-# define UNIF2 {UNIF2A, UNIF2B, UNIF2C}
-# define PROGATT2 {sc_tex_vertex, sc_tex_fragment, 3, LOCS2, 3, UNIF2},
+# define UNIF2A {"model", &tex_unif_model}
+# define UNIF2B {"view", &tex_unif_view}
+# define UNIF2C {"projection", &tex_unif_projection}
+# define UNIF2D {"ourTexture", &tex_unif_texture}
+# define UNIF2 {UNIF2A, UNIF2B, UNIF2C, UNIF2D}
+# define PROGATT2 {sc_tex_vertex, sc_tex_fragment, 3, LOCS2, 4, UNIF2},
 
 # define PROGRAMS_ATTRIBUTES_LIST PROGATT1 PROGATT2
 
