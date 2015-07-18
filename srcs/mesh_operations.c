@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/18 12:01:22 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/18 14:32:30 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/18 15:33:46 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,11 @@ static int		gen_attribs(t_meshattribs att)
 	v_size *= sizeof(GLfloat);
 	i = 0;
 	delta = NULL;
-	qprintf("v_size %d\n", v_size);
 	while (i < att.size)
 	{
-		glVertexAttribPointer(i, att.data[i],
-							  GL_FLOAT, GL_FALSE, v_size, delta);
-		glEnableVertexAttribArray(i);		
-		qprintf("attrib[%d] size %u\n", i, att.data[i]);
+		glVertexAttribPointer(i, att.data[i], GL_FLOAT, GL_FALSE
+								, v_size, delta);
+		glEnableVertexAttribArray(i);
 		delta += att.data[i] * sizeof(GLfloat);
 		i++;
 	}
@@ -51,10 +49,10 @@ int				ps_build_mesh(t_mesh *me, t_meshattribs att)
 	glGenVertexArrays(1, me->desc + 0);
 	glBindVertexArray(me->desc[0]);
 	gen_buffer(me->desc + 1, GL_ARRAY_BUFFER, (GLvoid*)me->floats,
-			   me->n_floats * sizeof(*me->floats));
+				me->n_floats * sizeof(*me->floats));
 	if (att.has_indices)
 		gen_buffer(me->desc + 2, GL_ELEMENT_ARRAY_BUFFER, (GLvoid*)me->indices,
-				   me->n_indices * sizeof(*me->indices));
+					me->n_indices * sizeof(*me->indices));
 	gen_attribs(att);
 	glBindVertexArray(0);
 	return (0);

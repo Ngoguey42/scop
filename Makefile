@@ -45,7 +45,6 @@ C_HEADS := -I include -I libft/includes -I ~/.brew/include
 O_FILES := obj/srcs/env_operations.o \
 	obj/srcs/error.o \
 	obj/srcs/glfw_operations.o \
-	obj/srcs/load_texture.o \
 	obj/srcs/main.o \
 	obj/srcs/mesh_operations.o \
 	obj/srcs/program_operations.o \
@@ -66,6 +65,7 @@ O_FILES := obj/srcs/env_operations.o \
 	obj/srcs/objmodel/obj_parsing_multiple_units.o \
 	obj/srcs/objmodel/obj_parsing_unique_units.o \
 	obj/srcs/objmodel/objmodel_operations.o \
+	obj/srcs/textures/load_texture.o \
 	obj/srcs/textures/mapping_xy.o \
 	obj/srcs/tga/parse_tga.o \
 	obj/srcs/uniforms/item_uniforms.o \
@@ -92,10 +92,6 @@ obj/srcs/error.o: srcs/error.c include/config.h include/ftmath.h include/scop.h 
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
 obj/srcs/glfw_operations.o: srcs/glfw_operations.c include/config.h include/ftmath.h include/scop.h include/scop_structs.h
-	@mkdir -p obj/srcs 2> /dev/null || true
-	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
-
-obj/srcs/load_texture.o: srcs/load_texture.c include/config.h include/ftmath.h include/scop.h include/scop_structs.h
 	@mkdir -p obj/srcs 2> /dev/null || true
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
@@ -177,6 +173,10 @@ obj/srcs/objmodel/obj_parsing_unique_units.o: srcs/objmodel/obj_parsing_unique_u
 
 obj/srcs/objmodel/objmodel_operations.o: srcs/objmodel/objmodel_operations.c include/config.h include/ftmath.h include/objmodel_parsing.h include/scop.h include/scop_structs.h
 	@mkdir -p obj/srcs/objmodel 2> /dev/null || true
+	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
+
+obj/srcs/textures/load_texture.o: srcs/textures/load_texture.c include/config.h include/ftmath.h include/objmodel_parsing.h include/scop.h include/scop_structs.h
+	@mkdir -p obj/srcs/textures 2> /dev/null || true
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
 obj/srcs/textures/mapping_xy.o: srcs/textures/mapping_xy.c include/config.h include/ftmath.h include/objmodel_parsing.h include/scop.h include/scop_structs.h include/texture_mapping.h

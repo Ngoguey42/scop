@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/18 10:52:20 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/18 15:16:58 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/18 15:34:58 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "texture_mapping.h"
 #include <string.h>
 
-static void		calc_bounds(float const *vert, size_t nvert,
+static void	calc_bounds(float const *vert, size_t nvert,
 							float bx[2], float by[2])
 {
 	float const	*v;
@@ -40,7 +40,7 @@ static void		calc_bounds(float const *vert, size_t nvert,
 	return ;
 }
 
-static void		fill(t_ftvector *new, t_ftvector const *old, float fact[2])
+static void	fill(t_ftvector *new, t_ftvector const *old, float fact[2])
 {
 	float const	*ptr = old->data;
 	float const *end = old->data + old->size * old->chunk_size;
@@ -57,7 +57,7 @@ static void		fill(t_ftvector *new, t_ftvector const *old, float fact[2])
 	return ;
 }
 
-void	sp_wrap_texture_planxy(t_objmodel *m, float scale, float imgratio)
+void		sp_wrap_texture_planxy(t_objmodel *m, float scale, float imgratio)
 {
 	t_ftvector		newv[1];
 
