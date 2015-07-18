@@ -47,6 +47,7 @@ O_FILES := obj/srcs/env_operations.o \
 	obj/srcs/glfw_operations.o \
 	obj/srcs/load_texture.o \
 	obj/srcs/main.o \
+	obj/srcs/mesh_operations.o \
 	obj/srcs/program_operations.o \
 	obj/srcs/shader_operations.o \
 	obj/srcs/controls/controls_apply.o \
@@ -63,6 +64,7 @@ O_FILES := obj/srcs/env_operations.o \
 	obj/srcs/objmodel/obj_parsing_multiple_units.o \
 	obj/srcs/objmodel/obj_parsing_unique_units.o \
 	obj/srcs/objmodel/objmodel_operations.o \
+	obj/srcs/textures/mapping_xy.o \
 	obj/srcs/tga/parse_tga.o \
 	obj/srcs/uniforms/item_uniforms.o \
 	obj/srcs/uniforms/tex_uniforms.o
@@ -96,6 +98,10 @@ obj/srcs/load_texture.o: srcs/load_texture.c include/config.h include/ftmath.h i
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
 obj/srcs/main.o: srcs/main.c include/config.h include/ftmath.h include/scop.h include/scop_structs.h
+	@mkdir -p obj/srcs 2> /dev/null || true
+	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
+
+obj/srcs/mesh_operations.o: srcs/mesh_operations.c include/config.h include/ftmath.h include/scop.h include/scop_structs.h
 	@mkdir -p obj/srcs 2> /dev/null || true
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
@@ -163,15 +169,19 @@ obj/srcs/objmodel/objmodel_operations.o: srcs/objmodel/objmodel_operations.c inc
 	@mkdir -p obj/srcs/objmodel 2> /dev/null || true
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
-obj/srcs/tga/parse_tga.o: srcs/tga/parse_tga.c include/config.h include/ftmath.h include/objmodel_parsing.h include/scop.h include/scop_structs.h
+obj/srcs/textures/mapping_xy.o: srcs/textures/mapping_xy.c include/config.h include/ftmath.h include/objmodel_parsing.h include/scop.h include/scop_structs.h include/texture_mapping.h
+	@mkdir -p obj/srcs/textures 2> /dev/null || true
+	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
+
+obj/srcs/tga/parse_tga.o: srcs/tga/parse_tga.c include/config.h include/ftmath.h include/objmodel_parsing.h include/scop.h include/scop_structs.h include/texture_mapping.h
 	@mkdir -p obj/srcs/tga 2> /dev/null || true
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
-obj/srcs/uniforms/item_uniforms.o: srcs/uniforms/item_uniforms.c include/config.h include/ftmath.h include/objmodel_parsing.h include/scop.h include/scop_structs.h
+obj/srcs/uniforms/item_uniforms.o: srcs/uniforms/item_uniforms.c include/config.h include/ftmath.h include/objmodel_parsing.h include/scop.h include/scop_structs.h include/texture_mapping.h
 	@mkdir -p obj/srcs/uniforms 2> /dev/null || true
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
-obj/srcs/uniforms/tex_uniforms.o: srcs/uniforms/tex_uniforms.c include/config.h include/ftmath.h include/objmodel_parsing.h include/scop.h include/scop_structs.h
+obj/srcs/uniforms/tex_uniforms.o: srcs/uniforms/tex_uniforms.c include/config.h include/ftmath.h include/objmodel_parsing.h include/scop.h include/scop_structs.h include/texture_mapping.h
 	@mkdir -p obj/srcs/uniforms 2> /dev/null || true
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
@@ -181,7 +191,7 @@ $(LIBS):
 
 clean:
 	@rm -f $(O_FILES) 2> /dev/null || true
-	@rmdir -p obj/srcs/uniforms obj/srcs/tga obj/srcs/objmodel obj/srcs/ftmath obj/srcs/controls obj/srcs $(O_DIR) 2> /dev/null || true
+	@rmdir -p obj/srcs/uniforms obj/srcs/tga obj/srcs/textures obj/srcs/objmodel obj/srcs/ftmath obj/srcs/controls obj/srcs $(O_DIR) 2> /dev/null || true
 .PHONY: clean
 
 fclean: clean

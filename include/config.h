@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/01 12:09:19 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/17 15:32:39 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/18 10:23:56 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ typedef enum				s_program_index
 */
 # define OBJ_PATH "res/"
 # define WALL_PATH (OBJ_PATH "Wall.tga")
+# define PORCELAIN_PATH (OBJ_PATH "Porcelain.tga")
 
 /*
 ** CONFIG MACROES

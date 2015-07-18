@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 12:48:16 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/17 14:11:04 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/18 13:11:37 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,25 @@ typedef struct				s_objmodel
 }							t_objmodel;
 
 /*
+** MESH
+*/
+typedef struct				s_meshattribs
+{
+	GLuint					size;
+	GLuint					*data;
+}							t_meshattribs;
+typedef struct				s_mesh
+{
+	GLuint					desc[3];
+	GLuint					n_floats;
+	GLfloat const			*floats;
+	t_bool					has_indices;
+	GLuint					n_indices;
+	GLuint const			*indices;
+}							t_mesh;
+
+
+/*
 ** KEYS
 */
 enum						e_keyindex
@@ -96,9 +115,6 @@ typedef struct				s_env
 
 	GLuint					tex;
 	
-	GLuint					vao;
-	GLuint					vab;
-	GLuint					ebo;
 
 	double					mpos[2];
 	float					cangles[2];
