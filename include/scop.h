@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 12:07:31 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/20 12:15:33 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/20 12:49:17 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,17 +31,38 @@
 # define DEBUGF(...) qprintf(__VA_ARGS__), ft_putchar_fd('\n', 2)
 
 /*
-** OBJMODEL
-*/
-
-
-/*
 ** PROTOTYPES
 ** CORE FUNCTIONS
 */
+
+
 /*
 ** CONTROLS
 */
+void        sp_toggle_mouse_state(GLFWwindow *w, t_env *e);
+void        sp_keystate(t_env *e, int a, t_bool newstate);
+void            sp_update_states(t_env *e, double el);
+
+/*
+** ENV
+*/
+int             sp_init_env(t_env *e);
+t_env           *sp_instance(void);
+void            sp_clean_env(t_env *e);
+
+/*
+** GLFW
+*/
+int         sp_init_glfw(t_env *e);
+void        sp_disable_glfw(t_env *e);
+
+
+/*
+** 
+*/
+
+
+
 /*
 ** SHADER FUNCTIONS
 */

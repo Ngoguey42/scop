@@ -42,8 +42,12 @@ C_HEADS := -I include -I libft/includes -I ~/.brew/include
 # Internal
 #
 
-O_FILES := obj/srcs/error.o \
+O_FILES := obj/srcs/env_operations.o \
+	obj/srcs/error.o \
+	obj/srcs/glfw_operations.o \
 	obj/srcs/main.o \
+	obj/srcs/controls/controls_apply.o \
+	obj/srcs/controls/controls_inputs.o \
 	obj/srcs/ftmath/matrix4.o \
 	obj/srcs/ftmath/matrix4_invtranslate.o \
 	obj/srcs/ftmath/matrix4_miscop.o \
@@ -69,12 +73,28 @@ all: $(LIBS) $(NAME)
 $(NAME): $(O_FILES)
 	@$(MSG_0) $@ ; $(LD_CC) -o $@ $(O_FILES) $(LD_FLAGS) && $(MSG_END) || $(MSG_1) $@
 
-obj/srcs/error.o: srcs/error.c include/fterror.h
+obj/srcs/env_operations.o: srcs/env_operations.c include/fterror.h include/ftmath.h include/scop.h include/scop_conf.h include/scop_types.h
+	@mkdir -p obj/srcs 2> /dev/null || true
+	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
+
+obj/srcs/error.o: srcs/error.c include/fterror.h include/ftmath.h include/scop.h include/scop_conf.h include/scop_types.h
+	@mkdir -p obj/srcs 2> /dev/null || true
+	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
+
+obj/srcs/glfw_operations.o: srcs/glfw_operations.c include/fterror.h include/ftmath.h include/scop.h include/scop_conf.h include/scop_types.h
 	@mkdir -p obj/srcs 2> /dev/null || true
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
 obj/srcs/main.o: srcs/main.c include/fterror.h include/ftmath.h include/scop.h include/scop_conf.h include/scop_types.h
 	@mkdir -p obj/srcs 2> /dev/null || true
+	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
+
+obj/srcs/controls/controls_apply.o: srcs/controls/controls_apply.c include/fterror.h include/ftmath.h include/scop.h include/scop_conf.h include/scop_types.h
+	@mkdir -p obj/srcs/controls 2> /dev/null || true
+	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
+
+obj/srcs/controls/controls_inputs.o: srcs/controls/controls_inputs.c include/fterror.h include/ftmath.h include/scop.h include/scop_conf.h include/scop_types.h
+	@mkdir -p obj/srcs/controls 2> /dev/null || true
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
 obj/srcs/ftmath/matrix4.o: srcs/ftmath/matrix4.c include/fterror.h include/ftmath.h include/scop.h include/scop_conf.h include/scop_types.h
@@ -131,7 +151,7 @@ $(LIBS):
 
 clean:
 	@rm -f $(O_FILES) 2> /dev/null || true
-	@rmdir -p obj/srcs/objmodel obj/srcs/ftmath obj/srcs $(O_DIR) 2> /dev/null || true
+	@rmdir -p obj/srcs/objmodel obj/srcs/ftmath obj/srcs/controls obj/srcs $(O_DIR) 2> /dev/null || true
 .PHONY: clean
 
 fclean: clean
