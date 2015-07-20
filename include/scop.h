@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 12:07:31 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/20 15:21:05 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/20 16:16:34 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include "scop_conf.h"
 # include "scop_types.h"
 # include "fterror.h"
+# include "objmodel.h"
 
 /*
 ** DEBUG
@@ -85,6 +86,11 @@ int         parse_tga(char const *filepath, t_ftvector *v, int dim[2]);
 */
 int             sp_init_meshes(t_env *e);
 void            sp_delete_meshes(t_env *e);
+int     sp_meshfill_item(t_env const *e, t_mesh *me);
+
+/*
+** 
+*/
 
 /*
 ** 

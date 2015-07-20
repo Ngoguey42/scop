@@ -47,6 +47,7 @@ O_FILES := obj/srcs/conf.o \
 	obj/srcs/error.o \
 	obj/srcs/glfw_operations.o \
 	obj/srcs/main.o \
+	obj/srcs/mesh_fill.o \
 	obj/srcs/mesh_operations.o \
 	obj/srcs/program_operations.o \
 	obj/srcs/shader_operations.o \
@@ -80,103 +81,107 @@ all: $(LIBS) $(NAME)
 $(NAME): $(O_FILES)
 	@$(MSG_0) $@ ; $(LD_CC) -o $@ $(O_FILES) $(LD_FLAGS) && $(MSG_END) || $(MSG_1) $@
 
-obj/srcs/conf.o: srcs/conf.c include/fterror.h include/ftmath.h include/scop.h include/scop_conf.h include/scop_types.h
+obj/srcs/conf.o: srcs/conf.c include/fterror.h include/ftmath.h include/objmodel.h include/scop.h include/scop_conf.h include/scop_types.h
 	@mkdir -p obj/srcs 2> /dev/null || true
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
-obj/srcs/env_operations.o: srcs/env_operations.c include/fterror.h include/ftmath.h include/scop.h include/scop_conf.h include/scop_types.h
+obj/srcs/env_operations.o: srcs/env_operations.c include/fterror.h include/ftmath.h include/objmodel.h include/scop.h include/scop_conf.h include/scop_types.h
 	@mkdir -p obj/srcs 2> /dev/null || true
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
-obj/srcs/error.o: srcs/error.c include/fterror.h include/ftmath.h include/scop.h include/scop_conf.h include/scop_types.h
+obj/srcs/error.o: srcs/error.c include/fterror.h include/ftmath.h include/objmodel.h include/scop.h include/scop_conf.h include/scop_types.h
 	@mkdir -p obj/srcs 2> /dev/null || true
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
-obj/srcs/glfw_operations.o: srcs/glfw_operations.c include/fterror.h include/ftmath.h include/scop.h include/scop_conf.h include/scop_types.h
+obj/srcs/glfw_operations.o: srcs/glfw_operations.c include/fterror.h include/ftmath.h include/objmodel.h include/scop.h include/scop_conf.h include/scop_types.h
 	@mkdir -p obj/srcs 2> /dev/null || true
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
-obj/srcs/main.o: srcs/main.c include/fterror.h include/ftmath.h include/scop.h include/scop_conf.h include/scop_types.h
+obj/srcs/main.o: srcs/main.c include/fterror.h include/ftmath.h include/objmodel.h include/scop.h include/scop_conf.h include/scop_types.h
 	@mkdir -p obj/srcs 2> /dev/null || true
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
-obj/srcs/mesh_operations.o: srcs/mesh_operations.c include/fterror.h include/ftmath.h include/scop.h include/scop_conf.h include/scop_types.h
+obj/srcs/mesh_fill.o: srcs/mesh_fill.c include/fterror.h include/ftmath.h include/objmodel.h include/scop.h include/scop_conf.h include/scop_types.h
 	@mkdir -p obj/srcs 2> /dev/null || true
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
-obj/srcs/program_operations.o: srcs/program_operations.c include/fterror.h include/ftmath.h include/scop.h include/scop_conf.h include/scop_types.h
+obj/srcs/mesh_operations.o: srcs/mesh_operations.c include/fterror.h include/ftmath.h include/objmodel.h include/scop.h include/scop_conf.h include/scop_types.h
 	@mkdir -p obj/srcs 2> /dev/null || true
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
-obj/srcs/shader_operations.o: srcs/shader_operations.c include/fterror.h include/ftmath.h include/scop.h include/scop_conf.h include/scop_types.h
+obj/srcs/program_operations.o: srcs/program_operations.c include/fterror.h include/ftmath.h include/objmodel.h include/scop.h include/scop_conf.h include/scop_types.h
 	@mkdir -p obj/srcs 2> /dev/null || true
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
-obj/srcs/controls/controls_apply.o: srcs/controls/controls_apply.c include/fterror.h include/ftmath.h include/scop.h include/scop_conf.h include/scop_types.h
+obj/srcs/shader_operations.o: srcs/shader_operations.c include/fterror.h include/ftmath.h include/objmodel.h include/scop.h include/scop_conf.h include/scop_types.h
+	@mkdir -p obj/srcs 2> /dev/null || true
+	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
+
+obj/srcs/controls/controls_apply.o: srcs/controls/controls_apply.c include/fterror.h include/ftmath.h include/objmodel.h include/scop.h include/scop_conf.h include/scop_types.h
 	@mkdir -p obj/srcs/controls 2> /dev/null || true
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
-obj/srcs/controls/controls_inputs.o: srcs/controls/controls_inputs.c include/fterror.h include/ftmath.h include/scop.h include/scop_conf.h include/scop_types.h
+obj/srcs/controls/controls_inputs.o: srcs/controls/controls_inputs.c include/fterror.h include/ftmath.h include/objmodel.h include/scop.h include/scop_conf.h include/scop_types.h
 	@mkdir -p obj/srcs/controls 2> /dev/null || true
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
-obj/srcs/ftmath/matrix4.o: srcs/ftmath/matrix4.c include/fterror.h include/ftmath.h include/scop.h include/scop_conf.h include/scop_types.h
+obj/srcs/ftmath/matrix4.o: srcs/ftmath/matrix4.c include/fterror.h include/ftmath.h include/objmodel.h include/scop.h include/scop_conf.h include/scop_types.h
 	@mkdir -p obj/srcs/ftmath 2> /dev/null || true
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
-obj/srcs/ftmath/matrix4_invtranslate.o: srcs/ftmath/matrix4_invtranslate.c include/fterror.h include/ftmath.h include/scop.h include/scop_conf.h include/scop_types.h
+obj/srcs/ftmath/matrix4_invtranslate.o: srcs/ftmath/matrix4_invtranslate.c include/fterror.h include/ftmath.h include/objmodel.h include/scop.h include/scop_conf.h include/scop_types.h
 	@mkdir -p obj/srcs/ftmath 2> /dev/null || true
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
-obj/srcs/ftmath/matrix4_miscop.o: srcs/ftmath/matrix4_miscop.c include/fterror.h include/ftmath.h include/scop.h include/scop_conf.h include/scop_types.h
+obj/srcs/ftmath/matrix4_miscop.o: srcs/ftmath/matrix4_miscop.c include/fterror.h include/ftmath.h include/objmodel.h include/scop.h include/scop_conf.h include/scop_types.h
 	@mkdir -p obj/srcs/ftmath 2> /dev/null || true
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
-obj/srcs/ftmath/matrix4_rotation.o: srcs/ftmath/matrix4_rotation.c include/fterror.h include/ftmath.h include/scop.h include/scop_conf.h include/scop_types.h
+obj/srcs/ftmath/matrix4_rotation.o: srcs/ftmath/matrix4_rotation.c include/fterror.h include/ftmath.h include/objmodel.h include/scop.h include/scop_conf.h include/scop_types.h
 	@mkdir -p obj/srcs/ftmath 2> /dev/null || true
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
-obj/srcs/ftmath/matrix4_scale.o: srcs/ftmath/matrix4_scale.c include/fterror.h include/ftmath.h include/scop.h include/scop_conf.h include/scop_types.h
+obj/srcs/ftmath/matrix4_scale.o: srcs/ftmath/matrix4_scale.c include/fterror.h include/ftmath.h include/objmodel.h include/scop.h include/scop_conf.h include/scop_types.h
 	@mkdir -p obj/srcs/ftmath 2> /dev/null || true
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
-obj/srcs/ftmath/matrix4_translate.o: srcs/ftmath/matrix4_translate.c include/fterror.h include/ftmath.h include/scop.h include/scop_conf.h include/scop_types.h
+obj/srcs/ftmath/matrix4_translate.o: srcs/ftmath/matrix4_translate.c include/fterror.h include/ftmath.h include/objmodel.h include/scop.h include/scop_conf.h include/scop_types.h
 	@mkdir -p obj/srcs/ftmath 2> /dev/null || true
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
-obj/srcs/ftmath/vector3.o: srcs/ftmath/vector3.c include/fterror.h include/ftmath.h include/scop.h include/scop_conf.h include/scop_types.h
+obj/srcs/ftmath/vector3.o: srcs/ftmath/vector3.c include/fterror.h include/ftmath.h include/objmodel.h include/scop.h include/scop_conf.h include/scop_types.h
 	@mkdir -p obj/srcs/ftmath 2> /dev/null || true
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
-obj/srcs/ftmath/vector3_basicop.o: srcs/ftmath/vector3_basicop.c include/fterror.h include/ftmath.h include/scop.h include/scop_conf.h include/scop_types.h
+obj/srcs/ftmath/vector3_basicop.o: srcs/ftmath/vector3_basicop.c include/fterror.h include/ftmath.h include/objmodel.h include/scop.h include/scop_conf.h include/scop_types.h
 	@mkdir -p obj/srcs/ftmath 2> /dev/null || true
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
-obj/srcs/objmodel/obj_parsing.o: srcs/objmodel/obj_parsing.c include/fterror.h include/ftmath.h include/objmodel_parsing.h include/scop.h include/scop_conf.h include/scop_types.h
+obj/srcs/objmodel/obj_parsing.o: srcs/objmodel/obj_parsing.c include/fterror.h include/ftmath.h include/objmodel.h include/objmodel_parsing.h include/scop.h include/scop_conf.h include/scop_types.h
 	@mkdir -p obj/srcs/objmodel 2> /dev/null || true
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
-obj/srcs/objmodel/obj_parsing_multiple_units.o: srcs/objmodel/obj_parsing_multiple_units.c include/fterror.h include/ftmath.h include/objmodel_parsing.h include/scop.h include/scop_conf.h include/scop_types.h
+obj/srcs/objmodel/obj_parsing_multiple_units.o: srcs/objmodel/obj_parsing_multiple_units.c include/fterror.h include/ftmath.h include/objmodel.h include/objmodel_parsing.h include/scop.h include/scop_conf.h include/scop_types.h
 	@mkdir -p obj/srcs/objmodel 2> /dev/null || true
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
-obj/srcs/objmodel/obj_parsing_unique_units.o: srcs/objmodel/obj_parsing_unique_units.c include/fterror.h include/ftmath.h include/objmodel_parsing.h include/scop.h include/scop_conf.h include/scop_types.h
+obj/srcs/objmodel/obj_parsing_unique_units.o: srcs/objmodel/obj_parsing_unique_units.c include/fterror.h include/ftmath.h include/objmodel.h include/objmodel_parsing.h include/scop.h include/scop_conf.h include/scop_types.h
 	@mkdir -p obj/srcs/objmodel 2> /dev/null || true
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
-obj/srcs/objmodel/objmodel_operations.o: srcs/objmodel/objmodel_operations.c include/fterror.h include/ftmath.h include/objmodel_parsing.h include/scop.h include/scop_conf.h include/scop_types.h
+obj/srcs/objmodel/objmodel_operations.o: srcs/objmodel/objmodel_operations.c include/fterror.h include/ftmath.h include/objmodel.h include/objmodel_parsing.h include/scop.h include/scop_conf.h include/scop_types.h
 	@mkdir -p obj/srcs/objmodel 2> /dev/null || true
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
-obj/srcs/textures/load_texture.o: srcs/textures/load_texture.c include/fterror.h include/ftmath.h include/objmodel_parsing.h include/scop.h include/scop_conf.h include/scop_types.h
+obj/srcs/textures/load_texture.o: srcs/textures/load_texture.c include/fterror.h include/ftmath.h include/objmodel.h include/objmodel_parsing.h include/scop.h include/scop_conf.h include/scop_types.h
 	@mkdir -p obj/srcs/textures 2> /dev/null || true
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
-obj/srcs/textures/mapping_xy.o: srcs/textures/mapping_xy.c include/fterror.h include/ftmath.h include/objmodel_parsing.h include/scop.h include/scop_conf.h include/scop_types.h
+obj/srcs/textures/mapping_xy.o: srcs/textures/mapping_xy.c include/fterror.h include/ftmath.h include/objmodel.h include/objmodel_parsing.h include/scop.h include/scop_conf.h include/scop_types.h
 	@mkdir -p obj/srcs/textures 2> /dev/null || true
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
-obj/srcs/tga/parse_tga.o: srcs/tga/parse_tga.c include/fterror.h include/ftmath.h include/objmodel_parsing.h include/scop.h include/scop_conf.h include/scop_types.h
+obj/srcs/tga/parse_tga.o: srcs/tga/parse_tga.c include/fterror.h include/ftmath.h include/objmodel.h include/objmodel_parsing.h include/scop.h include/scop_conf.h include/scop_types.h
 	@mkdir -p obj/srcs/tga 2> /dev/null || true
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 

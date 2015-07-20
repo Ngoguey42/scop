@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 12:53:00 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/20 15:20:30 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/20 15:59:24 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,8 @@ int				sp_loadconf_meshes(t_env *e)
 	t_ftvector const	tmpv = ftv_uninitialized();
 	t_mesh const		tmp[sp_num_meshes] = {
 
-	{GL_STATIC_DRAW, sp_item_program, true, tmpv, tmpv, {0, 0, 0}},
+		{GL_STATIC_DRAW, sp_item_program, true, &sp_meshfill_item,
+		tmpv, tmpv, {0, 0, 0}},
 	};
 	memcpy(&e->meshes, &tmp, sizeof(tmp));
 	return (0);

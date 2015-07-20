@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 10:07:19 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/20 15:23:59 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/20 15:57:23 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ typedef struct					s_mesh
 	GLenum const				usage;
 	t_program_index const		program;
 	t_bool const				has_indices;
+	int							(*const fill)();
 	t_ftvector					vertices;
 	t_ftvector					faces;
 	// lighting datas etc...

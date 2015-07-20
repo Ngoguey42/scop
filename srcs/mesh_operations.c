@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/18 12:01:22 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/20 15:25:38 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/20 15:59:52 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,11 @@ static int		new_mesh(t_env const *e, t_mesh *me)
 		sp_enomem();
 	if (me->has_indices && ftv_init_instance(&me->faces, elem_width))
 		sp_enomem();
-	//fill vectors
+	if (me->fill(e, me))
+		return (ERROR("me->fill(e, me)"), 1);
+	qprintf("Mesh: %u*%u vert, %u*%u faces\n",
+			me->vertices.size, vert_width,
+			me->faces.size, elem_width);
 	glGenVertexArrays(1, me->handles + 0);
 	glBindVertexArray(me->handles[0]);
 	glGenBuffers(1, me->handles + 1);
