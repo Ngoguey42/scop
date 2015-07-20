@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 10:07:19 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/20 12:15:01 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/20 13:35:01 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 */
 typedef struct					s_shader
 {
-	char const					*filepath;
+	char const					filepath[64];
 	GLenum const				type;
 	void						(*const update_uniforms)();
 	GLuint						handle;
@@ -43,7 +43,7 @@ typedef struct					s_shader
 */
 typedef struct					s_location
 {
-	char const * const			name;
+	char const					name[64];
 	size_t						size;
 }								t_location;
 
@@ -52,7 +52,7 @@ typedef struct					s_program
 	t_shader_index const		vshader;
 	t_shader_index const		fshader;
 	size_t const				n_locations;
-	t_location const * const	locations;
+	t_location const			locations[4];
 	GLuint						handle;
 }								t_program;
 
