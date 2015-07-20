@@ -69,6 +69,7 @@ int				sp_init_programs(t_env *e)
 {
 	int		i;
 
+	lprintf("Initializing programs...");
 	i = 0;
 	while (i < sp_num_programs)
 	{

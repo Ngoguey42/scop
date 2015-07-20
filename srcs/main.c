@@ -32,16 +32,35 @@ static int		begin(t_env *e)
 
 static void		loop(t_env *e)
 {
+	double		cur_time;
+	double		el_time;
+	double		last_time;
+
+	last_time = glfwGetTime();
 	while (!glfwWindowShouldClose(e->win))
 	{
+		cur_time = glfwGetTime();
+		el_time = cur_time - last_time;
+		sp_update_states(e, el_time);
 		
+		/* update matrices */
+		
+		glClearColor(0.3f, 0.3f, 0.3f, 1.f);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		
+		/* render obs */
+		
+		glfwSwapBuffers(e->win);
+		glfwPollEvents();
+		last_time = cur_time;
 	}
 	return ;
 }
 
 static void		end(t_env *e)
 {
-	
+	/* clean everything */
+	(void)e;
 	return ;
 }
 

@@ -13,7 +13,6 @@
 #ifndef OBJMODEL_PARSING_H
 # define OBJMODEL_PARSING_H
 
-/* # include "scop.h" */
 # include "libft.h"
 # include "fterror.h"
 # include "ft_vector.h"

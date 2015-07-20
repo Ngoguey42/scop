@@ -13,9 +13,7 @@
 #ifndef OBJMODEL_H
 # define OBJMODEL_H
 
-/*
-** OBJMODELS
-*/
+# include "ft_vector.h"
 
 typedef struct  s_objmodel
 {
@@ -27,8 +25,9 @@ typedef struct  s_objmodel
 	char        *usemtl;
 	t_bool      smooth;
 }               t_objmodel;
-void            op_init_instance(t_objmodel *m, char const *filepath);
-int             op_parse_obj(t_objmodel *m);
-void    op_swap_vectors(t_objmodel *m, t_ftvector *v, t_ftvector *f);
+
+// void			op_init_instance(t_objmodel *m, char const *filepath);
+int				op_parse_obj(t_objmodel *m);
+// void			op_swap_vectors(t_objmodel *m, t_ftvector *v, t_ftvector *f);
 
 #endif

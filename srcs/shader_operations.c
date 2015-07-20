@@ -92,6 +92,7 @@ int				sp_init_shaders(t_env *e)
 {
 	int		i;
 
+	lprintf("Initializing shaders...");
 	i = 0;
 	while (i < sp_num_shaders)
 	{

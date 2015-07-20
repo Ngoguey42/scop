@@ -20,6 +20,24 @@
 # include "scop_conf.h"
 
 /*
+** KEYS
+*/
+enum                        e_keyindex
+{
+	sp_w_key,
+	sp_s_key,
+	sp_a_key,
+	sp_d_key,
+	sp_space_key,
+	sp_c_key,
+	sp_up_key,
+	sp_down_key,
+	sp_left_key,
+	sp_right_key,
+	sp_num_keys
+};
+
+/*
 ** Updating uniforms:
 ** 	A shader defines some updates from scop's env.
 **	A model  defines some updates from scop's env + a given t_ob.
@@ -33,7 +51,6 @@ typedef struct					s_shader
 {
 	char const					filepath[64];
 	GLenum const				type;
-	void						(*const update_uniforms)();
 	GLuint						handle;
 }								t_shader;
 
@@ -51,6 +68,7 @@ typedef struct					s_program
 {
 	t_shader_index const		vshader;
 	t_shader_index const		fshader;
+	void						(*const update_uniforms)();
 	size_t const				n_locations;
 	t_location const			locations[4];
 	GLuint						handle;
@@ -107,25 +125,6 @@ typedef struct					s_ob
 }								t_ob;
 
 /*
-** KEYS
-*/
-enum                        e_keyindex
-{
-	sp_w_key,
-	sp_s_key,
-	sp_a_key,
-	sp_d_key,
-	sp_space_key,
-	sp_c_key,
-	sp_up_key,
-	sp_down_key,
-	sp_left_key,
-	sp_right_key,
-	/* sp__key, */
-	sp_num_keys
-};
-
-/*
 ** ENV
 */
 typedef struct					s_env
@@ -138,14 +137,56 @@ typedef struct					s_env
 	t_mesh						meshes[sp_num_meshes];
 	t_texture					textures[sp_num_textures];
 	t_model						models[sp_num_models];
-	t_ftvector					obs[sp_num_programs];
+	// t_ftvector					obs[sp_num_programs];
 
 	t_matrix4					projection;
-	t_matrix4					view;	
+	t_matrix4					view;
 
 	double						mpos[2];
 	float						cangles[2];
 	t_vector3					cpos;
-}							t_env;
+}								t_env;
+
+# define VSOFP(E, P)	((E)->shaders[(P)->vshader])
+# define FSOFP(E, P)	((E)->shaders[(P)->fshader])
+
+# define POFME(E, ME)	((E)->programs[(ME)->program])
+# define VSOFME(E, ME)	VSOFP((E), POFME((E), ME))
+# define FSOFME(E, ME)	FSOFP((E), POFME((E), ME))
+
+# define TOFMO(E, MO)	((E)->textures[(MO)->texture])
+# define MEOFMO(E, MO)	((E)->meshes[(MO)->mesh])
+# define POFMO(E, MO)	POFME((E), MEOFMO((E), MO))
+# define VSOFMO(E, MO)	VSOFME((E), MEOFMO((E), MO))
+# define FSOFMO(E, MO)	FSOFME((E), MEOFMO((E), MO))
+
+# define MOOFOB(E, OB)	((E)OFmodels[(OB)OFmodel])
+# define TOFOB(E, OB)	TOFMO((E), MOOFOB((E), OB))
+# define MEOFOB(E, OB)	MEOFMO((E), MOOFOB((E), OB))
+# define POFOB(E, OB)	POFMO((E), MOOFOB((E), OB))
+# define VSOFOB(E, OB)	VSOFMO((E), MOOFOB((E), OB))
+# define FSOFOB(E, OB)	FSOFMO((E), MOOFOB((E), OB))
+
+/*
+# define VS<-P(E, P)	((E)->shaders[(P)->vshader])
+# define FS<-P(E, P)	((E)->shaders[(P)->fshader])
+
+# define P<-ME(E, ME)	((E)->programs[(ME)->program])
+# define VS<-ME(E, ME)	<-P((E), P<-ME((E), ME))
+# define FS<-ME(E, ME)	<-P((E), P<-ME((E), ME))
+
+# define T<-MO(E, MO)	((E)->textures[(MO)->texture])
+# define ME<-MO(E, MO)	((E)->meshes[(MO)->mesh])
+# define P<-MO(E, MO)	<-ME((E), ME<-MO((E), MO))
+# define VS<-MO(E, MO)	<-ME((E), ME<-MO((E), MO))
+# define FS<-MO(E, MO)	<-ME((E), ME<-MO((E), MO))
+
+# define MO<-OB(E, OB)	((E)<-models[(OB)<-model])
+# define T<-OB(E, OB)	<-MO((E), MO<-OB((E), OB))
+# define ME<-OB(E, OB)	<-MO((E), MO<-OB((E), OB))
+# define P<-OB(E, OB)	<-MO((E), MO<-OB((E), OB))
+# define VS<-OB(E, OB)	<-MO((E), MO<-OB((E), OB))
+# define FS<-OB(E, OB)	<-MO((E), MO<-OB((E), OB))
+*/
 
 #endif
