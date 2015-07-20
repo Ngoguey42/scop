@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 12:07:31 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/20 12:49:17 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/20 13:06:05 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void            sp_update_states(t_env *e, double el);
 int             sp_init_env(t_env *e);
 t_env           *sp_instance(void);
 void            sp_clean_env(t_env *e);
+int             sp_loadconf_shaders(t_env *e);
 
 /*
 ** GLFW
@@ -56,6 +57,19 @@ void            sp_clean_env(t_env *e);
 int         sp_init_glfw(t_env *e);
 void        sp_disable_glfw(t_env *e);
 
+/*
+** SHADERS
+*/
+void            sp_delete_shaders(t_env *e);
+int             sp_init_shaders(t_env *e);
+
+/*
+** 
+*/
+
+/*
+** 
+*/
 
 /*
 ** 
@@ -63,8 +77,5 @@ void        sp_disable_glfw(t_env *e);
 
 
 
-/*
-** SHADER FUNCTIONS
-*/
 
 #endif

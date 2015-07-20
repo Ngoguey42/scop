@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 10:33:54 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/20 12:11:57 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/20 12:56:57 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,11 @@ typedef enum				e_model_index
 	sp_num_models,
 }							t_model_index;
 
+
+# define SHADER_PATH(FILENAME) ("srcs/shaders/" FILENAME)
+
 /*
-** TEXTURES
+** RESSOURCES
 */
 # define RESSOURCES_PATH "res/"
 

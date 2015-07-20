@@ -42,10 +42,12 @@ C_HEADS := -I include -I libft/includes -I ~/.brew/include
 # Internal
 #
 
-O_FILES := obj/srcs/env_operations.o \
+O_FILES := obj/srcs/conf.o \
+	obj/srcs/env_operations.o \
 	obj/srcs/error.o \
 	obj/srcs/glfw_operations.o \
 	obj/srcs/main.o \
+	obj/srcs/shader_operations.o \
 	obj/srcs/controls/controls_apply.o \
 	obj/srcs/controls/controls_inputs.o \
 	obj/srcs/ftmath/matrix4.o \
@@ -73,6 +75,10 @@ all: $(LIBS) $(NAME)
 $(NAME): $(O_FILES)
 	@$(MSG_0) $@ ; $(LD_CC) -o $@ $(O_FILES) $(LD_FLAGS) && $(MSG_END) || $(MSG_1) $@
 
+obj/srcs/conf.o: srcs/conf.c include/fterror.h include/ftmath.h include/scop.h include/scop_conf.h include/scop_types.h
+	@mkdir -p obj/srcs 2> /dev/null || true
+	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
+
 obj/srcs/env_operations.o: srcs/env_operations.c include/fterror.h include/ftmath.h include/scop.h include/scop_conf.h include/scop_types.h
 	@mkdir -p obj/srcs 2> /dev/null || true
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
@@ -86,6 +92,10 @@ obj/srcs/glfw_operations.o: srcs/glfw_operations.c include/fterror.h include/ftm
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
 obj/srcs/main.o: srcs/main.c include/fterror.h include/ftmath.h include/scop.h include/scop_conf.h include/scop_types.h
+	@mkdir -p obj/srcs 2> /dev/null || true
+	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
+
+obj/srcs/shader_operations.o: srcs/shader_operations.c include/fterror.h include/ftmath.h include/scop.h include/scop_conf.h include/scop_types.h
 	@mkdir -p obj/srcs 2> /dev/null || true
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 

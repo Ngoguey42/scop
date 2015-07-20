@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 12:08:19 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/20 12:15:48 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/20 13:08:26 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,21 @@
 
 static int		begin(t_env *e)
 {
-	
+	if (sp_init_env(e))
+		return (ERROR("sp_init_env()"), 1);
+	if (sp_init_glfw(e))
+		return (ERROR("sp_init_glfw()"), 1);
+	if (sp_init_shaders(e))
+		return (ERROR("sp_init_shaders()"), 1);
 	return (0);
 }
 
 static void		loop(t_env *e)
 {
-	
+	while (!glfwWindowShouldClose(e->win))
+	{
+		
+	}
 	return ;
 }
 
