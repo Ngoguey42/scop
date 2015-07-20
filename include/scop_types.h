@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 10:07:19 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/20 11:47:10 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/20 12:15:01 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 # define SCOP_TYPES_H
 
 # include "libft.h"
+# define GLFW_INCLUDE_GLCOREARB
 # include <GLFW/glfw3.h>
 # include "ft_vector.h"
-# include "scop_config.h"
+# include "scop_conf.h"
 
 /*
 ** Updating uniforms:
@@ -51,7 +52,7 @@ typedef struct					s_program
 	t_shader_index const		vshader;
 	t_shader_index const		fshader;
 	size_t const				n_locations;
-	t_location const * const	locations;	
+	t_location const * const	locations;
 	GLuint						handle;
 }								t_program;
 
@@ -63,9 +64,9 @@ typedef struct					s_mesh
 {
 	GLenum const				usage;
 	t_program_index const		program;
-	t_ftvertex					*vertices;
+	t_ftvector					*vertices;
 	t_bool						has_indices;
-	t_ftvertex					*indices;
+	t_ftvector					*indices;
 	// lighting datas etc...
 	GLuint						handles[3];
 }								t_mesh;
@@ -89,7 +90,7 @@ typedef struct					s_model
 	t_mesh_index				mesh;
 	t_texture_index				texture;
 	void						(*update_uniforms)();
-}
+}								t_model;
 
 /*
 ** OB (object)
@@ -103,7 +104,26 @@ typedef struct					s_ob
 	t_bool						modified;
 	t_matrix4					mat;
 }								t_ob;
-	
+
+/*
+** KEYS
+*/
+enum                        e_keyindex
+{
+	sp_w_key,
+	sp_s_key,
+	sp_a_key,
+	sp_d_key,
+	sp_space_key,
+	sp_c_key,
+	sp_up_key,
+	sp_down_key,
+	sp_left_key,
+	sp_right_key,
+	/* sp__key, */
+	sp_num_keys
+};
+
 /*
 ** ENV
 */
@@ -125,7 +145,6 @@ typedef struct					s_env
 	double						mpos[2];
 	float						cangles[2];
 	t_vector3					cpos;
-	/* float						pos[3]; */
 }							t_env;
 
 #endif

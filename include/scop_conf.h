@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 10:33:54 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/20 11:46:41 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/20 12:11:57 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define SCOP_CONFIG_H
 
 # include "libft.h"
-# include "ft_math.h"
+# include "ftmath.h"
 
 typedef enum				e_shader_index
 {

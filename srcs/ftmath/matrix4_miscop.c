@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/15 10:07:41 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/15 10:09:16 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/20 12:22:19 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,26 +22,26 @@ extern t_matrix4	g_identitym4;
 #define LAI2 z.x, z.y, z.z, -(z.x * eye.x + z.y * eye.y + z.z * eye.z)
 #define LAI3 0, 0, 0, 1
 
-t_matrix4	m4_dotprod(t_matrix4 mata, t_matrix4 matb)
+t_matrix4	m4_dotprod(t_matrix4 const *mata, t_matrix4 const *matb)
 {
 	t_matrix4	ret;
 
-	ret.i[0].j[0] = MULT(mata.raw, matb.raw, 0, 1, 2, 3, 0, 4, 8, 12);
-	ret.i[0].j[1] = MULT(mata.raw, matb.raw, 0, 1, 2, 3, 1, 5, 9, 13);
-	ret.i[0].j[2] = MULT(mata.raw, matb.raw, 0, 1, 2, 3, 2, 6, 10, 14);
-	ret.i[0].j[3] = MULT(mata.raw, matb.raw, 0, 1, 2, 3, 3, 7, 11, 15);
-	ret.i[1].j[0] = MULT(mata.raw, matb.raw, 4, 5, 6, 7, 0, 4, 8, 12);
-	ret.i[1].j[1] = MULT(mata.raw, matb.raw, 4, 5, 6, 7, 1, 5, 9, 13);
-	ret.i[1].j[2] = MULT(mata.raw, matb.raw, 4, 5, 6, 7, 2, 6, 10, 14);
-	ret.i[1].j[3] = MULT(mata.raw, matb.raw, 4, 5, 6, 7, 3, 7, 11, 15);
-	ret.i[2].j[0] = MULT(mata.raw, matb.raw, 8, 9, 10, 11, 0, 4, 8, 12);
-	ret.i[2].j[1] = MULT(mata.raw, matb.raw, 8, 9, 10, 11, 1, 5, 9, 13);
-	ret.i[2].j[2] = MULT(mata.raw, matb.raw, 8, 9, 10, 11, 2, 6, 10, 14);
-	ret.i[2].j[3] = MULT(mata.raw, matb.raw, 8, 9, 10, 11, 3, 7, 11, 15);
-	ret.i[3].j[0] = MULT(mata.raw, matb.raw, 12, 13, 14, 15, 0, 4, 8, 12);
-	ret.i[3].j[1] = MULT(mata.raw, matb.raw, 12, 13, 14, 15, 1, 5, 9, 13);
-	ret.i[3].j[2] = MULT(mata.raw, matb.raw, 12, 13, 14, 15, 2, 6, 10, 14);
-	ret.i[3].j[3] = MULT(mata.raw, matb.raw, 12, 13, 14, 15, 3, 7, 11, 15);
+	ret.i[0].j[0] = MULT(mata->raw, matb->raw, 0, 1, 2, 3, 0, 4, 8, 12);
+	ret.i[0].j[1] = MULT(mata->raw, matb->raw, 0, 1, 2, 3, 1, 5, 9, 13);
+	ret.i[0].j[2] = MULT(mata->raw, matb->raw, 0, 1, 2, 3, 2, 6, 10, 14);
+	ret.i[0].j[3] = MULT(mata->raw, matb->raw, 0, 1, 2, 3, 3, 7, 11, 15);
+	ret.i[1].j[0] = MULT(mata->raw, matb->raw, 4, 5, 6, 7, 0, 4, 8, 12);
+	ret.i[1].j[1] = MULT(mata->raw, matb->raw, 4, 5, 6, 7, 1, 5, 9, 13);
+	ret.i[1].j[2] = MULT(mata->raw, matb->raw, 4, 5, 6, 7, 2, 6, 10, 14);
+	ret.i[1].j[3] = MULT(mata->raw, matb->raw, 4, 5, 6, 7, 3, 7, 11, 15);
+	ret.i[2].j[0] = MULT(mata->raw, matb->raw, 8, 9, 10, 11, 0, 4, 8, 12);
+	ret.i[2].j[1] = MULT(mata->raw, matb->raw, 8, 9, 10, 11, 1, 5, 9, 13);
+	ret.i[2].j[2] = MULT(mata->raw, matb->raw, 8, 9, 10, 11, 2, 6, 10, 14);
+	ret.i[2].j[3] = MULT(mata->raw, matb->raw, 8, 9, 10, 11, 3, 7, 11, 15);
+	ret.i[3].j[0] = MULT(mata->raw, matb->raw, 12, 13, 14, 15, 0, 4, 8, 12);
+	ret.i[3].j[1] = MULT(mata->raw, matb->raw, 12, 13, 14, 15, 1, 5, 9, 13);
+	ret.i[3].j[2] = MULT(mata->raw, matb->raw, 12, 13, 14, 15, 2, 6, 10, 14);
+	ret.i[3].j[3] = MULT(mata->raw, matb->raw, 12, 13, 14, 15, 3, 7, 11, 15);
 	return (ret);
 }
 

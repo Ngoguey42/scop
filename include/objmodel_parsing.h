@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/15 08:49:22 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/15 08:51:16 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/20 12:03:28 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,18 @@
 # include "scop.h"
 # include "ft_vector.h"
 # include <stdio.h>
+
+
+typedef struct	s_objmodel
+{
+	char		*filepath;
+	t_ftvector	vertices;
+	t_ftvector	faces;
+	char		*mtllib;
+	char		*name;
+	char		*usemtl;
+	t_bool		smooth;
+}				t_objmodel;
 
 typedef struct	s_token
 {
