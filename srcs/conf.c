@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 12:53:00 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/20 14:27:33 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/20 15:20:30 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,5 +62,16 @@ int				sp_loadconf_textures(t_env *e)
 	{TEXTURE_PATH("Porcelain.tga"), 0},
 	};
 	memcpy(&e->textures, &tmp, sizeof(tmp));
+	return (0);
+}
+
+int				sp_loadconf_meshes(t_env *e)
+{
+	t_ftvector const	tmpv = ftv_uninitialized();
+	t_mesh const		tmp[sp_num_meshes] = {
+
+	{GL_STATIC_DRAW, sp_item_program, true, tmpv, tmpv, {0, 0, 0}},
+	};
+	memcpy(&e->meshes, &tmp, sizeof(tmp));
 	return (0);
 }

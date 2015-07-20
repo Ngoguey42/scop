@@ -6,13 +6,14 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/18 10:52:20 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/20 14:29:03 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/20 14:32:23 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "scop.h"
 #include <string.h>
-/*
+#include "scop.h"
+#include "objmodel_parsing.h"
+
 static void	calc_bounds(float const *vert, size_t nvert,
 							float bx[2], float by[2])
 {
@@ -68,4 +69,3 @@ void		sp_wrap_texture_planxy(t_objmodel *m, float scale, float imgratio)
 	(void)calc_bounds;
 	return ;
 }
-*/

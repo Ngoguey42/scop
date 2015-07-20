@@ -47,6 +47,7 @@ O_FILES := obj/srcs/conf.o \
 	obj/srcs/error.o \
 	obj/srcs/glfw_operations.o \
 	obj/srcs/main.o \
+	obj/srcs/mesh_operations.o \
 	obj/srcs/program_operations.o \
 	obj/srcs/shader_operations.o \
 	obj/srcs/controls/controls_apply.o \
@@ -96,6 +97,10 @@ obj/srcs/glfw_operations.o: srcs/glfw_operations.c include/fterror.h include/ftm
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
 obj/srcs/main.o: srcs/main.c include/fterror.h include/ftmath.h include/scop.h include/scop_conf.h include/scop_types.h
+	@mkdir -p obj/srcs 2> /dev/null || true
+	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
+
+obj/srcs/mesh_operations.o: srcs/mesh_operations.c include/fterror.h include/ftmath.h include/scop.h include/scop_conf.h include/scop_types.h
 	@mkdir -p obj/srcs 2> /dev/null || true
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
