@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 12:48:16 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/18 14:13:45 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/20 11:19:58 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@
 */
 typedef struct				s_shader_metadata
 {
-	char					*filepath;
-	GLenum					type;
+	char					*filepath;			//ok
+	GLenum					type;				//ok
 }							t_shader_metadata;
 
 /*
@@ -38,12 +38,12 @@ typedef struct				s_program_uniform
 
 typedef struct				s_program_metadata
 {
-	GLuint					vertex_shaderid;
-	GLuint					fragment_shaderid;
-	int						num_locations;
-	char					*locations[16];
-	int						num_uniforms;
-	t_program_uniform		uniforms[16];
+	GLuint					vertex_shaderid;	//ok
+	GLuint					fragment_shaderid;	//ok
+	int						num_locations;		//ok
+	char					*locations[16];		//ok
+	int						num_uniforms;		//ok
+	t_program_uniform		uniforms[16];		//ok
 }							t_program_metadata;
 
 /*
@@ -65,17 +65,17 @@ typedef struct				s_objmodel
 */
 typedef struct				s_meshattribs
 {
-	GLuint					size;
-	GLuint const			*data;
-	t_bool					has_indices;
+	GLuint					size;				//ok to program
+	GLuint const			*data;				//ok to program
+	t_bool					has_indices;		//ok to mesh
 }							t_meshattribs;
 typedef struct				s_mesh
 {
-	GLuint					desc[3];
-	GLuint					n_floats;
-	GLfloat const			*floats;
-	GLuint					n_indices;
-	GLuint const			*indices;
+	GLuint					desc[3];			//ok
+	GLuint					n_floats;			//ok
+	GLfloat const			*floats;			//ok
+	GLuint					n_indices;			//ok
+	GLuint const			*indices;			//ok
 }							t_mesh;
 
 /*
@@ -83,10 +83,10 @@ typedef struct				s_mesh
 */
 typedef struct				s_drawable
 {
-	t_program_index			prog;
-	size_t					n_textures;
-	GLuint					*textures;
-	t_mesh					mesh;
+	t_program_index			prog;				// ok to mesh
+	size_t					n_textures;			// ok to model
+	GLuint					*textures;			// ok to model
+	t_mesh					mesh;				// ok to model
 }							t_drawable;
 
 
