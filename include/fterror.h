@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 12:04:26 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/20 12:05:01 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/20 12:37:04 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define FTERROR_H
 
 # include "libft.h"
+# include "ft_debug.h"
 
 /*
 ** ERRORS

@@ -42,7 +42,8 @@ C_HEADS := -I include -I libft/includes -I ~/.brew/include
 # Internal
 #
 
-O_FILES := obj/srcs/main.o \
+O_FILES := obj/srcs/error.o \
+	obj/srcs/main.o \
 	obj/srcs/ftmath/matrix4.o \
 	obj/srcs/ftmath/matrix4_invtranslate.o \
 	obj/srcs/ftmath/matrix4_miscop.o \
@@ -50,10 +51,14 @@ O_FILES := obj/srcs/main.o \
 	obj/srcs/ftmath/matrix4_scale.o \
 	obj/srcs/ftmath/matrix4_translate.o \
 	obj/srcs/ftmath/vector3.o \
-	obj/srcs/ftmath/vector3_basicop.o
+	obj/srcs/ftmath/vector3_basicop.o \
+	obj/srcs/objmodel/obj_parsing.o \
+	obj/srcs/objmodel/obj_parsing_multiple_units.o \
+	obj/srcs/objmodel/obj_parsing_unique_units.o \
+	obj/srcs/objmodel/objmodel_operations.o
 
-MSG_0 := printf '\033[0;32m%-38.38s\033[0;0m\r'
-MSG_1 := printf '\033[0;31m%-38.38s\033[0;0m\n'
+MSG_0 := printf '\033[0;32m%-46.46s\033[0;0m\r'
+MSG_1 := printf '\033[0;31m%-46.46s\033[0;0m\n'
 MSG_END := printf '\n'
 
 .SILENT:
@@ -63,6 +68,10 @@ all: $(LIBS) $(NAME)
 
 $(NAME): $(O_FILES)
 	@$(MSG_0) $@ ; $(LD_CC) -o $@ $(O_FILES) $(LD_FLAGS) && $(MSG_END) || $(MSG_1) $@
+
+obj/srcs/error.o: srcs/error.c include/fterror.h
+	@mkdir -p obj/srcs 2> /dev/null || true
+	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
 obj/srcs/main.o: srcs/main.c include/fterror.h include/ftmath.h include/scop.h include/scop_conf.h include/scop_types.h
 	@mkdir -p obj/srcs 2> /dev/null || true
@@ -100,13 +109,29 @@ obj/srcs/ftmath/vector3_basicop.o: srcs/ftmath/vector3_basicop.c include/fterror
 	@mkdir -p obj/srcs/ftmath 2> /dev/null || true
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
+obj/srcs/objmodel/obj_parsing.o: srcs/objmodel/obj_parsing.c include/fterror.h include/ftmath.h include/objmodel_parsing.h include/scop.h include/scop_conf.h include/scop_types.h
+	@mkdir -p obj/srcs/objmodel 2> /dev/null || true
+	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
+
+obj/srcs/objmodel/obj_parsing_multiple_units.o: srcs/objmodel/obj_parsing_multiple_units.c include/fterror.h include/ftmath.h include/objmodel_parsing.h include/scop.h include/scop_conf.h include/scop_types.h
+	@mkdir -p obj/srcs/objmodel 2> /dev/null || true
+	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
+
+obj/srcs/objmodel/obj_parsing_unique_units.o: srcs/objmodel/obj_parsing_unique_units.c include/fterror.h include/ftmath.h include/objmodel_parsing.h include/scop.h include/scop_conf.h include/scop_types.h
+	@mkdir -p obj/srcs/objmodel 2> /dev/null || true
+	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
+
+obj/srcs/objmodel/objmodel_operations.o: srcs/objmodel/objmodel_operations.c include/fterror.h include/ftmath.h include/objmodel_parsing.h include/scop.h include/scop_conf.h include/scop_types.h
+	@mkdir -p obj/srcs/objmodel 2> /dev/null || true
+	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
+
 $(LIBS):
 	@make -C $@
 .PHONY: $(LIBS)
 
 clean:
 	@rm -f $(O_FILES) 2> /dev/null || true
-	@rmdir -p obj/srcs/ftmath obj/srcs $(O_DIR) 2> /dev/null || true
+	@rmdir -p obj/srcs/objmodel obj/srcs/ftmath obj/srcs $(O_DIR) 2> /dev/null || true
 .PHONY: clean
 
 fclean: clean
