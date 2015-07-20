@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/15 13:44:48 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/20 13:44:49 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/20 14:30:17 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,8 @@ int				sp_init_env(t_env *e)
 			sp_enomem();
 		i++;
 	}
-	if (sp_loadconf_shaders(e) || sp_loadconf_programs(e))
+	if (sp_loadconf_shaders(e) || sp_loadconf_programs(e)
+		|| sp_loadconf_textures(e))
 		return (1);
 	return (0);
 }

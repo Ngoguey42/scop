@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 10:07:19 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/20 13:35:01 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/20 14:21:45 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ typedef struct					s_mesh
 */
 typedef struct					s_texture
 {
-	char const * const			filepath;
+	char const					filepath[64];
 	GLuint						handle;
 }								t_texture;
 
