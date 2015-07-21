@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 12:53:00 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/21 08:12:46 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/21 09:25:34 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 
 #define PROG(VS,FS,P,...) {VS, FS, P, NARG(__VA_ARGS__), {__VA_ARGS__}, 0}
 
-#define LOC_FLOAT(N, S) ((t_location){N, sizeof(GLfloat) * (S)})
+#define LOC(N, S) ((t_location){N, (S)})
 
 #define FTVU ftv_uninitialized()
 #define MESH(US, P, IN, FI) {(US), (P), (IN), (FI), FTVU, FTVU, {0, 0, 0}}
@@ -44,12 +44,12 @@ int				sp_loadconf_programs(t_env *e)
 {
 	t_program const		tmp[sp_num_programs] = {
 
-	PROG(sp_basic_vertex, sp_basic_fragment, NULL,
-	LOC_FLOAT("position", 3)),
-	PROG(sp_tex_vertex, sp_tex_fragment, NULL,
-	LOC_FLOAT("position", 3), LOC_FLOAT("color", 3), LOC_FLOAT("texCoord", 2)),
-	PROG(sp_item_vertex, sp_item_fragment, NULL,
-	LOC_FLOAT("position", 3), LOC_FLOAT("texCoord", 2)),
+	PROG(sp_basic_vertex, sp_basic_fragment, &sp_unif_viewproj,
+	LOC("position", 3)),
+	PROG(sp_tex_vertex, sp_tex_fragment, &sp_unif_viewproj,
+	LOC("position", 3), LOC("color", 3), LOC("texCoord", 2)),
+	PROG(sp_item_vertex, sp_item_fragment, &sp_unif_viewproj,
+	LOC("position", 3), LOC("texCoord", 2)),
 	};
 	memcpy(&e->programs, &tmp, sizeof(tmp));
 	return (0);
@@ -70,20 +70,21 @@ int				sp_loadconf_meshes(t_env *e)
 {
 	t_mesh const		tmp[sp_num_meshes] = {
 
-	MESH(GL_STATIC_DRAW, sp_item_program, true, &sp_meshfill_item),
+	MESH(GL_STATIC_DRAW, sp_basic_program, true, &sp_meshfill_item),
+	MESH(GL_STATIC_DRAW, sp_basic_program, true, &sp_meshfill_square),
 	};
 	memcpy(&e->meshes, &tmp, sizeof(tmp));
 	return (0);
 }
 
-
 int				sp_loadconf_models(t_env *e)
 {
-	// t_model const		tmp[sp_num_models] = {
+	t_model const		tmp[sp_num_models] = {
 
-		
-	// };
-	// memcpy(&e->models, &tmp, sizeof(tmp));
-	(void)e;
+		{sp_item_mesh, sp_porcelain_texture, &sp_unif_model},
+ 		{sp_square_mesh, sp_no_texture, &sp_unif_model}
+	};
+	memcpy(&e->models, &tmp, sizeof(tmp));
+	/* (void)e; */
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/15 13:44:48 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/20 14:43:32 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/21 09:05:48 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,35 +30,22 @@ t_env			*sp_instance(void)
 
 void			sp_clean_env(t_env *e)
 {
-	// int		i;
-
-	// i = 0;
-	// while (i < sp_num_programs)
-	// {
-		// ftv_release(e->obs + i, NULL); //todo
-	// }
+	sp_delete_obs(e);
 	return ;
 }
 
 int				sp_init_env(t_env *e)
 {
-	// int		i;
-
 	sp_register_instance(e);
 	bzero(e, sizeof(*e));
 	e->cpos = ATOV3(0.f, 2.f, 6.f);
 	e->cangles[0] = -(M_PI / 2);
 	e->cangles[1] = 0.f;
 	e->projection = m4_fovprojection(WIN_FOVF, WIN_RATIOF, WIN_NEARF, WIN_FARF);
-	// i = 0;
-	// while (i < sp_num_programs)
-	// {
-		// if (ftv_init_instance(e->obs + i, sizeof(t_ob)))
-			// sp_enomem();
-		// i++;
-	// }
+	sp_init_obs(e);
 	if (sp_loadconf_shaders(e) || sp_loadconf_programs(e)
-		|| sp_loadconf_textures(e) || sp_loadconf_meshes(e))
+		|| sp_loadconf_textures(e) || sp_loadconf_meshes(e)
+		|| sp_loadconf_models(e))
 		return (1);
 	return (0);
 }

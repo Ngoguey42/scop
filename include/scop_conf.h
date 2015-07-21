@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 10:33:54 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/20 14:21:23 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/21 08:40:17 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ typedef enum				e_program_index
 typedef enum				e_mesh_index
 {
 	sp_item_mesh,
+	sp_square_mesh,
 	sp_num_meshes,
 }							t_mesh_index;
 
@@ -84,6 +85,7 @@ typedef enum				e_texture_index
 typedef enum				e_model_index
 {
 	sp_item_model,
+	sp_square_model,
 	sp_num_models,
 }							t_model_index;
 

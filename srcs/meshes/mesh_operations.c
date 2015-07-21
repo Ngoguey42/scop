@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/18 12:01:22 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/20 15:59:52 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/21 08:46:31 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,13 @@ static int		gen_attribs(t_program const *p, size_t vert_width)
 	lprintf("Defining locations: ");
 	while (i < p->n_locations)
 	{
-		lprintf("    '%s' i=%u; sz=%u; wid=%u, dt=%u", p->locations[i].name, 
+		lprintf("    '%s' i=%02u; sz=%02u; wid=%02u, dt=%02u",
+			p->locations[i].name,
 			i, p->locations[i].size, vert_width, delta);
 		glVertexAttribPointer(i, p->locations[i].size, GL_FLOAT, GL_FALSE
 								, vert_width, delta);
 		glEnableVertexAttribArray(i);
-		delta += p->locations[i].size;
+		delta += p->locations[i].size * sizeof(GLfloat);
 		i++;
 	}
 	return (0);
@@ -51,7 +52,7 @@ static int		gen_attribs(t_program const *p, size_t vert_width)
 static int		new_mesh(t_env const *e, t_mesh *me)
 {
 	t_program const		*p = &e->programs[me->program];
-	size_t const		vert_width = mesh_width(p);
+	size_t const		vert_width = mesh_width(p) * sizeof(GLfloat);
 	size_t const		elem_width = 3 * sizeof(GLuint);
 
 	lprintf("Generating mesh:");

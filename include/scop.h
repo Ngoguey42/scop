@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 12:07:31 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/20 16:16:34 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/21 09:17:21 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,11 +88,17 @@ int			sp_meshfill_item(t_env const *e, t_mesh *me);
 int			sp_meshfill_square(t_env const *e, t_mesh *me);
 
 /*
-**
+** UNIFORMS
 */
+void            sp_unif_model(t_env const *e, t_ob const *ob);
+void            sp_unif_viewproj(t_env const *e, t_program const *p);
 
 /*
-**
+** OBS (OBJECTS)
 */
+int			sp_init_obs(t_env *e);
+void		sp_delete_obs(t_env *e);
+void        sp_render_obs(t_env const *e, double el);
+
 
 #endif

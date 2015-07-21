@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 15:57:45 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/20 16:18:06 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/21 08:26:19 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,19 @@ int				sp_meshfill_item(t_env const *e, t_mesh *me)
 
 int				sp_meshfill_square(t_env const *e, t_mesh *me)
 {
+	GLfloat vertices[] = {
+		0.5f,  0.5f, 0.0f,  // Top Right
+		0.5f, -0.5f, 0.0f,  // Bottom Right
+		-0.5f, -0.5f, 0.0f,  // Bottom Left
+		-0.5f,  0.5f, 0.0f   // Top Left
+	};
+	GLuint indices[] = {  // Note that we start from 0!
+		0, 1, 3,  // First Triangle
+		1, 2, 3   // Second Triangle
+	};
+
+	ftv_push_backn(&me->vertices, vertices, 4);
+	ftv_push_backn(&me->faces, indices, 2);
 	(void)e;
 	(void)me;
 	return (0);

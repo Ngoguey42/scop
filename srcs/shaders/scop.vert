@@ -6,7 +6,7 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/06/30 17:43:59 by ngoguey           #+#    #+#             //
-//   Updated: 2015/07/17 15:34:35 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/07/21 09:21:05 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -43,4 +43,5 @@ void main()
 	}
 
 	gl_Position = projection * view * gl_Position;
+	// gl_Position = vec4(position, 1.0);
 }

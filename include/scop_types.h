@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 10:07:19 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/20 15:57:23 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/21 08:59:30 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,7 +137,7 @@ typedef struct					s_env
 	t_mesh						meshes[sp_num_meshes];
 	t_texture					textures[sp_num_textures];
 	t_model						models[sp_num_models];
-	// t_ftvector					obs[sp_num_programs];
+	t_ftvector					obs;
 
 	t_matrix4					projection;
 	t_matrix4					view;
@@ -147,20 +147,20 @@ typedef struct					s_env
 	t_vector3					cpos;
 }								t_env;
 
-# define VSOFP(E, P)	((E)->shaders[(P)->vshader])
-# define FSOFP(E, P)	((E)->shaders[(P)->fshader])
+# define VSOFP(E, P)	(&(E)->shaders[(P)->vshader])
+# define FSOFP(E, P)	(&(E)->shaders[(P)->fshader])
 
-# define POFME(E, ME)	((E)->programs[(ME)->program])
+# define POFME(E, ME)	(&(E)->programs[(ME)->program])
 # define VSOFME(E, ME)	VSOFP((E), POFME((E), ME))
 # define FSOFME(E, ME)	FSOFP((E), POFME((E), ME))
 
-# define TOFMO(E, MO)	((E)->textures[(MO)->texture])
-# define MEOFMO(E, MO)	((E)->meshes[(MO)->mesh])
+# define TOFMO(E, MO)	(&(E)->textures[(MO)->texture])
+# define MEOFMO(E, MO)	(&(E)->meshes[(MO)->mesh])
 # define POFMO(E, MO)	POFME((E), MEOFMO((E), MO))
 # define VSOFMO(E, MO)	VSOFME((E), MEOFMO((E), MO))
 # define FSOFMO(E, MO)	FSOFME((E), MEOFMO((E), MO))
 
-# define MOOFOB(E, OB)	((E)OFmodels[(OB)OFmodel])
+# define MOOFOB(E, OB)	(&(E)->models[(OB)->model])
 # define TOFOB(E, OB)	TOFMO((E), MOOFOB((E), OB))
 # define MEOFOB(E, OB)	MEOFMO((E), MOOFOB((E), OB))
 # define POFOB(E, OB)	POFMO((E), MOOFOB((E), OB))

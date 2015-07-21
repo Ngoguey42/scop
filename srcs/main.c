@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 12:08:19 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/20 14:36:23 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/21 09:21:41 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,12 @@ static void		loop(t_env *e)
 		cur_time = glfwGetTime();
 		el_time = cur_time - last_time;
 		sp_update_states(e, el_time);
-		
-		/* update matrices */
-		
+		e->view = m4_lookat(ATOV3(e->cpos.x, e->cpos.y, e->cpos.z),
+							v3_add(ATOV3(e->cpos.x, e->cpos.y, e->cpos.z),
+								   v3_frontnormed(e->cangles)));		
 		glClearColor(0.3f, 0.3f, 0.3f, 1.f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		
-		/* render obs */
-		
+		sp_render_obs(e, el_time);
 		glfwSwapBuffers(e->win);
 		glfwPollEvents();
 		last_time = cur_time;
@@ -63,7 +61,6 @@ static void		end(t_env *e)
 	(void)e;
 	return ;
 }
-
 
 int				main(void)
 {
