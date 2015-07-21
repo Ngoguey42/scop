@@ -6,12 +6,13 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 12:08:19 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/21 11:25:42 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/21 14:25:38 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
 #include <stdlib.h>
+#include <time.h>
 
 static int		begin(t_env *e)
 {
@@ -24,7 +25,7 @@ static int		begin(t_env *e)
 	if (sp_init_programs(e))
 		return (ERROR("sp_init_programs(e)"), 1);
     if (sp_init_meshes(e))
-		return (ERROR("sp_init_textures(e)"), 1);
+		return (ERROR("sp_init_meshes(e)"), 1);
     if (sp_init_textures(e))
 		return (ERROR("sp_init_textures(e)"), 1);
 	return (0);
@@ -63,6 +64,7 @@ int				main(void)
 {
 	t_env					*e;
 
+	srand(time(NULL));
 	qprintf("sizeof(t_env) = %u\n", sizeof(*e));
 	e = malloc(sizeof(*e));
 	if (e == NULL)

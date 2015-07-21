@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 10:33:54 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/21 09:56:33 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/21 16:21:36 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,9 @@
 # define WIN_NEARF 0.1f
 # define WIN_FARF 100.f
 
+# define LAND_SIDEF 15.f
+# define POINTS_DEPTHI 8
+
 # define MOUSE_SENSITIVITYF 0.005f
 # define MOVEMENT_SPEEDF 4.f
 
@@ -47,6 +50,9 @@
 # define WIN_HEIGHTI ROUND_FTOI(WIN_HEIGHTF)
 
 # define CAMERA_POSBOUNDF (M_PI / 2 * 0.98)
+
+# define LAND_SIDEHALFF (LAND_SIDEF / 2.f)
+
 
 typedef enum				e_shader_index
 {

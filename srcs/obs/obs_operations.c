@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/21 09:02:18 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/21 11:34:14 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/21 16:22:29 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int         sp_init_obs(t_env *e)
 	ob->mat = m4_translate_nonuniform(ob->position);
 	ftv_push_back(&e->obs, ob);
 	ob->model = sp_land_model;
-	ob->position = ATOV3(0.f, -30.f, 0.f);;
+	ob->position = ATOV3(0.f, -.25f, 0.f);;
 	ob->mat = m4_translate_nonuniform(ob->position);
 	ftv_push_back(&e->obs, ob);
 	return (0);

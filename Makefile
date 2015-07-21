@@ -60,6 +60,8 @@ O_FILES := obj/srcs/conf.o \
 	obj/srcs/ftmath/matrix4_translate.o \
 	obj/srcs/ftmath/vector3.o \
 	obj/srcs/ftmath/vector3_basicop.o \
+	obj/srcs/meshes/generate_land_xyz.o \
+	obj/srcs/meshes/generate_land_z.o \
 	obj/srcs/meshes/mesh_fill.o \
 	obj/srcs/meshes/mesh_operations.o \
 	obj/srcs/objmodel/obj_parsing.o \
@@ -153,6 +155,14 @@ obj/srcs/ftmath/vector3.o: srcs/ftmath/vector3.c include/fterror.h include/ftmat
 
 obj/srcs/ftmath/vector3_basicop.o: srcs/ftmath/vector3_basicop.c include/fterror.h include/ftmath.h include/objmodel.h include/scop.h include/scop_conf.h include/scop_types.h
 	@mkdir -p obj/srcs/ftmath 2> /dev/null || true
+	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
+
+obj/srcs/meshes/generate_land_xyz.o: srcs/meshes/generate_land_xyz.c include/fterror.h include/ftmath.h include/objmodel.h include/scop.h include/scop_conf.h include/scop_types.h
+	@mkdir -p obj/srcs/meshes 2> /dev/null || true
+	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
+
+obj/srcs/meshes/generate_land_z.o: srcs/meshes/generate_land_z.c include/fterror.h include/ftmath.h include/objmodel.h include/scop.h include/scop_conf.h include/scop_types.h
+	@mkdir -p obj/srcs/meshes 2> /dev/null || true
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
 obj/srcs/meshes/mesh_fill.o: srcs/meshes/mesh_fill.c include/fterror.h include/ftmath.h include/objmodel.h include/scop.h include/scop_conf.h include/scop_types.h

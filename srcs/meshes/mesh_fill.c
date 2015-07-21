@@ -6,12 +6,13 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 15:57:45 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/21 10:42:47 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/21 15:57:44 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
 #include "objmodel.h"
+#include <math.h>
 
 int				sp_meshfill_item(t_env const *e, t_mesh *me)
 {
@@ -49,18 +50,28 @@ int				sp_meshfill_square(t_env const *e, t_mesh *me)
 
 int				sp_meshfill_land(t_env const *e, t_mesh *me)
 {
-	GLfloat vertices[] = {
-		05.f, 0.f, 05.f,  // Top Right
-		05.f, 0.f, -05.f,   // Bottom Right
-		-05.f, 0.f, -05.f,  // Bottom Left
-		-05.f, 0.f,  05.f,   // Top Left
-	};
-	GLuint indices[] = {  // Note that we start from 0!
-		0, 1, 3,  // First Triangle
-		1, 2, 3   // Second Triangle
-	};
-	ftv_push_backn(&me->vertices, vertices, 4);
-	ftv_push_backn(&me->faces, indices, 2);
+	t_ftvector		lines[1];
+	size_t const	line_points = (int)pow(2., (double)POINTS_DEPTHI);
+
+	if (ftv_init_instance(lines, sizeof(float) * line_points))
+		sp_enomem();
+	ftv_insert(lines, lines->data, line_points);
+	sp_fill_landgrid(lines);
+	sp_fill_landvertices(lines, &me->vertices);
+	sp_fill_landfaces(lines, &me->faces);
+	
+	/* GLfloat vertices[] = { */
+	/* 	05.f, 0.f, 05.f,  // Top Right */
+	/* 	05.f, 0.f, -05.f,   // Bottom Right */
+	/* 	-05.f, 0.f, -05.f,  // Bottom Left */
+	/* 	-05.f, 0.f,  05.f,   // Top Left */
+	/* }; */
+	/* GLuint indices[] = {  // Note that we start from 0! */
+	/* 	0, 1, 3,  // First Triangle */
+	/* 	1, 2, 3   // Second Triangle */
+	/* }; */
+	/* ftv_push_backn(&me->vertices, vertices, 4); */
+	/* ftv_push_backn(&me->faces, indices, 2); */
 	(void)e;
 	(void)me;
 	return (0);
