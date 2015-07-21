@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 10:07:19 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/21 08:59:30 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/21 11:26:12 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,11 +140,11 @@ typedef struct					s_env
 	t_ftvector					obs;
 
 	t_matrix4					projection;
-	t_matrix4					view;
-
 	double						mpos[2];
+	
 	float						cangles[2];
-	t_vector3					cpos;
+	t_vector3					cpos;	
+	t_matrix4					view;
 }								t_env;
 
 # define VSOFP(E, P)	(&(E)->shaders[(P)->vshader])

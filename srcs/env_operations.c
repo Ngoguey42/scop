@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/15 13:44:48 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/21 09:05:48 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/21 11:29:11 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,9 @@ int				sp_init_env(t_env *e)
 	e->cangles[0] = -(M_PI / 2);
 	e->cangles[1] = 0.f;
 	e->projection = m4_fovprojection(WIN_FOVF, WIN_RATIOF, WIN_NEARF, WIN_FARF);
+	e->view = m4_lookat(ATOV3(e->cpos.x, e->cpos.y, e->cpos.z),
+						v3_add(ATOV3(e->cpos.x, e->cpos.y, e->cpos.z),
+						v3_frontnormed(e->cangles)));
 	sp_init_obs(e);
 	if (sp_loadconf_shaders(e) || sp_loadconf_programs(e)
 		|| sp_loadconf_textures(e) || sp_loadconf_meshes(e)
