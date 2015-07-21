@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 12:53:00 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/20 15:59:24 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/21 08:12:46 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # define NARG(...) NARG_(__VA_ARGS__,11,10,9,8,7,6,5,4,3,2,1)
 #endif
 
-#define PROG(VS,FS,P,...) {VS, FS, P, NARG(__VA_ARGS__), {__VA_ARGS__}, NULL, 0}
+#define PROG(VS,FS,P,...) {VS, FS, P, NARG(__VA_ARGS__), {__VA_ARGS__}, 0}
 
 #define LOC_FLOAT(N, S) ((t_location){N, sizeof(GLfloat) * (S)})
 

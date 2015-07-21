@@ -47,8 +47,6 @@ O_FILES := obj/srcs/conf.o \
 	obj/srcs/error.o \
 	obj/srcs/glfw_operations.o \
 	obj/srcs/main.o \
-	obj/srcs/mesh_fill.o \
-	obj/srcs/mesh_operations.o \
 	obj/srcs/program_operations.o \
 	obj/srcs/shader_operations.o \
 	obj/srcs/controls/controls_apply.o \
@@ -61,6 +59,8 @@ O_FILES := obj/srcs/conf.o \
 	obj/srcs/ftmath/matrix4_translate.o \
 	obj/srcs/ftmath/vector3.o \
 	obj/srcs/ftmath/vector3_basicop.o \
+	obj/srcs/meshes/mesh_fill.o \
+	obj/srcs/meshes/mesh_operations.o \
 	obj/srcs/objmodel/obj_parsing.o \
 	obj/srcs/objmodel/obj_parsing_multiple_units.o \
 	obj/srcs/objmodel/obj_parsing_unique_units.o \
@@ -98,14 +98,6 @@ obj/srcs/glfw_operations.o: srcs/glfw_operations.c include/fterror.h include/ftm
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
 obj/srcs/main.o: srcs/main.c include/fterror.h include/ftmath.h include/objmodel.h include/scop.h include/scop_conf.h include/scop_types.h
-	@mkdir -p obj/srcs 2> /dev/null || true
-	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
-
-obj/srcs/mesh_fill.o: srcs/mesh_fill.c include/fterror.h include/ftmath.h include/objmodel.h include/scop.h include/scop_conf.h include/scop_types.h
-	@mkdir -p obj/srcs 2> /dev/null || true
-	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
-
-obj/srcs/mesh_operations.o: srcs/mesh_operations.c include/fterror.h include/ftmath.h include/objmodel.h include/scop.h include/scop_conf.h include/scop_types.h
 	@mkdir -p obj/srcs 2> /dev/null || true
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
@@ -157,6 +149,14 @@ obj/srcs/ftmath/vector3_basicop.o: srcs/ftmath/vector3_basicop.c include/fterror
 	@mkdir -p obj/srcs/ftmath 2> /dev/null || true
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
+obj/srcs/meshes/mesh_fill.o: srcs/meshes/mesh_fill.c include/fterror.h include/ftmath.h include/objmodel.h include/scop.h include/scop_conf.h include/scop_types.h
+	@mkdir -p obj/srcs/meshes 2> /dev/null || true
+	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
+
+obj/srcs/meshes/mesh_operations.o: srcs/meshes/mesh_operations.c include/fterror.h include/ftmath.h include/objmodel.h include/scop.h include/scop_conf.h include/scop_types.h
+	@mkdir -p obj/srcs/meshes 2> /dev/null || true
+	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
+
 obj/srcs/objmodel/obj_parsing.o: srcs/objmodel/obj_parsing.c include/fterror.h include/ftmath.h include/objmodel.h include/objmodel_parsing.h include/scop.h include/scop_conf.h include/scop_types.h
 	@mkdir -p obj/srcs/objmodel 2> /dev/null || true
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
@@ -191,7 +191,7 @@ $(LIBS):
 
 clean:
 	@rm -f $(O_FILES) 2> /dev/null || true
-	@rmdir -p obj/srcs/tga obj/srcs/textures obj/srcs/objmodel obj/srcs/ftmath obj/srcs/controls obj/srcs $(O_DIR) 2> /dev/null || true
+	@rmdir -p obj/srcs/tga obj/srcs/textures obj/srcs/objmodel obj/srcs/meshes obj/srcs/ftmath obj/srcs/controls obj/srcs $(O_DIR) 2> /dev/null || true
 .PHONY: clean
 
 fclean: clean
