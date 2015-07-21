@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 12:07:31 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/21 15:57:35 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/21 16:35:18 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ void    sp_fill_landfaces(t_ftvector const *lines, t_ftvector *vertices);
 ** UNIFORMS
 */
 void            sp_unif_model(t_env const *e, t_ob const *ob);
+void            sp_unif_land(t_env const *e, t_ob const *ob);
 void            sp_unif_viewproj(t_env const *e, t_program const *p);
 
 /*

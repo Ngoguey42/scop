@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 10:33:54 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/21 16:21:36 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/21 16:54:56 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,9 @@
 # define WIN_NEARF 0.1f
 # define WIN_FARF 100.f
 
-# define LAND_SIDEF 15.f
-# define POINTS_DEPTHI 8
+# define LAND_SIDEF 500.f
+# define LAND_RANGEF 28.f
+# define POINTS_DEPTHI 11
 
 # define MOUSE_SENSITIVITYF 0.005f
 # define MOVEMENT_SPEEDF 4.f
@@ -62,6 +63,8 @@ typedef enum				e_shader_index
 	sp_tex_fragment,
 	sp_item_vertex,
 	sp_item_fragment,
+	sp_land_vertex,
+	sp_land_fragment,
 	sp_num_shaders
 }							t_shader_index;
 
@@ -70,6 +73,7 @@ typedef enum				e_program_index
 	sp_basic_program,
 	sp_tex_program,
 	sp_item_program,
+	sp_land_program,
 	sp_num_programs
 }							t_program_index;
 

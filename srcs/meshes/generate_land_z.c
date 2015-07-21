@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/21 15:54:14 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/21 15:59:24 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/21 16:55:43 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,7 @@ void		sp_fill_landgrid(t_ftvector *lines)
 	qprintf("\n")
 
 	
-	range = 10.f;
+	range = LAND_RANGEF;
 	idt = lines->size / 2;
 	ptr = lines->data;
 	(ptr + DELTA(0, 0))[0] = GETRAND(range);
@@ -138,7 +138,7 @@ void		sp_fill_landgrid(t_ftvector *lines)
 	while (depth <= POINTS_DEPTHI)
 	{
 		lprintf("Solving depth %u", depth);
-		range /= 2.f;
+		range *= 0.7f;
 		/* range /= 2.f; */
 		apply_floats_diag(lines, range, idt);
 		/* TEST; */
@@ -150,6 +150,6 @@ void		sp_fill_landgrid(t_ftvector *lines)
 		depth++;
 	}	
 
-	TEST;
+	/* TEST; */
 	return ;
 }

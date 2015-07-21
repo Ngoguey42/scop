@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 15:57:45 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/21 15:57:44 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/21 16:31:32 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,21 +58,6 @@ int				sp_meshfill_land(t_env const *e, t_mesh *me)
 	ftv_insert(lines, lines->data, line_points);
 	sp_fill_landgrid(lines);
 	sp_fill_landvertices(lines, &me->vertices);
-	sp_fill_landfaces(lines, &me->faces);
-	
-	/* GLfloat vertices[] = { */
-	/* 	05.f, 0.f, 05.f,  // Top Right */
-	/* 	05.f, 0.f, -05.f,   // Bottom Right */
-	/* 	-05.f, 0.f, -05.f,  // Bottom Left */
-	/* 	-05.f, 0.f,  05.f,   // Top Left */
-	/* }; */
-	/* GLuint indices[] = {  // Note that we start from 0! */
-	/* 	0, 1, 3,  // First Triangle */
-	/* 	1, 2, 3   // Second Triangle */
-	/* }; */
-	/* ftv_push_backn(&me->vertices, vertices, 4); */
-	/* ftv_push_backn(&me->faces, indices, 2); */
-	(void)e;
-	(void)me;
+	sp_fill_landfaces(lines, &me->faces);	
 	return (0);
 }

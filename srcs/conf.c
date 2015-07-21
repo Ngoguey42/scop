@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 12:53:00 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/21 10:02:42 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/21 16:27:21 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ int				sp_loadconf_shaders(t_env *e)
 	{SHADER_PATH("tex.frag"), GL_FRAGMENT_SHADER, 0},
 	{SHADER_PATH("item.vert"), GL_VERTEX_SHADER, 0},
 	{SHADER_PATH("item.frag"), GL_FRAGMENT_SHADER, 0},
+	{SHADER_PATH("land.vert"), GL_VERTEX_SHADER, 0},
+	{SHADER_PATH("land.frag"), GL_FRAGMENT_SHADER, 0},
 	};
 	memcpy(&e->shaders, &tmp, sizeof(tmp));
 	return (0);
@@ -50,6 +52,8 @@ int				sp_loadconf_programs(t_env *e)
 	LOC("position", 3), LOC("color", 3), LOC("texCoord", 2)),
 	PROG(sp_item_vertex, sp_item_fragment, &sp_unif_viewproj,
 	LOC("position", 3), LOC("texCoord", 2)),
+	PROG(sp_land_vertex, sp_land_fragment, &sp_unif_viewproj,
+	 LOC("position", 3)),
 	};
 	memcpy(&e->programs, &tmp, sizeof(tmp));
 	return (0);
@@ -72,7 +76,7 @@ int				sp_loadconf_meshes(t_env *e)
 
 	MESH(GL_STATIC_DRAW, sp_item_program, true, &sp_meshfill_item),
 	MESH(GL_STATIC_DRAW, sp_basic_program, true, &sp_meshfill_square),
-	MESH(GL_STATIC_DRAW, sp_basic_program, true, &sp_meshfill_land),
+	MESH(GL_STATIC_DRAW, sp_land_program, true, &sp_meshfill_land),
 	};
 	memcpy(&e->meshes, &tmp, sizeof(tmp));
 	return (0);
@@ -84,7 +88,7 @@ int				sp_loadconf_models(t_env *e)
 
 		{sp_item_mesh, sp_porcelain_texture, &sp_unif_model},
  		{sp_square_mesh, sp_no_texture, &sp_unif_model},
- 		{sp_land_mesh, sp_no_texture, &sp_unif_model},
+ 		{sp_land_mesh, sp_no_texture, &sp_unif_land},
 	};
 	memcpy(&e->models, &tmp, sizeof(tmp));
 	/* (void)e; */
