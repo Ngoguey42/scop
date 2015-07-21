@@ -6,15 +6,17 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/15 08:49:22 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/15 08:51:16 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/20 16:16:19 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef OBJMODEL_PARSING_H
 # define OBJMODEL_PARSING_H
 
-# include "scop.h"
+# include "libft.h"
+# include "fterror.h"
 # include "ft_vector.h"
+# include "objmodel.h"
 # include <stdio.h>
 
 typedef struct	s_token

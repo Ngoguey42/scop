@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/01 15:12:18 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/02 14:20:39 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/20 12:23:41 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,7 @@ t_matrix4		m4_rotation_axis(t_axis a, float fact)
 
 t_matrix4		m4_rotationref_axis(t_matrix4 const *ref, t_axis a, float fact)
 {
-	return (m4_dotprod(*ref, m4_rotation_axis(a, fact)));
+	t_matrix4 const		tmp = m4_rotation_axis(a, fact);
+
+	return (m4_dotprod(ref, &tmp));
 }

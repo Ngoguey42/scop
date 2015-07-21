@@ -6,11 +6,11 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 15:07:55 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/06/30 15:10:17 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/20 12:37:00 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "scop.h"
+#include "fterror.h"
 #include <stdlib.h>
 
 void				sp_enomem(void)

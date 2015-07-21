@@ -6,13 +6,13 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/15 08:26:17 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/15 08:59:08 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/20 12:35:50 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "scop.h"
 #include <stdlib.h>
 #include <string.h>
+#include "scop.h"
 #include "objmodel_parsing.h"
 
 /*
@@ -25,7 +25,7 @@
 ** 'sp_register_objmodel'		Registers a new uninitialized model
 ** 							for initialization.
 */
-
+/*
 int			sp_init_objmodels(t_env *e)
 {
 	t_objmodel		*models;
@@ -78,3 +78,4 @@ void		sp_register_objmodel(t_env *e, char const *filepath)
 		sp_enomem();
 	return ;
 }
+*/

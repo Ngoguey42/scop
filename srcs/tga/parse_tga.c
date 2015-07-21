@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/17 12:00:25 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/17 15:20:50 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/20 14:20:03 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <fcntl.h>
 #include <string.h>
 #include <errno.h>
-#include "scop.h"
+#include "fterror.h"
 #include "libft.h"
 #include "ft_vector.h"
 

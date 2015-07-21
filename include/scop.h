@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 12:07:31 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/18 14:42:13 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/21 09:54:36 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,10 @@
 # include "libft.h"
 
 # include "ftmath.h"
-# include "config.h"
-# include "scop_structs.h"
+# include "scop_conf.h"
+# include "scop_types.h"
+# include "fterror.h"
+# include "objmodel.h"
 
 /*
 ** DEBUG
@@ -30,78 +32,74 @@
 # define DEBUGF(...) qprintf(__VA_ARGS__), ft_putchar_fd('\n', 2)
 
 /*
-** OBJMODEL
-*/
-int			sp_init_objmodels(t_env *e);
-void		sp_clean_objmodels(void *modelptr);
-void		sp_register_objmodel(t_env *e, char const *filepath);
-int			op_parse_obj(t_objmodel *m);
-
-
-/*
 ** PROTOTYPES
-** CORE FUNCTIONS
 */
-int			sp_init_env(t_env *e);
-void		sp_clean_env(t_env *e);
-t_env		*sp_instance(void);
-
-int			sp_init_glfw(t_env *e);
-void		sp_disable_glfw(t_env *e);
-int     sp_load_texture(char const *filepath, GLuint *desc);
-int         parse_tga(char const *filepath, t_ftvector *v, int dim[2]);
-
 /*
 ** CONTROLS
 */
+void		sp_toggle_mouse_state(GLFWwindow *w, t_env *e);
 void		sp_keystate(t_env *e, int a, t_bool newstate);
 void		sp_update_states(t_env *e, double el);
-void		sp_toggle_mouse_state(GLFWwindow *w, t_env *e);
 
 /*
-** SHADER FUNCTIONS
+** ENV
 */
-#define PROG0 (e->programs[0])
-#define PROG1 (e->programs[1])
+void		sp_clean_env(t_env *e);
+int			sp_init_env(t_env *e);
+t_env		*sp_instance(void);
 
-int			sp_init_shaders(t_env *e);
+int			sp_loadconf_shaders(t_env *e);
+int			sp_loadconf_programs(t_env *e);
+int			sp_loadconf_textures(t_env *e);
+int			sp_loadconf_meshes(t_env *e);
+int			sp_loadconf_models(t_env *e);
+
+/*
+** GLFW
+*/
+void		sp_disable_glfw(t_env *e);
+int			sp_init_glfw(t_env *e);
+
+/*
+** SHADERS
+*/
 void		sp_delete_shaders(t_env *e);
-
-int			sp_init_programs(t_env *e);
-void		sp_delete_programs(t_env *e);
-
-void        item_unif_projection(t_env const *e, GLuint loc);
-void        item_unif_view(t_env const *e, GLuint loc);
-void        item_unif_model(t_env const *e, GLuint loc);
-void        item_unif_texture(t_env const *e, GLuint loc);
-
-
-void        tex_unif_projection(t_env const *e, GLuint loc);
-void        tex_unif_view(t_env const *e, GLuint loc);
-void        tex_unif_model(t_env const *e, GLuint loc);
-void        tex_unif_texture(t_env const *e, GLuint loc);
-
-int             sp_create_drawables(t_env *e);
-void            sp_release_drawable(void *ptr);
-
-void            sp_update_uniforms(t_env const *e, int prid, GLuint prog);
-
-void    sp_wrap_texture_planxy(t_objmodel *m, float scale, float imgratio);
-int             ps_build_mesh(t_mesh *me, t_meshattribs att);
-
-void    sp_render_drawables(t_env *e);
+int			sp_init_shaders(t_env *e);
 
 /*
-** ERRORS
+** PROGRAMS
 */
-void				sp_enomem(void);
-# define PERR_H qprintf("Error l%d: ", __LINE__)
-# define PERRNO_ENDL qprintf(", (%s)\n", strerror(errno))
+void		sp_delete_programs(t_env *e);
+int			sp_init_programs(t_env *e);
 
-# define ERRORF(...) PERR_H, qprintf(__VA_ARGS__), ft_putchar_fd('\n', 2)
-# define ERROR(ARG) ERRORF("%s", (ARG))
+/*
+** TEXTURES
+*/
+int			sp_init_textures(t_env *e);
+void		sp_delete_textures(t_env *e);
+int			parse_tga(char const *filepath, t_ftvector *v, int dim[2]);
 
-# define ERRORNOF(...) PERR_H, qprintf(__VA_ARGS__), PERRNO_ENDL
-# define ERRORNO(ARG) ERRORNOF("%s", (ARG))
+/*
+** MESHES
+*/
+int			sp_init_meshes(t_env *e);
+void		sp_delete_meshes(t_env *e);
+int			sp_meshfill_item(t_env const *e, t_mesh *me);
+int			sp_meshfill_square(t_env const *e, t_mesh *me);
+int			sp_meshfill_land(t_env const *e, t_mesh *me);
+
+/*
+** UNIFORMS
+*/
+void            sp_unif_model(t_env const *e, t_ob const *ob);
+void            sp_unif_viewproj(t_env const *e, t_program const *p);
+
+/*
+** OBS (OBJECTS)
+*/
+int			sp_init_obs(t_env *e);
+void		sp_delete_obs(t_env *e);
+void        sp_render_obs(t_env const *e, double el);
+
 
 #endif

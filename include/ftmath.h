@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 12:16:50 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/15 09:58:47 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/20 12:20:26 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,31 +73,33 @@ typedef union	u_matrix4
 	struct s_vectorj4	i[4];
 }				t_matrix4;
 # define MAT4 t_matrix4
+# define VEC3 t_vector3
 
-MAT4			m4_scale_nonuniform(float vect[3]);
+MAT4			m4_scale_nonuniform(VEC3 vect);
 MAT4			m4_scale_uniform(float fact);
-MAT4			m4_scaleref_nonuniform(MAT4 const *ref, float vect[3]);
+MAT4			m4_scaleref_nonuniform(MAT4 const *ref, VEC3 vect);
 MAT4			m4_scaleref_uniform(MAT4 const *ref, float fact);
 
-MAT4			m4_translate_nonuniform(float vect[3]);
+MAT4			m4_translate_nonuniform(VEC3 vect);
 MAT4			m4_translate_uniform(float fact);
-MAT4			m4_translateref_nonuniform(MAT4 const *ref, float vect[3]);
+MAT4			m4_translateref_nonuniform(MAT4 const *ref, VEC3 vect);
 MAT4			m4_translateref_uniform(MAT4 const *ref, float fact);
 
-MAT4			m4_invtranslate_nonuniform(float vect[3]);
+MAT4			m4_invtranslate_nonuniform(VEC3 vect);
 MAT4			m4_invtranslate_uniform(float fact);
-MAT4			m4_invtranslateref_nonuniform(MAT4 const *ref, float vect[3]);
+MAT4			m4_invtranslateref_nonuniform(MAT4 const *ref, VEC3 vect);
 MAT4			m4_invtranslateref_uniform(MAT4 const *ref, float fact);
 
 MAT4			m4_rotation_axis(t_axis a, float fact);
 MAT4			m4_rotationref_axis(MAT4 const *ref, t_axis a, float fact);
 
-MAT4			m4_dotprod(MAT4 mata, MAT4 matb);
+MAT4			m4_dotprod(MAT4 const *mata, MAT4 const *matb);
 MAT4			m4_fovprojection(float fov, float ratio, float near, float far);
 
 void			m4_print(MAT4 mat);
 MAT4			m4_lookat(t_vector3 eye, t_vector3 at);
 
 # undef MAT4
+# undef VEC3
 
 #endif

@@ -6,16 +6,11 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/01 12:32:53 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/15 13:27:30 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/20 14:15:28 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
-
-static const t_program_metadata		g_data[] =
-{
-	PROGRAMS_ATTRIBUTES_LIST
-};
 
 static int		check_program_error(GLuint program, GLuint flag)
 {
@@ -26,46 +21,46 @@ static int		check_program_error(GLuint program, GLuint flag)
 	if (*success == GL_FALSE)
 	{
 		glGetProgramInfoLog(program, sizeof(msg), NULL, msg);
-		DEBUGF("Error with program: \"\033[35m%s\033[0m\"", msg);
+		qprintf("\033[35m%s\033[0m", msg);
 		return (1);
 	}
 	return (0);
 }
 
-static int		new_program(int index, GLuint *ptr, t_env const *e)
+static int		new_program(t_env const *e, t_program *p)
 {
-	int							i;
-	t_program_metadata const	*dat = g_data + index;
+	size_t		i;
 
-	*ptr = glCreateProgram();
-	glAttachShader(*ptr, e->shaders[dat->vertex_shaderid]);
-	glAttachShader(*ptr, e->shaders[dat->fragment_shaderid]);
-	i = 0;
-	while (i < g_data[index].num_locations)
+	p->handle = glCreateProgram();
+	glAttachShader(p->handle, e->shaders[p->vshader].handle);
+	glAttachShader(p->handle, e->shaders[p->fshader].handle);
+	i = 0;	
+	while (i < p->n_locations)
 	{
-		glBindAttribLocation(*ptr, i, g_data[index].locations[i]);
+		glBindAttribLocation(p->handle, i, p->locations[i].name);
 		i++;
 	}
-	glLinkProgram(*ptr);
-	if (check_program_error(*ptr, GL_LINK_STATUS))
-		return (DEBUG("glLinkProgram failed"), 1);
-	glValidateProgram(*ptr);
-	if (check_program_error(*ptr, GL_LINK_STATUS))
-		return (DEBUG("glValidateProgram failed"), 1);
+	glLinkProgram(p->handle);
+	if (check_program_error(p->handle, GL_LINK_STATUS))
+		return (ERROR("glLinkProgram(...)"), 1);
+	glValidateProgram(p->handle);
+	if (check_program_error(p->handle, GL_LINK_STATUS))
+		return (ERROR("glValidateProgram(...)"), 1);
 	return (0);
 }
 
 void			sp_delete_programs(t_env *e)
 {
-	int		i;
+	t_program			*p;
+	t_program const		*end = e->programs + sp_num_programs;
 
-	i = 0;
-	while (i < sc_num_programs)
+	p = e->programs;
+	while (p < end)
 	{
-		glDetachShader(e->programs[i], e->shaders[g_data[i].vertex_shaderid]);
-		glDetachShader(e->programs[i], e->shaders[g_data[i].fragment_shaderid]);
-		glDeleteProgram(e->programs[i]);
-		i++;
+		glDetachShader(p->handle, e->shaders[p->vshader].handle);
+		glDetachShader(p->handle, e->shaders[p->fshader].handle);
+		glDeleteProgram(p->handle);
+		p++;
 	}
 	return ;
 }
@@ -74,26 +69,13 @@ int				sp_init_programs(t_env *e)
 {
 	int		i;
 
+	lprintf("Initializing programs...");
 	i = 0;
-	while (i < sc_num_programs)
+	while (i < sp_num_programs)
 	{
-		if (new_program(i, e->programs + i, e))
-			return (DEBUGF("Error in new_program(%d)", i), 1);
+		if (new_program(e, e->programs + i))
+			return (ERRORF("new_program(%d)", i), 1);
 		i++;
 	}
 	return (0);
-}
-
-void			sp_update_uniforms(t_env const *e, int prid, GLuint prog)
-{
-	t_program_metadata const	*d = g_data + prid;
-	int							i;
-
-	i = 0;
-	while (i < d->num_uniforms)
-	{
-		d->uniforms[i].fun(e, glGetUniformLocation(prog, d->uniforms[i].name));
-		i++;
-	}
-	return ;
 }

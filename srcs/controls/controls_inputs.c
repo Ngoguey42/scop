@@ -6,13 +6,13 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/15 11:47:48 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/15 11:53:40 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/20 12:44:49 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
 
-int const		g_codes[] =
+static int const		g_codes[] =
 {
 	GLFW_KEY_W,
 	GLFW_KEY_S,

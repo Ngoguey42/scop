@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/13 12:53:24 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/17 15:38:18 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/20 12:49:32 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ static void	key_callback(GLFWwindow *w, int k, int sc, int a, int m)
 			glfwSetWindowShouldClose(w, GL_TRUE);
 	}
 	(void)sc;
+	(void)m;
 	return ;
 }
 

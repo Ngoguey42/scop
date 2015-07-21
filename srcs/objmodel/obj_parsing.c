@@ -6,13 +6,14 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/02 13:21:56 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/15 09:27:00 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/20 16:18:38 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <errno.h>
 #include <string.h>
 #include "objmodel_parsing.h"
+#include "fterror.h"
 
 #define OFFSET(P) (offsetof(struct s_objmodel, P))
 
@@ -41,7 +42,21 @@ static const t_token	g_tokens[] =
 	(t_token){"usemtl", &op_match_str, OFFSET(usemtl)},
 };
 
-int		op_parse_obj(t_objmodel *m)
+void			op_init_instance(t_objmodel *m, char const *filepath)
+{
+	bzero(m, sizeof(*m));
+	m->smooth = undefined;
+	m->filepath = strdup(filepath);
+	if (filepath == NULL)
+		sp_enomem();
+	if (ftv_init_instance(&m->vertices, sizeof(float) * 3))
+		sp_enomem();
+	if (ftv_init_instance(&m->faces, sizeof(unsigned int) * 3))
+		sp_enomem();
+	return ;
+}
+
+int				op_parse_obj(t_objmodel *m)
 {
 	FILE	*stream;
 	size_t	i;
@@ -68,4 +83,13 @@ int		op_parse_obj(t_objmodel *m)
 			return (ERROR("no matching token"), 1);
 	}
 	return (fclose(stream), 0);
+}
+
+void			op_swap_vectors(t_objmodel *m, t_ftvector *v, t_ftvector *f)
+{
+	free(m->filepath);
+	memcpy(v, &m->vertices, sizeof(t_ftvector));
+	if (m->faces.size)
+		memcpy(f, &m->faces, sizeof(t_ftvector));
+	return ;
 }

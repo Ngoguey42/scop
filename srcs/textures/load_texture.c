@@ -6,13 +6,13 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/17 14:11:32 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/18 15:15:11 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/20 14:29:31 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
 
-int		sp_load_texture(char const *filepath, GLuint *desc)
+static int		new_texture(char const *filepath, GLuint *desc)
 {
 	int			dim[2];
 	t_ftvector	v;
@@ -32,5 +32,33 @@ int		sp_load_texture(char const *filepath, GLuint *desc)
 	glGenerateMipmap(GL_TEXTURE_2D);
 	ftv_release(&v, NULL);
 	glBindTexture(GL_TEXTURE_2D, 0);
+	return (0);
+}
+
+void            sp_delete_textures(t_env *e)
+{
+	t_texture           *t;
+	t_texture const     *end = e->textures + sp_num_textures;
+
+	t = e->textures;
+	while (t < end)
+	{
+		glDeleteTextures(1, &t->handle);
+		t++;
+	}
+	return ;
+}
+
+int             sp_init_textures(t_env *e)
+{
+	int     i;
+
+	i = 0;
+	while (i < sp_num_textures)
+	{
+		if (new_texture(e->textures[i].filepath, &e->textures[i].handle))
+			return (ERRORF("new_texture(%s, ...)", e->textures[i].filepath), 1);
+		i++;
+	}
 	return (0);
 }

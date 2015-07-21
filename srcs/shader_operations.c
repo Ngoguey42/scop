@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/01 12:15:52 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/01 13:01:37 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/20 14:09:40 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,6 @@
 
 #define BADLOAD_FMT "Could not open %s \"\033[35m%s\033[0m\""
 #define BADCREATE_FMT "Error in glCreateShader(%d)"
-
-static const t_shader_metadata	g_data[] =
-{
-	SHADERS_ATTRIBUTES_LIST
-};
 
 static int		check_shader_error(GLuint shader, GLuint flag)
 {
@@ -48,7 +43,7 @@ static int		sp_load_shader(char const *filepath, char **ptr)
 
 	fd = open(filepath, O_RDONLY);
 	if (fd < 0)
-		return (DEBUGF(BADLOAD_FMT, filepath, strerror(errno)), 1);
+		return (ERRORNOF("fopen(\"%s\")", filepath), 1);
 	*ptr = NULL;
 	while ((ret = read(fd, buffer, sizeof(buffer) - 1)) > 0)
 	{
@@ -66,23 +61,21 @@ static int		sp_load_shader(char const *filepath, char **ptr)
 	return (0);
 }
 
-static int		sp_new_shader(int index, GLuint *ptr)
+static int		sp_new_shader(t_shader *s)
 {
 	char	*text[1];
-	GLuint	shaderid;
 	GLint	len[1];
 
-	if (sp_load_shader(g_data[index].filepath, text))
-		return (DEBUG("Error in sp_load_shader"), 1);
-	shaderid = glCreateShader(g_data[index].type);
-	if (shaderid == 0)
-		return (DEBUGF(BADCREATE_FMT, shaderid), free(*text), 1);
+	if (sp_load_shader(s->filepath, text))
+		return (ERROR("sp_load_shader(...)"), 1);
+	s->handle = glCreateShader(s->type);
+	if (s->handle == 0)
+		return (DEBUGF(BADCREATE_FMT, s->handle), free(*text), 1);
 	*len = strlen(*text);
-	glShaderSource(shaderid, 1, (char const *const*)text, len);
+	glShaderSource(s->handle, 1, (char const *const*)text, len);
 	free(*text);
-	glCompileShader(shaderid);
-	*ptr = shaderid;
-	return (check_shader_error(shaderid, GL_COMPILE_STATUS));
+	glCompileShader(s->handle);
+	return (check_shader_error(s->handle, GL_COMPILE_STATUS));
 }
 
 void			sp_delete_shaders(t_env *e)
@@ -90,8 +83,8 @@ void			sp_delete_shaders(t_env *e)
 	int		i;
 
 	i = 0;
-	while (i < sc_num_shaders)
-		glDeleteShader(e->shaders[i++]);
+	while (i < sp_num_shaders)
+		glDeleteShader(e->shaders[i++].handle);
 	return ;
 }
 
@@ -99,11 +92,12 @@ int				sp_init_shaders(t_env *e)
 {
 	int		i;
 
+	lprintf("Initializing shaders...");
 	i = 0;
-	while (i < sc_num_shaders)
+	while (i < sp_num_shaders)
 	{
-		if (sp_new_shader(i, e->shaders + i))
-			return (DEBUGF("Error in sp_new_shader(%d)", i), 1);
+		if (sp_new_shader(e->shaders + i))
+			return (ERRORF("sp_new_shader(%d)", i), 1);
 		i++;
 	}
 	return (0);
