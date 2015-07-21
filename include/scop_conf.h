@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 10:33:54 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/21 16:54:56 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/21 17:30:30 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,14 @@
 /*
 ** CONFIG MACROES
 */
-# define WIN_WIDTHI 1000
+# define WIN_WIDTHI 1800
 /* # define WIN_RATIOF (4.f / 4.f) */
 # define WIN_RATIOF (4.f / 3.f)
 /* # define WIN_RATIOF (16.f / 9.f) */
 /* # define WIN_RATIOF (2.39f / 1.f) */
 # define WIN_FOVF 45.f
 # define WIN_NEARF 0.1f
-# define WIN_FARF 100.f
+# define WIN_FARF 200.f
 
 # define LAND_SIDEF 500.f
 # define LAND_RANGEF 28.f
