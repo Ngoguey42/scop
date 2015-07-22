@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 10:07:19 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/21 16:32:02 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/22 13:07:01 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,7 +138,7 @@ typedef struct					s_env
 	t_mesh						meshes[sp_num_meshes];
 	t_texture					textures[sp_num_textures];
 	t_model						models[sp_num_models];
-	t_ftvector					obs;
+	t_ftvector					obs[sp_num_programs];
 
 	t_matrix4					projection;
 	double						mpos[2];

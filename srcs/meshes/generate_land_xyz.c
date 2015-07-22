@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/21 15:54:37 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/21 16:21:17 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/22 14:28:26 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 
 void	sp_fill_landvertices(t_ftvector const *lines, t_ftvector *vertices)
 {
-	int		x;
-	int		y;
+	size_t	x;
+	size_t	y;
 	float	tmp[3];
 	float const		fact = LAND_SIDEF / (float)lines->size;
 	

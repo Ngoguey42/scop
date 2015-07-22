@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 12:07:31 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/21 16:35:18 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/22 14:31:14 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,7 @@ void            sp_unif_viewproj(t_env const *e, t_program const *p);
 int			sp_init_obs(t_env *e);
 void		sp_delete_obs(t_env *e);
 void        sp_render_obs(t_env const *e, double el);
+int         sp_fill_obs(t_env *e);
 
 
 #endif

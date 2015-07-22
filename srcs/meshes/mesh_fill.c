@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 15:57:45 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/21 16:31:32 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/22 14:29:43 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int				sp_meshfill_item(t_env const *e, t_mesh *me)
 		return (ERROR("op_parse_obj(m)"), 1);
 	sp_wrap_texture_planxy(m, 1.8f, 442.f / 405.f);
 	op_swap_vectors(m, &me->vertices, &me->faces);
+	/* sp_clean_objmodel(m); */
 	(void)e;
 	(void)me;
 	return (0);
@@ -58,6 +59,8 @@ int				sp_meshfill_land(t_env const *e, t_mesh *me)
 	ftv_insert(lines, lines->data, line_points);
 	sp_fill_landgrid(lines);
 	sp_fill_landvertices(lines, &me->vertices);
-	sp_fill_landfaces(lines, &me->faces);	
+	sp_fill_landfaces(lines, &me->faces);
+	ftv_release(lines, NULL);
 	return (0);
+	(void)e;
 }

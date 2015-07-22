@@ -6,12 +6,13 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/02 13:21:56 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/20 16:18:38 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/22 14:30:00 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <errno.h>
 #include <string.h>
+#include <stdlib.h>
 #include "objmodel_parsing.h"
 #include "fterror.h"
 

@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/21 15:54:14 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/21 16:55:43 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/22 14:28:48 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,8 @@ void		sp_fill_landgrid(t_ftvector *lines)
 	float	range;
 
 	size_t i ;
-
+	(void)i;
+	
 #define TEST \
 	for (i = 0; i < lines->size * lines->size; i++)\
 	{	\

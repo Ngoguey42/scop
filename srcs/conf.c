@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 12:53:00 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/21 16:27:21 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/22 13:05:14 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int				sp_loadconf_programs(t_env *e)
 	PROG(sp_item_vertex, sp_item_fragment, &sp_unif_viewproj,
 	LOC("position", 3), LOC("texCoord", 2)),
 	PROG(sp_land_vertex, sp_land_fragment, &sp_unif_viewproj,
-	 LOC("position", 3)),
+	LOC("position", 3)),
 	};
 	memcpy(&e->programs, &tmp, sizeof(tmp));
 	return (0);
@@ -86,11 +86,10 @@ int				sp_loadconf_models(t_env *e)
 {
 	t_model const		tmp[sp_num_models] = {
 
-		{sp_item_mesh, sp_porcelain_texture, &sp_unif_model},
- 		{sp_square_mesh, sp_no_texture, &sp_unif_model},
- 		{sp_land_mesh, sp_no_texture, &sp_unif_land},
+	{sp_item_mesh, sp_porcelain_texture, &sp_unif_model},
+	{sp_square_mesh, sp_no_texture, &sp_unif_model},
+		{sp_land_mesh, sp_no_texture, &sp_unif_land},
 	};
 	memcpy(&e->models, &tmp, sizeof(tmp));
-	/* (void)e; */
 	return (0);
 }

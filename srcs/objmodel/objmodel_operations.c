@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/15 08:26:17 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/20 12:35:50 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/22 13:00:27 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,24 +47,21 @@ int			sp_init_objmodels(t_env *e)
 	}
 	return (0);
 }
-
-void		sp_clean_objmodels(void *modelptr)
+*/
+void		sp_clean_objmodel(t_objmodel *m)
 {
-	t_objmodel		*m;
-
-	m = modelptr;
-	free(m->filepath);
+	/* free(m->filepath); */
 	if (m->mtllib)
 		free(m->mtllib);
 	if (m->name)
 		free(m->name);
 	if (m->usemtl)
 		free(m->usemtl);
-	ftv_release(&m->vertices, NULL);
-	ftv_release(&m->faces, NULL);
+	/* ftv_release(&m->vertices, NULL); */
+	/* ftv_release(&m->faces, NULL); */
 	return ;
 }
-
+/*
 void		sp_register_objmodel(t_env *e, char const *filepath)
 {
 	t_objmodel		m;
