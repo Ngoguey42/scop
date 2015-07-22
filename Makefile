@@ -66,6 +66,7 @@ O_FILES := obj/srcs/conf.o \
 	obj/srcs/meshes/mesh_fill.o \
 	obj/srcs/meshes/mesh_operations.o \
 	obj/srcs/objmodel/obj_parsing.o \
+	obj/srcs/objmodel/obj_parsing_floats.o \
 	obj/srcs/objmodel/obj_parsing_multiple_units.o \
 	obj/srcs/objmodel/obj_parsing_unique_units.o \
 	obj/srcs/objmodel/objmodel_operations.o \
@@ -180,6 +181,10 @@ obj/srcs/meshes/mesh_operations.o: srcs/meshes/mesh_operations.c include/fterror
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
 obj/srcs/objmodel/obj_parsing.o: srcs/objmodel/obj_parsing.c include/fterror.h include/ftmath.h include/objmodel.h include/objmodel_parsing.h include/scop.h include/scop_conf.h include/scop_types.h
+	@mkdir -p obj/srcs/objmodel 2> /dev/null || true
+	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
+
+obj/srcs/objmodel/obj_parsing_floats.o: srcs/objmodel/obj_parsing_floats.c include/fterror.h include/ftmath.h include/objmodel.h include/objmodel_parsing.h include/scop.h include/scop_conf.h include/scop_types.h
 	@mkdir -p obj/srcs/objmodel 2> /dev/null || true
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 

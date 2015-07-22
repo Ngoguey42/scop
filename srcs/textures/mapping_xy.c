@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/18 10:52:20 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/20 14:32:23 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/22 18:14:53 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void		sp_wrap_texture_planxy(t_objmodel *m, float scale, float imgratio)
 	t_ftvector		newv[1];
 
 	ftv_init_instance(newv, sizeof(float) * 5);
-	ftv_reserve(newv, m->vertices.size / 3 * 5);
+	ftv_reserve(newv, m->vertices.size);
 	fill(newv, &m->vertices, (float[2]){1 / (scale * imgratio), 1 / scale});
 	ftv_release(&m->vertices, NULL);
 	m->vertices = *newv;

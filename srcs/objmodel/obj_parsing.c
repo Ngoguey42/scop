@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/02 13:21:56 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/22 14:30:00 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/22 18:31:24 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,11 @@
 static const t_token	g_tokens[] =
 {
 	(t_token){"#", &op_match_comment, 0},
+	(t_token){"g", &op_match_comment, 0},
 	(t_token){"s", &op_match_bool, OFFSET(smooth)},
-	(t_token){"v", &op_match_vertices, 0},
+	(t_token){"v", &op_match_v, 0},
+	(t_token){"vt", &op_match_vt, 0},
+	(t_token){"vn", &op_match_vn, 0},
 	(t_token){"f", &op_match_faces, 0},
 	(t_token){"mtllib", &op_match_str, OFFSET(mtllib)},
 	(t_token){"o", &op_match_str, OFFSET(name)},
@@ -50,9 +53,11 @@ void			op_init_instance(t_objmodel *m, char const *filepath)
 	m->filepath = strdup(filepath);
 	if (filepath == NULL)
 		sp_enomem();
-	if (ftv_init_instance(&m->vertices, sizeof(float) * 3))
+	if (ftv_init_instance(&m->coords, sizeof(float) * 3))
 		sp_enomem();
-	if (ftv_init_instance(&m->faces, sizeof(unsigned int) * 3))
+	if (ftv_init_instance(&m->textures, sizeof(float) * 2))
+		sp_enomem();
+	if (ftv_init_instance(&m->normals, sizeof(float) * 3))
 		sp_enomem();
 	return ;
 }
@@ -83,12 +88,12 @@ int				op_parse_obj(t_objmodel *m)
 		if (i >= sizeof(g_tokens) / sizeof(t_token))
 			return (ERROR("no matching token"), 1);
 	}
-	return (fclose(stream), 0);
+	return (fclose(stream), op_build_vertices(m) || 0);
 }
 
 void			op_swap_vectors(t_objmodel *m, t_ftvector *v, t_ftvector *f)
 {
-	free(m->filepath);
+	/* memcpy(v, &m->coords, sizeof(t_ftvector)); */
 	memcpy(v, &m->vertices, sizeof(t_ftvector));
 	if (m->faces.size)
 		memcpy(f, &m->faces, sizeof(t_ftvector));

@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/22 17:07:12 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/22 17:08:50 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/22 18:26:15 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ static float    get_rand(float init)
 {
 	float nb;
 
-	nb = (((float)(rand() % 10000)) / 10000.f - 0.5f) * 0.04f + init;
+	nb = (((float)(rand() % 10000)) / 10000.f - 0.5f) * LAND_COLORRAND + init;
 	if (nb > 1.f)
 		return (1.f);
 	else if (nb < 0.f)
@@ -114,8 +114,7 @@ void		sp_fill_landrgb(t_ftvector *vertices, float const bounds[2])
 	ptr = vertices->data;
 	while (i < vertices->size)
 	{
-		input_color(ptr + 3, get_rand((ptr[1] - bounds[0]) / delta));
-		
+		input_color(ptr + 3, get_rand((ptr[1] - bounds[0]) / delta));		
 		ptr += 6;
 		i++;
 	}

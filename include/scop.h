@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 12:07:31 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/22 15:17:46 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/22 17:14:37 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ int			parse_tga(char const *filepath, t_ftvector *v, int dim[2]);
 int			sp_init_meshes(t_env *e);
 void		sp_delete_meshes(t_env *e);
 int			sp_meshfill_item(t_env const *e, t_mesh *me);
+int			sp_meshfill_item2(t_env const *e, t_mesh *me);
 int			sp_meshfill_square(t_env const *e, t_mesh *me);
 int			sp_meshfill_land(t_env const *e, t_mesh *me);
 

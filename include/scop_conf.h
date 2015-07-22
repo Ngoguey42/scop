@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 10:33:54 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/22 17:01:22 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/22 18:26:51 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@
 
 # define LAND_SIDEF 100.f
 # define LAND_RANGEF 28.f
-# define POINTS_DEPTHI 11
+# define LAND_COLORRAND 0.05f
+# define POINTS_DEPTHI 9
 # define LAND_YF -15.f
 
 # define MOUSE_SENSITIVITYF 0.005f
@@ -83,6 +84,7 @@ typedef enum				e_mesh_index
 	sp_item_mesh,
 	sp_square_mesh,
 	sp_land_mesh,
+	sp_item2_mesh,
 	sp_num_meshes,
 }							t_mesh_index;
 
@@ -99,6 +101,7 @@ typedef enum				e_model_index
 	sp_item_model,
 	sp_square_model,
 	sp_land_model,
+	sp_item2_model,
 	sp_num_models,
 }							t_model_index;
 

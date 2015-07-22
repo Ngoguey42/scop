@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 16:15:35 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/21 09:36:20 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/22 17:41:19 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@ typedef struct  s_objmodel
 {
 	char        *filepath;
 	t_ftvector  vertices;
+	t_ftvector  coords;
+	t_ftvector  textures;
+	t_ftvector  normals;
 	t_ftvector  faces;
 	char        *mtllib;
 	char        *name;

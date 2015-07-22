@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 15:57:45 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/22 16:19:19 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/22 18:14:07 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,21 @@ int				sp_meshfill_item(t_env const *e, t_mesh *me)
 	t_objmodel	m[1];
 
 	op_init_instance(m, "res/teapot2.obj");
+	if (op_parse_obj(m))
+		return (ERROR("op_parse_obj(m)"), 1);
+	sp_wrap_texture_planxy(m, 1.8f, 442.f / 405.f);
+	op_swap_vectors(m, &me->vertices, &me->faces);
+	/* sp_clean_objmodel(m); */
+	(void)e;
+	(void)me;
+	return (0);
+}
+
+int				sp_meshfill_item2(t_env const *e, t_mesh *me)
+{
+	t_objmodel	m[1];
+
+	op_init_instance(m, "res/42.obj");
 	if (op_parse_obj(m))
 		return (ERROR("op_parse_obj(m)"), 1);
 	sp_wrap_texture_planxy(m, 1.8f, 442.f / 405.f);
@@ -61,8 +76,6 @@ int				sp_meshfill_land(t_env const *e, t_mesh *me)
 	sp_fill_landgrid(lines);
 	sp_fill_landvertices(lines, &me->vertices, bounds);
 	sp_fill_landfaces(lines, &me->faces);
-	/* bounds[0] += 0.001; */
-	/* bounds[1] -= 0.001; */
 	sp_fill_landrgb(&me->vertices, bounds);
 	ftv_release(lines, NULL);
 	return (0);
