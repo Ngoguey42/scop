@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/15 13:44:48 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/22 13:07:47 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/22 14:53:45 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int				sp_init_env(t_env *e)
 	e->view = m4_lookat(ATOV3(e->cpos.x, e->cpos.y, e->cpos.z),
 						v3_add(ATOV3(e->cpos.x, e->cpos.y, e->cpos.z),
 						v3_frontnormed(e->cangles)));
-	sp_init_obs(e);
+	e->viewproj = m4_dotprod(&e->projection, &e->view);
 	if (sp_loadconf_shaders(e) || sp_loadconf_programs(e)
 		|| sp_loadconf_textures(e) || sp_loadconf_meshes(e)
 		|| sp_loadconf_models(e))

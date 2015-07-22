@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 15:57:45 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/22 14:29:43 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/22 16:19:19 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,17 @@ int				sp_meshfill_land(t_env const *e, t_mesh *me)
 {
 	t_ftvector		lines[1];
 	size_t const	line_points = (int)pow(2., (double)POINTS_DEPTHI);
-
+	float			bounds[2];
+	
 	if (ftv_init_instance(lines, sizeof(float) * line_points))
 		sp_enomem();
 	ftv_insert(lines, lines->data, line_points);
 	sp_fill_landgrid(lines);
-	sp_fill_landvertices(lines, &me->vertices);
+	sp_fill_landvertices(lines, &me->vertices, bounds);
 	sp_fill_landfaces(lines, &me->faces);
+	/* bounds[0] += 0.001; */
+	/* bounds[1] -= 0.001; */
+	sp_fill_landrgb(&me->vertices, bounds);
 	ftv_release(lines, NULL);
 	return (0);
 	(void)e;

@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 12:08:19 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/22 13:00:41 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/22 14:41:42 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ static int		begin(t_env *e)
 		return (ERROR("sp_init_meshes(e)"), 1);
     if (sp_init_textures(e))
 		return (ERROR("sp_init_textures(e)"), 1);
+    if (sp_init_obs(e))
+		return (ERROR("sp_init_obs(e)"), 1);
 	return (0);
 }
 

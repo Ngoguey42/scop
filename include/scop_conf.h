@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 10:33:54 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/22 12:53:40 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/22 17:01:22 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,10 @@
 # define WIN_NEARF 0.1f
 # define WIN_FARF 200.f
 
-# define LAND_SIDEF 500.f
+# define LAND_SIDEF 100.f
 # define LAND_RANGEF 28.f
 # define POINTS_DEPTHI 11
+# define LAND_YF -15.f
 
 # define MOUSE_SENSITIVITYF 0.005f
 # define MOVEMENT_SPEEDF 4.f

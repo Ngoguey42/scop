@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 12:07:31 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/22 14:31:14 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/22 15:17:46 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,14 +89,17 @@ int			sp_meshfill_square(t_env const *e, t_mesh *me);
 int			sp_meshfill_land(t_env const *e, t_mesh *me);
 
 void        sp_fill_landgrid(t_ftvector *lines);
-void    sp_fill_landvertices(t_ftvector const *lines, t_ftvector *faces);
+void    sp_fill_landvertices(t_ftvector const *lines, t_ftvector *faces,
+	float bounds[2]);
 void    sp_fill_landfaces(t_ftvector const *lines, t_ftvector *vertices);
+void    sp_fill_landrgb(t_ftvector *vertices, float const bounds[2]);
 /*
 ** UNIFORMS
 */
 void            sp_unif_model(t_env const *e, t_ob const *ob);
 void            sp_unif_land(t_env const *e, t_ob const *ob);
 void            sp_unif_viewproj(t_env const *e, t_program const *p);
+void            sp_unif_viewproj2(t_env const *e, t_program const *p);
 
 /*
 ** OBS (OBJECTS)

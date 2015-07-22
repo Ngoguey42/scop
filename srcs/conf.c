@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 12:53:00 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/22 13:05:14 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/22 14:59:57 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,14 +46,14 @@ int				sp_loadconf_programs(t_env *e)
 {
 	t_program const		tmp[sp_num_programs] = {
 
-	PROG(sp_basic_vertex, sp_basic_fragment, &sp_unif_viewproj,
+	PROG(sp_basic_vertex, sp_basic_fragment, &sp_unif_viewproj2,
 	LOC("position", 3)),
-	PROG(sp_tex_vertex, sp_tex_fragment, &sp_unif_viewproj,
+	PROG(sp_tex_vertex, sp_tex_fragment, &sp_unif_viewproj2,
 	LOC("position", 3), LOC("color", 3), LOC("texCoord", 2)),
-	PROG(sp_item_vertex, sp_item_fragment, &sp_unif_viewproj,
+	PROG(sp_item_vertex, sp_item_fragment, &sp_unif_viewproj2,
 	LOC("position", 3), LOC("texCoord", 2)),
 	PROG(sp_land_vertex, sp_land_fragment, &sp_unif_viewproj,
-	LOC("position", 3)),
+	LOC("position", 3), LOC("color", 3)),
 	};
 	memcpy(&e->programs, &tmp, sizeof(tmp));
 	return (0);

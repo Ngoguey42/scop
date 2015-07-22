@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/21 09:02:18 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/22 14:30:41 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/22 14:42:34 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,10 @@ static void	render_ob(t_env const *e, double el, t_ob *ob)
 {
 	t_model const	*mo = MOOFOB(e, ob);
 	t_mesh const	*me = MEOFMO(e, mo);
-	/* t_program const	*p = POFME(e, me); */
-
-	/* glUseProgram(p->handle); */
+	t_program const	*p = POFME(e, me);
+	
 	if (mo->update_uniforms != NULL)
 		mo->update_uniforms(e, ob);
-	/* if (p->update_uniforms != NULL) */
-	/* 	p->update_uniforms(e, p); */
 	if (mo->texture != sp_no_texture)
 	{
 		glActiveTexture(GL_TEXTURE0);
@@ -60,13 +57,12 @@ void		sp_render_obs(t_env const *e, double el)
 {
 	t_program_index		i;
 
-	i = 0;
-	while (i < sp_num_programs)
+	i = -1;
+	while (++i < sp_num_programs)
 	{
 		if (e->obs[i].size == 0)
 			continue ;
 		render_prog_obs(e, el, i);
-		i++;
 	}	
 	return ;
 }
@@ -84,7 +80,6 @@ void        sp_delete_obs(t_env *e)
 int         sp_init_obs(t_env *e)
 {
 	int		i;
-	t_ob	ob[1];
 
 	i = 0;
 	while (i < sp_num_programs)
@@ -94,18 +89,5 @@ int         sp_init_obs(t_env *e)
 		i++;
 	}
 	sp_fill_obs(e);
-	/* ob->scale = ; */
-	ob->model = sp_item_model;
-	/* ob->position = ATOV3(-0.f, -0.f, 0.f);; */
-	/* ob->mat = m4_translate_nonuniform(ob->position); */
-	/* ftv_push_back(&e->obs, ob); */
-	/* ob->model = sp_square_model; */
-	/* ob->position = ATOV3(0.f, 0.f, -5.f);; */
-	/* ob->mat = m4_translate_nonuniform(ob->position); */
-	/* ftv_push_back(&e->obs, ob); */
-	/* ob->model = sp_land_model; */
-	/* ob->position = ATOV3(0.f, -15.f, 0.f);; */
-	/* ob->mat = m4_translate_nonuniform(ob->position); */
-	/* ftv_push_back(&e->obs, ob); */
 	return (0);
 }
