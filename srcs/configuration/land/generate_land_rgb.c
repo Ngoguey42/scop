@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/22 17:07:12 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/22 18:26:15 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/23 08:26:50 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,14 @@
 
 static float	g_colors[][5] =
 {
-	{CTOF(220.f), CTOF(220.f), CTOF(220.f), 0.925f, 0.075f},//snow
+	{CTOF(220.f), CTOF(220.f), CTOF(220.f), 0.925f, 0.076f},//snow
 	{CTOF(94.f), CTOF(71.f), CTOF(64.f), 0.8f, 0.10f},		//rock
 	{CTOF(13.f), CTOF(55.f), CTOF(13.f), 0.675f, 0.125f},	//dark forest
 	{CTOF(55.f), CTOF(170.f), CTOF(80.f), 0.400f, 0.225f},	//grass1
 	{CTOF(34.f), CTOF(156.f), CTOF(13.f), 0.300f, 0.1f},	//disneyland
 	{CTOF(109.f), CTOF(61.f), CTOF(39.f), 0.4f, 0.05f},		//earth
 	{CTOF(237.f), CTOF(200.f), CTOF(85.f), 0.175f, 0.025f},	//sand
-	{CTOF(94.f), CTOF(97.f), CTOF(186.f), 0.075f, 0.075f},	//water
+	{CTOF(94.f), CTOF(97.f), CTOF(186.f), 0.075f, 0.076f},	//water
 };
 
 static void	normalize_prop(float proportions[NUM_COLORS])
