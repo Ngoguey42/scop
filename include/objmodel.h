@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 16:15:35 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/22 17:41:19 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/23 08:41:23 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct  s_objmodel
 	char        *mtllib;
 	char        *name;
 	char        *usemtl;
+	size_t		width;
 	t_bool      smooth;
 }               t_objmodel;
 

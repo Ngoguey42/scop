@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/15 08:49:22 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/22 18:13:03 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/23 11:13:08 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,7 @@ int				op_match_v(FILE *stream, char const *h, t_objmodel *m);
 int				op_match_vt(FILE *stream, char const *h, t_objmodel *m);
 int				op_match_vn(FILE *stream, char const *h, t_objmodel *m);
 int				op_match_faces(FILE *stream, char const *h, t_objmodel *m);
+void			op_insert_face(t_objmodel *m, size_t const *oldind);
+void			op_init_meshvectors(t_objmodel *m);
 
 #endif
