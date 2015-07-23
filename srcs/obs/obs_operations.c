@@ -6,13 +6,13 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/21 09:02:18 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/22 14:42:34 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/23 14:19:41 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
 
-static void	render_ob(t_env const *e, double el, t_ob *ob)
+static void	render_ob(t_env const *e, t_ob *ob)
 {
 	t_model const	*mo = MOOFOB(e, ob);
 	t_mesh const	*me = MEOFMO(e, mo);
@@ -29,28 +29,34 @@ static void	render_ob(t_env const *e, double el, t_ob *ob)
 	glDrawElements(GL_TRIANGLES, 3 * me->faces.size, GL_UNSIGNED_INT, 0);
 	glBindVertexArray(0);
 	return ;
-	(void)el;
 }
 
-void		render_prog_obs(t_env const *e, double el, t_program_index i)
+static void	update_ob(t_env const *e, t_ob *ob)
+{
+	if (ob->modified)
+	{
+		ob->mat = m4_translate_nonuniform(ob->position);
+		ob->mat = m4_rotationref_axis(&ob->mat, z_axis, ob->rotation.x);
+		ob->mat = m4_rotationref_axis(&ob->mat, y_axis, ob->rotation.y);
+		ob->mat = m4_rotationref_axis(&ob->mat, x_axis, ob->rotation.z);
+		ob->mat = m4_scaleref_nonuniform(&ob->mat, ob->scale);
+		ob->modified = false;
+	}
+	return ;
+}
+
+
+void		render_prog_obs(t_env const *e, t_program_index i)
 {
 	t_program const		*p = e->programs + i;
 	t_ftvector const	*prv = e->obs + i;
-	t_ob				*ob;
-	t_ob const			*obend;
 
 	glUseProgram(p->handle);
 	if (p->update_uniforms != NULL)
 		p->update_uniforms(e, p);
-	ob = prv->data;
-	obend = ob + prv->size;
-	while (ob < obend)
-	{
-		render_ob(e, el, ob);
-		ob++;
-	}
+	ftv_foreach(prv, &update_ob, e);
+	ftv_foreach(prv, &render_ob, e);
 	return ;
-	(void)el;
 }
 
 void		sp_render_obs(t_env const *e, double el)
@@ -62,9 +68,10 @@ void		sp_render_obs(t_env const *e, double el)
 	{
 		if (e->obs[i].size == 0)
 			continue ;
-		render_prog_obs(e, el, i);
-	}	
+		render_prog_obs(e, i);
+	}
 	return ;
+	(void)el;
 }
 
 void        sp_delete_obs(t_env *e)

@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/15 09:20:50 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/23 12:57:57 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/23 13:17:17 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ int		op_match_str(FILE *stream, char const *h, char **dst)
 	len = strlen(buf);
 	if (len >= 63)
 		return (ERRORF("word too long for \"%s\"", hbuf), -1);
-	*dst = strdup(buf);
-	if (*dst == NULL)
-		sp_enomem();
+	/* *dst = strdup(buf); */
+	/* if (*dst == NULL) */
+		/* sp_enomem(); */
 	return (1);
 }
 
