@@ -17,24 +17,26 @@
 
 void		sp_clean_objmodel(t_objmodel *m)
 {
-	if (m->filepath)
+	// if (m->filepath)
 		free(m->filepath);
-	if (m->mtllib)
-		free(m->mtllib);
-	if (m->name)
-		free(m->name);
-	if (m->usemtl)
-		free(m->usemtl);
-	if (m->textures.data != NULL)
+	// if (m->mtllib)
+		// free(m->mtllib);
+	// if (m->name)
+		// free(m->name);
+	// if (m->usemtl)
+		// free(m->usemtl);
+	// if (m->textures.data != NULL)
 		ftv_release(&m->textures, NULL);
-	if (m->coords.data != NULL)
+	// if (m->coords.data != NULL)
 		ftv_release(&m->coords, NULL);
-	if (m->normals.data != NULL)
+	// if (m->normals.data != NULL)
 		ftv_release(&m->normals, NULL);
 	if (m->faces.data != NULL)
+	{
 		ftv_release(&m->faces, NULL);
-	if (m->vertices.data != NULL)
-		ftv_release(&m->vertices, NULL);	
+	// if (m->vertices.data != NULL)
+		ftv_release(&m->vertices, NULL);
+	}
 	return ;
 }
 
@@ -53,9 +55,18 @@ void		op_init_meshvectors(t_objmodel *m)
 	return ;
 }
 
-int			op_build_vertices(t_objmodel *m)
+void			op_init_instance(t_objmodel *m, char const *filepath)
 {
-	m->vertices = m->coords;
-
-	return (0);
+	bzero(m, sizeof(*m));
+	// m->smooth = undefined;
+	m->filepath = strdup(filepath);
+	if (filepath == NULL)
+		sp_enomem();
+	if (ftv_init_instance(&m->coords, sizeof(float) * 3))
+		sp_enomem();
+	if (ftv_init_instance(&m->textures, sizeof(float) * 2))
+		sp_enomem();
+	if (ftv_init_instance(&m->normals, sizeof(float) * 3))
+		sp_enomem();
+	return ;
 }

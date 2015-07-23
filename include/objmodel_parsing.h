@@ -19,24 +19,27 @@
 # include "objmodel.h"
 # include <stdio.h>
 
-typedef struct	s_token
-{
-	char		*h;
-	int			(*fun)();
-	size_t		pad;
-}				t_token;
+int				op_match_f(FILE *stream, t_objmodel *m);
+int				op_match_v(FILE *stream, t_objmodel *m);
+int				op_match_vt(FILE *stream, t_objmodel *m);
+int				op_match_vn(FILE *stream, t_objmodel *m);
+int				op_match_comment(FILE *stream, t_objmodel *m);
+int				op_match_group(FILE *stream, t_objmodel *m);
+int				op_match_smooth(FILE *stream, t_objmodel *m);
+int				op_match_mtllib(FILE *stream, t_objmodel *m);
+int				op_match_usemtl(FILE *stream, t_objmodel *m);
+int				op_match_name(FILE *stream, t_objmodel *m);
 
-int				op_build_vertices(t_objmodel *m);
-void			op_init_faces(t_objmodel *m);
-int				op_parse_obj(t_objmodel *m);
-int				op_match_str(FILE *stream, char const *h, char **dst);
-int				op_match_comment(FILE *stream);
-int				op_match_bool(FILE *stream, char const *h, t_bool *dst);
-int				op_match_v(FILE *stream, char const *h, t_objmodel *m);
-int				op_match_vt(FILE *stream, char const *h, t_objmodel *m);
-int				op_match_vn(FILE *stream, char const *h, t_objmodel *m);
-int				op_match_faces(FILE *stream, char const *h, t_objmodel *m);
-void			op_insert_face(t_objmodel *m, size_t const *oldind);
+// int				op_parse_obj(t_objmodel *m);
+// int				op_match_str(FILE *stream, char const *h, char **dst);
+// int				op_match_comment(FILE *stream);
+// int				op_match_bool(FILE *stream, char const *h, t_bool *dst);
+// int				op_match_v(FILE *stream, char const *h, t_objmodel *m);
+// int				op_match_vt(FILE *stream, char const *h, t_objmodel *m);
+// int				op_match_vn(FILE *stream, char const *h, t_objmodel *m);
+// int				op_match_faces(FILE *stream, char const *h, t_objmodel *m);
+
 void			op_init_meshvectors(t_objmodel *m);
+void			op_insert_face(t_objmodel *m, t_ui const oldind[9]);
 
 #endif

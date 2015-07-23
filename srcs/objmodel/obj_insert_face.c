@@ -15,17 +15,41 @@
 #include <string.h>
 #include "objmodel_parsing.h"
 
+#define PLAN(I) (((float*)(m->coords.data)) + (3 * (I)))
 #define TEXTURE(I) (((float*)m->textures.data) + 2 * (I))
 #define NORMAL(I) (((float*)m->normals.data) + 3 * (I))
 
 /*
-** receiving a vertex of any size, gives index, may push it in vertices.
+** 'op_insert_face'		receives indices in the right order.
+** 							(plan 0/3/6, texture 1/4/7, normal 2/5/8)
+** 							pushes them in ->vertices, ->faces
+** **
+** 'build_vertex'		receives 3 indices for [0]plan/[1]texture/[2]normal
+** 							builds vert[8]
+** **
+** 'gen_vertex_index'	receives a vertex pointer, returns it's index
+**							(may create it's index)
 */
+
+static size_t	ftv_find_index_opti(t_ftvector const *v, void const *ref)
+{
+	size_t		i;
+
+	i = 0;
+	while (i < v->size)
+	{
+		if (memcmp(v->data + v->chunk_size * i, ref, v->chunk_size) == 0)
+			return (i);
+		i++;
+	}
+	return (-1);
+}
+
 static size_t	gen_vertex_index(t_objmodel *m, float const *vertex)
 {
 	int		i;
 
-	i = ftv_find_index(&m->vertices, vertex);
+	i = ftv_find_index_opti(&m->vertices, vertex);
 	if (i < 0)
 	{
 		i = (int)m->vertices.size;
@@ -35,16 +59,10 @@ static size_t	gen_vertex_index(t_objmodel *m, float const *vertex)
 	return (i);
 }
 
-#define COORD(I) (((float*)(m->coords.data)) + (3 * (I)))
-
-/*
-** receiving 3 indices for [0]coord/[1]texture/[2]normal
-** building a vertex of any size
-*/
 static void		build_vertex(t_objmodel const *m, float vert[8],
-							 size_t const indices[3])
+							t_ui const indices[3])
 {
-	memcpy(vert, COORD(indices[0]), sizeof(float) * 3);
+	memcpy(vert, PLAN(indices[0]), sizeof(float) * 3);
 	if (m->width == 5)
 	{
 		memcpy(vert + 3, TEXTURE(indices[1]), sizeof(float) * 2);
@@ -61,13 +79,7 @@ static void		build_vertex(t_objmodel const *m, float vert[8],
 	return ;
 }
 
-/* static void		save_face(t_objmodel *m, ) */
-
-/*
-** receiving indices in the right position:
-** (coords at 0/3/6, textures at 1/4/7, normals at 2/5/8)
-*/
-void	op_insert_face(t_objmodel *m, size_t const oldind[9])
+void	op_insert_face(t_objmodel *m, t_ui const oldind[9])
 {
 	unsigned int	newindices[3];
 	float			vert[8];
@@ -78,7 +90,6 @@ void	op_insert_face(t_objmodel *m, size_t const oldind[9])
 	newindices[1] = gen_vertex_index(m, vert);
 	build_vertex(m, vert, oldind + 6);
 	newindices[2] = gen_vertex_index(m, vert);
-	/* qprintf("new: %2u %2u %2u\n", newindices[0], newindices[1], newindices[2]); */
 	if (ftv_push_back(&m->faces, newindices))
 		sp_enomem();
 	return ;

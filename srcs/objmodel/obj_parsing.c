@@ -32,47 +32,35 @@
 ** Vertices must be 3floats
 */
 
-static const t_token	g_tokens[] =
+static int		(*const g_tokens[])(FILE *stream, t_objmodel *m) =
 {
-	(t_token){"#", &op_match_comment, 0},
-	(t_token){"g", &op_match_comment, 0},
-	(t_token){"s", &op_match_comment, 0},
-	/* (t_token){"s", &op_match_bool, OFFSET(smooth)}, */
-	(t_token){"v", &op_match_v, 0},
-	(t_token){"vt", &op_match_vt, 0},
-	(t_token){"vn", &op_match_vn, 0},
-	(t_token){"f", &op_match_faces, 0},
-	(t_token){"mtllib", &op_match_str, OFFSET(mtllib)},
-	(t_token){"o", &op_match_str, OFFSET(name)},
-	(t_token){"usemtl", &op_match_str, OFFSET(usemtl)},
+	&op_match_f,
+	&op_match_v,
+	&op_match_vt,
+	&op_match_vn,
+	&op_match_comment,
+	&op_match_group,
+	&op_match_smooth,
+	&op_match_mtllib,
+	&op_match_usemtl,
+	&op_match_name,
 };
-
-void			op_init_instance(t_objmodel *m, char const *filepath)
-{
-	bzero(m, sizeof(*m));
-	m->smooth = undefined;
-	m->filepath = strdup(filepath);
-	if (filepath == NULL)
-		sp_enomem();
-	if (ftv_init_instance(&m->coords, sizeof(float) * 3))
-		sp_enomem();
-	if (ftv_init_instance(&m->textures, sizeof(float) * 2))
-		sp_enomem();
-	if (ftv_init_instance(&m->normals, sizeof(float) * 3))
-		sp_enomem();
-	return ;
-}
 
 static void		print_no_match(FILE *stream)
 {
-	char	buf[32];
-	int		i;
+	char	buf[128];
+	char	*ptr;
 
-	i = 0;
-	while (i < 31)
-		buf[i++] = fgetc(stream);
-	buf[31] = '\0';	
-	ERRORF("no matching token \033[32m'%s'\033[0m", buf);
+	ptr = fgets(buf, sizeof(buf), stream);
+	if (ptr != NULL)
+	{
+		ptr = strchr(buf, '\n');
+		if (ptr != NULL)
+			*ptr = '\0';
+		ERRORF("no matching token \033[32m'%s'\033[0m", buf);
+	}
+	else
+		ERROR("no matching token \033[32m'NULL'\033[0m");
 	return ;
 }
 
@@ -87,32 +75,30 @@ int				op_parse_obj(t_objmodel *m)
 	while (1)
 	{
 		i = 0;
-		while (i < sizeof(g_tokens) / sizeof(t_token))
+		while (i < sizeof(g_tokens) / sizeof(*g_tokens))
 		{
-			ret = g_tokens[i].fun(stream, g_tokens[i].h, (void*)m +
-									g_tokens[i].pad);
-			if (ret == -1)
-				return (ERRORF("g_tokens[%d].fun", i), 1);
-			if (ret == 1)
+			if ((ret = g_tokens[i](stream, m)) == -1)
+				return (ERRORF("g_tokens[%d]", i), 1);
+			else if (ret == 1)
 				break ;
 			i++;
 		}
 		if (feof(stream))
 			break ;
-		if (i >= sizeof(g_tokens) / sizeof(t_token))
+		if (i >= sizeof(g_tokens) / sizeof(*g_tokens))
 			return (print_no_match(stream), 1);
 	}
 	return (fclose(stream), 0);
 }
 
-void printvertice(void *env, float *vert, int i)
-{
-	qprintf("%2d: (% 5.2f, % 5.2f, % 5.2f)\n", i, vert[0], vert[1], vert[2]);	
-}
-void printuint(void *env, unsigned int *vert, int i)
-{
-	qprintf("%2d: (% 5.2u, % 5.2u, % 5.2u)\n", i, vert[0], vert[1], vert[2]);	
-}
+// void printvertice(void *env, float *vert, int i)
+// {
+	// qprintf("%2d: (% 5.2f, % 5.2f, % 5.2f)\n", i, vert[0], vert[1], vert[2]);	
+// }
+// void printuint(void *env, unsigned int *vert, int i)
+// {
+	// qprintf("%2d: (% 5.2u, % 5.2u, % 5.2u)\n", i, vert[0], vert[1], vert[2]);	
+// }
 
 void			op_swap_vectors(t_objmodel *m, t_ftvector *v, t_ftvector *f)
 {
