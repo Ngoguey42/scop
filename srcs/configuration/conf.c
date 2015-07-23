@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 12:53:00 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/23 13:03:58 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/23 15:09:29 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int				sp_loadconf_models(t_env *e)
 {
 	t_model const		tmp[sp_num_models] = {
 
-	{sp_item_mesh, sp_porcelain_texture, &sp_unif_model},
+	{sp_item_mesh, sp_wall_texture, &sp_unif_model},
 	{sp_square_mesh, sp_no_texture, &sp_unif_model},
 	{sp_land_mesh, sp_no_texture, &sp_unif_land},
 	{sp_item2_mesh, sp_wall_texture, &sp_unif_model},

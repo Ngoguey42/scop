@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/02 13:21:56 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/23 12:39:24 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/23 15:52:12 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ static const t_token	g_tokens[] =
 {
 	(t_token){"#", &op_match_comment, 0},
 	(t_token){"g", &op_match_comment, 0},
-	(t_token){"s", &op_match_bool, OFFSET(smooth)},
+	(t_token){"s", &op_match_comment, 0},
+	/* (t_token){"s", &op_match_bool, OFFSET(smooth)}, */
 	(t_token){"v", &op_match_v, 0},
 	(t_token){"vt", &op_match_vt, 0},
 	(t_token){"vn", &op_match_vn, 0},
@@ -59,6 +60,19 @@ void			op_init_instance(t_objmodel *m, char const *filepath)
 		sp_enomem();
 	if (ftv_init_instance(&m->normals, sizeof(float) * 3))
 		sp_enomem();
+	return ;
+}
+
+static void		print_no_match(FILE *stream)
+{
+	char	buf[32];
+	int		i;
+
+	i = 0;
+	while (i < 31)
+		buf[i++] = fgetc(stream);
+	buf[31] = '\0';	
+	ERRORF("no matching token \033[32m'%s'\033[0m", buf);
 	return ;
 }
 
@@ -86,7 +100,7 @@ int				op_parse_obj(t_objmodel *m)
 		if (feof(stream))
 			break ;
 		if (i >= sizeof(g_tokens) / sizeof(t_token))
-			return (ERROR("no matching token"), 1);
+			return (print_no_match(stream), 1);
 	}
 	return (fclose(stream), 0);
 }
