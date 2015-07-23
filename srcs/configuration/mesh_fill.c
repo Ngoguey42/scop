@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 15:57:45 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/23 12:39:36 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/23 12:59:16 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,11 @@ int				sp_meshfill_item2(t_env const *e, t_mesh *me)
 {
 	t_objmodel	m[1];
 
-	op_init_instance(m, "res/42.obj");
+	op_init_instance(m, "res/new_csie_b1.obj");
+	/* op_init_instance(m, "res/42.obj"); */
 	if (op_parse_obj(m))
 		return (ERROR("op_parse_obj(m)"), 1);
-	sp_wrap_texture_planxy(m, 1.8f, 442.f / 405.f);
+	/* sp_wrap_texture_planxy(m, 1.8f, 442.f / 405.f); */
 	op_swap_vectors(m, &me->vertices, &me->faces);
 	/* sp_clean_objmodel(m); */
 	(void)e;

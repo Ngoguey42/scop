@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 10:33:54 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/22 18:26:51 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/23 13:04:21 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ typedef enum				e_shader_index
 	sp_item_fragment,
 	sp_land_vertex,
 	sp_land_fragment,
+	sp_ptn_vertex,
+	sp_ptn_fragment,
 	sp_num_shaders
 }							t_shader_index;
 
@@ -76,6 +78,7 @@ typedef enum				e_program_index
 	sp_tex_program,
 	sp_item_program,
 	sp_land_program,
+	sp_ptn_program,
 	sp_num_programs
 }							t_program_index;
 

@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/15 09:20:50 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/15 09:26:20 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/23 12:57:57 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ int		op_match_str(FILE *stream, char const *h, char **dst)
 		return (fsetpos(stream, &pos) || 0);
 	if (ferror(stream))
 		return (ERRORNO("fscanf(...)"), -1);
-	if (*dst != NULL)
-		return (ERRORF("duplicate for \"%s\"", hbuf), -1);
+	/* if (*dst != NULL) */
+		/* return (ERRORF("duplicate for \"%s\"", hbuf), -1); */
 	len = strlen(buf);
 	if (len >= 63)
 		return (ERRORF("word too long for \"%s\"", hbuf), -1);
