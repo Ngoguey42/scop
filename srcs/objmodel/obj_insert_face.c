@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/23 11:05:53 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/23 11:34:26 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/23 12:39:12 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,6 @@ static size_t	gen_vertex_index(t_objmodel *m, float const *vertex)
 
 #define COORD(I) (((float*)(m->coords.data)) + (3 * (I)))
 
-
-/* #define COORD(I) */
-
-/* ( */
-/* 	((float*)(m->coords.data)) */
-/* 	+ 3 * (I)) */
-/* 	) */
-
 /*
 ** receiving 3 indices for [0]coord/[1]texture/[2]normal
 ** building a vertex of any size
@@ -52,25 +44,7 @@ static size_t	gen_vertex_index(t_objmodel *m, float const *vertex)
 static void		build_vertex(t_objmodel const *m, float vert[8],
 							 size_t const indices[3])
 {
-c	/* T; */
-	/* qprintf("indice %u\n", indices[0]); */
-
-	/* qprintf("%u\n", sizeof(size_t)); */
-	/* qprintf("%u\n", sizeof(void*)); */
-	/* qprintf("%u\n", sizeof(unsigned int)); */
-	
-	/* qprintf("(((float*)%p) + 3 * (%u)) = %p\n", m->coords.data, indices[0], */
-	/* 		/\* COORD(indices[0]) *\/ */
-	/* 		(((float*)(m->coords.data)) + (3 * (0))) */
-			
-		/* ); */
-	
-	/* qprintf("size coordvert %u\n", m->coords.size); */
-	/* qprintf("size coordvert %p\n", m->coords.data); */
-	/* qprintf("diffptr %p\n", (void*)COORD(indices[0]) - m->coords.data); */
-	/* qprintf("memcpy(%p, %p, %u)", vert, COORD(indices[0]), sizeof(float) * 3); */
 	memcpy(vert, COORD(indices[0]), sizeof(float) * 3);
-	/* T; */
 	if (m->width == 5)
 	{
 		memcpy(vert + 3, TEXTURE(indices[1]), sizeof(float) * 2);
@@ -84,9 +58,10 @@ c	/* T; */
 		memcpy(vert + 3, TEXTURE(indices[1]), sizeof(float) * 2);
 		memcpy(vert + 5, NORMAL(indices[2]), sizeof(float) * 3);		
 	}
-	T;
 	return ;
 }
+
+/* static void		save_face(t_objmodel *m, ) */
 
 /*
 ** receiving indices in the right position:
@@ -94,23 +69,17 @@ c	/* T; */
 */
 void	op_insert_face(t_objmodel *m, size_t const oldind[9])
 {
-	size_t	newindices[3];
-	float	vert[8];
+	unsigned int	newindices[3];
+	float			vert[8];
 
-	qprintf("addresse de vert %p\n", vert);
-	qprintf("addresse de vert %p\n", &vert);
-	T;
 	build_vertex(m, vert, oldind);
-	T;
 	newindices[0] = gen_vertex_index(m, vert);
-	T;
 	build_vertex(m, vert, oldind + 3);
 	newindices[1] = gen_vertex_index(m, vert);
 	build_vertex(m, vert, oldind + 6);
 	newindices[2] = gen_vertex_index(m, vert);
-	T;
+	/* qprintf("new: %2u %2u %2u\n", newindices[0], newindices[1], newindices[2]); */
 	if (ftv_push_back(&m->faces, newindices))
 		sp_enomem();
-	T;
 	return ;
 }

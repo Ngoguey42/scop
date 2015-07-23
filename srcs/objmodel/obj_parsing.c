@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/02 13:21:56 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/22 18:31:24 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/23 12:39:24 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,14 +88,27 @@ int				op_parse_obj(t_objmodel *m)
 		if (i >= sizeof(g_tokens) / sizeof(t_token))
 			return (ERROR("no matching token"), 1);
 	}
-	return (fclose(stream), op_build_vertices(m) || 0);
+	return (fclose(stream), 0);
+}
+
+void printvertice(void *env, float *vert, int i)
+{
+	qprintf("%2d: (% 5.2f, % 5.2f, % 5.2f)\n", i, vert[0], vert[1], vert[2]);	
+}
+void printuint(void *env, unsigned int *vert, int i)
+{
+	qprintf("%2d: (% 5.2u, % 5.2u, % 5.2u)\n", i, vert[0], vert[1], vert[2]);	
 }
 
 void			op_swap_vectors(t_objmodel *m, t_ftvector *v, t_ftvector *f)
 {
-	/* memcpy(v, &m->coords, sizeof(t_ftvector)); */
 	memcpy(v, &m->vertices, sizeof(t_ftvector));
-	if (m->faces.size)
+	if (m->faces.data != NULL)
 		memcpy(f, &m->faces, sizeof(t_ftvector));
+	/* T; */
+	/* ftv_foreachi(&m->vertices, &printvertice, NULL); */
+	/* ftv_foreachi(&m->faces, &printuint, NULL); */
+	bzero(&m->vertices, sizeof(t_ftvector));
+	bzero(&m->faces, sizeof(t_ftvector));
 	return ;
 }
