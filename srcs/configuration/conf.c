@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 12:53:00 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/24 15:06:26 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/24 15:12:58 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int				sp_loadconf_meshes(t_env *e)
 {
 	t_mesh const		tmp[sp_num_meshes] = {
 
-	MESH(GL_STATIC_DRAW, sp_pt_program, true, &sp_meshfill_item),
+	MESH(GL_STATIC_DRAW, sp_pt_program, true, &sp_meshfill_plane),
 	MESH(GL_STATIC_DRAW, sp_p_program, true, &sp_meshfill_square),
 	MESH(GL_STATIC_DRAW, sp_land_program, true, &sp_meshfill_land),
 	MESH(GL_STATIC_DRAW, sp_ptn_program, true, &sp_meshfill_item2),
@@ -92,10 +92,10 @@ int				sp_loadconf_models(t_env *e)
 {
 	t_model const		tmp[sp_num_models] = {
 
-	{sp_item_mesh, sp_metal_texture, &sp_unif_model},
+	{sp_plane_mesh, sp_metal_texture, &sp_unif_model},
 	{sp_square_mesh, sp_no_texture, &sp_unif_model},
 	{sp_land_mesh, sp_no_texture, &sp_unif_land},
-	{sp_plane_mesh, sp_metal_texture, &sp_unif_model},
+	{sp_ptn_mesh, sp_metal_texture, &sp_unif_model},
 	};
 	memcpy(&e->models, &tmp, sizeof(tmp));
 	return (0);

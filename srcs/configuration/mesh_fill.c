@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 15:57:45 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/24 15:01:55 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/24 15:11:38 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,11 @@
 #include "objmodel.h"
 #include <math.h>
 
-int				sp_meshfill_item(t_env const *e, t_mesh *me)
+int				sp_meshfill_plane(t_env const *e, t_mesh *me)
 {
 	t_objmodel	m[1];
 	/* op_init_instance(m, "res/teapot2.obj"); */
 
-	/* int		i; */
-	/* i = 0; */
-
-	/* while (i++ < 0) */
-	/* { */
-	/* op_init_instance(m, "res/alfa147.obj"); */
-	/* 	if (op_parse_obj(m)) */
-	/* 	return (ERROR("op_parse_obj(m)"), 1); */
-	/* sp_clean_objmodel(m); */
-	/* } */
 	op_init_instance(m, "res/cessna.obj");
 	/* op_init_instance(m, "res/teapot.obj"); */
 	if (op_parse_obj(m))
