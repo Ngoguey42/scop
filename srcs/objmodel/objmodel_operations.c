@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/15 08:26:17 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/23 13:48:45 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/24 10:05:35 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,29 @@ void			op_init_instance(t_objmodel *m, char const *filepath)
 		sp_enomem();
 	if (ftv_init_instance(&m->normals, sizeof(float) * 3))
 		sp_enomem();
+	return ;
+}
+
+// void printvertice(void *env, float *vert, int i)
+// {
+// qprintf("%2d: (% 5.2f, % 5.2f, % 5.2f)\n", i, vert[0], vert[1], vert[2]);  \
+
+// }
+// void printuint(void *env, unsigned int *vert, int i)
+// {
+// qprintf("%2d: (% 5.2u, % 5.2u, % 5.2u)\n", i, vert[0], vert[1], vert[2]);  \
+
+// }
+
+void            op_swap_vectors(t_objmodel *m, t_ftvector *v, t_ftvector *f)
+{
+	memcpy(v, &m->vertices, sizeof(t_ftvector));
+	if (m->faces.data != NULL)
+		memcpy(f, &m->faces, sizeof(t_ftvector));
+	/* T; */
+	/* ftv_foreachi(&m->vertices, &printvertice, NULL); */
+	/* ftv_foreachi(&m->faces, &printuint, NULL); */
+	bzero(&m->vertices, sizeof(t_ftvector));
+	bzero(&m->faces, sizeof(t_ftvector));
 	return ;
 }

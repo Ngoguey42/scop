@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/02 13:21:56 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/23 15:52:12 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/24 10:12:36 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,83 +32,88 @@
 ** Vertices must be 3floats
 */
 
-static int		(*const g_tokens[])(FILE *stream, t_objmodel *m) =
-{
-	&op_match_f,
-	&op_match_v,
-	&op_match_vt,
-	&op_match_vn,
-	&op_match_comment,
-	&op_match_group,
-	&op_match_smooth,
-	&op_match_mtllib,
-	&op_match_usemtl,
-	&op_match_name,
+#define TOKEN(NAME, FUN) {(NAME), strlen((NAME)), (FUN)}
+
+static const t_token	g_tokens[] = {
+	TOKEN("f ", &op_match_f),
+	TOKEN("v ", &op_match_v),
+	TOKEN("vt ", &op_match_vt),
+	TOKEN("vn ", &op_match_vn),
+	TOKEN("#", &op_match_comment),
+	TOKEN("g ", &op_match_group),
+	TOKEN("s ", &op_match_smooth),
+	TOKEN("mtllib ", &op_match_mtllib),
+	TOKEN("usemtl ", &op_match_usemtl),
+	TOKEN("o ", &op_match_name),
 };
 
-static void		print_no_match(FILE *stream)
+
+int             op_match_f(FILE *stream, t_objmodel *m, char const *buf){return 0;(void)stream; (void)buf; (void)m;}
+int             op_match_v(FILE *stream, t_objmodel *m, char const *buf){return 0;(void)stream; (void)buf; (void)m;}
+int             op_match_vt(FILE *stream, t_objmodel *m, char const *buf){return 0;(void)stream; (void)buf; (void)m;}
+int             op_match_vn(FILE *stream, t_objmodel *m, char const *buf){return 0;(void)stream; (void)buf; (void)m;}
+int             op_match_comment(FILE *stream, t_objmodel *m, char const *buf){return 0;(void)stream; (void)buf; (void)m;}
+int             op_match_group(FILE *stream, t_objmodel *m, char const *buf){return 0;(void)stream; (void)buf; (void)m;}
+int             op_match_smooth(FILE *stream, t_objmodel *m, char const *buf){return 0;(void)stream; (void)buf; (void)m;}
+int             op_match_mtllib(FILE *stream, t_objmodel *m, char const *buf){return 0;(void)stream; (void)buf; (void)m;}
+int             op_match_usemtl(FILE *stream, t_objmodel *m, char const *buf){return 0;(void)stream; (void)buf; (void)m;}
+int             op_match_name(FILE *stream, t_objmodel *m, char const *buf){return 0;(void)stream; (void)buf; (void)m;}
+
+#define EMPTY_LINE (sizeof(g_tokens) / sizeof(*g_tokens) + 1)
+
+static int		get_index(char const buf[BFSZ], char const *endptr)
 {
-	char	buf[128];
+	size_t	i;
+
+	i = 0;
+	while (i < sizeof(g_tokens) / sizeof(*g_tokens))
+	{
+		if (memcmp(buf, g_tokens[i].str, g_tokens[i].len) == 0)
+		{
+			memmove(buf, buf + g_tokens[i].len, endptr - buf + 1);
+			return (i);
+		}
+		i++;
+	}	
+	return (ERRORF("token not found '%s'", buf), -2);
+}
+
+static int		next_line_index(FILE *stream, char buf[BFSZ])
+{
 	char	*ptr;
 
-	ptr = fgets(buf, sizeof(buf), stream);
-	if (ptr != NULL)
+	if (fgets(buf, BFSZ, stream) == NULL)
 	{
-		ptr = strchr(buf, '\n');
-		if (ptr != NULL)
-			*ptr = '\0';
-		ERRORF("no matching token \033[32m'%s'\033[0m", buf);
+		if (feof(stream))
+			return (-1);
+		if (ferror(stream))
+			return (ERRORNO("fgets(...)"), -2);
+		return (ERROR("while reading"), -2);
 	}
-	else
-		ERROR("no matching token \033[32m'NULL'\033[0m");
-	return ;
+	if ((ptr = strchr(buf, '\n')) == NULL)
+		return (ERRORF("no eol '%s'", buf), -2);
+	if (buf == ptr)
+		return (EMPTY_LINE);
+	*ptr = '\0';
+	return (get_index(buf, ptr));
 }
 
 int				op_parse_obj(t_objmodel *m)
 {
-	FILE	*stream;
-	size_t	i;
-	int		ret;
+	FILE			*stream;
+	int				i;
+	char			buf[BFSZ];
 
 	if ((stream = fopen(m->filepath, "r")) == NULL)
 		return (ERRORNOF("fopen(\"%s\")", m->filepath), 1);
-	while (1)
+	while ((i = next_line_index(stream, buf)) >= 0)
 	{
-		i = 0;
-		while (i < sizeof(g_tokens) / sizeof(*g_tokens))
-		{
-			if ((ret = g_tokens[i](stream, m)) == -1)
-				return (ERRORF("g_tokens[%d]", i), 1);
-			else if (ret == 1)
-				break ;
-			i++;
-		}
-		if (feof(stream))
-			break ;
-		if (i >= sizeof(g_tokens) / sizeof(*g_tokens))
-			return (print_no_match(stream), 1);
+		if (i == EMPTY_LINE)
+			continue ;
+		if (g_tokens[i].fun(stream, m, buf))
+			return (ERRORF("g_tokens[i].fun(..., '%s')", buf), 1);
 	}
-	return (fclose(stream), 0);
-}
-
-// void printvertice(void *env, float *vert, int i)
-// {
-	// qprintf("%2d: (% 5.2f, % 5.2f, % 5.2f)\n", i, vert[0], vert[1], vert[2]);	
-// }
-// void printuint(void *env, unsigned int *vert, int i)
-// {
-	// qprintf("%2d: (% 5.2u, % 5.2u, % 5.2u)\n", i, vert[0], vert[1], vert[2]);	
-// }
-
-void			op_swap_vectors(t_objmodel *m, t_ftvector *v, t_ftvector *f)
-{
-	memcpy(v, &m->vertices, sizeof(t_ftvector));
-	if (m->faces.data != NULL)
-		memcpy(f, &m->faces, sizeof(t_ftvector));
-	/* T; */
-	/* ftv_foreachi(&m->vertices, &printvertice, NULL); */
-	/* ftv_foreachi(&m->faces, &printuint, NULL); */
-	bzero(&m->vertices, sizeof(t_ftvector));
-	bzero(&m->faces, sizeof(t_ftvector));
-	return ;
+	if (i == -1)
+		return (fclose(stream), 0);
+	return (ERROR("parsing failed"), 1);
 }
