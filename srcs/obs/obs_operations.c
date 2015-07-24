@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/21 09:02:18 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/23 14:19:41 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/24 14:55:42 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ static void	render_ob(t_env const *e, t_ob *ob)
 {
 	t_model const	*mo = MOOFOB(e, ob);
 	t_mesh const	*me = MEOFMO(e, mo);
-	t_program const	*p = POFME(e, me);
 	
 	if (mo->update_uniforms != NULL)
 		mo->update_uniforms(e, ob);
@@ -43,6 +42,7 @@ static void	update_ob(t_env const *e, t_ob *ob)
 		ob->modified = false;
 	}
 	return ;
+	(void)e;
 }
 
 
@@ -54,8 +54,8 @@ void		render_prog_obs(t_env const *e, t_program_index i)
 	glUseProgram(p->handle);
 	if (p->update_uniforms != NULL)
 		p->update_uniforms(e, p);
-	ftv_foreach(prv, &update_ob, e);
-	ftv_foreach(prv, &render_ob, e);
+	ftv_foreach((void*)prv, &update_ob, (void*)e);
+	ftv_foreach((void*)prv, &render_ob, (void*)e);
 	return ;
 }
 

@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/22 13:44:32 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/24 12:42:37 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/24 15:06:38 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int			sp_fill_obs(t_env *e)
 	ob->model = sp_land_model;
 	push_ob(e, ob);
 	
-	ob->model = sp_item2_model;
+	ob->model = sp_plane_model;
 	ob->rotation = ATOV3(0.f, 0.f, -M_PI / 2.f);
 	ob->scale = ATOV3(0.05f, 0.05f, 0.05f);
 	/* ob->scale = ATOV3(0.05f, 0.05f, 0.05f); */

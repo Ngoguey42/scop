@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/15 08:26:17 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/24 10:05:35 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/24 13:54:27 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,3 +94,4 @@ void            op_swap_vectors(t_objmodel *m, t_ftvector *v, t_ftvector *f)
 	bzero(&m->faces, sizeof(t_ftvector));
 	return ;
 }
+

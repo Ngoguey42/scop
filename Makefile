@@ -65,6 +65,7 @@ O_FILES := obj/srcs/env_operations.o \
 	obj/srcs/ftmath/vector3.o \
 	obj/srcs/ftmath/vector3_basicop.o \
 	obj/srcs/meshes/mesh_operations.o \
+	obj/srcs/objmodel/obj_faces_operations.o \
 	obj/srcs/objmodel/obj_insert_face.o \
 	obj/srcs/objmodel/obj_parsing.o \
 	obj/srcs/objmodel/obj_parsing_faces.o \
@@ -180,6 +181,10 @@ obj/srcs/ftmath/vector3_basicop.o: srcs/ftmath/vector3_basicop.c include/fterror
 
 obj/srcs/meshes/mesh_operations.o: srcs/meshes/mesh_operations.c include/fterror.h include/ftmath.h include/objmodel.h include/scop.h include/scop_conf.h include/scop_types.h
 	@mkdir -p obj/srcs/meshes 2> /dev/null || true
+	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
+
+obj/srcs/objmodel/obj_faces_operations.o: srcs/objmodel/obj_faces_operations.c include/fterror.h include/ftmath.h include/objmodel.h include/objmodel_parsing.h include/scop.h include/scop_conf.h include/scop_types.h
+	@mkdir -p obj/srcs/objmodel 2> /dev/null || true
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
 obj/srcs/objmodel/obj_insert_face.o: srcs/objmodel/obj_insert_face.c include/fterror.h include/ftmath.h include/objmodel.h include/objmodel_parsing.h include/scop.h include/scop_conf.h include/scop_types.h

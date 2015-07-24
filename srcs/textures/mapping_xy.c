@@ -6,11 +6,12 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/18 10:52:20 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/22 18:14:53 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/24 14:51:42 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <string.h>
+#include <assert.h>
 #include "scop.h"
 #include "objmodel_parsing.h"
 
@@ -57,15 +58,16 @@ static void	fill(t_ftvector *new, t_ftvector const *old, float fact[2])
 	return ;
 }
 
-void		sp_wrap_texture_planxy(t_objmodel *m, float scale, float imgratio)
+void		sp_wrap_texture_planxy(t_ftvector *v, float scale, float imgratio)
 {
 	t_ftvector		newv[1];
 
+	assert(v->chunk_size == 3 * sizeof(float));
 	ftv_init_instance(newv, sizeof(float) * 5);
-	ftv_reserve(newv, m->vertices.size);
-	fill(newv, &m->vertices, (float[2]){1 / (scale * imgratio), 1 / scale});
-	ftv_release(&m->vertices, NULL);
-	m->vertices = *newv;
+	ftv_reserve(newv, v->size);
+	fill(newv, v, (float[2]){1 / (scale * imgratio), 1 / scale});
+	ftv_release(v, NULL);
+	*v = *newv;
 	(void)calc_bounds;
 	return ;
 }

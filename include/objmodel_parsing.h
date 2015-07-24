@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/15 08:49:22 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/24 11:24:57 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/24 13:50:45 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ typedef struct	s_token
 	int			(*fun)();
 }				t_token;
 
-
 int				op_match_f(t_objmodel *m, char const *buf);
 int				op_match_v(t_objmodel *m, char const *buf);
 int				op_match_vt(t_objmodel *m, char const *buf);
@@ -42,16 +41,15 @@ int				op_match_mtllib(t_objmodel *m, char const *buf);
 int				op_match_usemtl(t_objmodel *m, char const *buf);
 int				op_match_name(t_objmodel *m, char const *buf);
 
-// int				op_parse_obj(t_objmodel *m);
-// int				op_match_str(FILE *stream, char *h, char **dst);
-// int				op_match_comment(FILE *stream);
-// int				op_match_bool(FILE *stream, char *h, t_bool *dst);
-// int				op_match_v(FILE *stream, char *h, t_objmodel *m);
-// int				op_match_vt(FILE *stream, char *h, t_objmodel *m);
-// int				op_match_vn(FILE *stream, char *h, t_objmodel *m);
-// int				op_match_faces(FILE *stream, char *h, t_objmodel *m);
-
+/*
+** face parsing, specific prototypes
+*/
 void			op_init_meshvectors(t_objmodel *m);
 void			op_insert_face(t_objmodel *m, t_ui const oldind[9]);
+
+void			op_faces_decr_indices(t_ui b[9], int i, int end);
+int				op_parse_uiblock(char const **buf, t_ui uibuf[9],
+									int const *indices);
+t_bool			op_faces_indices_valid(t_objmodel const *m, t_ui const b[9]);
 
 #endif

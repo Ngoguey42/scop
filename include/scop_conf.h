@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 10:33:54 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/23 16:23:38 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/24 15:05:36 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,12 +59,12 @@
 
 typedef enum				e_shader_index
 {
-	sp_basic_vertex,
-	sp_basic_fragment,
-	sp_tex_vertex,
-	sp_tex_fragment,
-	sp_item_vertex,
-	sp_item_fragment,
+	sp_p_vertex,
+	sp_p_fragment,
+	sp_pct_vertex,
+	sp_pct_fragment,
+	sp_pt_vertex,
+	sp_pt_fragment,
 	sp_land_vertex,
 	sp_land_fragment,
 	sp_ptn_vertex,
@@ -74,9 +74,9 @@ typedef enum				e_shader_index
 
 typedef enum				e_program_index
 {
-	sp_basic_program,
-	sp_tex_program,
-	sp_item_program,
+	sp_p_program,
+	sp_pct_program,
+	sp_pt_program,
 	sp_land_program,
 	sp_ptn_program,
 	sp_num_programs
@@ -87,7 +87,7 @@ typedef enum				e_mesh_index
 	sp_item_mesh,
 	sp_square_mesh,
 	sp_land_mesh,
-	sp_item2_mesh,
+	sp_plane_mesh,
 	sp_num_meshes,
 }							t_mesh_index;
 
@@ -95,6 +95,7 @@ typedef enum				e_texture_index
 {
 	sp_porcelain_texture,
 	sp_wall_texture,
+	sp_metal_texture,
 	sp_num_textures,
 	sp_no_texture
 }							t_texture_index;
@@ -104,7 +105,7 @@ typedef enum				e_model_index
 	sp_item_model,
 	sp_square_model,
 	sp_land_model,
-	sp_item2_model,
+	sp_plane_model,
 	sp_num_models,
 }							t_model_index;
 

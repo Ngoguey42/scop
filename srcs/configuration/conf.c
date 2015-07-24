@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 12:53:00 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/23 16:20:44 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/24 15:06:26 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,11 @@ int				sp_loadconf_programs(t_env *e)
 {
 	t_program const		tmp[sp_num_programs] = {
 
-	PROG(sp_basic_vertex, sp_basic_fragment, &sp_unif_viewproj2,
+	PROG(sp_p_vertex, sp_p_fragment, &sp_unif_viewproj2,
 	LOC("position", 3)),
-	PROG(sp_tex_vertex, sp_tex_fragment, &sp_unif_viewproj2,
+	PROG(sp_pct_vertex, sp_pct_fragment, &sp_unif_viewproj2,
 	LOC("position", 3), LOC("color", 3), LOC("texCoord", 2)),
-	PROG(sp_item_vertex, sp_item_fragment, &sp_unif_viewproj2,
+	PROG(sp_pt_vertex, sp_pt_fragment, &sp_unif_viewproj2,
 	LOC("position", 3), LOC("texCoord", 2)),
 	PROG(sp_land_vertex, sp_land_fragment, &sp_unif_viewproj,
 	LOC("position", 3), LOC("color", 3)),
@@ -69,6 +69,7 @@ int				sp_loadconf_textures(t_env *e)
 
 	{TEXTURE_PATH("Porcelain.tga"), 0},
 	{TEXTURE_PATH("Wall.tga"), 0},
+	{TEXTURE_PATH("Metal.tga"), 0},
 	};
 	memcpy(&e->textures, &tmp, sizeof(tmp));
 	return (0);
@@ -78,8 +79,8 @@ int				sp_loadconf_meshes(t_env *e)
 {
 	t_mesh const		tmp[sp_num_meshes] = {
 
-	MESH(GL_STATIC_DRAW, sp_item_program, true, &sp_meshfill_item),
-	MESH(GL_STATIC_DRAW, sp_basic_program, true, &sp_meshfill_square),
+	MESH(GL_STATIC_DRAW, sp_pt_program, true, &sp_meshfill_item),
+	MESH(GL_STATIC_DRAW, sp_p_program, true, &sp_meshfill_square),
 	MESH(GL_STATIC_DRAW, sp_land_program, true, &sp_meshfill_land),
 	MESH(GL_STATIC_DRAW, sp_ptn_program, true, &sp_meshfill_item2),
 	};
@@ -91,10 +92,10 @@ int				sp_loadconf_models(t_env *e)
 {
 	t_model const		tmp[sp_num_models] = {
 
-	{sp_item_mesh, sp_porcelain_texture, &sp_unif_model},
+	{sp_item_mesh, sp_metal_texture, &sp_unif_model},
 	{sp_square_mesh, sp_no_texture, &sp_unif_model},
 	{sp_land_mesh, sp_no_texture, &sp_unif_land},
-	{sp_item2_mesh, sp_wall_texture, &sp_unif_model},
+	{sp_plane_mesh, sp_metal_texture, &sp_unif_model},
 	};
 	memcpy(&e->models, &tmp, sizeof(tmp));
 	return (0);

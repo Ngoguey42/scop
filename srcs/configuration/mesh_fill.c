@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 15:57:45 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/24 12:42:20 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/24 15:01:55 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ int				sp_meshfill_item(t_env const *e, t_mesh *me)
 	/* op_init_instance(m, "res/teapot.obj"); */
 	if (op_parse_obj(m))
 		return (ERROR("op_parse_obj(m)"), 1);
-	/* sp_wrap_texture_planxy(m, 1.8f, 1.f); */
-	sp_wrap_texture_planxy(m, 1.8f, 442.f / 405.f);
 	op_swap_vectors(m, &me->vertices, &me->faces);
+	/* sp_wrap_texture_planxy(&me->vertices, 1.8f, 442.f / 405.f);//porcelain */
+	sp_wrap_texture_planxy(&me->vertices, 6.f, 1.f);//metal
 	sp_clean_objmodel(m);
 	(void)e;
 	(void)me;
