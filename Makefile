@@ -69,8 +69,8 @@ O_FILES := obj/srcs/env_operations.o \
 	obj/srcs/objmodel/obj_parsing.o \
 	obj/srcs/objmodel/obj_parsing_faces.o \
 	obj/srcs/objmodel/obj_parsing_floats.o \
-	obj/srcs/objmodel/obj_parsing_multiple_units.o \
-	obj/srcs/objmodel/obj_parsing_unique_units.o \
+	obj/srcs/objmodel/obj_parsing_misc.o \
+	obj/srcs/objmodel/obj_parsing_mtl.o \
 	obj/srcs/objmodel/objmodel_operations.o \
 	obj/srcs/obs/obs_operations.o \
 	obj/srcs/shaders/shader_operations.o \
@@ -198,11 +198,11 @@ obj/srcs/objmodel/obj_parsing_floats.o: srcs/objmodel/obj_parsing_floats.c inclu
 	@mkdir -p obj/srcs/objmodel 2> /dev/null || true
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
-obj/srcs/objmodel/obj_parsing_multiple_units.o: srcs/objmodel/obj_parsing_multiple_units.c include/fterror.h include/ftmath.h include/objmodel.h include/objmodel_parsing.h include/scop.h include/scop_conf.h include/scop_types.h
+obj/srcs/objmodel/obj_parsing_misc.o: srcs/objmodel/obj_parsing_misc.c include/fterror.h include/ftmath.h include/objmodel.h include/objmodel_parsing.h include/scop.h include/scop_conf.h include/scop_types.h
 	@mkdir -p obj/srcs/objmodel 2> /dev/null || true
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
-obj/srcs/objmodel/obj_parsing_unique_units.o: srcs/objmodel/obj_parsing_unique_units.c include/fterror.h include/ftmath.h include/objmodel.h include/objmodel_parsing.h include/scop.h include/scop_conf.h include/scop_types.h
+obj/srcs/objmodel/obj_parsing_mtl.o: srcs/objmodel/obj_parsing_mtl.c include/fterror.h include/ftmath.h include/objmodel.h include/objmodel_parsing.h include/scop.h include/scop_conf.h include/scop_types.h
 	@mkdir -p obj/srcs/objmodel 2> /dev/null || true
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 

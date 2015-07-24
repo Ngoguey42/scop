@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/02 13:21:56 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/24 10:12:36 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/24 11:01:51 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@
 */
 
 #define TOKEN(NAME, FUN) {(NAME), strlen((NAME)), (FUN)}
+#define NTOKENS (sizeof(g_tokens) / sizeof(*g_tokens))
+#define EMPTY_LINE (NTOKENS + 1)
 
 static const t_token	g_tokens[] = {
 	TOKEN("f ", &op_match_f),
@@ -40,41 +42,31 @@ static const t_token	g_tokens[] = {
 	TOKEN("vt ", &op_match_vt),
 	TOKEN("vn ", &op_match_vn),
 	TOKEN("#", &op_match_comment),
-	TOKEN("g ", &op_match_group),
+	TOKEN("g", &op_match_group),
 	TOKEN("s ", &op_match_smooth),
 	TOKEN("mtllib ", &op_match_mtllib),
 	TOKEN("usemtl ", &op_match_usemtl),
 	TOKEN("o ", &op_match_name),
 };
 
-
 int             op_match_f(FILE *stream, t_objmodel *m, char const *buf){return 0;(void)stream; (void)buf; (void)m;}
-int             op_match_v(FILE *stream, t_objmodel *m, char const *buf){return 0;(void)stream; (void)buf; (void)m;}
-int             op_match_vt(FILE *stream, t_objmodel *m, char const *buf){return 0;(void)stream; (void)buf; (void)m;}
-int             op_match_vn(FILE *stream, t_objmodel *m, char const *buf){return 0;(void)stream; (void)buf; (void)m;}
-int             op_match_comment(FILE *stream, t_objmodel *m, char const *buf){return 0;(void)stream; (void)buf; (void)m;}
-int             op_match_group(FILE *stream, t_objmodel *m, char const *buf){return 0;(void)stream; (void)buf; (void)m;}
-int             op_match_smooth(FILE *stream, t_objmodel *m, char const *buf){return 0;(void)stream; (void)buf; (void)m;}
-int             op_match_mtllib(FILE *stream, t_objmodel *m, char const *buf){return 0;(void)stream; (void)buf; (void)m;}
-int             op_match_usemtl(FILE *stream, t_objmodel *m, char const *buf){return 0;(void)stream; (void)buf; (void)m;}
-int             op_match_name(FILE *stream, t_objmodel *m, char const *buf){return 0;(void)stream; (void)buf; (void)m;}
 
-#define EMPTY_LINE (sizeof(g_tokens) / sizeof(*g_tokens) + 1)
-
-static int		get_index(char const buf[BFSZ], char const *endptr)
+static int		get_index(char buf[BFSZ], char const *endptr)
 {
-	size_t	i;
+	size_t			i;
+	static size_t	j = 0;
 
 	i = 0;
-	while (i < sizeof(g_tokens) / sizeof(*g_tokens))
+	while (i < NTOKENS)
 	{
-		if (memcmp(buf, g_tokens[i].str, g_tokens[i].len) == 0)
+		if (memcmp(buf, g_tokens[j].str, g_tokens[j].len) == 0)
 		{
-			memmove(buf, buf + g_tokens[i].len, endptr - buf + 1);
-			return (i);
+			memmove(buf, buf + g_tokens[j].len, endptr - buf + 1);
+			return (j);
 		}
 		i++;
-	}	
+		j = (j + 1) % NTOKENS;
+	}
 	return (ERRORF("token not found '%s'", buf), -2);
 }
 
@@ -113,7 +105,11 @@ int				op_parse_obj(t_objmodel *m)
 		if (g_tokens[i].fun(stream, m, buf))
 			return (ERRORF("g_tokens[i].fun(..., '%s')", buf), 1);
 	}
-	if (i == -1)
-		return (fclose(stream), 0);
-	return (ERROR("parsing failed"), 1);
+	if (i != -1)
+		return (ERROR("parsing failed"), 1);
+	qprintf("Got %08d coords, ", m->coords.size);
+	qprintf("Got %08d textures, ", m->textures.size);
+	qprintf("Got %08d normals\n", m->normals.size);
+	
+	return (fclose(stream), 0);
 }

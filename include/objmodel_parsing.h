@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/15 08:49:22 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/24 10:01:02 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/24 10:23:04 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,11 @@ int				op_match_f(FILE *stream, t_objmodel *m, char const *buf);
 int				op_match_v(FILE *stream, t_objmodel *m, char const *buf);
 int				op_match_vt(FILE *stream, t_objmodel *m, char const *buf);
 int				op_match_vn(FILE *stream, t_objmodel *m, char const *buf);
+
 int				op_match_comment(FILE *stream, t_objmodel *m, char const *buf);
-int				op_match_group(FILE *stream, t_objmodel *m, char const *buf);
 int				op_match_smooth(FILE *stream, t_objmodel *m, char const *buf);
+
+int				op_match_group(FILE *stream, t_objmodel *m, char const *buf);
 int				op_match_mtllib(FILE *stream, t_objmodel *m, char const *buf);
 int				op_match_usemtl(FILE *stream, t_objmodel *m, char const *buf);
 int				op_match_name(FILE *stream, t_objmodel *m, char const *buf);
