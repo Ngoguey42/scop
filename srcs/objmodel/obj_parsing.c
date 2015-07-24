@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/02 13:21:56 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/24 14:42:15 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/24 15:25:09 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,12 @@ static int		next_line_index(FILE *stream, char buf[BFSZ])
 		return (ERRORF("no eol '%s'", buf), -2);
 	if (buf == ptr)
 		return (EMPTY_LINE);
+	else if (ptr[-1] == '\r')
+	{
+		if (buf == ptr - 1)
+			return (EMPTY_LINE);
+		ptr--;
+	}		
 	*ptr = '\0';
 	return (get_index(buf, ptr));
 }
