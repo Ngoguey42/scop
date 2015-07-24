@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/02 13:21:56 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/24 11:01:51 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/24 11:29:58 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,6 @@ static const t_token	g_tokens[] = {
 	TOKEN("usemtl ", &op_match_usemtl),
 	TOKEN("o ", &op_match_name),
 };
-
-int             op_match_f(FILE *stream, t_objmodel *m, char const *buf){return 0;(void)stream; (void)buf; (void)m;}
 
 static int		get_index(char buf[BFSZ], char const *endptr)
 {
@@ -102,14 +100,16 @@ int				op_parse_obj(t_objmodel *m)
 	{
 		if (i == EMPTY_LINE)
 			continue ;
-		if (g_tokens[i].fun(stream, m, buf))
+		if (g_tokens[i].fun(m, buf))
 			return (ERRORF("g_tokens[i].fun(..., '%s')", buf), 1);
 	}
 	if (i != -1)
 		return (ERROR("parsing failed"), 1);
 	qprintf("Got %08d coords, ", m->coords.size);
 	qprintf("Got %08d textures, ", m->textures.size);
-	qprintf("Got %08d normals\n", m->normals.size);
+	qprintf("Got %08d normals, ", m->normals.size);
+	qprintf("Got %08d faces, ", m->faces.size);
+	qprintf("Got %08d vertices\n", m->vertices.size);
 	
 	return (fclose(stream), 0);
 }

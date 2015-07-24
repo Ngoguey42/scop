@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 12:08:19 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/24 10:48:33 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/24 11:46:42 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static void		loop(t_env *e)
 		glfwSwapBuffers(e->win);
 		glfwPollEvents();
 		last_time = cur_time;
-		exit(0); //debug
+		/* exit(0); //debug */
 	}
 	return ;
 }

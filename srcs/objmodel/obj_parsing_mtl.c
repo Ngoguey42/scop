@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/24 10:24:07 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/24 10:25:13 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/24 11:25:28 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,33 +15,29 @@
 #include <string.h>
 #include "objmodel_parsing.h"
 
-int             op_match_group(FILE *stream, t_objmodel *m, char const *buf)
+int             op_match_group(t_objmodel *m, char const *buf)
 {
-	(void)stream;
 	(void)m;
 	(void)buf;
 	return (0);
 }
 
-int             op_match_mtllib(FILE *stream, t_objmodel *m, char const *buf)
+int             op_match_mtllib(t_objmodel *m, char const *buf)
 {
-	(void)stream;
 	(void)m;
 	(void)buf;
 	return (0);
 }
 
-int             op_match_usemtl(FILE *stream, t_objmodel *m, char const *buf)
+int             op_match_usemtl(t_objmodel *m, char const *buf)
 {
-	(void)stream;
 	(void)m;
 	(void)buf;
 	return (0);
 }
 
-int             op_match_name(FILE *stream, t_objmodel *m, char const *buf)
+int             op_match_name(t_objmodel *m, char const *buf)
 {
-	(void)stream;
 	(void)m;
 	(void)buf;
 	return (0);

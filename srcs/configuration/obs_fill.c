@@ -6,11 +6,12 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/22 13:44:32 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/23 14:10:57 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/24 12:19:41 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
+#include <math.h>
 
 static void	push_ob(t_env *e, t_ob const *ob)
 {
@@ -29,7 +30,7 @@ int			sp_fill_obs(t_env *e)
 	ob->model = sp_item_model;
 	ob->rotation = ATOV3(0.f, 0.f, 0.f);
 	ob->scale = ATOV3(1.f, 1.f, 1.f);
-	ob->position = ATOV3(-0.f, -0.f, 0.f);
+	ob->position = ATOV3(-0.f, -0.f, -0.f);
 	/* ob->mat = m4_translate_nonuniform(ob->position); */
 	push_ob(e, ob);
 	
@@ -44,9 +45,12 @@ int			sp_fill_obs(t_env *e)
 	push_ob(e, ob);
 	
 	ob->model = sp_item2_model;
-	ob->position = ATOV3(-5.f, -0.f, -5.f);
-	ob->rotation = ATOV3(0.f, 0.f, 0.f);
-	ob->scale = ATOV3(.5f, .5f, .5f);
+	ob->rotation = ATOV3(0.f, 0.f, -M_PI / 2.f);
+	ob->scale = ATOV3(0.05f, 0.05f, 0.05f);
+	ob->position = ATOV3(-0.f, -0.f, -20.f);
+	/* ob->position = ATOV3(-5.f, -0.f, -5.f); */
+	/* ob->rotation = ATOV3(0.f, 0.f, 0.f); */
+	/* ob->scale = ATOV3(.5f, .5f, .5f); */
 	push_ob(e, ob);
 	return (0);
 }

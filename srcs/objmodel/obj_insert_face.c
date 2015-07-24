@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/23 11:05:53 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/23 12:39:12 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/24 12:12:23 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ static size_t	gen_vertex_index(t_objmodel *m, float const *vertex)
 {
 	int		i;
 
-	i = ftv_find_index_opti(&m->vertices, vertex);
+	i = -1;
+	/* i = ftv_find_index_opti(&m->vertices, vertex); */
 	if (i < 0)
 	{
 		i = (int)m->vertices.size;
@@ -84,8 +85,27 @@ void	op_insert_face(t_objmodel *m, t_ui const oldind[9])
 	unsigned int	newindices[3];
 	float			vert[8];
 
+	/* int i; */
+	/* for (i = 0; i < 8; i++) */
+	/* { */
+	/* 	qprintf("%f/", vert[i]); */
+	/* } */
+	/* qprintf("\n"); */
+	
 	build_vertex(m, vert, oldind);
+	
 	newindices[0] = gen_vertex_index(m, vert);
+
+	/* for (i = 0; i < 8; i++) */
+	/* { */
+	/* 	qprintf("%f/", vert[i]); */
+	/* } */
+	/* qprintf("\n"); */
+
+	if (m->faces.size % 10000 == 0)
+		qprintf("m->faces.size = %u\n", m->faces.size);
+		
+
 	build_vertex(m, vert, oldind + 3);
 	newindices[1] = gen_vertex_index(m, vert);
 	build_vertex(m, vert, oldind + 6);

@@ -6,13 +6,14 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/22 17:32:29 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/24 11:04:13 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/24 12:08:56 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <errno.h>
 #include <string.h>
+#include <stdlib.h>
 #include "objmodel_parsing.h"
 
 static void		push_floats(t_ftvector *v, float const fbuf[3])
@@ -22,7 +23,7 @@ static void		push_floats(t_ftvector *v, float const fbuf[3])
 	return ;
 }
 
-int             op_match_v(FILE *stream, t_objmodel *m, char const *buf)
+int             op_match_v(t_objmodel *m, char const *buf)
 {
 	float		fbuf[3];
 	int			i;
@@ -30,7 +31,7 @@ int             op_match_v(FILE *stream, t_objmodel *m, char const *buf)
 	i = 0;
 	while (i < 3)
 	{
-		fbuf[i++] = strtod(buf, &buf);
+		fbuf[i++] = (float)strtod(buf, (char**)&buf);
 		if (buf == NULL)
 			return (1);
 	}
@@ -38,7 +39,7 @@ int             op_match_v(FILE *stream, t_objmodel *m, char const *buf)
 	return (0);
 }
 
-int             op_match_vt(FILE *stream, t_objmodel *m, char const *buf)
+int             op_match_vt(t_objmodel *m, char const *buf)
 {
 	float		fbuf[3];
 	int			i;
@@ -46,7 +47,7 @@ int             op_match_vt(FILE *stream, t_objmodel *m, char const *buf)
 	i = 0;
 	while (i < 2)
 	{
-		fbuf[i++] = strtod(buf, &buf);
+		fbuf[i++] = strtod(buf, (char**)&buf);
 		if (buf == NULL)
 			return (1); //error parsing float
 	}
@@ -54,7 +55,7 @@ int             op_match_vt(FILE *stream, t_objmodel *m, char const *buf)
 	return (0);
 }
 
-int             op_match_vn(FILE *stream, t_objmodel *m, char const *buf)
+int             op_match_vn(t_objmodel *m, char const *buf)
 {
 	float		fbuf[3];
 	int			i;
@@ -62,7 +63,7 @@ int             op_match_vn(FILE *stream, t_objmodel *m, char const *buf)
 	i = 0;
 	while (i < 3)
 	{
-		fbuf[i++] = strtod(buf, &buf);
+		fbuf[i++] = strtod(buf, (char**)&buf);
 		if (buf == NULL)
 			return (1); //error parsing float
 	}

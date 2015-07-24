@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/15 08:49:22 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/24 10:23:04 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/24 11:24:57 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,18 +29,18 @@ typedef struct	s_token
 }				t_token;
 
 
-int				op_match_f(FILE *stream, t_objmodel *m, char const *buf);
-int				op_match_v(FILE *stream, t_objmodel *m, char const *buf);
-int				op_match_vt(FILE *stream, t_objmodel *m, char const *buf);
-int				op_match_vn(FILE *stream, t_objmodel *m, char const *buf);
+int				op_match_f(t_objmodel *m, char const *buf);
+int				op_match_v(t_objmodel *m, char const *buf);
+int				op_match_vt(t_objmodel *m, char const *buf);
+int				op_match_vn(t_objmodel *m, char const *buf);
 
-int				op_match_comment(FILE *stream, t_objmodel *m, char const *buf);
-int				op_match_smooth(FILE *stream, t_objmodel *m, char const *buf);
+int				op_match_comment(t_objmodel *m, char const *buf);
+int				op_match_smooth(t_objmodel *m, char const *buf);
 
-int				op_match_group(FILE *stream, t_objmodel *m, char const *buf);
-int				op_match_mtllib(FILE *stream, t_objmodel *m, char const *buf);
-int				op_match_usemtl(FILE *stream, t_objmodel *m, char const *buf);
-int				op_match_name(FILE *stream, t_objmodel *m, char const *buf);
+int				op_match_group(t_objmodel *m, char const *buf);
+int				op_match_mtllib(t_objmodel *m, char const *buf);
+int				op_match_usemtl(t_objmodel *m, char const *buf);
+int				op_match_name(t_objmodel *m, char const *buf);
 
 // int				op_parse_obj(t_objmodel *m);
 // int				op_match_str(FILE *stream, char *h, char **dst);
