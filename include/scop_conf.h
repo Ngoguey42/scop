@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 10:33:54 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/24 15:12:27 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/25 10:09:16 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "libft.h"
 # include "ftmath.h"
 
-# define SHADER_PATH(FILENAME) ("srcs/shaders/" FILENAME)
+# define SHD_PATH(FILENAME) ("srcs/shaders/" FILENAME)
 
 /*
 ** RESSOURCES
@@ -57,20 +57,24 @@
 # define LAND_SIDEHALFF (LAND_SIDEF / 2.f)
 
 
-typedef enum				e_shader_index
+typedef enum				e_vshader_index
 {
-	sp_p_vertex,
-	sp_p_fragment,
-	sp_pct_vertex,
-	sp_pct_fragment,
-	sp_pt_vertex,
-	sp_pt_fragment,
-	sp_land_vertex,
-	sp_land_fragment,
-	sp_ptn_vertex,
-	sp_ptn_fragment,
-	sp_num_shaders
-}							t_shader_index;
+	sp_po_to_co_vshader,
+	sp_pocote_to_couv_vshader,
+	sp_pote_to_couv_vshader,
+	sp_poco_to_co_vshader,
+	sp_poteno_to_uv_vshader,
+	sp_num_vshaders
+}							t_vshader_index;
+
+typedef enum				e_fshader_index
+{
+	sp_co_identity_fshader,
+	sp_uv_identity_fshader,
+	sp_couv_blend_fshader,
+	sp_couv_uv_fshader,
+	sp_num_fshaders,
+}							t_fshader_index;
 
 typedef enum				e_program_index
 {

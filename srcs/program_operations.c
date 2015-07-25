@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/01 12:32:53 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/20 14:15:28 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/25 09:53:20 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,16 @@ static int		check_program_error(GLuint program, GLuint flag)
 
 static int		new_program(t_env const *e, t_program *p)
 {
-	size_t		i;
-
+	size_t			i;
+	t_vshader const	*vs = VSOFP(e, p);
+	
 	p->handle = glCreateProgram();
-	glAttachShader(p->handle, e->shaders[p->vshader].handle);
-	glAttachShader(p->handle, e->shaders[p->fshader].handle);
-	i = 0;	
-	while (i < p->n_locations)
+	glAttachShader(p->handle, vs->handle);
+	glAttachShader(p->handle, FSOFP(e, p)->handle);
+	i = 0;
+	while (i < vs->n_locations)
 	{
-		glBindAttribLocation(p->handle, i, p->locations[i].name);
+		glBindAttribLocation(p->handle, i, vs->locations[i].name);
 		i++;
 	}
 	glLinkProgram(p->handle);
@@ -57,8 +58,8 @@ void			sp_delete_programs(t_env *e)
 	p = e->programs;
 	while (p < end)
 	{
-		glDetachShader(p->handle, e->shaders[p->vshader].handle);
-		glDetachShader(p->handle, e->shaders[p->fshader].handle);
+		glDetachShader(p->handle, VSOFP(e, p)->handle);
+		glDetachShader(p->handle, FSOFP(e, p)->handle);
 		glDeleteProgram(p->handle);
 		p++;
 	}

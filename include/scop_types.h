@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 10:07:19 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/22 14:47:14 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/25 09:53:00 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,30 +47,35 @@ enum                        e_keyindex
 ** SHADERS
 ** A shader is tied to several <program>
 */
-typedef struct					s_shader
-{
-	char const					filepath[64];
-	GLenum const				type;
-	GLuint						handle;
-}								t_shader;
-
-/*
-** PROGRAMS
-** A program is tied to several <mesh>
-*/
 typedef struct					s_location
 {
 	char const					name[64];
 	size_t						size;
 }								t_location;
 
-typedef struct					s_program
+typedef struct					s_vshader
 {
-	t_shader_index const		vshader;
-	t_shader_index const		fshader;
-	void						(*const update_uniforms)();
+	char const					filepath[64];
+	void						(*const unif_update)();
 	size_t const				n_locations;
 	t_location const			locations[4];
+	GLuint						handle;
+}								t_vshader;
+typedef struct					s_fshader
+{
+	char const					filepath[64];
+	void						(*const unif_update)();
+	GLuint						handle;
+}								t_fshader;
+
+/*
+** PROGRAMS
+** A program is tied to several <mesh>
+*/
+typedef struct					s_program
+{
+	t_vshader_index const		vshader;
+	t_fshader_index const		fshader;
 	GLuint						handle;
 }								t_program;
 
@@ -133,7 +138,8 @@ typedef struct					s_env
 	GLFWwindow					*win;
 	int							states[sp_num_keys];
 
-	t_shader					shaders[sp_num_shaders];
+	t_vshader					vshaders[sp_num_vshaders];
+	t_fshader					fshaders[sp_num_fshaders];
 	t_program					programs[sp_num_programs];
 	t_mesh						meshes[sp_num_meshes];
 	t_texture					textures[sp_num_textures];
@@ -150,8 +156,8 @@ typedef struct					s_env
 	t_matrix4					viewproj;
 }								t_env;
 
-# define VSOFP(E, P)	(&(E)->shaders[(P)->vshader])
-# define FSOFP(E, P)	(&(E)->shaders[(P)->fshader])
+# define VSOFP(E, P)	(&(E)->vshaders[(P)->vshader])
+# define FSOFP(E, P)	(&(E)->fshaders[(P)->fshader])
 
 # define POFME(E, ME)	(&(E)->programs[(ME)->program])
 # define VSOFME(E, ME)	VSOFP((E), POFME((E), ME))

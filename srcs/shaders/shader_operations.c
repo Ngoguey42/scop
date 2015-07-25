@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/01 12:15:52 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/20 14:09:40 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/25 09:56:31 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,21 +61,21 @@ static int		sp_load_shader(char const *filepath, char **ptr)
 	return (0);
 }
 
-static int		sp_new_shader(t_shader *s)
+static int		sp_new_shader(char const *filepath, GLuint *handle, GLenum t)
 {
 	char	*text[1];
 	GLint	len[1];
 
-	if (sp_load_shader(s->filepath, text))
+	if (sp_load_shader(filepath, text))
 		return (ERROR("sp_load_shader(...)"), 1);
-	s->handle = glCreateShader(s->type);
-	if (s->handle == 0)
-		return (DEBUGF(BADCREATE_FMT, s->handle), free(*text), 1);
+	*handle = glCreateShader(t);
+	if (*handle == 0)
+		return (DEBUGF(BADCREATE_FMT, *handle), free(*text), 1);
 	*len = strlen(*text);
-	glShaderSource(s->handle, 1, (char const *const*)text, len);
+	glShaderSource(*handle, 1, (char const *const*)text, len);
 	free(*text);
-	glCompileShader(s->handle);
-	return (check_shader_error(s->handle, GL_COMPILE_STATUS));
+	glCompileShader(*handle);
+	return (check_shader_error(*handle, GL_COMPILE_STATUS));
 }
 
 void			sp_delete_shaders(t_env *e)
@@ -83,8 +83,11 @@ void			sp_delete_shaders(t_env *e)
 	int		i;
 
 	i = 0;
-	while (i < sp_num_shaders)
-		glDeleteShader(e->shaders[i++].handle);
+	while (i < sp_num_vshaders)
+		glDeleteShader(e->vshaders[i++].handle);
+	i = 0;
+	while (i < sp_num_fshaders)
+		glDeleteShader(e->fshaders[i++].handle);
 	return ;
 }
 
@@ -94,10 +97,19 @@ int				sp_init_shaders(t_env *e)
 
 	lprintf("Initializing shaders...");
 	i = 0;
-	while (i < sp_num_shaders)
+	while (i < sp_num_vshaders)
 	{
-		if (sp_new_shader(e->shaders + i))
-			return (ERRORF("sp_new_shader(%d)", i), 1);
+		if (sp_new_shader(e->vshaders[i].filepath, &e->vshaders[i].handle
+						  , GL_VERTEX_SHADER))
+			return (ERRORF("sp_new_vshader(%d)", i), 1);
+		i++;
+	}
+	i = 0;
+	while (i < sp_num_fshaders)
+	{
+		if (sp_new_shader(e->fshaders[i].filepath, &e->fshaders[i].handle
+						  , GL_FRAGMENT_SHADER))
+			return (ERRORF("sp_new_fshader(%d)", i), 1);
 		i++;
 	}
 	return (0);

@@ -6,28 +6,28 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/18 12:01:22 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/23 09:25:11 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/25 09:54:33 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
 
-static size_t	mesh_width(t_program const *p)
+static size_t	mesh_width(t_vshader const *vs)
 {
 	size_t	i;
 	size_t	tot;
 
 	i = 0;
 	tot = 0;
-	while (i < p->n_locations)
+	while (i < vs->n_locations)
 	{
-		tot += p->locations[i].size;
+		tot += vs->locations[i].size;
 		i++;
 	}
 	return (tot);
 }
 
-static int		gen_attribs(t_program const *p, size_t vert_width)
+static int		gen_attribs(t_vshader const *vs, size_t vert_width)
 {
 	size_t	i;
 	GLvoid	*delta;
@@ -35,15 +35,15 @@ static int		gen_attribs(t_program const *p, size_t vert_width)
 	i = 0;
 	delta = NULL;
 	lprintf("Defining locations: ");
-	while (i < p->n_locations)
+	while (i < vs->n_locations)
 	{
 		lprintf("    '%s' i=%02u; sz=%02u; wid=%02u, dt=%02u",
-			p->locations[i].name,
-			i, p->locations[i].size, vert_width, delta);
-		glVertexAttribPointer(i, p->locations[i].size, GL_FLOAT, GL_FALSE
+			vs->locations[i].name,
+			i, vs->locations[i].size, vert_width, delta);
+		glVertexAttribPointer(i, vs->locations[i].size, GL_FLOAT, GL_FALSE
 								, vert_width, delta);
 		glEnableVertexAttribArray(i);
-		delta += p->locations[i].size * sizeof(GLfloat);
+		delta += vs->locations[i].size * sizeof(GLfloat);
 		i++;
 	}
 	return (0);
@@ -52,7 +52,7 @@ static int		gen_attribs(t_program const *p, size_t vert_width)
 static int		new_mesh(t_env const *e, t_mesh *me)
 {
 	t_program const		*p = &e->programs[me->program];
-	size_t const		vert_width = mesh_width(p) * sizeof(GLfloat);
+	size_t const		vert_width = mesh_width(VSOFP(e, p)) * sizeof(GLfloat);
 	size_t const		elem_width = 3 * sizeof(GLuint);
 
 	lprintf("Generating mesh:");
@@ -82,7 +82,7 @@ static int		new_mesh(t_env const *e, t_mesh *me)
 	}
 	lprintf("Handles: [%u, %u, %u]",
 		me->handles[0], me->handles[1], me->handles[2]);
-	gen_attribs(p, vert_width);
+	gen_attribs(VSOFP(e, p), vert_width);
 	glBindVertexArray(0);
 	lprintf("");
 	return (0);

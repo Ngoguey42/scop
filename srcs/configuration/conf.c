@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 12:53:00 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/24 15:12:58 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/25 10:12:38 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,29 +18,63 @@
 # define NARG(...) NARG_(__VA_ARGS__,11,10,9,8,7,6,5,4,3,2,1)
 #endif
 
-#define PROG(VS,FS,P,...) {VS, FS, P, NARG(__VA_ARGS__), {__VA_ARGS__}, 0}
+#define PROG(VS,FS) {VS, FS, 0}
 
 #define LOC(N, S) ((t_location){N, (S)})
 
 #define FTVU ftv_uninitialized()
 #define MESH(US, P, IN, FI) {(US), (P), (IN), (FI), FTVU, FTVU, {0, 0, 0}}
 
-int				sp_loadconf_shaders(t_env *e)
-{
-	t_shader const		tmp[sp_num_shaders] = {
+#define VSHADER(N, F, ...) {SHD_PATH(N), F, NARG(__VA_ARGS__), {__VA_ARGS__}, 0}
+#define FSHADER(N, F) {SHD_PATH(N), F, 0}
 
-	{SHADER_PATH("scop.vert"), GL_VERTEX_SHADER, 0},
-	{SHADER_PATH("scop.frag"), GL_FRAGMENT_SHADER, 0},
-	{SHADER_PATH("tex.vert"), GL_VERTEX_SHADER, 0},
-	{SHADER_PATH("tex.frag"), GL_FRAGMENT_SHADER, 0},
-	{SHADER_PATH("item.vert"), GL_VERTEX_SHADER, 0},
-	{SHADER_PATH("item.frag"), GL_FRAGMENT_SHADER, 0},
-	{SHADER_PATH("land.vert"), GL_VERTEX_SHADER, 0},
-	{SHADER_PATH("land.frag"), GL_FRAGMENT_SHADER, 0},
-	{SHADER_PATH("ptn.vert"), GL_VERTEX_SHADER, 0},
-	{SHADER_PATH("ptn.frag"), GL_FRAGMENT_SHADER, 0},
+/*
+
+po_to_co		//scop
+pocote_to_couv	//tex
+pote_to_couv	//item
+poco_to_co		//land
+poteno_to_uv	//ptn
+
+co_identity		//scop
+couv_blend		//tex
+couv_uv			//item
+uv_identity		//ptn
+
+
+
+
+**
+*/
+int				sp_loadconf_vshaders(t_env *e)
+{
+	t_vshader const		tmp[sp_num_vshaders] = {
+
+	VSHADER("po_to_co.vert", &sp_unif_viewproj2, //model view proj
+			LOC("position", 3)), //color
+	VSHADER("pocote_to_couv.vert", &sp_unif_viewproj2, //model view proj
+			LOC("position", 3), LOC("color", 3), LOC("texCoord", 2)), //color uv
+	VSHADER("pote_to_couv.vert", &sp_unif_viewproj2, //model view proj
+			LOC("position", 3), LOC("texCoord", 2)), //color uv
+	VSHADER("poco_to_co.vert", &sp_unif_viewproj, //viewproj
+			LOC("position", 3), LOC("color", 3)), //color
+	VSHADER("poteno_to_uv.vert", &sp_unif_viewproj2, //model view proj
+			LOC("position", 3), LOC("texCoord", 2), LOC("normal", 3)), //uv
 	};
-	memcpy(&e->shaders, &tmp, sizeof(tmp));
+	memcpy(&e->vshaders, &tmp, sizeof(tmp));
+	return (0);
+}
+
+int				sp_loadconf_fshaders(t_env *e)
+{
+	t_fshader const		tmp[sp_num_fshaders] = {
+
+	FSHADER("co_identity.frag", NULL),
+	FSHADER("uv_identity.frag", NULL),
+	FSHADER("couv_blend.frag", NULL),
+	FSHADER("couv_uv.frag", NULL),
+	};
+	memcpy(&e->fshaders, &tmp, sizeof(tmp));
 	return (0);
 }
 
@@ -48,16 +82,11 @@ int				sp_loadconf_programs(t_env *e)
 {
 	t_program const		tmp[sp_num_programs] = {
 
-	PROG(sp_p_vertex, sp_p_fragment, &sp_unif_viewproj2,
-	LOC("position", 3)),
-	PROG(sp_pct_vertex, sp_pct_fragment, &sp_unif_viewproj2,
-	LOC("position", 3), LOC("color", 3), LOC("texCoord", 2)),
-	PROG(sp_pt_vertex, sp_pt_fragment, &sp_unif_viewproj2,
-	LOC("position", 3), LOC("texCoord", 2)),
-	PROG(sp_land_vertex, sp_land_fragment, &sp_unif_viewproj,
-	LOC("position", 3), LOC("color", 3)),
-	PROG(sp_ptn_vertex, sp_ptn_fragment, &sp_unif_viewproj2,
-	LOC("position", 3), LOC("texCoord", 2), LOC("normal", 3)),
+	PROG(sp_po_to_co_vshader, sp_co_identity_fshader),
+	PROG(sp_pocote_to_couv_vshader, sp_couv_uv_fshader),
+	PROG(sp_pote_to_couv_vshader, sp_couv_uv_fshader),
+	PROG(sp_poco_to_co_vshader, sp_co_identity_fshader),
+	PROG(sp_poteno_to_uv_vshader, sp_uv_identity_fshader),
 	};
 	memcpy(&e->programs, &tmp, sizeof(tmp));
 	return (0);

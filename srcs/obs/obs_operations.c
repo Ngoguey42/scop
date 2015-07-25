@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/21 09:02:18 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/24 14:55:42 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/25 09:54:59 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	render_ob(t_env const *e, t_ob *ob)
 {
 	t_model const	*mo = MOOFOB(e, ob);
 	t_mesh const	*me = MEOFMO(e, mo);
-	
+
 	if (mo->update_uniforms != NULL)
 		mo->update_uniforms(e, ob);
 	if (mo->texture != sp_no_texture)
@@ -50,10 +50,14 @@ void		render_prog_obs(t_env const *e, t_program_index i)
 {
 	t_program const		*p = e->programs + i;
 	t_ftvector const	*prv = e->obs + i;
+	void				(*const vsunif_update)() = VSOFP(e, p)->unif_update;
+	void				(*const fsunif_update)() = FSOFP(e, p)->unif_update;
 
 	glUseProgram(p->handle);
-	if (p->update_uniforms != NULL)
-		p->update_uniforms(e, p);
+	if (vsunif_update != NULL)
+		vsunif_update(e, p);
+	if (fsunif_update != NULL)
+		fsunif_update(e, p);
 	ftv_foreach((void*)prv, &update_ob, (void*)e);
 	ftv_foreach((void*)prv, &render_ob, (void*)e);
 	return ;
