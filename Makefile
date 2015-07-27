@@ -74,6 +74,7 @@ O_FILES := obj/srcs/env_operations.o \
 	obj/srcs/objmodel/obj_parsing_mtl.o \
 	obj/srcs/objmodel/objmodel_operations.o \
 	obj/srcs/obs/obs_operations.o \
+	obj/srcs/obs/obs_render.o \
 	obj/srcs/shaders/shader_operations.o \
 	obj/srcs/textures/mapping_xy.o \
 	obj/srcs/textures/parse_tga.o \
@@ -216,6 +217,10 @@ obj/srcs/objmodel/objmodel_operations.o: srcs/objmodel/objmodel_operations.c inc
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
 obj/srcs/obs/obs_operations.o: srcs/obs/obs_operations.c include/fterror.h include/ftmath.h include/objmodel.h include/objmodel_parsing.h include/scop.h include/scop_conf.h include/scop_types.h
+	@mkdir -p obj/srcs/obs 2> /dev/null || true
+	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
+
+obj/srcs/obs/obs_render.o: srcs/obs/obs_render.c include/fterror.h include/ftmath.h include/objmodel.h include/objmodel_parsing.h include/scop.h include/scop_conf.h include/scop_types.h
 	@mkdir -p obj/srcs/obs 2> /dev/null || true
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 

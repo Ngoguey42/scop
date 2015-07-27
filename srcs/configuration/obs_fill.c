@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/22 13:44:32 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/27 10:41:29 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/27 12:13:15 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,12 @@ int			sp_fill_obs(t_env *e)
 		t_ob    ob[1];
 
 		ob->hidden = false;
-	
 		ob->modified = true;
 		ob->model = sp_square_model;
 		ob->rotation = ATOV3(0.f, 0.f, 0.f);
 		ob->scale = ATOV3(1.f, 1.f, 1.f);
 		ob->position = ATOV3(0.f, 0.f, -5.f);
 		push_ob(e, ob);
-
 	}
 	{
 		t_ob    ob[1];
