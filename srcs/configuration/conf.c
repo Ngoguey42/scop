@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 12:53:00 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/27 18:30:25 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/27 19:06:32 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ int				sp_loadconf_meshes(t_env *e)
 {
 	t_mesh const		tmp[sp_num_meshes] = {
 
-	MESH(GL_STATIC_DRAW, sp_pt_program, true, &sp_meshfill_plane),
+	MESH(GL_STATIC_DRAW, sp_ptn_program, true, &sp_meshfill_plane),
 	MESH(GL_STATIC_DRAW, sp_pcn_program, true, &sp_meshfill_square),
 	MESH(GL_STATIC_DRAW, sp_land_program, true, &sp_meshfill_land),
 	MESH(GL_STATIC_DRAW, sp_ptn_program, true, &sp_meshfill_item2),

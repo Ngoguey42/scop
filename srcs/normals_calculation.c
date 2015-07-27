@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/27 16:22:14 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/27 18:47:50 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/27 19:10:22 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,12 @@ static void	calc_normals(void *const dst, t_ftvector const *vert,
 		fvect[0] = v3_sub(*SRCPTR_V3(vert, f[0]), *SRCPTR_V3(vert, f[1]));
 		fvect[1] = v3_sub(*SRCPTR_V3(vert, f[1]), *SRCPTR_V3(vert, f[2]));
 		fvect[2] = v3_sub(*SRCPTR_V3(vert, f[2]), *SRCPTR_V3(vert, f[0]));
-		ADD_V3(*DSTPTR_V3(dst, f[0]), v3_cross(v3_inv(fvect[2]), fvect[0]));
-		ADD_V3(*DSTPTR_V3(dst, f[1]), v3_cross(v3_inv(fvect[0]), fvect[1]));
-		ADD_V3(*DSTPTR_V3(dst, f[2]), v3_cross(v3_inv(fvect[1]), fvect[2]));
+		ADD_V3(*DSTPTR_V3(dst, f[0]), v3_cross(v3_inv(fvect[0]), fvect[2]));
+		ADD_V3(*DSTPTR_V3(dst, f[1]), v3_cross(v3_inv(fvect[1]), fvect[0]));
+		ADD_V3(*DSTPTR_V3(dst, f[2]), v3_cross(v3_inv(fvect[2]), fvect[1]));
+		/* ADD_V3(*DSTPTR_V3(dst, f[0]), v3_cross(v3_inv(fvect[2]), fvect[0])); */
+		/* ADD_V3(*DSTPTR_V3(dst, f[1]), v3_cross(v3_inv(fvect[0]), fvect[1])); */
+		/* ADD_V3(*DSTPTR_V3(dst, f[2]), v3_cross(v3_inv(fvect[1]), fvect[2])); */
 		f += 3;
 	}
 	normalize(dst, vert->size);
