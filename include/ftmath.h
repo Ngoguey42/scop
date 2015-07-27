@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 12:16:50 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/20 12:20:26 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/27 17:19:32 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ t_vector3		v3_frontnormed(float const angles[2]);
 t_vector3		v3_cross(t_vector3 a, t_vector3 b);
 t_vector3		v3_sub(t_vector3 a, t_vector3 b);
 t_vector3		v3_add(t_vector3 a, t_vector3 b);
+t_vector3		v3_inv(t_vector3 a);
+t_vector3		v3_div_scalar(t_vector3 a, float q);
 
 /*
 ** MATRIX4

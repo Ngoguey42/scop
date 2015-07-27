@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/15 09:37:05 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/15 09:50:10 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/27 17:17:27 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,14 @@ t_vector3	v3_add(t_vector3 a, t_vector3 b)
 t_vector3	v3_sub(t_vector3 a, t_vector3 b)
 {
 	return (ATOV3(a.x - b.x, a.y - b.y, a.z - b.z));
+}
+
+t_vector3	v3_div_scalar(t_vector3 a, float q)
+{
+	return (ATOV3(a.x / q, a.y / q, a.z / q));
+}
+
+t_vector3	v3_inv(t_vector3 a)
+{
+	return (ATOV3(-a.x, -a.y, -a.z));
 }

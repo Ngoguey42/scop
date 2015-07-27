@@ -6,7 +6,7 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/07/27 14:26:39 by ngoguey           #+#    #+#             //
-//   Updated: 2015/07/27 14:50:14 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/07/27 15:31:58 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -27,7 +27,7 @@ void main()
 {
 	color = texture(ourTexture, texUV);
 	// Ambient
-	float ambientStrength = 0.1f;
+	float ambientStrength = 0.25f;
 	vec3 ambient = ambientStrength * lightColor;
 
 	// Diffuse

@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 12:53:00 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/27 14:48:04 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/27 16:17:47 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ int				sp_loadconf_programs(t_env *e)
 	PROG(sp_pote_to_couv_vshader, sp_couv_uv_fshader),
 	PROG(sp_poco_to_co_vshader, sp_co_identity_fshader),
 	PROG(sp_poteno_to_uv_vshader, sp_uvno_uvli_fshader),
-	/* PROG(sp_poteno_to_uv_vshader, sp_uv_identity_fshader), */
 	};
 	memcpy(&e->programs, &tmp, sizeof(tmp));
 	return (0);
@@ -105,7 +104,7 @@ int				sp_loadconf_models(t_env *e)
 {
 	t_model const		tmp[sp_num_models] = {
 
-	{sp_plane_mesh, sp_metal_texture, &sp_unif_model},
+	{sp_plane_mesh, sp_porcelain_texture, &sp_unif_model},
 	{sp_square_mesh, sp_no_texture, &sp_unif_model},
 	{sp_land_mesh, sp_no_texture, &sp_unif_land},
 	{sp_ptn_mesh, sp_metal_texture, &sp_unif_model},

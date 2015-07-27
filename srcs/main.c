@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 12:08:19 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/27 11:59:39 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/27 16:42:18 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static void		end(t_env *e)
 
 int				main(void)
 {
-	t_env					*e;
+	t_env					*e;	
 
 	srand(time(NULL));
 	qprintf("sizeof(t_env) = %uBytes\n", sizeof(*e));

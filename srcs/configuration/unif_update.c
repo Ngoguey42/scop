@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/21 09:01:30 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/27 14:51:08 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/27 15:29:47 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,6 @@ void			sp_unif_light(t_env const *e, t_program const *p)
 	glUniform3f(lploc, 10.f, 30.f, 0.f);
 	glUniform3f(vpoloc, e->cpos.x, e->cpos.y, e->cpos.z);
 	glUniform3f(lcloc, 1.0f, 1.0f, 1.0f);
+	/* glUniform3f(lcloc, 64.f / 255.f, 156.f / 255.f, 255.f / 255.f); */
 	return ;
 }
