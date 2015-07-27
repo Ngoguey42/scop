@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/15 11:35:09 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/22 14:53:17 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/27 11:14:11 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static void		update_angles_mouse(t_env *e, t_bool *up)
 	return ;
 }
 
-static void		update_angles_keyboard(t_env *e, float el, t_bool *up)
+static void		update_angles_keyboard(t_env *e, t_bool *up)
 {
 	int const	mvya = e->states[sp_right_key] - e->states[sp_left_key];
 	int const	mvpi = e->states[sp_up_key] - e->states[sp_down_key];
@@ -62,25 +62,25 @@ static void		update_angles_keyboard(t_env *e, float el, t_bool *up)
 	if (mvya)
 	{
 		*up = true;
-		e->cangles[0] += 1.0 * mvya / (float)(mvpi * mvpi + 1) * el;
+		e->cangles[0] += 1.0 * mvya / (float)(mvpi * mvpi + 1) * e->time_el;
 	}
 	if (mvpi)
 	{
 		*up = true;
-		e->cangles[1] += 1.0 * mvpi / (float)(mvya * mvya + 1) * el;
+		e->cangles[1] += 1.0 * mvpi / (float)(mvya * mvya + 1) * e->time_el;
 	}
 	return ;
 }
 
-void			sp_update_states(t_env *e, double el)
+void			sp_update_states(t_env *e)
 {
 	t_bool	update;
 
 	update = false;
 	if (glfwGetInputMode(e->win, GLFW_CURSOR) == GLFW_CURSOR_DISABLED)
 		update_angles_mouse(e, &update);
-	update_angles_keyboard(e, el, &update);
-	updade_pos(e, (float)el * MOVEMENT_SPEEDF, &update);
+	update_angles_keyboard(e, &update);
+	updade_pos(e, (float)e->time_el * MOVEMENT_SPEEDF, &update);
 	if (e->cangles[1] > CAMERA_POSBOUNDF)
 		e->cangles[1] = CAMERA_POSBOUNDF;
 	if (e->cangles[1] < -CAMERA_POSBOUNDF)

@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/15 13:44:48 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/27 10:50:05 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/27 11:13:06 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ t_env			*sp_instance(void)
 
 void			sp_clean_env(t_env *e)
 {
+	(void)e;
 	return ;
 }
 

@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 10:07:19 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/27 10:40:42 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/27 11:12:25 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,7 +137,6 @@ typedef struct					s_ob
 typedef struct					s_env
 {
 	GLFWwindow					*win;
-	int							states[sp_num_keys];
 
 	t_vshader					vshaders[sp_num_vshaders];
 	t_fshader					fshaders[sp_num_fshaders];
@@ -147,6 +146,7 @@ typedef struct					s_env
 	t_model						models[sp_num_models];
 	t_ftvector					obs[sp_num_programs];
 	
+	int							states[sp_num_keys];
 	double						mpos[2];
 	
 	float						cangles[2];
@@ -155,6 +155,10 @@ typedef struct					s_env
 
 	t_matrix4					projection;
 	t_matrix4					viewproj;
+
+	double						time_start;
+	double						time_cur;
+	double						time_el;
 }								t_env;
 
 # define VSOFP(E, P)	(&(E)->vshaders[(P)->vshader])

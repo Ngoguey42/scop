@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/21 09:02:18 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/27 10:41:12 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/27 11:11:15 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void		render_prog_obs(t_env const *e, t_program_index i)
 	return ;
 }
 
-void		sp_render_obs(t_env const *e, double el)
+void		sp_render_obs(t_env const *e)
 {
 	t_program_index		i;
 
@@ -75,7 +75,6 @@ void		sp_render_obs(t_env const *e, double el)
 		render_prog_obs(e, i);
 	}
 	return ;
-	(void)el;
 }
 
 void        sp_delete_obs(t_env *e)

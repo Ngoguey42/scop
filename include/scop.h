@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 12:07:31 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/25 09:57:16 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/27 11:57:10 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@
 */
 void		sp_toggle_mouse_state(GLFWwindow *w, t_env *e);
 void		sp_keystate(t_env *e, int a, t_bool newstate);
-void		sp_update_states(t_env *e, double el);
+void		sp_update_states(t_env *e);
 
 /*
 ** ENV
@@ -79,7 +79,8 @@ int			sp_init_programs(t_env *e);
 int			sp_init_textures(t_env *e);
 void		sp_delete_textures(t_env *e);
 int			parse_tga(char const *filepath, t_ftvector *v, int dim[2]);
-void		sp_wrap_texture_planxy(t_ftvector *v, float scale, float imgratio);
+void		sp_wrap_texture_planxy(t_ftvector *v,
+								   float scale, float imgratio);
 
 /*
 ** MESHES
@@ -109,7 +110,7 @@ void            sp_unif_viewproj2(t_env const *e, t_program const *p);
 */
 int			sp_init_obs(t_env *e);
 void		sp_delete_obs(t_env *e);
-void        sp_render_obs(t_env const *e, double el);
+void        sp_render_obs(t_env const *e);
 int         sp_fill_obs(t_env *e);
 
 

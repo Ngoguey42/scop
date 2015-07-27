@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 12:08:19 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/27 10:59:07 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/27 11:59:39 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ static int		begin(t_env *e)
 		return (ERROR("sp_init_programs(e)"), 1);
     if (sp_init_meshes(e))
 		return (ERROR("sp_init_meshes(e)"), 1);
-	/* ft_leaks(); */
     if (sp_init_textures(e))
 		return (ERROR("sp_init_textures(e)"), 1);
     if (sp_init_obs(e))
@@ -36,22 +35,22 @@ static int		begin(t_env *e)
 
 static void		loop(t_env *e)
 {
-	double		cur_time;
-	double		el_time;
 	double		last_time;
 
-	last_time = glfwGetTime();
+	e->time_start = glfwGetTime();
+	e->time_cur = e->time_start;
+	last_time = e->time_start;
 	while (!glfwWindowShouldClose(e->win))
 	{
-		cur_time = glfwGetTime();
-		el_time = cur_time - last_time;
-		sp_update_states(e, el_time);
+		e->time_cur = glfwGetTime();
+		e->time_el = e->time_cur - last_time;
+		sp_update_states(e);
 		glClearColor(155. / 256., 216. / 256., 220. / 256., 1.f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		sp_render_obs(e, el_time);
+		sp_render_obs(e);
 		glfwSwapBuffers(e->win);
 		glfwPollEvents();
-		last_time = cur_time;
+		last_time = e->time_cur;
 	}
 	return ;
 }
@@ -65,8 +64,6 @@ static void		end(t_env *e)
 	sp_delete_shaders(e);
 	sp_disable_glfw(e);
 	sp_clean_env(e);
-	/* clean everything */
-	(void)e;
 	return ;
 }
 
@@ -75,15 +72,15 @@ int				main(void)
 	t_env					*e;
 
 	srand(time(NULL));
-	qprintf("sizeof(t_env) = %u\n", sizeof(*e));
+	qprintf("sizeof(t_env) = %uBytes\n", sizeof(*e));
 	e = malloc(sizeof(*e));
 	if (e == NULL)
-		return (1);
+		return (ERROR("Env allocation failed"), 1);
 	if (begin(e))
 		return (1);
 	loop(e);
 	end(e);
 	free(e);
-	ft_leaks();
+	/* ft_leaks(); */
 	return (0);
 }

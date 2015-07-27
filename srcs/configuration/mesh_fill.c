@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 15:57:45 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/27 10:59:00 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/27 11:57:15 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,15 +39,12 @@ int				sp_meshfill_item2(t_env const *e, t_mesh *me)
 
 	/* op_init_instance(m, "res/new_csie_b1.obj"); */
 	/* op_init_instance(m, "res/cessna.obj"); */
-	T;
 	(void)op_init_instance(m, "res/Pretty_House.obj");
 	/* op_init_instance(m, "res/alfa147.obj"); */
 	/* op_init_instance(m, "res/42.obj"); */
-	T;
 	if (op_parse_obj(m))
 		return (ERROR("op_parse_obj(m)"), 1);
 	/* sp_wrap_texture_planxy(m, 1.8f, 442.f / 405.f); */
-	T;
 	op_swap_vectors(m, &me->vertices, &me->faces);
 	sp_clean_objmodel(m);
 	(void)e;
@@ -86,26 +83,14 @@ int				sp_meshfill_land(t_env const *e, t_mesh *me)
 	if (ftv_insert_count(lines, lines->data, line_points))
 		sp_enomem();
 	sp_fill_landgrid(lines);
-	/* T; */
-	/* qprintf("RESERVING vert: %u\n", lines->size * lines->size); */
-	
 	if (ftv_reserve(&me->vertices, lines->size * lines->size))
 		sp_enomem();
-	/* T; */
 	sp_fill_landvertices(lines, &me->vertices, bounds);
-	/* qprintf("SIZE vert: %u\n", me->vertices.size); */
-	/* T; */
 	if (ftv_reserve(&me->faces, (lines->size - 1) * (lines->size - 1) * 2))
 		sp_enomem();
-	/* qprintf("RESERVING faces: %u\n", me->faces.capacity); */
-	/* T; */
 	sp_fill_landfaces(lines, &me->faces);
-	/* qprintf("SIZE faces: %u\n", me->faces.size); */
-	/* T; */
 	sp_fill_landrgb(&me->vertices, bounds);
-	/* T; */
 	ftv_release(lines, NULL);
-	/* T; */
 	return (0);
 	(void)e;
 }
