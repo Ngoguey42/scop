@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/01 12:32:53 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/25 09:53:20 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/27 14:39:35 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int		check_program_error(GLuint program, GLuint flag)
 	if (*success == GL_FALSE)
 	{
 		glGetProgramInfoLog(program, sizeof(msg), NULL, msg);
-		qprintf("\033[35m%s\033[0m", msg);
+		qprintf("\033[35m%s\033[0m\n", msg);
 		return (1);
 	}
 	return (0);

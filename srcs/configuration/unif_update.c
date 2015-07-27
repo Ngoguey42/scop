@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/21 09:01:30 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/22 18:29:09 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/27 14:51:08 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,17 @@ void			sp_unif_viewproj(t_env const *e, t_program const *p)
 	GLuint const	loc = glGetUniformLocation(p->handle, "viewproj");
 
 	glUniformMatrix4fv(loc, 1, GL_TRUE, (float*)&e->viewproj);
+	return ;
+}
+
+void			sp_unif_light(t_env const *e, t_program const *p)
+{
+	GLuint const	lploc = glGetUniformLocation(p->handle, "lightPos");
+	GLuint const	vpoloc = glGetUniformLocation(p->handle, "viewPos");
+	GLuint const	lcloc = glGetUniformLocation(p->handle, "lightColor");
+
+	glUniform3f(lploc, 10.f, 30.f, 0.f);
+	glUniform3f(vpoloc, e->cpos.x, e->cpos.y, e->cpos.z);
+	glUniform3f(lcloc, 1.0f, 1.0f, 1.0f);
 	return ;
 }

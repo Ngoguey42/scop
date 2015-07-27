@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 10:33:54 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/25 10:09:16 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/27 14:28:23 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ typedef enum				e_fshader_index
 	sp_uv_identity_fshader,
 	sp_couv_blend_fshader,
 	sp_couv_uv_fshader,
+	sp_uvno_uvli_fshader,
 	sp_num_fshaders,
 }							t_fshader_index;
 

@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 12:53:00 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/27 09:23:23 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/27 14:48:04 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int				sp_loadconf_vshaders(t_env *e)
 	LOC("position", 3), LOC("texCoord", 2)),
 	VSHADER("poco_to_co.vert", &sp_unif_viewproj,
 	LOC("position", 3), LOC("color", 3)),
-	VSHADER("poteno_to_uv.vert", &sp_unif_viewproj2,
+	VSHADER("poteno_to_uv.vert", &sp_unif_viewproj,
 	LOC("position", 3), LOC("texCoord", 2), LOC("normal", 3)),
 	};
 	memcpy(&e->vshaders, &tmp, sizeof(tmp));
@@ -55,6 +55,7 @@ int				sp_loadconf_fshaders(t_env *e)
 	FSHADER("uv_identity.frag", NULL),
 	FSHADER("couv_blend.frag", NULL),
 	FSHADER("couv_uv.frag", NULL),
+	FSHADER("uvno_uvli.frag", &sp_unif_light),
 	};
 	memcpy(&e->fshaders, &tmp, sizeof(tmp));
 	return (0);
@@ -68,7 +69,8 @@ int				sp_loadconf_programs(t_env *e)
 	PROG(sp_pocote_to_couv_vshader, sp_couv_uv_fshader),
 	PROG(sp_pote_to_couv_vshader, sp_couv_uv_fshader),
 	PROG(sp_poco_to_co_vshader, sp_co_identity_fshader),
-	PROG(sp_poteno_to_uv_vshader, sp_uv_identity_fshader),
+	PROG(sp_poteno_to_uv_vshader, sp_uvno_uvli_fshader),
+	/* PROG(sp_poteno_to_uv_vshader, sp_uv_identity_fshader), */
 	};
 	memcpy(&e->programs, &tmp, sizeof(tmp));
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 15:57:45 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/27 11:57:15 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/27 14:16:03 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ int				sp_meshfill_item2(t_env const *e, t_mesh *me)
 
 	/* op_init_instance(m, "res/new_csie_b1.obj"); */
 	/* op_init_instance(m, "res/cessna.obj"); */
-	(void)op_init_instance(m, "res/Pretty_House.obj");
-	/* op_init_instance(m, "res/alfa147.obj"); */
+	/* (void)op_init_instance(m, "res/Pretty_House.obj"); */
+	op_init_instance(m, "res/alfa147.obj");
 	/* op_init_instance(m, "res/42.obj"); */
 	if (op_parse_obj(m))
 		return (ERROR("op_parse_obj(m)"), 1);
