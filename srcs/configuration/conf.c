@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 12:53:00 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/27 16:17:47 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/27 18:30:25 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ int				sp_loadconf_vshaders(t_env *e)
 	LOC("position", 3), LOC("color", 3)),
 	VSHADER("poteno_to_uv.vert", &sp_unif_viewproj,
 	LOC("position", 3), LOC("texCoord", 2), LOC("normal", 3)),
+	VSHADER("pocono_to_co.vert", &sp_unif_viewproj,
+	LOC("position", 3), LOC("color", 3), LOC("normal", 3)),
 	};
 	memcpy(&e->vshaders, &tmp, sizeof(tmp));
 	return (0);
@@ -56,6 +58,7 @@ int				sp_loadconf_fshaders(t_env *e)
 	FSHADER("couv_blend.frag", NULL),
 	FSHADER("couv_uv.frag", NULL),
 	FSHADER("uvno_uvli.frag", &sp_unif_light),
+	FSHADER("cono_coli.frag", &sp_unif_light),
 	};
 	memcpy(&e->fshaders, &tmp, sizeof(tmp));
 	return (0);
@@ -70,6 +73,7 @@ int				sp_loadconf_programs(t_env *e)
 	PROG(sp_pote_to_couv_vshader, sp_couv_uv_fshader),
 	PROG(sp_poco_to_co_vshader, sp_co_identity_fshader),
 	PROG(sp_poteno_to_uv_vshader, sp_uvno_uvli_fshader),
+	PROG(sp_pocono_to_co_vshader, sp_cono_coli_fshader),
 	};
 	memcpy(&e->programs, &tmp, sizeof(tmp));
 	return (0);
@@ -92,7 +96,7 @@ int				sp_loadconf_meshes(t_env *e)
 	t_mesh const		tmp[sp_num_meshes] = {
 
 	MESH(GL_STATIC_DRAW, sp_pt_program, true, &sp_meshfill_plane),
-	MESH(GL_STATIC_DRAW, sp_p_program, true, &sp_meshfill_square),
+	MESH(GL_STATIC_DRAW, sp_pcn_program, true, &sp_meshfill_square),
 	MESH(GL_STATIC_DRAW, sp_land_program, true, &sp_meshfill_land),
 	MESH(GL_STATIC_DRAW, sp_ptn_program, true, &sp_meshfill_item2),
 	};

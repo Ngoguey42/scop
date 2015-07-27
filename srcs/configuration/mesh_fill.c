@@ -6,13 +6,14 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 15:57:45 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/27 15:42:34 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/27 18:30:49 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
 #include "objmodel.h"
 #include <math.h>
+#include <string.h>
 
 int				sp_meshfill_plane(t_env const *e, t_mesh *me)
 {
@@ -54,19 +55,52 @@ int				sp_meshfill_item2(t_env const *e, t_mesh *me)
 
 int				sp_meshfill_square(t_env const *e, t_mesh *me)
 {
+	t_ftvector		vert[1];
+
 	GLfloat vertices[] = {
-		0.5f,  0.5f, 0.0f,  // Top Right
-		0.5f, -0.5f, 0.0f,  // Bottom Right
-		-0.5f, -0.5f, 0.0f,  // Bottom Left
-		-0.5f,  0.5f, 0.0f   // Top Left
+		0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f,    // Top Right
+		0.5f, -0.5f, 0.0f,   0.0f, 1.0f, 0.0f,    // Bottom Right
+		-0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 1.0f,   // Bottom Left
+		-0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 0.0f,   // Top Left 
 	};
 	GLuint indices[] = {  // Note that we start from 0!
 		0, 1, 3,  // First Triangle
 		1, 2, 3   // Second Triangle
 	};
 
-	(void)ftv_insert_range(&me->vertices, vertices, 4);
+	ftv_init_instance(vert, sizeof(float) * 6);
+	
+	(void)ftv_insert_range(vert, vertices, 4);
 	(void)ftv_insert_range(&me->faces, indices, 2);
+
+	int	i;
+	int width;
+	int	j;
+	
+	width = 6;
+	for (i = 0; i < (int)vert->size; i++)
+	{
+		qprintf("[%d]", i);
+		for (j = 0; j < width; j++)
+			qprintf("% .2f ", i,
+					((float*)vert->data)[i * width + j]);
+		qprintf("\n");
+	}
+
+	sp_normals_add(vert, &me->faces);
+	width = 9;
+	for (i = 0; i < (int)vert->size; i++)
+	{
+		qprintf("[%d]", i);
+		for (j = 0; j < width; j++)
+			qprintf("% .2f ", i,
+					((float*)vert->data)[i * width + j]);
+		qprintf("\n");
+	}
+
+	memcpy(&me->vertices, vert, sizeof(t_ftvector));
+	
+
 	(void)e;
 	(void)me;
 	return (0);

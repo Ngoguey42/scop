@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 10:33:54 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/27 14:28:23 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/27 18:24:31 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ typedef enum				e_vshader_index
 	sp_pote_to_couv_vshader,
 	sp_poco_to_co_vshader,
 	sp_poteno_to_uv_vshader,
+	sp_pocono_to_co_vshader,
 	sp_num_vshaders
 }							t_vshader_index;
 
@@ -74,6 +75,7 @@ typedef enum				e_fshader_index
 	sp_couv_blend_fshader,
 	sp_couv_uv_fshader,
 	sp_uvno_uvli_fshader,
+	sp_cono_coli_fshader,
 	sp_num_fshaders,
 }							t_fshader_index;
 
@@ -84,6 +86,7 @@ typedef enum				e_program_index
 	sp_pt_program,
 	sp_land_program,
 	sp_ptn_program,
+	sp_pcn_program,
 	sp_num_programs
 }							t_program_index;
 

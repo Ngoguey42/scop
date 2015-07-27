@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 12:07:31 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/27 14:47:49 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/27 17:25:33 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,11 +92,13 @@ int			sp_meshfill_item2(t_env const *e, t_mesh *me);
 int			sp_meshfill_square(t_env const *e, t_mesh *me);
 int			sp_meshfill_land(t_env const *e, t_mesh *me);
 
-void        sp_fill_landgrid(t_ftvector *lines);
-void    sp_fill_landvertices(t_ftvector const *lines, t_ftvector *faces,
+void		sp_fill_landgrid(t_ftvector *lines);
+void		sp_fill_landvertices(t_ftvector const *lines, t_ftvector *faces,
 	float bounds[2]);
-void    sp_fill_landfaces(t_ftvector const *lines, t_ftvector *vertices);
-void    sp_fill_landrgb(t_ftvector *vertices, float const bounds[2]);
+void		sp_fill_landfaces(t_ftvector const *lines, t_ftvector *vertices);
+void		sp_fill_landrgb(t_ftvector *vertices, float const bounds[2]);
+void		sp_normals_add(t_ftvector *vertices, t_ftvector const *faces);
+
 /*
 ** UNIFORMS
 */
