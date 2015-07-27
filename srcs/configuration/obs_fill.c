@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/22 13:44:32 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/27 18:33:44 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/27 19:05:00 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ int			sp_fill_obs(t_env *e)
 		ob->modified = true;
 		ob->model = sp_square_model;
 		ob->rotation = ATOV3(0.f, 0.f, 0.f);
-		ob->scale = ATOV3(1.f, 1.f, 1.f);
-		ob->position = ATOV3(0.f, 0.f, 2.f);
+		ob->scale = ATOV3(4.f, 4.f, 4.f);
+		ob->position = ATOV3(0.f, -5.f, 2.f);
 		push_ob(e, ob);
 	}
 	{
@@ -63,7 +63,8 @@ int			sp_fill_obs(t_env *e)
 		ob->model = sp_ptn_model;
 		/* ob->rotation = ATOV3(0.f, 0.f, 0.f); */
 		ob->rotation = ATOV3(0.f, 0.f, -M_PI / 2.f);
-		ob->scale = ATOV3(0.2f, 0.2f, 0.2f);
+		/* ob->scale = ATOV3(0.2f, 0.2f, 0.2f); */
+		ob->scale = ATOV3(0.17f, 0.17f, 0.17f);
 		/* ob->scale = ATOV3(0.05f, 0.05f, 0.05f); */
 		/* ob->scale = ATOV3(1.f, 1.f, 1.f); */
 		ob->position = ATOV3(-0.f, -0.f, -20.f);
