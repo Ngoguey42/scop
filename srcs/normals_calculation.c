@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/27 16:22:14 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/27 18:20:26 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/27 18:47:50 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@
 
 #define ADD_V3(DST, OTHER) (DST) = v3_add((DST), (OTHER))
 
+t_ftvector *lol;
+
 static void	normalize(void *const dst, size_t const nvert)
 {
 	size_t	i;
@@ -37,6 +39,12 @@ static void	normalize(void *const dst, size_t const nvert)
 	return ;
 }
 
+void printvertice(void *env, float *vert, int i)
+{
+qprintf("%2d: (% 5.2f, % 5.2f, % 5.2f)\n", i, vert[0], vert[1], vert[2]);
+(void)env;
+}
+
 static void	calc_normals(void *const dst, t_ftvector const *vert,
 						 t_ftvector const *faces)
 {
@@ -44,6 +52,7 @@ static void	calc_normals(void *const dst, t_ftvector const *vert,
 	t_ui const *const	faceend = faces->data + faces->chunk_size * faces->size;
 	t_vector3			fvect[3];
 
+	ftv_foreachi(lol, &printvertice, NULL);
 	while (f < faceend)
 	{
 		fvect[0] = v3_sub(*SRCPTR_V3(vert, f[0]), *SRCPTR_V3(vert, f[1]));
@@ -82,14 +91,17 @@ void		sp_normals_add(t_ftvector *vertices, t_ftvector const *faces)
 {
 	t_ftvector	normals[1];
 	t_ftvector	newv[1];
+	lol = normals;
 
 	assert(vertices->size > 0);
 	if (ftv_init_instance(normals, DATA_WIDTH))
 		sp_enomem();
 	ftv_push_back_unsafe(normals, normals->data);	
 	bzero(normals->data, normals->chunk_size);
+	qprintf("before\n"); ftv_foreachi(lol, &printvertice, NULL); qprintf("\n");
 	if (ftv_insert_count(normals, normals->data, vertices->size - 1))
 		sp_enomem();
+	qprintf("before\n"); ftv_foreachi(lol, &printvertice, NULL); qprintf("\n");
 	calc_normals(normals->data, vertices, faces);
 	if (ftv_init_instance(newv, vertices->chunk_size + 3 * sizeof(float)))
 		sp_enomem();
