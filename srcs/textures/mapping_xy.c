@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/18 10:52:20 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/24 14:51:42 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/27 10:02:48 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static void	fill(t_ftvector *new, t_ftvector const *old, float fact[2])
 		memcpy(tmp, ptr, sizeof(*tmp) * 3);
 		tmp[3] = ptr[0] * fact[0];
 		tmp[4] = ptr[1] * fact[1];
-		ftv_push_back(new, tmp);
+		ftv_push_back_unsafe(new, tmp);
 		ptr += 3;
 	}
 	return ;

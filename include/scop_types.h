@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 10:07:19 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/25 09:53:00 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/27 10:40:42 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,7 @@ typedef struct					s_ob
 	t_vector3					position;
 	t_vector3					rotation;
 	t_vector3					scale;
+	t_bool						hidden;
 	t_bool						modified;
 	t_matrix4					mat;
 	float						values[3];
@@ -145,7 +146,7 @@ typedef struct					s_env
 	t_texture					textures[sp_num_textures];
 	t_model						models[sp_num_models];
 	t_ftvector					obs[sp_num_programs];
-
+	
 	double						mpos[2];
 	
 	float						cangles[2];

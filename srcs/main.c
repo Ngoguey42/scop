@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 12:08:19 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/24 15:11:21 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/27 10:59:07 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ static int		begin(t_env *e)
 		return (ERROR("sp_init_programs(e)"), 1);
     if (sp_init_meshes(e))
 		return (ERROR("sp_init_meshes(e)"), 1);
+	/* ft_leaks(); */
     if (sp_init_textures(e))
 		return (ERROR("sp_init_textures(e)"), 1);
     if (sp_init_obs(e))
@@ -57,6 +58,13 @@ static void		loop(t_env *e)
 
 static void		end(t_env *e)
 {
+	sp_delete_obs(e);
+	sp_delete_textures(e);
+	sp_delete_meshes(e);
+	sp_delete_programs(e);
+	sp_delete_shaders(e);
+	sp_disable_glfw(e);
+	sp_clean_env(e);
 	/* clean everything */
 	(void)e;
 	return ;
@@ -76,6 +84,6 @@ int				main(void)
 	loop(e);
 	end(e);
 	free(e);
-	/* ft_leaks(); */
+	ft_leaks();
 	return (0);
 }

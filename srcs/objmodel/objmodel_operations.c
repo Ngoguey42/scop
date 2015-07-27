@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/15 08:26:17 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/24 13:54:27 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/27 10:58:50 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,10 @@ void			op_init_instance(t_objmodel *m, char const *filepath)
 
 void            op_swap_vectors(t_objmodel *m, t_ftvector *v, t_ftvector *f)
 {
+	if (v->data != NULL)
+		ftv_release(v, NULL);
+	if (f->data != NULL)
+		ftv_release(f, NULL);
 	memcpy(v, &m->vertices, sizeof(t_ftvector));
 	if (m->faces.data != NULL)
 		memcpy(f, &m->faces, sizeof(t_ftvector));

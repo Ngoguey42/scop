@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/22 13:44:32 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/24 15:14:19 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/27 10:41:29 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,42 +17,56 @@ static void	push_ob(t_env *e, t_ob const *ob)
 {
 	t_program_index const	pi = MEOFOB(e, ob)->program;
 
-	ftv_push_back(e->obs + pi, ob);
+	if (ftv_push_back(e->obs + pi, ob))
+		sp_enomem();
 	return ;
 }
 
 int			sp_fill_obs(t_env *e)
 {
-	(void)e;
-	(void)push_ob;
-	t_ob    ob[1];
+	{
+		t_ob    ob[1];
 
-	ob->model = sp_plane_model;
-	ob->rotation = ATOV3(0.f, 0.f, 0.f);
-	ob->scale = ATOV3(0.1f, 0.1f, 0.1f);
-	/* ob->scale = ATOV3(1.f, 1.f, 1.f); */
-	ob->position = ATOV3(-0.f, -0.f, -0.f);
-	/* ob->mat = m4_translate_nonuniform(ob->position); */
-	push_ob(e, ob);
-	
-	ob->model = sp_square_model;
-	ob->rotation = ATOV3(0.f, 0.f, 0.f);
-	ob->scale = ATOV3(1.f, 1.f, 1.f);
-	ob->position = ATOV3(0.f, 0.f, -5.f);
-	/* ob->mat = m4_translate_nonuniform(ob->position); */
-	push_ob(e, ob);
+		ob->hidden = false;
+		ob->modified = true;
+		ob->model = sp_plane_model;
+		ob->rotation = ATOV3(0.f, 0.f, 0.f);
+		ob->scale = ATOV3(0.1f, 0.1f, 0.1f);
+		ob->position = ATOV3(-0.f, -0.f, -0.f);
+		push_ob(e, ob);
+	}
+	{
+		t_ob    ob[1];
 
-	ob->model = sp_land_model;
-	push_ob(e, ob);
+		ob->hidden = false;
 	
-	ob->model = sp_ptn_model;
-	ob->rotation = ATOV3(0.f, 0.f, -M_PI / 2.f);
-	ob->scale = ATOV3(0.05f, 0.05f, 0.05f);
-	/* ob->scale = ATOV3(0.05f, 0.05f, 0.05f); */
-	ob->position = ATOV3(-0.f, -0.f, -20.f);
-	/* ob->position = ATOV3(-5.f, -0.f, -5.f); */
-	/* ob->rotation = ATOV3(0.f, 0.f, 0.f); */
-	/* ob->scale = ATOV3(.5f, .5f, .5f); */
-	push_ob(e, ob);
+		ob->modified = true;
+		ob->model = sp_square_model;
+		ob->rotation = ATOV3(0.f, 0.f, 0.f);
+		ob->scale = ATOV3(1.f, 1.f, 1.f);
+		ob->position = ATOV3(0.f, 0.f, -5.f);
+		push_ob(e, ob);
+
+	}
+	{
+		t_ob    ob[1];
+
+		ob->hidden = false;
+		ob->modified = true;
+		ob->model = sp_land_model;
+		push_ob(e, ob);
+	
+	}
+	{
+		t_ob    ob[1];
+
+		ob->hidden = false;
+		ob->modified = true;
+		ob->model = sp_ptn_model;
+		ob->rotation = ATOV3(0.f, 0.f, -M_PI / 2.f);
+		ob->scale = ATOV3(0.05f, 0.05f, 0.05f);
+		ob->position = ATOV3(-0.f, -0.f, -20.f);
+		push_ob(e, ob);
+	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 15:57:45 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/24 15:15:01 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/27 10:59:00 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,17 @@ int				sp_meshfill_plane(t_env const *e, t_mesh *me)
 	t_objmodel	m[1];
 	/* op_init_instance(m, "res/teapot2.obj"); */
 
-	op_init_instance(m, "res/cessna.obj");
+	(void)op_init_instance(m, "res/cessna.obj");
 	/* op_init_instance(m, "res/teapot.obj"); */
 	if (op_parse_obj(m))
 		return (ERROR("op_parse_obj(m)"), 1);
 	op_swap_vectors(m, &me->vertices, &me->faces);
 	/* sp_wrap_texture_planxy(&me->vertices, 1.8f, 442.f / 405.f);//porcelain */
-	sp_wrap_texture_planxy(&me->vertices, 6.f, 1.f);//metal
+	(void)sp_wrap_texture_planxy(&me->vertices, 6.f, 1.f);//metal
 	sp_clean_objmodel(m);
 	(void)e;
 	(void)me;
+	/* ft_leaks(); */
 	return (0);
 }
 
@@ -38,12 +39,15 @@ int				sp_meshfill_item2(t_env const *e, t_mesh *me)
 
 	/* op_init_instance(m, "res/new_csie_b1.obj"); */
 	/* op_init_instance(m, "res/cessna.obj"); */
-	op_init_instance(m, "res/Pretty_House.obj");
+	T;
+	(void)op_init_instance(m, "res/Pretty_House.obj");
 	/* op_init_instance(m, "res/alfa147.obj"); */
 	/* op_init_instance(m, "res/42.obj"); */
+	T;
 	if (op_parse_obj(m))
 		return (ERROR("op_parse_obj(m)"), 1);
 	/* sp_wrap_texture_planxy(m, 1.8f, 442.f / 405.f); */
+	T;
 	op_swap_vectors(m, &me->vertices, &me->faces);
 	sp_clean_objmodel(m);
 	(void)e;
@@ -64,8 +68,8 @@ int				sp_meshfill_square(t_env const *e, t_mesh *me)
 		1, 2, 3   // Second Triangle
 	};
 
-	ftv_push_backn(&me->vertices, vertices, 4);
-	ftv_push_backn(&me->faces, indices, 2);
+	(void)ftv_insert_range(&me->vertices, vertices, 4);
+	(void)ftv_insert_range(&me->faces, indices, 2);
 	(void)e;
 	(void)me;
 	return (0);
@@ -76,15 +80,32 @@ int				sp_meshfill_land(t_env const *e, t_mesh *me)
 	t_ftvector		lines[1];
 	size_t const	line_points = (int)pow(2., (double)POINTS_DEPTHI);
 	float			bounds[2];
-	
+
 	if (ftv_init_instance(lines, sizeof(float) * line_points))
 		sp_enomem();
-	ftv_insert(lines, lines->data, line_points);
+	if (ftv_insert_count(lines, lines->data, line_points))
+		sp_enomem();
 	sp_fill_landgrid(lines);
+	/* T; */
+	/* qprintf("RESERVING vert: %u\n", lines->size * lines->size); */
+	
+	if (ftv_reserve(&me->vertices, lines->size * lines->size))
+		sp_enomem();
+	/* T; */
 	sp_fill_landvertices(lines, &me->vertices, bounds);
+	/* qprintf("SIZE vert: %u\n", me->vertices.size); */
+	/* T; */
+	if (ftv_reserve(&me->faces, (lines->size - 1) * (lines->size - 1) * 2))
+		sp_enomem();
+	/* qprintf("RESERVING faces: %u\n", me->faces.capacity); */
+	/* T; */
 	sp_fill_landfaces(lines, &me->faces);
+	/* qprintf("SIZE faces: %u\n", me->faces.size); */
+	/* T; */
 	sp_fill_landrgb(&me->vertices, bounds);
+	/* T; */
 	ftv_release(lines, NULL);
+	/* T; */
 	return (0);
 	(void)e;
 }

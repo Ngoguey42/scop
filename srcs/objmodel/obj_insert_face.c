@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/23 11:05:53 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/24 14:54:04 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/27 09:46:49 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,27 +31,12 @@
 **							(may create it's index)
 */
 
-static size_t	ftv_find_index_opti(t_ftvector const *v, void const *ref)
-{
-	size_t		i;
-
-	i = 0;
-	while (i < v->size)
-	{
-		if (memcmp(v->data + v->chunk_size * i, ref, v->chunk_size) == 0)
-			return (i);
-		i++;
-	}
-	return (-1);
-}
-
 static size_t	gen_vertex_index(t_objmodel *m, float const *vertex)
 {
 	int		i;
 
 	i = -1;
-	/* i = ftv_find_index_opti(&m->vertices, vertex); */
-	(void)ftv_find_index_opti;
+	/* i = ftv_find_index(&m->vertices, vertex); */
 	if (i < 0)
 	{
 		i = (int)m->vertices.size;

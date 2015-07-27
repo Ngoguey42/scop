@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/18 12:01:22 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/25 09:54:33 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/27 10:53:48 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ static int		new_mesh(t_env const *e, t_mesh *me)
 	lprintf("Filling mesh:");
 	if (me->fill(e, me))
 		return (ERROR("me->fill(e, me)"), 1);
+	/* ft_leaks(); */
 	lprintf("    %u vertices, %u faces:", me->vertices.size, me->faces.size);
 	glGenVertexArrays(1, me->handles + 0);
 	glBindVertexArray(me->handles[0]);
@@ -99,6 +100,9 @@ void            sp_delete_meshes(t_env *e)
 		ftv_release(&me->vertices, NULL);
 		if (me->has_indices)
 			ftv_release(&me->faces, NULL);
+		glDeleteBuffers(1, me->handles + 1);
+		glDeleteBuffers(1, me->handles + 2);
+		glDeleteVertexArrays(1, me->handles + 3);
 		me++;
 	}
 	return ;

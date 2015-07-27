@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/17 12:00:25 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/20 14:20:03 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/27 09:47:19 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static int	parse_pix(int fd, t_ftvector *v, int npix)
 	{
 		if (read(fd, buf, sizeof(buf)) != (int)sizeof(buf))
 			return (ERROR("Unexpected end of file"), 1);
-		if (ftv_push_backn(v, buf, sizeof(buf) / 4))
+		if (ftv_insert_range(v, buf, sizeof(buf) / 4))
 			sp_enomem();
 		npix -= sizeof(buf) / 4;
 	}
@@ -72,7 +72,8 @@ int			parse_tga(char const *filepath, t_ftvector *v, int dim[2])
 		return (ERRORNOF("open(%s, O_RDONLY)", filepath), 1);
 	if (parse_header(fd, dim))
 		return (ERROR("parse_header(...)"), 1);
-	ftv_reserve(v, dim[0] * dim[1]);
+	if (ftv_reserve(v, dim[0] * dim[1]))
+		sp_enomem();
 	if (parse_pix(fd, v, dim[0] * dim[1]))
 		return (ERROR("parse_pix(...)"), 1);
 	close(fd);

@@ -75,9 +75,9 @@ O_FILES := obj/srcs/env_operations.o \
 	obj/srcs/objmodel/objmodel_operations.o \
 	obj/srcs/obs/obs_operations.o \
 	obj/srcs/shaders/shader_operations.o \
-	obj/srcs/textures/load_texture.o \
 	obj/srcs/textures/mapping_xy.o \
-	obj/srcs/textures/parse_tga.o
+	obj/srcs/textures/parse_tga.o \
+	obj/srcs/textures/textures_operations.o
 
 MSG_0 := printf '\033[0;32m%-47.47s\033[0;0m\r'
 MSG_1 := printf '\033[0;31m%-47.47s\033[0;0m\n'
@@ -223,15 +223,15 @@ obj/srcs/shaders/shader_operations.o: srcs/shaders/shader_operations.c include/f
 	@mkdir -p obj/srcs/shaders 2> /dev/null || true
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
-obj/srcs/textures/load_texture.o: srcs/textures/load_texture.c include/fterror.h include/ftmath.h include/objmodel.h include/objmodel_parsing.h include/scop.h include/scop_conf.h include/scop_types.h
-	@mkdir -p obj/srcs/textures 2> /dev/null || true
-	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
-
 obj/srcs/textures/mapping_xy.o: srcs/textures/mapping_xy.c include/fterror.h include/ftmath.h include/objmodel.h include/objmodel_parsing.h include/scop.h include/scop_conf.h include/scop_types.h
 	@mkdir -p obj/srcs/textures 2> /dev/null || true
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
 obj/srcs/textures/parse_tga.o: srcs/textures/parse_tga.c include/fterror.h include/ftmath.h include/objmodel.h include/objmodel_parsing.h include/scop.h include/scop_conf.h include/scop_types.h
+	@mkdir -p obj/srcs/textures 2> /dev/null || true
+	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
+
+obj/srcs/textures/textures_operations.o: srcs/textures/textures_operations.c include/fterror.h include/ftmath.h include/objmodel.h include/objmodel_parsing.h include/scop.h include/scop_conf.h include/scop_types.h
 	@mkdir -p obj/srcs/textures 2> /dev/null || true
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 

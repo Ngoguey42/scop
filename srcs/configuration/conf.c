@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 12:53:00 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/25 10:12:38 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/27 09:23:23 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,38 +28,20 @@
 #define VSHADER(N, F, ...) {SHD_PATH(N), F, NARG(__VA_ARGS__), {__VA_ARGS__}, 0}
 #define FSHADER(N, F) {SHD_PATH(N), F, 0}
 
-/*
-
-po_to_co		//scop
-pocote_to_couv	//tex
-pote_to_couv	//item
-poco_to_co		//land
-poteno_to_uv	//ptn
-
-co_identity		//scop
-couv_blend		//tex
-couv_uv			//item
-uv_identity		//ptn
-
-
-
-
-**
-*/
 int				sp_loadconf_vshaders(t_env *e)
 {
 	t_vshader const		tmp[sp_num_vshaders] = {
 
-	VSHADER("po_to_co.vert", &sp_unif_viewproj2, //model view proj
-			LOC("position", 3)), //color
-	VSHADER("pocote_to_couv.vert", &sp_unif_viewproj2, //model view proj
-			LOC("position", 3), LOC("color", 3), LOC("texCoord", 2)), //color uv
-	VSHADER("pote_to_couv.vert", &sp_unif_viewproj2, //model view proj
-			LOC("position", 3), LOC("texCoord", 2)), //color uv
-	VSHADER("poco_to_co.vert", &sp_unif_viewproj, //viewproj
-			LOC("position", 3), LOC("color", 3)), //color
-	VSHADER("poteno_to_uv.vert", &sp_unif_viewproj2, //model view proj
-			LOC("position", 3), LOC("texCoord", 2), LOC("normal", 3)), //uv
+	VSHADER("po_to_co.vert", &sp_unif_viewproj2,
+	LOC("position", 3)),
+	VSHADER("pocote_to_couv.vert", &sp_unif_viewproj2,
+	LOC("position", 3), LOC("color", 3), LOC("texCoord", 2)),
+	VSHADER("pote_to_couv.vert", &sp_unif_viewproj2,
+	LOC("position", 3), LOC("texCoord", 2)),
+	VSHADER("poco_to_co.vert", &sp_unif_viewproj,
+	LOC("position", 3), LOC("color", 3)),
+	VSHADER("poteno_to_uv.vert", &sp_unif_viewproj2,
+	LOC("position", 3), LOC("texCoord", 2), LOC("normal", 3)),
 	};
 	memcpy(&e->vshaders, &tmp, sizeof(tmp));
 	return (0);
