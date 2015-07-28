@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/28 11:41:25 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/28 15:23:22 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/28 15:40:36 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,21 @@
 ** bounds[2]		-> boundy min (bottom)
 ** bounds[3]		-> boundy max (top)
 ** *
-** factoffset[0]	-> factorx
-** factoffset[1]	-> factory
-** factoffset[2]	-> offsetx
-** factoffset[3]	-> offsety
-** * use this when !(imgratio > obratio), for centered textures
-** 		factoffset[3] = -by[0] * factoffset[1]
-**						+ (obratio - imgratio) / (obratio * 2);
+** factoffset[0]	-> factorX
+** factoffset[1]	-> factorY
+** factoffset[2]	-> offsetX
+** factoffset[3]	-> offsetY
+** *
+** 'calc_fact_and_offset':
+** 'if (imgratio < obratio)'
+** |		scale 1 will match image's left right bounds
+** |	'factoffset[1] *= imgratio / obratio'
+** |		decreases the factorY to match image's ratio
+** |	'factoffset[3] = -bounds[2] * factoffset[1]'
+** |		increases the offsetY (might be useless)
+** |	Use this when for centered textures:
+** |	factoffset[3] = -by[0] * factoffset[1]
+** |					+ (obratio - imgratio) / (obratio * 2);
 */
 
 static void	calc_bounds(t_ftvector const *const v, float bx[2], float by[2])
