@@ -6,13 +6,14 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 12:08:19 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/28 16:03:19 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/28 18:55:30 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
 #include <stdlib.h>
 #include <time.h>
+#include <unistd.h>
 
 static int		begin(t_env *e)
 {
@@ -36,6 +37,7 @@ static int		begin(t_env *e)
 static void		loop(t_env *e)
 {
 	double		last_time;
+	double		sleep_time;
 
 	e->time_start = glfwGetTime();
 	e->time_cur = e->time_start;
@@ -50,6 +52,9 @@ static void		loop(t_env *e)
 		sp_render_obs(e);
 		glfwSwapBuffers(e->win);
 		glfwPollEvents();
+		if (e->States[sp_window_focused_state] == 0
+			&& (sleep_time = 0.5 - (glfwGetTime() - e->time_cur)) < 0.5)
+			usleep(sleep_time * 1000000.);
 		last_time = e->time_cur;
 	}
 	return ;

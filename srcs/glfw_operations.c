@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/13 12:53:24 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/20 12:49:32 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/28 18:38:42 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,15 @@ static void	key_callback(GLFWwindow *w, int k, int sc, int a, int m)
 	return ;
 }
 
+static void	focus_callback(GLFWwindow *w, int state)
+{
+	t_env   *e;
+
+	e = sp_instance();
+	e->States[sp_window_focused_state] = (state == GL_TRUE ? 1 : 0);
+	return ;
+}
+
 int			sp_init_glfw(t_env *e)
 {
 	glfwSetErrorCallback(error_callback);
@@ -55,6 +64,7 @@ int			sp_init_glfw(t_env *e)
 	e->win = glfwCreateWindow(WIN_WIDTHI, WIN_HEIGHTI, "Scop", NULL, NULL);
 	if (!e->win)
 		return (glfwTerminate(), DEBUG("Could not create window"), 1);
+	glfwSetWindowFocusCallback(e->win, &focus_callback);
 	glfwSetKeyCallback(e->win, key_callback);
 	glfwMakeContextCurrent(e->win);
 	glViewport(0, 0, WIN_WIDTHI, WIN_HEIGHTI);

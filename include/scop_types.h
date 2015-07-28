@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 10:07:19 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/28 16:18:53 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/28 18:38:21 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,12 @@ enum                        e_keyindex
 	sp_left_key,
 	sp_right_key,
 	sp_num_keys
+};
+
+enum                        e_stateindex
+{
+	sp_window_focused_state,
+	sp_num_states
 };
 
 /*
@@ -147,8 +153,9 @@ typedef struct					s_env
 	t_texture					textures[sp_num_textures];
 	t_model						models[sp_num_models];
 	t_ftvector					obs[sp_num_programs];
-	
+
 	int							states[sp_num_keys];
+	int							States[sp_num_states];
 	double						mpos[2];
 	
 	float						cangles[2];

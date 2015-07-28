@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/01 12:32:53 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/28 16:01:31 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/28 18:56:51 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ static int		check_program_error(GLuint program, GLuint flag)
 
 static int		new_program(t_env const *e, t_program *p)
 {
-	size_t			i;
-	t_vshader const	*vs = VSOFP(e, p);
+	size_t					i;
+	t_vshader const	*const	vs = VSOFP(e, p);
 
 	p->handle = glCreateProgram();
 	glAttachShader(p->handle, vs->handle);
@@ -52,8 +52,8 @@ static int		new_program(t_env const *e, t_program *p)
 
 void			sp_delete_programs(t_env *e)
 {
-	t_program			*p;
-	t_program const		*end = e->programs + sp_num_programs;
+	t_program				*p;
+	t_program const *const	end = ITEND_PROGRAMS(e);
 
 	p = e->programs;
 	while (p < end)
