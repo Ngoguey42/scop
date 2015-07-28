@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 10:07:19 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/28 13:19:29 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/28 16:18:53 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,46 +163,32 @@ typedef struct					s_env
 	double						time_el;
 }								t_env;
 
-# define VSOFP(E, P)	(&(E)->vshaders[(P)->vshader])
-# define FSOFP(E, P)	(&(E)->fshaders[(P)->fshader])
+# define ITEND_VSHADERS(E)	((E)->vshaders + sp_num_vshaders)
+# define ITEND_FSHADERS(E)	((E)->fshaders + sp_num_fshaders)
+# define ITEND_PROGRAMS(E)	((E)->programs + sp_num_programs)
+# define ITEND_MESHES(E)	((E)->meshes + sp_num_meshes)
+# define ITEND_TEXTURES(E)	((E)->textures + sp_num_textures)
+# define ITEND_MODELS(E)	((E)->models + sp_num_models)
+# define ITEND_OBS(E)		((E)->obs + sp_num_programs)
 
-# define POFME(E, ME)	(&(E)->programs[(ME)->program])
-# define VSOFME(E, ME)	VSOFP((E), POFME((E), ME))
-# define FSOFME(E, ME)	FSOFP((E), POFME((E), ME))
+# define VSOFP(E, P)		(&(E)->vshaders[(P)->vshader])
+# define FSOFP(E, P)		(&(E)->fshaders[(P)->fshader])
 
-# define TOFMO(E, MO)	(&(E)->textures[(MO)->texture])
-# define MEOFMO(E, MO)	(&(E)->meshes[(MO)->mesh])
-# define POFMO(E, MO)	POFME((E), MEOFMO((E), MO))
-# define VSOFMO(E, MO)	VSOFME((E), MEOFMO((E), MO))
-# define FSOFMO(E, MO)	FSOFME((E), MEOFMO((E), MO))
+# define POFME(E, ME)		(&(E)->programs[(ME)->program])
+# define VSOFME(E, ME)		VSOFP((E), POFME((E), ME))
+# define FSOFME(E, ME)		FSOFP((E), POFME((E), ME))
 
-# define MOOFOB(E, OB)	(&(E)->models[(OB)->model])
-# define TOFOB(E, OB)	TOFMO((E), MOOFOB((E), OB))
-# define MEOFOB(E, OB)	MEOFMO((E), MOOFOB((E), OB))
-# define POFOB(E, OB)	POFMO((E), MOOFOB((E), OB))
-# define VSOFOB(E, OB)	VSOFMO((E), MOOFOB((E), OB))
-# define FSOFOB(E, OB)	FSOFMO((E), MOOFOB((E), OB))
+# define TOFMO(E, MO)		(&(E)->textures[(MO)->texture])
+# define MEOFMO(E, MO)		(&(E)->meshes[(MO)->mesh])
+# define POFMO(E, MO)		POFME((E), MEOFMO((E), MO))
+# define VSOFMO(E, MO)		VSOFME((E), MEOFMO((E), MO))
+# define FSOFMO(E, MO)		FSOFME((E), MEOFMO((E), MO))
 
-/*
-# define VS<-P(E, P)	((E)->shaders[(P)->vshader])
-# define FS<-P(E, P)	((E)->shaders[(P)->fshader])
-
-# define P<-ME(E, ME)	((E)->programs[(ME)->program])
-# define VS<-ME(E, ME)	<-P((E), P<-ME((E), ME))
-# define FS<-ME(E, ME)	<-P((E), P<-ME((E), ME))
-
-# define T<-MO(E, MO)	((E)->textures[(MO)->texture])
-# define ME<-MO(E, MO)	((E)->meshes[(MO)->mesh])
-# define P<-MO(E, MO)	<-ME((E), ME<-MO((E), MO))
-# define VS<-MO(E, MO)	<-ME((E), ME<-MO((E), MO))
-# define FS<-MO(E, MO)	<-ME((E), ME<-MO((E), MO))
-
-# define MO<-OB(E, OB)	((E)<-models[(OB)<-model])
-# define T<-OB(E, OB)	<-MO((E), MO<-OB((E), OB))
-# define ME<-OB(E, OB)	<-MO((E), MO<-OB((E), OB))
-# define P<-OB(E, OB)	<-MO((E), MO<-OB((E), OB))
-# define VS<-OB(E, OB)	<-MO((E), MO<-OB((E), OB))
-# define FS<-OB(E, OB)	<-MO((E), MO<-OB((E), OB))
-*/
+# define MOOFOB(E, OB)		(&(E)->models[(OB)->model])
+# define TOFOB(E, OB)		TOFMO((E), MOOFOB((E), OB))
+# define MEOFOB(E, OB)		MEOFMO((E), MOOFOB((E), OB))
+# define POFOB(E, OB)		POFMO((E), MOOFOB((E), OB))
+# define VSOFOB(E, OB)		VSOFMO((E), MOOFOB((E), OB))
+# define FSOFOB(E, OB)		FSOFMO((E), MOOFOB((E), OB))
 
 #endif
