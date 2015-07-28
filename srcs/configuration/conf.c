@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 12:53:00 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/27 19:06:32 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/28 14:05:55 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,9 +83,9 @@ int				sp_loadconf_textures(t_env *e)
 {
 	t_texture const		tmp[sp_num_textures] = {
 
-	{TEXTURE_PATH("Porcelain.tga"), 0},
-	{TEXTURE_PATH("Wall.tga"), 0},
-	{TEXTURE_PATH("Metal.tga"), 0},
+	{TEXTURE_PATH("BoundedPorcelain.tga"), {0, 0}, 0},
+	{TEXTURE_PATH("Wall.tga"), {0, 0}, 0},
+	{TEXTURE_PATH("Metal.tga"), {0, 0}, 0},
 	};
 	memcpy(&e->textures, &tmp, sizeof(tmp));
 	return (0);

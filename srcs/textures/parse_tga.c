@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/17 12:00:25 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/27 09:47:19 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/28 13:15:57 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 #include "libft.h"
 #include "ft_vector.h"
 
-static int	parse_header(int fd, int dim[2])
+static int	parse_header(int fd, t_ui dim[2])
 {
 	t_byte	buf[18];
 	int		ret;
@@ -57,14 +57,13 @@ static int	parse_pix(int fd, t_ftvector *v, int npix)
 	{
 		if (read(fd, buf, 4) != 4)
 			return (ERROR("Unexpected end of file"), 1);
-		if (ftv_push_back(v, &buf))
-			sp_enomem();
+		ftv_push_back_unsafe(v, &buf);
 		npix--;
 	}
 	return (0);
 }
 
-int			parse_tga(char const *filepath, t_ftvector *v, int dim[2])
+int			parse_tga(char const *filepath, t_ftvector *v, t_ui dim[2])
 {
 	int const	fd = open(filepath, O_RDONLY);
 

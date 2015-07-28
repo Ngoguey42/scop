@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 10:07:19 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/27 11:12:25 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/28 13:19:29 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ typedef struct					s_program
 /*
 ** MESH
 ** A mesh is tied to several <model>
+** Pos.x, Pos.y, Pos.z[, Co.r, Co.g, Co.b][, Tex.u, , Tex.v][, No.x, No.y, No.z]
 */
 typedef struct					s_mesh
 {
@@ -102,6 +103,7 @@ typedef struct					s_mesh
 typedef struct					s_texture
 {
 	char const					filepath[64];
+	t_ui						dim[2];
 	GLuint						handle;
 }								t_texture;
 

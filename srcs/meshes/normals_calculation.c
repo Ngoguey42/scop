@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/27 16:22:14 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/28 11:39:51 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/28 13:41:53 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ void		sp_normals_add(t_ftvector *vertices, t_ftvector const *faces)
 	t_ftvector	normals[1];
 	t_ftvector	newv[1];
 
+	lprintf("    Creating some Normal coords");
 	assert(vertices->size > 0);
 	if (ftv_init_instance(normals, DATA_WIDTH))
 		sp_enomem();
