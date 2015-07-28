@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 15:57:45 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/28 15:01:06 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/28 15:12:38 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int				sp_meshfill_plane(t_env const *e, t_mesh *me)
 		return (ERROR("op_parse_obj(m)"), 1);
 	op_swap_vectors(m, &me->vertices, &me->faces);
 	sp_wrap_texture_planxy(&me->vertices,
-					e->textures + sp_porcelain_texture, 2.f, 3);//porcelain
+						   e->textures + sp_porcelain_texture, 2.0f, 3);
 	sp_normals_add(&me->vertices, &me->faces);
 	/* (void)sp_wrap_texture_planxy(&me->vertices, 6.f, 1.f);//metal */
 	sp_clean_objmodel(m);
