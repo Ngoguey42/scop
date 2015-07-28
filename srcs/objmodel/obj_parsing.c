@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/02 13:21:56 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/24 15:25:09 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/28 10:50:24 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,10 +111,11 @@ int				op_parse_obj(t_objmodel *m)
 	}
 	if (i != -1)
 		return (ERROR("parsing failed"), 1);
-	qprintf("Got %08d coords, ", m->coords.size);
-	qprintf("Got %08d textures, ", m->textures.size);
-	qprintf("Got %08d normals, ", m->normals.size);
-	qprintf("Got %08d faces, ", m->faces.size);
-	qprintf("Got %08d vertices\n", m->vertices.size);	
+	qprintf("    Parsed \"\033[33m%s\033[0m\": ", m->filepath);
+	qprintf("%d coords, ", m->coords.size);
+	qprintf("%d textures, ", m->textures.size);
+	qprintf("%d normals, ", m->normals.size);
+	qprintf("%d vertices, ", m->vertices.size);	
+	qprintf("%d faces\n", m->faces.size);
 	return (fclose(stream), 0);
 }

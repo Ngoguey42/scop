@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 15:57:45 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/27 19:07:23 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/28 10:45:50 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,30 +74,9 @@ int				sp_meshfill_square(t_env const *e, t_mesh *me)
 	(void)ftv_insert_range(vert, vertices, 4);
 	(void)ftv_insert_range(&me->faces, indices, 2);
 
-	int	i;
-	int width;
-	int	j;
 	
-	width = 6;
-	for (i = 0; i < (int)vert->size; i++)
-	{
-		qprintf("[%d]", i);
-		for (j = 0; j < width; j++)
-			qprintf("% .2f ", i,
-					((float*)vert->data)[i * width + j]);
-		qprintf("\n");
-	}
 
 	sp_normals_add(vert, &me->faces);
-	width = 9;
-	for (i = 0; i < (int)vert->size; i++)
-	{
-		qprintf("[%d]", i);
-		for (j = 0; j < width; j++)
-			qprintf("% .2f ", i,
-					((float*)vert->data)[i * width + j]);
-		qprintf("\n");
-	}
 
 	memcpy(&me->vertices, vert, sizeof(t_ftvector));
 	

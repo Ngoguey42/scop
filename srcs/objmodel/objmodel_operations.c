@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/15 08:26:17 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/27 10:58:50 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/28 10:50:04 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ void		op_init_meshvectors(t_objmodel *m)
 		m->width += 2;
 	if (m->normals.size > 0)
 		m->width += 3;
-	qprintf("Vertex width = %u\n", m->width);
 	if (ftv_init_instance(&m->faces, sizeof(unsigned int) * 3))
 		sp_enomem();
 	if (ftv_init_instance(&m->vertices, sizeof(float) * m->width))

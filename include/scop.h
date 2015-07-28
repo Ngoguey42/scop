@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 12:07:31 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/27 17:25:33 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/28 11:05:37 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,8 @@ void		sp_wrap_texture_planxy(t_ftvector *v,
 ** MESHES
 */
 int			sp_init_meshes(t_env *e);
+
+int      op_new_mesh(t_env const *e, t_mesh *me);
 void		sp_delete_meshes(t_env *e);
 int			sp_meshfill_plane(t_env const *e, t_mesh *me);
 int			sp_meshfill_item2(t_env const *e, t_mesh *me);

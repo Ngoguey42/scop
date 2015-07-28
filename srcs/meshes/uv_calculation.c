@@ -1,19 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mapping_xy.c                                       :+:      :+:    :+:   */
+/*   uv_calculation.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/07/18 10:52:20 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/27 10:02:48 by ngoguey          ###   ########.fr       */
+/*   Created: 2015/07/28 11:41:25 by ngoguey           #+#    #+#             */
+/*   Updated: 2015/07/28 11:41:40 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <string.h>
 #include <assert.h>
 #include "scop.h"
-#include "objmodel_parsing.h"
 
 static void	calc_bounds(float const *vert, size_t nvert,
 							float bx[2], float by[2])
@@ -44,7 +43,7 @@ static void	calc_bounds(float const *vert, size_t nvert,
 static void	fill(t_ftvector *new, t_ftvector const *old, float fact[2])
 {
 	float const	*ptr = old->data;
-	float const *end = old->data + old->size * old->chunk_size;
+	float const *end = ftv_end(old);
 	float		tmp[5];
 
 	while (ptr < end)
