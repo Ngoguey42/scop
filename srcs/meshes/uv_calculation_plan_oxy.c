@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/28 11:41:25 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/28 15:40:36 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/28 15:46:57 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,14 +112,14 @@ static void	calc_fact_and_offset(float const bounds[4], float factoffset[4],
 	return ;
 }
 
-void		sp_wrap_texture_planxy(t_ftvector *v, t_texture const *t,
+void		sp_inject_uv_plan_oxy(t_ftvector *v, t_texture const *t,
 									float scale, size_t padfloats)
 {
 	t_ftvector		newv[1];
 	float			bounds[4];
 	float			factoffset[4];
 
-	lprintf("    Creating some UV coords");
+	lprintf("    Creating some UV coords with plan oxy");
 	assert(v->chunk_size == 3 * sizeof(float));
 	if (ftv_init_instance(newv, sizeof(float) * 5)
 		|| ftv_reserve(newv, v->size))

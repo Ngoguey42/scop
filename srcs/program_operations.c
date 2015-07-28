@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/01 12:32:53 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/27 14:39:35 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/28 16:01:31 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static int		new_program(t_env const *e, t_program *p)
 {
 	size_t			i;
 	t_vshader const	*vs = VSOFP(e, p);
-	
+
 	p->handle = glCreateProgram();
 	glAttachShader(p->handle, vs->handle);
 	glAttachShader(p->handle, FSOFP(e, p)->handle);

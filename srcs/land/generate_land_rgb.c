@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/22 17:07:12 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/23 08:26:50 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/28 16:04:40 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static float	g_colors[][5] =
 	{CTOF(94.f), CTOF(97.f), CTOF(186.f), 0.075f, 0.076f},	//water
 };
 
-static void	normalize_prop(float proportions[NUM_COLORS])
+static void		normalize_prop(float proportions[NUM_COLORS])
 {
 	size_t	i;
 	float	sum;
@@ -50,7 +50,7 @@ static void	normalize_prop(float proportions[NUM_COLORS])
 	return ;
 }
 
-static void	calc_color_ratio(float proportions[NUM_COLORS], float ratio)
+static void		calc_color_ratio(float proportions[NUM_COLORS], float ratio)
 {
 	size_t		i;
 
@@ -66,7 +66,7 @@ static void	calc_color_ratio(float proportions[NUM_COLORS], float ratio)
 	return ;
 }
 
-static void	input_color(float *rgb, float ratio)
+static void		input_color(float *rgb, float ratio)
 {
 	float		tmp[3];
 	float		proportions[NUM_COLORS];
@@ -92,7 +92,7 @@ static void	input_color(float *rgb, float ratio)
 	return ;
 }
 
-static float    get_rand(float init)
+static float	get_rand(float init)
 {
 	float nb;
 
@@ -104,7 +104,7 @@ static float    get_rand(float init)
 	return (nb);
 }
 
-void		sp_fill_landrgb(t_ftvector *vertices, float const bounds[2])
+void			sp_fill_landrgb(t_ftvector *vertices, float const bounds[2])
 {
 	float const		delta = bounds[1] - bounds[0];
 	size_t			i;
@@ -114,7 +114,7 @@ void		sp_fill_landrgb(t_ftvector *vertices, float const bounds[2])
 	ptr = vertices->data;
 	while (i < vertices->size)
 	{
-		input_color(ptr + 3, get_rand((ptr[1] - bounds[0]) / delta));		
+		input_color(ptr + 3, get_rand((ptr[1] - bounds[0]) / delta));
 		ptr += 6;
 		i++;
 	}

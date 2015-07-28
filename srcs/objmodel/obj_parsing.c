@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/02 13:21:56 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/28 10:50:24 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/28 15:57:02 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,19 +89,32 @@ static int		next_line_index(FILE *stream, char buf[BFSZ])
 		if (buf == ptr - 1)
 			return (EMPTY_LINE);
 		ptr--;
-	}		
+	}
 	*ptr = '\0';
 	return (get_index(buf, ptr));
 }
 
-int				op_parse_obj(t_objmodel *m)
+static void		init_instance(t_objmodel *m)
+{
+	bzero(m, sizeof(*m));
+	if (ftv_init_instance(&m->coords, sizeof(float) * 3))
+		sp_enomem();
+	if (ftv_init_instance(&m->textures, sizeof(float) * 2))
+		sp_enomem();
+	if (ftv_init_instance(&m->normals, sizeof(float) * 3))
+		sp_enomem();
+	return ;
+}
+
+int				op_parse_obj(t_objmodel *m, char const *filepath)
 {
 	FILE			*stream;
 	int				i;
 	char			buf[BFSZ];
 
-	if ((stream = fopen(m->filepath, "r")) == NULL)
-		return (ERRORNOF("fopen(\"%s\")", m->filepath), 1);
+	init_instance(m);
+	if ((stream = fopen(filepath, "r")) == NULL)
+		return (ERRORNOF("fopen(\"%s\")", filepath), 1);
 	while ((i = next_line_index(stream, buf)) >= 0)
 	{
 		if (i == EMPTY_LINE)
@@ -111,11 +124,11 @@ int				op_parse_obj(t_objmodel *m)
 	}
 	if (i != -1)
 		return (ERROR("parsing failed"), 1);
-	qprintf("    Parsed \"\033[33m%s\033[0m\": ", m->filepath);
+	qprintf("    Parsed \"\033[33m%s\033[0m\": ", filepath);
 	qprintf("%d coords, ", m->coords.size);
 	qprintf("%d textures, ", m->textures.size);
 	qprintf("%d normals, ", m->normals.size);
-	qprintf("%d vertices, ", m->vertices.size);	
+	qprintf("%d vertices, ", m->vertices.size);
 	qprintf("%d faces\n", m->faces.size);
 	return (fclose(stream), 0);
 }

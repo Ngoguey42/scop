@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/17 14:11:32 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/28 13:00:49 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/28 16:00:23 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,10 @@ static int		new_texture(t_texture *t)
 	return (0);
 }
 
-void            sp_delete_textures(t_env *e)
+void			sp_delete_textures(t_env *e)
 {
-	t_texture           *t;
-	t_texture const     *end = e->textures + sp_num_textures;
+	t_texture			*t;
+	t_texture const		*end = e->textures + sp_num_textures;
 
 	t = e->textures;
 	while (t < end)
@@ -48,9 +48,9 @@ void            sp_delete_textures(t_env *e)
 	return ;
 }
 
-int             sp_init_textures(t_env *e)
+int				sp_init_textures(t_env *e)
 {
-	int     i;
+	int		i;
 
 	i = 0;
 	while (i < sp_num_textures)

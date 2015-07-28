@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/24 13:49:05 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/24 13:49:22 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/28 15:48:36 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	op_faces_decr_indices(t_ui b[9], int i, int end)
 		b[i++]--;
 	return ;
 }
+
 int		op_parse_uiblock(char const **buf, t_ui uibuf[9], int const *indices)
 {
 	int		i;
@@ -51,7 +52,7 @@ int		op_parse_uiblock(char const **buf, t_ui uibuf[9], int const *indices)
 	return (0);
 }
 
-t_bool		op_faces_indices_valid(t_objmodel const *m, t_ui const b[9])
+t_bool	op_faces_indices_valid(t_objmodel const *m, t_ui const b[9])
 {
 	size_t	s;
 

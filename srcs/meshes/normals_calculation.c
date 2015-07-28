@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/27 16:22:14 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/28 13:41:53 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/28 15:45:08 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ static void	build_new_vertices(t_ftvector *newv, t_ftvector const *oldv,
 	return ;
 }
 
-void		sp_normals_add(t_ftvector *vertices, t_ftvector const *faces)
+void		sp_inject_normals(t_ftvector *vertices, t_ftvector const *faces)
 {
 	t_ftvector	normals[1];
 	t_ftvector	newv[1];

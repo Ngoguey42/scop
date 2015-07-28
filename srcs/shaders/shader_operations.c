@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/01 12:15:52 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/25 09:56:31 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/28 16:00:56 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ int				sp_init_shaders(t_env *e)
 	while (i < sp_num_vshaders)
 	{
 		if (sp_new_shader(e->vshaders[i].filepath, &e->vshaders[i].handle
-						  , GL_VERTEX_SHADER))
+						, GL_VERTEX_SHADER))
 			return (ERRORF("sp_new_vshader(%d)", i), 1);
 		i++;
 	}
@@ -108,7 +108,7 @@ int				sp_init_shaders(t_env *e)
 	while (i < sp_num_fshaders)
 	{
 		if (sp_new_shader(e->fshaders[i].filepath, &e->fshaders[i].handle
-						  , GL_FRAGMENT_SHADER))
+							, GL_FRAGMENT_SHADER))
 			return (ERRORF("sp_new_fshader(%d)", i), 1);
 		i++;
 	}

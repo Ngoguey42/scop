@@ -6,13 +6,13 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/27 12:01:57 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/27 12:12:44 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/28 16:02:30 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
 
-static void	render_ob(t_env const *e, t_ob *ob)
+static void		render_ob(t_env const *e, t_ob *ob)
 {
 	t_model const *const	mo = MOOFOB(e, ob);
 	t_mesh const *const		me = MEOFMO(e, mo);
@@ -30,7 +30,7 @@ static void	render_ob(t_env const *e, t_ob *ob)
 	return ;
 }
 
-static void	update_ob(t_env const *e, t_ob *ob)
+static void		update_ob(t_env const *e, t_ob *ob)
 {
 	ob->mat = m4_translate_nonuniform(ob->position);
 	ob->mat = m4_rotationref_axis(&ob->mat, z_axis, ob->rotation.x);
@@ -54,7 +54,7 @@ static t_bool	do_update(t_env const *e, t_ob *ob)
 	(void)e;
 }
 
-void		render_prog_obs(t_env const *e, t_program_index i)
+void			render_prog_obs(t_env const *e, t_program_index i)
 {
 	t_program const		*p = e->programs + i;
 	t_ftvector const	*prv = e->obs + i;
@@ -73,7 +73,7 @@ void		render_prog_obs(t_env const *e, t_program_index i)
 	return ;
 }
 
-void		sp_render_obs(t_env const *e)
+void			sp_render_obs(t_env const *e)
 {
 	t_program_index		i;
 

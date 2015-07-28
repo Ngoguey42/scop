@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/23 10:12:13 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/24 13:51:05 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/28 15:49:28 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,11 @@ static int	parse_width6(t_objmodel *m, char const *buf)
 	return (0);
 }
 
-
 static int	parse_width8(t_objmodel *m, char const *buf)
 {
 	t_ui	uibuf[9];
 	int		ret;
-	
+
 	op_parse_uiblock(&buf, uibuf, (int[]){0, -1, 1, -1, 2,
 				3, -1, 4, -1, 5,
 				6, -1, 7, -1, 8, -2});

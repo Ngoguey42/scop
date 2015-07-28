@@ -51,9 +51,6 @@ O_FILES := obj/srcs/env_operations.o \
 	obj/srcs/configuration/mesh_fill.o \
 	obj/srcs/configuration/obs_fill.o \
 	obj/srcs/configuration/unif_update.o \
-	obj/srcs/configuration/land/generate_land_rgb.o \
-	obj/srcs/configuration/land/generate_land_xyz.o \
-	obj/srcs/configuration/land/generate_land_y.o \
 	obj/srcs/controls/controls_apply.o \
 	obj/srcs/controls/controls_inputs.o \
 	obj/srcs/ftmath/matrix4.o \
@@ -64,10 +61,13 @@ O_FILES := obj/srcs/env_operations.o \
 	obj/srcs/ftmath/matrix4_translate.o \
 	obj/srcs/ftmath/vector3.o \
 	obj/srcs/ftmath/vector3_basicop.o \
+	obj/srcs/land/generate_land_rgb.o \
+	obj/srcs/land/generate_land_xyz.o \
+	obj/srcs/land/generate_land_y.o \
 	obj/srcs/meshes/mesh_creation.o \
 	obj/srcs/meshes/mesh_operations.o \
 	obj/srcs/meshes/normals_calculation.o \
-	obj/srcs/meshes/uv_calculation.o \
+	obj/srcs/meshes/uv_calculation_plan_oxy.o \
 	obj/srcs/objmodel/obj_faces_operations.o \
 	obj/srcs/objmodel/obj_insert_face.o \
 	obj/srcs/objmodel/obj_parsing.o \
@@ -82,8 +82,8 @@ O_FILES := obj/srcs/env_operations.o \
 	obj/srcs/textures/parse_tga.o \
 	obj/srcs/textures/textures_operations.o
 
-MSG_0 := printf '\033[0;32m%-47.47s\033[0;0m\r'
-MSG_1 := printf '\033[0;31m%-47.47s\033[0;0m\n'
+MSG_0 := printf '\033[0;32m%-41.41s\033[0;0m\r'
+MSG_1 := printf '\033[0;31m%-41.41s\033[0;0m\n'
 MSG_END := printf '\n'
 
 .SILENT:
@@ -130,18 +130,6 @@ obj/srcs/configuration/unif_update.o: srcs/configuration/unif_update.c include/f
 	@mkdir -p obj/srcs/configuration 2> /dev/null || true
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
-obj/srcs/configuration/land/generate_land_rgb.o: srcs/configuration/land/generate_land_rgb.c include/fterror.h include/ftmath.h include/objmodel.h include/scop.h include/scop_conf.h include/scop_types.h
-	@mkdir -p obj/srcs/configuration/land 2> /dev/null || true
-	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
-
-obj/srcs/configuration/land/generate_land_xyz.o: srcs/configuration/land/generate_land_xyz.c include/fterror.h include/ftmath.h include/objmodel.h include/scop.h include/scop_conf.h include/scop_types.h
-	@mkdir -p obj/srcs/configuration/land 2> /dev/null || true
-	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
-
-obj/srcs/configuration/land/generate_land_y.o: srcs/configuration/land/generate_land_y.c include/fterror.h include/ftmath.h include/objmodel.h include/scop.h include/scop_conf.h include/scop_types.h
-	@mkdir -p obj/srcs/configuration/land 2> /dev/null || true
-	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
-
 obj/srcs/controls/controls_apply.o: srcs/controls/controls_apply.c include/fterror.h include/ftmath.h include/objmodel.h include/scop.h include/scop_conf.h include/scop_types.h
 	@mkdir -p obj/srcs/controls 2> /dev/null || true
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
@@ -182,6 +170,18 @@ obj/srcs/ftmath/vector3_basicop.o: srcs/ftmath/vector3_basicop.c include/fterror
 	@mkdir -p obj/srcs/ftmath 2> /dev/null || true
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
+obj/srcs/land/generate_land_rgb.o: srcs/land/generate_land_rgb.c include/fterror.h include/ftmath.h include/objmodel.h include/scop.h include/scop_conf.h include/scop_types.h
+	@mkdir -p obj/srcs/land 2> /dev/null || true
+	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
+
+obj/srcs/land/generate_land_xyz.o: srcs/land/generate_land_xyz.c include/fterror.h include/ftmath.h include/objmodel.h include/scop.h include/scop_conf.h include/scop_types.h
+	@mkdir -p obj/srcs/land 2> /dev/null || true
+	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
+
+obj/srcs/land/generate_land_y.o: srcs/land/generate_land_y.c include/fterror.h include/ftmath.h include/objmodel.h include/scop.h include/scop_conf.h include/scop_types.h
+	@mkdir -p obj/srcs/land 2> /dev/null || true
+	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
+
 obj/srcs/meshes/mesh_creation.o: srcs/meshes/mesh_creation.c include/fterror.h include/ftmath.h include/objmodel.h include/scop.h include/scop_conf.h include/scop_types.h
 	@mkdir -p obj/srcs/meshes 2> /dev/null || true
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
@@ -194,7 +194,7 @@ obj/srcs/meshes/normals_calculation.o: srcs/meshes/normals_calculation.c include
 	@mkdir -p obj/srcs/meshes 2> /dev/null || true
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
-obj/srcs/meshes/uv_calculation.o: srcs/meshes/uv_calculation.c include/fterror.h include/ftmath.h include/objmodel.h include/objmodel_parsing.h include/scop.h include/scop_conf.h include/scop_types.h
+obj/srcs/meshes/uv_calculation_plan_oxy.o: srcs/meshes/uv_calculation_plan_oxy.c include/fterror.h include/ftmath.h include/objmodel.h include/objmodel_parsing.h include/scop.h include/scop_conf.h include/scop_types.h
 	@mkdir -p obj/srcs/meshes 2> /dev/null || true
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
@@ -256,7 +256,7 @@ $(LIBS):
 
 clean:
 	@rm -f $(O_FILES) 2> /dev/null || true
-	@rmdir -p obj/srcs/textures obj/srcs/shaders obj/srcs/obs obj/srcs/objmodel obj/srcs/meshes obj/srcs/ftmath obj/srcs/controls obj/srcs/configuration/land obj/srcs/configuration obj/srcs $(O_DIR) 2> /dev/null || true
+	@rmdir -p obj/srcs/textures obj/srcs/shaders obj/srcs/obs obj/srcs/objmodel obj/srcs/meshes obj/srcs/land obj/srcs/ftmath obj/srcs/controls obj/srcs/configuration obj/srcs $(O_DIR) 2> /dev/null || true
 .PHONY: clean
 
 fclean: clean

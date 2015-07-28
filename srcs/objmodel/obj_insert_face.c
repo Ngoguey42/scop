@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/23 11:05:53 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/27 09:46:49 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/28 15:48:49 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,17 +61,17 @@ static void		build_vertex(t_objmodel const *m, float vert[8],
 	else if (m->width == 8)
 	{
 		memcpy(vert + 3, TEXTURE(indices[1]), sizeof(float) * 2);
-		memcpy(vert + 5, NORMAL(indices[2]), sizeof(float) * 3);		
+		memcpy(vert + 5, NORMAL(indices[2]), sizeof(float) * 3);
 	}
 	return ;
 }
 
-void	op_insert_face(t_objmodel *m, t_ui const oldind[9])
+void			op_insert_face(t_objmodel *m, t_ui const oldind[9])
 {
 	unsigned int	newindices[3];
 	float			vert[8];
 
-	build_vertex(m, vert, oldind);	
+	build_vertex(m, vert, oldind);
 	newindices[0] = gen_vertex_index(m, vert);
 	build_vertex(m, vert, oldind + 3);
 	newindices[1] = gen_vertex_index(m, vert);

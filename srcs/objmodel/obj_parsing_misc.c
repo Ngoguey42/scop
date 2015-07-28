@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/24 10:22:18 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/24 11:25:39 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/28 15:50:52 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,3 @@ int		op_match_smooth(t_objmodel *m, char const *buf)
 	(void)buf;
 	return (0);
 }
-

@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 15:57:45 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/28 15:12:38 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/28 15:57:53 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,13 @@ int				sp_meshfill_plane(t_env const *e, t_mesh *me)
 	/* op_init_instance(m, "res/teapot2.obj"); */
 
 	/* (void)op_init_instance(m, "res/cessna.obj"); */
-	op_init_instance(m, "res/teapot.obj");
-	if (op_parse_obj(m))
+	/* if (op_init_instance(m, "res/teapot.obj") */
+	if (op_parse_obj(m, "res/teapot.obj"))
 		return (ERROR("op_parse_obj(m)"), 1);
 	op_swap_vectors(m, &me->vertices, &me->faces);
-	sp_wrap_texture_planxy(&me->vertices,
-						   e->textures + sp_porcelain_texture, 2.0f, 3);
-	sp_normals_add(&me->vertices, &me->faces);
-	/* (void)sp_wrap_texture_planxy(&me->vertices, 6.f, 1.f);//metal */
+	sp_inject_uv_plan_oxy(&me->vertices,
+				e->textures + sp_porcelain_texture, 2.0f, 3);
+	sp_inject_normals(&me->vertices, &me->faces);
 	sp_clean_objmodel(m);
 	(void)e;
 	(void)me;
@@ -42,12 +41,11 @@ int				sp_meshfill_item2(t_env const *e, t_mesh *me)
 
 	/* op_init_instance(m, "res/new_csie_b1.obj"); */
 	/* op_init_instance(m, "res/cessna.obj"); */
-	/* (void)op_init_instance(m, "res/Pretty_House.obj"); */
-	op_init_instance(m, "res/alfa147.obj");
+	/* op_init_instance(m, "res/alfa147.obj"); */
 	/* op_init_instance(m, "res/42.obj"); */
-	if (op_parse_obj(m))
+	if (op_parse_obj(m, "res/alfa147.obj"))
 		return (ERROR("op_parse_obj(m)"), 1);
-	/* sp_wrap_texture_planxy(m, 1.8f, 442.f / 405.f); */
+	/* sp_inject_uv_plan_oxy(m, 1.8f, 442.f / 405.f); */
 	op_swap_vectors(m, &me->vertices, &me->faces);
 	sp_clean_objmodel(m);
 	(void)e;
@@ -77,7 +75,7 @@ int				sp_meshfill_square(t_env const *e, t_mesh *me)
 
 	
 
-	sp_normals_add(vert, &me->faces);
+	sp_inject_normals(vert, &me->faces);
 
 	memcpy(&me->vertices, vert, sizeof(t_ftvector));
 	

@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/22 17:32:29 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/24 12:08:56 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/28 15:50:48 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@
 #include <stdlib.h>
 #include "objmodel_parsing.h"
 
-static void		push_floats(t_ftvector *v, float const fbuf[3])
+static void	push_floats(t_ftvector *v, float const fbuf[3])
 {
 	if (ftv_push_back(v, fbuf))
 		sp_enomem();
 	return ;
 }
 
-int             op_match_v(t_objmodel *m, char const *buf)
+int			op_match_v(t_objmodel *m, char const *buf)
 {
 	float		fbuf[3];
 	int			i;
@@ -33,13 +33,13 @@ int             op_match_v(t_objmodel *m, char const *buf)
 	{
 		fbuf[i++] = (float)strtod(buf, (char**)&buf);
 		if (buf == NULL)
-			return (1);
+			return (ERROR("Error parsing v"), 1);
 	}
 	push_floats(&m->coords, fbuf);
 	return (0);
 }
 
-int             op_match_vt(t_objmodel *m, char const *buf)
+int			op_match_vt(t_objmodel *m, char const *buf)
 {
 	float		fbuf[3];
 	int			i;
@@ -49,13 +49,13 @@ int             op_match_vt(t_objmodel *m, char const *buf)
 	{
 		fbuf[i++] = strtod(buf, (char**)&buf);
 		if (buf == NULL)
-			return (1); //error parsing float
+			return (ERROR("Error parsing vt"), 1);
 	}
 	push_floats(&m->textures, fbuf);
 	return (0);
 }
 
-int             op_match_vn(t_objmodel *m, char const *buf)
+int			op_match_vn(t_objmodel *m, char const *buf)
 {
 	float		fbuf[3];
 	int			i;
@@ -65,10 +65,8 @@ int             op_match_vn(t_objmodel *m, char const *buf)
 	{
 		fbuf[i++] = strtod(buf, (char**)&buf);
 		if (buf == NULL)
-			return (1); //error parsing float
+			return (ERROR("Error parsing vn"), 1);
 	}
 	push_floats(&m->normals, fbuf);
 	return (0);
 }
-
-

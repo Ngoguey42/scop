@@ -6,13 +6,13 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/21 09:02:18 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/27 12:02:03 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/28 16:02:50 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
 
-void        sp_delete_obs(t_env *e)
+void		sp_delete_obs(t_env *e)
 {
 	int		i;
 
@@ -22,7 +22,7 @@ void        sp_delete_obs(t_env *e)
 	return ;
 }
 
-int         sp_init_obs(t_env *e)
+int			sp_init_obs(t_env *e)
 {
 	int		i;
 

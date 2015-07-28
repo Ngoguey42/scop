@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/15 11:35:09 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/27 11:14:11 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/28 15:59:21 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,6 @@ void			sp_update_states(t_env *e)
 							v3_add(ATOV3(e->cpos.x, e->cpos.y, e->cpos.z),
 							v3_frontnormed(e->cangles)));
 		e->viewproj = m4_dotprod(&e->projection, &e->view);
-		/* e->viewproj = m4_dotprod(&e->view, &e->projection); */
 	}
 	return ;
 }
