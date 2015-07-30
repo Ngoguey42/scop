@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 10:33:54 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/27 18:24:31 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/30 10:40:47 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@
 # define LAND_YF -15.f
 
 # define MOUSE_SENSITIVITYF 0.005f
-# define MOVEMENT_SPEEDF 4.f
+# define MOVEMENT_SPEEDF 40.f
 
 /*
 ** CALCULATED MACROES
@@ -76,8 +76,16 @@ typedef enum				e_fshader_index
 	sp_couv_uv_fshader,
 	sp_uvno_uvli_fshader,
 	sp_cono_coli_fshader,
+	sp_couvno_blendli_fshader,
 	sp_num_fshaders,
 }							t_fshader_index;
+
+typedef enum				e_gshader_index
+{
+	sp_test_gshader,
+	sp_num_gshaders,
+	sp_no_gshader
+}							t_gshader_index;
 
 typedef enum				e_program_index
 {

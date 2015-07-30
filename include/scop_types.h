@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 10:07:19 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/28 18:38:21 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/30 09:47:03 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,12 @@ typedef struct					s_fshader
 	void						(*const unif_update)();
 	GLuint						handle;
 }								t_fshader;
+typedef struct					s_gshader
+{
+	char const					filepath[64];
+	void						(*const unif_update)();
+	GLuint						handle;
+}								t_gshader;
 
 /*
 ** PROGRAMS
@@ -82,6 +88,7 @@ typedef struct					s_program
 {
 	t_vshader_index const		vshader;
 	t_fshader_index const		fshader;
+	t_gshader_index const		gshader;
 	GLuint						handle;
 }								t_program;
 
@@ -148,6 +155,7 @@ typedef struct					s_env
 
 	t_vshader					vshaders[sp_num_vshaders];
 	t_fshader					fshaders[sp_num_fshaders];
+	t_gshader					gshaders[sp_num_gshaders];
 	t_program					programs[sp_num_programs];
 	t_mesh						meshes[sp_num_meshes];
 	t_texture					textures[sp_num_textures];
@@ -172,6 +180,7 @@ typedef struct					s_env
 
 # define ITEND_VSHADERS(E)	((E)->vshaders + sp_num_vshaders)
 # define ITEND_FSHADERS(E)	((E)->fshaders + sp_num_fshaders)
+# define ITEND_GSHADERS(E)	((E)->gshaders + sp_num_gshaders)
 # define ITEND_PROGRAMS(E)	((E)->programs + sp_num_programs)
 # define ITEND_MESHES(E)	((E)->meshes + sp_num_meshes)
 # define ITEND_TEXTURES(E)	((E)->textures + sp_num_textures)
@@ -180,16 +189,19 @@ typedef struct					s_env
 
 # define VSOFP(E, P)		(&(E)->vshaders[(P)->vshader])
 # define FSOFP(E, P)		(&(E)->fshaders[(P)->fshader])
+# define GSOFP(E, P)		(&(E)->gshaders[(P)->gshader])
 
 # define POFME(E, ME)		(&(E)->programs[(ME)->program])
 # define VSOFME(E, ME)		VSOFP((E), POFME((E), ME))
 # define FSOFME(E, ME)		FSOFP((E), POFME((E), ME))
+# define GSOFME(E, ME)		GSOFP((E), POFME((E), ME))
 
 # define TOFMO(E, MO)		(&(E)->textures[(MO)->texture])
 # define MEOFMO(E, MO)		(&(E)->meshes[(MO)->mesh])
 # define POFMO(E, MO)		POFME((E), MEOFMO((E), MO))
 # define VSOFMO(E, MO)		VSOFME((E), MEOFMO((E), MO))
 # define FSOFMO(E, MO)		FSOFME((E), MEOFMO((E), MO))
+# define GSOFMO(E, MO)		GSOFME((E), MEOFMO((E), MO))
 
 # define MOOFOB(E, OB)		(&(E)->models[(OB)->model])
 # define TOFOB(E, OB)		TOFMO((E), MOOFOB((E), OB))
@@ -197,5 +209,6 @@ typedef struct					s_env
 # define POFOB(E, OB)		POFMO((E), MOOFOB((E), OB))
 # define VSOFOB(E, OB)		VSOFMO((E), MOOFOB((E), OB))
 # define FSOFOB(E, OB)		FSOFMO((E), MOOFOB((E), OB))
+# define GSOFOB(E, OB)		GSOFMO((E), MOOFOB((E), OB))
 
 #endif

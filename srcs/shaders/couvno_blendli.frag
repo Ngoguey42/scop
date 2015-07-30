@@ -1,19 +1,20 @@
 // ************************************************************************** //
 //                                                                            //
 //                                                        :::      ::::::::   //
-//   uvno_uvli.frag                                     :+:      :+:    :+:   //
+//   couvno_blendli.frag                                :+:      :+:    :+:   //
 //                                                    +:+ +:+         +:+     //
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
-//   Created: 2015/07/27 14:26:39 by ngoguey           #+#    #+#             //
-//   Updated: 2015/07/30 09:58:53 by ngoguey          ###   ########.fr       //
+//   Created: 2015/07/30 10:07:14 by ngoguey           #+#    #+#             //
+//   Updated: 2015/07/30 11:06:33 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
 #version 410 core
 
-in UVNOFP
+in COUVNOFP
 {
+	vec3	Color;
 	vec2	texUV;
 	vec3	Normal;
 	vec3	fragPos;
@@ -28,7 +29,9 @@ uniform vec3		lightColor;
 
 void main()
 {
-	color = vec4(0.7, 0.7, 0.7, 1.);
+	// color = vec4(fs_in.Color, 1.f);
+	color = mix(vec4(fs_in.Color, 1.f), texture(ourTexture, fs_in.texUV), 0.45);
+	// color = vec4(0.7, 0.7, 0.7, 1.);
 	// color = texture(ourTexture, fs_in.texUV);
 	// Ambient
 	float ambientStrength = 0.25f;

@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 15:57:45 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/28 15:57:53 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/30 11:04:11 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int				sp_meshfill_plane(t_env const *e, t_mesh *me)
 
 	/* (void)op_init_instance(m, "res/cessna.obj"); */
 	/* if (op_init_instance(m, "res/teapot.obj") */
-	if (op_parse_obj(m, "res/teapot.obj"))
+	if (op_parse_obj(m, "res/teapot2.obj"))
 		return (ERROR("op_parse_obj(m)"), 1);
 	op_swap_vectors(m, &me->vertices, &me->faces);
 	sp_inject_uv_plan_oxy(&me->vertices,

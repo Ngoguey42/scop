@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 12:07:31 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/28 15:44:41 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/30 09:47:04 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ t_env		*sp_instance(void);
 
 int			sp_loadconf_vshaders(t_env *e);
 int			sp_loadconf_fshaders(t_env *e);
+int			sp_loadconf_gshaders(t_env *e);
 int			sp_loadconf_programs(t_env *e);
 int			sp_loadconf_textures(t_env *e);
 int			sp_loadconf_meshes(t_env *e);

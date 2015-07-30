@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/01 12:15:52 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/28 16:00:56 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/30 08:50:50 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,14 @@ int				sp_init_shaders(t_env *e)
 		if (sp_new_shader(e->fshaders[i].filepath, &e->fshaders[i].handle
 							, GL_FRAGMENT_SHADER))
 			return (ERRORF("sp_new_fshader(%d)", i), 1);
+		i++;
+	}
+	i = 0;
+	while (i < sp_num_gshaders)
+	{
+		if (sp_new_shader(e->gshaders[i].filepath, &e->gshaders[i].handle
+							, GL_GEOMETRY_SHADER))
+			return (ERRORF("sp_new_gshader(%d)", i), 1);
 		i++;
 	}
 	return (0);

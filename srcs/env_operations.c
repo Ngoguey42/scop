@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/15 13:44:48 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/28 18:38:10 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/30 08:48:33 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ int				sp_init_env(t_env *e)
 	e->viewproj = m4_dotprod(&e->projection, &e->view);
 	e->States[sp_window_focused_state] = 1;
 	if (sp_loadconf_vshaders(e) || sp_loadconf_fshaders(e)
+		|| sp_loadconf_gshaders(e)
 		|| sp_loadconf_programs(e)
 		|| sp_loadconf_textures(e) || sp_loadconf_meshes(e)
 		|| sp_loadconf_models(e))

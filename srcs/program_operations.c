@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/01 12:32:53 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/28 18:56:51 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/30 09:03:41 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static int		check_program_error(GLuint program, GLuint flag)
 {
 	GLint		success[1];
-	GLchar		msg[256];
+	GLchar		msg[1024];
 
 	glGetProgramiv(program, flag, success);
 	if (*success == GL_FALSE)
@@ -35,6 +35,8 @@ static int		new_program(t_env const *e, t_program *p)
 	p->handle = glCreateProgram();
 	glAttachShader(p->handle, vs->handle);
 	glAttachShader(p->handle, FSOFP(e, p)->handle);
+	if (p->gshader != sp_no_gshader)
+		glAttachShader(p->handle, GSOFP(e, p)->handle);
 	i = 0;
 	while (i < vs->n_locations)
 	{
@@ -60,6 +62,8 @@ void			sp_delete_programs(t_env *e)
 	{
 		glDetachShader(p->handle, VSOFP(e, p)->handle);
 		glDetachShader(p->handle, FSOFP(e, p)->handle);
+		if (p->gshader != sp_no_gshader)
+			glDetachShader(p->handle, GSOFP(e, p)->handle);
 		glDeleteProgram(p->handle);
 		p++;
 	}

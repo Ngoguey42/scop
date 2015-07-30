@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 12:53:00 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/28 14:05:55 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/30 11:07:02 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # define NARG(...) NARG_(__VA_ARGS__,11,10,9,8,7,6,5,4,3,2,1)
 #endif
 
-#define PROG(VS,FS) {VS, FS, 0}
+#define PROG(VS,FS,GS) {VS, FS, GS, 0}
 
 #define LOC(N, S) ((t_location){N, (S)})
 
@@ -26,7 +26,8 @@
 #define MESH(US, P, IN, FI) {(US), (P), (IN), (FI), FTVU, FTVU, {0, 0, 0}}
 
 #define VSHADER(N, F, ...) {SHD_PATH(N), F, NARG(__VA_ARGS__), {__VA_ARGS__}, 0}
-#define FSHADER(N, F) {SHD_PATH(N), F, 0}
+#define FSHADER(N, F) {SHD_PATH(N), (F), 0}
+#define GSHADER(N, F) {SHD_PATH(N), (F), 0}
 
 int				sp_loadconf_vshaders(t_env *e)
 {
@@ -59,8 +60,19 @@ int				sp_loadconf_fshaders(t_env *e)
 	FSHADER("couv_uv.frag", NULL),
 	FSHADER("uvno_uvli.frag", &sp_unif_light),
 	FSHADER("cono_coli.frag", &sp_unif_light),
+	FSHADER("couvno_blendli.frag", &sp_unif_light),
 	};
 	memcpy(&e->fshaders, &tmp, sizeof(tmp));
+	return (0);
+}
+
+int				sp_loadconf_gshaders(t_env *e)
+{
+	t_gshader const		tmp[sp_num_gshaders] = {
+
+	GSHADER("test.geom", NULL),
+	};
+	memcpy(&e->gshaders, &tmp, sizeof(tmp));
 	return (0);
 }
 
@@ -68,12 +80,12 @@ int				sp_loadconf_programs(t_env *e)
 {
 	t_program const		tmp[sp_num_programs] = {
 
-	PROG(sp_po_to_co_vshader, sp_co_identity_fshader),
-	PROG(sp_pocote_to_couv_vshader, sp_couv_uv_fshader),
-	PROG(sp_pote_to_couv_vshader, sp_couv_uv_fshader),
-	PROG(sp_poco_to_co_vshader, sp_co_identity_fshader),
-	PROG(sp_poteno_to_uv_vshader, sp_uvno_uvli_fshader),
-	PROG(sp_pocono_to_co_vshader, sp_cono_coli_fshader),
+	PROG(sp_po_to_co_vshader, sp_co_identity_fshader, sp_no_gshader),
+	PROG(sp_pocote_to_couv_vshader, sp_couv_uv_fshader, sp_no_gshader),
+	PROG(sp_pote_to_couv_vshader, sp_couv_uv_fshader, sp_no_gshader),
+	PROG(sp_poco_to_co_vshader, sp_co_identity_fshader, sp_no_gshader),
+	PROG(sp_poteno_to_uv_vshader, sp_couvno_blendli_fshader, sp_test_gshader),
+	PROG(sp_pocono_to_co_vshader, sp_cono_coli_fshader, sp_no_gshader),
 	};
 	memcpy(&e->programs, &tmp, sizeof(tmp));
 	return (0);
@@ -83,7 +95,8 @@ int				sp_loadconf_textures(t_env *e)
 {
 	t_texture const		tmp[sp_num_textures] = {
 
-	{TEXTURE_PATH("BoundedPorcelain.tga"), {0, 0}, 0},
+	{TEXTURE_PATH("Porcelain.tga"), {0, 0}, 0},
+	/* {TEXTURE_PATH("BoundedPorcelain.tga"), {0, 0}, 0}, */
 	{TEXTURE_PATH("Wall.tga"), {0, 0}, 0},
 	{TEXTURE_PATH("Metal.tga"), {0, 0}, 0},
 	};
