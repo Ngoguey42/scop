@@ -16,7 +16,10 @@
 # include "libft.h"
 # include "ftmath.h"
 
-# define SHD_PATH(FILENAME) ("srcs/shaders/" FILENAME)
+# define SHD_PATH(FILENAME) ("srcs/shaders/" (FILENAME))
+# define VSHD_PATH(FILENAME) (SHD_PATH("vshaders/" (FILENAME)))
+# define FSHD_PATH(FILENAME) (SHD_PATH("fshaders/" (FILENAME)))
+# define GSHD_PATH(FILENAME) (SHD_PATH("gshaders/" (FILENAME)))
 
 /*
 ** RESSOURCES

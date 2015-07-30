@@ -25,9 +25,9 @@
 #define FTVU ftv_uninitialized()
 #define MESH(US, P, IN, FI) {(US), (P), (IN), (FI), FTVU, FTVU, {0, 0, 0}}
 
-#define VSHADER(N, F, ...) {SHD_PATH(N), F, NARG(__VA_ARGS__), {__VA_ARGS__}, 0}
-#define FSHADER(N, F) {SHD_PATH(N), (F), 0}
-#define GSHADER(N, F) {SHD_PATH(N), (F), 0}
+#define VSHADER(N,F,...) {VSHD_PATH(N),F,NARG(__VA_ARGS__),{__VA_ARGS__},0}
+#define FSHADER(N, F) {FSHD_PATH(N), (F), 0}
+#define GSHADER(N, F) {GSHD_PATH(N), (F), 0}
 
 int				sp_loadconf_vshaders(t_env *e)
 {
