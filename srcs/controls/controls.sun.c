@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/30 15:27:27 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/30 15:55:32 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/30 16:30:33 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,12 +72,15 @@ void			sp_update_sun(t_env *e)
 			THETA(e) = -SUN_THETABOUNDF;
 		if (RADIUS(e) < SUN_RBOUNDF)
 			THETA(e) = SUN_RBOUNDF;
-		/* qprintf("newpos : x%6.2f ", CAR(e).x); */
-		/* qprintf("y%6.2f ", CAR(e).y); */
-		/* qprintf("z%6.2f\n", CAR(e).z); */
-		CAR(e).x = RADIUS(e) * sin(THETA(e)) * cos(PHI(e));
-		CAR(e).y = RADIUS(e) * sin(THETA(e)) * sin(PHI(e));
-		CAR(e).y = RADIUS(e) * cos(THETA(e));
+		qprintf("newpos : r%6.2f ", RADIUS(e));
+		qprintf("t%6.2f ", THETA(e));
+		qprintf("p%6.2f\n", PHI(e));
+		qprintf("newpos : x%6.2f ", CAR(e).x);
+		qprintf("y%6.2f ", CAR(e).y);
+		qprintf("z%6.2f\n", CAR(e).z);
+		CAR(e).x = RADIUS(e) * sin(PHI(e)) * cos(THETA(e));
+		CAR(e).y = RADIUS(e) * sin(PHI(e)) * sin(THETA(e));
+		CAR(e).z = RADIUS(e) * cos(PHI(e));
 	}
 	return ;
 }
