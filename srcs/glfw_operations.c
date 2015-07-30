@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/13 12:53:24 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/30 08:53:33 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/30 15:20:27 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static void	focus_callback(GLFWwindow *w, int state)
 	t_env   *e;
 
 	e = sp_instance();
-	e->States[sp_window_focused_state] = (state == GL_TRUE ? 1 : 0);
+	e->states[sp_window_focused_state] = (state == GL_TRUE ? 1 : 0);
 	(void)w;
 	return ;
 }

@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 10:33:54 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/30 13:39:39 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/30 15:53:03 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,10 @@
 # define WIN_HEIGHTI ROUND_FTOI(WIN_HEIGHTF)
 
 # define CAMERA_POSBOUNDF (M_PI / 2 * 0.98)
+# define SUN_THETABOUNDF (M_PI / 2 * 0.98)
+# define SUN_RBOUNDF (0.1f)
+# define SUN_RSPEED (12.f)
+# define SUN_TSPEED (1.f)
 
 # define LAND_SIDEHALFF (LAND_SIDEF / 2.f)
 

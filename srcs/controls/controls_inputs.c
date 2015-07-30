@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/15 11:47:48 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/20 12:44:49 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/30 15:19:27 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,13 @@ static int const		g_codes[] =
 	GLFW_KEY_UP,
 	GLFW_KEY_DOWN,
 	GLFW_KEY_LEFT,
-	GLFW_KEY_RIGHT
+	GLFW_KEY_RIGHT,
+	GLFW_KEY_T,
+	GLFW_KEY_G,
+	GLFW_KEY_F,
+	GLFW_KEY_H,
+	GLFW_KEY_R,
+	GLFW_KEY_Y,
 };
 
 void		sp_keystate(t_env *e, int a, t_bool newstate)
@@ -35,7 +41,7 @@ void		sp_keystate(t_env *e, int a, t_bool newstate)
 	{
 		if (g_codes[i] == a)
 		{
-			e->states[i] = newstate;
+			e->keystates[i] = newstate;
 			return ;
 		}
 		i++;

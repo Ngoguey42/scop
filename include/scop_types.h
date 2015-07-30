@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 10:07:19 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/30 13:57:33 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/30 15:20:19 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,12 @@ enum                        e_keyindex
 	sp_down_key,
 	sp_left_key,
 	sp_right_key,
+	sp_t_key,
+	sp_g_key,
+	sp_f_key,
+	sp_h_key,
+	sp_r_key,
+	sp_y_key,
 	sp_num_keys
 };
 
@@ -163,17 +169,19 @@ typedef struct					s_env
 	t_model						models[sp_num_models];
 	t_ftvector					obs[sp_num_programs];
 
-	int							states[sp_num_keys];
-	int							States[sp_num_states];
+	int							keystates[sp_num_keys];
+	int							states[sp_num_states];
 	double						mpos[2];
-	
+
 	float						cangles[2];
 	t_vector3					cpos;
 	t_matrix4					view;
 
 	t_matrix4					projection;
 	t_matrix4					viewproj;
-	
+
+	t_vector3					sunpos_spherical;
+	t_vector3					sunpos_cartesian;
 	t_vector3					sunpos;
 	t_vector3					suncolor;
 	

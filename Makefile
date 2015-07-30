@@ -52,8 +52,10 @@ O_FILES := obj/srcs/env_operations.o \
 	obj/srcs/configuration/obs_fill.o \
 	obj/srcs/configuration/obs_update.o \
 	obj/srcs/configuration/unif_update.o \
+	obj/srcs/controls/controls.sun.o \
 	obj/srcs/controls/controls_apply.o \
 	obj/srcs/controls/controls_inputs.o \
+	obj/srcs/controls/controls_movements.o \
 	obj/srcs/ftmath/matrix4.o \
 	obj/srcs/ftmath/matrix4_invtranslate.o \
 	obj/srcs/ftmath/matrix4_miscop.o \
@@ -135,11 +137,19 @@ obj/srcs/configuration/unif_update.o: srcs/configuration/unif_update.c include/f
 	@mkdir -p obj/srcs/configuration 2> /dev/null || true
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
+obj/srcs/controls/controls.sun.o: srcs/controls/controls.sun.c include/fterror.h include/ftmath.h include/objmodel.h include/scop.h include/scop_conf.h include/scop_types.h
+	@mkdir -p obj/srcs/controls 2> /dev/null || true
+	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
+
 obj/srcs/controls/controls_apply.o: srcs/controls/controls_apply.c include/fterror.h include/ftmath.h include/objmodel.h include/scop.h include/scop_conf.h include/scop_types.h
 	@mkdir -p obj/srcs/controls 2> /dev/null || true
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
 obj/srcs/controls/controls_inputs.o: srcs/controls/controls_inputs.c include/fterror.h include/ftmath.h include/objmodel.h include/scop.h include/scop_conf.h include/scop_types.h
+	@mkdir -p obj/srcs/controls 2> /dev/null || true
+	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
+
+obj/srcs/controls/controls_movements.o: srcs/controls/controls_movements.c include/fterror.h include/ftmath.h include/objmodel.h include/scop.h include/scop_conf.h include/scop_types.h
 	@mkdir -p obj/srcs/controls 2> /dev/null || true
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 

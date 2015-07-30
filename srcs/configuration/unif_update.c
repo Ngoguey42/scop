@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/21 09:01:30 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/30 14:02:00 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/30 15:48:08 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ void			sp_unif_light(t_env const *e, t_program const *p)
 	GLuint const	vpoloc = glGetUniformLocation(p->handle, "viewPos");
 	GLuint const	lcloc = glGetUniformLocation(p->handle, "lightColor");
 
-	glUniform3f(lploc, e->sunpos.x, e->sunpos.y, e->sunpos.z);
+	glUniform3f(lploc, e->sunpos_cartesian.x
+				, e->sunpos_cartesian.y, e->sunpos_cartesian.z);
 	glUniform3f(vpoloc, e->cpos.x, e->cpos.y, e->cpos.z);
 	glUniform3f(lcloc, e->suncolor.x, e->suncolor.y, e->suncolor.z);
 	return ;

@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 12:08:19 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/28 18:55:30 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/30 15:20:43 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static void		loop(t_env *e)
 		sp_render_obs(e);
 		glfwSwapBuffers(e->win);
 		glfwPollEvents();
-		if (e->States[sp_window_focused_state] == 0
+		if (e->states[sp_window_focused_state] == 0
 			&& (sleep_time = 0.5 - (glfwGetTime() - e->time_cur)) < 0.5)
 			usleep(sleep_time * 1000000.);
 		last_time = e->time_cur;

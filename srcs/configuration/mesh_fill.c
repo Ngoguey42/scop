@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 15:57:45 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/30 13:55:33 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/30 14:38:28 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,6 @@ int				sp_meshfill_sun(t_env const *e, t_mesh *me)
 		&me->vertices, vertices, sizeof(vertices) / sizeof(*vertices) / 3);
 	(void)ftv_insert_range(
 		&me->faces, indices, sizeof(indices) / sizeof(*indices) / 3);
-	qprintf("filling mesh for sun!\n");
 	return (0);
 	(void)e;
 }
