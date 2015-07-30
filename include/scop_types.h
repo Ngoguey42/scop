@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 10:07:19 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/30 09:47:03 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/30 13:57:33 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,8 +141,9 @@ typedef struct					s_ob
 	t_vector3					rotation;
 	t_vector3					scale;
 	t_bool						hidden;
-	t_bool						modified;
+	t_bool						moved;
 	t_matrix4					mat;
+	void						(*update)();
 	float						values[3];
 }								t_ob;
 
@@ -167,12 +168,15 @@ typedef struct					s_env
 	double						mpos[2];
 	
 	float						cangles[2];
-	t_vector3					cpos;	
-	t_matrix4					view;	
+	t_vector3					cpos;
+	t_matrix4					view;
 
 	t_matrix4					projection;
 	t_matrix4					viewproj;
-
+	
+	t_vector3					sunpos;
+	t_vector3					suncolor;
+	
 	double						time_start;
 	double						time_cur;
 	double						time_el;

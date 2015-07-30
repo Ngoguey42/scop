@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/21 09:01:30 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/27 19:09:52 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/30 14:02:00 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,6 @@ void			sp_unif_model(t_env const *e, t_ob const *ob)
 	GLuint const	loc = glGetUniformLocation(p->handle, "model");
 
 	glUniformMatrix4fv(loc, 1, GL_TRUE, (float*)&ob->mat);
-	return ;
-}
-
-void			sp_unif_land(t_env const *e, t_ob const *ob)
-{
-	(void)e;
-	(void)ob;
 	return ;
 }
 
@@ -52,10 +45,15 @@ void			sp_unif_light(t_env const *e, t_program const *p)
 	GLuint const	vpoloc = glGetUniformLocation(p->handle, "viewPos");
 	GLuint const	lcloc = glGetUniformLocation(p->handle, "lightColor");
 
-	glUniform3f(lploc, 0.f, 0.f, 15.f);
-	/* glUniform3f(lploc, 5.f, 5.f, 5.f); */
+	glUniform3f(lploc, e->sunpos.x, e->sunpos.y, e->sunpos.z);
 	glUniform3f(vpoloc, e->cpos.x, e->cpos.y, e->cpos.z);
-	glUniform3f(lcloc, 1.0f, 1.0f, 1.0f);
-	/* glUniform3f(lcloc, 64.f / 255.f, 156.f / 255.f, 255.f / 255.f); */
+	glUniform3f(lcloc, e->suncolor.x, e->suncolor.y, e->suncolor.z);
+	return ;
+}
+void			sp_unif_suncolor(t_env const *e, t_program const *p)
+{
+	GLuint const	loc = glGetUniformLocation(p->handle, "sunColor");
+
+	glUniform3f(loc, e->suncolor.x, e->suncolor.y, e->suncolor.z);
 	return ;
 }

@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 10:33:54 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/30 10:40:47 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/30 13:39:39 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ typedef enum				e_vshader_index
 	sp_poco_to_co_vshader,
 	sp_poteno_to_uv_vshader,
 	sp_pocono_to_co_vshader,
+	sp_po_to_noop_vshader,
 	sp_num_vshaders
 }							t_vshader_index;
 
@@ -77,6 +78,7 @@ typedef enum				e_fshader_index
 	sp_uvno_uvli_fshader,
 	sp_cono_coli_fshader,
 	sp_couvno_blendli_fshader,
+	sp_co_sun_fshader,
 	sp_num_fshaders,
 }							t_fshader_index;
 
@@ -95,6 +97,7 @@ typedef enum				e_program_index
 	sp_land_program,
 	sp_ptn_program,
 	sp_pcn_program,
+	sp_sun_program,
 	sp_num_programs
 }							t_program_index;
 
@@ -104,6 +107,7 @@ typedef enum				e_mesh_index
 	sp_square_mesh,
 	sp_land_mesh,
 	sp_ptn_mesh,
+	sp_sun_mesh,
 	sp_num_meshes,
 }							t_mesh_index;
 
@@ -122,6 +126,7 @@ typedef enum				e_model_index
 	sp_square_model,
 	sp_land_model,
 	sp_ptn_model,
+	sp_sun_model,
 	sp_num_models,
 }							t_model_index;
 

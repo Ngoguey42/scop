@@ -6,7 +6,7 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/07/30 10:07:14 by ngoguey           #+#    #+#             //
-//   Updated: 2015/07/30 11:06:33 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/07/30 13:03:00 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -30,9 +30,9 @@ uniform vec3		lightColor;
 void main()
 {
 	// color = vec4(fs_in.Color, 1.f);
-	color = mix(vec4(fs_in.Color, 1.f), texture(ourTexture, fs_in.texUV), 0.45);
+	// color = mix(vec4(fs_in.Color, 1.f), texture(ourTexture, fs_in.texUV), 0.45);
 	// color = vec4(0.7, 0.7, 0.7, 1.);
-	// color = texture(ourTexture, fs_in.texUV);
+	color = texture(ourTexture, fs_in.texUV);
 	// Ambient
 	float ambientStrength = 0.25f;
 	vec3 ambient = ambientStrength * lightColor;

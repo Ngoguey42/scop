@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 12:53:00 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/30 11:07:02 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/30 13:59:29 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ int				sp_loadconf_vshaders(t_env *e)
 	LOC("position", 3), LOC("texCoord", 2), LOC("normal", 3)),
 	VSHADER("pocono_to_co.vert", &sp_unif_viewproj,
 	LOC("position", 3), LOC("color", 3), LOC("normal", 3)),
+	VSHADER("po_to_noop.vert", &sp_unif_viewproj,
+	LOC("position", 3)),
 	};
 	memcpy(&e->vshaders, &tmp, sizeof(tmp));
 	return (0);
@@ -61,6 +63,7 @@ int				sp_loadconf_fshaders(t_env *e)
 	FSHADER("uvno_uvli.frag", &sp_unif_light),
 	FSHADER("cono_coli.frag", &sp_unif_light),
 	FSHADER("couvno_blendli.frag", &sp_unif_light),
+	FSHADER("co_sun.frag", &sp_unif_suncolor),
 	};
 	memcpy(&e->fshaders, &tmp, sizeof(tmp));
 	return (0);
@@ -86,6 +89,7 @@ int				sp_loadconf_programs(t_env *e)
 	PROG(sp_poco_to_co_vshader, sp_co_identity_fshader, sp_no_gshader),
 	PROG(sp_poteno_to_uv_vshader, sp_couvno_blendli_fshader, sp_test_gshader),
 	PROG(sp_pocono_to_co_vshader, sp_cono_coli_fshader, sp_no_gshader),
+	PROG(sp_po_to_noop_vshader, sp_co_sun_fshader, sp_no_gshader),
 	};
 	memcpy(&e->programs, &tmp, sizeof(tmp));
 	return (0);
@@ -112,6 +116,7 @@ int				sp_loadconf_meshes(t_env *e)
 	MESH(GL_STATIC_DRAW, sp_pcn_program, true, &sp_meshfill_square),
 	MESH(GL_STATIC_DRAW, sp_land_program, true, &sp_meshfill_land),
 	MESH(GL_STATIC_DRAW, sp_ptn_program, true, &sp_meshfill_item2),
+	MESH(GL_STATIC_DRAW, sp_sun_program, true, &sp_meshfill_sun),
 	};
 	memcpy(&e->meshes, &tmp, sizeof(tmp));
 	return (0);
@@ -123,8 +128,9 @@ int				sp_loadconf_models(t_env *e)
 
 	{sp_plane_mesh, sp_porcelain_texture, &sp_unif_model},
 	{sp_square_mesh, sp_no_texture, &sp_unif_model},
-	{sp_land_mesh, sp_no_texture, &sp_unif_land},
+	{sp_land_mesh, sp_no_texture, NULL},
 	{sp_ptn_mesh, sp_metal_texture, &sp_unif_model},
+	{sp_sun_mesh, sp_no_texture, &sp_unif_model},
 	};
 	memcpy(&e->models, &tmp, sizeof(tmp));
 	return (0);

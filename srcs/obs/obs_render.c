@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/27 12:01:57 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/28 16:02:30 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/30 13:39:01 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,22 @@ static void		render_ob(t_env const *e, t_ob *ob)
 	return ;
 }
 
-static void		update_ob(t_env const *e, t_ob *ob)
+static void		update_matrix_ob(t_env const *e, t_ob *ob)
 {
 	ob->mat = m4_translate_nonuniform(ob->position);
 	ob->mat = m4_rotationref_axis(&ob->mat, z_axis, ob->rotation.x);
 	ob->mat = m4_rotationref_axis(&ob->mat, y_axis, ob->rotation.y);
 	ob->mat = m4_rotationref_axis(&ob->mat, x_axis, ob->rotation.z);
 	ob->mat = m4_scaleref_nonuniform(&ob->mat, ob->scale);
-	ob->modified = false;
+	ob->moved = false;
+	return ;
+	(void)e;
+}
+
+static void		update_ob(t_env const *e, t_ob *ob)
+{
+	if (ob->update != NULL)
+		ob->update(e, ob);
 	return ;
 	(void)e;
 }
@@ -48,9 +56,9 @@ static t_bool	do_draw(t_env const *e, t_ob *ob)
 	(void)e;
 }
 
-static t_bool	do_update(t_env const *e, t_ob *ob)
+static t_bool	do_update_matrix(t_env const *e, t_ob *ob)
 {
-	return (ob->modified ? true : false);
+	return (ob->moved ? true : false);
 	(void)e;
 }
 
@@ -68,7 +76,8 @@ void			render_prog_obs(t_env const *e, t_program_index i)
 		vsunif_update(e, p);
 	if (fsunif_update != NULL)
 		fsunif_update(e, p);
-	ftv_foreach_if((void*)prv, &update_ob, (void*)e, &do_update);
+	ftv_foreach((void*)prv, &update_ob, (void*)e);
+	ftv_foreach_if((void*)prv, &update_matrix_ob, (void*)e, &do_update_matrix);
 	ftv_foreach_if((void*)prv, &render_ob, (void*)e, &do_draw);
 	return ;
 }

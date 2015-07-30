@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/22 13:44:32 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/30 10:18:59 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/30 13:53:37 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,9 @@ int			sp_fill_obs(t_env *e)
 	{
 		t_ob    ob[1];
 
+		ob->update = NULL;
 		ob->hidden = false;
-		ob->modified = true;
+		ob->moved = true;
 		ob->model = sp_plane_model;
 		ob->rotation = ATOV3(0.f, 0.f, 0.f);
 		ob->scale = ATOV3(1.f, 1.f, 1.f);
@@ -39,8 +40,9 @@ int			sp_fill_obs(t_env *e)
 	{
 		t_ob    ob[1];
 
+		ob->update = NULL;
 		ob->hidden = false;
-		ob->modified = true;
+		ob->moved = true;
 		ob->model = sp_square_model;
 		ob->rotation = ATOV3(0.f, 0.f, 0.f);
 		ob->scale = ATOV3(4.f, 4.f, 4.f);
@@ -50,16 +52,18 @@ int			sp_fill_obs(t_env *e)
 	{
 		t_ob    ob[1];
 
+		ob->update = NULL;
 		ob->hidden = false;
-		ob->modified = true;
+		ob->moved = true;
 		ob->model = sp_land_model;
 		push_ob(e, ob);	
 	}
 	{
 		t_ob    ob[1];
 
+		ob->update = NULL;
 		ob->hidden = false;
-		ob->modified = true;
+		ob->moved = true;
 		ob->model = sp_ptn_model;
 		/* ob->rotation = ATOV3(0.f, 0.f, 0.f); */
 		ob->rotation = ATOV3(0.f, 0.f, -M_PI / 2.f);
@@ -70,6 +74,19 @@ int			sp_fill_obs(t_env *e)
 		ob->position = ATOV3(-45.f, -0.f, -40.f);
 		/* ob->position = ATOV3(-0.f, -0.f, -20.f); */
 		/* ob->position = ATOV3(-0.f, -0.f, -20.f); */
+		push_ob(e, ob);
+	}
+	{
+		t_ob    ob[1];
+
+		ob->update = &sp_obupdate_sun;
+		ob->hidden = false;
+		ob->moved = false;
+		ob->model = sp_sun_model;
+		ob->rotation = ATOV3(0.f, 0.f, 0.f);
+		ob->scale = ATOV3(10.f, 10.f, 10.f);
+		/* ob->scale = ATOV3(1.f, 1.f, 1.f); */
+		ob->position = ATOV3(0.f, 0.f, 0.f);
 		push_ob(e, ob);
 	}
 	return (0);

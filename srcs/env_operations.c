@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/15 13:44:48 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/30 08:48:33 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/30 14:03:04 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,9 @@ int				sp_init_env(t_env *e)
 	sp_register_instance(e);
 	bzero(e, sizeof(*e));
 	e->cpos = ATOV3(0.f, 2.f, 6.f);
+	e->sunpos = ATOV3(0.f, 30.f, 15.f);
+	e->suncolor = ATOV3(245.f / 255.f, 235.f / 255.f, 190.f / 255.f);
+	/* e->suncolor = ATOV3(233.f / 255.f, 189.f / 255.f, 21.f / 255.f); */
 	e->cangles[0] = -(M_PI / 2);
 	e->cangles[1] = 0.f;
 	e->projection = m4_fovprojection(WIN_FOVF, WIN_RATIOF, WIN_NEARF, WIN_FARF);

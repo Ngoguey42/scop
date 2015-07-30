@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 15:57:45 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/30 11:04:11 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/30 13:55:33 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,35 @@ int				sp_meshfill_land(t_env const *e, t_mesh *me)
 	sp_fill_landfaces(lines, &me->faces);
 	sp_fill_landrgb(&me->vertices, bounds);
 	ftv_release(lines, NULL);
+	return (0);
+	(void)e;
+}
+
+int				sp_meshfill_sun(t_env const *e, t_mesh *me)
+{
+	GLfloat vertices[24] = {
+		-1.0f, 1.0f, -1.0f,
+		-1.0f, -1.0f, -1.0f,
+		-1.0f, 1.0f, 1.0f,
+		-1.0f, -1.0f, 1.0f,
+		1.0f, 1.0f, 1.0f,
+		1.0f, -1.0f, 1.0f,
+		1.0f, 1.0f, -1.0f,
+		1.0f, -1.0f, -1.0f
+	};
+	GLuint indices[36] = {
+		0,1,2,2,1,3,
+		4,5,6,6,5,7,
+		3,1,5,5,1,7,
+		0,2,6,6,2,4,
+		6,7,0,0,7,1,
+		2,3,4,4,3,5
+	};
+	(void)ftv_insert_range(
+		&me->vertices, vertices, sizeof(vertices) / sizeof(*vertices) / 3);
+	(void)ftv_insert_range(
+		&me->faces, indices, sizeof(indices) / sizeof(*indices) / 3);
+	qprintf("filling mesh for sun!\n");
 	return (0);
 	(void)e;
 }

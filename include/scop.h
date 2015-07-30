@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 12:07:31 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/30 09:47:04 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/30 14:01:10 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ int			sp_meshfill_plane(t_env const *e, t_mesh *me);
 int			sp_meshfill_item2(t_env const *e, t_mesh *me);
 int			sp_meshfill_square(t_env const *e, t_mesh *me);
 int			sp_meshfill_land(t_env const *e, t_mesh *me);
+int			sp_meshfill_sun(t_env const *e, t_mesh *me);
 
 void		sp_inject_normals(t_ftvector *vertices, t_ftvector const *faces);
 void		sp_inject_uv_plan_oxy(t_ftvector *v, t_texture const *t,
@@ -114,6 +115,7 @@ void		sp_unif_land(t_env const *e, t_ob const *ob);
 void		sp_unif_viewproj(t_env const *e, t_program const *p);
 void		sp_unif_viewproj2(t_env const *e, t_program const *p);
 void		sp_unif_light(t_env const *e, t_program const *p);
+void		sp_unif_suncolor(t_env const *e, t_program const *p);
 
 /*
 ** OBS (OBJECTS)
@@ -122,5 +124,6 @@ int			sp_init_obs(t_env *e);
 void		sp_delete_obs(t_env *e);
 void        sp_render_obs(t_env const *e);
 int         sp_fill_obs(t_env *e);
+void        sp_obupdate_sun(t_env const *e, t_ob *ob);
 
 #endif
