@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 12:53:00 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/30 13:59:29 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/31 13:10:35 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int				sp_loadconf_programs(t_env *e)
 	PROG(sp_po_to_co_vshader, sp_co_identity_fshader, sp_no_gshader),
 	PROG(sp_pocote_to_couv_vshader, sp_couv_uv_fshader, sp_no_gshader),
 	PROG(sp_pote_to_couv_vshader, sp_couv_uv_fshader, sp_no_gshader),
-	PROG(sp_poco_to_co_vshader, sp_co_identity_fshader, sp_no_gshader),
+	PROG(sp_pocono_to_co_vshader, sp_cono_coli_fshader, sp_no_gshader),
 	PROG(sp_poteno_to_uv_vshader, sp_couvno_blendli_fshader, sp_test_gshader),
 	PROG(sp_pocono_to_co_vshader, sp_cono_coli_fshader, sp_no_gshader),
 	PROG(sp_po_to_noop_vshader, sp_co_sun_fshader, sp_no_gshader),
@@ -128,7 +128,7 @@ int				sp_loadconf_models(t_env *e)
 
 	{sp_plane_mesh, sp_porcelain_texture, &sp_unif_model},
 	{sp_square_mesh, sp_no_texture, &sp_unif_model},
-	{sp_land_mesh, sp_no_texture, NULL},
+	{sp_land_mesh, sp_no_texture, &sp_unif_model},
 	{sp_ptn_mesh, sp_metal_texture, &sp_unif_model},
 	{sp_sun_mesh, sp_no_texture, &sp_unif_model},
 	};

@@ -6,7 +6,7 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/07/27 18:24:49 by ngoguey           #+#    #+#             //
-//   Updated: 2015/07/27 19:00:43 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/07/31 13:13:39 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -36,7 +36,7 @@ void main()
 	vec3 diffuse = diff * lightColor;
 
 	// Specular
-	float specularStrength = 0.6f;
+	float specularStrength = 0.1f;
 	vec3 viewDir = normalize(viewPos - fragPos);
 	vec3 reflectDir = reflect(-lightDir, norm);
 	float spec = pow(max(dot(viewDir, reflectDir), 0.0), 32);

@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 15:57:45 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/30 14:38:28 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/31 13:10:02 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int				sp_meshfill_square(t_env const *e, t_mesh *me)
 	
 
 	sp_inject_normals(vert, &me->faces);
-
+	
 	memcpy(&me->vertices, vert, sizeof(t_ftvector));
 	
 
@@ -96,7 +96,10 @@ int				sp_meshfill_land(t_env const *e, t_mesh *me)
 	if (ftv_insert_count(lines, lines->data, line_points))
 		sp_enomem();
 	sp_fill_landgrid(lines);
-	if (ftv_reserve(&me->vertices, lines->size * lines->size))
+	//fuite
+ 	if (ftv_init_instance(&me->vertices, 6 * sizeof(float)))
+		sp_enomem();
+ 	if (ftv_reserve(&me->vertices, lines->size * lines->size))
 		sp_enomem();
 	sp_fill_landvertices(lines, &me->vertices, bounds);
 	if (ftv_reserve(&me->faces, (lines->size - 1) * (lines->size - 1) * 2))
@@ -104,6 +107,41 @@ int				sp_meshfill_land(t_env const *e, t_mesh *me)
 	sp_fill_landfaces(lines, &me->faces);
 	sp_fill_landrgb(&me->vertices, bounds);
 	ftv_release(lines, NULL);
+
+	/* qprintf("%u %u\n", me->vertices.chunk_size, me->vertices.size); */
+
+	qprintf("%.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f \n",
+			((float*)me->vertices.data)[0],
+			((float*)me->vertices.data)[1],
+			((float*)me->vertices.data)[2],
+			((float*)me->vertices.data)[3],
+			((float*)me->vertices.data)[4],
+			((float*)me->vertices.data)[5],
+			((float*)me->vertices.data)[6],
+			((float*)me->vertices.data)[7],
+			((float*)me->vertices.data)[8]
+		);
+	
+
+	
+	sp_inject_normals(&me->vertices, &me->faces);
+	/* qprintf("%u %u\n", me->vertices.chunk_size, me->vertices.size); */
+
+	qprintf("%.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f %.2f \n",
+			((float*)me->vertices.data)[0],
+			((float*)me->vertices.data)[1],
+			((float*)me->vertices.data)[2],
+			((float*)me->vertices.data)[3],
+			((float*)me->vertices.data)[4],
+			((float*)me->vertices.data)[5],
+			((float*)me->vertices.data)[6],
+			((float*)me->vertices.data)[7],
+			((float*)me->vertices.data)[8]
+		);
+	
+	/* return (1); */
+
+	
 	return (0);
 	(void)e;
 }

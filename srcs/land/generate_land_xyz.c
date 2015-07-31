@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/22 17:08:03 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/28 16:05:58 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/31 13:11:45 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,13 @@ void	sp_fill_landfaces(t_ftvector const *lines, t_ftvector *faces)
 		x = 1;
 		while (x < lines->size)
 		{
-			tmp[0] = (x - 1) + (y - 1) * lines->size;
+			tmp[2] = (x - 1) + (y - 1) * lines->size;
 			tmp[1] = (x + 0) + (y + 0) * lines->size;
-			tmp[2] = (x - 1) + (y + 0) * lines->size;
+			tmp[0] = (x - 1) + (y + 0) * lines->size;
 			ftv_push_back_unsafe(faces, &tmp);
-			tmp[0] = (x - 1) + (y - 1) * lines->size;
+			tmp[2] = (x - 1) + (y - 1) * lines->size;
 			tmp[1] = (x + 0) + (y - 1) * lines->size;
-			tmp[2] = (x + 0) + (y + 0) * lines->size;
+			tmp[0] = (x + 0) + (y + 0) * lines->size;
 			ftv_push_back_unsafe(faces, &tmp);
 			x += 1;
 		}

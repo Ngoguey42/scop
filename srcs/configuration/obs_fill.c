@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/22 13:44:32 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/30 13:53:37 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/31 13:00:03 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,12 @@ int			sp_fill_obs(t_env *e)
 		ob->hidden = false;
 		ob->moved = true;
 		ob->model = sp_land_model;
+
+		ob->rotation = ATOV3(0.f, 0.f, 0.f);
+		ob->scale = ATOV3(1.f, 1.f, 1.f);
+		ob->position = ATOV3(0.f, 0.f, 0.f);
+		
+		
 		push_ob(e, ob);	
 	}
 	{
