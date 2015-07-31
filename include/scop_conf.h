@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 10:33:54 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/30 15:53:03 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/31 10:01:08 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@
 # include "libft.h"
 # include "ftmath.h"
 
-# define SHD_PATH(FILENAME) ("srcs/shaders/" (FILENAME))
-# define VSHD_PATH(FILENAME) (SHD_PATH("vshaders/" (FILENAME)))
-# define FSHD_PATH(FILENAME) (SHD_PATH("fshaders/" (FILENAME)))
-# define GSHD_PATH(FILENAME) (SHD_PATH("gshaders/" (FILENAME)))
+# define SHD_PATH(FILENAME) ("srcs/shaders/" FILENAME)
+# define VSHD_PATH(FILENAME) (SHD_PATH("vshaders/" FILENAME))
+# define FSHD_PATH(FILENAME) (SHD_PATH("fshaders/" FILENAME))
+# define GSHD_PATH(FILENAME) (SHD_PATH("gshaders/" FILENAME))
 
 /*
 ** RESSOURCES
@@ -58,8 +58,8 @@
 # define CAMERA_POSBOUNDF (M_PI / 2 * 0.98)
 # define SUN_THETABOUNDF (M_PI / 2 * 0.98)
 # define SUN_RBOUNDF (0.1f)
-# define SUN_RSPEED (12.f)
-# define SUN_TSPEED (1.f)
+# define SUN_RSPEED (45.f)
+# define SUN_ASPEED (3.f)
 
 # define LAND_SIDEHALFF (LAND_SIDEF / 2.f)
 

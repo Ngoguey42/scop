@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/15 11:35:09 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/30 15:27:16 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/31 10:06:31 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,6 @@
 void			sp_update_states(t_env *e)
 {
 	sp_update_movements(e);
-	sp_update_sun(e);
+	sp_update_sun(e, false);
 	return ;
 }

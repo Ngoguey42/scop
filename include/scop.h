@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 12:07:31 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/30 15:33:05 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/31 10:05:25 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void		sp_toggle_mouse_state(GLFWwindow *w, t_env *e);
 void		sp_keystate(t_env *e, int a, t_bool newstate);
 void		sp_update_states(t_env *e);
 void		sp_update_movements(t_env *e);
-void		sp_update_sun(t_env *e);
+void		sp_update_sun(t_env *e, t_bool force);
 
 /*
 ** ENV

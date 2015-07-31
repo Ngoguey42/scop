@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 10:07:19 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/30 15:20:19 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/07/31 10:02:48 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,7 +182,6 @@ typedef struct					s_env
 
 	t_vector3					sunpos_spherical;
 	t_vector3					sunpos_cartesian;
-	t_vector3					sunpos;
 	t_vector3					suncolor;
 	
 	double						time_start;
