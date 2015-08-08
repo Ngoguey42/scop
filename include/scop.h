@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 12:07:31 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/08 12:16:46 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/08 12:45:20 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include "ftmath.h"
 # include "scop_conf.h"
 # include "scop_types.h"
+# include "scop_cogconf_meshfill.h"
 # include "fterror.h"
 # include "objmodel.h"
 
@@ -89,12 +90,6 @@ int			sp_init_meshes(t_env *e);
 
 void		sp_delete_meshes(t_env *e);
 int			op_new_mesh(t_env const *e, t_mesh *me);
-
-int			sp_meshfill_plane(t_env const *e, t_mesh *me);
-int			sp_meshfill_ptn(t_env const *e, t_mesh *me);
-int			sp_meshfill_square(t_env const *e, t_mesh *me);
-int			sp_meshfill_land(t_env const *e, t_mesh *me);
-int			sp_meshfill_sun(t_env const *e, t_mesh *me);
 
 void		sp_inject_normals(t_ftvector *vertices, t_ftvector const *faces);
 void		sp_inject_uv_plan_oxy(t_ftvector *v, t_texture const *t,
