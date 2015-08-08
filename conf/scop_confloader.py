@@ -6,7 +6,7 @@
 #    By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/08/08 11:56:11 by ngoguey           #+#    #+#              #
-#    Updated: 2015/08/08 11:56:11 by ngoguey          ###   ########.fr        #
+#    Updated: 2015/08/08 12:33:58 by ngoguey          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,11 @@ def output_enums():
 			elt.output_enum_line()
 		cstruct[0].output_enum_end()
 		cog.outl("")
+
+def output_meshfill_prototypes():        
+	for mesh in meshes:
+		output_doth_indent_2str("int", "sp_meshfill_" + mesh.name
+                                        + "(t_env const *e, t_mesh *me);")
 
 def output_cconf():
 	for cstruct in cstructs:
