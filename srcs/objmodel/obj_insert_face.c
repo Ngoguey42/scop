@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/23 11:05:53 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/08 09:33:00 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/08 10:56:33 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,9 @@
 ** **
 ** 'gen_vertex_index'	receives a vertex pointer, returns it's index
 **							(may create it's index)
+** *
+**	'if (m->width != 8 && m->width != 6)'
+**		UGLY LVL 9000
 */
 
 static size_t	gen_vertex_index(t_objmodel *m, float const *vertex)
@@ -36,7 +39,8 @@ static size_t	gen_vertex_index(t_objmodel *m, float const *vertex)
 	int		i;
 
 	i = -1;
-	i = ftv_find_index(&m->vertices, vertex);
+	if (m->width != 8 && m->width != 6)
+		i = ftv_find_index(&m->vertices, vertex);
 	if (i < 0)
 	{
 		i = (int)m->vertices.size;
