@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 15:57:45 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/08 09:32:07 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/08 12:16:29 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int				sp_meshfill_plane(t_env const *e, t_mesh *me)
 	return (0);
 }
 
-int				sp_meshfill_item2(t_env const *e, t_mesh *me)
+int				sp_meshfill_ptn(t_env const *e, t_mesh *me)
 {
 	t_objmodel	m[1];
 

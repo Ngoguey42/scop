@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 12:53:00 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/31 13:10:35 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/08 12:18:59 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,24 @@
 #define LOC(N, S) ((t_location){N, (S)})
 
 #define FTVU ftv_uninitialized()
-#define MESH(US, P, IN, FI) {(US), (P), (IN), (FI), FTVU, FTVU, {0, 0, 0}}
 
 #define VSHADER(N,F,...) {VSHD_PATH(N),F,NARG(__VA_ARGS__),{__VA_ARGS__},0}
 #define FSHADER(N, F) {FSHD_PATH(N), (F), 0}
 #define GSHADER(N, F) {GSHD_PATH(N), (F), 0}
+#define MESH(P, U, F) {(U), (P), true, (F), FTVU, FTVU, {0, 0, 0}}
+#define TEXTURE(FN) {TEXTURE_PATH(FN), {0, 0}, 0}
+#define MODEL(ME, TE, F) {(ME), (TE), (F)}
 
-int				sp_loadconf_vshaders(t_env *e)
+/*
+**	[[[cog
+**	import cog
+**	cog.outl("*" "/")
+**	from scop_confloader import output_cconf
+**	output_cconf()
+**	cog.outl("/" "*")
+**	]]]
+*/
+int			sp_loadconf_vshaders(t_env *e)
 {
 	t_vshader const		tmp[sp_num_vshaders] = {
 
@@ -52,7 +63,7 @@ int				sp_loadconf_vshaders(t_env *e)
 	return (0);
 }
 
-int				sp_loadconf_fshaders(t_env *e)
+int			sp_loadconf_fshaders(t_env *e)
 {
 	t_fshader const		tmp[sp_num_fshaders] = {
 
@@ -69,7 +80,7 @@ int				sp_loadconf_fshaders(t_env *e)
 	return (0);
 }
 
-int				sp_loadconf_gshaders(t_env *e)
+int			sp_loadconf_gshaders(t_env *e)
 {
 	t_gshader const		tmp[sp_num_gshaders] = {
 
@@ -79,7 +90,7 @@ int				sp_loadconf_gshaders(t_env *e)
 	return (0);
 }
 
-int				sp_loadconf_programs(t_env *e)
+int			sp_loadconf_programs(t_env *e)
 {
 	t_program const		tmp[sp_num_programs] = {
 
@@ -95,43 +106,46 @@ int				sp_loadconf_programs(t_env *e)
 	return (0);
 }
 
-int				sp_loadconf_textures(t_env *e)
+int			sp_loadconf_textures(t_env *e)
 {
 	t_texture const		tmp[sp_num_textures] = {
 
-	{TEXTURE_PATH("Porcelain.tga"), {0, 0}, 0},
-	/* {TEXTURE_PATH("BoundedPorcelain.tga"), {0, 0}, 0}, */
-	{TEXTURE_PATH("Wall.tga"), {0, 0}, 0},
-	{TEXTURE_PATH("Metal.tga"), {0, 0}, 0},
+	TEXTURE("Porcelain.tga"),
+	TEXTURE("Wall.tga"),
+	TEXTURE("metal.tga"),
 	};
 	memcpy(&e->textures, &tmp, sizeof(tmp));
 	return (0);
 }
 
-int				sp_loadconf_meshes(t_env *e)
+int			sp_loadconf_meshes(t_env *e)
 {
 	t_mesh const		tmp[sp_num_meshes] = {
 
-	MESH(GL_STATIC_DRAW, sp_ptn_program, true, &sp_meshfill_plane),
-	MESH(GL_STATIC_DRAW, sp_pcn_program, true, &sp_meshfill_square),
-	MESH(GL_STATIC_DRAW, sp_land_program, true, &sp_meshfill_land),
-	MESH(GL_STATIC_DRAW, sp_ptn_program, true, &sp_meshfill_item2),
-	MESH(GL_STATIC_DRAW, sp_sun_program, true, &sp_meshfill_sun),
+	MESH(sp_ptn_program, GL_STATIC_DRAW, &sp_meshfill_plane),
+	MESH(sp_pcn_program, GL_STATIC_DRAW, &sp_meshfill_square),
+	MESH(sp_land_program, GL_STATIC_DRAW, &sp_meshfill_land),
+	MESH(sp_ptn_program, GL_STATIC_DRAW, &sp_meshfill_ptn),
+	MESH(sp_sun_program, GL_STATIC_DRAW, &sp_meshfill_sun),
 	};
 	memcpy(&e->meshes, &tmp, sizeof(tmp));
 	return (0);
 }
 
-int				sp_loadconf_models(t_env *e)
+int			sp_loadconf_models(t_env *e)
 {
 	t_model const		tmp[sp_num_models] = {
 
-	{sp_plane_mesh, sp_porcelain_texture, &sp_unif_model},
-	{sp_square_mesh, sp_no_texture, &sp_unif_model},
-	{sp_land_mesh, sp_no_texture, &sp_unif_model},
-	{sp_ptn_mesh, sp_metal_texture, &sp_unif_model},
-	{sp_sun_mesh, sp_no_texture, &sp_unif_model},
+	MODEL(sp_plane_mesh, sp_porcelain_texture, &sp_unif_model),
+	MODEL(sp_square_mesh, sp_no_texture, &sp_unif_model),
+	MODEL(sp_land_mesh, sp_no_texture, &sp_unif_model),
+	MODEL(sp_ptn_mesh, sp_metal_texture, &sp_unif_model),
+	MODEL(sp_sun_mesh, sp_no_texture, &sp_unif_model),
 	};
 	memcpy(&e->models, &tmp, sizeof(tmp));
 	return (0);
 }
+
+/*
+**	[[[end]]]
+*/
