@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/23 11:05:53 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/28 15:48:49 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/08 09:33:00 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static size_t	gen_vertex_index(t_objmodel *m, float const *vertex)
 	int		i;
 
 	i = -1;
-	/* i = ftv_find_index(&m->vertices, vertex); */
+	i = ftv_find_index(&m->vertices, vertex);
 	if (i < 0)
 	{
 		i = (int)m->vertices.size;

@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 15:57:45 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/31 13:10:02 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/08 09:32:07 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,9 @@ int				sp_meshfill_item2(t_env const *e, t_mesh *me)
 	/* op_init_instance(m, "res/cessna.obj"); */
 	/* op_init_instance(m, "res/alfa147.obj"); */
 	/* op_init_instance(m, "res/42.obj"); */
-	if (op_parse_obj(m, "res/alfa147.obj"))
+	/* if (op_parse_obj(m, "res/cessna.obj")) */
+	/* if (op_parse_obj(m, "res/alfa147.obj")) */
+	if (op_parse_obj(m, "res/new_csie_b1.obj"))
 		return (ERROR("op_parse_obj(m)"), 1);
 	/* sp_inject_uv_plan_oxy(m, 1.8f, 442.f / 405.f); */
 	op_swap_vectors(m, &me->vertices, &me->faces);

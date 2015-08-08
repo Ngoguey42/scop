@@ -6,14 +6,14 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/27 16:22:14 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/28 15:45:08 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/08 09:57:08 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <string.h>
+#include <math.h>
 #include <assert.h>
 #include "scop.h"
-#include "objmodel_parsing.h"
 
 #define DATA_WIDTH sizeof(t_vector3)
 #define DST_(PTR, I) ((void*)(PTR) + DATA_WIDTH * (I))
@@ -24,7 +24,9 @@
 
 #define ADD_V3(DST, OTHER) (DST) = v3_add((DST), (OTHER))
 
-static void	normalize(void *const dst, size_t const nvert)
+#define ANGLE_BETWEEN(V1, V2) (acos(v3_dot_normed((V1), (V2))))
+
+static void	normalize_all(void *const dst, size_t const nvert)
 {
 	size_t	i;
 
@@ -37,24 +39,31 @@ static void	normalize(void *const dst, size_t const nvert)
 	return ;
 }
 
-static void	calc_normals(void *const dst, t_ftvector const *vert,
+static void	sum_normals_all(void *const dst, t_ftvector const *vert,
 							t_ftvector const *faces)
 {
 	t_ui const			*f = faces->data;
 	t_ui const *const	faceend = ftv_end(faces);
 	t_vector3			fvect[3];
+	t_vector3			normal;
 
 	while (f < faceend)
 	{
-		fvect[0] = v3_sub(*SRCPTR_V3(vert, f[0]), *SRCPTR_V3(vert, f[1]));
-		fvect[1] = v3_sub(*SRCPTR_V3(vert, f[1]), *SRCPTR_V3(vert, f[2]));
-		fvect[2] = v3_sub(*SRCPTR_V3(vert, f[2]), *SRCPTR_V3(vert, f[0]));
-		ADD_V3(*DSTPTR_V3(dst, f[0]), v3_cross(v3_inv(fvect[0]), fvect[2]));
-		ADD_V3(*DSTPTR_V3(dst, f[1]), v3_cross(v3_inv(fvect[1]), fvect[0]));
-		ADD_V3(*DSTPTR_V3(dst, f[2]), v3_cross(v3_inv(fvect[2]), fvect[1]));
+		fvect[0] = v3_normalize(
+			v3_sub(*SRCPTR_V3(vert, f[0]), *SRCPTR_V3(vert, f[1])));
+		fvect[1] = v3_normalize(
+			v3_sub(*SRCPTR_V3(vert, f[1]), *SRCPTR_V3(vert, f[2])));
+		fvect[2] = v3_normalize(
+			v3_sub(*SRCPTR_V3(vert, f[2]), *SRCPTR_V3(vert, f[0])));
+		normal = v3_cross(v3_inv(fvect[0]), fvect[2]);
+		ADD_V3(*DSTPTR_V3(dst, f[0]), v3_mul_scalar(normal,
+			ANGLE_BETWEEN(v3_inv(fvect[0]), fvect[2])));
+		ADD_V3(*DSTPTR_V3(dst, f[1]), v3_mul_scalar(normal,
+			ANGLE_BETWEEN(v3_inv(fvect[1]), fvect[0])));
+		ADD_V3(*DSTPTR_V3(dst, f[2]), v3_mul_scalar(normal,
+			ANGLE_BETWEEN(v3_inv(fvect[2]), fvect[1])));
 		f += 3;
 	}
-	normalize(dst, vert->size);
 	return ;
 }
 
@@ -91,7 +100,8 @@ void		sp_inject_normals(t_ftvector *vertices, t_ftvector const *faces)
 	bzero(normals->data, normals->chunk_size);
 	if (ftv_insert_count(normals, normals->data, vertices->size - 1))
 		sp_enomem();
-	calc_normals(normals->data, vertices, faces);
+	sum_normals_all(normals->data, vertices, faces);
+	normalize_all(normals->data, vertices->size);
 	if (ftv_init_instance(newv, vertices->chunk_size + DATA_WIDTH))
 		sp_enomem();
 	if (ftv_reserve(newv, vertices->size))

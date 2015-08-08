@@ -6,18 +6,24 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/15 09:37:05 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/27 17:17:27 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/08 08:59:05 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ftmath.h"
 #include <math.h>
 
-#define DO_OP(A, B) (a.A * b.B - a.B * b.A)
+#define CROSS_OP(A, B) (a.A * b.B - a.B * b.A)
+#define DOT_OP(M) (a.M * b.M)
 
 t_vector3	v3_cross(t_vector3 a, t_vector3 b)
 {
-	return (ATOV3(DO_OP(y, z), DO_OP(z, x), DO_OP(x, y)));
+	return (ATOV3(CROSS_OP(y, z), CROSS_OP(z, x), CROSS_OP(x, y)));
+}
+
+float		v3_dot_normed(t_vector3 a, t_vector3 b)
+{
+	return (DOT_OP(x) + DOT_OP(y) + DOT_OP(z));
 }
 
 t_vector3	v3_add(t_vector3 a, t_vector3 b)
@@ -33,6 +39,11 @@ t_vector3	v3_sub(t_vector3 a, t_vector3 b)
 t_vector3	v3_div_scalar(t_vector3 a, float q)
 {
 	return (ATOV3(a.x / q, a.y / q, a.z / q));
+}
+
+t_vector3	v3_mul_scalar(t_vector3 a, float f)
+{
+	return (ATOV3(a.x * f, a.y * f, a.z * f));
 }
 
 t_vector3	v3_inv(t_vector3 a)
