@@ -6,7 +6,7 @@
 #    By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/08/08 11:56:14 by ngoguey           #+#    #+#              #
-#    Updated: 2015/08/08 11:56:15 by ngoguey          ###   ########.fr        #
+#    Updated: 2015/08/08 12:28:54 by ngoguey          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ DOTH_INDENT_TABCOLUMN = DOTH_INDENT_COLUMN / 4
 assert DOTH_INDENT_TABCOLUMN * 4 == DOTH_INDENT_COLUMN
 
 def output_doth_indent_2str(lhs, rhs):
-	num_tabs = DOTH_INDENT_TABCOLUMN - int(math.ceil(float(len(lhs)) / 4.))
+	num_tabs = DOTH_INDENT_TABCOLUMN - int(math.floor(float(len(lhs)) / 4.))
 	assert num_tabs > 0
 	cog.outl(lhs + ('\t' * num_tabs) + rhs)
 

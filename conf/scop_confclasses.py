@@ -6,7 +6,7 @@
 #    By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/08/08 11:56:07 by ngoguey           #+#    #+#              #
-#    Updated: 2015/08/08 12:13:54 by ngoguey          ###   ########.fr        #
+#    Updated: 2015/08/08 12:24:57 by ngoguey          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,7 +45,7 @@ class Vshader(Cstruct):
 	@staticmethod
 	def output_enum_end():
 		cog.outl("\t" + "sp_" + "num" + "_vshaders")
-		output_doth_indent_2str("}", "t_vshader_index")
+		output_doth_indent_2str("}", "t_vshader_index;")
 	def output_enum_line(self):
 		cog.outl("\t" + "sp_" + self.name + "_vshader,")
 	@staticmethod
@@ -74,7 +74,7 @@ class Fshader(Cstruct):
 	@staticmethod
 	def output_enum_end():
 		cog.outl("\t" + "sp_" + "num" + "_fshaders")
-		output_doth_indent_2str("}", "t_fshader_index")
+		output_doth_indent_2str("}", "t_fshader_index;")
 	def output_enum_line(self):
 		cog.outl("\t" + "sp_" + self.name + "_fshader,")
 	@staticmethod
@@ -102,7 +102,7 @@ class Gshader(Cstruct):
 	def output_enum_end():
 		cog.outl("\t" + "sp_" + "num" + "_gshaders,")
 		cog.outl("\t" + "sp_" + "no" + "_gshader")
-		output_doth_indent_2str("}", "t_gshader_index")
+		output_doth_indent_2str("}", "t_gshader_index;")
 	def output_enum_line(self):
 		cog.outl("\t" + "sp_" + self.name + "_gshader,")
 	@staticmethod
@@ -130,7 +130,7 @@ class Program(Cstruct):
 	@staticmethod
 	def output_enum_end():
 		cog.outl("\t" + "sp_" + "num" + "_programs")
-		output_doth_indent_2str("}", "t_program_index")
+		output_doth_indent_2str("}", "t_program_index;")
 	def output_enum_line(self):
 		cog.outl("\t" + "sp_" + self.name + "_program,")
 	@staticmethod
@@ -155,7 +155,7 @@ class Texture(Cstruct):
 	def output_enum_end():
 		cog.outl("\t" + "sp_" + "num" + "_textures,")
 		cog.outl("\t" + "sp_" + "no" + "_texture")
-		output_doth_indent_2str("}", "t_texture_index")
+		output_doth_indent_2str("}", "t_texture_index;")
 	def output_enum_line(self):
 		cog.outl("\t" + "sp_" + self.name + "_texture,")
 	@staticmethod
@@ -182,7 +182,7 @@ class Mesh(Cstruct):
 	@staticmethod
 	def output_enum_end():
 		cog.outl("\t" + "sp_" + "num" + "_meshes")
-		output_doth_indent_2str("}", "t_mesh_index")
+		output_doth_indent_2str("}", "t_mesh_index;")
 	def output_enum_line(self):
 		cog.outl("\t" + "sp_" + self.name + "_mesh,")
 	@staticmethod
@@ -212,7 +212,7 @@ class Model(Cstruct):
 	@staticmethod
 	def output_enum_end():
 		cog.outl("\t" + "sp_" + "num" + "_models")
-		output_doth_indent_2str("}", "t_model_index")
+		output_doth_indent_2str("}", "t_model_index;")
 	def output_enum_line(self):
 		cog.outl("\t" + "sp_" + self.name + "_model,")
 	@staticmethod

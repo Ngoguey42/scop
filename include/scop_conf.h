@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 10:33:54 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/31 10:01:08 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/08 12:24:43 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,15 @@
 
 # define LAND_SIDEHALFF (LAND_SIDEF / 2.f)
 
-
+/*
+**  [[[cog
+**  import cog
+**  cog.outl("*" "/")
+**  from scop_confloader import output_enums
+**  output_enums()
+**  cog.out("/" "*")
+**  ]]]
+*/
 typedef enum				e_vshader_index
 {
 	sp_po_to_co_vshader,
@@ -86,7 +94,7 @@ typedef enum				e_fshader_index
 	sp_cono_coli_fshader,
 	sp_couvno_blendli_fshader,
 	sp_co_sun_fshader,
-	sp_num_fshaders,
+	sp_num_fshaders
 }							t_fshader_index;
 
 typedef enum				e_gshader_index
@@ -108,16 +116,6 @@ typedef enum				e_program_index
 	sp_num_programs
 }							t_program_index;
 
-typedef enum				e_mesh_index
-{
-	sp_plane_mesh,
-	sp_square_mesh,
-	sp_land_mesh,
-	sp_ptn_mesh,
-	sp_sun_mesh,
-	sp_num_meshes,
-}							t_mesh_index;
-
 typedef enum				e_texture_index
 {
 	sp_porcelain_texture,
@@ -127,6 +125,16 @@ typedef enum				e_texture_index
 	sp_no_texture
 }							t_texture_index;
 
+typedef enum				e_mesh_index
+{
+	sp_plane_mesh,
+	sp_square_mesh,
+	sp_land_mesh,
+	sp_ptn_mesh,
+	sp_sun_mesh,
+	sp_num_meshes
+}							t_mesh_index;
+
 typedef enum				e_model_index
 {
 	sp_plane_model,
@@ -134,7 +142,11 @@ typedef enum				e_model_index
 	sp_land_model,
 	sp_ptn_model,
 	sp_sun_model,
-	sp_num_models,
+	sp_num_models
 }							t_model_index;
+
+/*
+**  [[[end]]]
+*/
 
 #endif
