@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 10:07:19 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/31 10:02:48 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/08 14:39:13 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,15 +142,17 @@ typedef struct					s_model
 */
 typedef struct					s_ob
 {
-	t_model_index				model;
+	t_bool						hidden:1;
+	t_bool						moved:1;
+	t_bool						delete:1;
+	t_model_index				model:5;
 	t_vector3					position;
 	t_vector3					rotation;
 	t_vector3					scale;
-	t_bool						hidden;
-	t_bool						moved;
 	t_matrix4					mat;
 	void						(*update)();
-	float						values[3];
+	float						valf[1];
+	int							vali[1];
 }								t_ob;
 
 /*

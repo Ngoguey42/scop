@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/01 12:15:52 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/30 08:50:50 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/08 14:43:14 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,6 @@ int				sp_init_shaders(t_env *e)
 {
 	int		i;
 
-	lprintf("Initializing shaders...");
 	i = 0;
 	while (i < sp_num_vshaders)
 	{

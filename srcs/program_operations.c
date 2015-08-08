@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/01 12:32:53 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/30 09:03:41 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/08 14:43:20 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ int				sp_init_programs(t_env *e)
 {
 	int		i;
 
-	lprintf("Initializing programs...");
 	i = 0;
 	while (i < sp_num_programs)
 	{

@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/18 12:01:22 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/28 18:58:55 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/08 14:43:27 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ int				sp_init_meshes(t_env *e)
 	t_mesh			*me;
 	t_mesh const	*end = ITEND_MESHES(e);
 
-	lprintf("Initializing meshes...");
 	me = e->meshes;
 	while (me < end)
 	{

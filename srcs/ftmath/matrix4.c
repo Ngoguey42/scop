@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/01 14:35:20 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/20 12:20:57 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/08 14:17:33 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,11 @@ const t_matrix4		g_identitym4 =
 	{1.f, 0.f, 0.f, 0.f, 0.f, 1.f, 0.f, 0.f,
 		0.f, 0.f, 1.f, 0.f, 0.f, 0.f, 0.f, 1.f}
 };
+
+t_matrix4		m4_identity(void)
+{
+	return (g_identitym4);
+}
 
 void			m4_print(t_matrix4 mat)
 {

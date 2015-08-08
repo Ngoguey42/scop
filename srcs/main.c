@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 12:08:19 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/08 09:47:25 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/08 15:22:04 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,24 @@
 #include <stdlib.h>
 #include <time.h>
 #include <unistd.h>
+#define PSIZEOF(T) qprintf("sizeof(%s) = %zuBytes\n", #T, sizeof(T))
+#define VERBOSE(STR) lprintf("\033[36mInitializing %s...\033[0m", (STR))
 
 static int		begin(t_env *e)
 {
-	if (sp_init_env(e))
+	if (VERBOSE("env"), sp_init_env(e))
 		return (ERROR("sp_init_env(e)"), 1);
-	if (sp_init_glfw(e))
+	if (VERBOSE("glfw"), sp_init_glfw(e))
 		return (ERROR("sp_init_glfw(e)"), 1);
-	if (sp_init_shaders(e))
+	if (VERBOSE("shaders"), sp_init_shaders(e))
 		return (ERROR("sp_init_shaders(e)"), 1);
-	if (sp_init_programs(e))
+	if (VERBOSE("programs"), sp_init_programs(e))
 		return (ERROR("sp_init_programs(e)"), 1);
-	if (sp_init_textures(e))
+	if (VERBOSE("textures"), sp_init_textures(e))
 		return (ERROR("sp_init_textures(e)"), 1);
-	if (sp_init_meshes(e))
+	if (VERBOSE("meshes"), sp_init_meshes(e))
 		return (ERROR("sp_init_meshes(e)"), 1);
-	if (sp_init_obs(e))
+	if (VERBOSE("obs"), sp_init_obs(e))
 		return (ERROR("sp_init_obs(e)"), 1);
 	return (0);
 }
@@ -77,7 +79,8 @@ int				main(void)
 	t_env					*e;
 
 	srand(time(NULL));
-	qprintf("sizeof(t_env) = %uBytes\n", sizeof(*e));
+	PSIZEOF(t_env);
+	PSIZEOF(t_ob);
 	e = malloc(sizeof(*e));
 	if (e == NULL)
 		return (ERROR("Env allocation failed"), 1);
