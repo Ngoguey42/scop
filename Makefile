@@ -50,9 +50,10 @@ O_FILES := obj/srcs/env_operations.o \
 	obj/srcs/glfw_operations.o \
 	obj/srcs/main.o \
 	obj/srcs/program_operations.o \
-	obj/srcs/configuration/cogconf.o \
-	obj/srcs/configuration/mesh_fill1.o \
-	obj/srcs/configuration/mesh_fill2.o \
+	obj/srcs/configuration/cogconf1.o \
+	obj/srcs/configuration/cogconf2.o \
+	obj/srcs/configuration/cogconf_mesh_fill1.o \
+	obj/srcs/configuration/cogconf_mesh_fill2.o \
 	obj/srcs/configuration/obs_fill.o \
 	obj/srcs/configuration/obs_update.o \
 	obj/srcs/configuration/unif_update.o \
@@ -91,8 +92,8 @@ O_FILES := obj/srcs/env_operations.o \
 
 O_DIRS := obj/srcs/textures obj/srcs/shaders obj/srcs/obs obj/srcs/objmodel obj/srcs/meshes obj/srcs/land obj/srcs/ftmath obj/srcs/controls obj/srcs/configuration obj/srcs
 
-MSG_0 := printf '\033[0;32m%-41.41s\033[0;0m\r'
-MSG_1 := printf '\033[0;31m%-41.41s\033[0;0m\n'
+MSG_0 := printf '\033[0;32m%-43.43s\033[0;0m\r'
+MSG_1 := printf '\033[0;31m%-43.43s\033[0;0m\n'
 MSG_END := printf '\n'
 
 .SILENT:
@@ -118,13 +119,16 @@ obj/srcs/main.o: srcs/main.c include/fterror.h include/ftmath.h include/objmodel
 obj/srcs/program_operations.o: srcs/program_operations.c include/fterror.h include/ftmath.h include/objmodel.h include/scop.h include/scop_cogconf_enums.h include/scop_cogconf_meshfill.h include/scop_conf.h include/scop_types.h | obj/srcs
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
-obj/srcs/configuration/cogconf.o: srcs/configuration/cogconf.c include/fterror.h include/ftmath.h include/objmodel.h include/scop.h include/scop_cogconf_enums.h include/scop_cogconf_meshfill.h include/scop_conf.h include/scop_types.h | obj/srcs/configuration
+obj/srcs/configuration/cogconf1.o: srcs/configuration/cogconf1.c include/fterror.h include/ftmath.h include/objmodel.h include/scop.h include/scop_cogconf_enums.h include/scop_cogconf_meshfill.h include/scop_conf.h include/scop_types.h | obj/srcs/configuration
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
-obj/srcs/configuration/mesh_fill1.o: srcs/configuration/mesh_fill1.c include/fterror.h include/ftmath.h include/objmodel.h include/scop.h include/scop_cogconf_enums.h include/scop_cogconf_meshfill.h include/scop_conf.h include/scop_types.h | obj/srcs/configuration
+obj/srcs/configuration/cogconf2.o: srcs/configuration/cogconf2.c include/fterror.h include/ftmath.h include/objmodel.h include/scop.h include/scop_cogconf_enums.h include/scop_cogconf_meshfill.h include/scop_conf.h include/scop_types.h | obj/srcs/configuration
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
-obj/srcs/configuration/mesh_fill2.o: srcs/configuration/mesh_fill2.c include/fterror.h include/ftmath.h include/objmodel.h include/scop.h include/scop_cogconf_enums.h include/scop_cogconf_meshfill.h include/scop_conf.h include/scop_types.h | obj/srcs/configuration
+obj/srcs/configuration/cogconf_mesh_fill1.o: srcs/configuration/cogconf_mesh_fill1.c include/fterror.h include/ftmath.h include/objmodel.h include/scop.h include/scop_cogconf_enums.h include/scop_cogconf_meshfill.h include/scop_conf.h include/scop_types.h | obj/srcs/configuration
+	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
+
+obj/srcs/configuration/cogconf_mesh_fill2.o: srcs/configuration/cogconf_mesh_fill2.c include/fterror.h include/ftmath.h include/objmodel.h include/scop.h include/scop_cogconf_enums.h include/scop_cogconf_meshfill.h include/scop_conf.h include/scop_types.h | obj/srcs/configuration
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
 obj/srcs/configuration/obs_fill.o: srcs/configuration/obs_fill.c include/fterror.h include/ftmath.h include/objmodel.h include/scop.h include/scop_cogconf_enums.h include/scop_cogconf_meshfill.h include/scop_conf.h include/scop_types.h | obj/srcs/configuration

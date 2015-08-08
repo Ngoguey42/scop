@@ -6,14 +6,16 @@
 #    By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/08/08 11:56:11 by ngoguey           #+#    #+#              #
-#    Updated: 2015/08/08 12:33:58 by ngoguey          ###   ########.fr        #
+#    Updated: 2015/08/08 14:07:35 by ngoguey          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 import cog
 from scop_conf import *
 
-cstructs = [vshaders, fshaders, gshaders, programs, textures, meshes, models]
+cstructs1 = [vshaders, fshaders, gshaders, programs]
+cstructs2 = [textures, meshes, models]
+cstructs = cstructs1 + cstructs2
 
 def output_enums():
 	for cstruct in cstructs:
@@ -30,8 +32,17 @@ def output_meshfill_prototypes():
 		output_doth_indent_2str("int", "sp_meshfill_" + mesh.name
                                         + "(t_env const *e, t_mesh *me);")
 
-def output_cconf():
-	for cstruct in cstructs:
+def output_cconf1():
+	for cstruct in cstructs1:
+		assert len(cstruct) > 0
+		cstruct[0].output_cconf_start()
+		for elt in cstruct:
+			elt.output_cconf_entry()
+		cstruct[0].output_cconf_end()
+		cog.outl("")
+
+def output_cconf2():
+	for cstruct in cstructs2:
 		assert len(cstruct) > 0
 		cstruct[0].output_cconf_start()
 		for elt in cstruct:

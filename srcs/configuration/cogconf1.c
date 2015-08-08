@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   conf.c                                             :+:      :+:    :+:   */
+/*   cogconf1.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/07/20 12:53:00 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/08 12:18:59 by ngoguey          ###   ########.fr       */
+/*   Created: 2015/08/08 14:03:36 by ngoguey           #+#    #+#             */
+/*   Updated: 2015/08/08 14:04:38 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,26 +17,18 @@
 # define NARG_(_1,_2,_3,_4,_5,_6,_7,_8,_9,_10,_11,N,...) N
 # define NARG(...) NARG_(__VA_ARGS__,11,10,9,8,7,6,5,4,3,2,1)
 #endif
-
-#define PROG(VS,FS,GS) {VS, FS, GS, 0}
-
 #define LOC(N, S) ((t_location){N, (S)})
-
-#define FTVU ftv_uninitialized()
-
 #define VSHADER(N,F,...) {VSHD_PATH(N),F,NARG(__VA_ARGS__),{__VA_ARGS__},0}
 #define FSHADER(N, F) {FSHD_PATH(N), (F), 0}
 #define GSHADER(N, F) {GSHD_PATH(N), (F), 0}
-#define MESH(P, U, F) {(U), (P), true, (F), FTVU, FTVU, {0, 0, 0}}
-#define TEXTURE(FN) {TEXTURE_PATH(FN), {0, 0}, 0}
-#define MODEL(ME, TE, F) {(ME), (TE), (F)}
+#define PROG(VS,FS,GS) {VS, FS, GS, 0}
 
 /*
 **	[[[cog
 **	import cog
 **	cog.outl("*" "/")
-**	from scop_confloader import output_cconf
-**	output_cconf()
+**	from scop_confloader import output_cconf1
+**	output_cconf1()
 **	cog.outl("/" "*")
 **	]]]
 */
@@ -103,46 +95,6 @@ int			sp_loadconf_programs(t_env *e)
 	PROG(sp_po_to_noop_vshader, sp_co_sun_fshader, sp_no_gshader),
 	};
 	memcpy(&e->programs, &tmp, sizeof(tmp));
-	return (0);
-}
-
-int			sp_loadconf_textures(t_env *e)
-{
-	t_texture const		tmp[sp_num_textures] = {
-
-	TEXTURE("Porcelain.tga"),
-	TEXTURE("Wall.tga"),
-	TEXTURE("metal.tga"),
-	};
-	memcpy(&e->textures, &tmp, sizeof(tmp));
-	return (0);
-}
-
-int			sp_loadconf_meshes(t_env *e)
-{
-	t_mesh const		tmp[sp_num_meshes] = {
-
-	MESH(sp_ptn_program, GL_STATIC_DRAW, &sp_meshfill_plane),
-	MESH(sp_pcn_program, GL_STATIC_DRAW, &sp_meshfill_square),
-	MESH(sp_land_program, GL_STATIC_DRAW, &sp_meshfill_land),
-	MESH(sp_ptn_program, GL_STATIC_DRAW, &sp_meshfill_ptn),
-	MESH(sp_sun_program, GL_STATIC_DRAW, &sp_meshfill_sun),
-	};
-	memcpy(&e->meshes, &tmp, sizeof(tmp));
-	return (0);
-}
-
-int			sp_loadconf_models(t_env *e)
-{
-	t_model const		tmp[sp_num_models] = {
-
-	MODEL(sp_plane_mesh, sp_porcelain_texture, &sp_unif_model),
-	MODEL(sp_square_mesh, sp_no_texture, &sp_unif_model),
-	MODEL(sp_land_mesh, sp_no_texture, &sp_unif_model),
-	MODEL(sp_ptn_mesh, sp_metal_texture, &sp_unif_model),
-	MODEL(sp_sun_mesh, sp_no_texture, &sp_unif_model),
-	};
-	memcpy(&e->models, &tmp, sizeof(tmp));
 	return (0);
 }
 
