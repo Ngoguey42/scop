@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 12:16:50 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/08 14:18:03 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/09 12:50:24 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,9 @@ typedef enum	e_axis
 
 typedef struct	s_vector3
 {
-	float				x;
-	float				y;
-	float				z;
+	float		x;
+	float		y;
+	float		z;
 }				t_vector3;
 
 void			v3_print(t_vector3 v);
@@ -61,20 +61,13 @@ t_vector3		v3_mul_scalar(t_vector3 a, float q);
 /*
 ** MATRIX4
 */
-struct			s_vectorj4
-{
-	float				j[4];
-};
-
-typedef struct	s_vector4
-{
-	float				i[4];
-}				t_vector4;
-
 typedef union	u_matrix4
 {
-	float				raw[16];
-	struct s_vectorj4	i[4];
+	float		raw[16];
+	struct
+	{
+		float	j[4];
+	}			i[4];
 }				t_matrix4;
 # define MAT4 t_matrix4
 # define VEC3 t_vector3

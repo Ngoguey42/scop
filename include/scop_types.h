@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 10:07:19 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/09 09:35:47 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/09 13:10:16 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,12 @@
 # include "ft_vector.h"
 # include "ft_list.h"
 # include "scop_conf.h"
+# include "vertex.h"
 
 /*
 ** KEYS
 */
-enum                        e_keyindex
+enum							e_keyindex
 {
 	sp_w_key,
 	sp_s_key,
@@ -44,7 +45,7 @@ enum                        e_keyindex
 	sp_num_keys
 };
 
-enum                        e_stateindex
+enum							e_stateindex
 {
 	sp_window_focused_state,
 	sp_num_states
@@ -112,7 +113,6 @@ typedef struct					s_mesh
 	int							(*const fill)();
 	t_ftvector					vertices;
 	t_ftvector					faces;
-	// lighting datas etc...
 	GLuint						handles[3];
 }								t_mesh;
 
@@ -187,7 +187,7 @@ typedef struct					s_env
 	t_vector3					sunpos_spherical;
 	t_vector3					sunpos_cartesian;
 	t_vector3					suncolor;
-	
+
 	double						time_start;
 	double						time_cur;
 	double						time_el;
