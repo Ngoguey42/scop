@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 12:07:31 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/09 09:33:32 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/09 09:42:13 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,7 @@ void		sp_unif_suncolor(t_env const *e, t_program const *p);
 */
 int			sp_init_obs(t_env *e);
 void		sp_delete_obs(t_env *e);
+void		sp_update_obs(t_env *e);
 void		sp_render_obs(t_env const *e);
 int			sp_fill_obs(t_env *e);
 void		sp_obupdate_sun(t_env const *e, t_ob *ob);

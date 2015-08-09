@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 10:07:19 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/09 08:45:06 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/09 09:35:47 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,7 +171,6 @@ typedef struct					s_env
 	t_mesh						meshes[sp_num_meshes];
 	t_texture					textures[sp_num_textures];
 	t_model						models[sp_num_models];
-	/* t_ftvector					obs[sp_num_programs]; */
 	t_ftlist					obs[sp_num_programs];
 
 	int							keystates[sp_num_keys];

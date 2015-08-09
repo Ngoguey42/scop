@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 12:08:19 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/08 15:22:04 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/09 09:41:55 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ static void		loop(t_env *e)
 		sp_update_states(e);
 		glClearColor(155. / 256., 216. / 256., 220. / 256., 1.f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		sp_update_obs(e);
 		sp_render_obs(e);
 		glfwSwapBuffers(e->win);
 		glfwPollEvents();

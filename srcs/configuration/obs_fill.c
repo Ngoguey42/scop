@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/22 13:44:32 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/09 08:47:27 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/09 09:39:56 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int			sp_fill_obs(t_env *e)
 		*ob = default_ob(sp_sun_model);
 		ob->update = &sp_obupdate_sun;
 		ob->moved = false;
-		ob->scale = ATOV3(10.f, 10.f, 10.f);
+		/* ob->scale = ATOV3(10.f, 10.f, 10.f); */
 		push_ob(e, ob);
 	}
 	return (0);
