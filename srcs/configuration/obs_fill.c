@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/22 13:44:32 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/08 14:34:52 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/09 08:47:27 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,14 @@ static void	push_ob(t_env *e, t_ob const *ob)
 {
 	t_program_index const	pi = MEOFOB(e, ob)->program;
 
-	if (ftv_push_back(e->obs + pi, ob))
+	if (ftl_push_back(e->obs + pi, (t_ftlist_node const*)ob))
 		sp_enomem();
 	return ;
 }
 
 t_ob		default_ob(t_model_index moi)
 {
-	return ((t_ob){false, true, false, moi,
+	return ((t_ob){{NULL, NULL}, false, true, false, moi,
 			{0.f, 0.f, 0.f}, {0.f, 0.f, 0.f}, {1.f, 1.f, 1.f}
 			, m4_identity(), NULL, {0.f}, {0}});
 }

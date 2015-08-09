@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/27 12:01:57 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/30 13:39:01 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/09 08:48:07 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static t_bool	do_update_matrix(t_env const *e, t_ob *ob)
 void			render_prog_obs(t_env const *e, t_program_index i)
 {
 	t_program const		*p = e->programs + i;
-	t_ftvector const	*prv = e->obs + i;
+	t_ftlist const		*prl = e->obs + i;
 	void				(*vsunif_update)();
 	void				(*fsunif_update)();
 
@@ -76,9 +76,9 @@ void			render_prog_obs(t_env const *e, t_program_index i)
 		vsunif_update(e, p);
 	if (fsunif_update != NULL)
 		fsunif_update(e, p);
-	ftv_foreach((void*)prv, &update_ob, (void*)e);
-	ftv_foreach_if((void*)prv, &update_matrix_ob, (void*)e, &do_update_matrix);
-	ftv_foreach_if((void*)prv, &render_ob, (void*)e, &do_draw);
+	ftl_foreach((void*)prl, &update_ob, (void*)e);
+	ftl_foreach_if((void*)prl, &update_matrix_ob, (void*)e, &do_update_matrix);
+	ftl_foreach_if((void*)prl, &render_ob, (void*)e, &do_draw);
 	return ;
 }
 
