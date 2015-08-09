@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/08/09 13:09:52 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/09 14:09:08 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/09 14:43:14 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,12 @@ typedef struct					s_location
 	enum e_location_type		type:8;
 	t_byte						size;
 }								t_location;
+typedef struct					s_locations_backup_fill
+{
+	t_byte						off;
+	t_byte						noff;
+	void						(*fun)();
+}								t_locations_backup_fill;
 
 typedef struct					s_vertex_basic
 {

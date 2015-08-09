@@ -6,12 +6,11 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/28 11:02:28 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/09 14:10:25 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/09 14:20:38 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
-#include <string.h>
 
 char const		*g_locations_str[] = {
 	"pos",
@@ -45,7 +44,7 @@ static int		gen_attribs(t_vshader const *vs, size_t vert_width)
 	lprintf("    Defining locations: ");
 	while (i < vs->n_locations)
 	{
-		lprintf("    ->%-8s i=%02u; sz=%02u; wid=%02u, dt=%02u",
+		lprintf("    ->%-3s i=%02u; sz=%02u; wid=%02u, dt=%02u",
 				g_locations_str[vs->locations[i].type],
 			i, vs->locations[i].size, vert_width, delta);
 		glVertexAttribPointer(i, vs->locations[i].size, GL_FLOAT, GL_FALSE
@@ -79,9 +78,7 @@ int				op_new_mesh(t_env const *e, t_mesh *me)
 	t_program const		*p = &e->programs[me->program];
 	size_t const		vert_width = mesh_width(VSOFP(e, p)) * sizeof(float);
 	size_t const		elem_width = 3 * sizeof(t_ui);
-	t_vbo_basic			raw_vbo[1];
 
-	bzero(raw_vbo, sizeof(t_vbo_basic));
 	lprintf("\033[32mGenerating mesh...\033[0m");
 	lprintf("    vert_width(%u), elem_width(%u) :", vert_width, elem_width);
 	if (ftv_init_instance(&me->vertices, vert_width))
@@ -89,7 +86,7 @@ int				op_new_mesh(t_env const *e, t_mesh *me)
 	if (ftv_init_instance(&me->faces, elem_width))
 		sp_enomem();
 	lprintf("    \033[33mFilling mesh...\033[0m");
-	if (me->fill(e, me))
+	if (sp_fill_mesh(e, me))
 		return (ERROR("me->fill(e, me)"), 1);
 	lprintf("    \033[33m...done:  %u vertices, %u faces\033[0m",
 			me->vertices.size, me->faces.size);

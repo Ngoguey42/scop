@@ -73,6 +73,7 @@ O_FILES := obj/srcs/env_operations.o \
 	obj/srcs/land/generate_land_xyz.o \
 	obj/srcs/land/generate_land_y.o \
 	obj/srcs/meshes/mesh_creation.o \
+	obj/srcs/meshes/mesh_fill.o \
 	obj/srcs/meshes/mesh_operations.o \
 	obj/srcs/meshes/normals_calculation.o \
 	obj/srcs/meshes/uv_calculation_plan_oxy.o \
@@ -187,6 +188,9 @@ obj/srcs/land/generate_land_y.o: srcs/land/generate_land_y.c include/fterror.h i
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
 obj/srcs/meshes/mesh_creation.o: srcs/meshes/mesh_creation.c include/fterror.h include/ftmath.h include/objmodel.h include/scop.h include/scop_cogconf_enums.h include/scop_cogconf_meshfill.h include/scop_conf.h include/scop_types.h include/vertex.h | obj/srcs/meshes
+	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
+
+obj/srcs/meshes/mesh_fill.o: srcs/meshes/mesh_fill.c include/fterror.h include/ftmath.h include/objmodel.h include/scop.h include/scop_cogconf_enums.h include/scop_cogconf_meshfill.h include/scop_conf.h include/scop_types.h include/vertex.h | obj/srcs/meshes
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
 obj/srcs/meshes/mesh_operations.o: srcs/meshes/mesh_operations.c include/fterror.h include/ftmath.h include/objmodel.h include/scop.h include/scop_cogconf_enums.h include/scop_cogconf_meshfill.h include/scop_conf.h include/scop_types.h include/vertex.h | obj/srcs/meshes
