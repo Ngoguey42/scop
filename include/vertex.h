@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/08/09 13:09:52 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/09 15:14:08 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/09 18:00:47 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,11 @@ typedef struct					s_locations_backup_fill
 	t_byte						noff;
 	void						(*fun)();
 }								t_locations_backup_fill;
+
+#define ZERO_V4 {0.f, 0.f, 0.f, 0.f}
+#define ZERO_V3 {0.f, 0.f, 0.f}
+
+#define BVERT_POS(X, Y, Z) {{(X), (Y), (Z)}, ZERO_V4, {0.f, 0.f}, ZERO_V3}
 
 typedef struct					s_vertex_basic
 {

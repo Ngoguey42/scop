@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/22 13:44:32 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/09 17:12:02 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/09 17:59:15 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,23 +51,23 @@ int			sp_fill_obs(t_env *e)
 	/* 	*ob = default_ob(sp_land_model);		 */
 	/* 	push_ob(e, ob);	 */
 	/* } */
-	/* { */
-	/* 	t_ob    ob[1]; */
+	{
+		t_ob    ob[1];
 
-	/* 	*ob = default_ob(sp_ptn_model); */
-	/* 	ob->rotation = ATOV3(0.f, 0.f, -M_PI / 2.f); */
-	/* 	ob->scale = ATOV3(1.f, 1.f, 1.f); */
-	/* 	ob->position = ATOV3(-45.f, -0.f, -40.f); */
-	/* 	push_ob(e, ob); */
-	/* } */
-	/* { */
-	/* 	t_ob    ob[1]; */
+		*ob = default_ob(sp_ptn_model);
+		ob->rotation = ATOV3(0.f, 0.f, -M_PI / 2.f);
+		ob->scale = ATOV3(1.f, 1.f, 1.f);
+		ob->position = ATOV3(-45.f, -0.f, -40.f);
+		push_ob(e, ob);
+	}
+	{
+		t_ob    ob[1];
 
-	/* 	*ob = default_ob(sp_sun_model); */
-	/* 	ob->update = &sp_obupdate_sun; */
-	/* 	ob->moved = false; */
-	/* 	/\* ob->scale = ATOV3(10.f, 10.f, 10.f); *\/ */
-	/* 	push_ob(e, ob); */
-	/* } */
+		*ob = default_ob(sp_sun_model);
+		ob->update = &sp_obupdate_sun;
+		ob->moved = false;
+		/* ob->scale = ATOV3(10.f, 10.f, 10.f); */
+		push_ob(e, ob);
+	}
 	return (0);
 }

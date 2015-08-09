@@ -44,6 +44,8 @@ int			sp_loadconf_meshes(t_env *e)
 	t_mesh const		tmp[sp_num_meshes] = {
 
 	MESH(sp_ptn_program, GL_STATIC_DRAW, &sp_meshfill_plane),
+	MESH(sp_ptn_program, GL_STATIC_DRAW, &sp_meshfill_ptn),
+	MESH(sp_sun_program, GL_STATIC_DRAW, &sp_meshfill_sun),
 	};
 	memcpy(&e->meshes, &tmp, sizeof(tmp));
 	return (0);
@@ -54,6 +56,8 @@ int			sp_loadconf_models(t_env *e)
 	t_model const		tmp[sp_num_models] = {
 
 	MODEL(sp_plane_mesh, sp_porcelain_texture, &sp_unif_model),
+	MODEL(sp_ptn_mesh, sp_metal_texture, &sp_unif_model),
+	MODEL(sp_sun_mesh, sp_no_texture, &sp_unif_model),
 	};
 	memcpy(&e->models, &tmp, sizeof(tmp));
 	return (0);

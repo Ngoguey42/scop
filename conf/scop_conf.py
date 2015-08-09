@@ -6,7 +6,7 @@
 #    By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/08/08 11:56:00 by ngoguey           #+#    #+#              #
-#    Updated: 2015/08/09 17:25:08 by ngoguey          ###   ########.fr        #
+#    Updated: 2015/08/09 18:00:14 by ngoguey          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -125,7 +125,7 @@ meshes = [
         # */
 	# return (0);\n\t(void)e;\n\t(void)me;\n}"""),
 
-	# # land fait ceci cela
+	# land fait ceci cela
 	# Mesh("land", "land", "GL_STATIC_DRAW","""{
         # /*
 	# t_ftvector		lines[1];
@@ -152,45 +152,43 @@ meshes = [
         # */
 	# return (0);\n\t(void)e;\n\t(void)me;\n}"""),
 
-	# # ptn fait ceci cela
-	# Mesh("ptn", "ptn", "GL_STATIC_DRAW","""{
-        # /*
-	# t_objmodel	m[1];
+	# ptn fait ceci cela
+	Mesh("ptn", "ptn", "GL_STATIC_DRAW","""{
+	t_objmodel	m[1];
 
-	# if (op_parse_obj(m, "res/alfa147.obj"))
-	# 	return (ERROR("op_parse_obj(m)"), 1);
-	# op_swap_vectors(m, &me->vertices, &me->faces);
-	# sp_clean_objmodel(m);
-        # */
-	# return (0);\n\t(void)e;\n\t(void)me;\n}"""),
+	if (op_parse_obj(m, "res/alfa147.obj"))
+		return (ERROR("op_parse_obj(m)"), 1);
+        op_retreive_data(m, vbo, &me->faces);
+	sp_clean_objmodel(m);
+	return (0);\n\t(void)e;\n\t(void)me;\n}"""),
 
-	# # sun fait ceci cela
-	# Mesh("sun", "sun", "GL_STATIC_DRAW","""{
-        # /*
-	# GLfloat vertices[24] = {
-	# 	-1.0f, 1.0f, -1.0f,
-	# 	-1.0f, -1.0f, -1.0f,
-	# 	-1.0f, 1.0f, 1.0f,
-	# 	-1.0f, -1.0f, 1.0f,
-	# 	1.0f, 1.0f, 1.0f,
-	# 	1.0f, -1.0f, 1.0f,
-	# 	1.0f, 1.0f, -1.0f,
-	# 	1.0f, -1.0f, -1.0f
-	# };
-	# GLuint indices[36] = {
-	# 	0,1,2,2,1,3,
-	# 	4,5,6,6,5,7,
-	# 	3,1,5,5,1,7,
-	# 	0,2,6,6,2,4,
-	# 	6,7,0,0,7,1,
-	# 	2,3,4,4,3,5
-	# };
-	# (void)ftv_insert_range(
-	# 	&me->vertices, vertices, sizeof(vertices) / sizeof(*vertices) / 3);
-	# (void)ftv_insert_range(
-	# 	&me->faces, indices, sizeof(indices) / sizeof(*indices) / 3);
-        # */
-	# return (0);\n\t(void)e;\n\t(void)me;\n}"""),
+	# sun fait ceci cela
+	Mesh("sun", "sun", "GL_STATIC_DRAW","""{
+	t_vertex_basic	vertices[8] = {
+		BVERT_POS(-1.0f, 1.0f, -1.0f),
+		BVERT_POS(-1.0f, -1.0f, -1.0f),
+		BVERT_POS(-1.0f, 1.0f, 1.0f),
+		BVERT_POS(-1.0f, -1.0f, 1.0f),
+		BVERT_POS(1.0f, 1.0f, 1.0f),
+		BVERT_POS(1.0f, -1.0f, 1.0f),
+		BVERT_POS(1.0f, 1.0f, -1.0f),
+		BVERT_POS(1.0f, -1.0f, -1.0f)
+	};
+	GLuint indices[36] = {
+		0,1,2,2,1,3,
+		4,5,6,6,5,7,
+		3,1,5,5,1,7,
+		0,2,6,6,2,4,
+		6,7,0,0,7,1,
+		2,3,4,4,3,5
+	};
+        vbo->npos = 3;
+	(void)ftv_insert_range(
+		&vbo->vertices, vertices, sizeof(vertices) / sizeof(*vertices));
+	(void)ftv_insert_range(
+		&me->faces, indices, sizeof(indices) / sizeof(*indices) / 3);
+        ftv_print(&vbo->vertices, "fff");
+	return (0);\n\t(void)e;\n\t(void)me;\n}"""),
 ]
 models = [
 	# plane fait ceci cela
@@ -199,8 +197,8 @@ models = [
 	# Model("square", "square", "no", "model"),
 	# # land fait ceci cela
 	# Model("land", "land", "no", "model"),
-	# # ptn fait ceci cela
-	# Model("ptn", "ptn", "metal", "model"),
-	# # sun fait ceci cela
-	# Model("sun", "sun", "no", "model"),
+	# ptn fait ceci cela
+	Model("ptn", "ptn", "metal", "model"),
+	# sun fait ceci cela
+	Model("sun", "sun", "no", "model"),
 ]

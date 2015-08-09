@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/08/09 14:15:56 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/09 17:24:29 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/09 17:49:57 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ static void		shrink_vbo(t_ftvector *const dst, t_vbo_basic const *const srcb)
 	return ;
 }
 
-
 int				sp_fill_mesh(t_env const *e, t_mesh *me)
 {
 	t_vbo_basic          raw_vbo[1];
@@ -95,8 +94,6 @@ int				sp_fill_mesh(t_env const *e, t_mesh *me)
 		return (ERROR("me->fill(e, me)"), 1);
 	fill_gab(e, me, raw_vbo);
 	shrink_vbo(&me->vertices, raw_vbo);
-	ftv_printn(&raw_vbo->vertices, "fffFFFfffff", 8);
-	ftv_printn(&me->vertices, "ffffffff", 8);
 	ftv_release(&raw_vbo->vertices, NULL);
 	return (0);
 }
