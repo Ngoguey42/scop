@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/15 08:26:17 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/28 15:56:12 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/09 15:14:30 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void		op_init_meshvectors(t_objmodel *m)
 	return ;
 }
 
-void		op_swap_vectors(t_objmodel *m, t_ftvector *v, t_ftvector *f)
+void        op_swap_vectors(t_objmodel *m, t_ftvector *v, t_ftvector *f)
 {
 	if (v->data != NULL)
 		ftv_release(v, NULL);

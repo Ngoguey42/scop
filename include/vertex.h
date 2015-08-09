@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/08/09 13:09:52 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/09 14:43:14 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/09 15:14:08 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ typedef struct					s_location
 }								t_location;
 typedef struct					s_locations_backup_fill
 {
-	t_byte						off;
 	t_byte						noff;
 	void						(*fun)();
 }								t_locations_backup_fill;
@@ -59,6 +58,11 @@ typedef struct					s_vertex_basic
 		float					y;
 		float					z;
 	}							nor;
+}								t_vertex_basic;
+
+typedef struct					s_vbo_basic
+{
+	t_ftvector					vertices;
 	t_byte						npos;
 	t_byte						ncol;
 	t_byte						ntex;

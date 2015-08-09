@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/08/09 14:15:56 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/09 14:50:31 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/09 15:14:50 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@
 #define NORM_AT_42_IS_WTF(E, ME) (ME)->fill((E), (ME))
 
 static t_locations_backup_fill const	g_backup_fill[] = {
-	{offsetof(t_vbo_basic, pos), offsetof(t_vbo_basic, npos), NULL},
-	{offsetof(t_vbo_basic, col), offsetof(t_vbo_basic, ncol), NULL},
-	{offsetof(t_vbo_basic, tex), offsetof(t_vbo_basic, ntex), NULL},
-	{offsetof(t_vbo_basic, nor), offsetof(t_vbo_basic, nnor), NULL},
+	{offsetof(t_vbo_basic, npos), NULL},
+	{offsetof(t_vbo_basic, ncol), NULL},
+	{offsetof(t_vbo_basic, ntex), NULL},
+	{offsetof(t_vbo_basic, nnor), NULL},
 };
 
 #define TAB_SIZE (sizeof(g_vbo_basic_offsets) / sizeof(*g_vbo_basic_offsets))
@@ -43,7 +43,7 @@ static int		fill_gab(t_env const *e, t_mesh const *me
 			s_cur = *(t_byte*)((void*)raw_vbo + g_backup_fill[loc->type].noff);
 		}
 		if (s_cur != s_wished)
-			return (ERRORF("s_cur == %hhu", s_cur), 1);
+			return (ERRORF("s_cur == %hhu/%hhu", s_cur, s_wished), 1);
 		/* qprintf("HELLO: %hhu/%hhu\n", s_cur, s_wished); */
 		loc++;
 	}
@@ -55,8 +55,10 @@ int				sp_fill_mesh(t_env const *e, t_mesh *me)
 	t_vbo_basic          raw_vbo[1];
 
 	bzero(raw_vbo, sizeof(t_vbo_basic));
+	ftv_init_instance(&raw_vbo->vertices, sizeof(t_vertex_basic));
 	if (NORM_AT_42_IS_WTF(e, me))
 		return (ERROR("me->fill(e, me)"), 1);
 	fill_gab(e, me, raw_vbo);
+	ftv_release(&raw_vbo->vertices, NULL);
 	return (0);
 }
