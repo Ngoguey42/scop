@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/08/09 14:15:56 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/09 17:49:57 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/09 18:27:58 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include <string.h>
 
 #define NORM_AT_42_IS_WTF(E, ME, RVBO) (ME)->fill((E), (ME), (RVBO))
-/* #define NUMFLOATS(SRC) ((SRC)->npos + (SRC)->ncol + (SRC)->ntex + (SRC)->nnor) */
 
 static t_locations_backup_fill const	g_backup_fill[] = {
 	{offsetof(t_vbo_basic, npos), NULL},
@@ -26,7 +25,7 @@ static t_locations_backup_fill const	g_backup_fill[] = {
 #define TAB_SIZE (sizeof(g_vbo_basic_offsets) / sizeof(*g_vbo_basic_offsets))
 
 static int		fill_gab(t_env const *e, t_mesh const *me
-						 , t_vbo_basic raw_vbo[1])
+							, t_vbo_basic raw_vbo[1])
 {
 	t_vshader const *const	vshader = VSOFME(e, me);
 	t_location const		*loc = vshader->locations;
@@ -86,7 +85,7 @@ static void		shrink_vbo(t_ftvector *const dst, t_vbo_basic const *const srcb)
 
 int				sp_fill_mesh(t_env const *e, t_mesh *me)
 {
-	t_vbo_basic          raw_vbo[1];
+	t_vbo_basic		raw_vbo[1];
 
 	bzero(raw_vbo, sizeof(t_vbo_basic));
 	ftv_init_instance(&raw_vbo->vertices, sizeof(t_vertex_basic));

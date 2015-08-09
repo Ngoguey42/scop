@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/01 12:15:52 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/08 14:43:14 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/09 18:32:05 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,29 +95,20 @@ int				sp_init_shaders(t_env *e)
 {
 	int		i;
 
-	i = 0;
-	while (i < sp_num_vshaders)
-	{
+	i = -1;
+	while (++i < sp_num_vshaders)
 		if (sp_new_shader(e->vshaders[i].filepath, &e->vshaders[i].handle
 						, GL_VERTEX_SHADER))
 			return (ERRORF("sp_new_vshader(%d)", i), 1);
-		i++;
-	}
-	i = 0;
-	while (i < sp_num_fshaders)
-	{
+	i = -1;
+	while (++i < sp_num_fshaders)
 		if (sp_new_shader(e->fshaders[i].filepath, &e->fshaders[i].handle
 							, GL_FRAGMENT_SHADER))
 			return (ERRORF("sp_new_fshader(%d)", i), 1);
-		i++;
-	}
-	i = 0;
-	while (i < sp_num_gshaders)
-	{
+	i = -1;
+	while (++i < sp_num_gshaders)
 		if (sp_new_shader(e->gshaders[i].filepath, &e->gshaders[i].handle
 							, GL_GEOMETRY_SHADER))
 			return (ERRORF("sp_new_gshader(%d)", i), 1);
-		i++;
-	}
 	return (0);
 }

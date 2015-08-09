@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/27 16:22:14 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/09 16:44:36 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/09 18:28:33 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 #define ADD_V3(DST, OTHER) (DST) = v3_add((DST), (OTHER))
 #define ANGLE_BETWEEN(V1, V2) (acos(v3_dot_normed((V1), (V2))))
 
-static void	sum_normals_allNEW(t_ftvector *v, t_ftvector const *faces)
+static void	sum_normals_all(t_ftvector *v, t_ftvector const *faces)
 {
 	t_ui const			*f = faces->data;
 	t_ui const *const	faceend = ftv_end(faces);
@@ -72,7 +72,7 @@ void		sp_calc_normals(t_env const *e, t_mesh const *me
 {
 	lprintf("    Creating some Normal coords");
 	ftv_foreach(&vbo->vertices, &bzero_normals, NULL);
-	sum_normals_allNEW(&vbo->vertices, &me->faces);
+	sum_normals_all(&vbo->vertices, &me->faces);
 	ftv_foreach(&vbo->vertices, &normalize_normals, NULL);
 	vbo->nnor = 3;
 	return ;

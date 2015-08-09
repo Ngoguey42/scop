@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/13 14:09:03 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/15 09:53:00 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/09 18:25:26 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,9 @@ t_vector3	v3_normalize(t_vector3 v)
 t_vector3	v3_frontnormed(float const a[2])
 {
 	return (ATOV3N(cos(a[0]) * cos(a[1]), sin(a[1]), sin(a[0]) * cos(a[1])));
+}
+
+t_vector3	v3_inv(t_vector3 a)
+{
+	return (ATOV3(-a.x, -a.y, -a.z));
 }

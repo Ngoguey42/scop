@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/21 09:01:30 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/30 15:48:08 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/09 18:23:50 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ void			sp_unif_light(t_env const *e, t_program const *p)
 	glUniform3f(lcloc, e->suncolor.x, e->suncolor.y, e->suncolor.z);
 	return ;
 }
+
 void			sp_unif_suncolor(t_env const *e, t_program const *p)
 {
 	GLuint const	loc = glGetUniformLocation(p->handle, "sunColor");

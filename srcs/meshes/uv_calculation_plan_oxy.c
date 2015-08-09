@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/28 11:41:25 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/09 16:44:48 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/09 18:29:05 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static void	calc_fact_and_offset(float const bounds[4], float factoffset[4],
 	return ;
 }
 
-static void	calc_boundsNEW(t_ftvector const *const v, float bx[2], float by[2])
+static void	calc_bounds(t_ftvector const *const v, float bx[2], float by[2])
 {
 	t_vertex_basic const		*vertex = v->data;
 	t_vertex_basic const *const	vertexend = ftv_end(v);
@@ -88,9 +88,9 @@ static void	calc_boundsNEW(t_ftvector const *const v, float bx[2], float by[2])
 	return ;
 }
 
-static void	fillNEW(t_ftvector *v, float const factoffset[4])
+static void	fill(t_ftvector *v, float const factoffset[4])
 {
-	t_vertex_basic		*vertex;
+	t_vertex_basic				*vertex;
 	t_vertex_basic const *const	vertexend = ftv_end(v);
 
 	vertex = v->data;
@@ -112,10 +112,10 @@ void		sp_calc_uv_plan_oxy(t_env const *e, t_mesh const *me
 	float const		scale = 1.f;
 
 	lprintf("    Creating some UV coords with plan oxy");
-	calc_boundsNEW(&vbo->vertices, bounds, bounds + 2);
+	calc_bounds(&vbo->vertices, bounds, bounds + 2);
 	calc_fact_and_offset(bounds, factoffset
 					, (float)t->dim[0] / (float)t->dim[1], scale);
-	fillNEW(&vbo->vertices, factoffset);
+	fill(&vbo->vertices, factoffset);
 	vbo->ntex = 2;
 	return ;
 	(void)e;

@@ -69,6 +69,7 @@ O_FILES := obj/srcs/env_operations.o \
 	obj/srcs/ftmath/matrix4_translate.o \
 	obj/srcs/ftmath/vector3.o \
 	obj/srcs/ftmath/vector3_basicop.o \
+	obj/srcs/ftmath/vector3_scalarop.o \
 	obj/srcs/land/generate_land_rgb.o \
 	obj/srcs/land/generate_land_xyz.o \
 	obj/srcs/land/generate_land_y.o \
@@ -179,10 +180,13 @@ obj/srcs/ftmath/vector3.o: srcs/ftmath/vector3.c include/ftmath.h | obj/srcs/ftm
 obj/srcs/ftmath/vector3_basicop.o: srcs/ftmath/vector3_basicop.c include/ftmath.h | obj/srcs/ftmath
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
-obj/srcs/land/generate_land_rgb.o: srcs/land/generate_land_rgb.c include/fterror.h include/ftmath.h include/scop_cogconf_enums.h include/scop_conf.h | obj/srcs/land
+obj/srcs/ftmath/vector3_scalarop.o: srcs/ftmath/vector3_scalarop.c include/ftmath.h | obj/srcs/ftmath
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
-obj/srcs/land/generate_land_xyz.o: srcs/land/generate_land_xyz.c include/fterror.h include/ftmath.h include/scop_cogconf_enums.h include/scop_conf.h | obj/srcs/land
+obj/srcs/land/generate_land_rgb.o: srcs/land/generate_land_rgb.c include/fterror.h include/ftmath.h include/objmodel.h include/scop.h include/scop_cogconf_enums.h include/scop_cogconf_meshfill.h include/scop_conf.h include/scop_types.h include/vertex.h | obj/srcs/land
+	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
+
+obj/srcs/land/generate_land_xyz.o: srcs/land/generate_land_xyz.c include/fterror.h include/ftmath.h include/objmodel.h include/scop.h include/scop_cogconf_enums.h include/scop_cogconf_meshfill.h include/scop_conf.h include/scop_types.h include/vertex.h | obj/srcs/land
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
 obj/srcs/land/generate_land_y.o: srcs/land/generate_land_y.c include/fterror.h include/ftmath.h include/scop_cogconf_enums.h include/scop_conf.h | obj/srcs/land
@@ -203,25 +207,25 @@ obj/srcs/meshes/normals_calculation.o: srcs/meshes/normals_calculation.c include
 obj/srcs/meshes/uv_calculation_plan_oxy.o: srcs/meshes/uv_calculation_plan_oxy.c include/fterror.h include/ftmath.h include/objmodel.h include/scop.h include/scop_cogconf_enums.h include/scop_cogconf_meshfill.h include/scop_conf.h include/scop_types.h include/vertex.h | obj/srcs/meshes
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
-obj/srcs/objmodel/obj_faces_operations.o: srcs/objmodel/obj_faces_operations.c include/fterror.h include/objmodel.h include/objmodel_parsing.h | obj/srcs/objmodel
+obj/srcs/objmodel/obj_faces_operations.o: srcs/objmodel/obj_faces_operations.c include/fterror.h include/objmodel.h include/objmodel_parsing.h include/vertex.h | obj/srcs/objmodel
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
-obj/srcs/objmodel/obj_insert_face.o: srcs/objmodel/obj_insert_face.c include/fterror.h include/objmodel.h include/objmodel_parsing.h | obj/srcs/objmodel
+obj/srcs/objmodel/obj_insert_face.o: srcs/objmodel/obj_insert_face.c include/fterror.h include/objmodel.h include/objmodel_parsing.h include/vertex.h | obj/srcs/objmodel
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
-obj/srcs/objmodel/obj_parsing.o: srcs/objmodel/obj_parsing.c include/fterror.h include/objmodel.h include/objmodel_parsing.h | obj/srcs/objmodel
+obj/srcs/objmodel/obj_parsing.o: srcs/objmodel/obj_parsing.c include/fterror.h include/objmodel.h include/objmodel_parsing.h include/vertex.h | obj/srcs/objmodel
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
-obj/srcs/objmodel/obj_parsing_faces.o: srcs/objmodel/obj_parsing_faces.c include/fterror.h include/objmodel.h include/objmodel_parsing.h | obj/srcs/objmodel
+obj/srcs/objmodel/obj_parsing_faces.o: srcs/objmodel/obj_parsing_faces.c include/fterror.h include/objmodel.h include/objmodel_parsing.h include/vertex.h | obj/srcs/objmodel
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
-obj/srcs/objmodel/obj_parsing_floats.o: srcs/objmodel/obj_parsing_floats.c include/fterror.h include/objmodel.h include/objmodel_parsing.h | obj/srcs/objmodel
+obj/srcs/objmodel/obj_parsing_floats.o: srcs/objmodel/obj_parsing_floats.c include/fterror.h include/objmodel.h include/objmodel_parsing.h include/vertex.h | obj/srcs/objmodel
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
-obj/srcs/objmodel/obj_parsing_misc.o: srcs/objmodel/obj_parsing_misc.c include/fterror.h include/objmodel.h include/objmodel_parsing.h | obj/srcs/objmodel
+obj/srcs/objmodel/obj_parsing_misc.o: srcs/objmodel/obj_parsing_misc.c include/fterror.h include/objmodel.h include/objmodel_parsing.h include/vertex.h | obj/srcs/objmodel
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
-obj/srcs/objmodel/obj_parsing_mtl.o: srcs/objmodel/obj_parsing_mtl.c include/fterror.h include/objmodel.h include/objmodel_parsing.h | obj/srcs/objmodel
+obj/srcs/objmodel/obj_parsing_mtl.o: srcs/objmodel/obj_parsing_mtl.c include/fterror.h include/objmodel.h include/objmodel_parsing.h include/vertex.h | obj/srcs/objmodel
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
 obj/srcs/objmodel/objmodel_operations.o: srcs/objmodel/objmodel_operations.c include/fterror.h include/ftmath.h include/objmodel.h include/objmodel_parsing.h include/scop.h include/scop_cogconf_enums.h include/scop_cogconf_meshfill.h include/scop_conf.h include/scop_types.h include/vertex.h | obj/srcs/objmodel
