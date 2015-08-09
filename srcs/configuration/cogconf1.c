@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/08/08 14:03:36 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/09 13:38:22 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/09 14:09:51 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # define NARG(...) NARG_(__VA_ARGS__,11,10,9,8,7,6,5,4,3,2,1)
 #endif
 #define LOC(T, S) ((t_location){(T), (S)})
-#define VSHADER(N,F,...) {VSHD_PATH(N),F,NARG(__VA_ARGS__),{__VA_ARGS__},0}
+#define VSHADER(N,F,...) {VSHD_PATH(N), F, NARG(__VA_ARGS__), {__VA_ARGS__}, 0}
 #define FSHADER(N, F) {FSHD_PATH(N), (F), 0}
 #define GSHADER(N, F) {GSHD_PATH(N), (F), 0}
 #define PROG(VS,FS,GS) {VS, FS, GS, 0}

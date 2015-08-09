@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/08/08 14:03:56 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/08 14:04:19 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/09 14:10:07 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <string.h>
 
 #define FTVU ftv_uninitialized()
-#define MESH(P, U, F) {(U), (P), true, (F), FTVU, FTVU, {0, 0, 0}}
+#define MESH(P, U, F) {(U), (P), (F), FTVU, FTVU, {0, 0, 0}}
 #define TEXTURE(FN) {TEXTURE_PATH(FN), {0, 0}, 0}
 #define MODEL(ME, TE, F) {(ME), (TE), (F)}
 

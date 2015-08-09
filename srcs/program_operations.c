@@ -6,18 +6,13 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/01 12:32:53 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/09 13:40:48 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/09 13:47:29 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
 
-char const				*g_locations_str[] = {
-	"pos",
-	"col",
-	"tex",
-	"nor"
-};
+extern char const	*g_locations_str[];
 
 static int		check_program_error(GLuint program, GLuint flag)
 {
