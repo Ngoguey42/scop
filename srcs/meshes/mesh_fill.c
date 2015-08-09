@@ -6,14 +6,15 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/08/09 14:15:56 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/09 15:14:50 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/09 17:24:29 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
 #include <string.h>
 
-#define NORM_AT_42_IS_WTF(E, ME) (ME)->fill((E), (ME))
+#define NORM_AT_42_IS_WTF(E, ME, RVBO) (ME)->fill((E), (ME), (RVBO))
+/* #define NUMFLOATS(SRC) ((SRC)->npos + (SRC)->ncol + (SRC)->ntex + (SRC)->nnor) */
 
 static t_locations_backup_fill const	g_backup_fill[] = {
 	{offsetof(t_vbo_basic, npos), NULL},
@@ -37,18 +38,52 @@ static int		fill_gab(t_env const *e, t_mesh const *me
 	{
 		s_cur = *(t_byte*)((void*)raw_vbo + g_backup_fill[loc->type].noff);
 		s_wished = loc->size;
-		if (s_cur == 0 && g_backup_fill[loc->type].fun != NULL)
-		{
-			//fill
-			s_cur = *(t_byte*)((void*)raw_vbo + g_backup_fill[loc->type].noff);
-		}
 		if (s_cur != s_wished)
-			return (ERRORF("s_cur == %hhu/%hhu", s_cur, s_wished), 1);
-		/* qprintf("HELLO: %hhu/%hhu\n", s_cur, s_wished); */
+			ERRORF("s_cur == %hhu/%hhu", s_cur, s_wished);
 		loc++;
 	}
 	return (0);
 }
+
+static void		shrink_vbo(t_ftvector *const dst, t_vbo_basic const *const srcb)
+{
+	t_ftvector const *const			srcv = &srcb->vertices;
+	t_vertex_basic const			*src = srcv->data;
+	t_vertex_basic const *const		srcend = ftv_end(srcv);
+	float							tmp[dst->chunk_size / sizeof(float)];
+	float							*tmpptr;
+
+	if (ftv_reserve(dst, srcv->size))
+		sp_enomem();
+	while (src < srcend)
+	{
+		tmpptr = tmp;
+		if (srcb->npos > 0)
+		{
+			memcpy(tmpptr, &src->pos, srcb->npos * sizeof(float));
+			tmpptr += srcb->npos;
+		}
+		if (srcb->ncol > 0)
+		{
+			memcpy(tmpptr, &src->col, srcb->ncol * sizeof(float));
+			tmpptr += srcb->ncol;
+		}
+		if (srcb->ntex > 0)
+		{
+			memcpy(tmpptr, &src->tex, srcb->ntex * sizeof(float));
+			tmpptr += srcb->ntex;
+		}
+		if (srcb->nnor > 0)
+		{
+			memcpy(tmpptr, &src->nor, srcb->nnor * sizeof(float));
+			tmpptr += srcb->nnor;
+		}
+		ftv_push_back_unsafe(dst, tmp);
+		src++;
+	}
+	return ;
+}
+
 
 int				sp_fill_mesh(t_env const *e, t_mesh *me)
 {
@@ -56,9 +91,12 @@ int				sp_fill_mesh(t_env const *e, t_mesh *me)
 
 	bzero(raw_vbo, sizeof(t_vbo_basic));
 	ftv_init_instance(&raw_vbo->vertices, sizeof(t_vertex_basic));
-	if (NORM_AT_42_IS_WTF(e, me))
+	if (NORM_AT_42_IS_WTF(e, me, raw_vbo))
 		return (ERROR("me->fill(e, me)"), 1);
 	fill_gab(e, me, raw_vbo);
+	shrink_vbo(&me->vertices, raw_vbo);
+	ftv_printn(&raw_vbo->vertices, "fffFFFfffff", 8);
+	ftv_printn(&me->vertices, "ffffffff", 8);
 	ftv_release(&raw_vbo->vertices, NULL);
 	return (0);
 }

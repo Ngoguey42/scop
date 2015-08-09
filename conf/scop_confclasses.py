@@ -6,7 +6,7 @@
 #    By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/08/08 11:56:07 by ngoguey           #+#    #+#              #
-#    Updated: 2015/08/09 13:32:13 by ngoguey          ###   ########.fr        #
+#    Updated: 2015/08/09 16:48:59 by ngoguey          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -197,7 +197,7 @@ class Mesh(Cstruct):
 	def output_meshfill(self, index_first):
 		if self.index >= index_first and self.index < index_first + 5:
 			output_dotc_indent_2str("int", "sp_meshfill_" + self.name
-			+ "(t_env const *e, t_mesh *me)")
+			+ "(t_env const *e, t_mesh *me, t_vbo_basic *vbo)")
 			cog.outl(self.fill_funbody + "\n")
 
 class Model(Cstruct):

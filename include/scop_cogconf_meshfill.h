@@ -22,11 +22,7 @@
 **  cog.out("/" "*")
 **  ]]]
 */
-int							sp_meshfill_plane(t_env const *e, t_mesh *me);
-int							sp_meshfill_square(t_env const *e, t_mesh *me);
-int							sp_meshfill_land(t_env const *e, t_mesh *me);
-int							sp_meshfill_ptn(t_env const *e, t_mesh *me);
-int							sp_meshfill_sun(t_env const *e, t_mesh *me);
+int							sp_meshfill_plane(t_env const *e, t_mesh *me, t_vbo_basic *vbo);
 /*
 **  [[[end]]]
 */

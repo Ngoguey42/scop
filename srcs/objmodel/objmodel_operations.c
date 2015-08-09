@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/15 08:26:17 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/09 15:14:30 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/09 16:43:36 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,19 +39,5 @@ void		op_init_meshvectors(t_objmodel *m)
 		sp_enomem();
 	if (ftv_init_instance(&m->vertices, sizeof(float) * m->width))
 		sp_enomem();
-	return ;
-}
-
-void        op_swap_vectors(t_objmodel *m, t_ftvector *v, t_ftvector *f)
-{
-	if (v->data != NULL)
-		ftv_release(v, NULL);
-	if (f->data != NULL)
-		ftv_release(f, NULL);
-	memcpy(v, &m->vertices, sizeof(t_ftvector));
-	if (m->faces.data != NULL)
-		memcpy(f, &m->faces, sizeof(t_ftvector));
-	bzero(&m->vertices, sizeof(t_ftvector));
-	bzero(&m->faces, sizeof(t_ftvector));
 	return ;
 }
