@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/28 11:41:25 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/28 15:46:57 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/09 16:07:37 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ static void	calc_fact_and_offset(float const bounds[4], float factoffset[4],
 }
 
 void		sp_inject_uv_plan_oxy(t_ftvector *v, t_texture const *t,
-									float scale, size_t padfloats)
+									 float scale, size_t padfloats)
 {
 	t_ftvector		newv[1];
 	float			bounds[4];
@@ -131,4 +131,61 @@ void		sp_inject_uv_plan_oxy(t_ftvector *v, t_texture const *t,
 	ftv_release(v, NULL);
 	*v = *newv;
 	return ;
+}
+
+static void	calc_boundsNEW(t_ftvector const *const v, float bx[2], float by[2])
+{
+	t_vertex_basic const		*vertex = v->data;
+	t_vertex_basic const *const	vertexend = ftv_end(v);
+
+	bx[0] = vertex->pos.x;
+	bx[1] = vertex->pos.x;
+	by[0] = vertex->pos.y;
+	by[1] = vertex->pos.y;
+	while (vertex < vertexend)
+	{
+		if (vertex->pos.x < bx[0])
+			bx[0] = vertex->pos.x;
+		else if (vertex->pos.x > bx[1])
+			bx[1] = vertex->pos.x;
+		if (vertex->pos.y < by[0])
+			by[0] = vertex->pos.y;
+		else if (vertex->pos.y > by[1])
+			by[1] = vertex->pos.y;
+		vertex++;
+	}
+	return ;
+}
+
+static void	fillNEW(t_ftvector *v, float const factoffset[4])
+{
+	t_vertex_basic		*vertex;
+	t_vertex_basic const *const	vertexend = ftv_end(v);
+
+	vertex = v->data;
+	while (vertex < vertexend)
+	{
+		vertex->tex.u = vertex->pos.x * factoffset[0] + factoffset[2];
+		vertex->tex.v = vertex->pos.y * factoffset[1] + factoffset[3];
+		vertex++;
+	}
+	return ;
+}
+
+void		sp_calc_uv_plan_oxyNEW(t_env const *e, t_mesh const *me
+								, t_vbo_basic *vbo)
+{
+	float			bounds[4];
+	float			factoffset[4];
+	t_texture const	*t = e->textures + sp_porcelain_texture;
+	float const		scale = 1.f;
+
+	lprintf("    Creating some UV coords with plan oxy");
+	calc_boundsNEW(&vbo->vertices, bounds, bounds + 2);
+	calc_fact_and_offset(bounds, factoffset
+					, (float)t->dim[0] / (float)t->dim[1], scale);
+	fillNEW(&vbo->vertices, factoffset);
+	return ;
+	(void)e;
+	(void)me;
 }
