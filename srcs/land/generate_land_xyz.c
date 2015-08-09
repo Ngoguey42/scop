@@ -6,17 +6,17 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/22 17:08:03 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/31 13:11:45 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/09 18:08:41 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "scop_conf.h"
+#include "scop.h"
 #include "fterror.h"
 #include "libft.h"
 #include "ft_vector.h"
 #include <stdlib.h>
 
-void	sp_fill_landvertices(t_ftvector const *lines, t_ftvector *vertices,
+void	sp_fill_landvertices(t_ftvector const *lines, t_vbo_basic *vbo,
 								float bounds[2])
 {
 	size_t			x;
@@ -24,6 +24,7 @@ void	sp_fill_landvertices(t_ftvector const *lines, t_ftvector *vertices,
 	float			tmp[3];
 	float const		fact = LAND_SIDEF / (float)lines->size;
 
+	vbo->npos = 3;
 	bounds[0] = *(float*)lines->data;
 	bounds[1] = *(float*)lines->data;
 	y = -1;
@@ -35,7 +36,7 @@ void	sp_fill_landvertices(t_ftvector const *lines, t_ftvector *vertices,
 		{
 			tmp[0] = (float)x * fact - LAND_SIDEHALFF;
 			tmp[1] = *(((float*)lines->data) + x + y * lines->size);
-			ftv_push_back_unsafe(vertices, &tmp);
+			ftv_push_back_unsafe(&vbo->vertices, &tmp);
 			if (tmp[1] > bounds[1])
 				bounds[1] = tmp[1];
 			else if (tmp[1] < bounds[0])

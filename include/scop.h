@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 12:07:31 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/09 16:42:34 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/09 18:10:35 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,10 +101,10 @@ void        sp_calc_uv_plan_oxy(t_env const *e, t_mesh const *me
 ** LAND GENERATION
 */
 void		sp_fill_landgrid(t_ftvector *lines);
-void		sp_fill_landvertices(t_ftvector const *lines, t_ftvector *faces,
+void		sp_fill_landvertices(t_ftvector const *lines, t_vbo_basic *vbo,
 	float bounds[2]);
 void		sp_fill_landfaces(t_ftvector const *lines, t_ftvector *vertices);
-void		sp_fill_landrgb(t_ftvector *vertices, float const bounds[2]);
+void		sp_fill_landrgb(t_vbo_basic *vbo, float const bounds[2]);
 
 /*
 ** UNIFORMS

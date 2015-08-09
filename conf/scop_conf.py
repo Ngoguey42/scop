@@ -6,7 +6,7 @@
 #    By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/08/08 11:56:00 by ngoguey           #+#    #+#              #
-#    Updated: 2015/08/09 18:00:14 by ngoguey          ###   ########.fr        #
+#    Updated: 2015/08/09 18:10:25 by ngoguey          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -126,31 +126,26 @@ meshes = [
 	# return (0);\n\t(void)e;\n\t(void)me;\n}"""),
 
 	# land fait ceci cela
-	# Mesh("land", "land", "GL_STATIC_DRAW","""{
-        # /*
-	# t_ftvector		lines[1];
-	# size_t const	line_points = (int)pow(2., (double)POINTS_DEPTHI);
-	# float			bounds[2];
+	Mesh("land", "land", "GL_STATIC_DRAW","""{
+	t_ftvector		lines[1];
+	size_t const	line_points = (int)pow(2., (double)POINTS_DEPTHI);
+	float			bounds[2];
 
-	# if (ftv_init_instance(lines, sizeof(float) * line_points))
-	# 	sp_enomem();
-	# if (ftv_insert_count(lines, lines->data, line_points))
-	# 	sp_enomem();
-	# sp_fill_landgrid(lines);
-	# //fuite sur me->vertices
- 	# if (ftv_init_instance(&me->vertices, 6 * sizeof(float)))
-	# 	sp_enomem();
- 	# if (ftv_reserve(&me->vertices, lines->size * lines->size))
-	# 	sp_enomem();
-	# sp_fill_landvertices(lines, &me->vertices, bounds);
-	# if (ftv_reserve(&me->faces, (lines->size - 1) * (lines->size - 1) * 2))
-	# 	sp_enomem();
-	# sp_fill_landfaces(lines, &me->faces);
-	# sp_fill_landrgb(&me->vertices, bounds);
-	# ftv_release(lines, NULL);
-	# sp_inject_normals(&me->vertices, &me->faces);
-        # */
-	# return (0);\n\t(void)e;\n\t(void)me;\n}"""),
+	if (ftv_init_instance(lines, sizeof(float) * line_points))
+		sp_enomem();
+	if (ftv_insert_count(lines, lines->data, line_points))
+		sp_enomem();
+	sp_fill_landgrid(lines);
+ 	if (ftv_reserve(&vbo->vertices, lines->size * lines->size))
+		sp_enomem();
+	sp_fill_landvertices(lines, vbo, bounds);
+	if (ftv_reserve(&me->faces, (lines->size - 1) * (lines->size - 1) * 2))
+		sp_enomem();
+	sp_fill_landfaces(lines, &me->faces);
+	sp_fill_landrgb(vbo, bounds);
+	ftv_release(lines, NULL);
+        sp_calc_normals(e, me, vbo);
+	return (0);\n\t(void)e;\n\t(void)me;\n}"""),
 
 	# ptn fait ceci cela
 	Mesh("ptn", "ptn", "GL_STATIC_DRAW","""{
@@ -187,7 +182,6 @@ meshes = [
 		&vbo->vertices, vertices, sizeof(vertices) / sizeof(*vertices));
 	(void)ftv_insert_range(
 		&me->faces, indices, sizeof(indices) / sizeof(*indices) / 3);
-        ftv_print(&vbo->vertices, "fff");
 	return (0);\n\t(void)e;\n\t(void)me;\n}"""),
 ]
 models = [
@@ -195,8 +189,8 @@ models = [
 	Model("plane", "plane", "porcelain", "model"),
 	# # square fait ceci cela
 	# Model("square", "square", "no", "model"),
-	# # land fait ceci cela
-	# Model("land", "land", "no", "model"),
+	# land fait ceci cela
+	Model("land", "land", "no", "model"),
 	# ptn fait ceci cela
 	Model("ptn", "ptn", "metal", "model"),
 	# sun fait ceci cela

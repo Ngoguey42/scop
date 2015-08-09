@@ -6,11 +6,11 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/22 17:07:12 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/28 16:04:40 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/09 18:17:59 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "scop_conf.h"
+#include "scop.h"
 #include "fterror.h"
 #include "libft.h"
 #include "ft_vector.h"
@@ -66,29 +66,27 @@ static void		calc_color_ratio(float proportions[NUM_COLORS], float ratio)
 	return ;
 }
 
-static void		input_color(float *rgb, float ratio)
+static void		input_color(t_vertex_basic *vert, float ratio)
 {
-	float		tmp[3];
 	float		proportions[NUM_COLORS];
 	size_t		i;
 
 	calc_color_ratio(proportions, ratio);
 	normalize_prop(proportions);
 	i = 0;
-	tmp[0] = 0.f;
-	tmp[1] = 0.f;
-	tmp[2] = 0.f;
+	vert->col.r = 0.f;
+	vert->col.g = 0.f;
+	vert->col.b = 0.f;
 	while (i < NUM_COLORS)
 	{
 		if (proportions[i] > 0.f)
 		{
-			tmp[0] += g_colors[i][0] * proportions[i];
-			tmp[1] += g_colors[i][1] * proportions[i];
-			tmp[2] += g_colors[i][2] * proportions[i];
+			vert->col.r += g_colors[i][0] * proportions[i];
+			vert->col.g += g_colors[i][1] * proportions[i];
+			vert->col.b += g_colors[i][2] * proportions[i];
 		}
 		i++;
 	}
-	memcpy(rgb, tmp, sizeof(tmp));
 	return ;
 }
 
@@ -104,19 +102,18 @@ static float	get_rand(float init)
 	return (nb);
 }
 
-void			sp_fill_landrgb(t_ftvector *vertices, float const bounds[2])
+void			sp_fill_landrgb(t_vbo_basic *vbo, float const bounds[2])
 {
-	float const		delta = bounds[1] - bounds[0];
-	size_t			i;
-	float			*ptr;
+	t_vertex_basic					*vert;
+	t_vertex_basic const *const		vertend = ftv_end(&vbo->vertices);
+	float const						delta = bounds[1] - bounds[0];
 
-	i = 0;
-	ptr = vertices->data;
-	while (i < vertices->size)
+	vert = vbo->vertices.data;
+	while (vert < vertend)
 	{
-		input_color(ptr + 3, get_rand((ptr[1] - bounds[0]) / delta));
-		ptr += 6;
-		i++;
+		input_color(vert, get_rand((vert->pos.y - bounds[0]) / delta));
+		vert++;
 	}
+	vbo->ncol = 3;
 	return ;
 }
