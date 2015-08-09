@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/28 11:41:25 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/09 16:07:37 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/09 16:13:13 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,7 +172,7 @@ static void	fillNEW(t_ftvector *v, float const factoffset[4])
 	return ;
 }
 
-void		sp_calc_uv_plan_oxyNEW(t_env const *e, t_mesh const *me
+void		sp_calc_uv_plan_oxy(t_env const *e, t_mesh const *me
 								, t_vbo_basic *vbo)
 {
 	float			bounds[4];
