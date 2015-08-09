@@ -6,11 +6,13 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/27 12:01:57 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/09 08:48:07 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/09 09:34:50 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
+
+#define NORM_AT_42_IS_WTF(E, OB, MO) (MO)->update_uniforms((E), (OB))
 
 static void		render_ob(t_env const *e, t_ob *ob)
 {
@@ -18,7 +20,7 @@ static void		render_ob(t_env const *e, t_ob *ob)
 	t_mesh const *const		me = MEOFMO(e, mo);
 
 	if (mo->update_uniforms != NULL)
-		mo->update_uniforms(e, ob);
+		NORM_AT_42_IS_WTF(e, ob, mo);
 	if (mo->texture != sp_no_texture)
 	{
 		glActiveTexture(GL_TEXTURE0);
@@ -42,32 +44,12 @@ static void		update_matrix_ob(t_env const *e, t_ob *ob)
 	(void)e;
 }
 
-static void		update_ob(t_env const *e, t_ob *ob)
-{
-	if (ob->update != NULL)
-		ob->update(e, ob);
-	return ;
-	(void)e;
-}
-
-static t_bool	do_draw(t_env const *e, t_ob *ob)
-{
-	return (ob->hidden ? false : true);
-	(void)e;
-}
-
-static t_bool	do_update_matrix(t_env const *e, t_ob *ob)
-{
-	return (ob->moved ? true : false);
-	(void)e;
-}
-
 void			render_prog_obs(t_env const *e, t_program_index i)
 {
-	t_program const		*p = e->programs + i;
-	t_ftlist const		*prl = e->obs + i;
-	void				(*vsunif_update)();
-	void				(*fsunif_update)();
+	t_program const	*const	p = e->programs + i;
+	t_ftlist const *const	prl = e->obs + i;
+	void					(*vsunif_update)();
+	void					(*fsunif_update)();
 
 	vsunif_update = VSOFP(e, p)->unif_update;
 	fsunif_update = FSOFP(e, p)->unif_update;
@@ -76,9 +58,8 @@ void			render_prog_obs(t_env const *e, t_program_index i)
 		vsunif_update(e, p);
 	if (fsunif_update != NULL)
 		fsunif_update(e, p);
-	ftl_foreach((void*)prl, &update_ob, (void*)e);
-	ftl_foreach_if((void*)prl, &update_matrix_ob, (void*)e, &do_update_matrix);
-	ftl_foreach_if((void*)prl, &render_ob, (void*)e, &do_draw);
+	ftl_foreach_if((void*)prl, &update_matrix_ob, (void*)e, &sp_ob_get_moved);
+	ftl_foreach_if((void*)prl, &render_ob, (void*)e, &sp_ob_getnot_hidden);
 	return ;
 }
 

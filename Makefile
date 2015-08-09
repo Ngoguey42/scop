@@ -86,6 +86,7 @@ O_FILES := obj/srcs/env_operations.o \
 	obj/srcs/objmodel/objmodel_operations.o \
 	obj/srcs/obs/obs_operations.o \
 	obj/srcs/obs/obs_render.o \
+	obj/srcs/obs/obs_update.o \
 	obj/srcs/shaders/shader_operations.o \
 	obj/srcs/textures/parse_tga.o \
 	obj/srcs/textures/textures_operations.o
@@ -225,6 +226,9 @@ obj/srcs/obs/obs_operations.o: srcs/obs/obs_operations.c include/fterror.h inclu
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
 obj/srcs/obs/obs_render.o: srcs/obs/obs_render.c include/fterror.h include/ftmath.h include/objmodel.h include/scop.h include/scop_cogconf_enums.h include/scop_cogconf_meshfill.h include/scop_conf.h include/scop_types.h | obj/srcs/obs
+	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
+
+obj/srcs/obs/obs_update.o: srcs/obs/obs_update.c include/fterror.h include/ftmath.h include/objmodel.h include/scop.h include/scop_cogconf_enums.h include/scop_cogconf_meshfill.h include/scop_conf.h include/scop_types.h | obj/srcs/obs
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
 obj/srcs/shaders/shader_operations.o: srcs/shaders/shader_operations.c include/fterror.h include/ftmath.h include/objmodel.h include/scop.h include/scop_cogconf_enums.h include/scop_cogconf_meshfill.h include/scop_conf.h include/scop_types.h | obj/srcs/shaders

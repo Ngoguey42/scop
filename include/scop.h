@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 12:07:31 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/08 12:45:20 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/09 09:33:32 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ int			op_new_mesh(t_env const *e, t_mesh *me);
 
 void		sp_inject_normals(t_ftvector *vertices, t_ftvector const *faces);
 void		sp_inject_uv_plan_oxy(t_ftvector *v, t_texture const *t,
-								   float scale, size_t padfloats);
+									float scale, size_t padfloats);
 
 /*
 ** LAND GENERATION
@@ -119,8 +119,10 @@ void		sp_unif_suncolor(t_env const *e, t_program const *p);
 */
 int			sp_init_obs(t_env *e);
 void		sp_delete_obs(t_env *e);
-void        sp_render_obs(t_env const *e);
-int         sp_fill_obs(t_env *e);
-void        sp_obupdate_sun(t_env const *e, t_ob *ob);
+void		sp_render_obs(t_env const *e);
+int			sp_fill_obs(t_env *e);
+void		sp_obupdate_sun(t_env const *e, t_ob *ob);
+t_bool		sp_ob_getnot_hidden(t_env const *e, t_ob const *ob);
+t_bool		sp_ob_get_moved(t_env const *e, t_ob const *ob);
 
 #endif
