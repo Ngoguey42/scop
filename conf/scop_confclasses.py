@@ -6,7 +6,7 @@
 #    By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/08/08 11:56:07 by ngoguey           #+#    #+#              #
-#    Updated: 2015/08/08 12:24:57 by ngoguey          ###   ########.fr        #
+#    Updated: 2015/08/09 13:32:13 by ngoguey          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,9 +58,9 @@ class Vshader(Cstruct):
 		cog.out("\tVSHADER(\"" + self.filename
 			+ "\", &sp_unif_" + self.unif_funname + ",\n\t")
 		for loc in self.locations[0:-1]:
-			cog.out("LOC(\"" + loc[0] + "\", " + str(loc[1]) + "), ")
+			cog.out("LOC(sp_" + loc[0] + "_loc, " + str(loc[1]) + "), ")
 		loc = self.locations[-1]
-		cog.out("LOC(\"" + loc[0] + "\", " + str(loc[1]) + ")")
+		cog.out("LOC(sp_" + loc[0] + "_loc, " + str(loc[1]) + ")")
 		cog.outl("),")
 
 class Fshader(Cstruct):

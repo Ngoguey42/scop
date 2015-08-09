@@ -6,14 +6,14 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/07/18 15:04:28 by ngoguey           #+#    #+#             //
-//   Updated: 2015/07/18 15:05:15 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/08/09 13:40:07 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
 #version 410 core
 
-layout (location = 0) in vec3 position;
-layout (location = 1) in vec2 texCoord;
+layout (location = 0) in vec3 pos;
+layout (location = 1) in vec2 tex;
 
 out vec3 ourColor;
 out vec2 texUV;
@@ -24,7 +24,7 @@ uniform mat4 projection;
 
 void main()
 {
-	gl_Position = model * vec4(position, 1.0);
+	gl_Position = model * vec4(pos, 1.0);
 	if (gl_Position.y > 2.f)
 	{
 		if (gl_VertexID % 3 == 0)
@@ -43,7 +43,7 @@ void main()
 		float ratio = (gl_Position.y + 1.f) / 2.f;
 		ourColor = vec3(ratio, 1.f - ratio, 0.f);
 	}
-	ourColor = vec3(texCoord, 0.f);
-	texUV = texCoord;
+	ourColor = vec3(tex, 0.f);
+	texUV = tex;
 	gl_Position = projection * view * gl_Position;
 }

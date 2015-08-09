@@ -6,13 +6,13 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/06/30 17:43:59 by ngoguey           #+#    #+#             //
-//   Updated: 2015/07/21 09:21:05 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/08/09 13:28:18 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
 #version 410 core
 
-layout (location = 0) in vec3 position;
+layout (location = 0) in vec3 pos;
 
 out vec3 ourColor;
 
@@ -22,7 +22,7 @@ uniform mat4 projection;
 
 void main()
 {
-	gl_Position = model * vec4(position, 1.0);
+	gl_Position = model * vec4(pos, 1.0);
 	if (gl_Position.y > 2.f)
 	{
 		if (gl_VertexID % 3 == 0)
@@ -43,5 +43,5 @@ void main()
 	}
 
 	gl_Position = projection * view * gl_Position;
-	// gl_Position = vec4(position, 1.0);
+	// gl_Position = vec4(pos, 1.0);
 }

@@ -6,11 +6,18 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/01 12:32:53 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/08 14:43:20 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/09 13:40:48 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
+
+char const				*g_locations_str[] = {
+	"pos",
+	"col",
+	"tex",
+	"nor"
+};
 
 static int		check_program_error(GLuint program, GLuint flag)
 {
@@ -40,7 +47,8 @@ static int		new_program(t_env const *e, t_program *p)
 	i = 0;
 	while (i < vs->n_locations)
 	{
-		glBindAttribLocation(p->handle, i, vs->locations[i].name);
+		glBindAttribLocation(p->handle
+								, i, g_locations_str[vs->locations[i].type]);
 		i++;
 	}
 	glLinkProgram(p->handle);

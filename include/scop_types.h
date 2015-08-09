@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 10:07:19 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/09 13:10:16 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/09 13:39:00 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,18 @@ enum							e_stateindex
 ** SHADERS
 ** A shader is tied to several <program>
 */
+enum							e_location_type
+{
+	sp_pos_loc,
+	sp_col_loc,
+	sp_tex_loc,
+	sp_nor_loc,
+	sp_num_locs,
+};
 typedef struct					s_location
 {
-	char const					name[64];
-	size_t						size;
+	enum e_location_type		type:8;
+	t_byte						size;
 }								t_location;
 
 typedef struct					s_vshader

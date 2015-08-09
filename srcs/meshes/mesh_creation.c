@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/28 11:02:28 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/28 11:23:06 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/09 13:36:57 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ static size_t	mesh_width(t_vshader const *vs)
 	return (tot);
 }
 
+extern char const	*g_locations_str[];
+
 static int		gen_attribs(t_vshader const *vs, size_t vert_width)
 {
 	size_t	i;
@@ -38,7 +40,8 @@ static int		gen_attribs(t_vshader const *vs, size_t vert_width)
 	while (i < vs->n_locations)
 	{
 		lprintf("    ->%-8s i=%02u; sz=%02u; wid=%02u, dt=%02u",
-			vs->locations[i].name,
+			/* vs->locations[i].name, */
+				g_locations_str[vs->locations[i].type],
 			i, vs->locations[i].size, vert_width, delta);
 		glVertexAttribPointer(i, vs->locations[i].size, GL_FLOAT, GL_FALSE
 								, vert_width, delta);

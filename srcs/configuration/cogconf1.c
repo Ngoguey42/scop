@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/08/08 14:03:36 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/08 14:04:38 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/09 13:38:22 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # define NARG_(_1,_2,_3,_4,_5,_6,_7,_8,_9,_10,_11,N,...) N
 # define NARG(...) NARG_(__VA_ARGS__,11,10,9,8,7,6,5,4,3,2,1)
 #endif
-#define LOC(N, S) ((t_location){N, (S)})
+#define LOC(T, S) ((t_location){(T), (S)})
 #define VSHADER(N,F,...) {VSHD_PATH(N),F,NARG(__VA_ARGS__),{__VA_ARGS__},0}
 #define FSHADER(N, F) {FSHD_PATH(N), (F), 0}
 #define GSHADER(N, F) {GSHD_PATH(N), (F), 0}
@@ -37,19 +37,19 @@ int			sp_loadconf_vshaders(t_env *e)
 	t_vshader const		tmp[sp_num_vshaders] = {
 
 	VSHADER("po_to_co.vert", &sp_unif_viewproj2,
-	LOC("position", 3)),
+	LOC(sp_pos_loc, 3)),
 	VSHADER("pocote_to_couv.vert", &sp_unif_viewproj2,
-	LOC("position", 3), LOC("color", 3), LOC("texCoord", 2)),
+	LOC(sp_pos_loc, 3), LOC(sp_col_loc, 3), LOC(sp_tex_loc, 2)),
 	VSHADER("pote_to_couv.vert", &sp_unif_viewproj2,
-	LOC("position", 3), LOC("texCoord", 2)),
+	LOC(sp_pos_loc, 3), LOC(sp_tex_loc, 2)),
 	VSHADER("poco_to_co.vert", &sp_unif_viewproj,
-	LOC("position", 3), LOC("color", 3)),
+	LOC(sp_pos_loc, 3), LOC(sp_col_loc, 3)),
 	VSHADER("poteno_to_uv.vert", &sp_unif_viewproj,
-	LOC("position", 3), LOC("texCoord", 2), LOC("normal", 3)),
+	LOC(sp_pos_loc, 3), LOC(sp_tex_loc, 2), LOC(sp_nor_loc, 3)),
 	VSHADER("pocono_to_co.vert", &sp_unif_viewproj,
-	LOC("position", 3), LOC("color", 3), LOC("normal", 3)),
+	LOC(sp_pos_loc, 3), LOC(sp_col_loc, 3), LOC(sp_nor_loc, 3)),
 	VSHADER("po_to_noop.vert", &sp_unif_viewproj,
-	LOC("position", 3)),
+	LOC(sp_pos_loc, 3)),
 	};
 	memcpy(&e->vshaders, &tmp, sizeof(tmp));
 	return (0);

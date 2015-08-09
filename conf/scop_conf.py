@@ -6,7 +6,7 @@
 #    By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/08/08 11:56:00 by ngoguey           #+#    #+#              #
-#    Updated: 2015/08/08 12:17:55 by ngoguey          ###   ########.fr        #
+#    Updated: 2015/08/09 13:39:28 by ngoguey          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,31 +15,31 @@ from scop_confclasses import *
 vshaders = [
 	# po_to_co fait ceci cela
 	Vshader("po_to_co", "po_to_co.vert", "viewproj2",
-		("position", 3), ),
+		("pos", 3), ),
 
 	# pocote_to_couv fait ceci cela
 	Vshader("pocote_to_couv", "pocote_to_couv.vert", "viewproj2",
-		("position", 3), ("color", 3), ("texCoord", 2), ),
+		("pos", 3), ("col", 3), ("tex", 2), ),
 
 	# pote_to_couv fait ceci cela
 	Vshader("pote_to_couv", "pote_to_couv.vert", "viewproj2",
-		("position", 3), ("texCoord", 2), ),
+		("pos", 3), ("tex", 2), ),
 
 	# poco_to_co fait ceci cela
 	Vshader("poco_to_co", "poco_to_co.vert", "viewproj",
-		("position", 3), ("color", 3), ),
+		("pos", 3), ("col", 3), ),
 
 	# poteno_to_uv fait ceci cela
 	Vshader("poteno_to_uv", "poteno_to_uv.vert", "viewproj",
-		("position", 3), ("texCoord", 2), ("normal", 3), ),
+		("pos", 3), ("tex", 2), ("nor", 3), ),
 
 	# pocono_to_co fait ceci cela
 	Vshader("pocono_to_co", "pocono_to_co.vert", "viewproj",
-		("position", 3), ("color", 3), ("normal", 3), ),
+		("pos", 3), ("col", 3), ("nor", 3), ),
 
 	# po_to_noop fait ceci cela
 	Vshader("po_to_noop", "po_to_noop.vert", "viewproj",
-		("position", 3), ),
+		("pos", 3), ),
 ]
 fshaders = [
 	# co_identity fait ceci cela
