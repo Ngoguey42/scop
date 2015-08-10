@@ -27,7 +27,7 @@
 
 int			sp_meshfill_plane(t_env const *e, t_mesh *me, t_vbo_basic *vbo)
 {
-	t_objmodel     		m[1];
+	t_objmodel				m[1];
 	t_texture const *const	t = e->textures + sp_porcelain_texture;
 
 	/* if (op_parse_obj(m, "res/cessna.obj")) */
@@ -45,14 +45,14 @@ int			sp_meshfill_plane(t_env const *e, t_mesh *me, t_vbo_basic *vbo)
 
 int			sp_meshfill_square(t_env const *e, t_mesh *me, t_vbo_basic *vbo)
 {
-	t_vertex_basic  vertices[] = {
+	t_vertex_basic	vertices[] = {
 
 	BVERT_POSCOL( 0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f),  // Top Right
 	BVERT_POSCOL(0.5f, -0.5f, 2.0f,   0.0f, 1.0f, 0.0f),  // Bottom Right
 	BVERT_POSCOL(-0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 1.0f),  // Bottom Left
 	BVERT_POSCOL(-0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 0.0f),  // Top Left
         };
-	GLuint indices[] = {  // Note that we start from 0!
+	GLuint			indices[] = {  // Note that we start from 0!
 		3, 1, 0,  // First Triangle
 		3, 2, 1   // Second Triangle
 	};
@@ -70,9 +70,9 @@ int			sp_meshfill_square(t_env const *e, t_mesh *me, t_vbo_basic *vbo)
 
 int			sp_meshfill_land(t_env const *e, t_mesh *me, t_vbo_basic *vbo)
 {
-	t_ftvector	lines[1];
+	t_ftvector		lines[1];
 	size_t const	line_points = (int)pow(2., (double)POINTS_DEPTHI);
-	float		bounds[2];
+	float			bounds[2];
 
 	if (ftv_init_instance(lines, sizeof(float) * line_points))
 	sp_enomem();

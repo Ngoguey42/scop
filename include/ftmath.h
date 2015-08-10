@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 12:16:50 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/09 12:50:24 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/10 14:30:38 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 ** ATOM4		Absolute to matrix4
 */
 # define ATOV3(...) (t_vector3){__VA_ARGS__}
+# define ATOV3SCAL(VAL) (t_vector3){(VAL), (VAL), (VAL)}
 # define ATOM4(...) (t_matrix4){{__VA_ARGS__}}
 
 typedef enum	e_axis

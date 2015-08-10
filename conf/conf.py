@@ -6,40 +6,41 @@
 #    By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/08/10 13:13:01 by ngoguey           #+#    #+#              #
-#    Updated: 2015/08/10 13:13:07 by ngoguey          ###   ########.fr        #
+#    Updated: 2015/08/10 14:53:27 by ngoguey          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 from confclasses import *
+import math
 
 vshaders = [
 	# po_to_co fait ceci cela
 	Vshader("po_to_co", "po_to_co.vert", "viewproj2",
-	("pos", 3), ),
+			("pos", 3), ),
 
 	# pocote_to_couv fait ceci cela
 	Vshader("pocote_to_couv", "pocote_to_couv.vert", "viewproj2",
-	("pos", 3), ("col", 3), ("tex", 2), ),
+			("pos", 3), ("col", 3), ("tex", 2), ),
 
 	# pote_to_couv fait ceci cela
 	Vshader("pote_to_couv", "pote_to_couv.vert", "viewproj2",
-	("pos", 3), ("tex", 2), ),
+			("pos", 3), ("tex", 2), ),
 
 	# poco_to_co fait ceci cela
 	Vshader("poco_to_co", "poco_to_co.vert", "viewproj",
-	("pos", 3), ("col", 3), ),
+			("pos", 3), ("col", 3), ),
 
 	# poteno_to_uv fait ceci cela
 	Vshader("poteno_to_uv", "poteno_to_uv.vert", "viewproj",
-	("pos", 3), ("tex", 2), ("nor", 3), ),
+			("pos", 3), ("tex", 2), ("nor", 3), ),
 
 	# pocono_to_co fait ceci cela
 	Vshader("pocono_to_co", "pocono_to_co.vert", "viewproj",
-	("pos", 3), ("col", 3), ("nor", 3), ),
+			("pos", 3), ("col", 3), ("nor", 3), ),
 
 	# po_to_noop fait ceci cela
 	Vshader("po_to_noop", "po_to_noop.vert", "viewproj",
-	("pos", 3), ),
+			("pos", 3), ),
 ]
 fshaders = [
 	# co_identity fait ceci cela
@@ -90,7 +91,7 @@ textures = [
 meshes = [
 	# plane fait ceci cela
 	Mesh("plane", "ptn", "GL_STATIC_DRAW","""{
-	t_objmodel     		m[1];
+	t_objmodel				m[1];
 	t_texture const *const	t = e->textures + sp_porcelain_texture;
 
 	/* if (op_parse_obj(m, "res/cessna.obj")) */
@@ -105,14 +106,14 @@ meshes = [
 
 	# square fait ceci cela
 	Mesh("square", "pcn", "GL_STATIC_DRAW","""{
-	t_vertex_basic  vertices[] = {
+	t_vertex_basic	vertices[] = {
 
 	BVERT_POSCOL( 0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f),  // Top Right
 	BVERT_POSCOL(0.5f, -0.5f, 2.0f,   0.0f, 1.0f, 0.0f),  // Bottom Right
 	BVERT_POSCOL(-0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 1.0f),  // Bottom Left
 	BVERT_POSCOL(-0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 0.0f),  // Top Left
         };
-	GLuint indices[] = {  // Note that we start from 0!
+	GLuint			indices[] = {  // Note that we start from 0!
 		3, 1, 0,  // First Triangle
 		3, 2, 1   // Second Triangle
 	};
@@ -127,9 +128,9 @@ meshes = [
 
 	# land fait ceci cela
 	Mesh("land", "land", "GL_STATIC_DRAW","""{
-	t_ftvector	lines[1];
+	t_ftvector		lines[1];
 	size_t const	line_points = (int)pow(2., (double)POINTS_DEPTHI);
-	float		bounds[2];
+	float			bounds[2];
 
 	if (ftv_init_instance(lines, sizeof(float) * line_points))
 	sp_enomem();
@@ -196,3 +197,10 @@ models = [
 	# sun fait ceci cela
 	Model("sun", "sun", "no", "model"),
 ]
+obs = {
+    Ob("plane"),
+    Ob("square", scale = 4., pos = (0., -5., 2.)),
+	Ob("land"),
+	Ob("ptn", pos = (-45., -0., -40.), rotation = (0., 0., -math.pi / 2.)),
+	Ob("sun", update = "sp_obupdate_sun", moved = False)
+}

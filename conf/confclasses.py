@@ -6,7 +6,7 @@
 #    By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/08/10 13:13:13 by ngoguey           #+#    #+#              #
-#    Updated: 2015/08/10 13:13:16 by ngoguey          ###   ########.fr        #
+#    Updated: 2015/08/10 14:52:08 by ngoguey          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -224,3 +224,7 @@ class Model(Cstruct):
 	def output_cconf_entry(self):
 		cog.outl("\tMODEL(sp_" + self.mename + "_mesh, sp_"
 		+ self.tename + "_texture, &sp_unif_" + self.unif_funname + "),")
+
+class Ob():
+	def __init__(self, model, **kwargs):
+		pass
