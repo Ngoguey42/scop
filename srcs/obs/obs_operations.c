@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/21 09:02:18 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/09 09:32:29 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/10 13:51:36 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,11 @@ t_bool		sp_ob_get_moved(t_env const *e, t_ob const *ob)
 {
 	return (ob->moved);
 	(void)e;
+}
+
+t_ob		sp_default_ob(t_model_index moi)
+{
+	return ((t_ob){{NULL, NULL}, false, true, false, moi,
+		{0.f, 0.f, 0.f}, {0.f, 0.f, 0.f}, {1.f, 1.f, 1.f}
+		, m4_identity(), NULL, {0.f}, {0}});
 }
