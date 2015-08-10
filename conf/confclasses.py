@@ -6,7 +6,7 @@
 #    By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/08/10 13:13:13 by ngoguey           #+#    #+#              #
-#    Updated: 2015/08/10 14:52:08 by ngoguey          ###   ########.fr        #
+#    Updated: 2015/08/10 18:40:49 by ngoguey          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -225,6 +225,30 @@ class Model(Cstruct):
 		cog.outl("\tMODEL(sp_" + self.mename + "_mesh, sp_"
 		+ self.tename + "_texture, &sp_unif_" + self.unif_funname + "),")
 
-class Ob():
+class Ob(Cstruct):
 	def __init__(self, model, **kwargs):
-		pass
+		self.model = model
+		self.kwargs = kwargs
+	@staticmethod
+	def output_cconf_start():
+		output_dotc_indent_2str("int", "sp_loadconf_obs(t_env *e)\n{")
+	@staticmethod
+	def output_cconf_end():
+		cog.outl("\treturn (0);\n}")
+
+	def printstr(self, s):
+		if len(s) + self.col > 78:
+			cog.out('\n\t\t')
+			self.col = 8
+		cog.out(s)
+		self.col += len(s)
+
+	def output_cconf_entry(self):
+		self.col = 3
+		printstr("\tOB(sp_" + self.model + "_model")
+		for k, v in self.kwargs:
+			if k == sca:
+				s = str(float(v)) + 'f'
+				printstr(', ob_sca, ATOV3SCAL(' + s+', '+s+', '+s + ')')
+			# printstr("ob_" + str(k) + ', ')
+		cog.outl(');')

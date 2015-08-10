@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 10:07:19 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/10 17:31:03 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/10 18:11:39 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,6 +149,19 @@ typedef struct					s_ob
 	float						valf[1];
 	int							vali[1];
 }								t_ob;
+typedef enum					e_ob_param
+{
+	ob_hid,
+	ob_mov,
+	ob_pos,
+	ob_rot,
+	ob_sca,
+	ob_up,
+	ob_vf,
+	ob_vi,
+	ob_num_param,
+}								t_ob_param;
+
 
 /*
 ** ENV

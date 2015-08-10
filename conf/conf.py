@@ -6,7 +6,7 @@
 #    By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/08/10 13:13:01 by ngoguey           #+#    #+#              #
-#    Updated: 2015/08/10 14:53:27 by ngoguey          ###   ########.fr        #
+#    Updated: 2015/08/10 18:36:15 by ngoguey          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -199,8 +199,8 @@ models = [
 ]
 obs = {
     Ob("plane"),
-    Ob("square", scale = 4., pos = (0., -5., 2.)),
+    Ob("square", sca = 4., pos = (0., -5., 2.)),
 	Ob("land"),
-	Ob("ptn", pos = (-45., -0., -40.), rotation = (0., 0., -math.pi / 2.)),
-	Ob("sun", update = "sp_obupdate_sun", moved = False)
+	Ob("ptn", pos = (-45., -0., -40.), rot = (0., 0., -math.pi / 2.)),
+	Ob("sun", up = "sp_obupdate_sun", mov = False)
 }

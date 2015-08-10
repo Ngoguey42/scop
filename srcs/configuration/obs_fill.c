@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/22 13:44:32 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/10 18:09:09 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/10 18:21:35 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,28 +23,6 @@
 
 #define OB(T,...) push_ob(e,(t_ob[1]){dob((T),NARG(__VA_ARGS__),##__VA_ARGS__)})
 
-static void	push_ob(t_env *e, t_ob const *ob)
-{
-	t_program_index const	pi = MEOFOB(e, ob)->program;
-
-	if (ftl_push_back(e->obs + pi, (t_ftlist_node const*)ob))
-		sp_enomem();
-	return ;
-}
-
-typedef enum		e_ob_param
-{
-	ob_hid,
-	ob_mov,
-	ob_pos,
-	ob_rot,
-	ob_sca,
-	ob_up,
-	ob_vf,
-	ob_vi,
-	ob_num_param,
-}					t_ob_param;
-
 static size_t const		g_obdata[][2] =
 {
 	{offsetof(t_ob, hidden), sizeof(t_bool)},
@@ -57,7 +35,15 @@ static size_t const		g_obdata[][2] =
 	{offsetof(t_ob, vali), sizeof(float[1])},
 };
 
- //doesnt handle valf and vali
+static void	push_ob(t_env *e, t_ob const *ob)
+{
+	t_program_index const	pi = MEOFOB(e, ob)->program;
+
+	if (ftl_push_back(e->obs + pi, (t_ftlist_node const*)ob))
+		sp_enomem();
+	return ;
+}
+
 void		retreive_varg(va_list *ap, t_ob_param id, void *buf)
 {
 	if (id == ob_hid)
@@ -72,6 +58,7 @@ void		retreive_varg(va_list *ap, t_ob_param id, void *buf)
 		(*(t_vector3*)buf) = va_arg(*ap, t_vector3);
 	else if (id == ob_up)
 		(*(void(**)())buf) = va_arg(*ap, void(*)());
+	//valf and vali
 	return ;
 }
 
