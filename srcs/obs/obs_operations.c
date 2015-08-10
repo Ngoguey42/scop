@@ -6,11 +6,20 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/21 09:02:18 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/10 13:51:36 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/10 14:22:12 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
+
+#define NORM_AT_42_IS_WTF1 {NULL, NULL}, false, true, false, moi
+#define NORM_AT_42_IS_WTF2 {0.f, 0.f, 0.f}, {0.f, 0.f, 0.f}, {1.f, 1.f, 1.f}
+#define NORM_AT_42_IS_WTF3 m4_identity(), NULL, {0.f}, {0}
+
+t_ob		sp_default_ob(t_model_index moi)
+{
+	return ((t_ob){NORM_AT_42_IS_WTF1, NORM_AT_42_IS_WTF2, NORM_AT_42_IS_WTF3});
+}
 
 void		sp_delete_obs(t_env *e)
 {
@@ -43,11 +52,4 @@ t_bool		sp_ob_get_moved(t_env const *e, t_ob const *ob)
 {
 	return (ob->moved);
 	(void)e;
-}
-
-t_ob		sp_default_ob(t_model_index moi)
-{
-	return ((t_ob){{NULL, NULL}, false, true, false, moi,
-		{0.f, 0.f, 0.f}, {0.f, 0.f, 0.f}, {1.f, 1.f, 1.f}
-		, m4_identity(), NULL, {0.f}, {0}});
 }

@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/17 12:00:25 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/10 14:08:55 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/10 14:23:10 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@
 #include "fterror.h"
 #include "libft.h"
 #include "ft_vector.h"
-
-# define sp_enomem ft_enomem
 
 static int	parse_header(int fd, t_ui dim[2])
 {
@@ -52,7 +50,7 @@ static int	parse_pix(int fd, t_ftvector *v, int npix)
 		if (read(fd, buf, sizeof(buf)) != (int)sizeof(buf))
 			return (ERROR("Unexpected end of file"), 1);
 		if (ftv_insert_range(v, buf, sizeof(buf) / 4))
-			sp_enomem();
+			ft_enomem();
 		npix -= sizeof(buf) / 4;
 	}
 	while (npix > 0)
@@ -74,7 +72,7 @@ int			parse_tga(char const *filepath, t_ftvector *v, t_ui dim[2])
 	if (parse_header(fd, dim))
 		return (ERROR("parse_header(...)"), 1);
 	if (ftv_reserve(v, dim[0] * dim[1]))
-		sp_enomem();
+		ft_enomem();
 	if (parse_pix(fd, v, dim[0] * dim[1]))
 		return (ERROR("parse_pix(...)"), 1);
 	close(fd);

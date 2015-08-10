@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/08/09 08:57:03 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/09 09:12:52 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/10 14:18:14 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,11 @@
 
 #define NORM_AT_42_IS_WTF(E, OB) (OB)->update((E), (OB))
 
-static void		update_prog_obs(t_env *const e, t_program_index const i)
+static void		update_prog_obs(t_env *const e, t_ftlist *const prl)
 {
-	t_ftlist		*prl;
 	t_ob			*ob;
 	t_ftlist_node	*node;
 
-	prl = e->obs + i;
 	node = prl->next;
 	while (node != ftl_cend(prl))
 	{
@@ -43,7 +41,7 @@ void			sp_update_obs(t_env *e)
 	{
 		if (e->obs[i].size == 0)
 			continue ;
-		update_prog_obs(e, i);
+		update_prog_obs(e, e->obs + i);
 	}
 	return ;
 }

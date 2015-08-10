@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/30 15:25:51 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/30 15:30:14 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/10 14:24:04 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void			sp_update_movements(t_env *e)
 			e->cangles[1] = -CAMERA_POSBOUNDF;
 		e->view = m4_lookat(ATOV3(e->cpos.x, e->cpos.y, e->cpos.z),
 							v3_add(ATOV3(e->cpos.x, e->cpos.y, e->cpos.z),
-								   v3_frontnormed(e->cangles)));
+									v3_frontnormed(e->cangles)));
 		e->viewproj = m4_dotprod(&e->projection, &e->view);
 	}
 	return ;
