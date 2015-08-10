@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/28 11:02:28 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/09 14:20:38 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/10 13:29:35 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,18 +41,19 @@ static int		gen_attribs(t_vshader const *vs, size_t vert_width)
 
 	i = 0;
 	delta = NULL;
-	lprintf("    Defining locations: ");
+	qprintf("    Locations:  ");
 	while (i < vs->n_locations)
 	{
-		lprintf("    ->%-3s i=%02u; sz=%02u; wid=%02u, dt=%02u",
-				g_locations_str[vs->locations[i].type],
-			i, vs->locations[i].size, vert_width, delta);
+		qprintf("\"%-3s\":%u,%u,%02u,%02u   ",
+				g_locations_str[vs->locations[i].type], i,
+				vs->locations[i].size, vert_width, delta);
 		glVertexAttribPointer(i, vs->locations[i].size, GL_FLOAT, GL_FALSE
 								, vert_width, delta);
 		glEnableVertexAttribArray(i);
 		delta += vs->locations[i].size * sizeof(GLfloat);
 		i++;
 	}
+	qprintf("\n");
 	return (0);
 }
 
@@ -73,13 +74,12 @@ static void		handle_buffers(t_env const *e, t_mesh *me,
 	(void)e;
 }
 
-int				op_new_mesh(t_env const *e, t_mesh *me)
+int				sp_new_mesh(t_env const *e, t_mesh *me)
 {
 	t_program const		*p = &e->programs[me->program];
 	size_t const		vert_width = mesh_width(VSOFP(e, p)) * sizeof(float);
 	size_t const		elem_width = 3 * sizeof(t_ui);
 
-	lprintf("\033[32mGenerating mesh...\033[0m");
 	lprintf("    vert_width(%u), elem_width(%u) :", vert_width, elem_width);
 	if (ftv_init_instance(&me->vertices, vert_width))
 		sp_enomem();
@@ -97,6 +97,5 @@ int				op_new_mesh(t_env const *e, t_mesh *me)
 		me->handles[0], me->handles[1], me->handles[2]);
 	gen_attribs(VSOFP(e, p), vert_width);
 	glBindVertexArray(0);
-	lprintf("\033[32m...done\033[0m");
 	return (0);
 }
