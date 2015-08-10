@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/15 08:49:22 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/24 13:50:45 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/10 14:08:31 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 # include "ft_vector.h"
 # include "objmodel.h"
 # include <stdio.h>
+
+# define sp_enomem ft_enomem
 
 # define BFSZ 256
 

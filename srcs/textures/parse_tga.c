@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/17 12:00:25 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/28 13:15:57 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/10 14:08:55 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 #include "fterror.h"
 #include "libft.h"
 #include "ft_vector.h"
+
+# define sp_enomem ft_enomem
 
 static int	parse_header(int fd, t_ui dim[2])
 {

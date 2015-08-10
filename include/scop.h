@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 12:07:31 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/10 14:00:15 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/10 14:02:03 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@
 # include "cog_meshfill.h"
 # include "fterror.h"
 # include "objmodel.h"
+
+# define sp_enomem ft_enomem	// to fix at home
 
 /*
 ** DEBUG
