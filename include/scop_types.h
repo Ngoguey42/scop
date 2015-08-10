@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 10:07:19 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/10 12:17:45 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/10 17:31:03 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,10 +137,10 @@ typedef struct					s_model
 typedef struct					s_ob
 {
 	t_ftlist_node				list;
-	t_bool						hidden:1;
-	t_bool						moved:1;
-	t_bool						delete:1;
-	t_model_index				model:5;
+	t_bool						hidden;
+	t_bool						moved;
+	t_bool						delete;
+	t_model_index				model;
 	t_vector3					position;
 	t_vector3					rotation;
 	t_vector3					scale;

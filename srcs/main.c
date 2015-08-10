@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 12:08:19 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/09 17:57:31 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/10 17:47:05 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ int				main(void)
 		return (ERROR("Env allocation failed"), 1);
 	if (begin(e))
 		return (1);
+	/* return (0); */
 	loop(e);
 	end(e);
 	free(e);
