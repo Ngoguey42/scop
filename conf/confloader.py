@@ -1,17 +1,17 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    scop_confloader.py                                 :+:      :+:    :+:    #
+#    confloader.py                                      :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2015/08/08 11:56:11 by ngoguey           #+#    #+#              #
-#    Updated: 2015/08/09 16:49:25 by ngoguey          ###   ########.fr        #
+#    Created: 2015/08/10 13:13:20 by ngoguey           #+#    #+#              #
+#    Updated: 2015/08/10 13:13:24 by ngoguey          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 import cog
-from scop_conf import *
+from conf import *
 
 cstructs1 = [vshaders, fshaders, gshaders, programs]
 cstructs2 = [textures, meshes, models]
@@ -29,7 +29,7 @@ def output_enums():
 
 def output_meshfill_prototypes():        
 	for mesh in meshes:
-		output_doth_indent_2str("int", "sp_meshfill_" + mesh.name
+		output_proto_indent_2str("int", "sp_meshfill_" + mesh.name
                 + "(t_env const *e, t_mesh *me, t_vbo_basic *vbo);")
 
 def output_cconf1():

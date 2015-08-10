@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/08/08 14:03:56 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/09 14:10:07 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/10 13:14:20 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 **	[[[cog
 **	import cog
 **	cog.outl("*" "/")
-**	from scop_confloader import output_cconf2
+**	from confloader import output_cconf2
 **	output_cconf2()
 **	cog.outl("/" "*")
 **	]]]

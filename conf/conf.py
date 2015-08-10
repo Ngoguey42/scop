@@ -1,16 +1,16 @@
 # **************************************************************************** #
-#																			  #
-#														 :::	  ::::::::	#
-#	scop_conf.py									   :+:	  :+:	:+:	#
-#													 +:+ +:+		 +:+	  #
-#	By: ngoguey <ngoguey@student.42.fr>			+#+  +:+	   +#+		 #
-#												 +#+#+#+#+#+   +#+			#
-#	Created: 2015/08/08 11:56:00 by ngoguey		   #+#	#+#			  #
-#    Updated: 2015/08/10 12:56:17 by ngoguey          ###   ########.fr        #
-#																			  #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    conf.py                                            :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2015/08/10 13:13:01 by ngoguey           #+#    #+#              #
+#    Updated: 2015/08/10 13:13:07 by ngoguey          ###   ########.fr        #
+#                                                                              #
 # **************************************************************************** #
 
-from scop_confclasses import *
+from confclasses import *
 
 vshaders = [
 	# po_to_co fait ceci cela

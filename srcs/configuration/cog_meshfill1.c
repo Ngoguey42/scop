@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/08/08 12:49:25 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/08 12:50:34 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/10 13:14:34 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 **  [[[cog
 **  import cog
 **  cog.outl("*" "/")
-**  from scop_confloader import output_meshfill
+**  from confloader import output_meshfill
 **  output_meshfill(0)
 **  cog.out("/" "*")
 **  ]]]

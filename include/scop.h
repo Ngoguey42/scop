@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 12:07:31 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/10 12:48:53 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/10 13:02:58 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include "ftmath.h"
 # include "scop_conf.h"
 # include "scop_types.h"
-# include "scop_cogconf_meshfill.h"
+# include "cog_meshfill.h"
 # include "fterror.h"
 # include "objmodel.h"
 

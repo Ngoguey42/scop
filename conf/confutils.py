@@ -1,24 +1,33 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    scop_confutils.py                                  :+:      :+:    :+:    #
+#    confutils.py                                       :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2015/08/08 11:56:14 by ngoguey           #+#    #+#              #
-#    Updated: 2015/08/08 12:28:54 by ngoguey          ###   ########.fr        #
+#    Created: 2015/08/10 13:13:28 by ngoguey           #+#    #+#              #
+#    Updated: 2015/08/10 13:13:30 by ngoguey          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 import cog
 import math
 
-DOTH_INDENT_COLUMN = 28
-DOTH_INDENT_TABCOLUMN = DOTH_INDENT_COLUMN / 4
-assert DOTH_INDENT_TABCOLUMN * 4 == DOTH_INDENT_COLUMN
+ENUMS_INDENT_COLUMN = 28
+ENUMS_INDENT_TABCOLUMN = ENUMS_INDENT_COLUMN / 4
+assert ENUMS_INDENT_TABCOLUMN * 4 == ENUMS_INDENT_COLUMN
 
-def output_doth_indent_2str(lhs, rhs):
-	num_tabs = DOTH_INDENT_TABCOLUMN - int(math.floor(float(len(lhs)) / 4.))
+def output_enums_indent_2str(lhs, rhs):
+	num_tabs = ENUMS_INDENT_TABCOLUMN - int(math.floor(float(len(lhs)) / 4.))
+	assert num_tabs > 0
+	cog.outl(lhs + ('\t' * num_tabs) + rhs)
+
+PROTO_INDENT_COLUMN = 8
+PROTO_INDENT_TABCOLUMN = PROTO_INDENT_COLUMN / 4
+assert PROTO_INDENT_TABCOLUMN * 4 == PROTO_INDENT_COLUMN
+
+def output_proto_indent_2str(lhs, rhs):
+	num_tabs = PROTO_INDENT_TABCOLUMN - int(math.floor(float(len(lhs)) / 4.))
 	assert num_tabs > 0
 	cog.outl(lhs + ('\t' * num_tabs) + rhs)
 

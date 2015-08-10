@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   scop_cogconf_enums.h                               :+:      :+:    :+:   */
+/*   cog_enums.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/08/08 12:37:33 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/08 12:38:04 by ngoguey          ###   ########.fr       */
+/*   Created: 2015/08/10 13:02:15 by ngoguey           #+#    #+#             */
+/*   Updated: 2015/08/10 13:15:15 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 **  [[[cog
 **  import cog
 **  cog.outl("*" "/")
-**  from scop_confloader import output_enums
+**  from confloader import output_enums
 **  output_enums()
 **  cog.out("/" "*")
 **  ]]]

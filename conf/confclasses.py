@@ -1,17 +1,17 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    scop_confclasses.py                                :+:      :+:    :+:    #
+#    confclasses.py                                     :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2015/08/08 11:56:07 by ngoguey           #+#    #+#              #
-#    Updated: 2015/08/09 16:48:59 by ngoguey          ###   ########.fr        #
+#    Created: 2015/08/10 13:13:13 by ngoguey           #+#    #+#              #
+#    Updated: 2015/08/10 13:13:16 by ngoguey          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 import cog
-from scop_confutils import *
+from confutils import *
 
 class Cstruct:
 	def __init__(self):
@@ -41,11 +41,11 @@ class Vshader(Cstruct):
 		self.locations = args
 	@staticmethod
 	def output_enum_start():
-		output_doth_indent_2str("typedef enum", "e_vshader_index\n{")
+		output_enums_indent_2str("typedef enum", "e_vshader_index\n{")
 	@staticmethod
 	def output_enum_end():
 		cog.outl("\t" + "sp_" + "num" + "_vshaders")
-		output_doth_indent_2str("}", "t_vshader_index;")
+		output_enums_indent_2str("}", "t_vshader_index;")
 	def output_enum_line(self):
 		cog.outl("\t" + "sp_" + self.name + "_vshader,")
 	@staticmethod
@@ -70,11 +70,11 @@ class Fshader(Cstruct):
 		self.unif_funname = unif_funname
 	@staticmethod
 	def output_enum_start():
-		output_doth_indent_2str("typedef enum", "e_fshader_index\n{")
+		output_enums_indent_2str("typedef enum", "e_fshader_index\n{")
 	@staticmethod
 	def output_enum_end():
 		cog.outl("\t" + "sp_" + "num" + "_fshaders")
-		output_doth_indent_2str("}", "t_fshader_index;")
+		output_enums_indent_2str("}", "t_fshader_index;")
 	def output_enum_line(self):
 		cog.outl("\t" + "sp_" + self.name + "_fshader,")
 	@staticmethod
@@ -97,12 +97,12 @@ class Gshader(Cstruct):
 		self.unif_funname = unif_funname
 	@staticmethod
 	def output_enum_start():
-		output_doth_indent_2str("typedef enum", "e_gshader_index\n{")
+		output_enums_indent_2str("typedef enum", "e_gshader_index\n{")
 	@staticmethod
 	def output_enum_end():
 		cog.outl("\t" + "sp_" + "num" + "_gshaders,")
 		cog.outl("\t" + "sp_" + "no" + "_gshader")
-		output_doth_indent_2str("}", "t_gshader_index;")
+		output_enums_indent_2str("}", "t_gshader_index;")
 	def output_enum_line(self):
 		cog.outl("\t" + "sp_" + self.name + "_gshader,")
 	@staticmethod
@@ -126,11 +126,11 @@ class Program(Cstruct):
 		self.gsname = gsname
 	@staticmethod
 	def output_enum_start():
-		output_doth_indent_2str("typedef enum", "e_program_index\n{")
+		output_enums_indent_2str("typedef enum", "e_program_index\n{")
 	@staticmethod
 	def output_enum_end():
 		cog.outl("\t" + "sp_" + "num" + "_programs")
-		output_doth_indent_2str("}", "t_program_index;")
+		output_enums_indent_2str("}", "t_program_index;")
 	def output_enum_line(self):
 		cog.outl("\t" + "sp_" + self.name + "_program,")
 	@staticmethod
@@ -150,12 +150,12 @@ class Texture(Cstruct):
 		self.filename = filename
 	@staticmethod
 	def output_enum_start():
-		output_doth_indent_2str("typedef enum", "e_texture_index\n{")
+		output_enums_indent_2str("typedef enum", "e_texture_index\n{")
 	@staticmethod
 	def output_enum_end():
 		cog.outl("\t" + "sp_" + "num" + "_textures,")
 		cog.outl("\t" + "sp_" + "no" + "_texture")
-		output_doth_indent_2str("}", "t_texture_index;")
+		output_enums_indent_2str("}", "t_texture_index;")
 	def output_enum_line(self):
 		cog.outl("\t" + "sp_" + self.name + "_texture,")
 	@staticmethod
@@ -178,11 +178,11 @@ class Mesh(Cstruct):
 		Mesh.g_index += 1
 	@staticmethod
 	def output_enum_start():
-		output_doth_indent_2str("typedef enum", "e_mesh_index\n{")
+		output_enums_indent_2str("typedef enum", "e_mesh_index\n{")
 	@staticmethod
 	def output_enum_end():
 		cog.outl("\t" + "sp_" + "num" + "_meshes")
-		output_doth_indent_2str("}", "t_mesh_index;")
+		output_enums_indent_2str("}", "t_mesh_index;")
 	def output_enum_line(self):
 		cog.outl("\t" + "sp_" + self.name + "_mesh,")
 	@staticmethod
@@ -208,11 +208,11 @@ class Model(Cstruct):
 		self.unif_funname = unif_funname
 	@staticmethod
 	def output_enum_start():
-		output_doth_indent_2str("typedef enum", "e_model_index\n{")
+		output_enums_indent_2str("typedef enum", "e_model_index\n{")
 	@staticmethod
 	def output_enum_end():
 		cog.outl("\t" + "sp_" + "num" + "_models")
-		output_doth_indent_2str("}", "t_model_index;")
+		output_enums_indent_2str("}", "t_model_index;")
 	def output_enum_line(self):
 		cog.outl("\t" + "sp_" + self.name + "_model,")
 	@staticmethod

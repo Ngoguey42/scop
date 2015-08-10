@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 10:33:54 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/08 12:39:13 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/10 13:02:46 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "libft.h"
 # include "ftmath.h"
+# include "cog_enums.h"
 
 # define SHD_PATH(FILENAME) ("srcs/shaders/" FILENAME)
 # define VSHD_PATH(FILENAME) (SHD_PATH("vshaders/" FILENAME))
@@ -62,7 +63,5 @@
 # define SUN_ASPEED (3.f)
 
 # define LAND_SIDEHALFF (LAND_SIDEF / 2.f)
-
-# include "scop_cogconf_enums.h"
 
 #endif
