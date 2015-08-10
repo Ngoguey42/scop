@@ -1,13 +1,13 @@
 # **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    scop_conf.py                                       :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2015/08/08 11:56:00 by ngoguey           #+#    #+#              #
-#    Updated: 2015/08/09 18:10:25 by ngoguey          ###   ########.fr        #
-#                                                                              #
+#																			  #
+#														 :::	  ::::::::	#
+#	scop_conf.py									   :+:	  :+:	:+:	#
+#													 +:+ +:+		 +:+	  #
+#	By: ngoguey <ngoguey@student.42.fr>			+#+  +:+	   +#+		 #
+#												 +#+#+#+#+#+   +#+			#
+#	Created: 2015/08/08 11:56:00 by ngoguey		   #+#	#+#			  #
+#    Updated: 2015/08/10 12:56:17 by ngoguey          ###   ########.fr        #
+#																			  #
 # **************************************************************************** #
 
 from scop_confclasses import *
@@ -15,31 +15,31 @@ from scop_confclasses import *
 vshaders = [
 	# po_to_co fait ceci cela
 	Vshader("po_to_co", "po_to_co.vert", "viewproj2",
-		("pos", 3), ),
+	("pos", 3), ),
 
 	# pocote_to_couv fait ceci cela
 	Vshader("pocote_to_couv", "pocote_to_couv.vert", "viewproj2",
-		("pos", 3), ("col", 3), ("tex", 2), ),
+	("pos", 3), ("col", 3), ("tex", 2), ),
 
 	# pote_to_couv fait ceci cela
 	Vshader("pote_to_couv", "pote_to_couv.vert", "viewproj2",
-		("pos", 3), ("tex", 2), ),
+	("pos", 3), ("tex", 2), ),
 
 	# poco_to_co fait ceci cela
 	Vshader("poco_to_co", "poco_to_co.vert", "viewproj",
-		("pos", 3), ("col", 3), ),
+	("pos", 3), ("col", 3), ),
 
 	# poteno_to_uv fait ceci cela
 	Vshader("poteno_to_uv", "poteno_to_uv.vert", "viewproj",
-		("pos", 3), ("tex", 2), ("nor", 3), ),
+	("pos", 3), ("tex", 2), ("nor", 3), ),
 
 	# pocono_to_co fait ceci cela
 	Vshader("pocono_to_co", "pocono_to_co.vert", "viewproj",
-		("pos", 3), ("col", 3), ("nor", 3), ),
+	("pos", 3), ("col", 3), ("nor", 3), ),
 
 	# po_to_noop fait ceci cela
 	Vshader("po_to_noop", "po_to_noop.vert", "viewproj",
-		("pos", 3), ),
+	("pos", 3), ),
 ]
 fshaders = [
 	# co_identity fait ceci cela
@@ -90,61 +90,61 @@ textures = [
 meshes = [
 	# plane fait ceci cela
 	Mesh("plane", "ptn", "GL_STATIC_DRAW","""{
-	t_objmodel	m[1];
+	t_objmodel     		m[1];
+	t_texture const *const	t = e->textures + sp_porcelain_texture;
 
 	/* if (op_parse_obj(m, "res/cessna.obj")) */
 	/* if (op_parse_obj(m, "res/teapot.obj")) */
 	if (op_parse_obj(m, "res/teapot2.obj"))
-		return (ERROR("op_parse_obj(m)"), 1);
-        op_retreive_data(m, vbo, &me->faces);
-        sp_calc_uv_plan_oxy(e, me, vbo);
-        sp_calc_normals(e, me, vbo);
+	return (ERROR("op_parse_obj(m)"), 1);
+	op_retreive_data(m, vbo, &me->faces);
+	sp_calc_uv_plan_oxy(e, vbo, (float)t->dim[0] / (float)t->dim[1], 1.f);
+	sp_calc_normals(e, me, vbo);
 	sp_clean_objmodel(m);
 	return (0);\n\t(void)e;\n\t(void)me;\n}"""),
 
-	# # square fait ceci cela
-	# Mesh("square", "pcn", "GL_STATIC_DRAW","""{
-        # /*
-	# t_ftvector		vert[1];
+	# square fait ceci cela
+	Mesh("square", "pcn", "GL_STATIC_DRAW","""{
+	t_vertex_basic  vertices[] = {
 
-	# GLfloat vertices[] = {
-	# 	 0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f,  // Top Right
-	# 	 0.5f, -0.5f, 2.0f,   0.0f, 1.0f, 0.0f,  // Bottom Right
-	# 	-0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 1.0f,  // Bottom Left
-	# 	-0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 0.0f,  // Top Left
-	# };
-	# GLuint indices[] = {  // Note that we start from 0!
-	# 	0, 1, 3,  // First Triangle
-	# 	1, 2, 3   // Second Triangle
-	# };
-	# (void)ftv_init_instance(vert, sizeof(float) * 6);
-	# (void)ftv_insert_range(vert, vertices, 4);
-	# (void)ftv_insert_range(&me->faces, indices, 2);
-	# sp_inject_normals(vert, &me->faces);
-	# memcpy(&me->vertices, vert, sizeof(t_ftvector));
-        # */
-	# return (0);\n\t(void)e;\n\t(void)me;\n}"""),
+	BVERT_POSCOL( 0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f),  // Top Right
+	BVERT_POSCOL(0.5f, -0.5f, 2.0f,   0.0f, 1.0f, 0.0f),  // Bottom Right
+	BVERT_POSCOL(-0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 1.0f),  // Bottom Left
+	BVERT_POSCOL(-0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 0.0f),  // Top Left
+        };
+	GLuint indices[] = {  // Note that we start from 0!
+		3, 1, 0,  // First Triangle
+		3, 2, 1   // Second Triangle
+	};
+	vbo->npos = 3;
+	vbo->ncol = 3;
+	(void)ftv_insert_range(
+	&vbo->vertices, vertices, sizeof(vertices) / sizeof(*vertices));
+	(void)ftv_insert_range(
+	&me->faces, indices, sizeof(indices) / sizeof(*indices) / 3);
+        sp_calc_normals(e, me, vbo);        
+	return (0);\n\t(void)e;\n\t(void)me;\n}"""),
 
 	# land fait ceci cela
 	Mesh("land", "land", "GL_STATIC_DRAW","""{
-	t_ftvector		lines[1];
+	t_ftvector	lines[1];
 	size_t const	line_points = (int)pow(2., (double)POINTS_DEPTHI);
-	float			bounds[2];
+	float		bounds[2];
 
 	if (ftv_init_instance(lines, sizeof(float) * line_points))
-		sp_enomem();
+	sp_enomem();
 	if (ftv_insert_count(lines, lines->data, line_points))
-		sp_enomem();
+	sp_enomem();
 	sp_fill_landgrid(lines);
  	if (ftv_reserve(&vbo->vertices, lines->size * lines->size))
-		sp_enomem();
+	sp_enomem();
 	sp_fill_landvertices(lines, vbo, bounds);
 	if (ftv_reserve(&me->faces, (lines->size - 1) * (lines->size - 1) * 2))
-		sp_enomem();
+	sp_enomem();
 	sp_fill_landfaces(lines, &me->faces);
 	sp_fill_landrgb(vbo, bounds);
 	ftv_release(lines, NULL);
-        sp_calc_normals(e, me, vbo);
+		sp_calc_normals(e, me, vbo);
 	return (0);\n\t(void)e;\n\t(void)me;\n}"""),
 
 	# ptn fait ceci cela
@@ -152,43 +152,43 @@ meshes = [
 	t_objmodel	m[1];
 
 	if (op_parse_obj(m, "res/alfa147.obj"))
-		return (ERROR("op_parse_obj(m)"), 1);
-        op_retreive_data(m, vbo, &me->faces);
+	return (ERROR("op_parse_obj(m)"), 1);
+		op_retreive_data(m, vbo, &me->faces);
 	sp_clean_objmodel(m);
 	return (0);\n\t(void)e;\n\t(void)me;\n}"""),
 
 	# sun fait ceci cela
 	Mesh("sun", "sun", "GL_STATIC_DRAW","""{
 	t_vertex_basic	vertices[8] = {
-		BVERT_POS(-1.0f, 1.0f, -1.0f),
-		BVERT_POS(-1.0f, -1.0f, -1.0f),
-		BVERT_POS(-1.0f, 1.0f, 1.0f),
-		BVERT_POS(-1.0f, -1.0f, 1.0f),
-		BVERT_POS(1.0f, 1.0f, 1.0f),
-		BVERT_POS(1.0f, -1.0f, 1.0f),
-		BVERT_POS(1.0f, 1.0f, -1.0f),
-		BVERT_POS(1.0f, -1.0f, -1.0f)
+	BVERT_POS(-1.0f, 1.0f, -1.0f),
+	BVERT_POS(-1.0f, -1.0f, -1.0f),
+	BVERT_POS(-1.0f, 1.0f, 1.0f),
+	BVERT_POS(-1.0f, -1.0f, 1.0f),
+	BVERT_POS(1.0f, 1.0f, 1.0f),
+	BVERT_POS(1.0f, -1.0f, 1.0f),
+	BVERT_POS(1.0f, 1.0f, -1.0f),
+	BVERT_POS(1.0f, -1.0f, -1.0f)
 	};
 	GLuint indices[36] = {
-		0,1,2,2,1,3,
-		4,5,6,6,5,7,
-		3,1,5,5,1,7,
-		0,2,6,6,2,4,
-		6,7,0,0,7,1,
-		2,3,4,4,3,5
+	0,1,2,2,1,3,
+	4,5,6,6,5,7,
+	3,1,5,5,1,7,
+	0,2,6,6,2,4,
+	6,7,0,0,7,1,
+	2,3,4,4,3,5
 	};
-        vbo->npos = 3;
+	vbo->npos = 3;
 	(void)ftv_insert_range(
-		&vbo->vertices, vertices, sizeof(vertices) / sizeof(*vertices));
+	&vbo->vertices, vertices, sizeof(vertices) / sizeof(*vertices));
 	(void)ftv_insert_range(
-		&me->faces, indices, sizeof(indices) / sizeof(*indices) / 3);
+	&me->faces, indices, sizeof(indices) / sizeof(*indices) / 3);
 	return (0);\n\t(void)e;\n\t(void)me;\n}"""),
 ]
 models = [
 	# plane fait ceci cela
 	Model("plane", "plane", "porcelain", "model"),
-	# # square fait ceci cela
-	# Model("square", "square", "no", "model"),
+	# square fait ceci cela
+	Model("square", "square", "no", "model"),
 	# land fait ceci cela
 	Model("land", "land", "no", "model"),
 	# ptn fait ceci cela

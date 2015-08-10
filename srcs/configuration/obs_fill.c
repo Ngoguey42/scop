@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/22 13:44:32 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/09 18:02:24 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/10 12:56:50 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,14 @@ int			sp_fill_obs(t_env *e)
 		*ob = default_ob(sp_plane_model);
 		push_ob(e, ob);
 	}
-	/* { */
-	/* 	t_ob    ob[1]; */
+	{
+		t_ob    ob[1];
 
-	/* 	*ob = default_ob(sp_square_model); */
-	/* 	ob->scale = ATOV3(4.f, 4.f, 4.f); */
-	/* 	ob->position = ATOV3(0.f, -5.f, 2.f); */
-	/* 	push_ob(e, ob); */
-	/* } */
+		*ob = default_ob(sp_square_model);
+		ob->scale = ATOV3(4.f, 4.f, 4.f);
+		ob->position = ATOV3(0.f, -5.f, 2.f);
+		push_ob(e, ob);
+	}
 	{
 		t_ob    ob[1];
 

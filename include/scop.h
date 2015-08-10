@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 12:07:31 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/09 18:10:35 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/10 12:48:53 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,8 +94,8 @@ int			sp_fill_mesh(t_env const *e, t_mesh *me);
 
 void        sp_calc_normals(t_env const *e, t_mesh const *me
 							, t_vbo_basic *vbo);
-void        sp_calc_uv_plan_oxy(t_env const *e, t_mesh const *me
-								, t_vbo_basic *vbo);
+void        sp_calc_uv_plan_oxy(t_env const *e, t_vbo_basic *vbo
+								, float imgratio, float scale);
 
 /*
 ** LAND GENERATION

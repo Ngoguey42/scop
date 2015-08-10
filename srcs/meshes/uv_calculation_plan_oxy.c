@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/28 11:41:25 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/09 18:29:05 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/10 12:49:05 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,21 +103,17 @@ static void	fill(t_ftvector *v, float const factoffset[4])
 	return ;
 }
 
-void		sp_calc_uv_plan_oxy(t_env const *e, t_mesh const *me
-								, t_vbo_basic *vbo)
+void		sp_calc_uv_plan_oxy(t_env const *e, t_vbo_basic *vbo
+								, float imgratio, float scale)
 {
 	float			bounds[4];
 	float			factoffset[4];
-	t_texture const	*t = e->textures + sp_porcelain_texture;
-	float const		scale = 1.f;
 
 	lprintf("    Creating some UV coords with plan oxy");
 	calc_bounds(&vbo->vertices, bounds, bounds + 2);
-	calc_fact_and_offset(bounds, factoffset
-					, (float)t->dim[0] / (float)t->dim[1], scale);
+	calc_fact_and_offset(bounds, factoffset, imgratio, scale);
 	fill(&vbo->vertices, factoffset);
 	vbo->ntex = 2;
 	return ;
 	(void)e;
-	(void)me;
 }
