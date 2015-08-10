@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 10:07:19 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/09 14:08:00 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/10 12:17:45 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include "ft_vector.h"
 # include "ft_list.h"
 # include "scop_conf.h"
-# include "vertex.h"
+# include "vbo.h"
 
 /*
 ** KEYS

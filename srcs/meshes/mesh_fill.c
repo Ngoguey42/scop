@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/08/09 14:15:56 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/09 18:27:58 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/10 12:24:36 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,68 +15,73 @@
 
 #define NORM_AT_42_IS_WTF(E, ME, RVBO) (ME)->fill((E), (ME), (RVBO))
 
-static t_locations_backup_fill const	g_backup_fill[] = {
-	{offsetof(t_vbo_basic, npos), NULL},
-	{offsetof(t_vbo_basic, ncol), NULL},
-	{offsetof(t_vbo_basic, ntex), NULL},
-	{offsetof(t_vbo_basic, nnor), NULL},
+static t_byte const		g_offsets[][2] = {
+	{offsetof(t_vertex_basic, pos), offsetof(t_vbo_basic, npos)},
+	{offsetof(t_vertex_basic, col), offsetof(t_vbo_basic, ncol)},
+	{offsetof(t_vertex_basic, tex), offsetof(t_vbo_basic, ntex)},
+	{offsetof(t_vertex_basic, nor), offsetof(t_vbo_basic, nnor)}
 };
 
-#define TAB_SIZE (sizeof(g_vbo_basic_offsets) / sizeof(*g_vbo_basic_offsets))
-
-static int		fill_gab(t_env const *e, t_mesh const *me
-							, t_vbo_basic raw_vbo[1])
+static int		validate_vbo(t_vbo_basic const *const vbo
+								, t_vshader const *const vs)
 {
-	t_vshader const *const	vshader = VSOFME(e, me);
-	t_location const		*loc = vshader->locations;
-	t_location const *const	locend = loc + vshader->n_locations;
-	t_byte					s_cur;
-	t_byte					s_wished;
+	t_location const			*loc;
+	t_location const *const		end = vs->locations + vs->n_locations;
+	int							error;
+	t_byte						num_elt;
 
-	while (loc < locend)
+	loc = vs->locations;
+	error = 0;
+	while (loc < end)
 	{
-		s_cur = *(t_byte*)((void*)raw_vbo + g_backup_fill[loc->type].noff);
-		s_wished = loc->size;
-		if (s_cur != s_wished)
-			ERRORF("s_cur == %hhu/%hhu", s_cur, s_wished);
+		num_elt = *REACH_OFFSET(t_byte, vbo, g_offsets[loc->type][1]);
+		if (num_elt != loc->size)
+		{
+			error = 1;
+			ERRORF("Location not filled: %hhu/%hhu", num_elt, loc->size);
+		}
 		loc++;
 	}
-	return (0);
+	return (error);
 }
 
-static void		shrink_vbo(t_ftvector *const dst, t_vbo_basic const *const srcb)
+static void		build_vertex(float tmp[], t_vbo_basic const *const vbo
+								, t_vertex_basic const *const vert)
 {
-	t_ftvector const *const			srcv = &srcb->vertices;
-	t_vertex_basic const			*src = srcv->data;
-	t_vertex_basic const *const		srcend = ftv_end(srcv);
-	float							tmp[dst->chunk_size / sizeof(float)];
-	float							*tmpptr;
+	t_byte const			*offsets;
+	t_byte const *const		end = END_ARRAY(g_offsets);
+	float					*tmpptr;
+	t_byte					num_elt;
 
+	offsets = (const t_byte*)g_offsets;
+	tmpptr = tmp;
+	while (offsets < end)
+	{
+		num_elt = *REACH_OFFSET(t_byte, vbo, offsets[1]);
+		if (num_elt > 0)
+		{
+			memcpy(tmpptr, REACH_OFFSET(void, vert, offsets[0])
+						, num_elt * sizeof(float));
+			tmpptr += num_elt;
+		}
+		offsets = (void*)offsets + STRIDE_ARRAY(g_offsets);
+	}
+	return ;
+}
+
+static void		shrink_vbo(t_ftvector *const dst, t_vbo_basic const *const vbo)
+{
+	t_ftvector const *const			srcv = &vbo->vertices;
+	t_vertex_basic const			*src;
+	t_vertex_basic const *const		end = ftv_end(srcv);
+	float							tmp[dst->chunk_size / sizeof(float)];
+
+	src = srcv->data;
 	if (ftv_reserve(dst, srcv->size))
 		sp_enomem();
-	while (src < srcend)
+	while (src < end)
 	{
-		tmpptr = tmp;
-		if (srcb->npos > 0)
-		{
-			memcpy(tmpptr, &src->pos, srcb->npos * sizeof(float));
-			tmpptr += srcb->npos;
-		}
-		if (srcb->ncol > 0)
-		{
-			memcpy(tmpptr, &src->col, srcb->ncol * sizeof(float));
-			tmpptr += srcb->ncol;
-		}
-		if (srcb->ntex > 0)
-		{
-			memcpy(tmpptr, &src->tex, srcb->ntex * sizeof(float));
-			tmpptr += srcb->ntex;
-		}
-		if (srcb->nnor > 0)
-		{
-			memcpy(tmpptr, &src->nor, srcb->nnor * sizeof(float));
-			tmpptr += srcb->nnor;
-		}
+		build_vertex(tmp, vbo, src);
 		ftv_push_back_unsafe(dst, tmp);
 		src++;
 	}
@@ -91,7 +96,8 @@ int				sp_fill_mesh(t_env const *e, t_mesh *me)
 	ftv_init_instance(&raw_vbo->vertices, sizeof(t_vertex_basic));
 	if (NORM_AT_42_IS_WTF(e, me, raw_vbo))
 		return (ERROR("me->fill(e, me)"), 1);
-	fill_gab(e, me, raw_vbo);
+	if (validate_vbo(raw_vbo, VSOFME(e, me)))
+		return (ERROR("validate_vbo(...)"), 1);
 	shrink_vbo(&me->vertices, raw_vbo);
 	ftv_release(&raw_vbo->vertices, NULL);
 	return (0);

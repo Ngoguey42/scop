@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 16:15:35 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/09 16:42:13 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/10 12:18:03 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define OBJMODEL_H
 
 # include "ft_vector.h"
-# include "vertex.h"
+# include "vbo.h"
 
 typedef struct  s_objmodel
 {
