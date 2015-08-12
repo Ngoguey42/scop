@@ -6,11 +6,12 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/28 11:41:25 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/10 12:49:05 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/12 18:50:12 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <string.h>
+#include <math.h>
 #include <assert.h>
 #include "scop.h"
 
@@ -88,6 +89,14 @@ static void	calc_bounds(t_ftvector const *const v, float bx[2], float by[2])
 	return ;
 }
 
+static float	process_angle(float a)
+{
+	if (a < 0)
+		return (-a);
+	return (a);
+}
+
+
 static void	fill(t_ftvector *v, float const factoffset[4])
 {
 	t_vertex_basic				*vertex;
@@ -96,8 +105,14 @@ static void	fill(t_ftvector *v, float const factoffset[4])
 	vertex = v->data;
 	while (vertex < vertexend)
 	{
-		vertex->tex.u = vertex->pos.x * factoffset[0] + factoffset[2];
-		vertex->tex.v = vertex->pos.y * factoffset[1] + factoffset[3];
+		vertex->tex.u = process_angle(atan(vertex->pos.x / vertex->pos.z))
+			* factoffset[0] + factoffset[2];
+		/* vertex->tex.u = vertex->pos.x * factoffset[0] + factoffset[2]; */
+		vertex->tex.v = acos(vertex->pos.y / sqrt(
+								 vertex->pos.x * vertex->pos.x
+								 + vertex->pos.y * vertex->pos.y
+								 + vertex->pos.z * vertex->pos.z)) * 0.75
+			* factoffset[1] + factoffset[3];
 		vertex++;
 	}
 	return ;
