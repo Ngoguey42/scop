@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/15 08:49:22 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/10 14:08:31 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/12 14:54:29 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,15 @@ typedef struct	s_token
 	size_t		len;
 	int			(*fun)();
 }				t_token;
+
+# define SETNODE t_ftset_node
+
+typedef struct	s_tmpface
+{
+	SETNODE		*ptr[3];
+}				t_tmpface;
+
+#undef SETNODE
 
 int				op_match_f(t_objmodel *m, char const *buf);
 int				op_match_v(t_objmodel *m, char const *buf);

@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/08/09 14:15:56 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/10 12:24:36 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/12 14:57:44 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,9 +93,12 @@ int				sp_fill_mesh(t_env const *e, t_mesh *me)
 	t_vbo_basic		raw_vbo[1];
 
 	bzero(raw_vbo, sizeof(t_vbo_basic));
-	ftv_init_instance(&raw_vbo->vertices, sizeof(t_vertex_basic));
+	if (ftv_init_instance(&raw_vbo->vertices, sizeof(t_vertex_basic)))
+		ft_enomem();
+	T;
 	if (NORM_AT_42_IS_WTF(e, me, raw_vbo))
 		return (ERROR("me->fill(e, me)"), 1);
+	T;
 	if (validate_vbo(raw_vbo, VSOFME(e, me)))
 		return (ERROR("validate_vbo(...)"), 1);
 	shrink_vbo(&me->vertices, raw_vbo);

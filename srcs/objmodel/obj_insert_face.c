@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/23 11:05:53 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/08 10:56:33 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/12 15:23:53 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <string.h>
 #include "objmodel_parsing.h"
 
-#define PLAN(I) (((float*)(m->coords.data)) + (3 * (I)))
+#define POS(I) (((float*)(m->coords.data)) + 3 * (I))
 #define TEXTURE(I) (((float*)m->textures.data) + 2 * (I))
 #define NORMAL(I) (((float*)m->normals.data) + 3 * (I))
 
@@ -34,26 +34,19 @@
 **		UGLY LVL 9000
 */
 
-static size_t	gen_vertex_index(t_objmodel *m, float const *vertex)
+static t_ftset_node	*gen_vertex_index(t_objmodel *m, t_ftset_node const * buf)
 {
-	int		i;
+	t_ftset_insertion	result[1];
 
-	i = -1;
-	if (m->width != 8 && m->width != 6)
-		i = ftv_find_index(&m->vertices, vertex);
-	if (i < 0)
-	{
-		i = (int)m->vertices.size;
-		if (ftv_push_back(&m->vertices, vertex))
-			sp_enomem();
-	}
-	return (i);
+	if (fts_insert(&m->vertices, buf, result))
+		sp_enomem();
+	return (result->ptr);
 }
 
-static void		build_vertex(t_objmodel const *m, float vert[8],
+static void			build_vertex(t_objmodel const *m, float *vert,
 							t_ui const indices[3])
 {
-	memcpy(vert, PLAN(indices[0]), sizeof(float) * 3);
+	memcpy(vert, POS(indices[0]), sizeof(float) * 3);
 	if (m->width == 5)
 	{
 		memcpy(vert + 3, TEXTURE(indices[1]), sizeof(float) * 2);
@@ -70,17 +63,19 @@ static void		build_vertex(t_objmodel const *m, float vert[8],
 	return ;
 }
 
-void			op_insert_face(t_objmodel *m, t_ui const oldind[9])
+void				op_insert_face(t_objmodel *m, t_ui const oldind[9])
 {
-	unsigned int	newindices[3];
-	float			vert[8];
+	t_tmpface	newindices[1];
+	t_byte		buf[sizeof(t_ftset_node) + sizeof(float) * 8 + sizeof(t_ui)];
+	float		*vert;
 
+	vert = (void*)&buf + sizeof(t_ftset_node);
 	build_vertex(m, vert, oldind);
-	newindices[0] = gen_vertex_index(m, vert);
+	newindices->ptr[0] = gen_vertex_index(m, (t_ftset_node*)buf);
 	build_vertex(m, vert, oldind + 3);
-	newindices[1] = gen_vertex_index(m, vert);
+	newindices->ptr[1] = gen_vertex_index(m, (t_ftset_node*)buf);
 	build_vertex(m, vert, oldind + 6);
-	newindices[2] = gen_vertex_index(m, vert);
+	newindices->ptr[2] = gen_vertex_index(m, (t_ftset_node*)buf);
 	if (ftv_push_back(&m->faces, newindices))
 		sp_enomem();
 	return ;

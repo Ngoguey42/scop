@@ -6,7 +6,7 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/07/30 09:09:23 by ngoguey           #+#    #+#             //
-//   Updated: 2015/08/09 13:29:46 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/08/12 13:08:37 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -22,10 +22,6 @@ out UVNOFP
 	vec3						Normal;
 	vec3						fragPos;
 }								vs_out;
-
-out vec2						texUV;
-out vec3						Normal;
-out vec3						fragPos;
 
 uniform mat4					model;
 uniform mat4					viewproj;
