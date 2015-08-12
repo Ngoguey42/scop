@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 10:07:19 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/10 18:11:39 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/12 17:15:00 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ enum							e_stateindex
 typedef struct					s_vshader
 {
 	char const					filepath[64];
-	void						(*const unif_update)();
+	void						(*unif_update)();
 	size_t const				n_locations;
 	t_location const			locations[4];
 	GLuint						handle;
@@ -72,13 +72,13 @@ typedef struct					s_vshader
 typedef struct					s_fshader
 {
 	char const					filepath[64];
-	void						(*const unif_update)();
+	void						(*unif_update)();
 	GLuint						handle;
 }								t_fshader;
 typedef struct					s_gshader
 {
 	char const					filepath[64];
-	void						(*const unif_update)();
+	void						(*unif_update)();
 	GLuint						handle;
 }								t_gshader;
 
@@ -103,7 +103,7 @@ typedef struct					s_mesh
 {
 	GLenum const				usage;
 	t_program_index const		program;
-	int							(*const fill)();
+	int							(*fill)();
 	t_ftvector					vertices;
 	t_ftvector					faces;
 	GLuint						handles[3];
@@ -161,7 +161,6 @@ typedef enum					e_ob_param
 	ob_vi,
 	ob_num_param,
 }								t_ob_param;
-
 
 /*
 ** ENV

@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/23 11:05:53 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/12 15:23:53 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/12 17:05:13 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@
 **		UGLY LVL 9000
 */
 
-static t_ftset_node	*gen_vertex_index(t_objmodel *m, t_ftset_node const * buf)
+static t_ftset_node	*gen_vertex_index(t_objmodel *m, t_ftset_node const *buf)
 {
 	t_ftset_insertion	result[1];
 

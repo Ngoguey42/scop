@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 12:07:31 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/10 14:02:03 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/12 17:12:15 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,9 +95,9 @@ void		sp_delete_meshes(t_env *e);
 int			sp_new_mesh(t_env const *e, t_mesh *me);
 int			sp_fill_mesh(t_env const *e, t_mesh *me);
 
-void        sp_calc_normals(t_env const *e, t_mesh const *me
+void		sp_calc_normals(t_env const *e, t_mesh const *me
 							, t_vbo_basic *vbo);
-void        sp_calc_uv_plan_oxy(t_env const *e, t_vbo_basic *vbo
+void		sp_calc_uv_plan_oxy(t_env const *e, t_vbo_basic *vbo
 								, float imgratio, float scale);
 
 /*

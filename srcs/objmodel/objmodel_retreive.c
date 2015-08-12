@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   objmodel_swap.c                                    :+:      :+:    :+:   */
+/*   objmodel_retreive.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/08/09 15:05:18 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/12 16:16:34 by ngoguey          ###   ########.fr       */
+/*   Created: 2015/08/12 17:06:35 by ngoguey           #+#    #+#             */
+/*   Updated: 2015/08/12 17:39:30 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,20 +64,10 @@ static void	extract_vertices(t_vertex_basic *dst, void const *src
 	return ;
 }
 
-static void	retreive_vertices(t_objmodel const *const m, t_ftvector *const v)
+void		op_retreive_data(t_objmodel *m, t_vbo_basic *v, t_ftvector *f)
 {
+	size_t		ptrpad;
 	t_ui		nfloats[1];
-
-	*nfloats = (m->vertices.chunk_size - sizeof(t_ui) - sizeof(t_ftset_node))
-				/ sizeof(float);
-	ftv_summarize(v);
-	ft_set_to_vector(&m->vertices, v, &extract_vertices, nfloats);
-	return ;
-}
-
-void		op_retreive_data(t_objmodel const *m, t_vbo_basic *v, t_ftvector *f)
-{
-	size_t	ptrpad;
 
 	ptrpad = m->width * sizeof(float) + sizeof(t_ftset_node);
 	v->npos = 3;
@@ -87,6 +77,8 @@ void		op_retreive_data(t_objmodel const *m, t_vbo_basic *v, t_ftvector *f)
 		v->nnor = 3;
 	fts_foreachi(&m->vertices, &push_index, &ptrpad);
 	retreive_faces(m, f);
-	retreive_vertices(m, &v->vertices);
+	*nfloats = (m->vertices.chunk_size - sizeof(t_ui) - sizeof(t_ftset_node))
+				/ sizeof(float);
+	ft_set_to_vector(&m->vertices, &v->vertices, &extract_vertices, nfloats);
 	return ;
 }

@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/21 09:02:18 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/10 16:19:40 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/12 17:09:25 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,10 @@ t_ob		sp_default_ob(t_model_index moi)
 	return ((t_ob){HATEIT1(moi), HATEIT2, HATEIT3});
 }
 
-#include <string.h>
-
 void		sp_delete_obs(t_env *e)
 {
 	int		i;
 
-	/* t_ob		ob; */
-
-	/* memcpy(&ob, &OB(sp_plane_model), sizeof(t_ob)); */
-	/* memcpy(&ob, (t_ob[1]){sp_default_ob(sp_plane_model)}, sizeof(t_ob)); */
 	i = 0;
 	while (i < sp_num_programs)
 		ftl_release(e->obs + i++, NULL);

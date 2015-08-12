@@ -6,12 +6,12 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/08/10 13:02:15 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/10 13:15:15 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/12 17:10:50 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SCOP_COGCONF_ENUMS_H
-# define SCOP_COGCONF_ENUMS_H
+#ifndef COG_ENUMS_H
+# define COG_ENUMS_H
 
 /*
 **  [[[cog

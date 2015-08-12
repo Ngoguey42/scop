@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/15 08:49:22 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/12 14:54:29 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/12 17:11:58 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@
 # include "objmodel.h"
 # include <stdio.h>
 
-# define sp_enomem ft_enomem
+# define sp_enomem ft_enomem //tofix
 
 # define BFSZ 256
 
 typedef struct	s_token
 {
-	char 		*str;
+	char		*str;
 	size_t		len;
 	int			(*fun)();
 }				t_token;
@@ -37,7 +37,7 @@ typedef struct	s_tmpface
 	SETNODE		*ptr[3];
 }				t_tmpface;
 
-#undef SETNODE
+# undef SETNODE
 
 int				op_match_f(t_objmodel *m, char const *buf);
 int				op_match_v(t_objmodel *m, char const *buf);
