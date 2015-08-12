@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/08/09 15:05:18 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/12 15:12:55 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/12 16:16:34 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,53 +14,64 @@
 #include <string.h>
 #include "scop.h"
 #include "objmodel_parsing.h"
+#include "ft_containers.h"
 
-static void	retreive_vertices(t_objmodel const *const m, t_ftvector *const v)
+static void	push_index(size_t const *ptrpad, void *beginptr, int i)
 {
-	/* float const			*src = m->vertices.data; */
-	/* float const *const	srcend = src + m->width * m->vertices.size; */
-	/* t_vertex_basic		tmp[1]; */
+	*(t_ui*)(beginptr + *ptrpad) = (t_ui)i;
+	return ;
+}
 
-	/* if (ftv_reserve(v, m->vertices.size)) */
-	/* 	sp_enomem(); */
-	/* bzero(tmp, sizeof(*tmp)); */
-	/* while (src < srcend) */
-	/* { */
-	/* 	memcpy(&tmp->pos, src + 0, sizeof(float) * 3); */
-	/* 	if (m->width == 5 || m->width == 8) */
-	/* 		memcpy(&tmp->tex, src + 3, sizeof(float) * 2); */
-	/* 	if (m->width == 6) */
-	/* 		memcpy(&tmp->nor, src + 3, sizeof(float) * 3); */
-	/* 	else if (m->width == 8) */
-	/* 		memcpy(&tmp->nor, src + 5, sizeof(float) * 3); */
-	/* 	ftv_push_back_unsafe(v, tmp); */
-	/* 	src += m->width; */
-	/* } */
+static void	build_faces(void **ptrs, t_tmpface const *face)
+{
+	t_ui			tmp[3];
+	size_t const	ptrpad = *(size_t*)ptrs[1];
+
+	tmp[0] = *(t_ui*)((void*)face->ptr[0] + ptrpad);
+	tmp[1] = *(t_ui*)((void*)face->ptr[1] + ptrpad);
+	tmp[2] = *(t_ui*)((void*)face->ptr[2] + ptrpad);
+	ftv_push_back_unsafe(ptrs[0], tmp);
 	return ;
 }
 
 static void	retreive_faces(t_objmodel const *const m, t_ftvector *const f)
 {
-	
-	/* t_ui const			*src = m->faces.data; */
-	/* t_ui const *const	srcend = src + 3 * m->faces.size; */
-	/* t_ui				tmp[3]; */
+	void	*ptrs[2];
+	size_t	padtoindex;
 
-	/* if (ftv_reserve(f, m->faces.size)) */
-	/* 	sp_enomem(); */
-	/* bzero(tmp, sizeof(*tmp)); */
-	/* while (src < srcend) */
-	/* { */
-	/* 	memcpy(tmp, src, sizeof(t_ui) * 3); */
-	/* 	ftv_push_back_unsafe(f, tmp); */
-	/* 	src += 3; */
-	/* } */
+	if (ftv_reserve(f, m->faces.size))
+		sp_enomem();
+	padtoindex = m->vertices.chunk_size - sizeof(t_ui);
+	ptrs[0] = f;
+	ptrs[1] = &padtoindex;
+	ftv_foreach(&m->faces, &build_faces, ptrs);
 	return ;
 }
 
-static void	push_index(size_t const *ptrpad, void *beginptr, int i)
+static void	extract_vertices(t_vertex_basic *dst, void const *src
+								, t_ui const nfloats[1])
 {
-	*(t_ui*)(beginptr + *ptrpad) = (t_ui)i;
+	float	*floats;
+
+	floats = (float*)(src + sizeof(t_ftset_node));
+	memcpy(&dst->pos, floats + 0, sizeof(float) * 3);
+	if (*nfloats == 5 || *nfloats == 8)
+		memcpy(&dst->tex, floats + 3, sizeof(float) * 2);
+	if (*nfloats == 6)
+		memcpy(&dst->nor, floats + 3, sizeof(float) * 3);
+	else if (*nfloats == 8)
+		memcpy(&dst->nor, floats + 5, sizeof(float) * 3);
+	return ;
+}
+
+static void	retreive_vertices(t_objmodel const *const m, t_ftvector *const v)
+{
+	t_ui		nfloats[1];
+
+	*nfloats = (m->vertices.chunk_size - sizeof(t_ui) - sizeof(t_ftset_node))
+				/ sizeof(float);
+	ftv_summarize(v);
+	ft_set_to_vector(&m->vertices, v, &extract_vertices, nfloats);
 	return ;
 }
 
@@ -75,7 +86,7 @@ void		op_retreive_data(t_objmodel const *m, t_vbo_basic *v, t_ftvector *f)
 	if (m->width == 6 || m->width == 8)
 		v->nnor = 3;
 	fts_foreachi(&m->vertices, &push_index, &ptrpad);
-	retreive_vertices(m, &v->vertices);
 	retreive_faces(m, f);
+	retreive_vertices(m, &v->vertices);
 	return ;
 }
