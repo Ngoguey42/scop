@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/28 11:41:25 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/12 18:50:12 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/13 18:25:31 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@
 ** |	factoffset[3] = -by[0] * factoffset[1]
 ** |					+ (obratio - imgratio) / (obratio * 2);
 */
+#define STEP 0.1f
 
 static void	calc_fact_and_offset(float const bounds[4], float factoffset[4],
 									float const imgratio, float const scale)
@@ -96,38 +97,81 @@ static float	process_angle(float a)
 	return (a);
 }
 
+void		sp_calc_uv_spherical(t_vertex_basic *vertex
+								 , float const factoffset[4])
+{
+	t_vector3					tmp;
 
-static void	fill(t_ftvector *v, float const factoffset[4])
+	tmp = *(t_vector3*)&vertex->pos;
+	if (ABS(tmp.x) < STEP && ABS(tmp.z) < STEP)
+		tmp.x = tmp.z = STEP;
+	vertex->tex.u = process_angle(atan(tmp.x / tmp.z))
+		* factoffset[0] + factoffset[2];
+	vertex->tex.v = acos(tmp.y / sqrt(tmp.x * tmp.x
+									  + tmp.y * tmp.y
+									  + tmp.z * tmp.z))
+		* factoffset[1] + factoffset[3];
+	return ;
+}
+
+void		sp_calc_uv_planaroxy(t_vertex_basic *vertex
+								 , float const factoffset[4])
+{
+	vertex->tex.u = vertex->pos.x * factoffset[0] + factoffset[2];
+	vertex->tex.v = vertex->pos.y * factoffset[1] + factoffset[3];
+	return ;
+}
+
+/* #undef ABS */
+/* #define ABS */
+#define ANGLE_BETWEEN(V1, V2) (acos(v3_dot_normed((V1), (V2))))
+
+void		sp_calc_uv_box(t_vertex_basic *vertex
+								 , float const factoffset[4])
+{
+	float	const	nx = ABS(vertex->nor.x);
+	float	const	ny = ABS(vertex->nor.y);
+	float	const	nz = ABS(vertex->nor.z);
+
+	if (nz > nx && nz > ny)
+	{
+		vertex->tex.u = ABS(vertex->pos.x) * factoffset[0] + factoffset[2];
+		vertex->tex.v = ABS(vertex->pos.y) * factoffset[1] + factoffset[3];
+	}
+	else if (ny > nx)
+	{
+		vertex->tex.u = ABS(vertex->pos.x) * factoffset[0] + factoffset[2];
+		vertex->tex.v = -ABS(vertex->pos.z) * factoffset[1] + factoffset[3];
+	}
+	else
+	{
+		vertex->tex.u = -ABS(vertex->pos.z) * factoffset[0] + factoffset[2];
+		vertex->tex.v = ABS(vertex->pos.y) * factoffset[1] + factoffset[3];
+	}
+	return ;
+}
+
+static void	fill(t_ftvector *v, float const factoffset[4], void (*fun)())
 {
 	t_vertex_basic				*vertex;
 	t_vertex_basic const *const	vertexend = ftv_end(v);
 
 	vertex = v->data;
 	while (vertex < vertexend)
-	{
-		vertex->tex.u = process_angle(atan(vertex->pos.x / vertex->pos.z))
-			* factoffset[0] + factoffset[2];
-		/* vertex->tex.u = vertex->pos.x * factoffset[0] + factoffset[2]; */
-		vertex->tex.v = acos(vertex->pos.y / sqrt(
-								 vertex->pos.x * vertex->pos.x
-								 + vertex->pos.y * vertex->pos.y
-								 + vertex->pos.z * vertex->pos.z)) * 0.75
-			* factoffset[1] + factoffset[3];
-		vertex++;
-	}
+		fun(vertex++, factoffset);
 	return ;
 }
 
-void		sp_calc_uv_plan_oxy(t_env const *e, t_vbo_basic *vbo
+void		sp_calc_uv(t_env const *e, t_vbo_basic *vbo
 								, float imgratio, float scale)
 {
 	float			bounds[4];
-	float			factoffset[4];
+	float			factoffset[4];	
 
 	lprintf("    Creating some UV coords with plan oxy");
 	calc_bounds(&vbo->vertices, bounds, bounds + 2);
 	calc_fact_and_offset(bounds, factoffset, imgratio, scale);
-	fill(&vbo->vertices, factoffset);
+	fill(&vbo->vertices, factoffset, &sp_calc_uv_box);
 	vbo->ntex = 2;
 	return ;
 	(void)e;

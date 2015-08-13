@@ -35,8 +35,8 @@ int			sp_meshfill_plane(t_env const *e, t_mesh *me, t_vbo_basic *vbo)
 	if (op_parse_obj(m, "res/teapot2.obj"))
 	return (ERROR("op_parse_obj(m)"), 1);
 	op_retreive_data(m, vbo, &me->faces);
-	sp_calc_uv_plan_oxy(e, vbo, (float)t->dim[0] / (float)t->dim[1], 2.f);
 	sp_calc_normals(e, me, vbo);
+	sp_calc_uv(e, vbo, (float)t->dim[0] / (float)t->dim[1], 2.f);
 	sp_clean_objmodel(m);
 	return (0);
 	(void)e;

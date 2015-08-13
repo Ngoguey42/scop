@@ -6,7 +6,7 @@
 #    By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/08/10 13:13:01 by ngoguey           #+#    #+#              #
-#    Updated: 2015/08/12 18:48:49 by ngoguey          ###   ########.fr        #
+#    Updated: 2015/08/13 16:31:53 by ngoguey          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -99,8 +99,8 @@ meshes = [
 	if (op_parse_obj(m, "res/teapot2.obj"))
 	return (ERROR("op_parse_obj(m)"), 1);
 	op_retreive_data(m, vbo, &me->faces);
-	sp_calc_uv_plan_oxy(e, vbo, (float)t->dim[0] / (float)t->dim[1], 2.f);
 	sp_calc_normals(e, me, vbo);
+	sp_calc_uv(e, vbo, (float)t->dim[0] / (float)t->dim[1], 2.f);
 	sp_clean_objmodel(m);
 	return (0);\n\t(void)e;\n\t(void)me;\n}"""),
 
