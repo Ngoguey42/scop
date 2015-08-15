@@ -6,7 +6,7 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/07/30 10:07:14 by ngoguey           #+#    #+#             //
-//   Updated: 2015/08/15 14:21:59 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/08/15 19:19:30 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -32,13 +32,15 @@ uniform struct Light {
 	vec3 d;
 	vec3 s;
 
-	float constant;
 	float linear;
 	float quadratic;
 }							l;
 
 void main()
 {
+	float distance    = length(l.pos - fs_in.fragPos);
+	float attenuation = 1.0f / (1.f + l.linear * distance +
+								l.quadratic * (distance * distance));
 	// color = vec4(fs_in.Color, 1.f);
 	// color = mix(vec4(fs_in.Color, 1.f), texture(ourTexture, fs_in.texUV), 0.45);
 	// color = vec4(0.7, 0.7, 0.7, 1.);
@@ -60,6 +62,6 @@ void main()
 	float spec = pow(max(dot(viewDir, reflectDir), 0.0), 32);
 	vec3 specular = specularStrength * spec * l.s;
 	
-	vec3 result = (ambient + diffuse + specular) * color.xyz;
+	vec3 result = (ambient + diffuse + specular) * color.xyz * attenuation;
 	color = vec4(result, color.w);
 } 

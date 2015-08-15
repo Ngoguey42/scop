@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/08/10 11:42:30 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/15 11:52:50 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/15 18:37:47 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ typedef struct					s_locations_backup_fill
 
 typedef struct					s_vertex_basic
 {
-	struct
+	struct		lol
 	{
 		float					x;
 		float					y;

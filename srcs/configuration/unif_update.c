@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/21 09:01:30 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/15 14:41:12 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/15 19:17:37 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,57 +19,47 @@
 void			sp_unif_model(t_env const *e, t_ob const *ob)
 {
 	t_program const	*p = POFOB(e, ob);
-	GLuint const	loc = glGetUniformLocation(p->handle, "model");
 
-	glUniformMatrix4fv(loc, 1, GL_TRUE, (float*)&ob->mat);
+	U(Matrix4fv, "model", 1, GL_TRUE, (float*)&ob->mat);
 	return ;
 }
 
 void			sp_unif_viewproj2(t_env const *e, t_program const *p)
 {
-	GLuint const	vloc = glGetUniformLocation(p->handle, "view");
-	GLuint const	ploc = glGetUniformLocation(p->handle, "projection");
-
-	glUniformMatrix4fv(vloc, 1, GL_TRUE, (float*)&e->view);
-	glUniformMatrix4fv(ploc, 1, GL_TRUE, (float*)&e->projection);
+	U(Matrix4fv, "view", 1, GL_TRUE, (float*)&e->view);
+	U(Matrix4fv, "projection", 1, GL_TRUE, (float*)&e->projection);
 	return ;
 }
 
 void			sp_unif_viewproj(t_env const *e, t_program const *p)
 {
-	GLuint const	loc = glGetUniformLocation(p->handle, "viewproj");
-
-	glUniformMatrix4fv(loc, 1, GL_TRUE, (float*)&e->viewproj);
+	U(Matrix4fv, "viewproj", 1, GL_TRUE, (float*)&e->viewproj);
 	return ;
 }
 
 void			sp_unif_light(t_env const *e, t_program const *p)
 {
-	GLuint const	lploc = glGetUniformLocation(p->handle, "lightPos");
-	GLuint const	vpoloc = glGetUniformLocation(p->handle, "viewPos");
-	GLuint const	lcloc = glGetUniformLocation(p->handle, "lightColor");
-
-	glUniform3f(lploc, e->sunpos_cartesian.x
-				, e->sunpos_cartesian.y, e->sunpos_cartesian.z);
-	glUniform3f(vpoloc, e->cpos.x, e->cpos.y, e->cpos.z);
-	glUniform3f(lcloc, e->suncolor.x, e->suncolor.y, e->suncolor.z);
+	U(3f, "lightPos", e->sunpos_cartesian.x
+	  , e->sunpos_cartesian.y, e->sunpos_cartesian.z);
+	U(3f, "viewPos", e->cpos.x, e->cpos.y, e->cpos.z);
+	U(3f, "lightColor", e->sunka.x, e->sunka.y, e->sunka.z);
 	return ;
 }
 
 void			sp_unif_lightstruct(t_env const *e, t_program const *p)
 {
 	U(3fv, "l.pos", 1, (float*)&e->sunpos_cartesian);
-	U(3fv, "l.a", 1, (float*)&e->suncolor);
-	U(3fv, "l.d", 1, (float*)&e->suncolor);
-	U(3fv, "l.s", 1, (float*)&e->suncolor);
+	U(3fv, "l.a", 1, (float*)&e->sunka);
+	U(3fv, "l.d", 1, (float*)&e->sunkd);
+	U(3fv, "l.s", 1, (float*)&e->sunks);
+	U(1f, "l.linear", e->sundat[0]);
+	U(1f, "l.quadratic", e->sundat[1]);
 	U(3fv, "viewPos", 1, (float*)&e->cpos);
 	return ;
 }
 
 void			sp_unif_suncolor(t_env const *e, t_program const *p)
 {
-	GLuint const	loc = glGetUniformLocation(p->handle, "sunColor");
-
-	glUniform3f(loc, e->suncolor.x, e->suncolor.y, e->suncolor.z);
+	U(3f, "sunColor", e->sunka.x, e->sunka.y, e->sunka.z);
 	return ;
 }

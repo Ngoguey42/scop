@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 10:07:19 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/15 16:44:19 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/15 18:39:22 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,7 +155,7 @@ typedef struct					s_ob
 	t_vector3					scale;
 	t_matrix4					mat;
 	void						(*update)();
-	float						valf[1];
+	float						valf[6];
 	int							vali[1];
 }								t_ob;
 typedef enum					e_ob_param
@@ -200,11 +200,10 @@ typedef struct					s_env
 
 	t_vector3					sunpos_spherical;
 	t_vector3					sunpos_cartesian;
-	t_vector3					suncolor;
 	t_vector3					sunka;
 	t_vector3					sunkd;
 	t_vector3					sunks;
-	float						sundat[3];
+	float						sundat[2];
 
 	double						time_start;
 	double						time_cur;

@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 10:33:54 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/13 18:17:10 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/15 18:11:05 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@
 # define WIN_WIDTHI 1600
 # define WIN_RATIOF (4.f / 3.f)
 # define WIN_FOVF 45.f
-# define WIN_NEARF 0.1f
+# define WIN_NEARF 0.2f
 # define WIN_FARF 200.f
 
 # define LAND_SIDEF 100.f
@@ -44,7 +44,7 @@
 # define LAND_YF -15.f
 
 # define MOUSE_SENSITIVITYF 0.005f
-# define MOVEMENT_SPEEDF 20.f
+# define MOVEMENT_SPEEDF 10.f
 
 /*
 ** CALCULATED MACROES
