@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/08/15 11:15:10 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/15 12:50:32 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/15 15:30:43 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,8 @@ void		sp_calc_uv_spherical(t_vertex_basic *vertex
 		* factoffset[1] + factoffset[3];
 	return ;
 }
+
+
 
 void		sp_calc_uv_planaroxy(t_vertex_basic *vertex
 								 , float const factoffset[4])

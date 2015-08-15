@@ -65,7 +65,7 @@ int			sp_loadconf_fshaders(t_env *e)
 	FSHADER("couv_uv.frag", NULL),
 	FSHADER("uvno_uvli.frag", &sp_unif_light),
 	FSHADER("cono_coli.frag", &sp_unif_light),
-	FSHADER("couvno_blendli.frag", &sp_unif_light),
+	FSHADER("couvno_blendli.frag", &sp_unif_lightstruct),
 	FSHADER("co_sun.frag", &sp_unif_suncolor),
 	};
 	memcpy(&e->fshaders, &tmp, sizeof(tmp));

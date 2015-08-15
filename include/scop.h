@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 12:07:31 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/15 11:28:38 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/15 14:22:56 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,7 @@ void		sp_unif_land(t_env const *e, t_ob const *ob);
 void		sp_unif_viewproj(t_env const *e, t_program const *p);
 void		sp_unif_viewproj2(t_env const *e, t_program const *p);
 void		sp_unif_light(t_env const *e, t_program const *p);
+void		sp_unif_lightstruct(t_env const *e, t_program const *p);
 void		sp_unif_suncolor(t_env const *e, t_program const *p);
 
 /*

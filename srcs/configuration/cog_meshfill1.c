@@ -37,7 +37,7 @@ int			sp_meshfill_plane(t_env const *e, t_mesh *me, t_vbo_basic *vbo)
 	op_retreive_data(m, vbo, &me->faces);
 	sp_calc_normals(e, me, vbo);
 	sp_calc_uv(e, vbo, (float[2]){(float)t->dim[0] / (float)t->dim[1], 2.f}
-		, uvwrap_box);
+		, uvwrap_spherical);
 	sp_clean_objmodel(m);
 	return (0);
 	(void)e;

@@ -6,11 +6,15 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/21 09:01:30 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/09 18:23:50 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/15 14:41:12 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
+
+#define LOC(N)	glGetUniformLocation(p->handle, N)
+#define PREFIX(T) glUniform ## T
+#define U(T, N, ...) PREFIX(T)(LOC(N), __VA_ARGS__)
 
 void			sp_unif_model(t_env const *e, t_ob const *ob)
 {
@@ -49,6 +53,16 @@ void			sp_unif_light(t_env const *e, t_program const *p)
 				, e->sunpos_cartesian.y, e->sunpos_cartesian.z);
 	glUniform3f(vpoloc, e->cpos.x, e->cpos.y, e->cpos.z);
 	glUniform3f(lcloc, e->suncolor.x, e->suncolor.y, e->suncolor.z);
+	return ;
+}
+
+void			sp_unif_lightstruct(t_env const *e, t_program const *p)
+{
+	U(3fv, "l.pos", 1, (float*)&e->sunpos_cartesian);
+	U(3fv, "l.a", 1, (float*)&e->suncolor);
+	U(3fv, "l.d", 1, (float*)&e->suncolor);
+	U(3fv, "l.s", 1, (float*)&e->suncolor);
+	U(3fv, "viewPos", 1, (float*)&e->cpos);
 	return ;
 }
 

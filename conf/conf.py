@@ -6,7 +6,7 @@
 #    By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/08/10 13:13:01 by ngoguey           #+#    #+#              #
-#    Updated: 2015/08/15 11:56:23 by ngoguey          ###   ########.fr        #
+#    Updated: 2015/08/15 16:55:30 by ngoguey          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,7 +56,7 @@ fshaders = [
 	# cono_coli fait ceci cela
 	Fshader("cono_coli", "cono_coli.frag", "light"),
 	# couvno_blendli fait ceci cela
-	Fshader("couvno_blendli", "couvno_blendli.frag", "light"),
+	Fshader("couvno_blendli", "couvno_blendli.frag", "lightstruct"),
 	# co_sun fait ceci cela
 	Fshader("co_sun", "co_sun.frag", "suncolor"),
 ]
@@ -101,7 +101,7 @@ meshes = [
 	op_retreive_data(m, vbo, &me->faces);
 	sp_calc_normals(e, me, vbo);
 	sp_calc_uv(e, vbo, (float[2]){(float)t->dim[0] / (float)t->dim[1], 2.f}
-		, uvwrap_box);
+		, uvwrap_spherical);
 	sp_clean_objmodel(m);
 	return (0);\n\t(void)e;\n\t(void)me;\n}"""),
 

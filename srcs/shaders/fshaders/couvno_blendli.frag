@@ -6,7 +6,7 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/07/30 10:07:14 by ngoguey           #+#    #+#             //
-//   Updated: 2015/08/12 18:25:44 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/08/15 14:21:59 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -14,18 +14,28 @@
 
 in COUVNOFP
 {
-	vec3	Color;
-	vec2	texUV;
-	vec3	Normal;
-	vec3	fragPos;
-}		fs_in;
+	vec3					Color;
+	vec2					texUV;
+	vec3					Normal;
+	vec3					fragPos;
+}							fs_in;
 
-out vec4			color;
+out vec4					color;
 
-uniform sampler2D	ourTexture;
-uniform vec3		lightPos;
-uniform vec3		viewPos;
-uniform vec3		lightColor;
+uniform sampler2D			ourTexture;
+uniform vec3				viewPos;
+
+uniform struct Light {
+	vec3 pos;
+
+	vec3 a;
+	vec3 d;
+	vec3 s;
+
+	float constant;
+	float linear;
+	float quadratic;
+}							l;
 
 void main()
 {
@@ -35,20 +45,20 @@ void main()
 	color = texture(ourTexture, fs_in.texUV);
 	// Ambient
 	float ambientStrength = 0.25f;
-	vec3 ambient = ambientStrength * lightColor;
+	vec3 ambient = ambientStrength * l.a;
 
 	// Diffuse
 	vec3 norm = normalize(fs_in.Normal);
-	vec3 lightDir = normalize(lightPos - fs_in.fragPos);
+	vec3 lightDir = normalize(l.pos - fs_in.fragPos);
 	float diff = max(dot(norm, lightDir), 0.0);
-	vec3 diffuse = diff * lightColor;
+	vec3 diffuse = diff * l.d;
 
 	// Specular
 	float specularStrength = 0.6f;
 	vec3 viewDir = normalize(viewPos - fs_in.fragPos);
 	vec3 reflectDir = reflect(-lightDir, norm);
 	float spec = pow(max(dot(viewDir, reflectDir), 0.0), 32);
-	vec3 specular = specularStrength * spec * lightColor;
+	vec3 specular = specularStrength * spec * l.s;
 	
 	vec3 result = (ambient + diffuse + specular) * color.xyz;
 	color = vec4(result, color.w);
