@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/08/09 08:57:03 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/10 14:18:14 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/15 13:25:05 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,19 @@
 
 static void		update_prog_obs(t_env *const e, t_ftlist *const prl)
 {
-	t_ob			*ob;
-	t_ftlist_node	*node;
+	t_ob						*ob;
+	t_ftlist_node const *const	end = ftl_cend(prl);
+	t_ob						*next;
 
-	node = prl->next;
-	while (node != ftl_cend(prl))
+	ob = (t_ob*)prl->next;
+	while ((t_ftlist_node*)ob != end)
 	{
-		ob = (t_ob*)node;
-		node = node->next;
+		next = (t_ob*)ob->list.next;
 		if (ob->delete)
 			ftl_erase_pos(prl, (t_ftlist_node*)ob, NULL);
 		else if (ob->update != NULL)
 			NORM_AT_42_IS_WTF(e, ob);
+		ob = next;
 	}
 	return ;
 }

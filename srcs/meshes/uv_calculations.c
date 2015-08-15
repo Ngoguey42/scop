@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   uv_calculation.c                                   :+:      :+:    :+:   */
+/*   uv_calculations.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/07/28 11:41:25 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/13 18:25:31 by ngoguey          ###   ########.fr       */
+/*   Created: 2015/08/15 11:15:10 by ngoguey           #+#    #+#             */
+/*   Updated: 2015/08/15 12:50:32 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,6 +151,13 @@ void		sp_calc_uv_box(t_vertex_basic *vertex
 	return ;
 }
 
+static void	(*const g_wrapfuns[])() =
+{
+	&sp_calc_uv_planaroxy,
+	&sp_calc_uv_spherical,
+	&sp_calc_uv_box,
+};
+
 static void	fill(t_ftvector *v, float const factoffset[4], void (*fun)())
 {
 	t_vertex_basic				*vertex;
@@ -162,16 +169,16 @@ static void	fill(t_ftvector *v, float const factoffset[4], void (*fun)())
 	return ;
 }
 
-void		sp_calc_uv(t_env const *e, t_vbo_basic *vbo
-								, float imgratio, float scale)
+void		sp_calc_uv(t_env const *e, t_vbo_basic *vbo, float d[2]
+								, t_uvwrapping_type t)
 {
 	float			bounds[4];
 	float			factoffset[4];	
 
 	lprintf("    Creating some UV coords with plan oxy");
 	calc_bounds(&vbo->vertices, bounds, bounds + 2);
-	calc_fact_and_offset(bounds, factoffset, imgratio, scale);
-	fill(&vbo->vertices, factoffset, &sp_calc_uv_box);
+	calc_fact_and_offset(bounds, factoffset, d[0], d[1]);
+	fill(&vbo->vertices, factoffset, g_wrapfuns[t]);
 	vbo->ntex = 2;
 	return ;
 	(void)e;

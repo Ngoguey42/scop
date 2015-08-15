@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/08/08 14:03:56 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/10 13:14:20 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/15 11:52:53 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <string.h>
 
 #define FTVU ftv_uninitialized()
-#define MESH(P, U, F) {(U), (P), (F), FTVU, FTVU, {0, 0, 0}}
+#define MESH(P, U, F) {(U), (P), (F), FTVU, FTVU, EMPTY_BVBO, {0, 0, 0}}
 #define TEXTURE(FN) {TEXTURE_PATH(FN), {0, 0}, 0}
 #define MODEL(ME, TE, F) {(ME), (TE), (F)}
 
@@ -43,7 +43,7 @@ int			sp_loadconf_meshes(t_env *e)
 {
 	t_mesh const		tmp[sp_num_meshes] = {
 
-	MESH(sp_ptn_program, GL_STATIC_DRAW, &sp_meshfill_plane),
+	MESH(sp_ptn_program, GL_DYNAMIC_DRAW, &sp_meshfill_plane),
 	MESH(sp_pcn_program, GL_STATIC_DRAW, &sp_meshfill_square),
 	MESH(sp_land_program, GL_STATIC_DRAW, &sp_meshfill_land),
 	MESH(sp_ptn_program, GL_STATIC_DRAW, &sp_meshfill_ptn),

@@ -6,7 +6,7 @@
 #    By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/08/10 13:13:01 by ngoguey           #+#    #+#              #
-#    Updated: 2015/08/13 16:31:53 by ngoguey          ###   ########.fr        #
+#    Updated: 2015/08/15 11:56:23 by ngoguey          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -90,7 +90,7 @@ textures = [
 ]
 meshes = [
 	# plane fait ceci cela
-	Mesh("plane", "ptn", "GL_STATIC_DRAW","""{
+	Mesh("plane", "ptn", "GL_DYNAMIC_DRAW","""{
 	t_objmodel				m[1];
 	t_texture const *const	t = e->textures + sp_porcelain_texture;
 
@@ -100,7 +100,8 @@ meshes = [
 	return (ERROR("op_parse_obj(m)"), 1);
 	op_retreive_data(m, vbo, &me->faces);
 	sp_calc_normals(e, me, vbo);
-	sp_calc_uv(e, vbo, (float)t->dim[0] / (float)t->dim[1], 2.f);
+	sp_calc_uv(e, vbo, (float[2]){(float)t->dim[0] / (float)t->dim[1], 2.f}
+		, uvwrap_box);
 	sp_clean_objmodel(m);
 	return (0);\n\t(void)e;\n\t(void)me;\n}"""),
 

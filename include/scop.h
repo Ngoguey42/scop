@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 12:07:31 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/13 16:32:22 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/15 11:28:38 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,12 +93,20 @@ int			sp_init_meshes(t_env *e);
 
 void		sp_delete_meshes(t_env *e);
 int			sp_new_mesh(t_env const *e, t_mesh *me);
+int			sp_refresh_vbo(t_env const *e, t_mesh const *me);
 int			sp_fill_mesh(t_env const *e, t_mesh *me);
 
 void		sp_calc_normals(t_env const *e, t_mesh const *me
 							, t_vbo_basic *vbo);
-void		sp_calc_uv(t_env const *e, t_vbo_basic *vbo
-								, float imgratio, float scale);
+void		sp_calc_uv(t_env const *e, t_vbo_basic *vbo, float d[2]
+							, t_uvwrapping_type t);
+/* int			sp_validate_vbo(t_vbo_basic const *const vbo */
+/* 							, t_vshader const *const vs); */
+void		sp_shrink_vbo(t_ftvector *const dst, t_vbo_basic const *const vbo);
+/*
+** MAIN ITEM HANDLING
+*/
+void		sp_mainitem_remapuv(t_env const *e, t_uvwrapping_type t);
 
 /*
 ** LAND GENERATION

@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 10:07:19 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/12 17:15:00 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/15 11:47:07 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,8 +106,16 @@ typedef struct					s_mesh
 	int							(*fill)();
 	t_ftvector					vertices;
 	t_ftvector					faces;
+	t_vbo_basic					vbo;
 	GLuint						handles[3];
 }								t_mesh;
+typedef enum					e_uvwrapping_type
+{
+	uvwrap_oxy,
+	uvwrap_spherical,
+	uvwrap_box,
+	num_uvwraps
+}								t_uvwrapping_type;
 
 /*
 ** TEXTURE
