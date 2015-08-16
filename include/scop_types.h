@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 10:07:19 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/15 18:39:22 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/16 11:23:45 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,6 +168,7 @@ typedef enum					e_ob_param
 	ob_up,
 	ob_vf,
 	ob_vi,
+	ob_main,
 	ob_num_param,
 }								t_ob_param;
 
@@ -186,6 +187,8 @@ typedef struct					s_env
 	t_texture					textures[sp_num_textures];
 	t_model						models[sp_num_models];
 	t_ftlist					obs[sp_num_programs];
+
+	t_ob						*mainob;
 
 	int							keystates[sp_num_keys];
 	int							states[sp_num_states];

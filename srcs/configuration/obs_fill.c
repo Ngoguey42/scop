@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/22 13:44:32 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/15 11:03:34 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/16 11:33:37 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@
 # define NARG(...) NARG1(42, ##__VA_ARGS__)
 #endif
 
-#define OB(T,...) push_ob(e,(t_ob[1]){dob((T),NARG(__VA_ARGS__),##__VA_ARGS__)})
+#define CONV(...) (t_ob[1]){__VA_ARGS__}
+#define OB(T,...) push_ob(e,CONV(dob((T),NARG(__VA_ARGS__),##__VA_ARGS__)),0)
+#define OBMN(T,...) push_ob(e,CONV(dob((T),NARG(__VA_ARGS__),##__VA_ARGS__)),1)
 
 static size_t const		g_obdata[][2] =
 {
@@ -35,16 +37,18 @@ static size_t const		g_obdata[][2] =
 	{offsetof(t_ob, vali), sizeof(float[1])},
 };
 
-static void	push_ob(t_env *e, t_ob const *ob)
+static void	push_ob(t_env *e, t_ob const *ob, t_bool ismain)
 {
-	t_program_index const	pi = MEOFOB(e, ob)->program;
+	t_ftlist	*const vec = e->obs + MEOFOB(e, ob)->program;
 
-	if (ftl_push_back(e->obs + pi, (t_ftlist_node const*)ob))
+	if (ftl_push_back(vec, (t_ftlist_node const*)ob))
 		sp_enomem();
+	if (ismain)
+		e->mainob = (t_ob*)vec->prev;
 	return ;
 }
 
-void		retreive_varg(va_list *ap, t_ob_param id, void *buf)
+static void	retreive_varg(va_list *ap, t_ob_param id, void *buf)
 {
 	if (id == ob_hid)
 		(*(t_bool*)buf) = va_arg(*ap, t_bool);
@@ -62,7 +66,7 @@ void		retreive_varg(va_list *ap, t_ob_param id, void *buf)
 	return ;
 }
 
-t_ob		dob(t_model_index moi, int narg, ...)
+static t_ob	dob(t_model_index moi, int narg, ...)
 {
 	va_list		ap;
 	t_ob		tmp;
@@ -84,7 +88,7 @@ t_ob		dob(t_model_index moi, int narg, ...)
 
 int			sp_fill_obs(t_env *e)
 {
-	OB(sp_plane_model);
+	OBMN(sp_plane_model);
 	OB(sp_square_model, ob_sca, ATOV3SCAL(4.f), ob_pos, ATOV3(0.f, -5.f, 2.f));
 	OB(sp_land_model);
 	OB(sp_ptn_model, ob_rot, ATOV3(0.f, 0.f, -M_PI / 2.f)

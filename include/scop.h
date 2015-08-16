@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 12:07:31 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/15 14:22:56 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/16 11:35:42 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,9 +104,9 @@ void		sp_calc_uv(t_env const *e, t_vbo_basic *vbo, float d[2]
 /* 							, t_vshader const *const vs); */
 void		sp_shrink_vbo(t_ftvector *const dst, t_vbo_basic const *const vbo);
 /*
-** MAIN ITEM HANDLING
+** MAIN OB HANDLING
 */
-void		sp_mainitem_remapuv(t_env const *e, t_uvwrapping_type t);
+void		sp_mainob_model_remapuv(t_env *e, t_uvwrapping_type t);
 
 /*
 ** LAND GENERATION

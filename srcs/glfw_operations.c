@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/13 12:53:24 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/15 12:01:33 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/16 11:23:14 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,11 @@ static void	key_callback(GLFWwindow *w, int k, int sc, int a, int m)
 		if (k == GLFW_KEY_TAB)
 			sp_toggle_mouse_state(w, e);
 		else if (k == GLFW_KEY_8)
-			sp_mainitem_remapuv(e, uvwrap_oxy);
+			sp_mainob_model_remapuv(e, uvwrap_oxy);
 		else if (k == GLFW_KEY_9)
-			sp_mainitem_remapuv(e, uvwrap_spherical);
+			sp_mainob_model_remapuv(e, uvwrap_spherical);
 		else if (k == GLFW_KEY_0)
-			sp_mainitem_remapuv(e, uvwrap_box);
+			sp_mainob_model_remapuv(e, uvwrap_box);
 	}
 	if (a == GLFW_RELEASE)
 	{
