@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/15 13:44:48 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/15 19:20:42 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/16 13:19:38 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int				sp_init_env(t_env *e)
 	e->sunka = ATOV3(245.f / 255.f, 235.f / 255.f, 190.f / 255.f);
 	e->sunkd = ATOV3(245.f / 255.f, 235.f / 255.f, 190.f / 255.f);
 	e->sunks = ATOV3(190.f / 255.f, 190.f / 255.f, 230.f / 255.f);
-	memcpy(&e->sundat, ((float[2]){0.0014, 0.000007}), sizeof(float[2]));
+	memcpy(&e->sundat, ((float[2]){0.007, 0.0002}), sizeof(float[2]));
 	sp_update_sun(e, true);
 	e->cpos = ATOV3(-2.65, 1.23, 1.91);
 	e->cangles[0] = -1.04;

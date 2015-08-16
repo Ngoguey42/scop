@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/15 11:47:48 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/16 12:18:32 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/16 14:07:00 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,12 @@ static int const		g_keystates[] =
 	GLFW_KEY_DOWN,
 	GLFW_KEY_LEFT,
 	GLFW_KEY_RIGHT,
-	GLFW_KEY_T,
-	GLFW_KEY_G,
-	GLFW_KEY_F,
-	GLFW_KEY_H,
-	GLFW_KEY_R,
-	GLFW_KEY_Y,
+	GLFW_KEY_SEMICOLON,
+	GLFW_KEY_P,
+	GLFW_KEY_L,
+	GLFW_KEY_APOSTROPHE,
+	GLFW_KEY_EQUAL,
+	GLFW_KEY_MINUS,
 };
 
 typedef struct s_keyevents{void (*fun)(); int dat; int key;} t_keyevents;
@@ -46,15 +46,20 @@ void		sp_keyevent(t_env *e, int a)
 {
 	t_ui		i;
 
-	i = 0;
-	while (i < SIZE_ARRAY(g_keyevents))
+	if (a >= GLFW_KEY_1 && a < GLFW_KEY_1 + sp_num_models)
+		sp_mainob_changemodel(e, a - GLFW_KEY_1);
+	else
 	{
-		if (g_keyevents[i].key == a)
+		i = 0;
+		while (i < SIZE_ARRAY(g_keyevents))
 		{
-			g_keyevents[i].fun(e, g_keyevents[i].dat);
-			return ;
+			if (g_keyevents[i].key == a)
+			{
+				g_keyevents[i].fun(e, g_keyevents[i].dat);
+				return ;
+			}
+			i++;
 		}
-		i++;
 	}
 	return ;
 }
