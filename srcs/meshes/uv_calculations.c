@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/08/15 11:15:10 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/15 15:30:43 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/16 18:26:59 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@
 ** |					+ (obratio - imgratio) / (obratio * 2);
 */
 #define STEP 0.1f
+#define ANGLE_BETWEEN(V1, V2) (acos(v3_dot_normed((V1), (V2))))
 
 static void	calc_fact_and_offset(float const bounds[4], float factoffset[4],
 									float const imgratio, float const scale)
@@ -123,10 +124,6 @@ void		sp_calc_uv_planaroxy(t_vertex_basic *vertex
 	vertex->tex.v = vertex->pos.y * factoffset[1] + factoffset[3];
 	return ;
 }
-
-/* #undef ABS */
-/* #define ABS */
-#define ANGLE_BETWEEN(V1, V2) (acos(v3_dot_normed((V1), (V2))))
 
 void		sp_calc_uv_box(t_vertex_basic *vertex
 								 , float const factoffset[4])

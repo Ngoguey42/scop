@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/21 09:01:30 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/15 19:17:37 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/16 19:15:41 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,16 @@ void			sp_unif_model(t_env const *e, t_ob const *ob)
 	t_program const	*p = POFOB(e, ob);
 
 	U(Matrix4fv, "model", 1, GL_TRUE, (float*)&ob->mat);
+	U(1f, "mixval", 1.f);//debug
+	return ;
+}
+
+void			sp_unif_model_mix(t_env const *e, t_ob const *ob)
+{
+	t_program const	*p = POFOB(e, ob);
+
+	U(Matrix4fv, "model", 1, GL_TRUE, (float*)&ob->mat);
+	U(1f, "mixval", ob->valf[0]);
 	return ;
 }
 

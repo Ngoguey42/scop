@@ -6,7 +6,7 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/07/30 10:07:14 by ngoguey           #+#    #+#             //
-//   Updated: 2015/08/16 15:08:37 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/08/16 18:57:57 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -22,6 +22,8 @@ in COUVNOFP
 
 uniform sampler2D			ourTexture;
 uniform vec3				viewPos;
+uniform float				mixval;
+
 uniform struct Light {
 	vec3 pos;
 
@@ -41,9 +43,9 @@ void main()
 	float attenuation = 1.0f / (1.f + l.linear * distance +
 								l.quadratic * (distance * distance));
 	// color = vec4(fs_in.Color, 1.f);
-	// color = mix(vec4(fs_in.Color, 1.f), texture(ourTexture, fs_in.texUV), 0.45);
+	color = mix(vec4(fs_in.Color, 1.f), texture(ourTexture, fs_in.texUV), mixval);
 	// color = vec4(0.7, 0.7, 0.7, 1.);
-	color = texture(ourTexture, fs_in.texUV);
+	// color = texture(ourTexture, fs_in.texUV);
 	// Ambient
 	float ambientStrength = 0.25f;
 	vec3 ambient = ambientStrength * l.a;

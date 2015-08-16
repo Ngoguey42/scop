@@ -6,7 +6,7 @@
 #    By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/08/10 13:13:01 by ngoguey           #+#    #+#              #
-#    Updated: 2015/08/16 17:20:57 by ngoguey          ###   ########.fr        #
+#    Updated: 2015/08/16 19:22:46 by ngoguey          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -109,6 +109,28 @@ meshes = [
 	sp_clean_objmodel(m);
 	return (0);\n\t(void)e;\n\t(void)me;\n}"""),
 
+	Mesh("teapot1", "ptn", "GL_DYNAMIC_DRAW","""{
+	t_objmodel				m[1];
+	t_texture const *const	t = e->textures + sp_porcelain_texture;
+
+	if (op_parse_obj(m, "res/teapot.obj"))
+		return (ERROR("op_parse_obj(m)"), 1);
+	op_retreive_data(m, vbo, &me->faces);
+	sp_calc_normals(e, me, vbo);
+	sp_calc_uv(e, vbo, (float[2]){(float)t->dim[0] / (float)t->dim[1], 2.f}
+		, uvwrap_spherical);
+	sp_clean_objmodel(m);
+	return (0);\n\t(void)e;\n\t(void)me;\n}"""),
+
+	Mesh("csie", "ptn", "GL_DYNAMIC_DRAW","""{
+	t_objmodel				m[1];
+
+	if (op_parse_obj(m, "res/new_csie_b1.obj"))
+		return (ERROR("op_parse_obj(m)"), 1);
+	op_retreive_data(m, vbo, &me->faces);
+	sp_clean_objmodel(m);
+	return (0);\n\t(void)e;\n\t(void)me;\n}"""),
+
 	# square fait ceci cela
 	Mesh("square", "pcn", "GL_STATIC_DRAW","""{
 	t_vertex_basic	vertices[] = {
@@ -192,7 +214,11 @@ meshes = [
 ]
 models = [
 	# plane fait ceci cela
-	Model("plane", "plane", "porcelain", "model"),
+	Model("plane", "plane", "porcelain", "model_mix"),
+	# plane fait ceci cela
+	Model("teapot1", "teapot1", "porcelain", "model_mix"),
+	# plane fait ceci cela
+	Model("csie", "csie", "wall", "model"),
 	# square fait ceci cela
 	Model("square", "square", "no", "model"),
 	# land fait ceci cela
@@ -203,9 +229,9 @@ models = [
 	Model("sun", "sun", "no", "model"),
 ]
 obs = {
-    Ob("plane"),
-    Ob("square", sca = 4., pos = (0., -5., 2.)),
-	Ob("land"),
-	Ob("ptn", pos = (-45., -0., -40.), rot = (0., 0., -math.pi / 2.)),
-	Ob("sun", up = "sp_obupdate_sun", mov = False)
+    # Ob("plane"),
+    # Ob("square", sca = 4., pos = (0., -5., 2.)),
+	# Ob("land"),
+	# Ob("ptn", pos = (-45., -0., -40.), rot = (0., 0., -math.pi / 2.)),
+	# Ob("sun", up = "sp_obupdate_sun", mov = False)
 }

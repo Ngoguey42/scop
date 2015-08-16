@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 12:07:31 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/16 17:59:53 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/16 18:55:41 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,7 @@ void		sp_fill_landrgb(t_vbo_basic *vbo, float const bounds[2]);
 ** UNIFORMS
 */
 void		sp_unif_model(t_env const *e, t_ob const *ob);
+void		sp_unif_model_mix(t_env const *e, t_ob const *ob);
 void		sp_unif_land(t_env const *e, t_ob const *ob);
 void		sp_unif_viewproj(t_env const *e, t_program const *p);
 void		sp_unif_viewproj2(t_env const *e, t_program const *p);
@@ -140,6 +141,7 @@ void		sp_update_obs(t_env *e);
 void		sp_render_obs(t_env const *e);
 int			sp_fill_obs(t_env *e);
 void		sp_obupdate_sun(t_env const *e, t_ob *ob);
+void		sp_obupdate_mainob(t_env const *e, t_ob *ob);
 t_bool		sp_ob_getnot_hidden(t_env const *e, t_ob const *ob);
 t_bool		sp_ob_get_moved(t_env const *e, t_ob const *ob);
 t_ob		sp_default_ob(t_model_index moi);

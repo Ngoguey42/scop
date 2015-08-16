@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/22 13:44:32 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/16 18:07:44 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/16 19:28:45 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,9 @@ static size_t const		g_obdata[][2] =
 
 static void	push_ob(t_env *e, t_ob const *ob, t_bool ismain)
 {
-	t_ftlist	*const vec = e->obs + MEOFOB(e, ob)->program;
+	t_ftlist	*vec;
 
+	vec = e->obs + MEOFOB(e, ob)->program;
 	if (ftl_push_back(vec, (t_ftlist_node const*)ob))
 		sp_enomem();
 	if (ismain)
@@ -88,7 +89,8 @@ static t_ob	dob(t_model_index moi, int narg, ...)
 
 int			sp_fill_obs(t_env *e)
 {
-	OBMN(sp_plane_model, ob_pos, D_MAINOBPOS_V3, ob_rot, D_MAINOBANGLES_V3);
+	OBMN(sp_plane_model, ob_pos, D_MAINOBPOS_V3, ob_rot, D_MAINOBANGLES_V3
+		 ,ob_up, &sp_obupdate_mainob);
 	OB(sp_square_model, ob_sca, ATOV3SCAL(4.f), ob_pos, ATOV3(15.f, -5.f, 2.f));
 	OB(sp_land_model);
 	OB(sp_ptn_model, ob_rot, ATOV3(0.f, 0.f, -M_PI / 2.f)

@@ -6,13 +6,14 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/15 11:47:48 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/16 18:10:37 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/16 18:54:18 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <string.h>
 #include "scop.h"
 #define CONV(...) (t_keyevents){__VA_ARGS__}
+#define NORM_AT_42_IS_WTF ke->fun
 
 static int const		g_keystates[] =
 {
@@ -66,6 +67,15 @@ static void	reset_mainobpos(t_env *e)
 	return ;
 }
 
+static void	mix_item(t_env *e, int direction)
+{
+	t_ob		*ob;
+
+	ob = e->mainob;
+	ob->vali[0] = direction;
+	return ;
+}
+
 static t_keyevents const	g_keyevents[] =
 {
 	CONV(&sp_mainob_model_remapuv, uvwrap_oxy, GLFW_KEY_8, sp_is_held, 0),
@@ -74,6 +84,8 @@ static t_keyevents const	g_keyevents[] =
 	CONV(&toggle_mouse_state, 42, GLFW_KEY_TAB, sp_is_held, 0),
 	CONV(&reset_campos, 42, GLFW_KEY_R, sp_is_held, sp_control_held),
 	CONV(&reset_mainobpos, 42, GLFW_KEY_R, sp_is_held | sp_control_held, 0),
+	CONV(&mix_item, +1, GLFW_KEY_PAGE_UP, sp_is_held, 0),
+	CONV(&mix_item, -1, GLFW_KEY_PAGE_DOWN, sp_is_held, 0),
 };
 
 void		sp_keyevent(t_env *e, int a, t_keystate ks)
@@ -91,7 +103,7 @@ void		sp_keyevent(t_env *e, int a, t_keystate ks)
 			if (ke->key == a
 				&& !(ks & ke->noheld) && ((ks & ke->held) == ke->held))
 			{
-				ke->fun(e, ke->dat);
+				NORM_AT_42_IS_WTF(e, ke->dat);
 				return ;
 			}
 			ke++;
