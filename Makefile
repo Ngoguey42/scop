@@ -71,10 +71,10 @@ O_FILES := obj/srcs/env_operations.o \
 	obj/srcs/ftmath/vector3.o \
 	obj/srcs/ftmath/vector3_basicop.o \
 	obj/srcs/ftmath/vector3_scalarop.o \
-	obj/srcs/item_controls/remap_textures.o \
 	obj/srcs/land/generate_land_rgb.o \
 	obj/srcs/land/generate_land_xyz.o \
 	obj/srcs/land/generate_land_y.o \
+	obj/srcs/mainob/mainob_operations.o \
 	obj/srcs/meshes/mesh_creation.o \
 	obj/srcs/meshes/mesh_operations.o \
 	obj/srcs/meshes/mesh_refresh.o \
@@ -97,7 +97,7 @@ O_FILES := obj/srcs/env_operations.o \
 	obj/srcs/textures/parse_tga.o \
 	obj/srcs/textures/textures_operations.o
 
-O_DIRS := obj/srcs/textures obj/srcs/shaders obj/srcs/obs obj/srcs/objmodel obj/srcs/meshes obj/srcs/land obj/srcs/item_controls obj/srcs/ftmath obj/srcs/controls obj/srcs/configuration obj/srcs
+O_DIRS := obj/srcs/textures obj/srcs/shaders obj/srcs/obs obj/srcs/objmodel obj/srcs/meshes obj/srcs/mainob obj/srcs/land obj/srcs/ftmath obj/srcs/controls obj/srcs/configuration obj/srcs
 
 MSG_0 := printf '\033[0;32m%s\033[0;0m\n'
 MSG_1 := printf '\033[0;31m%s\033[0;0m\n'
@@ -183,9 +183,6 @@ obj/srcs/ftmath/vector3_basicop.o: srcs/ftmath/vector3_basicop.c include/ftmath.
 obj/srcs/ftmath/vector3_scalarop.o: srcs/ftmath/vector3_scalarop.c include/ftmath.h | obj/srcs/ftmath
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
-obj/srcs/item_controls/remap_textures.o: srcs/item_controls/remap_textures.c include/cog_enums.h include/cog_meshfill.h include/ftmath.h include/objmodel.h include/scop.h include/scop_conf.h include/scop_types.h include/vbo.h | obj/srcs/item_controls
-	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
-
 obj/srcs/land/generate_land_rgb.o: srcs/land/generate_land_rgb.c include/cog_enums.h include/cog_meshfill.h include/ftmath.h include/objmodel.h include/scop.h include/scop_conf.h include/scop_types.h include/vbo.h | obj/srcs/land
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
@@ -193,6 +190,9 @@ obj/srcs/land/generate_land_xyz.o: srcs/land/generate_land_xyz.c include/cog_enu
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
 obj/srcs/land/generate_land_y.o: srcs/land/generate_land_y.c include/cog_enums.h include/ftmath.h include/scop_conf.h | obj/srcs/land
+	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
+
+obj/srcs/mainob/mainob_operations.o: srcs/mainob/mainob_operations.c include/cog_enums.h include/cog_meshfill.h include/ftmath.h include/objmodel.h include/scop.h include/scop_conf.h include/scop_types.h include/vbo.h | obj/srcs/mainob
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
 obj/srcs/meshes/mesh_creation.o: srcs/meshes/mesh_creation.c include/cog_enums.h include/cog_meshfill.h include/ftmath.h include/objmodel.h include/scop.h include/scop_conf.h include/scop_types.h include/vbo.h | obj/srcs/meshes

@@ -6,13 +6,13 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/15 11:47:48 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/30 15:19:27 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/16 12:18:32 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
 
-static int const		g_codes[] =
+static int const		g_keystates[] =
 {
 	GLFW_KEY_W,
 	GLFW_KEY_S,
@@ -32,6 +32,33 @@ static int const		g_codes[] =
 	GLFW_KEY_Y,
 };
 
+typedef struct s_keyevents{void (*fun)(); int dat; int key;} t_keyevents;
+
+static t_keyevents const	g_keyevents[] =
+{
+	(t_keyevents){&sp_mainob_model_remapuv, uvwrap_oxy, GLFW_KEY_8},
+	(t_keyevents){&sp_mainob_model_remapuv, uvwrap_spherical, GLFW_KEY_9},
+	(t_keyevents){&sp_mainob_model_remapuv, uvwrap_box, GLFW_KEY_0},
+	(t_keyevents){&sp_toggle_mouse_state, 42, GLFW_KEY_TAB},
+};
+
+void		sp_keyevent(t_env *e, int a)
+{
+	t_ui		i;
+
+	i = 0;
+	while (i < SIZE_ARRAY(g_keyevents))
+	{
+		if (g_keyevents[i].key == a)
+		{
+			g_keyevents[i].fun(e, g_keyevents[i].dat);
+			return ;
+		}
+		i++;
+	}
+	return ;
+}
+
 void		sp_keystate(t_env *e, int a, t_bool newstate)
 {
 	int		i;
@@ -39,7 +66,7 @@ void		sp_keystate(t_env *e, int a, t_bool newstate)
 	i = 0;
 	while (i < sp_num_keys)
 	{
-		if (g_codes[i] == a)
+		if (g_keystates[i] == a)
 		{
 			e->keystates[i] = newstate;
 			return ;
@@ -49,8 +76,11 @@ void		sp_keystate(t_env *e, int a, t_bool newstate)
 	return ;
 }
 
-void		sp_toggle_mouse_state(GLFWwindow *w, t_env *e)
+void		sp_toggle_mouse_state(t_env *e)
 {
+	GLFWwindow	*w;
+
+	w = e->win;
 	if (glfwGetInputMode(w, GLFW_CURSOR) == GLFW_CURSOR_NORMAL)
 		glfwSetInputMode(w, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 	else

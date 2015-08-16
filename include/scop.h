@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 12:07:31 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/16 11:35:42 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/16 12:12:45 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,9 @@
 /*
 ** CONTROLS
 */
-void		sp_toggle_mouse_state(GLFWwindow *w, t_env *e);
+void		sp_toggle_mouse_state(t_env *e);
 void		sp_keystate(t_env *e, int a, t_bool newstate);
+void        sp_keyevent(t_env *e, int a);
 void		sp_update_states(t_env *e);
 void		sp_update_movements(t_env *e);
 void		sp_update_sun(t_env *e, t_bool force);
@@ -107,6 +108,7 @@ void		sp_shrink_vbo(t_ftvector *const dst, t_vbo_basic const *const vbo);
 ** MAIN OB HANDLING
 */
 void		sp_mainob_model_remapuv(t_env *e, t_uvwrapping_type t);
+void        sp_mainob_changemodel(t_env *e, t_model_index moi);
 
 /*
 ** LAND GENERATION
