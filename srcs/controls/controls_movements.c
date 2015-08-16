@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/30 15:25:51 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/16 16:01:13 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/16 16:05:37 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,20 +18,22 @@
 #define NOHELD (sp_control_held)
 
 #define COMPUTE(V) (V) & NOHELD ? 0 : (V)
+#define GETSTATE(E, V) ((E)->keystates[(V)] ? 1 : 0)
+#define BASICCOMPUTE(E, U, D) (GETSTATE((E), (U)) - GETSTATE((E), (D)))
 
-static int		compute_key(t_env const *const e, int u, int d)
+static int		compute_key(t_env const *const e, int up, int d)
 {
-	u = e->keystates[u];
+	up = e->keystates[up];
 	d = e->keystates[d];
-	if ((u & NOHELD) || !(u & HELD))
-		u = sp_not_held;
+	if ((up & NOHELD) || !(up & HELD))
+		up = sp_not_held;
 	else
-		u = 1;
+		up = 1;
 	if ((d & NOHELD) || !(d & HELD))
 		d = sp_not_held;
 	else
 		d = 1;
-	return (u - d);
+	return (up - d);
 }
 
 static void		updade_pos(t_env *e, float elms, t_bool *up)
@@ -76,8 +78,8 @@ static void		update_angles_mouse(t_env *e, t_bool *up)
 
 static void		update_angles_keyboard(t_env *e, t_bool *up)
 {
-	int const	mvya = e->keystates[sp_right_key] - e->keystates[sp_left_key];
-	int const	mvpi = e->keystates[sp_up_key] - e->keystates[sp_down_key];
+	int const	mvya = BASICCOMPUTE(e, sp_right_key, sp_left_key);
+	int const	mvpi = BASICCOMPUTE(e, sp_up_key, sp_down_key);
 
 	if (mvya)
 	{

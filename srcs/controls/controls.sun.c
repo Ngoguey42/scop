@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/30 15:27:27 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/31 10:05:07 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/16 16:06:53 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,12 @@
 
 #define CAR(E) ((E)->sunpos_cartesian)
 
+#define GETSTATE(E, V) ((E)->keystates[(V)] ? 1 : 0)
+#define BASICCOMPUTE(E, U, D) (GETSTATE((E), (U)) - GETSTATE((E), (D)))
+
 static void		update_radius(t_env *e, t_bool *update)
 {
-	int const	mvr = e->keystates[sp_r_key] - e->keystates[sp_y_key];
+	int const	mvr = BASICCOMPUTE(e, sp_r_key, sp_y_key);
 
 	if (mvr)
 	{
@@ -34,7 +37,7 @@ static void		update_radius(t_env *e, t_bool *update)
 
 static void		update_inclination(t_env *e, t_bool *update)
 {
-	int const	mvt = e->keystates[sp_f_key] - e->keystates[sp_h_key];
+	int const	mvt = BASICCOMPUTE(e, sp_f_key, sp_h_key);
 
 	if (mvt)
 	{
@@ -46,7 +49,7 @@ static void		update_inclination(t_env *e, t_bool *update)
 
 static void		update_azimuth(t_env *e, t_bool *update)
 {
-	int const	mvp = e->keystates[sp_t_key] - e->keystates[sp_g_key];
+	int const	mvp = BASICCOMPUTE(e, sp_t_key, sp_g_key);
 
 	if (mvp)
 	{
