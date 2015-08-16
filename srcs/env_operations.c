@@ -6,13 +6,16 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/15 13:44:48 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/16 13:19:38 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/16 18:03:28 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
 #include <string.h>
 #include <math.h>
+
+#define CONCAT(NAME) sp_loadconf_ ## NAME
+#define L(NAME, ENV) CONCAT(NAME)(ENV)
 
 static t_env	*sp_register_instance(t_env *e)
 {
@@ -44,20 +47,13 @@ int				sp_init_env(t_env *e)
 	e->sunks = ATOV3(190.f / 255.f, 190.f / 255.f, 230.f / 255.f);
 	memcpy(&e->sundat, ((float[2]){0.007, 0.0002}), sizeof(float[2]));
 	sp_update_sun(e, true);
-	e->cpos = ATOV3(-2.65, 1.23, 1.91);
-	e->cangles[0] = -1.04;
-	e->cangles[1] = -0.34;
+	e->cpos = DEFAULT_CPOS_V3;
+	memcpy(&e->cangles, DEFAULT_CANGLES, sizeof(DEFAULT_CANGLES));
 	e->projection = m4_fovprojection(WIN_FOVF, WIN_RATIOF, WIN_NEARF, WIN_FARF);
-	e->view = m4_lookat(ATOV3(e->cpos.x, e->cpos.y, e->cpos.z),
-						v3_add(ATOV3(e->cpos.x, e->cpos.y, e->cpos.z),
-						v3_frontnormed(e->cangles)));
-	e->viewproj = m4_dotprod(&e->projection, &e->view);
+	sp_update_movements(e, true);
 	e->states[sp_window_focused_state] = 1;
-	if (sp_loadconf_vshaders(e) || sp_loadconf_fshaders(e)
-		|| sp_loadconf_gshaders(e)
-		|| sp_loadconf_programs(e)
-		|| sp_loadconf_textures(e) || sp_loadconf_meshes(e)
-		|| sp_loadconf_models(e))
+	if (L(vshaders, e) || L(fshaders, e) || L(gshaders, e) || L(programs, e)
+		|| L(textures, e) || L(meshes, e) || L(models, e))
 		return (1);
 	return (0);
 }

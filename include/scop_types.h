@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 10:07:19 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/16 16:27:06 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/16 17:39:09 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,6 @@ typedef enum					e_keyindex
 	sp_apos_key,
 	sp_minus_key,
 	sp_equal_key,
-
-	/* sp_t_key, */
-	/* sp_g_key, */
-	/* sp_f_key, */
-	/* sp_h_key, */
-	/* sp_r_key, */
-	/* sp_y_key, */
 	sp_num_keys
 }								t_keyindex;
 typedef enum					e_keystate
@@ -70,6 +63,8 @@ typedef struct					s_keyevents
 	void						(*fun)();
 	int							dat;
 	int							key;
+	t_keystate					held;
+	t_keystate					noheld;
 }								t_keyevents;
 
 /*

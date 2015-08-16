@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/30 15:25:51 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/16 16:05:37 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/16 17:58:20 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ static void		update_angles_keyboard(t_env *e, t_bool *up)
 	return ;
 }
 
-void			sp_update_movements(t_env *e)
+void			sp_update_movements(t_env *e, t_bool force)
 {
 	t_bool	update;
 
@@ -103,7 +103,7 @@ void			sp_update_movements(t_env *e)
 		update_angles_mouse(e, &update);
 	update_angles_keyboard(e, &update);
 	updade_pos(e, (float)e->time_el * MOVEMENT_SPEEDF, &update);
-	if (update)
+	if (update || force)
 	{
 		if (e->cangles[1] > CAMERA_POSBOUNDF)
 			e->cangles[1] = CAMERA_POSBOUNDF;

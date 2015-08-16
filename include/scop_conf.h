@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 10:33:54 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/15 18:11:05 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/16 18:07:49 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,11 @@
 
 # define MOUSE_SENSITIVITYF 0.005f
 # define MOVEMENT_SPEEDF 10.f
+
+# define DEFAULT_CPOS_V3 ATOV3(-2.65, 1.23, 1.91)
+# define DEFAULT_CANGLES (float[2]){-1.04, -0.34}
+# define D_MAINOBPOS_V3 ATOV3(0.f, 0.f, 0.f)
+# define D_MAINOBANGLES_V3 ATOV3(0.f, 0.f, 0.f)
 
 /*
 ** CALCULATED MACROES

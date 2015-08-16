@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/13 12:53:24 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/16 15:42:27 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/16 17:47:35 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,15 @@ static void	error_callback(int error, const char *description)
 
 static void	key_callback(GLFWwindow *w, int k, int sc, int a, int m)
 {
-	t_env	*e;
+	t_env		*e;
+	t_keystate	state;
 
 	if (a == GLFW_PRESS)
 	{
 		e = sp_instance();
-		sp_keystate(e, k, MODCONV(m) | sp_is_held);
-		sp_keyevent(e, k);
+		state = MODCONV(m) | sp_is_held;
+		sp_keystate(e, k, state);
+		sp_keyevent(e, k, state);
 	}
 	if (a == GLFW_RELEASE)
 	{
