@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 10:07:19 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/16 15:47:55 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/16 16:27:06 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,19 @@ typedef enum					e_keyindex
 	sp_down_key,
 	sp_left_key,
 	sp_right_key,
-	sp_t_key,
-	sp_g_key,
-	sp_f_key,
-	sp_h_key,
-	sp_r_key,
-	sp_y_key,
+	sp_p_key,
+	sp_semico_key,
+	sp_l_key,
+	sp_apos_key,
+	sp_minus_key,
+	sp_equal_key,
+
+	/* sp_t_key, */
+	/* sp_g_key, */
+	/* sp_f_key, */
+	/* sp_h_key, */
+	/* sp_r_key, */
+	/* sp_y_key, */
 	sp_num_keys
 }								t_keyindex;
 typedef enum					e_keystate

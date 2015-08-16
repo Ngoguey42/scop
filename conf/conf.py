@@ -6,7 +6,7 @@
 #    By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/08/10 13:13:01 by ngoguey           #+#    #+#              #
-#    Updated: 2015/08/16 14:59:31 by ngoguey          ###   ########.fr        #
+#    Updated: 2015/08/16 17:20:57 by ngoguey          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,10 @@ vshaders = [
 
 	# pocono_to_co fait ceci cela
 	Vshader("pocono_to_co", "pocono_to_co.vert", "viewproj",
+			("pos", 3), ("col", 3), ("nor", 3), ),
+
+	# pocono_to_co_nomodel fait ceci cela
+	Vshader("pocono_to_co_nomodel", "pocono_to_co_nomodel.vert", "viewproj",
 			("pos", 3), ("col", 3), ("nor", 3), ),
 
 	# po_to_noop fait ceci cela
@@ -72,7 +76,7 @@ programs = [
 	# pt fait ceci cela
 	Program("pt", "pote_to_couv", "couv_uv", "no"),
 	# land fait ceci cela
-	Program("land", "pocono_to_co", "cono_coli", "no"),
+	Program("land", "pocono_to_co_nomodel", "cono_coli", "no"),
 	# ptn fait ceci cela
 	Program("ptn", "poteno_to_uv", "couvno_blendli", "test"),
 	# pcn fait ceci cela
@@ -192,7 +196,7 @@ models = [
 	# square fait ceci cela
 	Model("square", "square", "no", "model"),
 	# land fait ceci cela
-	Model("land", "land", "no", "model"),
+	Model("land", "land", "no", ""),
 	# ptn fait ceci cela
 	Model("ptn", "ptn", "metal", "model"),
 	# sun fait ceci cela

@@ -6,7 +6,7 @@
 #    By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/08/10 13:13:13 by ngoguey           #+#    #+#              #
-#    Updated: 2015/08/10 18:40:49 by ngoguey          ###   ########.fr        #
+#    Updated: 2015/08/16 17:25:47 by ngoguey          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -223,7 +223,9 @@ class Model(Cstruct):
 		output_cconf_end("models")
 	def output_cconf_entry(self):
 		cog.outl("\tMODEL(sp_" + self.mename + "_mesh, sp_"
-		+ self.tename + "_texture, &sp_unif_" + self.unif_funname + "),")
+		+ self.tename + "_texture, "
+		+ ("NULL" if not self.unif_funname else "&sp_unif_" + self.unif_funname)
+		+ "),")
 
 class Ob(Cstruct):
 	def __init__(self, model, **kwargs):

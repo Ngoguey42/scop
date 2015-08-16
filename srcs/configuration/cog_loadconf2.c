@@ -59,7 +59,7 @@ int			sp_loadconf_models(t_env *e)
 
 	MODEL(sp_plane_mesh, sp_porcelain_texture, &sp_unif_model),
 	MODEL(sp_square_mesh, sp_no_texture, &sp_unif_model),
-	MODEL(sp_land_mesh, sp_no_texture, &sp_unif_model),
+	MODEL(sp_land_mesh, sp_no_texture, NULL),
 	MODEL(sp_ptn_mesh, sp_metal_texture, &sp_unif_model),
 	MODEL(sp_sun_mesh, sp_no_texture, &sp_unif_model),
 	};

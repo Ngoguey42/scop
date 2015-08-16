@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 12:07:31 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/16 15:40:36 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/16 16:33:50 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void        sp_keyevent(t_env *e, int a);
 void		sp_update_states(t_env *e);
 void		sp_update_movements(t_env *e);
 void		sp_update_sun(t_env *e, t_bool force);
+void		sp_updatepos_mainob(t_env *e);
 
 /*
 ** ENV

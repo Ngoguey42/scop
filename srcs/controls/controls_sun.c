@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/30 15:27:27 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/16 16:06:53 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/16 16:28:35 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 
 static void		update_radius(t_env *e, t_bool *update)
 {
-	int const	mvr = BASICCOMPUTE(e, sp_r_key, sp_y_key);
+	int const	mvr = BASICCOMPUTE(e, sp_minus_key, sp_equal_key);
 
 	if (mvr)
 	{
@@ -37,7 +37,7 @@ static void		update_radius(t_env *e, t_bool *update)
 
 static void		update_inclination(t_env *e, t_bool *update)
 {
-	int const	mvt = BASICCOMPUTE(e, sp_f_key, sp_h_key);
+	int const	mvt = BASICCOMPUTE(e, sp_l_key, sp_apos_key);
 
 	if (mvt)
 	{
@@ -49,7 +49,7 @@ static void		update_inclination(t_env *e, t_bool *update)
 
 static void		update_azimuth(t_env *e, t_bool *update)
 {
-	int const	mvp = BASICCOMPUTE(e, sp_t_key, sp_g_key);
+	int const	mvp = BASICCOMPUTE(e, sp_p_key, sp_semico_key);
 
 	if (mvp)
 	{

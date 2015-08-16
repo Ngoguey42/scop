@@ -30,6 +30,7 @@ typedef enum				e_vshader_index
 	sp_poco_to_co_vshader,
 	sp_poteno_to_uv_vshader,
 	sp_pocono_to_co_vshader,
+	sp_pocono_to_co_nomodel_vshader,
 	sp_po_to_noop_vshader,
 	sp_num_vshaders
 }							t_vshader_index;
