@@ -6,7 +6,7 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/07/30 10:07:14 by ngoguey           #+#    #+#             //
-//   Updated: 2015/08/15 19:19:30 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/08/16 15:08:37 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -20,11 +20,8 @@ in COUVNOFP
 	vec3					fragPos;
 }							fs_in;
 
-out vec4					color;
-
 uniform sampler2D			ourTexture;
 uniform vec3				viewPos;
-
 uniform struct Light {
 	vec3 pos;
 
@@ -35,6 +32,8 @@ uniform struct Light {
 	float linear;
 	float quadratic;
 }							l;
+
+out vec4					color;
 
 void main()
 {

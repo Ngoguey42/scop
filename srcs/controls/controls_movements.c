@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/30 15:25:51 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/10 14:24:04 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/16 16:01:13 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,31 @@
 #include <math.h>
 #include "scop.h"
 
+#define HELD (sp_is_held)
+#define NOHELD (sp_control_held)
+
+#define COMPUTE(V) (V) & NOHELD ? 0 : (V)
+
+static int		compute_key(t_env const *const e, int u, int d)
+{
+	u = e->keystates[u];
+	d = e->keystates[d];
+	if ((u & NOHELD) || !(u & HELD))
+		u = sp_not_held;
+	else
+		u = 1;
+	if ((d & NOHELD) || !(d & HELD))
+		d = sp_not_held;
+	else
+		d = 1;
+	return (u - d);
+}
+
 static void		updade_pos(t_env *e, float elms, t_bool *up)
 {
-	int const	mvx = e->keystates[sp_a_key] - e->keystates[sp_d_key];
-	int const	mvy = e->keystates[sp_space_key] - e->keystates[sp_c_key];
-	int const	mvz = e->keystates[sp_w_key] - e->keystates[sp_s_key];
+	int const	mvx = compute_key(e, sp_a_key, sp_d_key);
+	int const	mvy = compute_key(e, sp_space_key, sp_c_key);
+	int const	mvz = compute_key(e, sp_w_key, sp_s_key);
 	float const	nb = (float)(mvx * mvx + mvy * mvy + mvz * mvz);
 	float		fact;
 

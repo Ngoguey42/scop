@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/15 11:47:48 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/16 14:07:00 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/16 15:32:40 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,6 @@ static int const		g_keystates[] =
 	GLFW_KEY_EQUAL,
 	GLFW_KEY_MINUS,
 };
-
-typedef struct s_keyevents{void (*fun)(); int dat; int key;} t_keyevents;
 
 static t_keyevents const	g_keyevents[] =
 {
@@ -64,7 +62,7 @@ void		sp_keyevent(t_env *e, int a)
 	return ;
 }
 
-void		sp_keystate(t_env *e, int a, t_bool newstate)
+void		sp_keystate(t_env *e, int a, t_keystate newstate)
 {
 	int		i;
 

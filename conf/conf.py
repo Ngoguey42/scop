@@ -6,7 +6,7 @@
 #    By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/08/10 13:13:01 by ngoguey           #+#    #+#              #
-#    Updated: 2015/08/15 16:55:30 by ngoguey          ###   ########.fr        #
+#    Updated: 2015/08/16 14:59:31 by ngoguey          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,7 +54,7 @@ fshaders = [
 	# uvno_uvli fait ceci cela
 	Fshader("uvno_uvli", "uvno_uvli.frag", "light"),
 	# cono_coli fait ceci cela
-	Fshader("cono_coli", "cono_coli.frag", "light"),
+	Fshader("cono_coli", "cono_coli.frag", "lightstruct"),
 	# couvno_blendli fait ceci cela
 	Fshader("couvno_blendli", "couvno_blendli.frag", "lightstruct"),
 	# co_sun fait ceci cela

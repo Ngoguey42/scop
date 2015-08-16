@@ -6,7 +6,7 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/07/27 18:22:28 by ngoguey           #+#    #+#             //
-//   Updated: 2015/08/12 18:22:49 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/08/16 15:08:55 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -16,18 +16,21 @@ layout (location = 0) in vec3	pos;
 layout (location = 1) in vec3	col;
 layout (location = 2) in vec3	nor;
 
-out vec3						ourColor;
-out vec3						Normal;
-out vec3						fragPos;
-
 uniform mat4					model;
 uniform mat4					viewproj;
 
+out PoCoNo
+{
+	vec3                        pos;
+	vec3						col;
+	vec3                        nor;
+}                               vs_out;
+
 void main()
 {
-	Normal = mat3(transpose(inverse(model))) * nor;
-	ourColor = col;
+	vs_out.nor = mat3(transpose(inverse(model))) * nor;
+	vs_out.col = col;
 	gl_Position = model * vec4(pos, 1.f);
-	fragPos = vec3(gl_Position);	
+	vs_out.pos = vec3(gl_Position);	
 	gl_Position = viewproj * gl_Position;
 }

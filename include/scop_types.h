@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 10:07:19 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/16 11:23:45 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/16 15:47:55 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 /*
 ** KEYS
 */
-enum							e_keyindex
+typedef enum					e_keyindex
 {
 	sp_w_key,
 	sp_s_key,
@@ -43,13 +43,27 @@ enum							e_keyindex
 	sp_r_key,
 	sp_y_key,
 	sp_num_keys
-};
-
+}								t_keyindex;
+typedef enum					e_keystate
+{
+	sp_not_held = 0,
+	sp_is_held = 1,
+	sp_shift_held = 2,
+	sp_control_held = 4,
+	sp_alt_held = 8,
+	sp_super_held = 16,
+}								t_keystate;
 enum							e_stateindex
 {
 	sp_window_focused_state,
 	sp_num_states
 };
+typedef struct					s_keyevents
+{
+	void						(*fun)();
+	int							dat;
+	int							key;
+}								t_keyevents;
 
 /*
 ** Updating uniforms:
@@ -99,7 +113,6 @@ typedef struct					s_program
 ** A mesh is tied to several <model>
 ** Pos.x, Pos.y, Pos.z[, Co.r, Co.g, Co.b][, Tex.u, , Tex.v][, No.x, No.y, No.z]
 */
-
 typedef struct					s_mesh
 {
 	GLenum const				usage;
@@ -190,7 +203,7 @@ typedef struct					s_env
 
 	t_ob						*mainob;
 
-	int							keystates[sp_num_keys];
+	t_keystate					keystates[sp_num_keys];
 	int							states[sp_num_states];
 	double						mpos[2];
 

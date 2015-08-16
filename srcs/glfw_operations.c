@@ -6,11 +6,17 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/13 12:53:24 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/16 13:15:51 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/16 15:42:27 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
+
+#define SHHELD(V) ((V) & GLFW_MOD_SHIFT ? sp_shift_held : 0)
+#define COHELD(V) ((V) & GLFW_MOD_CONTROL ? sp_control_held : 0)
+#define ALHELD(V) ((V) & GLFW_MOD_ALT ? sp_alt_held : 0)
+#define SUHELD(V) ((V) & GLFW_MOD_SUPER ? sp_super_held : 0)
+#define MODCONV(V) (SHHELD((V)) | COHELD((V)) | ALHELD((V)) | SUHELD((V)))
 
 static void	error_callback(int error, const char *description)
 {
@@ -26,12 +32,12 @@ static void	key_callback(GLFWwindow *w, int k, int sc, int a, int m)
 	if (a == GLFW_PRESS)
 	{
 		e = sp_instance();
-		sp_keystate(e, k, true);
-		sp_keyevent(e, k);			
+		sp_keystate(e, k, MODCONV(m) | sp_is_held);
+		sp_keyevent(e, k);
 	}
 	if (a == GLFW_RELEASE)
 	{
-		sp_keystate(sp_instance(), k, false);
+		sp_keystate(sp_instance(), k, sp_not_held);
 		if (k == GLFW_KEY_ESCAPE || k == GLFW_KEY_Q)
 			glfwSetWindowShouldClose(w, GL_TRUE);
 	}
