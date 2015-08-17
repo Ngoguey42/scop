@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 12:07:31 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/17 13:53:18 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/17 14:39:52 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,10 @@ void		sp_calc_uv(t_env const *e, t_vbo_basic *vbo, float d[2]
 							, t_uvwrapping_type t);
 void		sp_recenter_positions(t_vbo_basic *vbo);
 void		sp_shrink_vbo(t_ftvector *const dst, t_vbo_basic const *const vbo);
+int         sp_meshfillbumb_objmodel(t_env const *e, t_mesh *me
+									 , t_vbo_basic *vbo
+									 , char const *filename);
+
 /*
 ** MAIN OB HANDLING
 */

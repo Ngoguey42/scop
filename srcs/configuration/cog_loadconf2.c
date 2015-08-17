@@ -44,12 +44,12 @@ int			sp_loadconf_meshes(t_env *e)
 	t_mesh const		tmp[sp_num_meshes] = {
 
 	MESH(sp_ptn_program, GL_DYNAMIC_DRAW, &sp_meshfill_teapot1),
-	MESH(sp_ptn_program, GL_DYNAMIC_DRAW, &sp_meshfill_plane),
+	MESH(sp_ptn_program, GL_DYNAMIC_DRAW, &sp_meshfill_teapot2),
 	MESH(sp_ptn_program, GL_DYNAMIC_DRAW, &sp_meshfill_ft),
 	MESH(sp_ptn_program, GL_DYNAMIC_DRAW, &sp_meshfill_csie),
+	MESH(sp_ptn_program, GL_STATIC_DRAW, &sp_meshfill_ptn),
 	MESH(sp_pcn_program, GL_STATIC_DRAW, &sp_meshfill_square),
 	MESH(sp_land_program, GL_STATIC_DRAW, &sp_meshfill_land),
-	MESH(sp_ptn_program, GL_STATIC_DRAW, &sp_meshfill_ptn),
 	MESH(sp_sun_program, GL_STATIC_DRAW, &sp_meshfill_sun),
 	};
 	memcpy(&e->meshes, &tmp, sizeof(tmp));
@@ -61,12 +61,12 @@ int			sp_loadconf_models(t_env *e)
 	t_model const		tmp[sp_num_models] = {
 
 	MODEL(sp_teapot1_mesh, sp_porcelain_texture, &sp_unif_model_mix),
-	MODEL(sp_plane_mesh, sp_porcelain_texture, &sp_unif_model_mix),
+	MODEL(sp_teapot2_mesh, sp_porcelain_texture, &sp_unif_model_mix),
 	MODEL(sp_ft_mesh, sp_porcelain_texture, &sp_unif_model_mix),
 	MODEL(sp_csie_mesh, sp_wall_texture, &sp_unif_model),
+	MODEL(sp_ptn_mesh, sp_metal_texture, &sp_unif_model),
 	MODEL(sp_square_mesh, sp_no_texture, &sp_unif_model),
 	MODEL(sp_land_mesh, sp_no_texture, NULL),
-	MODEL(sp_ptn_mesh, sp_metal_texture, &sp_unif_model),
 	MODEL(sp_sun_mesh, sp_no_texture, &sp_unif_model),
 	};
 	memcpy(&e->models, &tmp, sizeof(tmp));

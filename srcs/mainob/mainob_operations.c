@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/08/16 11:57:44 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/16 13:12:22 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/17 14:51:56 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,11 @@ void		sp_mainob_model_remapuv(t_env *e, t_uvwrapping_type t)
 	t_texture const *const	tex = e->textures + sp_porcelain_texture;
 
 	me = MEOFOB(e, e->mainob);
+	if (me->usage == GL_STATIC_DRAW)
+	{
+		ERROR("Cannot remap uv for this mesh.");
+		return ;
+	}
 	ftv_clear(&me->vertices, NULL);
 	sp_calc_uv(e, &me->vbo
 				, (float[2]){(float)tex->dim[0] / (float)tex->dim[1], 2.f}, t);

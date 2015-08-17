@@ -80,12 +80,12 @@ typedef enum				e_texture_index
 typedef enum				e_mesh_index
 {
 	sp_teapot1_mesh,
-	sp_plane_mesh,
+	sp_teapot2_mesh,
 	sp_ft_mesh,
 	sp_csie_mesh,
+	sp_ptn_mesh,
 	sp_square_mesh,
 	sp_land_mesh,
-	sp_ptn_mesh,
 	sp_sun_mesh,
 	sp_num_meshes
 }							t_mesh_index;
@@ -93,12 +93,12 @@ typedef enum				e_mesh_index
 typedef enum				e_model_index
 {
 	sp_teapot1_model,
-	sp_plane_model,
+	sp_teapot2_model,
 	sp_ft_model,
 	sp_csie_model,
+	sp_ptn_model,
 	sp_square_model,
 	sp_land_model,
-	sp_ptn_model,
 	sp_sun_model,
 	sp_num_models
 }							t_model_index;

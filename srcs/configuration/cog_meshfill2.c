@@ -25,6 +25,31 @@
 **  ]]]
 */
 
+int			sp_meshfill_square(t_env const *e, t_mesh *me, t_vbo_basic *vbo)
+{
+	t_vertex_basic	vertices[] = {
+
+	BVERT_POSCOL( 0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f),  // Top Right
+	BVERT_POSCOL(0.5f, -0.5f, 2.0f,   0.0f, 1.0f, 0.0f),  // Bottom Right
+	BVERT_POSCOL(-0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 1.0f),  // Bottom Left
+	BVERT_POSCOL(-0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 0.0f),  // Top Left
+        };
+	GLuint			indices[] = {  // Note that we start from 0!
+		3, 1, 0,  // First Triangle
+		3, 2, 1   // Second Triangle
+	};
+	vbo->npos = 3;
+	vbo->ncol = 3;
+	(void)ftv_insert_range(
+	&vbo->vertices, vertices, sizeof(vertices) / sizeof(*vertices));
+	(void)ftv_insert_range(
+	&me->faces, indices, sizeof(indices) / sizeof(*indices) / 3);
+        sp_calc_normals(e, me, vbo);        
+	return (0);
+	(void)e;
+	(void)me;
+}
+
 int			sp_meshfill_land(t_env const *e, t_mesh *me, t_vbo_basic *vbo)
 {
 	t_ftvector		lines[1];
@@ -32,32 +57,19 @@ int			sp_meshfill_land(t_env const *e, t_mesh *me, t_vbo_basic *vbo)
 	float			bounds[2];
 
 	if (ftv_init_instance(lines, sizeof(float) * line_points))
-	sp_enomem();
+		sp_enomem();
 	if (ftv_insert_count(lines, lines->data, line_points))
-	sp_enomem();
+		sp_enomem();
 	sp_fill_landgrid(lines);
  	if (ftv_reserve(&vbo->vertices, lines->size * lines->size))
-	sp_enomem();
+		sp_enomem();
 	sp_fill_landvertices(lines, vbo, bounds);
 	if (ftv_reserve(&me->faces, (lines->size - 1) * (lines->size - 1) * 2))
-	sp_enomem();
+		sp_enomem();
 	sp_fill_landfaces(lines, &me->faces);
 	sp_fill_landrgb(vbo, bounds);
 	ftv_release(lines, NULL);
-		sp_calc_normals(e, me, vbo);
-	return (0);
-	(void)e;
-	(void)me;
-}
-
-int			sp_meshfill_ptn(t_env const *e, t_mesh *me, t_vbo_basic *vbo)
-{
-	t_objmodel	m[1];
-
-	if (op_parse_obj(m, "res/alfa147.obj"))
-	return (ERROR("op_parse_obj(m)"), 1);
-		op_retreive_data(m, vbo, &me->faces);
-	sp_clean_objmodel(m);
+	sp_calc_normals(e, me, vbo);
 	return (0);
 	(void)e;
 	(void)me;
@@ -85,9 +97,9 @@ int			sp_meshfill_sun(t_env const *e, t_mesh *me, t_vbo_basic *vbo)
 	};
 	vbo->npos = 3;
 	(void)ftv_insert_range(
-	&vbo->vertices, vertices, sizeof(vertices) / sizeof(*vertices));
+		&vbo->vertices, vertices, sizeof(vertices) / sizeof(*vertices));
 	(void)ftv_insert_range(
-	&me->faces, indices, sizeof(indices) / sizeof(*indices) / 3);
+		&me->faces, indices, sizeof(indices) / sizeof(*indices) / 3);
 	return (0);
 	(void)e;
 	(void)me;

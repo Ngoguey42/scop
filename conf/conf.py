@@ -6,7 +6,7 @@
 #    By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/08/10 13:13:01 by ngoguey           #+#    #+#              #
-#    Updated: 2015/08/17 14:11:10 by ngoguey          ###   ########.fr        #
+#    Updated: 2015/08/17 14:47:36 by ngoguey          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,35 +16,35 @@ import math
 vshaders = [
 	# po_to_co fait ceci cela
 	Vshader("po_to_co", "po_to_co.vert", "viewproj2",
-			("pos", 3), ),
+	("pos", 3), ),
 
 	# pocote_to_couv fait ceci cela
 	Vshader("pocote_to_couv", "pocote_to_couv.vert", "viewproj2",
-			("pos", 3), ("col", 3), ("tex", 2), ),
+	("pos", 3), ("col", 3), ("tex", 2), ),
 
 	# pote_to_couv fait ceci cela
 	Vshader("pote_to_couv", "pote_to_couv.vert", "viewproj2",
-			("pos", 3), ("tex", 2), ),
+	("pos", 3), ("tex", 2), ),
 
 	# poco_to_co fait ceci cela
 	Vshader("poco_to_co", "poco_to_co.vert", "viewproj",
-			("pos", 3), ("col", 3), ),
+	("pos", 3), ("col", 3), ),
 
 	# poteno_to_uv fait ceci cela
 	Vshader("poteno_to_uv", "poteno_to_uv.vert", "viewproj",
-			("pos", 3), ("tex", 2), ("nor", 3), ),
+	("pos", 3), ("tex", 2), ("nor", 3), ),
 
 	# pocono_to_co fait ceci cela
 	Vshader("pocono_to_co", "pocono_to_co.vert", "viewproj",
-			("pos", 3), ("col", 3), ("nor", 3), ),
+	("pos", 3), ("col", 3), ("nor", 3), ),
 
 	# pocono_to_co_nomodel fait ceci cela
 	Vshader("pocono_to_co_nomodel", "pocono_to_co_nomodel.vert", "viewproj",
-			("pos", 3), ("col", 3), ("nor", 3), ),
+	("pos", 3), ("col", 3), ("nor", 3), ),
 
 	# po_to_noop fait ceci cela
 	Vshader("po_to_noop", "po_to_noop.vert", "viewproj",
-			("pos", 3), ),
+	("pos", 3), ),
 ]
 fshaders = [
 	# co_identity fait ceci cela
@@ -95,57 +95,16 @@ textures = [
 	Texture("metal", "metal.tga"),
 ]
 meshes = [
-	# plane fait ceci cela
 	Mesh("teapot1", "ptn", "GL_DYNAMIC_DRAW","""{
-	t_objmodel				m[1];
-	t_texture const *const	t = e->textures + sp_porcelain_texture;
-
-	if (op_parse_obj(m, "res/teapot.obj"))
-		return (ERROR("op_parse_obj(m)"), 1);
-	op_retreive_data(m, vbo, &me->faces);
-	sp_recenter_positions(vbo);
-	sp_calc_normals(e, me, vbo);
-	sp_calc_uv(e, vbo, (float[2]){(float)t->dim[0] / (float)t->dim[1], 2.f}
-		, uvwrap_spherical);
-	sp_clean_objmodel(m);
-	return (0);\n\t(void)e;\n\t(void)me;\n}"""),
-
-	Mesh("plane", "ptn", "GL_DYNAMIC_DRAW","""{
-	t_objmodel				m[1];
-	t_texture const *const	t = e->textures + sp_porcelain_texture;
-
-	if (op_parse_obj(m, "res/teapot2.obj"))
-		return (ERROR("op_parse_obj(m)"), 1);
-	op_retreive_data(m, vbo, &me->faces);
-	sp_recenter_positions(vbo);
-	sp_calc_normals(e, me, vbo);
-	sp_calc_uv(e, vbo, (float[2]){(float)t->dim[0] / (float)t->dim[1], 2.f}
-		, uvwrap_spherical);
-	sp_clean_objmodel(m);
-	return (0);\n\t(void)e;\n\t(void)me;\n}"""),
-
+	return (sp_meshfillbumb_objmodel(e, me, vbo, "res/teapot.obj"));\n}"""),
+	Mesh("teapot2", "ptn", "GL_DYNAMIC_DRAW","""{
+	return (sp_meshfillbumb_objmodel(e, me, vbo, "res/teapot2.obj"));\n}"""),
 	Mesh("ft", "ptn", "GL_DYNAMIC_DRAW","""{
-	t_objmodel				m[1];
-	t_texture const *const	t = e->textures + sp_porcelain_texture;
-
-	if (op_parse_obj(m, "res/42.obj"))
-		return (ERROR("op_parse_obj(m)"), 1);
-	op_retreive_data(m, vbo, &me->faces);
-	sp_recenter_positions(vbo);
-	sp_calc_normals(e, me, vbo);
-	sp_calc_uv(e, vbo, (float[2]){(float)t->dim[0] / (float)t->dim[1], 2.f}
-		, uvwrap_spherical);
-	sp_clean_objmodel(m);
-	return (0);\n\t(void)e;\n\t(void)me;\n}"""),
-
+	return (sp_meshfillbumb_objmodel(e, me, vbo, "res/42.obj"));\n}"""),
 	Mesh("csie", "ptn", "GL_DYNAMIC_DRAW","""{
-	t_objmodel				m[1];
-
-	if (op_parse_obj(m, "res/new_csie_b1.obj"))
-		return (ERROR("op_parse_obj(m)"), 1);
-	op_retreive_data(m, vbo, &me->faces);
-	sp_clean_objmodel(m);
-	return (0);\n\t(void)e;\n\t(void)me;\n}"""),
+	return (sp_meshfillbumb_objmodel(e, me, vbo, "res/new_csie_b1.obj"));\n}"""),
+	Mesh("ptn", "ptn", "GL_STATIC_DRAW","""{
+	return (sp_meshfillbumb_objmodel(e, me, vbo, "res/alfa147.obj"));\n}"""),
 
 	# square fait ceci cela
 	Mesh("square", "pcn", "GL_STATIC_DRAW","""{
@@ -176,29 +135,19 @@ meshes = [
 	float			bounds[2];
 
 	if (ftv_init_instance(lines, sizeof(float) * line_points))
-	sp_enomem();
+		sp_enomem();
 	if (ftv_insert_count(lines, lines->data, line_points))
-	sp_enomem();
+		sp_enomem();
 	sp_fill_landgrid(lines);
  	if (ftv_reserve(&vbo->vertices, lines->size * lines->size))
-	sp_enomem();
+		sp_enomem();
 	sp_fill_landvertices(lines, vbo, bounds);
 	if (ftv_reserve(&me->faces, (lines->size - 1) * (lines->size - 1) * 2))
-	sp_enomem();
+		sp_enomem();
 	sp_fill_landfaces(lines, &me->faces);
 	sp_fill_landrgb(vbo, bounds);
 	ftv_release(lines, NULL);
-		sp_calc_normals(e, me, vbo);
-	return (0);\n\t(void)e;\n\t(void)me;\n}"""),
-
-	# ptn fait ceci cela
-	Mesh("ptn", "ptn", "GL_STATIC_DRAW","""{
-	t_objmodel	m[1];
-
-	if (op_parse_obj(m, "res/alfa147.obj"))
-	return (ERROR("op_parse_obj(m)"), 1);
-		op_retreive_data(m, vbo, &me->faces);
-	sp_clean_objmodel(m);
+	sp_calc_normals(e, me, vbo);
 	return (0);\n\t(void)e;\n\t(void)me;\n}"""),
 
 	# sun fait ceci cela
@@ -223,31 +172,24 @@ meshes = [
 	};
 	vbo->npos = 3;
 	(void)ftv_insert_range(
-	&vbo->vertices, vertices, sizeof(vertices) / sizeof(*vertices));
+		&vbo->vertices, vertices, sizeof(vertices) / sizeof(*vertices));
 	(void)ftv_insert_range(
-	&me->faces, indices, sizeof(indices) / sizeof(*indices) / 3);
+		&me->faces, indices, sizeof(indices) / sizeof(*indices) / 3);
 	return (0);\n\t(void)e;\n\t(void)me;\n}"""),
 ]
 models = [
-	# plane fait ceci cela
 	Model("teapot1", "teapot1", "porcelain", "model_mix"),
-	# plane fait ceci cela
-	Model("plane", "plane", "porcelain", "model_mix"),
-	# plane fait ceci cela
+	Model("teapot2", "teapot2", "porcelain", "model_mix"),
 	Model("ft", "ft", "porcelain", "model_mix"),
-	# plane fait ceci cela
 	Model("csie", "csie", "wall", "model"),
-	# square fait ceci cela
-	Model("square", "square", "no", "model"),
-	# land fait ceci cela
-	Model("land", "land", "no", ""),
-	# ptn fait ceci cela
 	Model("ptn", "ptn", "metal", "model"),
-	# sun fait ceci cela
+	
+	Model("square", "square", "no", "model"),
+	Model("land", "land", "no", ""),
 	Model("sun", "sun", "no", "model"),
 ]
 obs = {
-    # Ob("plane"),
+    # Ob("teapot2"),
     # Ob("square", sca = 4., pos = (0., -5., 2.)),
 	# Ob("land"),
 	# Ob("ptn", pos = (-45., -0., -40.), rot = (0., 0., -math.pi / 2.)),
