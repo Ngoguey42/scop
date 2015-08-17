@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/22 13:44:32 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/17 15:07:49 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/17 18:11:48 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 #include <math.h>
 #include <stdarg.h>
 #include <string.h>
+#include <assert.h>
+#include <stdlib.h>
 
 #ifndef NARG
 # define NARG2(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Z,...) Z
@@ -33,8 +35,8 @@ static size_t const		g_obdata[][2] =
 	{offsetof(t_ob, rotation), sizeof(t_vector3)},
 	{offsetof(t_ob, scale), sizeof(t_vector3)},
 	{offsetof(t_ob, update), sizeof(void(*)())},
-	{offsetof(t_ob, valf), sizeof(float[1])},
-	{offsetof(t_ob, vali), sizeof(float[1])},
+	{offsetof(t_ob, valf), sizeof(float[3])},
+	{offsetof(t_ob, vali), sizeof(int[1])},
 };
 
 static void	push_ob(t_env *e, t_ob const *ob, t_bool ismain)
@@ -63,7 +65,10 @@ static void	retreive_varg(va_list *ap, t_ob_param id, void *buf)
 		(*(t_vector3*)buf) = va_arg(*ap, t_vector3);
 	else if (id == ob_up)
 		(*(void(**)())buf) = va_arg(*ap, void(*)());
-	//valf and vali
+	else if (id == ob_vf)
+		memcpy(buf, va_arg(*ap, float*), sizeof(float) * 3);
+	else if (id == ob_vi)
+		memcpy(buf, va_arg(*ap, int*), sizeof(int) * 1);
 	return ;
 }
 
@@ -76,9 +81,11 @@ static t_ob	dob(t_model_index moi, int narg, ...)
 
 	tmp = sp_default_ob(moi);
 	va_start(ap, narg);
+	assert(narg % 2 == 0);
 	while (narg >= 2)
 	{
 		paramid = va_arg(ap, t_ob_param);
+		assert(paramid < ob_num_param);
 		retreive_varg(&ap, paramid, buf);
 		memcpy(((void*)&tmp) + g_obdata[paramid][0], buf, g_obdata[paramid][1]);
 		narg -= 2;
@@ -87,14 +94,36 @@ static t_ob	dob(t_model_index moi, int narg, ...)
 	return (tmp);
 }
 
+float		ft_randf(void)
+{
+	return ((float)(rand() % 10000) / 9999.f);
+}
+
 int			sp_fill_obs(t_env *e)
 {
 	OBMN(sp_teapot2_model, ob_pos, D_MAINOBPOS_V3, ob_rot, D_MAINOBANGLES_V3
-		 ,ob_up, &sp_obupdate_mainob);
+		 ,ob_up, &sp_obupdate_mainob, ob_vi, ((int[1]){1}));
 	OB(sp_square_model, ob_sca, ATOV3SCAL(4.f), ob_pos, ATOV3(15.f, -5.f, 2.f));
 	OB(sp_land_model);
-	OB(sp_alpha_model, ob_rot, ATOV3(0.f, 0.f, -M_PI / 2.f)
-		, ob_pos, ATOV3(-45.f, -0.f, -40.f));
+	/* OB(sp_alpha_model, ob_rot, ATOV3(0.f, 0.f, -M_PI / 2.f) */
+		/* , ob_pos, ATOV3(-45.f, -0.f, -40.f)); */
 	OB(sp_sun_model, ob_up, &sp_obupdate_sun, ob_mov, false);
+
+	float	rad;
+	int		dir;
+
+	rad = 45.f;
+	while (rad < 500.f)
+	{
+		dir = 1 - rand() % 2 * 2;
+		OB(sp_plane_model, ob_sca, ATOV3SCAL(0.5f) , ob_up, &sp_obupdate_plane
+		   , ob_vi, ((int[1]){dir})
+		   , ob_vf, ((float[3]){ft_randf() * M_PI * 2, (float)dir * (0.1f + ft_randf()), rad}));
+		rad += 25.f * ft_randf();
+	}
+	/* OB(sp_plane_model, ob_sca, ATOV3SCAL(0.5f) , ob_up, &sp_obupdate_plane */
+	/*    , ob_vi, ((int[1]){-1}), ob_vf, ((float[3]){0.f, -1.2f, 35.f})); */
+	/* OB(sp_plane_model, ob_sca, ATOV3SCAL(0.5f) , ob_up, &sp_obupdate_plane */
+	/*    , ob_vi, ((int[1]){1}), ob_vf, ((float[3]){0.f, 1.5f, 50.f})); */
 	return (0);
 }

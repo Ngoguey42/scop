@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/30 13:49:29 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/16 19:09:06 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/17 18:03:48 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,38 @@ void		sp_obupdate_mainob(t_env const *e, t_ob *ob)
 void		sp_obupdate_sun(t_env const *e, t_ob *ob)
 {
 	ob->mat = m4_translate_nonuniform(e->sunpos_cartesian);
+	return ;
+}
+
+/*
+** float[0] = angle
+** float[1] = elapsed fact
+** float[3] = radius
+*/
+
+void		sp_obupdate_plane(t_env const *e, t_ob *ob)
+{
+	ob->valf[0] += (float)e->time_el * ob->valf[1];
+	ob->position = v3_add(
+		PLANES_CENTER_V3
+		, ATOV3(-sin(ob->valf[0]) * ob->valf[2]
+				, 0.f, -cos(ob->valf[0]) * ob->valf[2]))
+	;
+	/* ob->position.x = -sin(ob->valf[0]) * ob->valf[2]; */
+	/* ob->position.z = -cos(ob->valf[0]) * ob->valf[2]; */
+	/* ob->position.x += 1.f; */
+	if (ob->vali[0] > 0)
+	{
+		ob->rotation.y = ob->valf[0];
+		ob->rotation.z = 30.f / ob->valf[2];
+	}
+	else
+	{
+		ob->rotation.y = ob->valf[0] + M_PI;
+		ob->rotation.z = -30.f / ob->valf[2];
+	}
+		
+	/* ob->rotation.y = ob->valf[0]; */
+	ob->moved = true;
 	return ;
 }

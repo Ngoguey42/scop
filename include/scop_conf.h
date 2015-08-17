@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 10:33:54 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/16 18:07:49 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/17 18:12:33 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@
 # define WIN_RATIOF (4.f / 3.f)
 # define WIN_FOVF 45.f
 # define WIN_NEARF 0.2f
-# define WIN_FARF 200.f
+# define WIN_FARF 2000.f
 
 # define LAND_SIDEF 100.f
 # define LAND_RANGEF 28.f
@@ -50,6 +50,8 @@
 # define DEFAULT_CANGLES (float[2]){-1.04, -0.34}
 # define D_MAINOBPOS_V3 ATOV3(0.f, 0.f, 0.f)
 # define D_MAINOBANGLES_V3 ATOV3(0.f, 0.f, 0.f)
+
+# define PLANES_CENTER_V3 ATOV3(0.f, 250.f, 0.f)
 
 /*
 ** CALCULATED MACROES

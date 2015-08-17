@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/27 12:01:57 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/15 16:54:36 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/17 17:45:04 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,5 +74,6 @@ void			sp_render_obs(t_env const *e)
 			continue ;
 		render_prog_obs(e, i);
 	}
+	qprintf("\n");
 	return ;
 }

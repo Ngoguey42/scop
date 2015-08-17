@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 10:07:19 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/16 18:43:47 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/17 17:45:51 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,7 +170,7 @@ typedef struct					s_ob
 	t_vector3					scale;
 	t_matrix4					mat;
 	void						(*update)();
-	float						valf[1];
+	float						valf[3];
 	int							vali[1];
 }								t_ob;
 typedef enum					e_ob_param

@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 12:07:31 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/17 16:00:26 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/17 17:03:36 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,6 +146,7 @@ void		sp_render_obs(t_env const *e);
 int			sp_fill_obs(t_env *e);
 void		sp_obupdate_sun(t_env const *e, t_ob *ob);
 void		sp_obupdate_mainob(t_env const *e, t_ob *ob);
+void		sp_obupdate_plane(t_env const *e, t_ob *ob);
 t_bool		sp_ob_getnot_hidden(t_env const *e, t_ob const *ob);
 t_bool		sp_ob_get_moved(t_env const *e, t_ob const *ob);
 t_ob		sp_default_ob(t_model_index moi);
