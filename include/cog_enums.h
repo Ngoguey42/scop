@@ -50,7 +50,8 @@ typedef enum				e_fshader_index
 
 typedef enum				e_gshader_index
 {
-	sp_test_gshader,
+	sp_face_rgb_gshader,
+	sp_face_grey_gshader,
 	sp_num_gshaders,
 	sp_no_gshader
 }							t_gshader_index;
@@ -78,8 +79,9 @@ typedef enum				e_texture_index
 
 typedef enum				e_mesh_index
 {
-	sp_plane_mesh,
 	sp_teapot1_mesh,
+	sp_plane_mesh,
+	sp_ft_mesh,
 	sp_csie_mesh,
 	sp_square_mesh,
 	sp_land_mesh,
@@ -90,8 +92,9 @@ typedef enum				e_mesh_index
 
 typedef enum				e_model_index
 {
-	sp_plane_model,
 	sp_teapot1_model,
+	sp_plane_model,
+	sp_ft_model,
 	sp_csie_model,
 	sp_square_model,
 	sp_land_model,

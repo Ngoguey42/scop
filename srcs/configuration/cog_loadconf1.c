@@ -78,7 +78,8 @@ int			sp_loadconf_gshaders(t_env *e)
 {
 	t_gshader const		tmp[sp_num_gshaders] = {
 
-	GSHADER("test.geom", NULL),
+	GSHADER("face_rgb.geom", NULL),
+	GSHADER("face_grey.geom", NULL),
 	};
 	memcpy(&e->gshaders, &tmp, sizeof(tmp));
 	return (0);
@@ -92,7 +93,7 @@ int			sp_loadconf_programs(t_env *e)
 	PROG(sp_pocote_to_couv_vshader, sp_couv_uv_fshader, sp_no_gshader),
 	PROG(sp_pote_to_couv_vshader, sp_couv_uv_fshader, sp_no_gshader),
 	PROG(sp_pocono_to_co_nomodel_vshader, sp_cono_coli_fshader, sp_no_gshader),
-	PROG(sp_poteno_to_uv_vshader, sp_couvno_blendli_fshader, sp_test_gshader),
+	PROG(sp_poteno_to_uv_vshader, sp_couvno_blendli_fshader, sp_face_grey_gshader),
 	PROG(sp_pocono_to_co_vshader, sp_cono_coli_fshader, sp_no_gshader),
 	PROG(sp_po_to_noop_vshader, sp_co_sun_fshader, sp_no_gshader),
 	};

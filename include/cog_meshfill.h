@@ -22,8 +22,9 @@
 **  cog.out("/" "*")
 **  ]]]
 */
-int		sp_meshfill_plane(t_env const *e, t_mesh *me, t_vbo_basic *vbo);
 int		sp_meshfill_teapot1(t_env const *e, t_mesh *me, t_vbo_basic *vbo);
+int		sp_meshfill_plane(t_env const *e, t_mesh *me, t_vbo_basic *vbo);
+int		sp_meshfill_ft(t_env const *e, t_mesh *me, t_vbo_basic *vbo);
 int		sp_meshfill_csie(t_env const *e, t_mesh *me, t_vbo_basic *vbo);
 int		sp_meshfill_square(t_env const *e, t_mesh *me, t_vbo_basic *vbo);
 int		sp_meshfill_land(t_env const *e, t_mesh *me, t_vbo_basic *vbo);

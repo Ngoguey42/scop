@@ -25,15 +25,13 @@
 **  ]]]
 */
 
-int			sp_meshfill_plane(t_env const *e, t_mesh *me, t_vbo_basic *vbo)
+int			sp_meshfill_teapot1(t_env const *e, t_mesh *me, t_vbo_basic *vbo)
 {
 	t_objmodel				m[1];
 	t_texture const *const	t = e->textures + sp_porcelain_texture;
 
-	/* if (op_parse_obj(m, "res/cessna.obj")) */
-	/* if (op_parse_obj(m, "res/teapot.obj")) */
-	if (op_parse_obj(m, "res/teapot2.obj"))
-	return (ERROR("op_parse_obj(m)"), 1);
+	if (op_parse_obj(m, "res/teapot.obj"))
+		return (ERROR("op_parse_obj(m)"), 1);
 	op_retreive_data(m, vbo, &me->faces);
 	sp_calc_normals(e, me, vbo);
 	sp_calc_uv(e, vbo, (float[2]){(float)t->dim[0] / (float)t->dim[1], 2.f}
@@ -44,12 +42,29 @@ int			sp_meshfill_plane(t_env const *e, t_mesh *me, t_vbo_basic *vbo)
 	(void)me;
 }
 
-int			sp_meshfill_teapot1(t_env const *e, t_mesh *me, t_vbo_basic *vbo)
+int			sp_meshfill_plane(t_env const *e, t_mesh *me, t_vbo_basic *vbo)
 {
 	t_objmodel				m[1];
 	t_texture const *const	t = e->textures + sp_porcelain_texture;
 
-	if (op_parse_obj(m, "res/teapot.obj"))
+	if (op_parse_obj(m, "res/teapot2.obj"))
+		return (ERROR("op_parse_obj(m)"), 1);
+	op_retreive_data(m, vbo, &me->faces);
+	sp_calc_normals(e, me, vbo);
+	sp_calc_uv(e, vbo, (float[2]){(float)t->dim[0] / (float)t->dim[1], 2.f}
+		, uvwrap_spherical);
+	sp_clean_objmodel(m);
+	return (0);
+	(void)e;
+	(void)me;
+}
+
+int			sp_meshfill_ft(t_env const *e, t_mesh *me, t_vbo_basic *vbo)
+{
+	t_objmodel				m[1];
+	t_texture const *const	t = e->textures + sp_porcelain_texture;
+
+	if (op_parse_obj(m, "res/42.obj"))
 		return (ERROR("op_parse_obj(m)"), 1);
 	op_retreive_data(m, vbo, &me->faces);
 	sp_calc_normals(e, me, vbo);
@@ -94,31 +109,6 @@ int			sp_meshfill_square(t_env const *e, t_mesh *me, t_vbo_basic *vbo)
 	(void)ftv_insert_range(
 	&me->faces, indices, sizeof(indices) / sizeof(*indices) / 3);
         sp_calc_normals(e, me, vbo);        
-	return (0);
-	(void)e;
-	(void)me;
-}
-
-int			sp_meshfill_land(t_env const *e, t_mesh *me, t_vbo_basic *vbo)
-{
-	t_ftvector		lines[1];
-	size_t const	line_points = (int)pow(2., (double)POINTS_DEPTHI);
-	float			bounds[2];
-
-	if (ftv_init_instance(lines, sizeof(float) * line_points))
-	sp_enomem();
-	if (ftv_insert_count(lines, lines->data, line_points))
-	sp_enomem();
-	sp_fill_landgrid(lines);
- 	if (ftv_reserve(&vbo->vertices, lines->size * lines->size))
-	sp_enomem();
-	sp_fill_landvertices(lines, vbo, bounds);
-	if (ftv_reserve(&me->faces, (lines->size - 1) * (lines->size - 1) * 2))
-	sp_enomem();
-	sp_fill_landfaces(lines, &me->faces);
-	sp_fill_landrgb(vbo, bounds);
-	ftv_release(lines, NULL);
-		sp_calc_normals(e, me, vbo);
 	return (0);
 	(void)e;
 	(void)me;

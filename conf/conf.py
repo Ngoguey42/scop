@@ -6,7 +6,7 @@
 #    By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/08/10 13:13:01 by ngoguey           #+#    #+#              #
-#    Updated: 2015/08/16 19:22:46 by ngoguey          ###   ########.fr        #
+#    Updated: 2015/08/17 13:28:46 by ngoguey          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -66,7 +66,9 @@ fshaders = [
 ]
 gshaders = [
 	# test fait ceci cela
-	Gshader("test", "test.geom", ""),
+	Gshader("face_rgb", "face_rgb.geom", ""),
+	# test fait ceci cela
+	Gshader("face_grey", "face_grey.geom", ""),
 ]
 programs = [
 	# p fait ceci cela
@@ -78,7 +80,7 @@ programs = [
 	# land fait ceci cela
 	Program("land", "pocono_to_co_nomodel", "cono_coli", "no"),
 	# ptn fait ceci cela
-	Program("ptn", "poteno_to_uv", "couvno_blendli", "test"),
+	Program("ptn", "poteno_to_uv", "couvno_blendli", "face_grey"),
 	# pcn fait ceci cela
 	Program("pcn", "pocono_to_co", "cono_coli", "no"),
 	# sun fait ceci cela
@@ -94,14 +96,12 @@ textures = [
 ]
 meshes = [
 	# plane fait ceci cela
-	Mesh("plane", "ptn", "GL_DYNAMIC_DRAW","""{
+	Mesh("teapot1", "ptn", "GL_DYNAMIC_DRAW","""{
 	t_objmodel				m[1];
 	t_texture const *const	t = e->textures + sp_porcelain_texture;
 
-	/* if (op_parse_obj(m, "res/cessna.obj")) */
-	/* if (op_parse_obj(m, "res/teapot.obj")) */
-	if (op_parse_obj(m, "res/teapot2.obj"))
-	return (ERROR("op_parse_obj(m)"), 1);
+	if (op_parse_obj(m, "res/teapot.obj"))
+		return (ERROR("op_parse_obj(m)"), 1);
 	op_retreive_data(m, vbo, &me->faces);
 	sp_calc_normals(e, me, vbo);
 	sp_calc_uv(e, vbo, (float[2]){(float)t->dim[0] / (float)t->dim[1], 2.f}
@@ -109,11 +109,24 @@ meshes = [
 	sp_clean_objmodel(m);
 	return (0);\n\t(void)e;\n\t(void)me;\n}"""),
 
-	Mesh("teapot1", "ptn", "GL_DYNAMIC_DRAW","""{
+	Mesh("plane", "ptn", "GL_DYNAMIC_DRAW","""{
 	t_objmodel				m[1];
 	t_texture const *const	t = e->textures + sp_porcelain_texture;
 
-	if (op_parse_obj(m, "res/teapot.obj"))
+	if (op_parse_obj(m, "res/teapot2.obj"))
+		return (ERROR("op_parse_obj(m)"), 1);
+	op_retreive_data(m, vbo, &me->faces);
+	sp_calc_normals(e, me, vbo);
+	sp_calc_uv(e, vbo, (float[2]){(float)t->dim[0] / (float)t->dim[1], 2.f}
+		, uvwrap_spherical);
+	sp_clean_objmodel(m);
+	return (0);\n\t(void)e;\n\t(void)me;\n}"""),
+
+	Mesh("ft", "ptn", "GL_DYNAMIC_DRAW","""{
+	t_objmodel				m[1];
+	t_texture const *const	t = e->textures + sp_porcelain_texture;
+
+	if (op_parse_obj(m, "res/42.obj"))
 		return (ERROR("op_parse_obj(m)"), 1);
 	op_retreive_data(m, vbo, &me->faces);
 	sp_calc_normals(e, me, vbo);
@@ -214,9 +227,11 @@ meshes = [
 ]
 models = [
 	# plane fait ceci cela
+	Model("teapot1", "teapot1", "porcelain", "model_mix"),
+	# plane fait ceci cela
 	Model("plane", "plane", "porcelain", "model_mix"),
 	# plane fait ceci cela
-	Model("teapot1", "teapot1", "porcelain", "model_mix"),
+	Model("ft", "ft", "porcelain", "model_mix"),
 	# plane fait ceci cela
 	Model("csie", "csie", "wall", "model"),
 	# square fait ceci cela

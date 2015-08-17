@@ -1,33 +1,34 @@
 // ************************************************************************** //
 //                                                                            //
 //                                                        :::      ::::::::   //
-//   test.geom                                          :+:      :+:    :+:   //
+//   face_rgb.geom                                      :+:      :+:    :+:   //
 //                                                    +:+ +:+         +:+     //
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
-//   Created: 2015/07/30 08:53:45 by ngoguey           #+#    #+#             //
-//   Updated: 2015/07/30 11:03:39 by ngoguey          ###   ########.fr       //
+//   Created: 2015/08/17 13:18:02 by ngoguey           #+#    #+#             //
+//   Updated: 2015/08/17 13:18:03 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
 #version 410 core
-layout (triangles) in;
-layout (triangle_strip, max_vertices = 3) out;
 
-in UVNOFP
-{
-	vec2	texUV;
-	vec3	Normal;
-	vec3	fragPos;
-}       gs_in[];
+layout					(triangles) in;
+layout					(triangle_strip, max_vertices = 3) out;
 
-out COUVNOFP
+in PoUvNo
 {
-	vec3	Color;
-	vec2	texUV;
-	vec3	Normal;
-	vec3	fragPos;
-}	gs_out;
+	vec3				pos;
+	vec2				tex;
+	vec3				nor;
+}						gs_in[];
+
+out PoCoUvNo
+{
+	vec3				pos;
+	vec3				col;
+	vec2				tex;
+	vec3				nor;
+}						gs_out;
 
 #define NSHADES 24
 #define THIRD (NSHADES / 3)
@@ -35,20 +36,20 @@ out COUVNOFP
 
 void main()
 {
-	int		i;
-	int		colorid = gl_PrimitiveIDIn % NSHADES;
+	int			i;
+	int			colorid = gl_PrimitiveIDIn % NSHADES;
 
 	if (colorid < THIRD)
-		gs_out.Color = vec3((colorid % THIRD * DELTA + 50) / 255.f, 0.f, 0.f);
+		gs_out.col = vec3((colorid % THIRD * DELTA + 50) / 255.f, 0.f, 0.f);
 	else if (colorid < THIRD * 2)
-		gs_out.Color = vec3(0.f, (colorid % THIRD * DELTA + 50) / 255.f, 0.f);
+		gs_out.col = vec3(0.f, (colorid % THIRD * DELTA + 50) / 255.f, 0.f);
 	else
-		gs_out.Color = vec3(0.f, 0.f, (colorid % THIRD * DELTA + 50) / 255.f);	
+		gs_out.col = vec3(0.f, 0.f, (colorid % THIRD * DELTA + 50) / 255.f);
 	for (i = 0; i < 3; i++)
 	{
-		gs_out.texUV = gs_in[i].texUV;
-		gs_out.Normal = gs_in[i].Normal;
-		gs_out.fragPos = gs_in[i].fragPos;
+		gs_out.tex = gs_in[i].tex;
+		gs_out.nor = gs_in[i].nor;
+		gs_out.pos = gs_in[i].pos;
 		gl_Position = gl_in[i].gl_Position;
 		EmitVertex();
 	}

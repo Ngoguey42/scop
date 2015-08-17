@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/15 11:47:48 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/16 18:54:18 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/17 13:32:25 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void		sp_keyevent(t_env *e, int a, t_keystate ks)
 	t_keyevents const			*ke;
 	t_keyevents const *const	end = END_ARRAY(g_keyevents);
 
-	if (a >= GLFW_KEY_1 && a < GLFW_KEY_1 + sp_num_models)
+	if (a >= GLFW_KEY_1 && a < GLFW_KEY_1 + sp_num_models && a < GLFW_KEY_8)
 		sp_mainob_changemodel(e, a - GLFW_KEY_1);
 	else
 	{
