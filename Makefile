@@ -81,6 +81,7 @@ O_FILES := obj/srcs/env_operations.o \
 	obj/srcs/meshes/mesh_refresh.o \
 	obj/srcs/meshes/mesh_vbo_operations.o \
 	obj/srcs/meshes/normals_calculation.o \
+	obj/srcs/meshes/positions_calculations.o \
 	obj/srcs/meshes/uv_calculations.o \
 	obj/srcs/objmodel/obj_faces_operations.o \
 	obj/srcs/objmodel/obj_insert_face.o \
@@ -212,6 +213,9 @@ obj/srcs/meshes/mesh_vbo_operations.o: srcs/meshes/mesh_vbo_operations.c include
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
 obj/srcs/meshes/normals_calculation.o: srcs/meshes/normals_calculation.c include/cog_enums.h include/cog_meshfill.h include/ftmath.h include/objmodel.h include/scop.h include/scop_conf.h include/scop_types.h include/vbo.h | obj/srcs/meshes
+	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
+
+obj/srcs/meshes/positions_calculations.o: srcs/meshes/positions_calculations.c include/cog_enums.h include/cog_meshfill.h include/ftmath.h include/objmodel.h include/scop.h include/scop_conf.h include/scop_types.h include/vbo.h | obj/srcs/meshes
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
 obj/srcs/meshes/uv_calculations.o: srcs/meshes/uv_calculations.c include/cog_enums.h include/cog_meshfill.h include/ftmath.h include/objmodel.h include/scop.h include/scop_conf.h include/scop_types.h include/vbo.h | obj/srcs/meshes

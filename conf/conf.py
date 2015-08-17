@@ -6,7 +6,7 @@
 #    By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/08/10 13:13:01 by ngoguey           #+#    #+#              #
-#    Updated: 2015/08/17 13:28:46 by ngoguey          ###   ########.fr        #
+#    Updated: 2015/08/17 14:11:10 by ngoguey          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -103,6 +103,7 @@ meshes = [
 	if (op_parse_obj(m, "res/teapot.obj"))
 		return (ERROR("op_parse_obj(m)"), 1);
 	op_retreive_data(m, vbo, &me->faces);
+	sp_recenter_positions(vbo);
 	sp_calc_normals(e, me, vbo);
 	sp_calc_uv(e, vbo, (float[2]){(float)t->dim[0] / (float)t->dim[1], 2.f}
 		, uvwrap_spherical);
@@ -116,6 +117,7 @@ meshes = [
 	if (op_parse_obj(m, "res/teapot2.obj"))
 		return (ERROR("op_parse_obj(m)"), 1);
 	op_retreive_data(m, vbo, &me->faces);
+	sp_recenter_positions(vbo);
 	sp_calc_normals(e, me, vbo);
 	sp_calc_uv(e, vbo, (float[2]){(float)t->dim[0] / (float)t->dim[1], 2.f}
 		, uvwrap_spherical);
@@ -129,6 +131,7 @@ meshes = [
 	if (op_parse_obj(m, "res/42.obj"))
 		return (ERROR("op_parse_obj(m)"), 1);
 	op_retreive_data(m, vbo, &me->faces);
+	sp_recenter_positions(vbo);
 	sp_calc_normals(e, me, vbo);
 	sp_calc_uv(e, vbo, (float[2]){(float)t->dim[0] / (float)t->dim[1], 2.f}
 		, uvwrap_spherical);

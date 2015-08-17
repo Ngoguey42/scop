@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 12:07:31 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/16 18:55:41 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/17 13:53:18 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,8 +102,7 @@ void		sp_calc_normals(t_env const *e, t_mesh const *me
 							, t_vbo_basic *vbo);
 void		sp_calc_uv(t_env const *e, t_vbo_basic *vbo, float d[2]
 							, t_uvwrapping_type t);
-/* int			sp_validate_vbo(t_vbo_basic const *const vbo */
-/* 							, t_vshader const *const vs); */
+void		sp_recenter_positions(t_vbo_basic *vbo);
 void		sp_shrink_vbo(t_ftvector *const dst, t_vbo_basic const *const vbo);
 /*
 ** MAIN OB HANDLING
