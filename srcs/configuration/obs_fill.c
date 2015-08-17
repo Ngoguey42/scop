@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/22 13:44:32 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/17 14:46:43 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/17 15:07:49 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ int			sp_fill_obs(t_env *e)
 		 ,ob_up, &sp_obupdate_mainob);
 	OB(sp_square_model, ob_sca, ATOV3SCAL(4.f), ob_pos, ATOV3(15.f, -5.f, 2.f));
 	OB(sp_land_model);
-	OB(sp_ptn_model, ob_rot, ATOV3(0.f, 0.f, -M_PI / 2.f)
+	OB(sp_alpha_model, ob_rot, ATOV3(0.f, 0.f, -M_PI / 2.f)
 		, ob_pos, ATOV3(-45.f, -0.f, -40.f));
 	OB(sp_sun_model, ob_up, &sp_obupdate_sun, ob_mov, false);
 	return (0);

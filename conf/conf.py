@@ -6,7 +6,7 @@
 #    By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/08/10 13:13:01 by ngoguey           #+#    #+#              #
-#    Updated: 2015/08/17 14:47:36 by ngoguey          ###   ########.fr        #
+#    Updated: 2015/08/17 15:09:02 by ngoguey          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,60 +14,35 @@ from confclasses import *
 import math
 
 vshaders = [
-	# po_to_co fait ceci cela
 	Vshader("po_to_co", "po_to_co.vert", "viewproj2",
 	("pos", 3), ),
-
-	# pocote_to_couv fait ceci cela
 	Vshader("pocote_to_couv", "pocote_to_couv.vert", "viewproj2",
 	("pos", 3), ("col", 3), ("tex", 2), ),
-
-	# pote_to_couv fait ceci cela
 	Vshader("pote_to_couv", "pote_to_couv.vert", "viewproj2",
 	("pos", 3), ("tex", 2), ),
-
-	# poco_to_co fait ceci cela
 	Vshader("poco_to_co", "poco_to_co.vert", "viewproj",
 	("pos", 3), ("col", 3), ),
-
-	# poteno_to_uv fait ceci cela
 	Vshader("poteno_to_uv", "poteno_to_uv.vert", "viewproj",
 	("pos", 3), ("tex", 2), ("nor", 3), ),
-
-	# pocono_to_co fait ceci cela
 	Vshader("pocono_to_co", "pocono_to_co.vert", "viewproj",
 	("pos", 3), ("col", 3), ("nor", 3), ),
-
-	# pocono_to_co_nomodel fait ceci cela
 	Vshader("pocono_to_co_nomodel", "pocono_to_co_nomodel.vert", "viewproj",
 	("pos", 3), ("col", 3), ("nor", 3), ),
-
-	# po_to_noop fait ceci cela
 	Vshader("po_to_noop", "po_to_noop.vert", "viewproj",
 	("pos", 3), ),
 ]
 fshaders = [
-	# co_identity fait ceci cela
 	Fshader("co_identity", "co_identity.frag", ""),
-	# uv_identity fait ceci cela
 	Fshader("uv_identity", "uv_identity.frag", ""),
-	# couv_blend fait ceci cela
 	Fshader("couv_blend", "couv_blend.frag", ""),
-	# couv_uv fait ceci cela
 	Fshader("couv_uv", "couv_uv.frag", ""),
-	# uvno_uvli fait ceci cela
 	Fshader("uvno_uvli", "uvno_uvli.frag", "light"),
-	# cono_coli fait ceci cela
 	Fshader("cono_coli", "cono_coli.frag", "lightstruct"),
-	# couvno_blendli fait ceci cela
 	Fshader("couvno_blendli", "couvno_blendli.frag", "lightstruct"),
-	# co_sun fait ceci cela
 	Fshader("co_sun", "co_sun.frag", "suncolor"),
 ]
 gshaders = [
-	# test fait ceci cela
 	Gshader("face_rgb", "face_rgb.geom", ""),
-	# test fait ceci cela
 	Gshader("face_grey", "face_grey.geom", ""),
 ]
 programs = [
@@ -103,8 +78,10 @@ meshes = [
 	return (sp_meshfillbumb_objmodel(e, me, vbo, "res/42.obj"));\n}"""),
 	Mesh("csie", "ptn", "GL_DYNAMIC_DRAW","""{
 	return (sp_meshfillbumb_objmodel(e, me, vbo, "res/new_csie_b1.obj"));\n}"""),
-	Mesh("ptn", "ptn", "GL_STATIC_DRAW","""{
+	Mesh("alpha", "ptn", "GL_STATIC_DRAW","""{
 	return (sp_meshfillbumb_objmodel(e, me, vbo, "res/alfa147.obj"));\n}"""),
+	Mesh("plane", "ptn", "GL_STATIC_DRAW","""{
+	return (sp_meshfillbumb_objmodel(e, me, vbo, "res/cessna.obj"));\n}"""),
 
 	# square fait ceci cela
 	Mesh("square", "pcn", "GL_STATIC_DRAW","""{
@@ -180,9 +157,10 @@ meshes = [
 models = [
 	Model("teapot1", "teapot1", "porcelain", "model_mix"),
 	Model("teapot2", "teapot2", "porcelain", "model_mix"),
-	Model("ft", "ft", "porcelain", "model_mix"),
+	Model("ft", "ft", "metal", "model_mix"),
 	Model("csie", "csie", "wall", "model"),
-	Model("ptn", "ptn", "metal", "model"),
+	Model("alpha", "alpha", "metal", "model"),
+	Model("plane", "plane", "wall", "model"),
 	
 	Model("square", "square", "no", "model"),
 	Model("land", "land", "no", ""),

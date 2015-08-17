@@ -45,7 +45,7 @@ int			sp_meshfill_csie(t_env const *e, t_mesh *me, t_vbo_basic *vbo)
 	return (sp_meshfillbumb_objmodel(e, me, vbo, "res/new_csie_b1.obj"));
 }
 
-int			sp_meshfill_ptn(t_env const *e, t_mesh *me, t_vbo_basic *vbo)
+int			sp_meshfill_alpha(t_env const *e, t_mesh *me, t_vbo_basic *vbo)
 {
 	return (sp_meshfillbumb_objmodel(e, me, vbo, "res/alfa147.obj"));
 }

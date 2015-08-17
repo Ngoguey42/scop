@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/13 12:53:24 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/16 17:47:35 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/17 16:03:45 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,16 @@
 #define ALHELD(V) ((V) & GLFW_MOD_ALT ? sp_alt_held : 0)
 #define SUHELD(V) ((V) & GLFW_MOD_SUPER ? sp_super_held : 0)
 #define MODCONV(V) (SHHELD((V)) | COHELD((V)) | ALHELD((V)) | SUHELD((V)))
+
+#define ISSHKEY(V) ((V) == GLFW_KEY_LEFT_SHIFT || (V) == GLFW_KEY_RIGHT_SHIFT)
+#define ISCOKEY(V) ((V) == GLFW_KEY_LEFT_CONTROL||(V) == GLFW_KEY_RIGHT_CONTROL)
+#define ISALKEY(V) ((V) == GLFW_KEY_LEFT_ALT || (V) == GLFW_KEY_RIGHT_ALT)
+#define ISSUKEY(V) ((V) == GLFW_KEY_LEFT_SUPER || (V) == GLFW_KEY_RIGHT_SUPER)
+#define SHKEY(V) (ISSHKEY((V)) ? sp_shift_held : 0)
+#define COKEY(V) (ISCOKEY((V)) ? sp_control_held : 0)
+#define ALKEY(V) (ISALKEY((V)) ? sp_alt_held : 0)
+#define SUKEY(V) (ISSUKEY((V)) ? sp_super_held : 0)
+#define MODPRESSCONV(K) (SHKEY(K) | COKEY(K) | ALKEY(K) | SUKEY(K))
 
 static void	error_callback(int error, const char *description)
 {
@@ -37,14 +47,15 @@ static void	key_callback(GLFWwindow *w, int k, int sc, int a, int m)
 		sp_keystate(e, k, state);
 		sp_keyevent(e, k, state);
 	}
-	if (a == GLFW_RELEASE)
+	else if (a == GLFW_RELEASE)
 	{
-		sp_keystate(sp_instance(), k, sp_not_held);
+		e = sp_instance();
+		sp_keystate(e, k, sp_not_held);
+		sp_keymodrelease(e, MODPRESSCONV(k));
 		if (k == GLFW_KEY_ESCAPE || k == GLFW_KEY_Q)
 			glfwSetWindowShouldClose(w, GL_TRUE);
 	}
 	(void)sc;
-	(void)m;
 	return ;
 }
 

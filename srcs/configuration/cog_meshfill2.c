@@ -25,6 +25,11 @@
 **  ]]]
 */
 
+int			sp_meshfill_plane(t_env const *e, t_mesh *me, t_vbo_basic *vbo)
+{
+	return (sp_meshfillbumb_objmodel(e, me, vbo, "res/cessna.obj"));
+}
+
 int			sp_meshfill_square(t_env const *e, t_mesh *me, t_vbo_basic *vbo)
 {
 	t_vertex_basic	vertices[] = {
