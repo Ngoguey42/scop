@@ -1,23 +1,23 @@
 // ************************************************************************** //
 //                                                                            //
 //                                                        :::      ::::::::   //
-//   po_to_noop.vert                                    :+:      :+:    :+:   //
+//   depth01.frag                                       :+:      :+:    :+:   //
 //                                                    +:+ +:+         +:+     //
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
-//   Created: 2015/07/30 13:19:05 by ngoguey           #+#    #+#             //
-//   Updated: 2015/08/18 15:50:29 by ngoguey          ###   ########.fr       //
+//   Created: 2015/08/18 15:54:08 by ngoguey           #+#    #+#             //
+//   Updated: 2015/08/18 15:55:47 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
 #version 410 core
 
-layout (location = 0) in vec3	pos;
+in vec4			pos;
 
-uniform mat4					viewproj;
-uniform mat4					model;
+uniform vec3	lpos;
+uniform float	far;
 
 void main()
 {
-	gl_Position = viewproj * model * vec4(pos, 1.f);
-}
+	gl_FragDepth = length(pos.xyz - lpos) / far;
+} 

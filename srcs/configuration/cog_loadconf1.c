@@ -37,21 +37,23 @@ int			sp_loadconf_vshaders(t_env *e)
 	t_vshader const		tmp[sp_num_vshaders] = {
 
 	VSHADER("po_to_co.vert", &sp_unif_viewproj2,
-	LOC(sp_pos_loc, 3)),
+LOC(sp_pos_loc, 3)),
 	VSHADER("pocote_to_couv.vert", &sp_unif_viewproj2,
-	LOC(sp_pos_loc, 3), LOC(sp_col_loc, 3), LOC(sp_tex_loc, 2)),
+LOC(sp_pos_loc, 3), LOC(sp_col_loc, 3), LOC(sp_tex_loc, 2)),
 	VSHADER("pote_to_couv.vert", &sp_unif_viewproj2,
-	LOC(sp_pos_loc, 3), LOC(sp_tex_loc, 2)),
+LOC(sp_pos_loc, 3), LOC(sp_tex_loc, 2)),
 	VSHADER("poco_to_co.vert", &sp_unif_viewproj,
-	LOC(sp_pos_loc, 3), LOC(sp_col_loc, 3)),
+LOC(sp_pos_loc, 3), LOC(sp_col_loc, 3)),
 	VSHADER("poteno_to_uv.vert", &sp_unif_viewproj,
-	LOC(sp_pos_loc, 3), LOC(sp_tex_loc, 2), LOC(sp_nor_loc, 3)),
+LOC(sp_pos_loc, 3), LOC(sp_tex_loc, 2), LOC(sp_nor_loc, 3)),
 	VSHADER("pocono_to_co.vert", &sp_unif_viewproj,
-	LOC(sp_pos_loc, 3), LOC(sp_col_loc, 3), LOC(sp_nor_loc, 3)),
+LOC(sp_pos_loc, 3), LOC(sp_col_loc, 3), LOC(sp_nor_loc, 3)),
 	VSHADER("pocono_to_co_nomodel.vert", &sp_unif_viewproj,
-	LOC(sp_pos_loc, 3), LOC(sp_col_loc, 3), LOC(sp_nor_loc, 3)),
+LOC(sp_pos_loc, 3), LOC(sp_col_loc, 3), LOC(sp_nor_loc, 3)),
 	VSHADER("po_to_noop.vert", &sp_unif_viewproj,
-	LOC(sp_pos_loc, 3)),
+LOC(sp_pos_loc, 3)),
+	VSHADER("po_to_noop_noviewproj.vert", NULL,
+LOC(sp_pos_loc, 3)),
 	};
 	memcpy(&e->vshaders, &tmp, sizeof(tmp));
 	return (0);
@@ -69,6 +71,7 @@ int			sp_loadconf_fshaders(t_env *e)
 	FSHADER("cono_coli.frag", &sp_unif_lightstruct),
 	FSHADER("couvno_blendli.frag", &sp_unif_lightstruct),
 	FSHADER("co_sun.frag", &sp_unif_suncolor),
+	FSHADER("depth01.frag", &sp_unif_lightdepth),
 	};
 	memcpy(&e->fshaders, &tmp, sizeof(tmp));
 	return (0);
@@ -80,6 +83,7 @@ int			sp_loadconf_gshaders(t_env *e)
 
 	GSHADER("face_rgb.geom", NULL),
 	GSHADER("face_grey.geom", NULL),
+	GSHADER("pos_to_cubemap.geom", &sp_unif_shadowmat6),
 	};
 	memcpy(&e->gshaders, &tmp, sizeof(tmp));
 	return (0);
@@ -96,6 +100,7 @@ int			sp_loadconf_programs(t_env *e)
 	PROG(sp_poteno_to_uv_vshader, sp_couvno_blendli_fshader, sp_face_grey_gshader),
 	PROG(sp_pocono_to_co_vshader, sp_cono_coli_fshader, sp_no_gshader),
 	PROG(sp_po_to_noop_vshader, sp_co_sun_fshader, sp_no_gshader),
+	PROG(sp_po_to_noop_noviewproj_vshader, sp_depth01_fshader, sp_pos_to_cubemap_gshader),
 	};
 	memcpy(&e->programs, &tmp, sizeof(tmp));
 	return (0);

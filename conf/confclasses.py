@@ -6,7 +6,7 @@
 #    By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/08/10 13:13:13 by ngoguey           #+#    #+#              #
-#    Updated: 2015/08/16 17:25:47 by ngoguey          ###   ########.fr        #
+#    Updated: 2015/08/18 16:17:28 by ngoguey          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,7 +56,11 @@ class Vshader(Cstruct):
 		output_cconf_end("vshaders")
 	def output_cconf_entry(self):
 		cog.out("\tVSHADER(\"" + self.filename
-			+ "\", &sp_unif_" + self.unif_funname + ",\n\t")
+			+ "\", ")
+		if self.unif_funname != "":
+			cog.out("&sp_unif_" + self.unif_funname + ",\n")
+		else:
+			cog.out("NULL,\n")
 		for loc in self.locations[0:-1]:
 			cog.out("LOC(sp_" + loc[0] + "_loc, " + str(loc[1]) + "), ")
 		loc = self.locations[-1]

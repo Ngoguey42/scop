@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 12:07:31 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/17 17:03:36 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/18 16:27:18 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,8 @@ void		sp_unif_viewproj2(t_env const *e, t_program const *p);
 void		sp_unif_light(t_env const *e, t_program const *p);
 void		sp_unif_lightstruct(t_env const *e, t_program const *p);
 void		sp_unif_suncolor(t_env const *e, t_program const *p);
+void		sp_unif_lightdepth(t_env const *e, t_program const *p);
+void		sp_unif_shadowmat6(t_env const *e, t_program const *p);
 
 /*
 ** OBS (OBJECTS)

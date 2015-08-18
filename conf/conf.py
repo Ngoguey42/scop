@@ -6,7 +6,7 @@
 #    By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/08/10 13:13:01 by ngoguey           #+#    #+#              #
-#    Updated: 2015/08/17 18:17:24 by ngoguey          ###   ########.fr        #
+#    Updated: 2015/08/18 16:29:53 by ngoguey          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,8 @@ vshaders = [
 	("pos", 3), ("col", 3), ("nor", 3), ),
 	Vshader("po_to_noop", "po_to_noop.vert", "viewproj",
 	("pos", 3), ),
+	Vshader("po_to_noop_noviewproj", "po_to_noop_noviewproj.vert", "",
+	("pos", 3), ),
 ]
 fshaders = [
 	Fshader("co_identity", "co_identity.frag", ""),
@@ -40,10 +42,12 @@ fshaders = [
 	Fshader("cono_coli", "cono_coli.frag", "lightstruct"),
 	Fshader("couvno_blendli", "couvno_blendli.frag", "lightstruct"),
 	Fshader("co_sun", "co_sun.frag", "suncolor"),
+	Fshader("depth01", "depth01.frag", "lightdepth"),
 ]
 gshaders = [
 	Gshader("face_rgb", "face_rgb.geom", ""),
 	Gshader("face_grey", "face_grey.geom", ""),
+	Gshader("pos_to_cubemap", "pos_to_cubemap.geom", "shadowmat6"),
 ]
 programs = [
 	# p fait ceci cela
@@ -60,6 +64,7 @@ programs = [
 	Program("pcn", "pocono_to_co", "cono_coli", "no"),
 	# sun fait ceci cela
 	Program("sun", "po_to_noop", "co_sun", "no"),
+	Program("pointshadow", "po_to_noop_noviewproj", "depth01", "pos_to_cubemap"),
 ]
 textures = [
 	# porcelain fait ceci cela

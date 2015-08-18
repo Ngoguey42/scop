@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/21 09:01:30 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/16 19:15:41 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/18 16:25:45 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,5 +71,19 @@ void			sp_unif_lightstruct(t_env const *e, t_program const *p)
 void			sp_unif_suncolor(t_env const *e, t_program const *p)
 {
 	U(3f, "sunColor", e->sunka.x, e->sunka.y, e->sunka.z);
+	return ;
+}
+
+void			sp_unif_lightdepth(t_env const *e, t_program const *p)
+{
+	(void)e;
+	(void)p;	
+	return ;
+}
+
+void			sp_unif_shadowmat6(t_env const *e, t_program const *p)
+{
+	(void)e;
+	(void)p;
 	return ;
 }
