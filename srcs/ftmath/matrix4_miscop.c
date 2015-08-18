@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/15 10:07:41 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/20 12:22:19 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/18 16:59:55 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ t_matrix4	m4_dotprod(t_matrix4 const *mata, t_matrix4 const *matb)
 	return (ret);
 }
 
-t_matrix4	m4_lookat(t_vector3 eye, t_vector3 at)
+t_matrix4	m4_lookat(t_vector3 eye, t_vector3 at, t_vector3 up)
 {
-	t_vector3 const		up = (t_vector3){0.f, 1.f, 0.f};
+	/* t_vector3 const		up = (t_vector3){0.f, 1.f, 0.f}; */
 	t_vector3 const		z = v3_normalize(v3_sub(eye, at));
 	t_vector3 const		x = v3_normalize(v3_cross(up, z));
 	t_vector3 const		y = v3_cross(z, x);

@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 12:16:50 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/10 17:54:04 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/18 17:00:03 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ MAT4			m4_dotprod(MAT4 const *mata, MAT4 const *matb);
 MAT4			m4_fovprojection(float fov, float ratio, float near, float far);
 
 void			m4_print(MAT4 mat);
-MAT4			m4_lookat(t_vector3 eye, t_vector3 at);
+MAT4			m4_lookat(t_vector3 eye, t_vector3 at, t_vector3 up);
 MAT4			m4_identity(void);
 
 # undef MAT4
