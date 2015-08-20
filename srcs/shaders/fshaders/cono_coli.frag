@@ -6,7 +6,7 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/07/27 18:24:49 by ngoguey           #+#    #+#             //
-//   Updated: 2015/08/16 15:08:43 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/08/20 14:16:39 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -20,6 +20,8 @@ in PoCoNo
 }							fs_in;
 
 uniform vec3                viewPos;
+uniform samplerCube			depthMap;
+uniform float				far;
 uniform struct Light
 {
 	vec3					pos;
@@ -33,6 +35,24 @@ uniform struct Light
 }							l;
 
 out vec4					color;
+float ShadowCalculation()
+{
+	// Get vector between fragment position and light position
+	vec3 fragToLight = fs_in.pos - l.pos;
+	// Use the fragment to light vector to sample from the depth map
+	float closestDepth = texture(depthMap, fragToLight).r;
+	// It is currently in linear range between [0,1]. Let's re-transform it back to original depth value
+	closestDepth *= far;
+	// Now get current linear depth as the length between the fragment and light position
+	float currentDepth = length(fragToLight);
+	// Now test for shadows
+	float bias = 0.05; // We use a much larger bias since depth is now in [near_plane, far] range
+	float shadow = currentDepth - bias > closestDepth ? 1.0 : 0.0;
+	// color = vec4(vec3(currentDepth / far), 1.0); //debug
+	// color = vec4(vec3(closestDepth / far), 1.0); //debug
+	// color = vec4(vec3(currentDepth / closestDepth), 1.0); //debug
+	return shadow;
+}
 
 void main()
 {
@@ -58,6 +78,8 @@ void main()
 	float spec = pow(max(dot(viewDir, reflectDir), 0.0), 32);
 	vec3 specular = specularStrength * spec * l.s;
 
-	vec3 result = (ambient + diffuse + specular) * color.xyz * attenuation;
+	// attenuation
+	vec3 result = (ambient + (diffuse + specular) * (1.f - ShadowCalculation()))
+		* color.xyz;
 	color = vec4(result, color.w);
 }

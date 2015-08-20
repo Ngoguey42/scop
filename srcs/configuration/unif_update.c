@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/21 09:01:30 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/18 16:25:45 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/20 13:47:24 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,18 @@ void			sp_unif_model(t_env const *e, t_ob const *ob)
 
 	U(Matrix4fv, "model", 1, GL_TRUE, (float*)&ob->mat);
 	U(1f, "mixval", 1.f);//debug
+	return ;
+}
+
+
+extern GLuint depthCubemap;//sha
+void			sp_unif_shadows(t_env const *e, t_ob const *ob)
+{
+	t_program const	*p = POFOB(e, ob);
+
+	U(1f, "far", 250.f);
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_CUBE_MAP, depthCubemap);
 	return ;
 }
 

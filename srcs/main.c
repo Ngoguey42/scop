@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 12:08:19 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/20 13:11:19 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/20 14:15:36 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ static int		begin(t_env *e)
 
 #include <math.h>
 
+GLuint depthCubemap;//sha
 static void		loop(t_env *e)
 {
 	double		last_time;
@@ -46,7 +47,6 @@ static void		loop(t_env *e)
 	const GLuint SHADOW_WIDTH = 1024, SHADOW_HEIGHT = 1024; //sha
 	GLuint depthMapFBO; //sha
 	glGenFramebuffers(1, &depthMapFBO); //sha
-	GLuint depthCubemap;//sha
 	glGenTextures(1, &depthCubemap);//sha
 	glBindTexture(GL_TEXTURE_CUBE_MAP, depthCubemap);//sha
 	for (GLuint i = 0; i < 6; ++i)//sha
@@ -83,7 +83,7 @@ static void		loop(t_env *e)
 		//lol
         GLfloat aspect = (GLfloat)SHADOW_WIDTH / (GLfloat)SHADOW_HEIGHT; //s
 		GLfloat near = 1.0f;//s
-		GLfloat far = 25.0f;//s
+		GLfloat far = 250.0f;//s
 		t_matrix4	shadowProj = m4_fovprojection(
 			M_PI / 2.f, aspect, near, far); //s
 
@@ -91,13 +91,13 @@ static void		loop(t_env *e)
 #define CONV(V) (t_matrix4[]){V}
 #define LOOKATPTR(V1, V2) CONV(m4_lookat(lightPos, v3_add(lightPos, (V1)), (V2)))
 		t_matrix4	shadowTransforms[6] = {
-m4_dotprod(LOOKATPTR(ATOV3(+1.0, 0.0, 0.0), ATOV3(0.0, -1.0, 0.0)), &shadowProj),
-m4_dotprod(LOOKATPTR(ATOV3(-1.0, 0.0, 0.0), ATOV3(0.0, -1.0, 0.0)), &shadowProj),
-m4_dotprod(LOOKATPTR(ATOV3(0.0, +1.0, 0.0), ATOV3(0.0, 0.0, +1.0)), &shadowProj),
-m4_dotprod(LOOKATPTR(ATOV3(0.0, -1.0, 0.0), ATOV3(0.0, 0.0, -1.0)), &shadowProj),
-m4_dotprod(LOOKATPTR(ATOV3(0.0, 0.0, +1.0), ATOV3(0.0, -1.0, 0.0)), &shadowProj),
-m4_dotprod(LOOKATPTR(ATOV3(0.0, 0.0, -1.0), ATOV3(0.0, -1.0, 0.0)), &shadowProj),
-		};
+m4_dotprod(&shadowProj, LOOKATPTR(ATOV3(+1.0, 0.0, 0.0), ATOV3(0.0, -1.0, 0.0))),
+m4_dotprod(&shadowProj, LOOKATPTR(ATOV3(-1.0, 0.0, 0.0), ATOV3(0.0, -1.0, 0.0))),
+m4_dotprod(&shadowProj, LOOKATPTR(ATOV3(0.0, +1.0, 0.0), ATOV3(0.0, 0.0, +1.0))),
+m4_dotprod(&shadowProj, LOOKATPTR(ATOV3(0.0, -1.0, 0.0), ATOV3(0.0, 0.0, -1.0))),
+m4_dotprod(&shadowProj, LOOKATPTR(ATOV3(0.0, 0.0, +1.0), ATOV3(0.0, -1.0, 0.0))),
+m4_dotprod(&shadowProj, LOOKATPTR(ATOV3(0.0, 0.0, -1.0), ATOV3(0.0, -1.0, 0.0))),
+		   };
 		glViewport(0, 0, SHADOW_WIDTH, SHADOW_HEIGHT);
 		glBindFramebuffer(GL_FRAMEBUFFER, depthMapFBO);
 		glClear(GL_DEPTH_BUFFER_BIT);
@@ -115,11 +115,12 @@ m4_dotprod(LOOKATPTR(ATOV3(0.0, 0.0, -1.0), ATOV3(0.0, -1.0, 0.0)), &shadowProj)
 			char	truc[32] = "shadowMatrices[6]";
 
 			truc[15] = i + '0';
-			U(Matrix4fv, truc, 1, GL_FALSE, (float*)(shadowTransforms + i));
+			U(Matrix4fv, truc, 1, GL_TRUE, (float*)(shadowTransforms + i));
 		}
-		U(1f, "far_plane", far);
-		U(3fv, "lightPos", 1, (float*)&lightPos);
-
+		U(1f, "far", far);
+		U(3fv, "lpos", 1, (float*)&lightPos);
+		U(Matrix4fv, "model", 1, GL_TRUE, (float*)&e->mainob->mat);
+ 
 		p = POFOB(e, e->mainob);
 		glBindVertexArray(MEOFOB(e, e->mainob)->handles[0]);
 		glDrawElements(GL_TRIANGLES, 3 * MEOFOB(e, e->mainob)->faces.size

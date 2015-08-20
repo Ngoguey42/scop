@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 12:07:31 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/18 16:27:18 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/20 13:29:56 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,7 @@ void		sp_fill_landrgb(t_vbo_basic *vbo, float const bounds[2]);
 /*
 ** UNIFORMS
 */
+void		sp_unif_shadows(t_env const *e, t_ob const *ob);
 void		sp_unif_model(t_env const *e, t_ob const *ob);
 void		sp_unif_model_mix(t_env const *e, t_ob const *ob);
 void		sp_unif_land(t_env const *e, t_ob const *ob);
