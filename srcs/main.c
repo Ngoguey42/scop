@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 12:08:19 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/20 14:15:36 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/20 14:42:44 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ static void		loop(t_env *e)
 	double		last_time;
 	double		sleep_time;
 
-	const GLuint SHADOW_WIDTH = 1024, SHADOW_HEIGHT = 1024; //sha
+	GLuint SHADOW_WIDTH, SHADOW_HEIGHT;
+	SHADOW_HEIGHT = SHADOW_WIDTH = 1024; //sha
 	GLuint depthMapFBO; //sha
 	glGenFramebuffers(1, &depthMapFBO); //sha
 	glGenTextures(1, &depthCubemap);//sha
