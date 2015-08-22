@@ -96,6 +96,7 @@ O_FILES := obj/srcs/env_operations.o \
 	obj/srcs/obs/obs_operations.o \
 	obj/srcs/obs/obs_render.o \
 	obj/srcs/obs/obs_update.o \
+	obj/srcs/sbox/sbox_operations.o \
 	obj/srcs/sbox/sbox_render.o \
 	obj/srcs/shaders/shader_operations.o \
 	obj/srcs/textures/parse_tga.o \
@@ -260,6 +261,9 @@ obj/srcs/obs/obs_render.o: srcs/obs/obs_render.c include/cog_enums.h include/cog
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
 obj/srcs/obs/obs_update.o: srcs/obs/obs_update.c include/cog_enums.h include/cog_meshfill.h include/ftmath.h include/objmodel.h include/scop.h include/scop_conf.h include/scop_types.h include/vbo.h | obj/srcs/obs
+	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
+
+obj/srcs/sbox/sbox_operations.o: srcs/sbox/sbox_operations.c include/cog_enums.h include/cog_meshfill.h include/ftmath.h include/objmodel.h include/scop.h include/scop_conf.h include/scop_types.h include/vbo.h | obj/srcs/sbox
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
 obj/srcs/sbox/sbox_render.o: srcs/sbox/sbox_render.c include/cog_enums.h include/cog_meshfill.h include/ftmath.h include/objmodel.h include/scop.h include/scop_conf.h include/scop_types.h include/vbo.h | obj/srcs/sbox

@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 10:07:19 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/22 15:06:34 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/22 16:45:43 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -227,8 +227,10 @@ typedef struct					s_env
 	GLuint						sbox_map;
 	GLuint						sbox_fbo;
 	t_ui						sbox_resolution;
-	
-	
+	float						sbox_farplane;
+	t_matrix4					sbox_proj;
+	t_matrix4					sbox_viewproj[6];
+
 	double						time_start;
 	double						time_cur;
 	double						time_el;

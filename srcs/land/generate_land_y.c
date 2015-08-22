@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/21 15:54:14 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/28 16:07:34 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/22 17:33:21 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ void			sp_fill_landgrid(t_ftvector *lines)
 	depth = 2;
 	while (depth <= POINTS_DEPTHI)
 	{
-		range *= 0.60f;
+		range *= 0.55f;
 		apply_floats_diag(lines, range, idt);
 		apply_floats_side(lines, range, idt, (int[2]){idt / 2, 0});
 		apply_floats_side(lines, range, idt, (int[2]){0, idt / 2});

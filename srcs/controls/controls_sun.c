@@ -6,10 +6,11 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/30 15:27:27 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/16 16:28:35 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/22 17:13:17 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <string.h>
 #include <math.h>
 #include "scop.h"
 
@@ -23,7 +24,7 @@
 #define GETSTATE(E, V) ((E)->keystates[(V)] ? 1 : 0)
 #define BASICCOMPUTE(E, U, D) (GETSTATE((E), (U)) - GETSTATE((E), (D)))
 
-static void		update_radius(t_env *e, t_bool *update)
+static void				update_radius(t_env *e, t_bool *update)
 {
 	int const	mvr = BASICCOMPUTE(e, sp_minus_key, sp_equal_key);
 
@@ -35,7 +36,7 @@ static void		update_radius(t_env *e, t_bool *update)
 	return ;
 }
 
-static void		update_inclination(t_env *e, t_bool *update)
+static void				update_inclination(t_env *e, t_bool *update)
 {
 	int const	mvt = BASICCOMPUTE(e, sp_l_key, sp_apos_key);
 
@@ -47,7 +48,7 @@ static void		update_inclination(t_env *e, t_bool *update)
 	return ;
 }
 
-static void		update_azimuth(t_env *e, t_bool *update)
+static void				update_azimuth(t_env *e, t_bool *update)
 {
 	int const	mvp = BASICCOMPUTE(e, sp_p_key, sp_semico_key);
 
@@ -59,7 +60,17 @@ static void		update_azimuth(t_env *e, t_bool *update)
 	return ;
 }
 
-void			sp_update_sun(t_env *e, t_bool force)
+static inline t_matrix4	shadow_viewproj(t_env const *const e
+										, t_vector3 const view_vec
+										, t_vector3 const up_vec)
+{
+	return (m4_dotprod(&e->sbox_proj, (t_matrix4[]){
+	m4_lookat(e->sunpos_cartesian
+	, v3_add(e->sunpos_cartesian, view_vec)
+	, up_vec)}));
+}
+
+void					sp_update_sun(t_env *e, t_bool force)
 {
 	t_bool	update;
 
@@ -74,6 +85,14 @@ void			sp_update_sun(t_env *e, t_bool force)
 		CAR(e).x = RADIUS(e) * sin(PHI(e)) * cos(THETA(e));
 		CAR(e).z = RADIUS(e) * sin(PHI(e)) * sin(THETA(e));
 		CAR(e).y = RADIUS(e) * cos(PHI(e));
+		memcpy(&e->sbox_viewproj, ((t_matrix4[6]){
+			shadow_viewproj(e, ATOV3(+1.0, 0.0, 0.0), ATOV3(0.0, -1.0, 0.0)),
+			shadow_viewproj(e, ATOV3(-1.0, 0.0, 0.0), ATOV3(0.0, -1.0, 0.0)),
+			shadow_viewproj(e, ATOV3(0.0, +1.0, 0.0), ATOV3(0.0, 0.0, +1.0)),
+			shadow_viewproj(e, ATOV3(0.0, -1.0, 0.0), ATOV3(0.0, 0.0, -1.0)),
+			shadow_viewproj(e, ATOV3(0.0, 0.0, +1.0), ATOV3(0.0, -1.0, 0.0)),
+			shadow_viewproj(e, ATOV3(0.0, 0.0, -1.0), ATOV3(0.0, -1.0, 0.0))
+		}), sizeof(e->sbox_viewproj));
 	}
 	return ;
 }

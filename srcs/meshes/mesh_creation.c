@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/28 11:02:28 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/10 13:29:35 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/22 16:02:41 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static void		handle_buffers(t_env const *e, t_mesh *me,
 	glBindBuffer(GL_ARRAY_BUFFER, me->handles[1]);
 	glBufferData(GL_ARRAY_BUFFER, me->vertices.size * widths[0],
 					me->vertices.data, me->usage);
-	qprintf("    Sending EAB... ");
+	qprintf("    Sending EBO... ");
 	glGenBuffers(1, me->handles + 2);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, me->handles[2]);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, me->faces.size * widths[1],
@@ -80,7 +80,6 @@ int				sp_new_mesh(t_env const *e, t_mesh *me)
 	size_t const		vert_width = mesh_width(VSOFP(e, p)) * sizeof(float);
 	size_t const		elem_width = 3 * sizeof(t_ui);
 
-	lprintf("    vert_width(%u), elem_width(%u) :", vert_width, elem_width);
 	if (ftv_init_instance(&me->vertices, vert_width))
 		sp_enomem();
 	if (ftv_init_instance(&me->faces, elem_width))

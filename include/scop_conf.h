@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 10:33:54 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/22 12:50:32 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/22 17:33:00 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@
 # define WIN_FARF 2000.f
 
 # define LAND_SIDEF 100.f
-# define LAND_RANGEF 28.f
+# define LAND_RANGEF (28.f)
 # define LAND_COLORRAND 0.05f
 # define POINTS_DEPTHI 8
 # define LAND_YF -15.f

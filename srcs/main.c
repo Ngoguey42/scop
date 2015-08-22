@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 12:08:19 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/22 15:06:55 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/22 17:45:13 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,51 +33,19 @@ static int		begin(t_env *e)
 		return (ERROR("sp_init_meshes(e)"), 1);
 	if (VERBOSE("obs"), sp_init_obs(e))
 		return (ERROR("sp_init_obs(e)"), 1);
+	if (VERBOSE("sbox"), sp_init_sbox(e))
+		return (ERROR("sp_init_sbox(e)"), 1);
 	return (0);
 }
 
-#include <math.h>
-
-GLuint depthCubemap;//sha
-	GLuint depthMapFBO; //sha
 static void		loop(t_env *e)
 {
 	double		last_time;
 	double		sleep_time;
 
-	
-	GLuint SHADOW_WIDTH, SHADOW_HEIGHT;
-	SHADOW_HEIGHT = SHADOW_WIDTH = 1024 * 1; //sha
-	glGenTextures(1, &depthCubemap);//sha
-	glBindTexture(GL_TEXTURE_CUBE_MAP, depthCubemap);//sha
-	for (GLuint i = 0; i < 6; ++i)//sha
-		glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i//sha
-					 , 0, GL_DEPTH_COMPONENT//sha
-					 , SHADOW_WIDTH, SHADOW_HEIGHT, 0//sha
-					 , GL_DEPTH_COMPONENT, GL_FLOAT, NULL);//sha
-	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_NEAREST);//s
-	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_NEAREST);//s
-	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);//s
-	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);//s
-	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);//s
-
-	glGenFramebuffers(1, &depthMapFBO); //sha
-	glBindFramebuffer(GL_FRAMEBUFFER, depthMapFBO);//s
-	glFramebufferTexture(GL_FRAMEBUFFER
-						 , GL_DEPTH_ATTACHMENT, depthCubemap, 0);//s
-	glDrawBuffer(GL_NONE);//s
-	glReadBuffer(GL_NONE);//s
-	if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)//s
-		qprintf("Framebuffer not complete!\n");
-	glBindFramebuffer(GL_FRAMEBUFFER, 0); //s
-	
 	e->time_start = glfwGetTime();
 	e->time_cur = e->time_start;
 	last_time = e->time_start;
-
-
-
-	
 	while (!glfwWindowShouldClose(e->win))
 	{
 		e->time_cur = glfwGetTime();
@@ -102,6 +70,7 @@ static void		loop(t_env *e)
 
 static void		end(t_env *e)
 {
+	//clean sbox ??
 	sp_delete_obs(e);
 	sp_delete_textures(e);
 	sp_delete_meshes(e);

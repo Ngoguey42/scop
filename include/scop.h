@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 12:07:31 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/22 14:21:04 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/22 17:38:09 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,5 +158,6 @@ t_ob		sp_default_ob(t_model_index moi);
 /*
 ** SHADOW BOX
 */
+int			sp_init_sbox(t_env *e);
 void		sp_render_sbox(t_env const *e);
 #endif
