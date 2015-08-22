@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 10:07:19 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/17 17:45:51 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/22 15:06:34 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,6 +163,7 @@ typedef struct					s_ob
 	t_ftlist_node				list;
 	t_bool						hidden;
 	t_bool						moved;
+	t_bool						shadow;
 	t_bool						delete;
 	t_model_index				model;
 	t_vector3					position;
@@ -177,6 +178,7 @@ typedef enum					e_ob_param
 {
 	ob_hid,
 	ob_mov,
+	ob_sha,
 	ob_pos,
 	ob_rot,
 	ob_sca,
@@ -222,7 +224,11 @@ typedef struct					s_env
 	t_vector3					sunkd;
 	t_vector3					sunks;
 	float						sundat[2];
-
+	GLuint						sbox_map;
+	GLuint						sbox_fbo;
+	t_ui						sbox_resolution;
+	
+	
 	double						time_start;
 	double						time_cur;
 	double						time_el;

@@ -6,7 +6,7 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/07/27 18:24:49 by ngoguey           #+#    #+#             //
-//   Updated: 2015/08/20 15:30:30 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/08/22 14:46:48 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -35,6 +35,18 @@ uniform struct Light
 }							l;
 
 out vec4					color;
+
+
+// float ShadowCalculation()
+// {
+// 	vec3 fragToLight = fs_in.pos - l.pos;
+// 	float closestDepth = texture(depthMap, fragToLight).r;
+// 	closestDepth *= far;
+// 	float currentDepth = length(fragToLight);
+// 	float bias = 0.05f;
+// 	float shadow = currentDepth - bias > closestDepth ? 1.0 : 0.0;
+// 	return shadow;
+// }
 
 vec3					gridSamplingDisk[20] = vec3[](
 	vec3(1, 1, 1), vec3(1, -1, 1), vec3(-1, -1, 1), vec3(-1, 1, 1),
@@ -73,7 +85,7 @@ void					main()
 	color = vec4(fs_in.col, 1.f);
 	// color = vec4(0.7, 0.7, 0.7, 1.);
 	// Ambient
-	float ambientStrength = 0.6f;
+	float ambientStrength = 0.4f;
 	vec3 ambient = ambientStrength * l.a;
 
 	// Diffuse
@@ -91,7 +103,9 @@ void					main()
 
 	// attenuation
 	vec3 result =
-		(ambient + (diffuse + specular) * (1.f - ShadowCalculation()) * attenuation)
+		// (ambientStrength * (1.f - ShadowCalculation()))
+		(ambient + (diffuse + specular)
+		 * (1.f - ShadowCalculation()) * attenuation)
 		* color.xyz;
 	color = vec4(result, color.w);
 }

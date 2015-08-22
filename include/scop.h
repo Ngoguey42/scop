@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 12:07:31 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/22 12:54:34 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/22 14:21:04 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,6 +152,7 @@ void		sp_obupdate_mainob(t_env const *e, t_ob *ob);
 void		sp_obupdate_plane(t_env const *e, t_ob *ob);
 t_bool		sp_ob_getnot_hidden(t_env const *e, t_ob const *ob);
 t_bool		sp_ob_get_moved(t_env const *e, t_ob const *ob);
+t_bool		sp_ob_get_shadow(t_env const *e, t_ob const *ob);
 t_ob		sp_default_ob(t_model_index moi);
 
 /*

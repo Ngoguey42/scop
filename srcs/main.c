@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 12:08:19 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/22 12:55:31 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/22 15:06:55 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static void		loop(t_env *e)
 
 	
 	GLuint SHADOW_WIDTH, SHADOW_HEIGHT;
-	SHADOW_HEIGHT = SHADOW_WIDTH = 1024; //sha
+	SHADOW_HEIGHT = SHADOW_WIDTH = 1024 * 1; //sha
 	glGenTextures(1, &depthCubemap);//sha
 	glBindTexture(GL_TEXTURE_CUBE_MAP, depthCubemap);//sha
 	for (GLuint i = 0; i < 6; ++i)//sha

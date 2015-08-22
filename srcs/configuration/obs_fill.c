@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/22 13:44:32 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/17 18:11:48 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/22 14:49:50 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ static size_t const		g_obdata[][2] =
 {
 	{offsetof(t_ob, hidden), sizeof(t_bool)},
 	{offsetof(t_ob, moved), sizeof(t_bool)},
+	{offsetof(t_ob, shadow), sizeof(t_bool)},
 	{offsetof(t_ob, position), sizeof(t_vector3)},
 	{offsetof(t_ob, rotation), sizeof(t_vector3)},
 	{offsetof(t_ob, scale), sizeof(t_vector3)},
@@ -56,6 +57,8 @@ static void	retreive_varg(va_list *ap, t_ob_param id, void *buf)
 	if (id == ob_hid)
 		(*(t_bool*)buf) = va_arg(*ap, t_bool);
 	else if (id == ob_mov)
+		(*(t_bool*)buf) = va_arg(*ap, t_bool);
+	else if (id == ob_sha)
 		(*(t_bool*)buf) = va_arg(*ap, t_bool);
 	else if (id == ob_pos)
 		(*(t_vector3*)buf) = va_arg(*ap, t_vector3);
@@ -117,6 +120,7 @@ int			sp_fill_obs(t_env *e)
 	{
 		dir = 1 - rand() % 2 * 2;
 		OB(sp_plane_model, ob_sca, ATOV3SCAL(0.5f) , ob_up, &sp_obupdate_plane
+		   , ob_sha, false
 		   , ob_vi, ((int[1]){dir})
 		   , ob_vf, ((float[3]){ft_randf() * M_PI * 2, (float)dir * (0.1f + ft_randf()), rad}));
 		rad += 25.f * ft_randf();
