@@ -6,7 +6,7 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/07/27 18:24:49 by ngoguey           #+#    #+#             //
-//   Updated: 2015/08/22 19:04:57 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/08/22 19:12:18 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -47,7 +47,7 @@ out vec4					color;
 // 	return shadow;
 // }
 
-#define NSAMPLES 23
+#define NSAMPLES 20
 
 vec3					gridSamplingDisk[NSAMPLES] = vec3[](
 	vec3(1, 1, 1), vec3(1, -1, 1), vec3(-1, -1, 1), vec3(-1, 1, 1),
@@ -55,9 +55,6 @@ vec3					gridSamplingDisk[NSAMPLES] = vec3[](
 	vec3(1, 1, 0), vec3(1, -1, 0), vec3(-1, -1, 0), vec3(-1, 1, 0),
 	vec3(1, 0, 1), vec3(-1, 0, 1), vec3(1, 0, -1), vec3(-1, 0, -1),
 	vec3(0, 1, 1), vec3(0, -1, 1), vec3(0, -1, -1), vec3(0, 1, -1)
-	, vec3(0, 0, 0)
-	, vec3(0, 0, 0)
-	, vec3(0, 0, 0)
 );
 
 float					ShadowCalculation()
@@ -68,10 +65,8 @@ float					ShadowCalculation()
 	float bias = 0.15;
 	int samples = NSAMPLES;
 	float viewDistance = length(viewPos - fs_in.pos);
-
-	float centerDepth = texture(depthMap, fragToLight).r;
 	
-	float diskRadius = (1.0 + (viewDistance / far)) / 25.0 * 420.f * centerDepth;
+	float diskRadius = (1.0 + (viewDistance / far)) / 25.0 * 25.f;
 	for (int i = 0; i < samples; ++i)
 	{
 		float closestDepth =
