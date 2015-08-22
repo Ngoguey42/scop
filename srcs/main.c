@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 12:08:19 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/20 14:42:44 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/22 12:55:31 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,15 +39,15 @@ static int		begin(t_env *e)
 #include <math.h>
 
 GLuint depthCubemap;//sha
+	GLuint depthMapFBO; //sha
 static void		loop(t_env *e)
 {
 	double		last_time;
 	double		sleep_time;
 
+	
 	GLuint SHADOW_WIDTH, SHADOW_HEIGHT;
 	SHADOW_HEIGHT = SHADOW_WIDTH = 1024; //sha
-	GLuint depthMapFBO; //sha
-	glGenFramebuffers(1, &depthMapFBO); //sha
 	glGenTextures(1, &depthCubemap);//sha
 	glBindTexture(GL_TEXTURE_CUBE_MAP, depthCubemap);//sha
 	for (GLuint i = 0; i < 6; ++i)//sha
@@ -61,6 +61,7 @@ static void		loop(t_env *e)
 	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);//s
 	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);//s
 
+	glGenFramebuffers(1, &depthMapFBO); //sha
 	glBindFramebuffer(GL_FRAMEBUFFER, depthMapFBO);//s
 	glFramebufferTexture(GL_FRAMEBUFFER
 						 , GL_DEPTH_ATTACHMENT, depthCubemap, 0);//s
@@ -73,62 +74,17 @@ static void		loop(t_env *e)
 	e->time_start = glfwGetTime();
 	e->time_cur = e->time_start;
 	last_time = e->time_start;
+
+
+
+	
 	while (!glfwWindowShouldClose(e->win))
 	{
 		e->time_cur = glfwGetTime();
 		e->time_el = e->time_cur - last_time;
 		sp_update_states(e);
 		sp_update_obs(e);
-
-
-		//lol
-        GLfloat aspect = (GLfloat)SHADOW_WIDTH / (GLfloat)SHADOW_HEIGHT; //s
-		GLfloat near = 1.0f;//s
-		GLfloat far = 250.0f;//s
-		t_matrix4	shadowProj = m4_fovprojection(
-			M_PI / 2.f, aspect, near, far); //s
-
-		t_vector3	lightPos = e->sunpos_cartesian;
-#define CONV(V) (t_matrix4[]){V}
-#define LOOKATPTR(V1, V2) CONV(m4_lookat(lightPos, v3_add(lightPos, (V1)), (V2)))
-		t_matrix4	shadowTransforms[6] = {
-m4_dotprod(&shadowProj, LOOKATPTR(ATOV3(+1.0, 0.0, 0.0), ATOV3(0.0, -1.0, 0.0))),
-m4_dotprod(&shadowProj, LOOKATPTR(ATOV3(-1.0, 0.0, 0.0), ATOV3(0.0, -1.0, 0.0))),
-m4_dotprod(&shadowProj, LOOKATPTR(ATOV3(0.0, +1.0, 0.0), ATOV3(0.0, 0.0, +1.0))),
-m4_dotprod(&shadowProj, LOOKATPTR(ATOV3(0.0, -1.0, 0.0), ATOV3(0.0, 0.0, -1.0))),
-m4_dotprod(&shadowProj, LOOKATPTR(ATOV3(0.0, 0.0, +1.0), ATOV3(0.0, -1.0, 0.0))),
-m4_dotprod(&shadowProj, LOOKATPTR(ATOV3(0.0, 0.0, -1.0), ATOV3(0.0, -1.0, 0.0))),
-		   };
-		glViewport(0, 0, SHADOW_WIDTH, SHADOW_HEIGHT);
-		glBindFramebuffer(GL_FRAMEBUFFER, depthMapFBO);
-		glClear(GL_DEPTH_BUFFER_BIT);
-		t_program *p;
-		p = e->programs + sp_pointshadow_program;
-		glUseProgram(p->handle);
-
-#define LOC(N)  glGetUniformLocation(p->handle, N)
-#define PREFIX(T) glUniform ## T
-#define U(T, N, ...) PREFIX(T)(LOC(N), __VA_ARGS__)
-		
-		int i;
-		for (i = 0; i < 6; i++)
-		{
-			char	truc[32] = "shadowMatrices[6]";
-
-			truc[15] = i + '0';
-			U(Matrix4fv, truc, 1, GL_TRUE, (float*)(shadowTransforms + i));
-		}
-		U(1f, "far", far);
-		U(3fv, "lpos", 1, (float*)&lightPos);
-		U(Matrix4fv, "model", 1, GL_TRUE, (float*)&e->mainob->mat);
- 
-		p = POFOB(e, e->mainob);
-		glBindVertexArray(MEOFOB(e, e->mainob)->handles[0]);
-		glDrawElements(GL_TRIANGLES, 3 * MEOFOB(e, e->mainob)->faces.size
-					   , GL_UNSIGNED_INT, 0);
-		glBindVertexArray(0);
-
-		
+		sp_render_sbox(e);
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 		glViewport(0, 0, WIN_WIDTHI, WIN_HEIGHTI);
 		glClearColor(155. / 256., 216. / 256., 220. / 256., 1.f);
