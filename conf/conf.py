@@ -6,7 +6,7 @@
 #    By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/08/10 13:13:01 by ngoguey           #+#    #+#              #
-#    Updated: 2015/08/20 13:24:57 by ngoguey          ###   ########.fr        #
+#    Updated: 2015/08/22 18:39:15 by ngoguey          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -166,9 +166,9 @@ models = [
 	Model("csie", "csie", "wall", "model"),
 	Model("alpha", "alpha", "metal", "model"),
 	Model("plane", "plane", "wall", "model"),
-	
+
 	Model("square", "square", "no", "model"),
-	Model("land", "land", "no", "shadows"),
+	Model("land", "land", "no", ""),
 	Model("sun", "sun", "no", "model"),
 ]
 obs = {

@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/21 09:01:30 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/22 15:41:34 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/22 18:38:50 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,6 @@ void			sp_unif_model(t_env const *e, t_ob const *ob)
 
 	U(Matrix4fv, "model", 1, GL_TRUE, (float*)&ob->mat);
 	U(1f, "mixval", 1.f);//debug
-	return ;
-}
-
-void			sp_unif_shadows(t_env const *e, t_ob const *ob)
-{
-	t_program const	*p = POFOB(e, ob);
-
-	U(1f, "far", e->sbox_resolution);
-	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_CUBE_MAP, e->sbox_map);
 	return ;
 }
 
@@ -75,6 +65,7 @@ void			sp_unif_lightstruct(t_env const *e, t_program const *p)
 	U(1f, "l.linear", e->sundat[0]);
 	U(1f, "l.quadratic", e->sundat[1]);
 	U(3fv, "viewPos", 1, (float*)&e->cpos);
+	U(1f, "far", e->sbox_resolution);
 	return ;
 }
 

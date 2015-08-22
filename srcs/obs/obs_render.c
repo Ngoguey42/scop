@@ -6,11 +6,15 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/27 12:01:57 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/22 12:19:04 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/22 18:30:33 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
+
+#define LOC(N)  glGetUniformLocation(p->handle, N)
+#define PREFIX(T) glUniform ## T
+#define U(T, N, ...) PREFIX(T)(LOC(N), __VA_ARGS__)
 
 #define NORM_AT_42_IS_WTF(E, OB, MO) (MO)->update_uniforms((E), (OB))
 
@@ -18,12 +22,19 @@ static void		render_ob(t_env const *e, t_ob *ob)
 {
 	t_model const *const	mo = MOOFOB(e, ob);
 	t_mesh const *const		me = MEOFMO(e, mo);
+	t_program const* const	p = POFME(e, me);
+	int						texi;
 
 	if (mo->update_uniforms != NULL)
 		NORM_AT_42_IS_WTF(e, ob, mo);
+	texi = 0;
+	U(1i, "depthMap", texi);
+	glActiveTexture(GL_TEXTURE0 + texi++);
+	glBindTexture(GL_TEXTURE_CUBE_MAP, e->sbox_map);
 	if (mo->texture != sp_no_texture)
 	{
-		glActiveTexture(GL_TEXTURE0);
+		U(1i, "ourTexture", texi);
+		glActiveTexture(GL_TEXTURE0 + texi++);
 		glBindTexture(GL_TEXTURE_2D, TOFMO(e, mo)->handle);
 	}
 	glBindVertexArray(me->handles[0]);
