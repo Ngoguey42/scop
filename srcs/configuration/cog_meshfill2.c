@@ -30,6 +30,11 @@ int			sp_meshfill_plane(t_env const *e, t_mesh *me, t_vbo_basic *vbo)
 	return (sp_meshfillbumb_objmodel(e, me, vbo, "res/cessna.obj"));
 }
 
+int			sp_meshfill_dodeca(t_env const *e, t_mesh *me, t_vbo_basic *vbo)
+{
+	return (sp_meshfillbumb_objmodel(e, me, vbo, "res/dodecahedron.obj"));
+}
+
 int			sp_meshfill_square(t_env const *e, t_mesh *me, t_vbo_basic *vbo)
 {
 	t_vertex_basic	vertices[] = {
@@ -82,7 +87,7 @@ int			sp_meshfill_land(t_env const *e, t_mesh *me, t_vbo_basic *vbo)
 
 int			sp_meshfill_sun(t_env const *e, t_mesh *me, t_vbo_basic *vbo)
 {
-	t_vertex_basic	vertices[8] = {
+	t_vertex_basic	vertices[] = {
 	BVERT_POS(-1.0f, 1.0f, -1.0f),
 	BVERT_POS(-1.0f, -1.0f, -1.0f),
 	BVERT_POS(-1.0f, 1.0f, 1.0f),
@@ -92,7 +97,7 @@ int			sp_meshfill_sun(t_env const *e, t_mesh *me, t_vbo_basic *vbo)
 	BVERT_POS(1.0f, 1.0f, -1.0f),
 	BVERT_POS(1.0f, -1.0f, -1.0f)
 	};
-	GLuint indices[36] = {
+	GLuint indices[] = {
 	0,1,2,2,1,3,
 	4,5,6,6,5,7,
 	3,1,5,5,1,7,

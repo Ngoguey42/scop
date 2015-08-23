@@ -6,7 +6,7 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/07/30 10:07:14 by ngoguey           #+#    #+#             //
-//   Updated: 2015/08/22 19:03:28 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/08/23 16:03:41 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -49,17 +49,34 @@ out vec4					color;
 //  return shadow;
 // }
 
-#define NSAMPLES 23
+#define NSAMPLES 20
 
 vec3                    gridSamplingDisk[NSAMPLES] = vec3[](
-	vec3(1, 1, 1), vec3(1, -1, 1), vec3(-1, -1, 1), vec3(-1, 1, 1),
-	vec3(1, 1, -1), vec3(1, -1, -1), vec3(-1, -1, -1), vec3(-1, 1, -1),
-	vec3(1, 1, 0), vec3(1, -1, 0), vec3(-1, -1, 0), vec3(-1, 1, 0),
-	vec3(1, 0, 1), vec3(-1, 0, 1), vec3(1, 0, -1), vec3(-1, 0, -1),
-	vec3(0, 1, 1), vec3(0, -1, 1), vec3(0, -1, -1), vec3(0, 1, -1)
-	, vec3(0, 0, 0)
-	, vec3(0, 0, 0)
-	, vec3(0, 0, 0)
+	// vec3(1, 1, 1), vec3(1, -1, 1), vec3(-1, -1, 1), vec3(-1, 1, 1),
+	// vec3(1, 1, -1), vec3(1, -1, -1), vec3(-1, -1, -1), vec3(-1, 1, -1),
+	// vec3(1, 1, 0), vec3(1, -1, 0), vec3(-1, -1, 0), vec3(-1, 1, 0),
+	// vec3(1, 0, 1), vec3(-1, 0, 1), vec3(1, 0, -1), vec3(-1, 0, -1),
+	// vec3(0, 1, 1), vec3(0, -1, 1), vec3(0, -1, -1), vec3(0, 1, -1)
+	vec3(-0.57735, -0.57735, 0.57735),
+	vec3(0.934172, 0.356822, 0),
+	vec3(0.934172, -0.356822, 0),
+	vec3(-0.934172, 0.356822, 0),
+	vec3(-0.934172, -0.356822, 0),
+	vec3(0, 0.934172, 0.356822),
+	vec3(0, 0.934172, -0.356822),
+	vec3(0.356822, 0, -0.934172),
+	vec3(-0.356822, 0, -0.934172),
+	vec3(0, -0.934172, -0.356822),
+	vec3(0, -0.934172, 0.356822),
+	vec3(0.356822, 0, 0.934172),
+	vec3(-0.356822, 0, 0.934172),
+	vec3(0.57735, 0.57735, -0.57735),
+	vec3(0.57735, 0.57735, 0.57735),
+	vec3(-0.57735, 0.57735, -0.57735),
+	vec3(-0.57735, 0.57735, 0.57735),
+	vec3(0.57735, -0.57735, -0.57735),
+	vec3(0.57735, -0.57735, 0.57735),
+	vec3(-0.57735, -0.57735, -0.57735)
 	);
 
 float                   ShadowCalculation()
@@ -69,11 +86,8 @@ float                   ShadowCalculation()
 	float shadow = 0.0;
 	float bias = 0.15;
 	int samples = NSAMPLES;
-	float viewDistance = length(viewPos - fs_in.pos);
-
-	float centerDepth = texture(depthMap, fragToLight).r;
-	
-	float diskRadius = (1.0 + (viewDistance / far)) / 25.0 * 42.f * centerDepth;
+	float viewDistance = length(viewPos - fs_in.pos);	
+	float diskRadius = (1.0 + (viewDistance / far)) / 25.f;
 	for (int i = 0; i < samples; ++i)
 	{
 		float closestDepth =

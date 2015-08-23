@@ -6,7 +6,7 @@
 #    By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/08/10 13:13:01 by ngoguey           #+#    #+#              #
-#    Updated: 2015/08/22 18:39:15 by ngoguey          ###   ########.fr        #
+#    Updated: 2015/08/23 15:55:11 by ngoguey          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -87,6 +87,8 @@ meshes = [
 	return (sp_meshfillbumb_objmodel(e, me, vbo, "res/alfa147.obj"));\n}"""),
 	Mesh("plane", "ptn", "GL_STATIC_DRAW","""{
 	return (sp_meshfillbumb_objmodel(e, me, vbo, "res/cessna.obj"));\n}"""),
+	Mesh("dodeca", "ptn", "GL_STATIC_DRAW","""{
+	return (sp_meshfillbumb_objmodel(e, me, vbo, "res/dodecahedron.obj"));\n}"""),
 
 	# square fait ceci cela
 	Mesh("square", "pcn", "GL_STATIC_DRAW","""{
@@ -134,7 +136,7 @@ meshes = [
 
 	# sun fait ceci cela
 	Mesh("sun", "sun", "GL_STATIC_DRAW","""{
-	t_vertex_basic	vertices[8] = {
+	t_vertex_basic	vertices[] = {
 	BVERT_POS(-1.0f, 1.0f, -1.0f),
 	BVERT_POS(-1.0f, -1.0f, -1.0f),
 	BVERT_POS(-1.0f, 1.0f, 1.0f),
@@ -144,7 +146,7 @@ meshes = [
 	BVERT_POS(1.0f, 1.0f, -1.0f),
 	BVERT_POS(1.0f, -1.0f, -1.0f)
 	};
-	GLuint indices[36] = {
+	GLuint indices[] = {
 	0,1,2,2,1,3,
 	4,5,6,6,5,7,
 	3,1,5,5,1,7,
@@ -166,6 +168,7 @@ models = [
 	Model("csie", "csie", "wall", "model"),
 	Model("alpha", "alpha", "metal", "model"),
 	Model("plane", "plane", "wall", "model"),
+	Model("dodeca", "dodeca", "porcelain", "model_mix"),
 
 	Model("square", "square", "no", "model"),
 	Model("land", "land", "no", ""),
