@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/22 13:44:32 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/22 14:49:50 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/23 17:19:24 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,14 +120,11 @@ int			sp_fill_obs(t_env *e)
 	{
 		dir = 1 - rand() % 2 * 2;
 		OB(sp_plane_model, ob_sca, ATOV3SCAL(0.5f) , ob_up, &sp_obupdate_plane
-		   , ob_sha, false
-		   , ob_vi, ((int[1]){dir})
-		   , ob_vf, ((float[3]){ft_randf() * M_PI * 2, (float)dir * (0.1f + ft_randf()), rad}));
+		, ob_sha, false
+		, ob_vi, ((int[1]){dir})
+		, ob_vf, ((float[3]){ft_randf() * M_PI * 2
+			, (float)dir * (0.1f + ft_randf()), rad}));
 		rad += 25.f * ft_randf();
 	}
-	/* OB(sp_plane_model, ob_sca, ATOV3SCAL(0.5f) , ob_up, &sp_obupdate_plane */
-	/*    , ob_vi, ((int[1]){-1}), ob_vf, ((float[3]){0.f, -1.2f, 35.f})); */
-	/* OB(sp_plane_model, ob_sca, ATOV3SCAL(0.5f) , ob_up, &sp_obupdate_plane */
-	/*    , ob_vi, ((int[1]){1}), ob_vf, ((float[3]){0.f, 1.5f, 50.f})); */
 	return (0);
 }

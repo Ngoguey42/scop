@@ -30,11 +30,6 @@ int			sp_meshfill_plane(t_env const *e, t_mesh *me, t_vbo_basic *vbo)
 	return (sp_meshfillbumb_objmodel(e, me, vbo, "res/cessna.obj"));
 }
 
-int			sp_meshfill_dodeca(t_env const *e, t_mesh *me, t_vbo_basic *vbo)
-{
-	return (sp_meshfillbumb_objmodel(e, me, vbo, "res/dodecahedron.obj"));
-}
-
 int			sp_meshfill_square(t_env const *e, t_mesh *me, t_vbo_basic *vbo)
 {
 	t_vertex_basic	vertices[] = {
@@ -87,29 +82,11 @@ int			sp_meshfill_land(t_env const *e, t_mesh *me, t_vbo_basic *vbo)
 
 int			sp_meshfill_sun(t_env const *e, t_mesh *me, t_vbo_basic *vbo)
 {
-	t_vertex_basic	vertices[] = {
-	BVERT_POS(-1.0f, 1.0f, -1.0f),
-	BVERT_POS(-1.0f, -1.0f, -1.0f),
-	BVERT_POS(-1.0f, 1.0f, 1.0f),
-	BVERT_POS(-1.0f, -1.0f, 1.0f),
-	BVERT_POS(1.0f, 1.0f, 1.0f),
-	BVERT_POS(1.0f, -1.0f, 1.0f),
-	BVERT_POS(1.0f, 1.0f, -1.0f),
-	BVERT_POS(1.0f, -1.0f, -1.0f)
-	};
-	GLuint indices[] = {
-	0,1,2,2,1,3,
-	4,5,6,6,5,7,
-	3,1,5,5,1,7,
-	0,2,6,6,2,4,
-	6,7,0,0,7,1,
-	2,3,4,4,3,5
-	};
-	vbo->npos = 3;
-	(void)ftv_insert_range(
-		&vbo->vertices, vertices, sizeof(vertices) / sizeof(*vertices));
-	(void)ftv_insert_range(
-		&me->faces, indices, sizeof(indices) / sizeof(*indices) / 3);
+	t_objmodel              m[1];
+
+    if (op_parse_obj(m, "res/dodecahedron.obj"))
+        return (ERROR("op_parse_obj(m)"), 1);
+    op_retreive_data(m, vbo, &me->faces);
 	return (0);
 	(void)e;
 	(void)me;

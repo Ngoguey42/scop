@@ -6,7 +6,7 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/07/27 18:24:49 by ngoguey           #+#    #+#             //
-//   Updated: 2015/08/23 16:11:58 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/08/23 17:16:10 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -36,64 +36,38 @@ uniform struct Light
 
 out vec4					color;
 
-// float ShadowCalculation()
-// {
-// 	vec3 fragToLight = fs_in.pos - l.pos;
-// 	float closestDepth = texture(depthMap, fragToLight).r;
-// 	closestDepth *= far;
-// 	float currentDepth = length(fragToLight);
-// 	float bias = 0.05f;
-// 	float shadow = currentDepth - bias > closestDepth ? 1.0 : 0.0;
-// 	return shadow;
-// }
-
 #define NSAMPLES 20
+#define GN ((1 + sqrt(5.f)) / 2.f)
+#define GN2 (GN * GN)
+#define GN3 (GN2 * GN)
 
-vec3					gridSamplingDisk[NSAMPLES] = vec3[](
-	// vec3(1, 1, 1), vec3(1, -1, 1), vec3(-1, -1, 1), vec3(-1, 1, 1),
-	// vec3(1, 1, -1), vec3(1, -1, -1), vec3(-1, -1, -1), vec3(-1, 1, -1),
-	// vec3(1, 1, 0), vec3(1, -1, 0), vec3(-1, -1, 0), vec3(-1, 1, 0),
-	// vec3(1, 0, 1), vec3(-1, 0, 1), vec3(1, 0, -1), vec3(-1, 0, -1),
-	// vec3(0, 1, 1), vec3(0, -1, 1), vec3(0, -1, -1), vec3(0, 1, -1)
-	vec3(-0.57735, -0.57735, 0.57735),
-	vec3(0.934172, 0.356822, 0),
-	vec3(0.934172, -0.356822, 0),
-	vec3(-0.934172, 0.356822, 0),
-	vec3(-0.934172, -0.356822, 0),
-	vec3(0, 0.934172, 0.356822),
-	vec3(0, 0.934172, -0.356822),
-	vec3(0.356822, 0, -0.934172),
-	vec3(-0.356822, 0, -0.934172),
-	vec3(0, -0.934172, -0.356822),
-	vec3(0, -0.934172, 0.356822),
-	vec3(0.356822, 0, 0.934172),
-	vec3(-0.356822, 0, 0.934172),
-	vec3(0.57735, 0.57735, -0.57735),
-	vec3(0.57735, 0.57735, 0.57735),
-	vec3(-0.57735, 0.57735, -0.57735),
-	vec3(-0.57735, 0.57735, 0.57735),
-	vec3(0.57735, -0.57735, -0.57735),
-	vec3(0.57735, -0.57735, 0.57735),
-	vec3(-0.57735, -0.57735, -0.57735)
-	);
+vec3						gridSamplingDisk[NSAMPLES] = vec3[](
+	vec3(-GN2, -GN2, GN2), vec3(GN3, GN, 0), vec3(GN3, -GN, 0),
+	vec3(-GN3, GN, 0), vec3(-GN3, -GN, 0), vec3(0, GN3, GN),
+	vec3(0, GN3, -GN), vec3(GN, 0, -GN3), vec3(-GN, 0, -GN3),
+	vec3(0, -GN3, -GN), vec3(0, -GN3, GN), vec3(GN, 0, GN3),
+	vec3(-GN, 0, GN3), vec3(GN2, GN2, -GN2), vec3(GN2, GN2, GN2),
+	vec3(-GN2, GN2, -GN2), vec3(-GN2, GN2, GN2), vec3(GN2, -GN2, -GN2),
+	vec3(GN2, -GN2, GN2), vec3(-GN2, -GN2, -GN2)
+);
 
 float					ShadowCalculation()
 {
 	vec3 fragToLight = fs_in.pos - l.pos;
 	float currentDepth = length(fragToLight);
 	float shadow = 0.0;
-	float bias = 0.15;
+	float bias = 0.05;
 	int samples = NSAMPLES;
 	float viewDistance = length(viewPos - fs_in.pos);
-	
-	float diskRadius = (1.0 + (viewDistance / far)) / 25.f;
+
+	float diskRadius = 20.f / 1024.f;
 	for (int i = 0; i < samples; ++i)
 	{
 		float closestDepth =
 			texture(depthMap, fragToLight + gridSamplingDisk[i] * diskRadius).r;
 		closestDepth *= far;
 		if (currentDepth - bias > closestDepth)
-			shadow += 1.0;
+			shadow += 1.f;
 	}
 	shadow = shadow / float(samples);
 	return (shadow);
@@ -124,10 +98,8 @@ void					main()
 	vec3 specular = specularStrength * spec * l.s;
 
 	// attenuation
-	vec3 result =
-		// (ambientStrength * (1.f - ShadowCalculation()))
-		(ambient + (diffuse + specular)
-		 * (1.f - ShadowCalculation()) * attenuation)
+	vec3 result = (ambient + (diffuse + specular)
+				   * (1.f - ShadowCalculation()) * attenuation)
 		* color.xyz;
 	color = vec4(result, color.w);
 }
