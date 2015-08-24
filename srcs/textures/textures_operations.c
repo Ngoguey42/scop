@@ -6,16 +6,12 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/17 14:11:32 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/24 14:57:55 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/24 17:33:54 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
 #include <assert.h>
-
-#define LOC(N)  glGetUniformLocation(p->handle, N)
-#define PREFIX(T) glUniform ## T
-#define U(T, N, ...) PREFIX(T)(LOC(N), __VA_ARGS__)
 
 static int		new_texture(t_texture *t)
 {
@@ -45,7 +41,7 @@ void			sp_activate_texture(t_program const *p, t_texslot texslot
 	int const		gltexi = p->gltexi[texslot];
 
 	assert(gltexi >= 0);
-	U(1i, unifname, gltexi);
+	UNIF(p, m1i, unifname, gltexi);
 	glActiveTexture(GL_TEXTURE0 + gltexi);
 	glBindTexture(t->target, t->handle);
 	return ;

@@ -1,41 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   matrix4.c                                          :+:      :+:    :+:   */
+/*   obs_booleans.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/07/01 14:35:20 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/24 17:21:51 by ngoguey          ###   ########.fr       */
+/*   Created: 2015/08/24 17:31:16 by ngoguey           #+#    #+#             */
+/*   Updated: 2015/08/24 17:31:21 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ftmath.h"
-#include "ft_debug.h"
+#include "scop.h"
 
-const t_matrix4		g_identitym4 =
+t_bool		sp_ob_getnot_hidden(t_env const *e, t_ob const *ob)
 {
-	{1.f, 0.f, 0.f, 0.f, 0.f, 1.f, 0.f, 0.f,
-		0.f, 0.f, 1.f, 0.f, 0.f, 0.f, 0.f, 1.f}
-};
-
-t_matrix4		m4_identity(void)
-{
-	return (g_identitym4);
+	return (!ob->hidden);
+	(void)e;
 }
 
-void			m4_print(t_matrix4 mat)
+t_bool		sp_ob_get_moved(t_env const *e, t_ob const *ob)
 {
-	int	i;
+	return (ob->moved);
+	(void)e;
+}
 
-	i = 0;
-	while (i < 16)
-	{
-		if (i % 4 == 3)
-			qprintf("% 5.2f\n", mat.raw[i]);
-		else
-			qprintf("% 5.2f, ", mat.raw[i]);
-		i++;
-	}
-	return ;
+t_bool		sp_ob_get_shadow(t_env const *e, t_ob const *ob)
+{
+	return (ob->shadow);
+	(void)e;
 }

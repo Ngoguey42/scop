@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/15 13:44:48 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/24 17:06:05 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/24 17:43:31 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 
 #define CONCAT(NAME) sp_loadconf_ ## NAME
 #define L(NAME, ENV) CONCAT(NAME)(ENV)
+#define COMP_LIT(TYPE) (TYPE){__VA_ARGS__}
+#define FUCK_NORM (t_texture){NULL, GL_TEXTURE_CUBE_MAP, {1024, 1024}, 0}
 
 static t_env	*sp_register_instance(t_env *e)
 {
@@ -46,10 +48,9 @@ int				sp_init_env(t_env *e)
 	e->sunkd = ATOV3(245.f / 255.f, 235.f / 255.f, 190.f / 255.f);
 	e->sunks = ATOV3(190.f / 255.f, 190.f / 255.f, 230.f / 255.f);
 	memcpy(&e->sundat, ((float[2]){0.007, 0.0002}), sizeof(float[2]));
-	memcpy(&e->sbox_texture, &((t_texture)
-	{NULL, GL_TEXTURE_CUBE_MAP, {1024, 1024}, 0}), sizeof(t_texture));
+	memcpy(&e->sbox_texture, &(FUCK_NORM), sizeof(t_texture));
 	e->sbox_farplane = 150.f;
-	e->sbox_proj =  m4_fovprojection(M_PI / 2.f, 1.f, 1.f, e->sbox_farplane);
+	e->sbox_proj = m4_fovprojection(M_PI / 2.f, 1.f, 1.f, e->sbox_farplane);
 	sp_update_sunpos(e, true);
 	e->cpos = DEFAULT_CPOS_V3;
 	memcpy(&e->cangles, DEFAULT_CANGLES, sizeof(DEFAULT_CANGLES));

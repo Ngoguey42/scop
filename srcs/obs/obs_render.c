@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/27 12:01:57 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/24 15:03:38 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/24 17:31:37 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void		render_ob(t_env const *e, t_ob *ob)
 {
 	t_model const *const	mo = MOOFOB(e, ob);
 	t_mesh const *const		me = MEOFMO(e, mo);
-	t_program const* const	p = POFME(e, me);
+	t_program const *const	p = POFME(e, me);
 
 	if (mo->update_uniforms != NULL)
 		NORM_AT_42_IS_WTF(e, ob, mo);

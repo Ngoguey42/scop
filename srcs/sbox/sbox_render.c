@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/08/22 12:21:49 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/24 14:39:22 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/24 17:32:50 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,12 @@
 #include <math.h>
 #include <string.h>
 
-#define LOC(N)  glGetUniformLocation(p->handle, N)
-#define PREFIX(T) glUniform ## T
-#define U(T, N, ...) PREFIX(T)(LOC(N), __VA_ARGS__)
-
 static void	render_ob(t_env const *const e, t_ob const *const ob)
 {
 	t_mesh const *const		me = MEOFOB(e, ob);
 	t_program const *const	p = e->programs + sp_pointshadow_program;
 
-	U(Matrix4fv, "model", 1, GL_TRUE, (float*)&ob->mat);
+	UNIF(p, mMatrix4fv, "model", 1, GL_TRUE, (float*)&ob->mat);
 	glBindVertexArray(me->handles[0]);
 	glDrawElements(GL_TRIANGLES, 3 * me->faces.size, GL_UNSIGNED_INT, 0);
 	return ;
@@ -39,11 +35,11 @@ static void	update_uniforms(t_env const *e, t_program const *p)
 	while (i < 6)
 	{
 		buf[15] = i + '0';
-		U(Matrix4fv, buf, 1, GL_TRUE, (float*)(e->sbox_viewproj + i));
+		UNIF(p, mMatrix4fv, buf, 1, GL_TRUE, (float*)(e->sbox_viewproj + i));
 		i++;
 	}
-	U(1f, "far", e->sbox_farplane);
-	U(3fv, "lpos", 1, (float*)&e->sunpos_cartesian);
+	UNIF(p, m1f, "far", e->sbox_farplane);
+	UNIF(p, m3fv, "lpos", 1, (float*)&e->sunpos_cartesian);
 	return ;
 }
 

@@ -86,6 +86,7 @@ O_FILES := obj/srcs/env_operations.o \
 	obj/srcs/meshes/normals_calculation.o \
 	obj/srcs/meshes/positions_calculations.o \
 	obj/srcs/meshes/uv_calculations.o \
+	obj/srcs/meshes/uv_calculations_wrapfuns.o \
 	obj/srcs/objmodel/obj_faces_operations.o \
 	obj/srcs/objmodel/obj_insert_face.o \
 	obj/srcs/objmodel/obj_parsing.o \
@@ -95,6 +96,7 @@ O_FILES := obj/srcs/env_operations.o \
 	obj/srcs/objmodel/obj_parsing_mtl.o \
 	obj/srcs/objmodel/objmodel_operations.o \
 	obj/srcs/objmodel/objmodel_retreive.o \
+	obj/srcs/obs/obs_booleans.o \
 	obj/srcs/obs/obs_operations.o \
 	obj/srcs/obs/obs_render.o \
 	obj/srcs/obs/obs_update.o \
@@ -235,6 +237,9 @@ obj/srcs/meshes/positions_calculations.o: srcs/meshes/positions_calculations.c i
 obj/srcs/meshes/uv_calculations.o: srcs/meshes/uv_calculations.c include/cog_enums.h include/cog_meshfill.h include/ftmath.h include/objmodel.h include/scop.h include/scop_conf.h include/scop_types.h include/vbo.h | obj/srcs/meshes
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
+obj/srcs/meshes/uv_calculations_wrapfuns.o: srcs/meshes/uv_calculations_wrapfuns.c include/cog_enums.h include/cog_meshfill.h include/ftmath.h include/objmodel.h include/scop.h include/scop_conf.h include/scop_types.h include/vbo.h | obj/srcs/meshes
+	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
+
 obj/srcs/objmodel/obj_faces_operations.o: srcs/objmodel/obj_faces_operations.c include/objmodel.h include/objmodel_parsing.h include/vbo.h | obj/srcs/objmodel
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
@@ -260,6 +265,9 @@ obj/srcs/objmodel/objmodel_operations.o: srcs/objmodel/objmodel_operations.c inc
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
 obj/srcs/objmodel/objmodel_retreive.o: srcs/objmodel/objmodel_retreive.c include/cog_enums.h include/cog_meshfill.h include/ftmath.h include/objmodel.h include/objmodel_parsing.h include/scop.h include/scop_conf.h include/scop_types.h include/vbo.h | obj/srcs/objmodel
+	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
+
+obj/srcs/obs/obs_booleans.o: srcs/obs/obs_booleans.c include/cog_enums.h include/cog_meshfill.h include/ftmath.h include/objmodel.h include/scop.h include/scop_conf.h include/scop_types.h include/vbo.h | obj/srcs/obs
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
 obj/srcs/obs/obs_operations.o: srcs/obs/obs_operations.c include/cog_enums.h include/cog_meshfill.h include/ftmath.h include/objmodel.h include/scop.h include/scop_conf.h include/scop_types.h include/vbo.h | obj/srcs/obs
