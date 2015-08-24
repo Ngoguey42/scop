@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 12:08:19 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/22 17:45:13 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/24 15:38:19 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static void		loop(t_env *e)
 
 static void		end(t_env *e)
 {
-	//clean sbox ??
+	/* clean sbox ?? */
 	sp_delete_obs(e);
 	sp_delete_textures(e);
 	sp_delete_meshes(e);

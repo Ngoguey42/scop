@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cogconf1.c                                         :+:      :+:    :+:   */
+/*   cog_loadconf1.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/08/08 14:03:36 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/24 13:50:24 by ngoguey          ###   ########.fr       */
+/*   Created: 2015/08/24 15:53:55 by ngoguey           #+#    #+#             */
+/*   Updated: 2015/08/24 15:53:56 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int			sp_loadconf_fshaders(t_env *e)
 	FSHADER("cono_coli.frag", &sp_unif_lightstruct),
 	FSHADER("couvno_blendli.frag", &sp_unif_lightstruct),
 	FSHADER("co_sun.frag", &sp_unif_suncolor),
-	FSHADER("depth01.frag", &sp_unif_lightdepth),
+	FSHADER("depth01.frag", NULL),
 	};
 	memcpy(&e->fshaders, &tmp, sizeof(tmp));
 	return (0);
@@ -84,7 +84,7 @@ int			sp_loadconf_gshaders(t_env *e)
 
 	GSHADER("face_rgb.geom", NULL),
 	GSHADER("face_grey.geom", NULL),
-	GSHADER("pos_to_cubemap.geom", &sp_unif_shadowmat6),
+	GSHADER("pos_to_cubemap.geom", NULL),
 	};
 	memcpy(&e->gshaders, &tmp, sizeof(tmp));
 	return (0);

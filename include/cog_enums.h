@@ -86,7 +86,6 @@ typedef enum				e_mesh_index
 	sp_csie_mesh,
 	sp_alpha_mesh,
 	sp_plane_mesh,
-	sp_square_mesh,
 	sp_land_mesh,
 	sp_sun_mesh,
 	sp_num_meshes
@@ -100,7 +99,6 @@ typedef enum				e_model_index
 	sp_csie_model,
 	sp_alpha_model,
 	sp_plane_model,
-	sp_square_model,
 	sp_land_model,
 	sp_sun_model,
 	sp_num_models

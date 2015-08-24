@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cogconf2.c                                         :+:      :+:    :+:   */
+/*   cog_loadconf2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/08/08 14:03:56 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/24 14:33:10 by ngoguey          ###   ########.fr       */
+/*   Created: 2015/08/24 15:54:06 by ngoguey           #+#    #+#             */
+/*   Updated: 2015/08/24 15:54:07 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ int			sp_loadconf_meshes(t_env *e)
 	MESH(sp_ptn_program, GL_DYNAMIC_DRAW, &sp_meshfill_csie),
 	MESH(sp_ptn_program, GL_STATIC_DRAW, &sp_meshfill_alpha),
 	MESH(sp_ptn_program, GL_STATIC_DRAW, &sp_meshfill_plane),
-	MESH(sp_pcn_program, GL_STATIC_DRAW, &sp_meshfill_square),
 	MESH(sp_land_program, GL_STATIC_DRAW, &sp_meshfill_land),
 	MESH(sp_sun_program, GL_STATIC_DRAW, &sp_meshfill_sun),
 	};
@@ -67,7 +66,6 @@ int			sp_loadconf_models(t_env *e)
 	MODEL(sp_csie_mesh, sp_wall_texture, &sp_unif_model),
 	MODEL(sp_alpha_mesh, sp_metal_texture, &sp_unif_model),
 	MODEL(sp_plane_mesh, sp_wall_texture, &sp_unif_model),
-	MODEL(sp_square_mesh, sp_no_texture, &sp_unif_model),
 	MODEL(sp_land_mesh, sp_no_texture, NULL),
 	MODEL(sp_sun_mesh, sp_no_texture, &sp_unif_model),
 	};

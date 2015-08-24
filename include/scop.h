@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 12:07:31 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/24 14:58:32 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/24 15:43:20 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,13 @@
 # include "ft_debug.h"
 # define DEBUG(ARG) qprintf("%s\n", (ARG))
 # define DEBUGF(...) qprintf(__VA_ARGS__), ft_putchar_fd('\n', 2)
+
+/*
+** REDUNDANT MACROES
+*/
+# define UNIFLOC_(P, N)  glGetUniformLocation((P)->handle, N)
+# define UNIFPREFIX_(T) glUnifor ## T
+# define UNIF(P, T, N, ...) UNIFPREFIX_(T)(UNIFLOC_(P, N), __VA_ARGS__)
 
 /*
 ** PROTOTYPES
@@ -138,8 +145,6 @@ void		sp_unif_viewproj2(t_env const *e, t_program const *p);
 void		sp_unif_light(t_env const *e, t_program const *p);
 void		sp_unif_lightstruct(t_env const *e, t_program const *p);
 void		sp_unif_suncolor(t_env const *e, t_program const *p);
-void		sp_unif_lightdepth(t_env const *e, t_program const *p);
-void		sp_unif_shadowmat6(t_env const *e, t_program const *p);
 
 /*
 ** OBS (OBJECTS)

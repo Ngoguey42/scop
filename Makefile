@@ -58,6 +58,7 @@ O_FILES := obj/srcs/env_operations.o \
 	obj/srcs/configuration/obs_fill.o \
 	obj/srcs/configuration/obs_update.o \
 	obj/srcs/configuration/unif_update.o \
+	obj/srcs/configuration/unif_update_light.o \
 	obj/srcs/controls/controls_apply.o \
 	obj/srcs/controls/controls_inputs.o \
 	obj/srcs/controls/controls_mainob.o \
@@ -147,6 +148,9 @@ obj/srcs/configuration/obs_update.o: srcs/configuration/obs_update.c include/cog
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
 obj/srcs/configuration/unif_update.o: srcs/configuration/unif_update.c include/cog_enums.h include/cog_meshfill.h include/ftmath.h include/objmodel.h include/scop.h include/scop_conf.h include/scop_types.h include/vbo.h | obj/srcs/configuration
+	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
+
+obj/srcs/configuration/unif_update_light.o: srcs/configuration/unif_update_light.c include/cog_enums.h include/cog_meshfill.h include/ftmath.h include/objmodel.h include/scop.h include/scop_conf.h include/scop_types.h include/vbo.h | obj/srcs/configuration
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
 obj/srcs/controls/controls_apply.o: srcs/controls/controls_apply.c include/cog_enums.h include/cog_meshfill.h include/ftmath.h include/objmodel.h include/scop.h include/scop_conf.h include/scop_types.h include/vbo.h | obj/srcs/controls
