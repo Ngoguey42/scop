@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 12:07:31 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/24 17:45:04 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/24 18:48:37 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,7 @@ void		sp_shrink_vbo(t_ftvector *const dst, t_vbo_basic const *const vbo);
 int			sp_meshfillbumb_objmodel(t_env const *e, t_mesh *me
 										, t_vbo_basic *vbo
 										, char const *filename);
+void		sp_transpose_ebo(t_ftvector *dst, t_ftvector const *faces);
 
 /*
 ** MAIN OB HANDLING

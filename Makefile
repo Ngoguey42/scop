@@ -85,6 +85,7 @@ O_FILES := obj/srcs/env_operations.o \
 	obj/srcs/meshes/mesh_vbo_operations.o \
 	obj/srcs/meshes/normals_calculation.o \
 	obj/srcs/meshes/positions_calculations.o \
+	obj/srcs/meshes/transpose_ebo.o \
 	obj/srcs/meshes/uv_calculations.o \
 	obj/srcs/meshes/uv_calculations_wrapfuns.o \
 	obj/srcs/objmodel/obj_faces_operations.o \
@@ -232,6 +233,9 @@ obj/srcs/meshes/normals_calculation.o: srcs/meshes/normals_calculation.c include
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
 obj/srcs/meshes/positions_calculations.o: srcs/meshes/positions_calculations.c include/cog_enums.h include/cog_meshfill.h include/ftmath.h include/objmodel.h include/scop.h include/scop_conf.h include/scop_types.h include/vbo.h | obj/srcs/meshes
+	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
+
+obj/srcs/meshes/transpose_ebo.o: srcs/meshes/transpose_ebo.c | obj/srcs/meshes
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
 obj/srcs/meshes/uv_calculations.o: srcs/meshes/uv_calculations.c include/cog_enums.h include/cog_meshfill.h include/ftmath.h include/objmodel.h include/scop.h include/scop_conf.h include/scop_types.h include/vbo.h | obj/srcs/meshes

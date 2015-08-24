@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/08/15 11:15:10 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/24 17:27:20 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/24 17:59:22 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,6 @@
 ** |	factoffset[3] = -by[0] * factoffset[1]
 ** |					+ (obratio - imgratio) / (obratio * 2);
 */
-
-#define STEP 0.1f
-#define ANGLE_BETWEEN(V1, V2) (acos(v3_dot_normed((V1), (V2))))
 
 extern void	(*const g_wrapfuns[])();
 
