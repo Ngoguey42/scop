@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   controls.sun.c                                     :+:      :+:    :+:   */
+/*   update_sunpos.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/07/30 15:27:27 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/22 17:13:17 by ngoguey          ###   ########.fr       */
+/*   Created: 2015/08/24 17:03:11 by ngoguey           #+#    #+#             */
+/*   Updated: 2015/08/24 17:03:12 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static inline t_matrix4	shadow_viewproj(t_env const *const e
 	, up_vec)}));
 }
 
-void					sp_update_sun(t_env *e, t_bool force)
+void					sp_update_sunpos(t_env *e, t_bool force)
 {
 	t_bool	update;
 

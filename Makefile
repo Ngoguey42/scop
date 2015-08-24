@@ -60,10 +60,11 @@ O_FILES := obj/srcs/env_operations.o \
 	obj/srcs/configuration/unif_update.o \
 	obj/srcs/configuration/unif_update_light.o \
 	obj/srcs/controls/controls_apply.o \
+	obj/srcs/controls/controls_events.o \
 	obj/srcs/controls/controls_inputs.o \
-	obj/srcs/controls/controls_mainob.o \
-	obj/srcs/controls/controls_movements.o \
-	obj/srcs/controls/controls_sun.o \
+	obj/srcs/controls/update_campos.o \
+	obj/srcs/controls/update_mainobpos.o \
+	obj/srcs/controls/update_sunpos.o \
 	obj/srcs/ftmath/matrix4.o \
 	obj/srcs/ftmath/matrix4_invtranslate.o \
 	obj/srcs/ftmath/matrix4_miscop.o \
@@ -156,16 +157,19 @@ obj/srcs/configuration/unif_update_light.o: srcs/configuration/unif_update_light
 obj/srcs/controls/controls_apply.o: srcs/controls/controls_apply.c include/cog_enums.h include/cog_meshfill.h include/ftmath.h include/objmodel.h include/scop.h include/scop_conf.h include/scop_types.h include/vbo.h | obj/srcs/controls
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
+obj/srcs/controls/controls_events.o: srcs/controls/controls_events.c include/cog_enums.h include/cog_meshfill.h include/ftmath.h include/objmodel.h include/scop.h include/scop_conf.h include/scop_types.h include/vbo.h | obj/srcs/controls
+	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
+
 obj/srcs/controls/controls_inputs.o: srcs/controls/controls_inputs.c include/cog_enums.h include/cog_meshfill.h include/ftmath.h include/objmodel.h include/scop.h include/scop_conf.h include/scop_types.h include/vbo.h | obj/srcs/controls
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
-obj/srcs/controls/controls_mainob.o: srcs/controls/controls_mainob.c include/cog_enums.h include/cog_meshfill.h include/ftmath.h include/objmodel.h include/scop.h include/scop_conf.h include/scop_types.h include/vbo.h | obj/srcs/controls
+obj/srcs/controls/update_campos.o: srcs/controls/update_campos.c include/cog_enums.h include/cog_meshfill.h include/ftmath.h include/objmodel.h include/scop.h include/scop_conf.h include/scop_types.h include/vbo.h | obj/srcs/controls
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
-obj/srcs/controls/controls_movements.o: srcs/controls/controls_movements.c include/cog_enums.h include/cog_meshfill.h include/ftmath.h include/objmodel.h include/scop.h include/scop_conf.h include/scop_types.h include/vbo.h | obj/srcs/controls
+obj/srcs/controls/update_mainobpos.o: srcs/controls/update_mainobpos.c include/cog_enums.h include/cog_meshfill.h include/ftmath.h include/objmodel.h include/scop.h include/scop_conf.h include/scop_types.h include/vbo.h | obj/srcs/controls
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
-obj/srcs/controls/controls_sun.o: srcs/controls/controls_sun.c include/cog_enums.h include/cog_meshfill.h include/ftmath.h include/objmodel.h include/scop.h include/scop_conf.h include/scop_types.h include/vbo.h | obj/srcs/controls
+obj/srcs/controls/update_sunpos.o: srcs/controls/update_sunpos.c include/cog_enums.h include/cog_meshfill.h include/ftmath.h include/objmodel.h include/scop.h include/scop_conf.h include/scop_types.h include/vbo.h | obj/srcs/controls
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
 obj/srcs/ftmath/matrix4.o: srcs/ftmath/matrix4.c include/ftmath.h | obj/srcs/ftmath

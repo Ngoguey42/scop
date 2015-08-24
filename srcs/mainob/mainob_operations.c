@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/08/16 11:57:44 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/17 14:51:56 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/24 16:57:42 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,17 @@ void		sp_mainob_model_remapuv(t_env *e, t_uvwrapping_type t)
 				, (float[2]){(float)tex->dim[0] / (float)tex->dim[1], 2.f}, t);
 	sp_shrink_vbo(&me->vertices, &me->vbo);
 	sp_refresh_vbo(e, me);
+	return ;
+}
+
+void		sp_mainob_resetpos(t_env *e)
+{
+	t_ob        *ob;
+
+	ob = e->mainob;
+	ob->position = D_MAINOBPOS_V3;
+	ob->rotation = D_MAINOBANGLES_V3;
+	ob->moved = true;
 	return ;
 }
 

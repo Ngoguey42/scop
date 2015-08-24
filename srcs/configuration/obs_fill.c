@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/22 13:44:32 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/24 16:02:11 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/24 16:50:18 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,34 +102,27 @@ float		ft_randf(void)
 	return ((float)(rand() % 10000) / 9999.f);
 }
 
-#define ARRAY_FLOAT(COUNT, ...) ((float[(COUNT)]){__VA_ARGS__})
-
 int			sp_fill_obs(t_env *e)
 {
 	float	rad;
 	int		dir;
 
 	OBMN(sp_teapot2_model, ob_pos, D_MAINOBPOS_V3, ob_rot, D_MAINOBANGLES_V3
-		 , ob_up, &sp_obupdate_mainob, ob_vi, ((int[1]){1}));
+	, ob_up, &sp_obupdate_mainob, ob_vi, ((int[1]){1}));
 	OB(sp_land_model);
 	OB(sp_sun_model, ob_up, &sp_obupdate_sun, ob_mov, false);
 	rad = 45.f;
-
 	while (rad < 500.f)
 	{
 		dir = 1 - rand() % 2 * 2;
-
-		OB(sp_plane_model, ob_sca, ATOV3SCAL(0.5f) , ob_up, &sp_obupdate_plane
+		OB(sp_plane_model, ob_sca, ATOV3SCAL(0.5f), ob_up, &sp_obupdate_plane
 		, ob_sha, false
 		, ob_vi, ((int[1]){dir})
 		, ob_vf
-		, ((float[3]){
-				M_PI * 2 * ft_randf()
-					, (float)dir * (0.1f + ft_randf())
-					, rad
-		   })
-		   /* ((float[3]){M_PI * 2.f * ft_randf(), 0.f, 0.f}) */
-			);
+		, ((float[3]){M_PI * 2 * ft_randf()
+		, (float)dir * (0.1f + ft_randf())
+		, rad
+		}));
 		rad += 25.f * ft_randf();
 	}
 	return (0);

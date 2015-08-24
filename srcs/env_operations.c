@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/15 13:44:48 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/24 15:12:45 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/24 17:06:05 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,11 @@ int				sp_init_env(t_env *e)
 	{NULL, GL_TEXTURE_CUBE_MAP, {1024, 1024}, 0}), sizeof(t_texture));
 	e->sbox_farplane = 150.f;
 	e->sbox_proj =  m4_fovprojection(M_PI / 2.f, 1.f, 1.f, e->sbox_farplane);
-	sp_update_sun(e, true);
+	sp_update_sunpos(e, true);
 	e->cpos = DEFAULT_CPOS_V3;
 	memcpy(&e->cangles, DEFAULT_CANGLES, sizeof(DEFAULT_CANGLES));
 	e->projection = m4_fovprojection(WIN_FOVF, WIN_RATIOF, WIN_NEARF, WIN_FARF);
-	sp_update_movements(e, true);
+	sp_update_campos(e, true);
 	e->states[sp_window_focused_state] = 1;
 	if (L(vshaders, e) || L(fshaders, e) || L(gshaders, e) || L(programs, e)
 		|| L(textures, e) || L(meshes, e) || L(models, e))

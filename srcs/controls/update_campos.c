@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   controls_movements.c                               :+:      :+:    :+:   */
+/*   update_campos.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/07/30 15:25:51 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/18 17:00:47 by ngoguey          ###   ########.fr       */
+/*   Created: 2015/08/24 17:03:28 by ngoguey           #+#    #+#             */
+/*   Updated: 2015/08/24 17:17:05 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ static void		update_angles_keyboard(t_env *e, t_bool *up)
 	return ;
 }
 
-void			sp_update_movements(t_env *e, t_bool force)
+void			sp_update_campos(t_env *e, t_bool force)
 {
 	t_bool	update;
 
@@ -109,10 +109,9 @@ void			sp_update_movements(t_env *e, t_bool force)
 			e->cangles[1] = CAMERA_POSBOUNDF;
 		else if (e->cangles[1] < -CAMERA_POSBOUNDF)
 			e->cangles[1] = -CAMERA_POSBOUNDF;
-		e->view = m4_lookat(ATOV3(e->cpos.x, e->cpos.y, e->cpos.z),
-							v3_add(ATOV3(e->cpos.x, e->cpos.y, e->cpos.z),
-								   v3_frontnormed(e->cangles)),
-							(t_vector3){0.f, 1.f, 0.f});
+		e->view = m4_lookat(e->cpos,
+		v3_add(ATOV3(e->cpos.x, e->cpos.y, e->cpos.z),
+		v3_frontnormed(e->cangles)), ATOV3(0.f, 1.f, 0.f));
 		e->viewproj = m4_dotprod(&e->projection, &e->view);
 	}
 	return ;

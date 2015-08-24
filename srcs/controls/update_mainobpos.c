@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   controls_mainob.c                                  :+:      :+:    :+:   */
+/*   update_mainobpos.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/08/16 16:29:41 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/16 17:12:11 by ngoguey          ###   ########.fr       */
+/*   Created: 2015/08/24 17:05:03 by ngoguey           #+#    #+#             */
+/*   Updated: 2015/08/24 17:08:05 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static void		updade_pos(t_env *e, float elms, t_bool *up, t_ob *ob)
 	return ;
 }
 
-void		sp_updatepos_mainob(t_env *e)
+void			sp_update_mainobpos(t_env *e)
 {
 	t_bool		up[1];
 

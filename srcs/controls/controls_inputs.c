@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/15 11:47:48 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/17 16:08:19 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/24 16:58:24 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,57 +35,16 @@ static int const		g_keystates[] =
 	GLFW_KEY_MINUS,
 };
 
-static void	toggle_mouse_state(t_env *e)
-{
-	GLFWwindow	*w;
-
-	w = e->win;
-	if (glfwGetInputMode(w, GLFW_CURSOR) == GLFW_CURSOR_NORMAL)
-		glfwSetInputMode(w, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-	else
-		glfwSetInputMode(w, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
-	glfwGetCursorPos(w, e->mpos, e->mpos + 1);
-	return ;
-}
-
-static void	reset_campos(t_env *e)
-{
-	e->cpos = DEFAULT_CPOS_V3;
-	memcpy(&e->cangles, DEFAULT_CANGLES, sizeof(DEFAULT_CANGLES));
-	sp_update_movements(e, true);
-	return ;
-}
-
-static void	reset_mainobpos(t_env *e)
-{
-	t_ob		*ob;
-
-	ob = e->mainob;
-	ob->position = D_MAINOBPOS_V3;
-	ob->rotation = D_MAINOBANGLES_V3;
-	ob->moved = true;
-	return ;
-}
-
-static void	mix_item(t_env *e, int direction)
-{
-	t_ob		*ob;
-
-	ob = e->mainob;
-	ob->vali[0] = direction;
-	return ;
-}
-
 static t_keyevents const	g_keyevents[] =
 {
 	CONV(&sp_mainob_model_remapuv, uvwrap_oxy, GLFW_KEY_8, sp_is_held, 0),
 	CONV(&sp_mainob_model_remapuv, uvwrap_spherical, GLFW_KEY_9, sp_is_held, 0),
 	CONV(&sp_mainob_model_remapuv, uvwrap_box, GLFW_KEY_0, sp_is_held, 0),
-	CONV(&toggle_mouse_state, 42, GLFW_KEY_TAB, sp_is_held, 0),
-	CONV(&reset_campos, 42, GLFW_KEY_R, sp_is_held, sp_control_held),
-	CONV(&reset_mainobpos, 42, GLFW_KEY_R, sp_is_held | sp_control_held, 0),
-	CONV(&mix_item, +1, GLFW_KEY_PAGE_UP, sp_is_held, 0),
-	CONV(&mix_item, -1, GLFW_KEY_PAGE_DOWN, sp_is_held, 0),
+	CONV(&sp_kevent_toggle_mouse_state, 42, GLFW_KEY_TAB, sp_is_held, 0),
+	CONV(&sp_kevent_reset_campos, 42, GLFW_KEY_R, sp_is_held, sp_control_held),
+	CONV(&sp_mainob_resetpos, 42, GLFW_KEY_R, sp_is_held | sp_control_held, 0),
+	CONV(&sp_kevent_mix_item, +1, GLFW_KEY_PAGE_UP, sp_is_held, 0),
+	CONV(&sp_kevent_mix_item, -1, GLFW_KEY_PAGE_DOWN, sp_is_held, 0),
 };
 
 void		sp_keyevent(t_env *e, int a, t_keystate ks)
