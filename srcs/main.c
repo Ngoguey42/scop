@@ -53,10 +53,6 @@ static void		loop(t_env *e)
 		sp_update_states(e);
 		sp_update_obs(e);
 		sp_render_sbox(e);
-		glBindFramebuffer(GL_FRAMEBUFFER, 0);
-		glViewport(0, 0, WIN_WIDTHI, WIN_HEIGHTI);
-		glClearColor(155. / 256., 216. / 256., 220. / 256., 1.f);
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		sp_render_obs(e);
 		glfwSwapBuffers(e->win);
 		glfwPollEvents();

@@ -18,7 +18,7 @@
 #define PREFIX(T) glUniform ## T
 #define U(T, N, ...) PREFIX(T)(LOC(N), __VA_ARGS__)
 
-static void	render_ob(t_env const *e, t_ob const *ob)
+static void	render_ob(t_env const *const e, t_ob const *const ob)
 {
 	t_mesh const *const		me = MEOFOB(e, ob);
 	t_program const *const	p = e->programs + sp_pointshadow_program;
@@ -50,10 +50,10 @@ static void	update_uniforms(t_env const *e, t_program const *p)
 void		sp_render_sbox(t_env const *e)
 {
 	t_program const *const	p = e->programs + sp_pointshadow_program;
-	t_program_index     i;
+	t_program_index			i;
 
-	glViewport(0, 0, e->sbox_resolution, e->sbox_resolution);
 	glBindFramebuffer(GL_FRAMEBUFFER, e->sbox_fbo);
+	glViewport(0, 0, e->sbox_resolution, e->sbox_resolution);
 	glClear(GL_DEPTH_BUFFER_BIT);
 	glUseProgram(p->handle);
 	update_uniforms(e, p);

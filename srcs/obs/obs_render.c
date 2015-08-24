@@ -65,6 +65,10 @@ void			sp_render_obs(t_env const *e)
 {
 	t_program_index		i;
 
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	glViewport(0, 0, WIN_WIDTHI, WIN_HEIGHTI);
+	glClearColor(155. / 256., 216. / 256., 220. / 256., 1.f);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	i = -1;
 	while (++i < sp_num_programs)
 	{
