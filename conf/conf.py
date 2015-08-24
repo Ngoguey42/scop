@@ -6,7 +6,7 @@
 #    By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/08/10 13:13:01 by ngoguey           #+#    #+#              #
-#    Updated: 2015/08/23 18:02:35 by ngoguey          ###   ########.fr        #
+#    Updated: 2015/08/24 14:09:06 by ngoguey          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,18 +50,12 @@ gshaders = [
 	Gshader("pos_to_cubemap", "pos_to_cubemap.geom", "shadowmat6"),
 ]
 programs = [
-	# p fait ceci cela
-	Program("p", "po_to_co", "co_identity", "no"),
-	# pct fait ceci cela
-	Program("pct", "pocote_to_couv", "couv_uv", "no"),
-	# pt fait ceci cela
-	Program("pt", "pote_to_couv", "couv_uv", "no"),
 	# land fait ceci cela
-	Program("land", "pocono_to_co_nomodel", "cono_coli", "no"),
+	Program("land", "pocono_to_co_nomodel", "cono_coli", "no", img1=0),
 	# ptn fait ceci cela
-	Program("ptn", "poteno_to_uv", "couvno_blendli", "face_grey"),
+	Program("ptn", "poteno_to_uv", "couvno_blendli", "face_grey", sbox=0, img1=1),
 	# pcn fait ceci cela
-	Program("pcn", "pocono_to_co", "cono_coli", "no"),
+	Program("pcn", "pocono_to_co", "cono_coli", "no", sbox=0),
 	# sun fait ceci cela
 	Program("sun", "po_to_noop", "co_sun", "no"),
 	Program("pointshadow", "po_to_noop_noviewproj", "depth01", "pos_to_cubemap"),

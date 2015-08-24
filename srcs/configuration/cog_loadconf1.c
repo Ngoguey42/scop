@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/08/08 14:03:36 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/10 13:14:10 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/24 13:50:24 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@
 #define VSHADER(N,F,...) {VSHD_PATH(N), F, NARG(__VA_ARGS__), {__VA_ARGS__}, 0}
 #define FSHADER(N, F) {FSHD_PATH(N), (F), 0}
 #define GSHADER(N, F) {GSHD_PATH(N), (F), 0}
-#define PROG(VS,FS,GS) {VS, FS, GS, 0}
+#define PROG(VS,FS,GS,TEXI) {VS, FS, GS, TEXI, 0}
+#define TEXI(...) {__VA_ARGS__}
 
 /*
 **	[[[cog
@@ -37,23 +38,23 @@ int			sp_loadconf_vshaders(t_env *e)
 	t_vshader const		tmp[sp_num_vshaders] = {
 
 	VSHADER("po_to_co.vert", &sp_unif_viewproj2,
-LOC(sp_pos_loc, 3)),
+	LOC(sp_pos_loc, 3)),
 	VSHADER("pocote_to_couv.vert", &sp_unif_viewproj2,
-LOC(sp_pos_loc, 3), LOC(sp_col_loc, 3), LOC(sp_tex_loc, 2)),
+	LOC(sp_pos_loc, 3), LOC(sp_col_loc, 3), LOC(sp_tex_loc, 2)),
 	VSHADER("pote_to_couv.vert", &sp_unif_viewproj2,
-LOC(sp_pos_loc, 3), LOC(sp_tex_loc, 2)),
+	LOC(sp_pos_loc, 3), LOC(sp_tex_loc, 2)),
 	VSHADER("poco_to_co.vert", &sp_unif_viewproj,
-LOC(sp_pos_loc, 3), LOC(sp_col_loc, 3)),
+	LOC(sp_pos_loc, 3), LOC(sp_col_loc, 3)),
 	VSHADER("poteno_to_uv.vert", &sp_unif_viewproj,
-LOC(sp_pos_loc, 3), LOC(sp_tex_loc, 2), LOC(sp_nor_loc, 3)),
+	LOC(sp_pos_loc, 3), LOC(sp_tex_loc, 2), LOC(sp_nor_loc, 3)),
 	VSHADER("pocono_to_co.vert", &sp_unif_viewproj,
-LOC(sp_pos_loc, 3), LOC(sp_col_loc, 3), LOC(sp_nor_loc, 3)),
+	LOC(sp_pos_loc, 3), LOC(sp_col_loc, 3), LOC(sp_nor_loc, 3)),
 	VSHADER("pocono_to_co_nomodel.vert", &sp_unif_viewproj,
-LOC(sp_pos_loc, 3), LOC(sp_col_loc, 3), LOC(sp_nor_loc, 3)),
+	LOC(sp_pos_loc, 3), LOC(sp_col_loc, 3), LOC(sp_nor_loc, 3)),
 	VSHADER("po_to_noop.vert", &sp_unif_viewproj,
-LOC(sp_pos_loc, 3)),
+	LOC(sp_pos_loc, 3)),
 	VSHADER("po_to_noop_noviewproj.vert", NULL,
-LOC(sp_pos_loc, 3)),
+	LOC(sp_pos_loc, 3)),
 	};
 	memcpy(&e->vshaders, &tmp, sizeof(tmp));
 	return (0);
@@ -93,14 +94,15 @@ int			sp_loadconf_programs(t_env *e)
 {
 	t_program const		tmp[sp_num_programs] = {
 
-	PROG(sp_po_to_co_vshader, sp_co_identity_fshader, sp_no_gshader),
-	PROG(sp_pocote_to_couv_vshader, sp_couv_uv_fshader, sp_no_gshader),
-	PROG(sp_pote_to_couv_vshader, sp_couv_uv_fshader, sp_no_gshader),
-	PROG(sp_pocono_to_co_nomodel_vshader, sp_cono_coli_fshader, sp_no_gshader),
-	PROG(sp_poteno_to_uv_vshader, sp_couvno_blendli_fshader, sp_face_grey_gshader),
-	PROG(sp_pocono_to_co_vshader, sp_cono_coli_fshader, sp_no_gshader),
-	PROG(sp_po_to_noop_vshader, sp_co_sun_fshader, sp_no_gshader),
-	PROG(sp_po_to_noop_noviewproj_vshader, sp_depth01_fshader, sp_pos_to_cubemap_gshader),
+	PROG(sp_pocono_to_co_nomodel_vshader, sp_cono_coli_fshader, sp_no_gshader
+	, TEXI(0, -1)),
+	PROG(sp_poteno_to_uv_vshader, sp_couvno_blendli_fshader
+	, sp_face_grey_gshader, TEXI(1, 0)),
+	PROG(sp_pocono_to_co_vshader, sp_cono_coli_fshader, sp_no_gshader
+	, TEXI(-1, 0)),
+	PROG(sp_po_to_noop_vshader, sp_co_sun_fshader, sp_no_gshader, TEXI(-1, -1)),
+	PROG(sp_po_to_noop_noviewproj_vshader, sp_depth01_fshader
+	, sp_pos_to_cubemap_gshader, TEXI(-1, -1)),
 	};
 	memcpy(&e->programs, &tmp, sizeof(tmp));
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/08/22 12:21:49 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/22 17:34:26 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/24 14:39:22 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void	update_uniforms(t_env const *e, t_program const *p)
 		U(Matrix4fv, buf, 1, GL_TRUE, (float*)(e->sbox_viewproj + i));
 		i++;
 	}
-	U(1f, "far", e->sbox_resolution);
+	U(1f, "far", e->sbox_farplane);
 	U(3fv, "lpos", 1, (float*)&e->sunpos_cartesian);
 	return ;
 }
@@ -53,7 +53,7 @@ void		sp_render_sbox(t_env const *e)
 	t_program_index			i;
 
 	glBindFramebuffer(GL_FRAMEBUFFER, e->sbox_fbo);
-	glViewport(0, 0, e->sbox_resolution, e->sbox_resolution);
+	glViewport(0, 0, e->sbox_texture.dim[0], e->sbox_texture.dim[1]);
 	glClear(GL_DEPTH_BUFFER_BIT);
 	glUseProgram(p->handle);
 	update_uniforms(e, p);

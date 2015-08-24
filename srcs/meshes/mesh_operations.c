@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/18 12:01:22 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/10 14:00:21 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/24 14:13:09 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int						sp_init_meshes(t_env *e)
 	while (me < end)
 	{
 		gettimeofday(&t, NULL);
-		lprintf("\033[32mGenerating mesh...\033[0m");
+		qprintf("\033[32mGenerating mesh...\033[0m");
 		if (sp_new_mesh(e, me))
 			return (1);
 		lprintf("\033[32m...done in %.6fs\033[0m", ft_timeval_elapsed(t));

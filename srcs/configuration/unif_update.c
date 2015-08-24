@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/21 09:01:30 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/22 18:38:50 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/24 14:37:37 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void			sp_unif_lightstruct(t_env const *e, t_program const *p)
 	U(1f, "l.linear", e->sundat[0]);
 	U(1f, "l.quadratic", e->sundat[1]);
 	U(3fv, "viewPos", 1, (float*)&e->cpos);
-	U(1f, "far", e->sbox_resolution);
+	U(1f, "far", e->sbox_farplane);
 	return ;
 }
 

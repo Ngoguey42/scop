@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/08/15 11:25:49 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/23 18:06:03 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/24 12:16:22 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,6 @@ void			sp_shrink_vbo(t_ftvector *const dst
 	src = srcv->data;
 	if (ftv_reserve(dst, srcv->size))
 		sp_enomem();
-	T;
 	while (src < end)
 	{
 		build_vertex(tmp, vbo, src);
@@ -119,9 +118,7 @@ int				sp_fill_mesh(t_env const *e, t_mesh *me)
 		return (ERROR("me->fill(e, me)"), 1);
 	if (sp_validate_vbo(&me->vbo, VSOFME(e, me)))
 		return (ERROR("validate_vbo(...)"), 1);
-	T;
 	sp_shrink_vbo(&me->vertices, &me->vbo);
-	T;
 	if (me->usage == GL_STATIC_DRAW)
 		ftv_release(&me->vbo.vertices, NULL);
 	return (0);

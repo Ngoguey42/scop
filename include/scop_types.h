@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 10:07:19 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/22 16:45:43 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/24 15:13:04 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ typedef struct					s_keyevents
 */
 typedef struct					s_vshader
 {
-	char const					filepath[64];
+	char const					*filepath;
 	void (*const				unif_update)();
 	size_t const				n_locations;
 	t_location const			locations[4];
@@ -87,13 +87,13 @@ typedef struct					s_vshader
 }								t_vshader;
 typedef struct					s_fshader
 {
-	char const					filepath[64];
+	char const					*filepath;
 	void (*const				unif_update)();
 	GLuint						handle;
 }								t_fshader;
 typedef struct					s_gshader
 {
-	char const					filepath[64];
+	char const					*filepath;
 	void (*const				unif_update)();
 	GLuint						handle;
 }								t_gshader;
@@ -102,11 +102,18 @@ typedef struct					s_gshader
 ** PROGRAMS
 ** A program is tied to several <mesh>
 */
+typedef enum					e_texslot
+{
+	sp_image1_texslot,
+	sp_sbox_texslot,
+	sp_num_texslots,
+}								t_texslot;
 typedef struct					s_program
 {
 	t_vshader_index const		vshader;
 	t_fshader_index const		fshader;
 	t_gshader_index const		gshader;
+	int const					gltexi[sp_num_texslots];
 	GLuint						handle;
 }								t_program;
 
@@ -139,7 +146,8 @@ typedef enum					e_uvwrapping_type
 */
 typedef struct					s_texture
 {
-	char const					filepath[64];
+	char const					*filepath;
+	GLenum const				target;
 	t_ui						dim[2];
 	GLuint						handle;
 }								t_texture;
@@ -224,9 +232,8 @@ typedef struct					s_env
 	t_vector3					sunkd;
 	t_vector3					sunks;
 	float						sundat[2];
-	GLuint						sbox_map;
+	t_texture					sbox_texture;
 	GLuint						sbox_fbo;
-	t_ui						sbox_resolution;
 	float						sbox_farplane;
 	t_matrix4					sbox_proj;
 	t_matrix4					sbox_viewproj[6];

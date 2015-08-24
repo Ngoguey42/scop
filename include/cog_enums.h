@@ -61,9 +61,6 @@ typedef enum				e_gshader_index
 
 typedef enum				e_program_index
 {
-	sp_p_program,
-	sp_pct_program,
-	sp_pt_program,
 	sp_land_program,
 	sp_ptn_program,
 	sp_pcn_program,

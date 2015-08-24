@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/28 11:02:28 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/23 17:21:54 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/24 14:13:49 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ static int		gen_attribs(t_vshader const *vs, size_t vert_width)
 		delta += vs->locations[i].size * sizeof(GLfloat);
 		i++;
 	}
-	qprintf("\n");
 	return (0);
 }
 
@@ -87,7 +86,7 @@ int				sp_new_mesh(t_env const *e, t_mesh *me)
 	lprintf("    \033[33mFilling mesh...\033[0m");
 	if (sp_fill_mesh(e, me))
 		return (ERROR("me->fill(e, me)"), 1);
-	lprintf("    \033[33m...done:  %u vertices, %u faces\033[0m",
+	qprintf("    \033[33m...done:  %u vertices, %u faces\033[0m",
 			me->vertices.size, me->faces.size);
 	glGenVertexArrays(1, me->handles + 0);
 	glBindVertexArray(me->handles[0]);

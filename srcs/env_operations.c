@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/15 13:44:48 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/22 17:02:04 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/24 15:12:45 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,10 @@ int				sp_init_env(t_env *e)
 	e->sunkd = ATOV3(245.f / 255.f, 235.f / 255.f, 190.f / 255.f);
 	e->sunks = ATOV3(190.f / 255.f, 190.f / 255.f, 230.f / 255.f);
 	memcpy(&e->sundat, ((float[2]){0.007, 0.0002}), sizeof(float[2]));
-	e->sbox_resolution = 1024 * 1;
-	e->sbox_farplane = 250.f;
-	e->sbox_proj =  m4_fovprojection(M_PI / 2.f, 1.f, 1.f, e->sbox_resolution);
+	memcpy(&e->sbox_texture, &((t_texture)
+	{NULL, GL_TEXTURE_CUBE_MAP, {1024, 1024}, 0}), sizeof(t_texture));
+	e->sbox_farplane = 150.f;
+	e->sbox_proj =  m4_fovprojection(M_PI / 2.f, 1.f, 1.f, e->sbox_farplane);
 	sp_update_sun(e, true);
 	e->cpos = DEFAULT_CPOS_V3;
 	memcpy(&e->cangles, DEFAULT_CANGLES, sizeof(DEFAULT_CANGLES));

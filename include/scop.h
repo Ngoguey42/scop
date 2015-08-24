@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 12:07:31 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/22 18:38:54 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/24 14:58:32 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,9 @@ int			sp_init_programs(t_env *e);
 int			sp_init_textures(t_env *e);
 void		sp_delete_textures(t_env *e);
 int			parse_tga(char const *filepath, t_ftvector *v, t_ui dim[2]);
+void		sp_activate_texture(t_program const *p, t_texslot texslot
+								, t_texture const *t, char const *unifname);
+
 /*
 ** MESHES
 */

@@ -6,7 +6,7 @@
 #    By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/08/10 13:13:13 by ngoguey           #+#    #+#              #
-#    Updated: 2015/08/18 16:17:28 by ngoguey          ###   ########.fr        #
+#    Updated: 2015/08/24 14:17:41 by ngoguey          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,12 @@ from confutils import *
 class Cstruct:
 	def __init__(self):
 		pass
+	def printstr(self, s):
+		if len(s) + self.col > 78:
+			cog.out('\n\t')
+			self.col = 4
+		cog.out(s)
+		self.col += len(s)
 	@staticmethod
 	def output_enum_start():
 		raise NotImplementedError("Subclass must implement abstract method")
@@ -58,9 +64,9 @@ class Vshader(Cstruct):
 		cog.out("\tVSHADER(\"" + self.filename
 			+ "\", ")
 		if self.unif_funname != "":
-			cog.out("&sp_unif_" + self.unif_funname + ",\n")
+			cog.out("&sp_unif_" + self.unif_funname + ",\n\t")
 		else:
-			cog.out("NULL,\n")
+			cog.out("NULL,\n\t")
 		for loc in self.locations[0:-1]:
 			cog.out("LOC(sp_" + loc[0] + "_loc, " + str(loc[1]) + "), ")
 		loc = self.locations[-1]
@@ -123,11 +129,14 @@ class Gshader(Cstruct):
 			cog.out("NULL" + "),\n")
 
 class Program(Cstruct):
-	def __init__(self, name, vsname, fsname, gsname):
+	def __init__(self, name, vsname, fsname, gsname
+				 , img1=-1, sbox=-1):
 		self.name = name
 		self.vsname = vsname
 		self.fsname = fsname
 		self.gsname = gsname
+		self.img1 = img1
+		self.sbox = sbox
 	@staticmethod
 	def output_enum_start():
 		output_enums_indent_2str("typedef enum", "e_program_index\n{")
@@ -144,9 +153,12 @@ class Program(Cstruct):
 	def output_cconf_end():
 		output_cconf_end("programs")
 	def output_cconf_entry(self):
-		cog.outl("\tPROG(sp_" + self.vsname + "_vshader, sp_"
-			+ self.fsname + "_fshader, sp_"
-			 + self.gsname + "_gshader" + "),")
+		self.col = 3
+		self.printstr("\tPROG(sp_" + self.vsname + "_vshader")
+		self.printstr(", sp_" + self.fsname + "_fshader")
+		self.printstr(", sp_" + self.gsname + "_gshader")
+		self.printstr(", TEXI(" + str(self.img1) + ", " + str(self.sbox) + ")")
+		cog.outl("),");
 
 class Texture(Cstruct):
 	def __init__(self, name, filename):
@@ -242,19 +254,12 @@ class Ob(Cstruct):
 	def output_cconf_end():
 		cog.outl("\treturn (0);\n}")
 
-	def printstr(self, s):
-		if len(s) + self.col > 78:
-			cog.out('\n\t\t')
-			self.col = 8
-		cog.out(s)
-		self.col += len(s)
-
 	def output_cconf_entry(self):
 		self.col = 3
-		printstr("\tOB(sp_" + self.model + "_model")
+		self.printstr("\tOB(sp_" + self.model + "_model")
 		for k, v in self.kwargs:
 			if k == sca:
 				s = str(float(v)) + 'f'
-				printstr(', ob_sca, ATOV3SCAL(' + s+', '+s+', '+s + ')')
+				self.printstr(', ob_sca, ATOV3SCAL(' + s+', '+s+', '+s + ')')
 			# printstr("ob_" + str(k) + ', ')
 		cog.outl(');')
