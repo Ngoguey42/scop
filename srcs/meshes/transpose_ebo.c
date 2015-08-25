@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/08/24 18:23:03 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/24 19:28:58 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/25 15:45:30 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,30 +74,25 @@ static void		fill_alloc(t_ftvector *occurances, t_ui const vindices[3]
 
 void debug(void *ptr, t_transposed_ebo const *tebo)
 {
-	int i;
+	size_t	i;
 
-	i =0;
+	i = 0;
 	while (i < tebo->count)
 	{
 		qprintf("(%2u)", tebo->faces[i]);
-
 		i++;
 	}
 	qprintf("\n");
-	
+	(void)ptr;
 	return ;
 }
 
 void			sp_transpose_ebo(t_ftvector *dst, t_ftvector const *faces)
 {
-	t_ftvector			occurances[1];
-
-	ftv_init_instance(occurances, sizeof(t_transposed_ebo));
-	ftv_foreach(faces, &fill_count, occurances);
-	/* ftv_print(occurances, "uUp");//debug */
-	ftv_foreach(occurances, &init_alloc, NULL);
-	ftv_foreachi(faces, &fill_alloc, occurances);
-	ftv_foreach(occurances, &debug, NULL);
-	(void)dst;
+	ftv_init_instance(dst, sizeof(t_transposed_ebo));
+	ftv_foreach(faces, &fill_count, dst);
+	ftv_foreach(dst, &init_alloc, NULL);
+	ftv_foreachi(faces, &fill_alloc, dst);
+	ftv_foreach(dst, &debug, NULL);
 	return ;
 }

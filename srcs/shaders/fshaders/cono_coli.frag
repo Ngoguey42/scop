@@ -6,7 +6,7 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/07/30 10:07:14 by ngoguey           #+#    #+#             //
-//   Updated: 2015/08/25 15:07:50 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/08/25 15:13:13 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -43,10 +43,8 @@ in PoCoNo
 	vec3					nor;
 }							fs_in;
 uniform samplerCube			depthMap;
-// uniform sampler2D			ourTexture;
 uniform float				far;
 uniform vec3				viewPos;
-// uniform float				mixval;
 uniform struct Light {
 	vec3 pos;
 

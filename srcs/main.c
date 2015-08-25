@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 12:08:19 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/24 19:37:13 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/25 16:36:54 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,9 @@ static void		loop(t_env *e)
 	last_time = e->time_start;
 
 
-	/* t_mesh	*me = e->meshes + sp_ft_mesh; */
-
-	/* ftv_print(&me->faces, "uuu"); */
-	/* T; */
-	/* sp_transpose_ebo(NULL, &me->faces); */
-	
+	t_mesh	*me = e->meshes + sp_ft_mesh;
+	sp_split_ebo(&me->vbo, &me->faces, NULL);
+		
 	/* return ; */
 	while (!glfwWindowShouldClose(e->win))
 	{
