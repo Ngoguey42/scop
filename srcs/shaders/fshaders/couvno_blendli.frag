@@ -77,7 +77,7 @@ vec3						SAMPLES[NSAMPLESI] = vec3[](
 float					sample_shadows(
 	float dFraLi, vec3 vLiToFra, float weight, float radius)
 {
-	float	shadow;
+	float				shadow;
 	
 	shadow = 0.f;
 	for (int i = 0; i < NSAMPLESI; ++i)
@@ -94,10 +94,10 @@ float					sample_shadows(
 float					compute_shadows(
 	float dnFraLi, float dFraLi, vec3 vLiToFra)
 {
-	float	shadow;
-	float	samples;
-	float	weight;
-	float	radius;
+	float				shadow;
+	float				samples;
+	float				weight;
+	float				radius;
 
 	shadow = 0.f;
 	samples = 0.f;
@@ -115,33 +115,49 @@ float					compute_shadows(
 
 void					main()
 {
-	vec3	vLiToFra = fs_in.pos - l.pos;
-	vec3	vFraToLi = -vLiToFra;
-	vec3	vnFraToLi = normalize(vFraToLi);
-	vec3	vFraToCam = viewPos - fs_in.pos;
-	vec3	vnFraToCam = normalize(vFraToCam);
-	vec3	vnFraNormal = normalize(fs_in.nor);
-	float	dFraLi = length(vLiToFra);
-	float	dnFraLi = dFraLi / far;
-	float	dFraCam = length(vFraToCam);
-	float	attenuation = 1.f / (1.f
-								 + l.linear * dFraLi
-								 + l.quadratic * (dFraLi * dFraLi));
-	vec3	ambient = AMBIENT_STRENGTH * l.a;
-	vec3	diffuse = max(dot(vnFraNormal, vnFraToLi), 0.f) * l.d;
-	vec3	specular =
-		pow(max(dot(vnFraToCam, reflect(-vnFraToLi, vnFraNormal)), 0.0)
-			, SPECULAR_POWER)
-		* SPECULAR_STRENGTH * l.s;
-	float	shadow = compute_shadows(dnFraLi, dFraLi, vLiToFra);
+	float				attenuation;
+	float				shadow;
+	vec3				ambient;
+	vec3				diffuse;
+	vec3				specular;
 
+	{
+		vec3			vFraToLi;
+
+		{
+			vec3		vLiToFra = fs_in.pos - l.pos;
+
+			{
+				float	dFraLi = length(vLiToFra);
+				float	dnFraLi = dFraLi / far;
+
+				shadow = compute_shadows(dnFraLi, dFraLi, vLiToFra);
+				attenuation = 1.f / (1.f
+					+ l.linear * dFraLi
+					+ l.quadratic * (dFraLi * dFraLi));
+			}
+			vFraToLi = -vLiToFra;
+		}
+		vec3			vnFraToLi = normalize(vFraToLi);
+		vec3			vnFraNormal = normalize(fs_in.nor);
+
+		diffuse = max(dot(vnFraNormal, vnFraToLi), 0.f) * l.d;
+		{
+			vec3		vFraToCam = viewPos - fs_in.pos;
+			vec3		vnFraToCam = normalize(vFraToCam);
+
+			specular =
+				pow(max(dot(vnFraToCam, reflect(-vnFraToLi, vnFraNormal)), 0.0)
+					, SPECULAR_POWER)
+				* SPECULAR_STRENGTH * l.s;
+		}
+		ambient = AMBIENT_STRENGTH * l.a;
+	}
 	color = mix(vec4(fs_in.col, 1.f), texture(ourTexture, fs_in.tex), mixval);
 	// color = vec4(fs_in.col, 1.f);
 	// color = vec4(0.7, 0.7, 0.7, 1.);
-	color = vec4(
-		(ambient
-		 + (diffuse + specular)
-		 * (1.f - shadow) * attenuation)
-		* color.xyz
-		, color.w);
+	color = vec4((ambient
+				  + (diffuse + specular)
+				  * (1.f - shadow) * attenuation)
+				 * color.xyz, color.w);
 }
