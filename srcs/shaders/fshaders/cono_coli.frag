@@ -6,7 +6,7 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/07/27 18:24:49 by ngoguey           #+#    #+#             //
-//   Updated: 2015/08/23 17:16:10 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/08/25 12:39:38 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -53,8 +53,8 @@ vec3						gridSamplingDisk[NSAMPLES] = vec3[](
 
 float					ShadowCalculation()
 {
-	vec3 fragToLight = fs_in.pos - l.pos;
-	float currentDepth = length(fragToLight);
+	vec3 light_to_frag = fs_in.pos - l.pos;
+	float currentDepth = length(light_to_frag);
 	float shadow = 0.0;
 	float bias = 0.05;
 	int samples = NSAMPLES;
@@ -64,7 +64,7 @@ float					ShadowCalculation()
 	for (int i = 0; i < samples; ++i)
 	{
 		float closestDepth =
-			texture(depthMap, fragToLight + gridSamplingDisk[i] * diskRadius).r;
+			texture(depthMap, light_to_frag + gridSamplingDisk[i] * diskRadius).r;
 		closestDepth *= far;
 		if (currentDepth - bias > closestDepth)
 			shadow += 1.f;
@@ -73,29 +73,34 @@ float					ShadowCalculation()
 	return (shadow);
 }
 
+#define AMBIENT_STRENGTH 0.05f
+#define SPECULAR_STRENGTH 0.5f
+
 void					main()
 {
-	float distance    = length(l.pos - fs_in.pos);
-	float attenuation = 1.0f / (1.0f + l.linear * distance +
-								l.quadratic * (distance * distance));
+	vec3		v_LiToFra = fs_in.pos - l.pos;
+	vec3		v_FraToLi = -v_LiToFra;
+	vec3		vn_FraToLi = normalize(v_FraToLi);
+	float		d_FraLi = length(v_LiToFra);
+	float		attenuation = 1.f / (1.f
+									 + l.linear * d_FraLi
+									 + l.quadratic * (d_FraLi * d_FraLi));
+	
 	color = vec4(fs_in.col, 1.f);
 	// color = vec4(0.7, 0.7, 0.7, 1.);
 	// Ambient
-	float ambientStrength = 0.4f;
-	vec3 ambient = ambientStrength * l.a;
+	vec3		ambient = AMBIENT_STRENGTH * l.a;
 
 	// Diffuse
-	vec3 norm = normalize(fs_in.nor);
-	vec3 lightDir = normalize(l.pos - fs_in.pos);
-	float diff = max(dot(norm, lightDir), 0.0);
-	vec3 diffuse = diff * l.d;
+	vec3		vn_FraNormal = normalize(fs_in.nor);
+	vec3		diffuse = max(dot(vn_FraNormal, vn_FraToLi), 0.f) * l.d;
 
 	// Specular
-	float specularStrength = 0.25f;
-	vec3 viewDir = normalize(viewPos - fs_in.pos);
-	vec3 reflectDir = reflect(-lightDir, norm);
-	float spec = pow(max(dot(viewDir, reflectDir), 0.0), 32);
-	vec3 specular = specularStrength * spec * l.s;
+	vec3		vn_FraToCam = normalize(viewPos - fs_in.pos);
+	vec3 reflectDir = reflect(-vn_FraToLi, vn_FraNormal);
+	float spec = pow(max(dot(vn_FraToCam, reflectDir), 0.0), 32);
+	vec3 specular = SPECULAR_STRENGTH * spec * l.s;
+	// vec3 specular = SPECULAR_STRENGTH * spec * vec3(1.f, 0.f, 0.f);
 
 	// attenuation
 	vec3 result = (ambient + (diffuse + specular)

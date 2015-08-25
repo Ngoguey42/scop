@@ -6,7 +6,7 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/07/30 10:07:14 by ngoguey           #+#    #+#             //
-//   Updated: 2015/08/23 17:17:16 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/08/25 11:31:10 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -61,16 +61,27 @@ float                   ShadowCalculation()
 	float bias = 0.05;
 	int samples = NSAMPLES;
 	float viewDistance = length(viewPos - fs_in.pos);
-	float diskRadius = 10.f / 1024.f;
+	float diskRadius = 5.f / 1024.f;
+	float weight = 1.f;
 	for (int i = 0; i < samples; ++i)
 	{
 		float closestDepth =
 			texture(depthMap, fragToLight + gridSamplingDisk[i] * diskRadius).r;
 		closestDepth *= far;
 		if (currentDepth - bias > closestDepth)
-			shadow += 1.f;
+			shadow += weight;
 	}
-	shadow = shadow / float(samples);
+	diskRadius *= 2.f;
+	weight /= 4.f;
+	for (int i = 0; i < samples; ++i)
+	{
+		float closestDepth =
+			texture(depthMap, fragToLight + gridSamplingDisk[i] * diskRadius).r;
+		closestDepth *= far;
+		if (currentDepth - bias > closestDepth)
+			shadow += weight;
+	}
+	shadow = shadow / float(samples * 2);
 	return (shadow);
 }
 
