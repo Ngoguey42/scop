@@ -6,7 +6,7 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/07/30 10:07:14 by ngoguey           #+#    #+#             //
-//   Updated: 2015/08/25 13:17:54 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/08/25 14:44:20 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -43,7 +43,7 @@ out vec4					color;
 #define GN2 (GN * GN)
 #define GN3 (GN2 * GN)
 
-vec3					gridSamplingDisk[NSAMPLES] = vec3[](
+vec3	SAMPLES[NSAMPLES] = vec3[](
 	vec3(-GN2, -GN2, GN2), vec3(GN3, GN, 0), vec3(GN3, -GN, 0),
 	vec3(-GN3, GN, 0), vec3(-GN3, -GN, 0), vec3(0, GN3, GN),
 	vec3(0, GN3, -GN), vec3(GN, 0, -GN3), vec3(-GN, 0, -GN3),
@@ -56,6 +56,47 @@ vec3					gridSamplingDisk[NSAMPLES] = vec3[](
 #define AMBIENT_STRENGTH 0.25f
 #define SPECULAR_STRENGTH 0.6f
 #define BIAS 0.05f
+#define DECAY 1.5f
+#define NUM_SAMPLING_LOOPS 3
+
+float					sample_shadows(
+	float dFraLi, vec3 vLiToFra, float weight, float radius)
+{
+	float	shadow;
+	
+	shadow = 0.f;
+	for (int i = 0; i < NSAMPLES; ++i)
+	{
+		if (dFraLi - BIAS
+			> texture(depthMap, vLiToFra + SAMPLES[i] * radius).r * far)
+		{
+			shadow += weight;
+		}
+	}
+	return (shadow);
+}
+
+float					compute_shadows(
+	float dnFraLi, float dFraLi, vec3 vLiToFra)
+{
+	float	shadow;
+	float	samples;
+	float	weight;
+	float	radius;
+
+	shadow = 0.f;
+	samples = 0.f;
+	weight = 1.f;
+	radius = 15.f / 1024.f * sqrt(dnFraLi);
+	for (int i = 0; i < NUM_SAMPLING_LOOPS; i++)
+	{
+		shadow += sample_shadows(dFraLi, vLiToFra, weight, radius);
+		samples += 20.f * weight;
+		weight /= DECAY * DECAY;
+		radius *= DECAY;
+	}
+	return (shadow / samples);
+}
 
 void					main()
 {
@@ -66,6 +107,7 @@ void					main()
 	vec3	vnFraToCam = normalize(vFraToCam);
 	vec3	vnFraNormal = normalize(fs_in.nor);
 	float	dFraLi = length(vLiToFra);
+	float	dnFraLi = dFraLi / far;
 	float	dFraCam = length(vFraToCam);
 	float	attenuation = 1.f / (1.f
 								 + l.linear * dFraLi
@@ -75,34 +117,7 @@ void					main()
 	vec3	specular =
 		pow(max(dot(vnFraToCam, reflect(-vnFraToLi, vnFraNormal)), 0.0), 32)
 		* SPECULAR_STRENGTH * l.s;
-
-
-	float	shadow;
-	float	weight;
-	float	diskRadius = 5.f / 1024.f;
-
-	shadow = 0.0;
-	weight = 1.f;
-	for (int i = 0; i < NSAMPLES; ++i)
-	{
-		float closestDepth =
-			texture(depthMap, vLiToFra + gridSamplingDisk[i] * diskRadius).r;
-		closestDepth *= far;
-		if (dFraLi - BIAS > closestDepth)
-			shadow += weight;
-	}
-	diskRadius *= 2.f;
-	weight /= 4.f;
-	for (int i = 0; i < NSAMPLES; ++i)
-	{
-		float closestDepth =
-			texture(depthMap, vLiToFra + gridSamplingDisk[i] * diskRadius).r;
-		closestDepth *= far;
-		if (dFraLi - BIAS > closestDepth)
-			shadow += weight;
-	}
-	shadow = shadow / float(NSAMPLES * 1.25f);
-	
+	float	shadow = compute_shadows(dnFraLi, dFraLi, vLiToFra);
 
 	color = mix(vec4(fs_in.col, 1.f), texture(ourTexture, fs_in.tex), mixval);
 	// color = vec4(fs_in.col, 1.f);
@@ -114,38 +129,3 @@ void					main()
 		* color.xyz
 		, color.w);
 }
-
-/*
-void main()
-{
-	float	distance = length(l.pos - fs_in.pos);
-	float	attenuation = 1.0f / (1.0f + l.linear * distance +
-									l.quadratic * (distance * distance));
-
-	// color = vec4(fs_in.col, 1.f);
-	color = mix(vec4(fs_in.col, 1.f), texture(ourTexture, fs_in.tex), mixval);
-	// color = vec4(0.7, 0.7, 0.7, 1.);
-	// color = texture(ourTexture, fs_in.tex);
-	// Ambient
-	float ambientStrength = 0.25f;
-	vec3 ambient = ambientStrength * l.a;
-
-	// Diffuse
-	vec3 norm = normalize(fs_in.nor);
-	vec3 lightDir = normalize(l.pos - fs_in.pos);
-	float diff = max(dot(norm, lightDir), 0.0);
-	vec3 diffuse = diff * l.d;
-
-	// Specular
-	float specularStrength = 0.6f;
-	vec3 viewDir = normalize(viewPos - fs_in.pos);
-	vec3 reflectDir = reflect(-lightDir, norm);
-	float spec = pow(max(dot(viewDir, reflectDir), 0.0), 32);
-	vec3 specular = specularStrength * spec * l.s;
-
-	vec3 result = (ambient + (diffuse + specular)
-					* attenuation * (1.f - ShadowCalculation())
-		) * color.xyz;
-	color = vec4(result, color.w);
-} 
-*/
