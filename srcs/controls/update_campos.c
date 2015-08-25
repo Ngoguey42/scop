@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/08/24 17:03:28 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/24 17:17:05 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/25 14:56:07 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,8 +110,7 @@ void			sp_update_campos(t_env *e, t_bool force)
 		else if (e->cangles[1] < -CAMERA_POSBOUNDF)
 			e->cangles[1] = -CAMERA_POSBOUNDF;
 		e->view = m4_lookat(e->cpos,
-		v3_add(ATOV3(e->cpos.x, e->cpos.y, e->cpos.z),
-		v3_frontnormed(e->cangles)), ATOV3(0.f, 1.f, 0.f));
+		v3_add(e->cpos, v3_frontnormed(e->cangles)), ATOV3(0.f, 1.f, 0.f));
 		e->viewproj = m4_dotprod(&e->projection, &e->view);
 	}
 	return ;

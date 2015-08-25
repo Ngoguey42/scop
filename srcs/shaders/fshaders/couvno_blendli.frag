@@ -6,12 +6,36 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/07/30 10:07:14 by ngoguey           #+#    #+#             //
-//   Updated: 2015/08/25 14:44:20 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/08/25 14:50:59 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
 #version 410 core
 
+/*
+** CONFIG MACROES
+*/
+#define AMBIENT_STRENGTH 0.25f
+#define SPECULAR_STRENGTH 0.6f
+#define SPECULAR_POWER 32.f
+
+#define NSAMPLESI 20
+#define BIAS 0.05f
+#define DECAY 1.5f
+#define NUM_SAMPLING_LOOPS 3
+#define INITIAL_RADIUS (15.f / 1024.f)
+
+/*
+** CALCULATED MACROES
+*/
+#define NSAMPLESF float(NSAMPLESI)
+#define GN ((1 + sqrt(5.f)) / 2.f)
+#define GN2 (GN * GN)
+#define GN3 (GN2 * GN)
+
+/*
+** IN / UNIFORMS
+*/
 in PoCoUvNo
 {
 	vec3					pos;
@@ -19,7 +43,6 @@ in PoCoUvNo
 	vec2					tex;
 	vec3					nor;
 }							fs_in;
-
 uniform samplerCube			depthMap;
 uniform sampler2D			ourTexture;
 uniform float				far;
@@ -36,28 +59,20 @@ uniform struct Light {
 	float quadratic;
 }							l;
 
+/*
+** OUT
+*/
 out vec4					color;
 
-#define NSAMPLES 20
-#define GN ((1 + sqrt(5.f)) / 2.f)
-#define GN2 (GN * GN)
-#define GN3 (GN2 * GN)
-
-vec3	SAMPLES[NSAMPLES] = vec3[](
-	vec3(-GN2, -GN2, GN2), vec3(GN3, GN, 0), vec3(GN3, -GN, 0),
-	vec3(-GN3, GN, 0), vec3(-GN3, -GN, 0), vec3(0, GN3, GN),
-	vec3(0, GN3, -GN), vec3(GN, 0, -GN3), vec3(-GN, 0, -GN3),
-	vec3(0, -GN3, -GN), vec3(0, -GN3, GN), vec3(GN, 0, GN3),
-	vec3(-GN, 0, GN3), vec3(GN2, GN2, -GN2), vec3(GN2, GN2, GN2),
-	vec3(-GN2, GN2, -GN2), vec3(-GN2, GN2, GN2), vec3(GN2, -GN2, -GN2),
-	vec3(GN2, -GN2, GN2), vec3(-GN2, -GN2, -GN2)
+vec3						SAMPLES[NSAMPLESI] = vec3[](
+	vec3(-GN2, -GN2, GN2),	vec3(GN3, GN, 0),		vec3(GN3, -GN, 0),
+	vec3(-GN3, GN, 0),		vec3(-GN3, -GN, 0),		vec3(0, GN3, GN),
+	vec3(0, GN3, -GN),		vec3(GN, 0, -GN3),		vec3(-GN, 0, -GN3),
+	vec3(0, -GN3, -GN),		vec3(0, -GN3, GN),		vec3(GN, 0, GN3),
+	vec3(-GN, 0, GN3),		vec3(GN2, GN2, -GN2),	vec3(GN2, GN2, GN2),
+	vec3(-GN2, GN2, -GN2),	vec3(-GN2, GN2, GN2),	vec3(GN2, -GN2, -GN2),
+	vec3(GN2, -GN2, GN2),	vec3(-GN2, -GN2, -GN2)
 );
-
-#define AMBIENT_STRENGTH 0.25f
-#define SPECULAR_STRENGTH 0.6f
-#define BIAS 0.05f
-#define DECAY 1.5f
-#define NUM_SAMPLING_LOOPS 3
 
 float					sample_shadows(
 	float dFraLi, vec3 vLiToFra, float weight, float radius)
@@ -65,7 +80,7 @@ float					sample_shadows(
 	float	shadow;
 	
 	shadow = 0.f;
-	for (int i = 0; i < NSAMPLES; ++i)
+	for (int i = 0; i < NSAMPLESI; ++i)
 	{
 		if (dFraLi - BIAS
 			> texture(depthMap, vLiToFra + SAMPLES[i] * radius).r * far)
@@ -87,11 +102,11 @@ float					compute_shadows(
 	shadow = 0.f;
 	samples = 0.f;
 	weight = 1.f;
-	radius = 15.f / 1024.f * sqrt(dnFraLi);
+	radius = INITIAL_RADIUS * sqrt(dnFraLi);
 	for (int i = 0; i < NUM_SAMPLING_LOOPS; i++)
 	{
 		shadow += sample_shadows(dFraLi, vLiToFra, weight, radius);
-		samples += 20.f * weight;
+		samples += NSAMPLESF * weight;
 		weight /= DECAY * DECAY;
 		radius *= DECAY;
 	}
@@ -115,7 +130,8 @@ void					main()
 	vec3	ambient = AMBIENT_STRENGTH * l.a;
 	vec3	diffuse = max(dot(vnFraNormal, vnFraToLi), 0.f) * l.d;
 	vec3	specular =
-		pow(max(dot(vnFraToCam, reflect(-vnFraToLi, vnFraNormal)), 0.0), 32)
+		pow(max(dot(vnFraToCam, reflect(-vnFraToLi, vnFraNormal)), 0.0)
+			, SPECULAR_POWER)
 		* SPECULAR_STRENGTH * l.s;
 	float	shadow = compute_shadows(dnFraLi, dFraLi, vLiToFra);
 
