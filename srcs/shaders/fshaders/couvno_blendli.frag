@@ -19,12 +19,13 @@
 #define DIFFUSE_STRENGTH 2.0f
 #define SPECULAR_STRENGTH 2.f
 #define SPECULAR_POWER 32.f
+#define GAMMA 2.2f
 
 #define NSAMPLESI 20
 #define BIAS 0.05f
 #define DECAY 1.5f
 #define NUM_SAMPLING_LOOPS 3
-#define INITIAL_RADIUS (15.f / 1024.f)
+#define INITIAL_RADIUS (15.f / 1024.f) //divided by 4.53 with new samp values
 
 /*
 ** CALCULATED MACROES
@@ -63,14 +64,14 @@ uniform float				far;
 uniform vec3				viewPos;
 uniform float				mixval;
 uniform struct Light {
-	vec3 pos;
+	vec3					pos;
 
-	vec3 a;
-	vec3 d;
-	vec3 s;
+	vec3					a;
+	vec3					d;
+	vec3					s;
 
-	float linear;
-	float quadratic;
+	float					linear;
+	float					quadratic;
 }							l;
 
 /*
@@ -142,8 +143,6 @@ void					main()
 	
 	float	shadow = compute_shadows(dnFraLi, dFraLi, vLiToFra);
 
-#define GAMMA 2.2f
-	
 	color = mix(vec4(fs_in.col, 1.f), texture(ourTexture, fs_in.tex), mixval);
 	color.rgb = pow(color.rgb, vec3(GAMMA));
 	// color = vec4(fs_in.col, 1.f);
