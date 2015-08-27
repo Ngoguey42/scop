@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 12:08:19 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/25 16:36:54 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/27 14:41:56 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,18 +42,10 @@ static void		loop(t_env *e)
 {
 	double		last_time;
 	double		sleep_time;
-
-
 	
 	e->time_start = glfwGetTime();
 	e->time_cur = e->time_start;
 	last_time = e->time_start;
-
-
-	t_mesh	*me = e->meshes + sp_ft_mesh;
-	sp_split_ebo(&me->vbo, &me->faces, NULL);
-		
-	/* return ; */
 	while (!glfwWindowShouldClose(e->win))
 	{
 		e->time_cur = glfwGetTime();

@@ -6,7 +6,7 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/07/30 10:07:14 by ngoguey           #+#    #+#             //
-//   Updated: 2015/08/27 13:33:13 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/08/27 15:49:42 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -124,9 +124,17 @@ void					main()
 	float	dFraLi = length(vLiToFra);
 	float	dnFraLi = dFraLi / far;
 	float	dFraCam = length(vFraToCam);
-	float	attenuation = 1.f / (1.f
-								 + l.linear * dFraLi
-								 + l.quadratic * (dFraLi * dFraLi));
+	float   attenuation = 1.f / (dFraLi / far);
+	// float	attenuation = 1.f / (
+	// 	1.f
+	// 							 + l.linear
+	// 							 * dFraLi
+	// 							 + l.quadratic * (dFraLi
+	// 											  * dFraLi
+	// 								 )
+	// 	)
+	// 	/ dFraLi
+	// 	;
 	vec3	ambient = AMBIENT_STRENGTH * l.a;
 	vec3	diffuse = max(dot(vnFraNormal, vnFraToLi), 0.f) * l.d;
 
@@ -139,7 +147,10 @@ void					main()
 	
 	float	shadow = compute_shadows(dnFraLi, dFraLi, vLiToFra);
 
+#define GAMMA 2.2f
+	
 	color = mix(vec4(fs_in.col, 1.f), texture(ourTexture, fs_in.tex), mixval);
+	color.rgb = pow(color.rgb, vec3(GAMMA));
 	// color = vec4(fs_in.col, 1.f);
 	// color = vec4(0.7, 0.7, 0.7, 1.);
 	color = vec4(
@@ -148,4 +159,5 @@ void					main()
 		 * (1.f - shadow) * attenuation)
 		* color.xyz
 		, color.w);
+	color.rgb = pow(color.rgb, vec3(1.f / GAMMA));
 }
