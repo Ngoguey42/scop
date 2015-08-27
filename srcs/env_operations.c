@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/15 13:44:48 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/24 17:43:31 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/08/27 16:59:17 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ int				sp_init_env(t_env *e)
 	sp_register_instance(e);
 	bzero(e, sizeof(*e));
 	e->sunpos_spherical = ATOV3(30.f, M_PI / 4.f, M_PI / 4.f);
-	e->sunka = ATOV3(245.f / 255.f, 235.f / 255.f, 190.f / 255.f);
-	e->sunkd = ATOV3(245.f / 255.f, 235.f / 255.f, 190.f / 255.f);
-	e->sunks = ATOV3(190.f / 255.f, 190.f / 255.f, 230.f / 255.f);
+	e->sunka = ATOV3(255.f / 255.f, 203.f / 255.f, 92.f / 255.f);
+	e->sunkd = ATOV3(255.f / 255.f, 203.f / 255.f, 92.f / 255.f);
+	e->sunks = ATOV3(255.f / 255.f, 203.f / 255.f, 92.f / 255.f);
 	memcpy(&e->sundat, ((float[2]){0.007, 0.0002}), sizeof(float[2]));
 	memcpy(&e->sbox_texture, &(FUCK_NORM), sizeof(t_texture));
 	e->sbox_farplane = 150.f;

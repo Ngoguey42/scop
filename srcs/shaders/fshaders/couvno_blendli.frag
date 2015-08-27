@@ -6,7 +6,7 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/07/30 10:07:14 by ngoguey           #+#    #+#             //
-//   Updated: 2015/08/27 15:49:42 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/08/27 17:07:02 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -15,8 +15,9 @@
 /*
 ** CONFIG MACROES
 */
-#define AMBIENT_STRENGTH 0.25f
-#define SPECULAR_STRENGTH 0.6f
+#define AMBIENT_STRENGTH 0.02f
+#define DIFFUSE_STRENGTH 2.0f
+#define SPECULAR_STRENGTH 2.f
 #define SPECULAR_POWER 32.f
 
 #define NSAMPLESI 20
@@ -124,24 +125,15 @@ void					main()
 	float	dFraLi = length(vLiToFra);
 	float	dnFraLi = dFraLi / far;
 	float	dFraCam = length(vFraToCam);
-	float   attenuation = 1.f / (dFraLi / far);
-	// float	attenuation = 1.f / (
-	// 	1.f
-	// 							 + l.linear
-	// 							 * dFraLi
-	// 							 + l.quadratic * (dFraLi
-	// 											  * dFraLi
-	// 								 )
-	// 	)
-	// 	/ dFraLi
-	// 	;
+	float   attenuation = 1.f
+		- (dFraLi / far)
+		;
 	vec3	ambient = AMBIENT_STRENGTH * l.a;
-	vec3	diffuse = max(dot(vnFraNormal, vnFraToLi), 0.f) * l.d;
+	vec3	diffuse = max(dot(vnFraNormal, vnFraToLi), 0.f)
+		* DIFFUSE_STRENGTH * l.d;
 
 	vec3	vnLiCamHalfway = normalize(vnFraToLi + vnFraToCam);
 	vec3	specular =
-		// pow(max(dot(vnFraToCam, reflect(-vnFraToLi, vnFraNormal)), 0.0)
-			// , SPECULAR_POWER)x
 		pow(max(dot(vnFraNormal, vnLiCamHalfway), 0.0), SPECULAR_POWER)
 			* SPECULAR_STRENGTH * l.s;
 	
