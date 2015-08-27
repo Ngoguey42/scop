@@ -28,11 +28,24 @@
 
 /*
 ** CALCULATED MACROES
+** GN			->	Gold Number
+** V0			->	Base value for a normalized dodecahedron
 */
 #define NSAMPLESF float(NSAMPLESI)
-#define GN ((1 + sqrt(5.f)) / 2.f)
-#define GN2 (GN * GN)
-#define GN3 (GN2 * GN)
+#define GN ((1.f + sqrt(5.f)) / 2.f)
+#define V0 (sqrt(1.f / (GN * GN * 3.f)))
+#define V1 (V0 * V0)
+#define V2 (V0 * V0 * V0)
+
+vec3						SAMPLES[NSAMPLESI] = vec3[](
+	vec3(-V1, -V1, V1),	vec3(V2, V0, 0),	vec3(V2, -V0, 0),
+	vec3(-V2, V0, 0),	vec3(-V2, -V0, 0),	vec3(0, V2, V0),
+	vec3(0, V2, -V0),	vec3(V0, 0, -V2),	vec3(-V0, 0, -V2),
+	vec3(0, -V2, -V0),	vec3(0, -V2, V0),	vec3(V0, 0, V2),
+	vec3(-V0, 0, V2),	vec3(V1, V1, -V1),	vec3(V1, V1, V1),
+	vec3(-V1, V1, -V1),	vec3(-V1, V1, V1),	vec3(V1, -V1, -V1),
+	vec3(V1, -V1, V1),	vec3(-V1, -V1, -V1)
+);
 
 /*
 ** IN / UNIFORMS
@@ -64,16 +77,6 @@ uniform struct Light {
 ** OUT
 */
 out vec4					color;
-
-vec3						SAMPLES[NSAMPLESI] = vec3[](
-	vec3(-GN2, -GN2, GN2),	vec3(GN3, GN, 0),		vec3(GN3, -GN, 0),
-	vec3(-GN3, GN, 0),		vec3(-GN3, -GN, 0),		vec3(0, GN3, GN),
-	vec3(0, GN3, -GN),		vec3(GN, 0, -GN3),		vec3(-GN, 0, -GN3),
-	vec3(0, -GN3, -GN),		vec3(0, -GN3, GN),		vec3(GN, 0, GN3),
-	vec3(-GN, 0, GN3),		vec3(GN2, GN2, -GN2),	vec3(GN2, GN2, GN2),
-	vec3(-GN2, GN2, -GN2),	vec3(-GN2, GN2, GN2),	vec3(GN2, -GN2, -GN2),
-	vec3(GN2, -GN2, GN2),	vec3(-GN2, -GN2, -GN2)
-);
 
 float					sample_shadows(
 	float dFraLi, vec3 vLiToFra, float weight, float radius)
