@@ -6,7 +6,7 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/07/30 10:07:14 by ngoguey           #+#    #+#             //
-//   Updated: 2015/08/25 15:13:13 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/08/27 13:33:27 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -126,9 +126,11 @@ void					main()
 								 + l.quadratic * (dFraLi * dFraLi));
 	vec3	ambient = AMBIENT_STRENGTH * l.a;
 	vec3	diffuse = max(dot(vnFraNormal, vnFraToLi), 0.f) * l.d;
+	vec3    vnLiCamHalfway = normalize(vnFraToLi + vnFraToCam);
 	vec3	specular =
-		pow(max(dot(vnFraToCam, reflect(-vnFraToLi, vnFraNormal)), 0.0)
-			, SPECULAR_POWER)
+		// pow(max(dot(vnFraToCam, reflect(-vnFraToLi, vnFraNormal)), 0.0)
+			// , SPECULAR_POWER)
+		pow(max(dot(vnFraNormal, vnLiCamHalfway), 0.0), SPECULAR_POWER)
 		* SPECULAR_STRENGTH * l.s;
 	float	shadow = compute_shadows(dnFraLi, dFraLi, vLiToFra);
 
