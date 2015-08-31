@@ -72,20 +72,23 @@ static void	focus_callback(GLFWwindow *w, int state)
 int			sp_init_glfw(t_env *e)
 {
 	glfwSetErrorCallback(error_callback);
-	glfwInit();
+	if (glfwInit() != GL_TRUE)
+	  return (ERROR("glfwInit()"), 1);
 	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
-	glfwWindowHint(GLFW_SAMPLES, 8);
-	glfwWindowHint(GLFW_DOUBLEBUFFER, GL_TRUE);
+	glfwWindowHint(GLFW_SAMPLES, 2);
+	// glfwWindowHint(GLFW_DOUBLEBUFFER, GL_TRUE);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
-	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_COMPAT_PROFILE);
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 	e->win = glfwCreateWindow(WIN_WIDTHI, WIN_HEIGHTI, "Scop", NULL, NULL);
 	if (!e->win)
-		return (glfwTerminate(), DEBUG("Could not create window"), 1);
+		return (glfwTerminate(), ERROR("glfwCreateWindow"), 1);
 	glfwSetWindowFocusCallback(e->win, &focus_callback);
 	glfwSetKeyCallback(e->win, key_callback);
 	glfwMakeContextCurrent(e->win);
+	if (glewInit() != GLEW_OK)
+	  return (ERROR("glewInit()"), 1);
 	glViewport(0, 0, WIN_WIDTHI, WIN_HEIGHTI);
 	glEnable(GL_DEPTH_TEST);
 	return (0);

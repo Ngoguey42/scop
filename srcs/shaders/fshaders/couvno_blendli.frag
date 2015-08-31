@@ -25,7 +25,8 @@
 #define BIAS 0.05f
 #define DECAY 1.5f
 #define NUM_SAMPLING_LOOPS 3
-#define INITIAL_RADIUS (15.f / 1024.f) //divided by 4.53 with new samp values
+#define INITIAL_RADIUS (4.5f * 15.f / (1024.f * 4.5345679f))
+//default radius is 4.534567884
 
 /*
 ** CALCULATED MACROES
@@ -34,7 +35,7 @@
 */
 #define NSAMPLESF float(NSAMPLESI)
 #define GN ((1.f + sqrt(5.f)) / 2.f)
-#define V0 (sqrt(1.f / (GN * GN * 3.f)))
+#define V0 GN
 #define V1 (V0 * V0)
 #define V2 (V0 * V0 * V0)
 

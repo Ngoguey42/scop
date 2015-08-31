@@ -72,7 +72,7 @@ static int		sp_new_shader(char const *filepath, GLuint *handle, GLenum t)
 	if (*handle == 0)
 		return (DEBUGF(BADCREATE_FMT, *handle), free(*text), 1);
 	*len = strlen(*text);
-	glShaderSource(*handle, 1, (char const *const*)text, len);
+	glShaderSource(*handle, 1, (char const **)text, len);
 	free(*text);
 	glCompileShader(*handle);
 	return (check_shader_error(*handle, GL_COMPILE_STATUS));

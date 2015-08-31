@@ -14,7 +14,7 @@
 # define SCOP_TYPES_H
 
 # include "libft.h"
-# define GLFW_INCLUDE_GLCOREARB
+# include <GL/glew.h>
 # include <GLFW/glfw3.h>
 # include "ft_vector.h"
 # include "ft_list.h"

@@ -31,7 +31,7 @@
 /*
 ** CONFIG MACROES
 */
-# define WIN_WIDTHI 1600
+# define WIN_WIDTHI 1350
 # define WIN_RATIOF (4.f / 3.f)
 # define WIN_FOVF 45.f
 # define WIN_NEARF 0.2f
@@ -40,7 +40,7 @@
 # define LAND_SIDEF 50.f
 # define LAND_RANGEF (14.f)
 # define LAND_COLORRAND 0.05f
-# define POINTS_DEPTHI 7
+# define POINTS_DEPTHI 10
 # define LAND_YF -10.f
 
 # define MOUSE_SENSITIVITYF 0.005f
