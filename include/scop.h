@@ -123,9 +123,7 @@ int			sp_meshfillbumb_objmodel(t_env const *e, t_mesh *me
 										, char const *filename);
 void		sp_transpose_ebo(t_ftvector *dst, t_ftvector const *faces);
 void        sp_split_ebo(t_vbo_basic *vbo, t_ftvector *faces, int (*fun)());
-void        sp_get_facenormals(t_ftvector *facenormals
-							   , t_vbo_basic const *vbo
-							   , t_ftvector const *faces);
+
 /*
 ** MAIN OB HANDLING
 */

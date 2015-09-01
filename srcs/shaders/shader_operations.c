@@ -29,7 +29,7 @@ static int		check_shader_error(GLuint shader, GLuint flag)
 	if (*success == GL_FALSE)
 	{
 		glGetShaderInfoLog(shader, sizeof(msg), NULL, msg);
-		DEBUGF("Error compiling shader: \"\033[35m%s\033[0m\"", msg);
+		ERRORF("Shader compilation: \n\033[35m%s\033[0m", msg);
 		return (1);
 	}
 	return (0);
@@ -57,7 +57,7 @@ static int		sp_load_shader(char const *filepath, char **ptr)
 	}
 	close(fd);
 	if (ret < 0 || *ptr == NULL)
-		return (DEBUGF("Error while reading %s", filepath), 1);
+		return (ERRORF("Error while reading %s", filepath), 1);
 	return (0);
 }
 
@@ -70,7 +70,7 @@ static int		sp_new_shader(char const *filepath, GLuint *handle, GLenum t)
 		return (ERROR("sp_load_shader(...)"), 1);
 	*handle = glCreateShader(t);
 	if (*handle == 0)
-		return (DEBUGF(BADCREATE_FMT, *handle), free(*text), 1);
+		return (ERRORF(BADCREATE_FMT, *handle), free(*text), 1);
 	*len = strlen(*text);
 	glShaderSource(*handle, 1, (char const **)text, len);
 	free(*text);

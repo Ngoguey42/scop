@@ -78,7 +78,6 @@ O_FILES := obj/srcs/env_operations.o \
 	obj/srcs/land/generate_land_xyz.o \
 	obj/srcs/land/generate_land_y.o \
 	obj/srcs/mainob/mainob_operations.o \
-	obj/srcs/meshes/add_normal_ebo.o \
 	obj/srcs/meshes/mesh_creation.o \
 	obj/srcs/meshes/mesh_dumb_fill.o \
 	obj/srcs/meshes/mesh_operations.o \
@@ -213,9 +212,6 @@ obj/srcs/land/generate_land_y.o: srcs/land/generate_land_y.c include/cog_enums.h
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
 obj/srcs/mainob/mainob_operations.o: srcs/mainob/mainob_operations.c include/cog_enums.h include/cog_meshfill.h include/ftmath.h include/objmodel.h include/scop.h include/scop_conf.h include/scop_types.h include/vbo.h | obj/srcs/mainob
-	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
-
-obj/srcs/meshes/add_normal_ebo.o: srcs/meshes/add_normal_ebo.c include/cog_enums.h include/cog_meshfill.h include/ftmath.h include/objmodel.h include/scop.h include/scop_conf.h include/scop_types.h include/vbo.h | obj/srcs/meshes
 	@$(MSG_0) $< ; clang $(C_FLAGS) $(C_HEADS) -c -o $@ $< || ($(MSG_1) $< && false)
 
 obj/srcs/meshes/mesh_creation.o: srcs/meshes/mesh_creation.c include/cog_enums.h include/cog_meshfill.h include/ftmath.h include/objmodel.h include/scop.h include/scop_conf.h include/scop_types.h include/vbo.h | obj/srcs/meshes
