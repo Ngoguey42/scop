@@ -26,9 +26,9 @@
 ** ATOV3		Absolute to vector3
 ** ATOM4		Absolute to matrix4
 */
-# define ATOV3(...) ((t_vector3){__VA_ARGS__})
-# define ATOV3SCAL(VAL) ((t_vector3){(VAL), (VAL), (VAL)})
-# define ATOM4(...) ((t_matrix4){{__VA_ARGS__}})
+# define ATOV3(...) ((t_vec3){__VA_ARGS__})
+# define ATOV3SCAL(VAL) ((t_vec3){(VAL), (VAL), (VAL)})
+# define ATOM4(...) ((t_mat4){{__VA_ARGS__}})
 
 typedef enum	e_axis
 {
@@ -41,23 +41,23 @@ typedef enum	e_axis
 ** VECTOR3
 */
 
-typedef struct	s_vector3
+typedef struct	s_vec3
 {
 	float		x;
 	float		y;
 	float		z;
-}				t_vector3;
+}				t_vec3;
 
-void			v3_print(t_vector3 v);
-t_vector3		v3_normalize(t_vector3 v);
-t_vector3		v3_frontnormed(float const angles[2]);
-t_vector3		v3_cross(t_vector3 a, t_vector3 b);
-float			v3_dot_normed(t_vector3 a, t_vector3 b);
-t_vector3		v3_sub(t_vector3 a, t_vector3 b);
-t_vector3		v3_add(t_vector3 a, t_vector3 b);
-t_vector3		v3_inv(t_vector3 a);
-t_vector3		v3_div_scalar(t_vector3 a, float q);
-t_vector3		v3_mul_scalar(t_vector3 a, float q);
+void			v3_print(t_vec3 v);
+t_vec3		v3_normalize(t_vec3 v);
+t_vec3		v3_frontnormed(float const angles[2]);
+t_vec3		v3_cross(t_vec3 a, t_vec3 b);
+float			v3_dot_normed(t_vec3 a, t_vec3 b);
+t_vec3		v3_sub(t_vec3 a, t_vec3 b);
+t_vec3		v3_add(t_vec3 a, t_vec3 b);
+t_vec3		v3_inv(t_vec3 a);
+t_vec3		v3_div_scalar(t_vec3 a, float q);
+t_vec3		v3_mul_scalar(t_vec3 a, float q);
 
 /*
 ** MATRIX4
@@ -69,9 +69,9 @@ typedef union	u_matrix4
 	{
 		float	j[4];
 	}			i[4];
-}				t_matrix4;
-# define MAT4 t_matrix4
-# define VEC3 t_vector3
+}				t_mat4;
+# define MAT4 t_mat4
+# define VEC3 t_vec3
 
 MAT4			m4_scale_nonuniform(VEC3 vect);
 MAT4			m4_scale_uniform(float fact);
@@ -95,7 +95,7 @@ MAT4			m4_dotprod(MAT4 const *mata, MAT4 const *matb);
 MAT4			m4_fovprojection(float fov, float ratio, float near, float far);
 
 void			m4_print(MAT4 mat);
-MAT4			m4_lookat(t_vector3 eye, t_vector3 at, t_vector3 up);
+MAT4			m4_lookat(t_vec3 eye, t_vec3 at, t_vec3 up);
 MAT4			m4_identity(void);
 
 # undef MAT4

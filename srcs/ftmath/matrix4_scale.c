@@ -12,11 +12,11 @@
 
 #include "ftmath.h"
 
-extern t_matrix4	g_identitym4;
+extern t_mat4	g_identitym4;
 
-t_matrix4			m4_scale_uniform(float fact)
+t_mat4			m4_scale_uniform(float fact)
 {
-	t_matrix4		ret;
+	t_mat4		ret;
 
 	ret = g_identitym4;
 	ret.i[0].j[0] = fact;
@@ -25,9 +25,9 @@ t_matrix4			m4_scale_uniform(float fact)
 	return (ret);
 }
 
-t_matrix4			m4_scale_nonuniform(t_vector3 vect)
+t_mat4			m4_scale_nonuniform(t_vec3 vect)
 {
-	t_matrix4		ret;
+	t_mat4		ret;
 
 	ret = g_identitym4;
 	ret.i[0].j[0] = vect.x;
@@ -36,16 +36,16 @@ t_matrix4			m4_scale_nonuniform(t_vector3 vect)
 	return (ret);
 }
 
-t_matrix4			m4_scaleref_uniform(t_matrix4 const *ref, float fact)
+t_mat4			m4_scaleref_uniform(t_mat4 const *ref, float fact)
 {
-	t_matrix4 const		tmp = m4_scale_uniform(fact);
+	t_mat4 const		tmp = m4_scale_uniform(fact);
 
 	return (m4_dotprod(ref, &tmp));
 }
 
-t_matrix4			m4_scaleref_nonuniform(t_matrix4 const *ref, t_vector3 vect)
+t_mat4			m4_scaleref_nonuniform(t_mat4 const *ref, t_vec3 vect)
 {
-	t_matrix4 const		tmp = m4_scale_nonuniform(vect);
+	t_mat4 const		tmp = m4_scale_nonuniform(vect);
 
 	return (m4_dotprod(ref, &tmp));
 }

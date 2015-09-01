@@ -16,14 +16,14 @@
 typedef struct s_facenormals
 {
 	t_ui        indices[3];
-	t_vector3   normal;
+	t_vec3   normal;
 } t_facenormals;
 
 void		sp_get_facenormals(t_ftvector *facenormals
 							   , t_vbo_basic const *vbo
 							   , t_ftvector const *faces)
 {
-	t_vector3 const			*ver[3];
+	t_vec3 const			*ver[3];
 	t_ui const				*face;
 	t_ui const *const		faceend = ftv_end(faces);
 	t_facenormals			tmp[1];
@@ -38,11 +38,11 @@ void		sp_get_facenormals(t_ftvector *facenormals
 		tmp->indices[0] = face[0];
 		tmp->indices[1] = face[1];
 		tmp->indices[2] = face[2];
-		ver[0] = (t_vector3*)&((t_vertex_basic*)(vbo->vertices.data
+		ver[0] = (t_vec3*)&((t_vertex_basic*)(vbo->vertices.data
 		+ vbo->vertices.chunk_size * face[0]))->pos;
-		ver[1] = (t_vector3*)&((t_vertex_basic*)(vbo->vertices.data
+		ver[1] = (t_vec3*)&((t_vertex_basic*)(vbo->vertices.data
 		+ vbo->vertices.chunk_size * face[1]))->pos;
-		ver[2] = (t_vector3*)&((t_vertex_basic*)(vbo->vertices.data
+		ver[2] = (t_vec3*)&((t_vertex_basic*)(vbo->vertices.data
 		+ vbo->vertices.chunk_size * face[2]))->pos;
 		tmp->normal = v3_cross(v3_inv(v3_normalize(v3_sub(*ver[0], *ver[1])))
 							   , v3_normalize(v3_sub(*ver[2], *ver[0])));

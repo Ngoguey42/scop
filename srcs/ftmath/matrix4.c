@@ -13,18 +13,18 @@
 #include "ftmath.h"
 #include "ft_debug.h"
 
-const t_matrix4		g_identitym4 =
+const t_mat4		g_identitym4 =
 {
 	{1.f, 0.f, 0.f, 0.f, 0.f, 1.f, 0.f, 0.f,
 		0.f, 0.f, 1.f, 0.f, 0.f, 0.f, 0.f, 1.f}
 };
 
-t_matrix4		m4_identity(void)
+t_mat4		m4_identity(void)
 {
 	return (g_identitym4);
 }
 
-void			m4_print(t_matrix4 mat)
+void			m4_print(t_mat4 mat)
 {
 	int	i;
 

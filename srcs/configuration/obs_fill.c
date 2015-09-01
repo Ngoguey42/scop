@@ -32,9 +32,9 @@ static size_t const		g_obdata[][2] =
 	{offsetof(t_ob, hidden), sizeof(t_bool)},
 	{offsetof(t_ob, moved), sizeof(t_bool)},
 	{offsetof(t_ob, shadow), sizeof(t_bool)},
-	{offsetof(t_ob, position), sizeof(t_vector3)},
-	{offsetof(t_ob, rotation), sizeof(t_vector3)},
-	{offsetof(t_ob, scale), sizeof(t_vector3)},
+	{offsetof(t_ob, position), sizeof(t_vec3)},
+	{offsetof(t_ob, rotation), sizeof(t_vec3)},
+	{offsetof(t_ob, scale), sizeof(t_vec3)},
 	{offsetof(t_ob, update), sizeof(void(*)())},
 	{offsetof(t_ob, valf), sizeof(float[3])},
 	{offsetof(t_ob, vali), sizeof(int[1])},
@@ -61,11 +61,11 @@ static void	retreive_varg(va_list *ap, t_ob_param id, void *buf)
 	else if (id == ob_sha)
 		(*(t_bool*)buf) = va_arg(*ap, t_bool);
 	else if (id == ob_pos)
-		(*(t_vector3*)buf) = va_arg(*ap, t_vector3);
+		(*(t_vec3*)buf) = va_arg(*ap, t_vec3);
 	else if (id == ob_rot)
-		(*(t_vector3*)buf) = va_arg(*ap, t_vector3);
+		(*(t_vec3*)buf) = va_arg(*ap, t_vec3);
 	else if (id == ob_sca)
-		(*(t_vector3*)buf) = va_arg(*ap, t_vector3);
+		(*(t_vec3*)buf) = va_arg(*ap, t_vec3);
 	else if (id == ob_up)
 		(*(void(**)())buf) = va_arg(*ap, void(*)());
 	else if (id == ob_vf)
@@ -80,7 +80,7 @@ static t_ob	dob(t_model_index moi, int narg, ...)
 	va_list		ap;
 	t_ob		tmp;
 	t_ob_param	paramid;
-	t_byte		buf[sizeof(t_vector3)];
+	t_byte		buf[sizeof(t_vec3)];
 
 	tmp = sp_default_ob(moi);
 	va_start(ap, narg);

@@ -13,12 +13,12 @@
 #include "ftmath.h"
 #include <math.h>
 
-t_vector3	v3_div_scalar(t_vector3 a, float q)
+t_vec3	v3_div_scalar(t_vec3 a, float q)
 {
 	return (ATOV3(a.x / q, a.y / q, a.z / q));
 }
 
-t_vector3	v3_mul_scalar(t_vector3 a, float f)
+t_vec3	v3_mul_scalar(t_vec3 a, float f)
 {
 	return (ATOV3(a.x * f, a.y * f, a.z * f));
 }

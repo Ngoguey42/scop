@@ -13,11 +13,11 @@
 #include "ftmath.h"
 #include <math.h>
 
-extern t_matrix4	g_identitym4;
+extern t_mat4	g_identitym4;
 
-t_matrix4		m4_rotation_axis(t_axis a, float fact)
+t_mat4		m4_rotation_axis(t_axis a, float fact)
 {
-	t_matrix4		ret;
+	t_mat4		ret;
 
 	ret = g_identitym4;
 	if (a == x_axis)
@@ -44,9 +44,9 @@ t_matrix4		m4_rotation_axis(t_axis a, float fact)
 	return (ret);
 }
 
-t_matrix4		m4_rotationref_axis(t_matrix4 const *ref, t_axis a, float fact)
+t_mat4		m4_rotationref_axis(t_mat4 const *ref, t_axis a, float fact)
 {
-	t_matrix4 const		tmp = m4_rotation_axis(a, fact);
+	t_mat4 const		tmp = m4_rotation_axis(a, fact);
 
 	return (m4_dotprod(ref, &tmp));
 }

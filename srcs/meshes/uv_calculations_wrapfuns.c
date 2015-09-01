@@ -27,9 +27,9 @@ static float	process_angle(float a)
 void			sp_calc_uv_spherical(t_vertex_basic *vertex
 									, float const factoffset[4])
 {
-	t_vector3					tmp;
+	t_vec3					tmp;
 
-	tmp = *(t_vector3*)&vertex->pos;
+	tmp = *(t_vec3*)&vertex->pos;
 	if (ABS(tmp.x) < STEP && ABS(tmp.z) < STEP)
 	{
 		tmp.x = STEP;

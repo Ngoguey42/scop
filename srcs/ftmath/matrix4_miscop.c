@@ -13,7 +13,7 @@
 #include "ftmath.h"
 #include <math.h>
 
-extern t_matrix4	g_identitym4;
+extern t_mat4	g_identitym4;
 
 #define MULT(A,B,F,G,H,I,M,N,O,P) A[F]*B[M]+A[G]*B[N]+A[H]*B[O]+A[I]*B[P]
 
@@ -22,9 +22,9 @@ extern t_matrix4	g_identitym4;
 #define LAI2 z.x, z.y, z.z, -(z.x * eye.x + z.y * eye.y + z.z * eye.z)
 #define LAI3 0, 0, 0, 1
 
-t_matrix4	m4_dotprod(t_matrix4 const *mata, t_matrix4 const *matb)
+t_mat4	m4_dotprod(t_mat4 const *mata, t_mat4 const *matb)
 {
-	t_matrix4	ret;
+	t_mat4	ret;
 
 	ret.i[0].j[0] = MULT(mata->raw, matb->raw, 0, 1, 2, 3, 0, 4, 8, 12);
 	ret.i[0].j[1] = MULT(mata->raw, matb->raw, 0, 1, 2, 3, 1, 5, 9, 13);
@@ -45,19 +45,19 @@ t_matrix4	m4_dotprod(t_matrix4 const *mata, t_matrix4 const *matb)
 	return (ret);
 }
 
-t_matrix4	m4_lookat(t_vector3 eye, t_vector3 at, t_vector3 up)
+t_mat4	m4_lookat(t_vec3 eye, t_vec3 at, t_vec3 up)
 {
-	t_vector3 const		z = v3_normalize(v3_sub(eye, at));
-	t_vector3 const		x = v3_normalize(v3_cross(up, z));
-	t_vector3 const		y = v3_cross(z, x);
+	t_vec3 const		z = v3_normalize(v3_sub(eye, at));
+	t_vec3 const		x = v3_normalize(v3_cross(up, z));
+	t_vec3 const		y = v3_cross(z, x);
 
 	return (ATOM4(LAI0, LAI1, LAI2, LAI3));
 }
 
-t_matrix4	m4_fovprojection(float fov, float ratio, float near, float far)
+t_mat4	m4_fovprojection(float fov, float ratio, float near, float far)
 {
 	float const		one_over_depth = 1.f / (far - near);
-	t_matrix4		result;
+	t_mat4		result;
 
 	result = g_identitym4;
 	result.i[1].j[1] = 1.f / tan(0.5f * fov);

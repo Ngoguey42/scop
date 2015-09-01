@@ -16,10 +16,10 @@
 #include "scop.h"
 
 #define SRCPOS(VEC, I) (&((((t_vertex_basic*)((VEC)->data)) + (I))->pos))
-#define SRCPOS_V3(VEC, I) ((t_vector3*)SRCPOS((VEC), (I)))
+#define SRCPOS_V3(VEC, I) ((t_vec3*)SRCPOS((VEC), (I)))
 
 #define DSTNOR(VEC, I) (&((((t_vertex_basic*)((VEC)->data)) + (I))->nor))
-#define DSTNOR_V3(VEC, I) ((t_vector3*)DSTNOR((VEC), (I)))
+#define DSTNOR_V3(VEC, I) ((t_vec3*)DSTNOR((VEC), (I)))
 
 #define ADD_V3(DST, OTHER) (DST) = v3_add((DST), (OTHER))
 #define ANGLE_BETWEEN(V1, V2) (acos(v3_dot_normed((V1), (V2))))
@@ -28,8 +28,8 @@ static void	sum_normals_all(t_ftvector *v, t_ftvector const *faces)
 {
 	t_ui const			*f = faces->data;
 	t_ui const *const	faceend = ftv_end(faces);
-	t_vector3			fvect[3];
-	t_vector3			normal;
+	t_vec3			fvect[3];
+	t_vec3			normal;
 
 	while (f < faceend)
 	{
@@ -60,9 +60,9 @@ static void	bzero_normals(void *ignore, t_vertex_basic *vert)
 
 static void	normalize_normals(void *ignore, t_vertex_basic *vert)
 {
-	t_vector3	const	tmp[1] = {v3_normalize(*(t_vector3*)&vert->nor)};
+	t_vec3	const	tmp[1] = {v3_normalize(*(t_vec3*)&vert->nor)};
 
-	memcpy(&vert->nor, tmp, sizeof(t_vector3));
+	memcpy(&vert->nor, tmp, sizeof(t_vec3));
 	return ;
 	(void)ignore;
 }

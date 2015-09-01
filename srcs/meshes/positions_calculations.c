@@ -13,21 +13,21 @@
 #include "scop.h"
 #include <string.h>
 
-static void	sum_pos(t_vector3 *const sum, t_vertex_basic const *const v)
+static void	sum_pos(t_vec3 *const sum, t_vertex_basic const *const v)
 {
-	*sum = v3_add(*sum, *(t_vector3 const*)&v->pos);
+	*sum = v3_add(*sum, *(t_vec3 const*)&v->pos);
 	return ;
 }
 
-static void	recenter_pos(t_vector3 const *const sum, t_vertex_basic *const v)
+static void	recenter_pos(t_vec3 const *const sum, t_vertex_basic *const v)
 {
-	*(t_vector3*)&v->pos = v3_sub(*(t_vector3*)&v->pos, *sum);
+	*(t_vec3*)&v->pos = v3_sub(*(t_vec3*)&v->pos, *sum);
 	return ;
 }
 
 void		sp_recenter_positions(t_vbo_basic *vbo)
 {
-	t_vector3		v[1];
+	t_vec3		v[1];
 
 	bzero(v, sizeof(*v));
 	ftv_foreach(&vbo->vertices, &sum_pos, v);

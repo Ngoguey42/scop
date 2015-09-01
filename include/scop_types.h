@@ -174,10 +174,10 @@ typedef struct					s_ob
 	t_bool						shadow;
 	t_bool						delete;
 	t_model_index				model;
-	t_vector3					position;
-	t_vector3					rotation;
-	t_vector3					scale;
-	t_matrix4					mat;
+	t_vec3					position;
+	t_vec3					rotation;
+	t_vec3					scale;
+	t_mat4					mat;
 	void						(*update)();
 	float						valf[3];
 	int							vali[1];
@@ -220,23 +220,23 @@ typedef struct					s_env
 	double						mpos[2];
 
 	float						cangles[2];
-	t_vector3					cpos;
-	t_matrix4					view;
+	t_vec3					cpos;
+	t_mat4					view;
 
-	t_matrix4					projection;
-	t_matrix4					viewproj;
+	t_mat4					projection;
+	t_mat4					viewproj;
 
-	t_vector3					sunpos_spherical;
-	t_vector3					sunpos_cartesian;
-	t_vector3					sunka;
-	t_vector3					sunkd;
-	t_vector3					sunks;
+	t_vec3					sunpos_spherical;
+	t_vec3					sunpos_cartesian;
+	t_vec3					sunka;
+	t_vec3					sunkd;
+	t_vec3					sunks;
 	float						sundat[2];
 	t_texture					sbox_texture;
 	GLuint						sbox_fbo;
 	float						sbox_farplane;
-	t_matrix4					sbox_proj;
-	t_matrix4					sbox_viewproj[6];
+	t_mat4					sbox_proj;
+	t_mat4					sbox_viewproj[6];
 
 	double						time_start;
 	double						time_cur;

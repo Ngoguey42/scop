@@ -16,22 +16,22 @@
 #define CROSS_OP(A, B) (a.A * b.B - a.B * b.A)
 #define DOT_OP(M) (a.M * b.M)
 
-t_vector3	v3_cross(t_vector3 a, t_vector3 b)
+t_vec3	v3_cross(t_vec3 a, t_vec3 b)
 {
 	return (ATOV3(CROSS_OP(y, z), CROSS_OP(z, x), CROSS_OP(x, y)));
 }
 
-float		v3_dot_normed(t_vector3 a, t_vector3 b)
+float		v3_dot_normed(t_vec3 a, t_vec3 b)
 {
 	return (DOT_OP(x) + DOT_OP(y) + DOT_OP(z));
 }
 
-t_vector3	v3_add(t_vector3 a, t_vector3 b)
+t_vec3	v3_add(t_vec3 a, t_vec3 b)
 {
 	return (ATOV3(a.x + b.x, a.y + b.y, a.z + b.z));
 }
 
-t_vector3	v3_sub(t_vector3 a, t_vector3 b)
+t_vec3	v3_sub(t_vec3 a, t_vec3 b)
 {
 	return (ATOV3(a.x - b.x, a.y - b.y, a.z - b.z));
 }

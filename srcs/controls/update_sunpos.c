@@ -60,11 +60,11 @@ static void				update_azimuth(t_env *e, t_bool *update)
 	return ;
 }
 
-static inline t_matrix4	shadow_viewproj(t_env const *const e
-										, t_vector3 const view_vec
-										, t_vector3 const up_vec)
+static inline t_mat4	shadow_viewproj(t_env const *const e
+										, t_vec3 const view_vec
+										, t_vec3 const up_vec)
 {
-	return (m4_dotprod(&e->sbox_proj, (t_matrix4[]){
+	return (m4_dotprod(&e->sbox_proj, (t_mat4[]){
 	m4_lookat(e->sunpos_cartesian
 	, v3_add(e->sunpos_cartesian, view_vec)
 	, up_vec)}));
@@ -85,7 +85,7 @@ void					sp_update_sunpos(t_env *e, t_bool force)
 		CAR(e).x = RADIUS(e) * sin(PHI(e)) * cos(THETA(e));
 		CAR(e).z = RADIUS(e) * sin(PHI(e)) * sin(THETA(e));
 		CAR(e).y = RADIUS(e) * cos(PHI(e));
-		memcpy(&e->sbox_viewproj, ((t_matrix4[6]){
+		memcpy(&e->sbox_viewproj, ((t_mat4[6]){
 			shadow_viewproj(e, ATOV3(+1.0, 0.0, 0.0), ATOV3(0.0, -1.0, 0.0)),
 			shadow_viewproj(e, ATOV3(-1.0, 0.0, 0.0), ATOV3(0.0, -1.0, 0.0)),
 			shadow_viewproj(e, ATOV3(0.0, +1.0, 0.0), ATOV3(0.0, 0.0, +1.0)),
