@@ -94,7 +94,7 @@ static float	get_rand(float init)
 {
 	float nb;
 
-	nb = (((float)(rand() % 10000)) / 10000.f - 0.5f) * LAND_COLORRAND + init;
+	nb = ft_randf0() * LAND_COLORRAND + init;
 	if (nb > 1.f)
 		return (1.f);
 	else if (nb < 0.f)
