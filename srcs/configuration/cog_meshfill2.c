@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "scop.h"
-#include "objmodel.h"
+#include "objmodel/objmodel.h"
 #include <math.h>
 #include <string.h>
 

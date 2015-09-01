@@ -13,7 +13,7 @@
 #include <errno.h>
 #include <string.h>
 #include <stdlib.h>
-#include "objmodel_parsing.h"
+#include "objmodel/_parsing.h"
 #include "fterror.h"
 
 #define OFFSET(P) (offsetof(struct s_objmodel, P))

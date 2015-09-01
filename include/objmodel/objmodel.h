@@ -15,7 +15,7 @@
 
 # include "ft_vector.h"
 # include "ft_set.h"
-# include "vbo.h"
+# include "meshes/vao.h"
 
 typedef struct	s_objmodel
 {

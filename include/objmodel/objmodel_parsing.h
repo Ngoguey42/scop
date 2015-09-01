@@ -16,7 +16,7 @@
 # include "libft.h"
 # include "fterror.h"
 # include "ft_vector.h"
-# include "objmodel.h"
+# include "objmodel/objmodel.h"
 # include <stdio.h>
 
 # define sp_enomem ft_enomem //tofix

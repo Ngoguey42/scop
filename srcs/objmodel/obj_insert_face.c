@@ -13,7 +13,7 @@
 #include <stdio.h>
 #include <errno.h>
 #include <string.h>
-#include "objmodel_parsing.h"
+#include "objmodel/_parsing.h"
 
 #define POS(I) (((float*)(m->coords.data)) + 3 * (I))
 #define TEXTURE(I) (((float*)m->textures.data) + 2 * (I))

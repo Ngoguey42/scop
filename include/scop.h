@@ -20,11 +20,11 @@
 # include "ft_timeval.h"
 
 # include "ftmath.h"
-# include "scop_conf.h"
+# include "configuration/scop_conf.h"
 # include "scop_types.h"
-# include "cog_meshfill.h"
+# include "configuration/cog_meshfill.h"
 # include "fterror.h"
-# include "objmodel.h"
+# include "objmodel/objmodel.h"
 
 # define sp_enomem ft_enomem	// to fix at home
 

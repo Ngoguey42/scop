@@ -14,7 +14,7 @@
 #include <errno.h>
 #include <string.h>
 #include <stdlib.h>
-#include "objmodel_parsing.h"
+#include "objmodel/_parsing.h"
 
 static void	push_floats(t_ftvector *v, float const fbuf[3])
 {

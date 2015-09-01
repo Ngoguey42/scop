@@ -13,7 +13,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "scop.h"
-#include "objmodel_parsing.h"
+#include "objmodel/_parsing.h"
 
 #define SKIP_NODEPART(P) (((void*)(P)) + sizeof(t_ftset_node))
 #define HATE_THIS_NORM s->chunk_size - sizeof(t_ui) - sizeof(t_ftset_node)

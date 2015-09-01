@@ -15,7 +15,7 @@
 
 # include "libft.h"
 # include "ftmath.h"
-# include "cog_enums.h"
+# include "configuration/cog_enums.h"
 
 # define SHD_PATH(FILENAME) ("srcs/shaders/" FILENAME)
 # define VSHD_PATH(FILENAME) (SHD_PATH("vshaders/" FILENAME))

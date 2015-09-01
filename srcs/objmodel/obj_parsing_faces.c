@@ -14,7 +14,7 @@
 #include <errno.h>
 #include <string.h>
 #include <stdlib.h>
-#include "objmodel_parsing.h"
+#include "objmodel/_parsing.h"
 
 static int	parse_width3(t_objmodel *m, char const *buf)
 {

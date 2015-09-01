@@ -14,7 +14,7 @@
 #include <errno.h>
 #include <string.h>
 #include <stdlib.h>
-#include "objmodel_parsing.h"
+#include "objmodel/_parsing.h"
 
 void	op_faces_decr_indices(t_ui b[9], int i, int end)
 {

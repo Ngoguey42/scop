@@ -19,7 +19,7 @@
 # include "ft_vector.h"
 # include "ft_list.h"
 # include "scop_conf.h"
-# include "vbo.h"
+# include "meshes/vao.h"
 
 /*
 ** KEYS
