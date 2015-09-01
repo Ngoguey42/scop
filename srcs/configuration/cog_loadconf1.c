@@ -13,10 +13,6 @@
 #include "scop.h"
 #include <string.h>
 
-#ifndef NARG
-# define NARG_(_1,_2,_3,_4,_5,_6,_7,_8,_9,_10,_11,N,...) N
-# define NARG(...) NARG_(__VA_ARGS__,11,10,9,8,7,6,5,4,3,2,1)
-#endif
 #define LOC(T, S) ((t_location){(T), (S)})
 #define VSHADER(N,F,...) {VSHD_PATH(N), F, NARG(__VA_ARGS__), {__VA_ARGS__}, 0}
 #define FSHADER(N, F) {FSHD_PATH(N), (F), 0}

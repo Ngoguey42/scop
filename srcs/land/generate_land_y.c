@@ -34,7 +34,7 @@ static int		get_delta(int x, int y, int size)
 
 static float	get_rand(float range)
 {
-	return ((((float)(rand() % 10000)) / 10000.f - 0.5f) * range);
+	return (ft_randf0() * range);
 }
 
 static void		apply_floats_diag(t_ftvector *lines, float range, int idt)

@@ -17,12 +17,6 @@
 #include <assert.h>
 #include <stdlib.h>
 
-#ifndef NARG
-# define NARG2(A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Z,...) Z
-# define NARG1(...) NARG2(__VA_ARGS__,15,14,13,12,11,10,9,8,7,6,5,4,3,2,1,0)
-# define NARG(...) NARG1(42, ##__VA_ARGS__)
-#endif
-
 #define CONV(...) (t_ob[1]){__VA_ARGS__}
 #define OB(T,...) push_ob(e,CONV(dob((T),NARG(__VA_ARGS__),##__VA_ARGS__)),0)
 #define OBMN(T,...) push_ob(e,CONV(dob((T),NARG(__VA_ARGS__),##__VA_ARGS__)),1)
@@ -97,11 +91,6 @@ static t_ob	dob(t_model_index moi, int narg, ...)
 	return (tmp);
 }
 
-float		ft_randf(void)
-{
-	return ((float)(rand() % 10000) / 9999.f);
-}
-
 int			sp_fill_obs(t_env *e)
 {
 	float	rad;
@@ -119,11 +108,11 @@ int			sp_fill_obs(t_env *e)
 		, ob_sha, false
 		, ob_vi, ((int[1]){dir})
 		, ob_vf
-		, ((float[3]){M_PI * 2 * ft_randf()
-		, (float)dir * (0.1f + ft_randf())
+		, ((float[3]){M_PI * 2 * ft_randf01()
+		, (float)dir * (0.1f + ft_randf01())
 		, rad
 		}));
-		rad += 25.f * ft_randf();
+		rad += 25.f * ft_randf01();
 	}
 	return (0);
 }

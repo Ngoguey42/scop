@@ -14,7 +14,6 @@
 #include <stdlib.h>
 #include <time.h>
 #include <unistd.h>
-#define PSIZEOF(T) qprintf("sizeof(%s) = %zuBytes\n", #T, sizeof(T))
 #define VERBOSE(STR) lprintf("\033[36mInitializing %s...\033[0m", (STR))
 
 static int		begin(t_env *e)
@@ -82,8 +81,8 @@ int				main(void)
 	t_env					*e;
 
 	srand(time(NULL));
-	PSIZEOF(t_env);
-	PSIZEOF(t_ob);
+	PRINTSIZEOF(t_env);
+	PRINTSIZEOF(t_ob);
 	e = malloc(sizeof(*e));
 	if (e == NULL)
 		return (ERROR("Env allocation failed"), 1);
