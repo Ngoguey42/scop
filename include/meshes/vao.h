@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   vao.h                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/09/03 13:55:22 by ngoguey           #+#    #+#             */
+/*   Updated: 2015/09/03 13:58:31 by ngoguey          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef VAO_H
 # define VAO_H
@@ -65,5 +76,25 @@ typedef struct					s_vbo_basic
 	t_byte						ntex;
 	t_byte						nnor;
 }								t_vbo_basic;
+
+typedef struct					s_faces_basic
+{
+	t_ui						indices[3];
+	t_vec3						nor;
+	int							group;
+	int							vali[1];
+	float						valf[1];
+}								t_face_basic;
+
+typedef struct					s_ebo_basic
+{
+	t_ftvector					faces;
+}								t_ebo_basic;
+
+typedef struct					s_vao_basic
+{
+	t_vbo_basic					vbo;
+	t_ebo_basic					ebo;
+}								t_vao_basic;
 
 #endif
