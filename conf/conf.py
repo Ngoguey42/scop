@@ -6,7 +6,7 @@
 #    By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/08/10 13:13:01 by ngoguey           #+#    #+#              #
-#    Updated: 2015/08/24 15:52:50 by ngoguey          ###   ########.fr        #
+#    Updated: 2015/09/03 18:45:15 by ngoguey          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,18 +69,19 @@ textures = [
 	Texture("metal", "metal.tga"),
 ]
 meshes = [
-	Mesh("teapot1", "ptn", "GL_DYNAMIC_DRAW","""{
-	return (sp_meshfillbumb_objmodel(e, me, vbo, "res/teapot.obj"));\n}"""),
-	Mesh("teapot2", "ptn", "GL_DYNAMIC_DRAW","""{
-	return (sp_meshfillbumb_objmodel(e, me, vbo, "res/teapot2.obj"));\n}"""),
-	Mesh("ft", "ptn", "GL_DYNAMIC_DRAW","""{
-	return (sp_meshfillbumb_objmodel(e, me, vbo, "res/42.obj"));\n}"""),
-	Mesh("csie", "ptn", "GL_DYNAMIC_DRAW","""{
-	return (sp_meshfillbumb_objmodel(e, me, vbo, "res/new_csie_b1.obj"));\n}"""),
-	Mesh("alpha", "ptn", "GL_STATIC_DRAW","""{
-	return (sp_meshfillbumb_objmodel(e, me, vbo, "res/alfa147.obj"));\n}"""),
-	Mesh("plane", "ptn", "GL_STATIC_DRAW","""{
-	return (sp_meshfillbumb_objmodel(e, me, vbo, "res/cessna.obj"));\n}"""),
+	Mesh("teapot1", "ptn", "GL_DYNAMIC_DRAW"
+		 , "", "", "", "true", "true", (1., 1.), """{
+	return (sp_meshfillbumb_objmodel(me, vao));\n}"""),
+	# Mesh("teapot2", "ptn", "GL_DYNAMIC_DRAW","""{
+	# return (sp_meshfillbumb_objmodel(me, vao, "res/teapot2.obj"));\n}"""),
+	# Mesh("ft", "ptn", "GL_DYNAMIC_DRAW","""{
+	# return (sp_meshfillbumb_objmodel(me, vao, "res/42.obj"));\n}"""),
+	# Mesh("csie", "ptn", "GL_DYNAMIC_DRAW","""{
+	# return (sp_meshfillbumb_objmodel(me, vao, "res/new_csie_b1.obj"));\n}"""),
+	# Mesh("alpha", "ptn", "GL_STATIC_DRAW","""{
+	# return (sp_meshfillbumb_objmodel(me, vao, "res/alfa147.obj"));\n}"""),
+	# Mesh("plane", "ptn", "GL_STATIC_DRAW","""{
+	# return (sp_meshfillbumb_objmodel(me, vao, "res/cessna.obj"));\n}"""),
 
 	# land fait ceci cela
 	Mesh("land", "land", "GL_STATIC_DRAW","""{

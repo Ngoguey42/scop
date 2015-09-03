@@ -6,7 +6,7 @@
 #    By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/08/10 13:13:13 by ngoguey           #+#    #+#              #
-#    Updated: 2015/08/24 14:17:41 by ngoguey          ###   ########.fr        #
+#    Updated: 2015/09/03 18:56:31 by ngoguey          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -185,10 +185,18 @@ class Texture(Cstruct):
 
 class Mesh(Cstruct):
 	g_index = 0
-	def __init__(self, name, program, usage, fill_funbody):
+	def __init__(self, name, program, usage
+				 , filename, grp_fun, tex_fun, vert_before, recenter, scale
+				 , fill_funbody):
 		self.name = name
 		self.program = program
 		self.usage = usage
+		self.filename = filename
+		self.grp_fun = grp_fun
+		self.tex_fun = tex_fun
+		self.vert_before = vert_before
+		self.recenter = recenter
+		self.scale = scale
 		self.fill_funbody = fill_funbody
 		self.index = Mesh.g_index
 		Mesh.g_index += 1
@@ -208,8 +216,19 @@ class Mesh(Cstruct):
 	def output_cconf_end():
 		output_cconf_end("meshes")
 	def output_cconf_entry(self):
-		cog.outl("\tMESH(sp_" + self.program + "_program, " + self.usage
-		+ ", &sp_meshfill_" + self.name + "),")
+		self.col = 3
+		self.printstr("\tMESH(")
+		self.printstr(", " + self.usage)
+		self.printstr("sp_" + self.program + "_program")
+		self.printstr(", " + "\"" + self.filename + "\"")
+		self.printstr(", " + "&sp_meshfill_" + self.name)
+		self.printstr(", " + "NULL" if self.grp_fun == "" else "&" + self.grp_fun)
+		self.printstr(", " + "NULL" if self.tex_fun == "" else "&" + self.tex_fun)
+		self.printstr(", " + self.vert_before)
+		self.printstr(", " + self.recenter)
+		self.printstr(", " + "{" + self.scale[0] + ", " + self.scale[1] + "}")
+		cog.outl(');')
+		
 	def output_meshfill(self, index_first):
 		if self.index >= index_first and self.index < index_first + 5:
 			output_dotc_indent_2str("int", "sp_meshfill_" + self.name
@@ -263,3 +282,4 @@ class Ob(Cstruct):
 				self.printstr(', ob_sca, ATOV3SCAL(' + s+', '+s+', '+s + ')')
 			# printstr("ob_" + str(k) + ', ')
 		cog.outl(');')
+			

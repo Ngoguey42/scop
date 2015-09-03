@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 16:15:35 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/12 17:39:50 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/09/03 18:23:58 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ typedef struct	s_objmodel
 
 int				op_parse_obj(t_objmodel *m, char const *filepath);
 void			sp_clean_objmodel(t_objmodel *m);
-void			op_retreive_data(t_objmodel *m, t_vbo_basic *v
-									, t_ftvector *f);
+void			op_retreive_data(t_objmodel *m, t_vao_basic *v);
 
 #endif

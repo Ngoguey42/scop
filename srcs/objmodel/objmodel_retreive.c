@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/08/12 17:06:35 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/09/03 11:42:07 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/09/03 18:37:24 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,29 +22,27 @@ static void	push_index(size_t const *ptrpad, void *beginptr, int i)
 	return ;
 }
 
-static void	build_faces(void **ptrs, t_tmpface const *face)
+static void	build_faces(t_ftvector *faces, size_t const *pad
+						, t_tmpface const *face)
 {
-	t_ui			tmp[3];
-	size_t const	ptrpad = *(size_t*)ptrs[1];
+	t_face_basic	tmp[1];
 
-	tmp[0] = *(t_ui*)((void*)face->ptr[0] + ptrpad);
-	tmp[1] = *(t_ui*)((void*)face->ptr[1] + ptrpad);
-	tmp[2] = *(t_ui*)((void*)face->ptr[2] + ptrpad);
-	ftv_push_back_unsafe(ptrs[0], tmp);
+	bzero(tmp, sizeof(tmp));
+	tmp->indices[0] = *(t_ui*)((void*)face->ptr[0] + *pad);
+	tmp->indices[1] = *(t_ui*)((void*)face->ptr[1] + *pad);
+	tmp->indices[2] = *(t_ui*)((void*)face->ptr[2] + *pad);
+	ftv_push_back_unsafe(faces, tmp);
 	return ;
 }
 
-static void	retreive_faces(t_objmodel const *const m, t_ftvector *const f)
+static void	retreive_faces(t_objmodel const *const m, t_ftvector *faces)
 {
-	void	*ptrs[2];
 	size_t	padtoindex;
 
-	if (ftv_reserve(f, m->faces.size))
+	if (ftv_reserve(faces, m->faces.size))
 		sp_enomem();
 	padtoindex = m->vertices.chunk_size - sizeof(t_ui);
-	ptrs[0] = f;
-	ptrs[1] = &padtoindex;
-	ftv_foreach(&m->faces, &build_faces, ptrs);
+	ftv_foreach2(&m->faces, &build_faces, faces, &padtoindex);
 	return ;
 }
 
@@ -64,21 +62,22 @@ static void	extract_vertices(t_vertex_basic *dst, void const *src
 	return ;
 }
 
-void		op_retreive_data(t_objmodel *m, t_vbo_basic *v, t_ftvector *f)
+void		op_retreive_data(t_objmodel *m, t_vao_basic *vao)
 {
 	size_t		ptrpad;
 	t_ui		nfloats[1];
 
 	ptrpad = m->width * sizeof(float) + sizeof(t_ftset_node);
-	v->npos = 3;
+	vao->vbo.npos = 3;
 	if (m->width == 5 || m->width == 8)
-		v->ntex = 2;
+		vao->vbo.ntex = 2;
 	if (m->width == 6 || m->width == 8)
-		v->nnor = 3;
+		vao->vbo.nnor = 3;
 	fts_foreachi(&m->vertices, &push_index, &ptrpad);
-	retreive_faces(m, f);
+	retreive_faces(m, &vao->ebo.faces);
 	*nfloats = (m->vertices.chunk_size - sizeof(t_ui) - sizeof(t_ftset_node))
 				/ sizeof(float);
-	ft_set_to_vector(&m->vertices, &v->vertices, &extract_vertices, nfloats);
+	ft_set_to_vector(&m->vertices, &vao->vbo.vertices
+					 , &extract_vertices, nfloats);
 	return ;
 }

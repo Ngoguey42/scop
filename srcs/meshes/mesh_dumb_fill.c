@@ -6,25 +6,19 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/08/17 14:36:32 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/09/03 16:12:06 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/09/03 18:36:10 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
-/*
+
 int			sp_meshfillbumb_objmodel(t_mesh *me, t_vao_basic *vao)
 {
 	t_objmodel				m[1];
 
-	if (op_parse_obj(m, filename))
+	if (op_parse_obj(m, me->filename))
 		return (ERROR("op_parse_obj(m)"), 1);
-	op_retreive_data(m, vbo, &me->faces);
-	sp_recenter_positions(vbo);
-	if (vbo->nnor == 0)
-		sp_calc_normals(e, me, vbo);
-	if (vbo->ntex == 0)
-		sp_calc_uv(e, vbo, (float[2]){(float)t->dim[0] / (float)t->dim[1], 2.f}
-					, uvwrap_spherical);
+	op_retreive_data(m, vao);
+	sp_clean_objmodel(m);
 	return (0);
 }
-*/
