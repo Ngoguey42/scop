@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/15 11:47:48 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/24 16:58:24 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/09/03 18:15:20 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ static int const		g_keystates[] =
 
 static t_keyevents const	g_keyevents[] =
 {
-	CONV(&sp_mainob_model_remapuv, uvwrap_oxy, GLFW_KEY_8, sp_is_held, 0),
-	CONV(&sp_mainob_model_remapuv, uvwrap_spherical, GLFW_KEY_9, sp_is_held, 0),
-	CONV(&sp_mainob_model_remapuv, uvwrap_box, GLFW_KEY_0, sp_is_held, 0),
+	/* CONV(&sp_mainob_model_remapuv, uvwrap_oxy, GLFW_KEY_8, sp_is_held, 0), */
+	/* CONV(&sp_mainob_model_remapuv, uvwrap_spherical, GLFW_KEY_9, sp_is_held, 0), */
+	/* CONV(&sp_mainob_model_remapuv, uvwrap_box, GLFW_KEY_0, sp_is_held, 0), */
 	CONV(&sp_kevent_toggle_mouse_state, 42, GLFW_KEY_TAB, sp_is_held, 0),
 	CONV(&sp_kevent_reset_campos, 42, GLFW_KEY_R, sp_is_held, sp_control_held),
 	CONV(&sp_mainob_resetpos, 42, GLFW_KEY_R, sp_is_held | sp_control_held, 0),

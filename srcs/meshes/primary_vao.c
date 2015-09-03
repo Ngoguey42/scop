@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/09/03 15:05:12 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/09/03 16:23:05 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/09/03 18:13:54 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static inline void	split_vbo(t_mesh const *me, t_vao_basic *vao)
 {
-	if (me->set_groups != NULL)
+	if (0 && me->set_groups != NULL)
 	{
 		me->set_groups(vao);
 		sp_rebuild_vbo_from_groups(vao);

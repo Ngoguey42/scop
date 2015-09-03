@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/09/03 16:26:31 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/09/03 18:01:59 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/09/03 18:14:21 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,19 @@ static void	bzero_normals(void *ignore, t_vertex_basic *vert)
 static void	sum_normals(t_vertex_basic *verts, t_face_basic const *f)
 {
 	int		i;
+	int		j;
 	float	angle;
 
 	i = 0;
+	j = 2;
 	while (i < 3)
 	{
-		angle = acos(v3_dot_normed(v3_inv(f->vec[i]), f->vec[(i + 2) % 3]));
+		angle = acos(v3_dot_normed(v3_inv(f->vec[i]), f->vec[j % 3]));
 		*(t_vec3*)&verts[f->indices[i]].nor =
 			v3_add(*(t_vec3*)&verts[f->indices[i]].nor
 				   , v3_mul_scalar(f->nor, angle));
 		i++;
+		j++;
 	}
 	return ;
 }
