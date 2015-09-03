@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/24 13:49:05 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/28 15:48:36 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/09/03 11:39:26 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <errno.h>
 #include <string.h>
 #include <stdlib.h>
-#include "objmodel/_parsing.h"
+#include "objmodel/objmodel_parsing.h"
 
 void	op_faces_decr_indices(t_ui b[9], int i, int end)
 {

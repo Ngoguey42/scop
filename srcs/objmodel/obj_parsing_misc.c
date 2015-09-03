@@ -6,14 +6,14 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/24 10:22:18 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/28 15:50:52 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/09/03 11:41:05 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <errno.h>
 #include <string.h>
-#include "objmodel/_parsing.h"
+#include "objmodel/objmodel_parsing.h"
 
 int		op_match_comment(t_objmodel *m, char const *buf)
 {

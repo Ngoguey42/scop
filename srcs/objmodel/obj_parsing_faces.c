@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/23 10:12:13 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/12 15:01:26 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/09/03 11:40:28 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <errno.h>
 #include <string.h>
 #include <stdlib.h>
-#include "objmodel/_parsing.h"
+#include "objmodel/objmodel_parsing.h"
 
 static int	parse_width3(t_objmodel *m, char const *buf)
 {

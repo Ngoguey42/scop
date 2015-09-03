@@ -6,14 +6,14 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/02 13:21:56 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/12 15:02:28 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/09/03 11:40:13 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <errno.h>
 #include <string.h>
 #include <stdlib.h>
-#include "objmodel/_parsing.h"
+#include "objmodel/objmodel_parsing.h"
 #include "fterror.h"
 
 #define OFFSET(P) (offsetof(struct s_objmodel, P))

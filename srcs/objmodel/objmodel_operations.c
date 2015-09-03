@@ -6,14 +6,14 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/15 08:26:17 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/12 17:06:23 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/09/03 11:41:58 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <string.h>
 #include "scop.h"
-#include "objmodel/_parsing.h"
+#include "objmodel/objmodel_parsing.h"
 
 #define SKIP_NODEPART(P) (((void*)(P)) + sizeof(t_ftset_node))
 #define HATE_THIS_NORM s->chunk_size - sizeof(t_ui) - sizeof(t_ftset_node)

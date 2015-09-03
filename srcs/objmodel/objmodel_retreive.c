@@ -6,14 +6,14 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/08/12 17:06:35 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/12 17:39:30 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/09/03 11:42:07 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <string.h>
 #include "scop.h"
-#include "objmodel/_parsing.h"
+#include "objmodel/objmodel_parsing.h"
 #include "ft_containers.h"
 
 static void	push_index(size_t const *ptrpad, void *beginptr, int i)

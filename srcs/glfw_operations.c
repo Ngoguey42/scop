@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/13 12:53:24 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/17 16:03:45 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/09/03 11:44:54 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,14 @@
 #define ALKEY(V) (ISALKEY((V)) ? sp_alt_held : 0)
 #define SUKEY(V) (ISSUKEY((V)) ? sp_super_held : 0)
 #define MODPRESSCONV(K) (SHKEY(K) | COKEY(K) | ALKEY(K) | SUKEY(K))
+
+#ifdef MAC_OS_MODE
+# define INIT_GLEW true
+# define OPENGL_PROFILE GLFW_OPENGL_CORE_PROFILE
+#else
+# define INIT_GLEW (glewInit() == GLEW_OK)
+# define OPENGL_PROFILE GLFW_OPENGL_COMPAT_PROFILE
+#endif
 
 static void	error_callback(int error, const char *description)
 {
@@ -72,14 +80,13 @@ static void	focus_callback(GLFWwindow *w, int state)
 int			sp_init_glfw(t_env *e)
 {
 	glfwSetErrorCallback(error_callback);
-	if (glfwInit() != GL_TRUE)
-	  return (ERROR("glfwInit()"), 1);
+	glfwInit();
 	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 	glfwWindowHint(GLFW_SAMPLES, 2);
 	// glfwWindowHint(GLFW_DOUBLEBUFFER, GL_TRUE);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
-	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_COMPAT_PROFILE);
+	glfwWindowHint(GLFW_OPENGL_PROFILE, OPENGL_PROFILE);
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 	e->win = glfwCreateWindow(WIN_WIDTHI, WIN_HEIGHTI, "Scop", NULL, NULL);
 	if (!e->win)
@@ -87,7 +94,7 @@ int			sp_init_glfw(t_env *e)
 	glfwSetWindowFocusCallback(e->win, &focus_callback);
 	glfwSetKeyCallback(e->win, key_callback);
 	glfwMakeContextCurrent(e->win);
-	if (glewInit() != GLEW_OK)
+	if (!INIT_GLEW)
 	  return (ERROR("glewInit()"), 1);
 	glViewport(0, 0, WIN_WIDTHI, WIN_HEIGHTI);
 	glEnable(GL_DEPTH_TEST);

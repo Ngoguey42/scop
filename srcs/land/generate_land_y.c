@@ -6,11 +6,11 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/21 15:54:14 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/22 17:33:21 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/09/03 11:39:06 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "scop_conf.h"
+#include "configuration/scop_conf.h"
 #include "fterror.h"
 #include "libft.h"
 #include "ft_vector.h"

@@ -6,14 +6,19 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 12:07:31 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/25 16:46:17 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/09/03 11:12:00 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SCOP_H
 # define SCOP_H
 
-# include <GL/glew.h>
+# ifdef MAC_OS_MODE
+#  define GLFW_INCLUDE_GLCOREARB
+# else
+#  include <GL/glew.h>
+# endif
+
 # include <GLFW/glfw3.h>
 
 # include "libft.h"

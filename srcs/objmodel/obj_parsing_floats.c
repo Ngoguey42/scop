@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/22 17:32:29 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/07/28 15:50:48 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/09/03 11:40:43 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <errno.h>
 #include <string.h>
 #include <stdlib.h>
-#include "objmodel/_parsing.h"
+#include "objmodel/objmodel_parsing.h"
 
 static void	push_floats(t_ftvector *v, float const fbuf[3])
 {

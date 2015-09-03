@@ -36,10 +36,15 @@ LD_CC := clang
 C_FLAGS := -Wall -Wextra -O2 -g
 
 # Linking flags
-LD_FLAGS := -Llibft -lft -lglfw -lGL -lGLEW -lm
+ifeq ($(shell uname),Darwin)
+	C_FLAGS += -D MAC_OS_MODE=1
+	LD_FLAGS := -Llibft -lft -L ~/.brew/lib -lglfw3 -lm -framework OpenGL
+else
+	LD_FLAGS := -Llibft -lft -lglfw -lGL -lGLEW -lm
+endif
 
 # C include flags
-C_HEADS := -I include -I libft/includes
+C_HEADS := -I include -I libft/includes -I ~/.brew/include
 
 NICE_OUTPUT := 0
 

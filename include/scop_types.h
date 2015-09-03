@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 10:07:19 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/24 15:13:04 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/09/03 11:14:55 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,17 @@
 # define SCOP_TYPES_H
 
 # include "libft.h"
-# include <GL/glew.h>
+
+# ifdef MAC_OS_MODE
+#  define GLFW_INCLUDE_GLCOREARB
+# else
+#  include <GL/glew.h>
+# endif
+
 # include <GLFW/glfw3.h>
 # include "ft_vector.h"
 # include "ft_list.h"
-# include "scop_conf.h"
+# include "configuration/scop_conf.h"
 # include "meshes/vao.h"
 
 /*

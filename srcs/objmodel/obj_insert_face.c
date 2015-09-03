@@ -6,14 +6,14 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/23 11:05:53 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/12 17:05:13 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/09/03 11:40:00 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <errno.h>
 #include <string.h>
-#include "objmodel/_parsing.h"
+#include "objmodel/objmodel_parsing.h"
 
 #define POS(I) (((float*)(m->coords.data)) + 3 * (I))
 #define TEXTURE(I) (((float*)m->textures.data) + 2 * (I))
