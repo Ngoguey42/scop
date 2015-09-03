@@ -5,95 +5,67 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/07/28 11:02:28 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/24 14:13:49 by ngoguey          ###   ########.fr       */
+/*   Created: 2015/09/03 14:25:20 by ngoguey           #+#    #+#             */
+/*   Updated: 2015/09/03 15:24:22 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "scop.h"
+#incude "scop.h"
 
-char const		*g_locations_str[] = {
+t_byte const		g_vbo_offsets[][2] = {
+	{offsetof(t_vertex_basic, pos), offsetof(t_vbo_basic, npos)},
+	{offsetof(t_vertex_basic, col), offsetof(t_vbo_basic, ncol)},
+	{offsetof(t_vertex_basic, tex), offsetof(t_vbo_basic, ntex)},
+	{offsetof(t_vertex_basic, nor), offsetof(t_vbo_basic, nnor)}
+};
+
+char const			*g_locations_str[] = {
 	"pos",
 	"col",
 	"tex",
 	"nor"
 };
 
-static size_t	mesh_width(t_vshader const *vs)
+static int	validate_vbo(t_vbo_basic const *vbo, t_vshader const *vs)
 {
-	size_t	i;
-	size_t	tot;
+	size_t		i;
+	int			error;
+	t_byte		num_elt_vbo;
+	t_byte		num_elt_vs;
 
+	error = 0;
 	i = 0;
-	tot = 0;
-	while (i < vs->n_locations)
+	while (i < SIZE_ARRAY(g_vbo_offsets))
 	{
-		tot += vs->locations[i].size;
+		num_elt_vbo = *REACH_OFFSET(t_byte, vbo, g_vbo_offsets[i][1]);
+		num_elt_vs = vs[i];//get_num_elt_vs(vs, i);
+		if (num_elt_vbo != num_elt_vs)
+		{
+			ERRORF("%s(%hhu/%hhu)"
+				   , g_locations_str[i], num_elt_vbo, num_elt_vs);
+			error = 1;
+		}
 		i++;
 	}
-	return (tot);
+	return (error);
 }
 
-static int		gen_attribs(t_vshader const *vs, size_t vert_width)
+int		sp_new_mesh(t_env const *e, t_mesh *me)
 {
-	size_t	i;
-	GLvoid	*delta;
+	t_vao_basic				vao[1];
+	t_vshader const *const	vs = VSOFME(e, me);
+	t_ftvector				vbo_final[1];
+	t_ftvector				ebo_final[1];
 
-	i = 0;
-	delta = NULL;
-	qprintf("    Locations:  ");
-	while (i < vs->n_locations)
-	{
-		qprintf("\"%-3s\":%u,%u,%02u,%02u   ",
-				g_locations_str[vs->locations[i].type], i,
-				vs->locations[i].size, vert_width, delta);
-		glVertexAttribPointer(i, vs->locations[i].size, GL_FLOAT, GL_FALSE
-								, vert_width, delta);
-		glEnableVertexAttribArray(i);
-		delta += vs->locations[i].size * sizeof(GLfloat);
-		i++;
-	}
-	return (0);
-}
-
-static void		handle_buffers(t_env const *e, t_mesh *me,
-								size_t const widths[2])
-{
-	qprintf("    Sending VBO... ");
-	glGenBuffers(1, me->handles + 1);
-	glBindBuffer(GL_ARRAY_BUFFER, me->handles[1]);
-	glBufferData(GL_ARRAY_BUFFER, me->vertices.size * widths[0],
-					me->vertices.data, me->usage);
-	qprintf("    Sending EBO... ");
-	glGenBuffers(1, me->handles + 2);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, me->handles[2]);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, me->faces.size * widths[1],
-					me->faces.data, me->usage);
-	return ;
-	(void)e;
-}
-
-int				sp_new_mesh(t_env const *e, t_mesh *me)
-{
-	t_program const		*p = &e->programs[me->program];
-	size_t const		vert_width = mesh_width(VSOFP(e, p)) * sizeof(float);
-	size_t const		elem_width = 3 * sizeof(t_ui);
-
-	if (ftv_init_instance(&me->vertices, vert_width))
-		sp_enomem();
-	if (ftv_init_instance(&me->faces, elem_width))
-		sp_enomem();
-	lprintf("    \033[33mFilling mesh...\033[0m");
-	if (sp_fill_mesh(e, me))
-		return (ERROR("me->fill(e, me)"), 1);
-	qprintf("    \033[33m...done:  %u vertices, %u faces\033[0m",
-			me->vertices.size, me->faces.size);
-	glGenVertexArrays(1, me->handles + 0);
-	glBindVertexArray(me->handles[0]);
-	handle_buffers(e, me, (size_t const[]){vert_width, elem_width});
-	lprintf("    Handles: [VAO->%u VBO->%u EBO->%u]",
-		me->handles[0], me->handles[1], me->handles[2]);
-	gen_attribs(VSOFP(e, p), vert_width);
-	glBindVertexArray(0);
+	if (sp_build_vao_primary(vao, vs))
+		return (ERROR("sp_build_vao_primary(vao, vs)"), 1);
+	if (validate_vbo(&vao->vbo, vs))
+		return (ERROR("validate_vbo(...)"), 1);
+	sp_build_vao_final(vbo_final, ebo_final, vao);
+	sp_push_vao(me, vs, vbo_final, ebo_final);
+	ftv_release(&vao->vbo.vertices, NULL);
+	ftv_release(&vao->ebo.faces, NULL);
+	ftv_release(vbo_final, NULL);
+	ftv_release(ebo_final, NULL);
 	return (0);
 }

@@ -6,18 +6,15 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/08/17 14:36:32 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/23 17:22:43 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/09/03 15:13:25 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
 
-int			sp_meshfillbumb_objmodel(t_env const *e, t_mesh *me
-										, t_vbo_basic *vbo
-										, char const *filename)
+int			sp_meshfillbumb_objmodel(t_mesh *me, t_vao_basic *vao)
 {
 	t_objmodel				m[1];
-	t_texture const *const	t = e->textures + sp_porcelain_texture;
 
 	if (op_parse_obj(m, filename))
 		return (ERROR("op_parse_obj(m)"), 1);

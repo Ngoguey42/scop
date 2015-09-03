@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 10:07:19 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/09/03 11:14:55 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/09/03 14:19:23 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,11 +132,15 @@ typedef struct					s_mesh
 {
 	GLenum const				usage;
 	t_program_index const		program;
-	int (*const					fill)();
-	t_ftvector					vertices;
-	t_ftvector					faces;
-	t_vbo_basic					vbo;
+	char const *const			filename;
+	int							(*fill)();
+	int							(*set_groups)();
+	int							(*set_textures)();
+	t_bool						vertices_normals_before_split;
+	t_bool						recenter_positions;
+	float						tex_scale[2];	
 	GLuint						handles[3];
+	t_bool						generated;
 }								t_mesh;
 typedef enum					e_uvwrapping_type
 {
