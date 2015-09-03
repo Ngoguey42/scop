@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/09/03 13:55:22 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/09/03 16:17:40 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/09/03 17:43:20 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ typedef struct					s_vbo_basic
 typedef struct					s_faces_basic
 {
 	t_ui						indices[3];
+	t_vec3						vec[3];
 	t_vec3						nor;
 	int							group;
 	int							vali[1];

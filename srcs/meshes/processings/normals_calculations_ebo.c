@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/09/03 16:26:04 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/09/03 17:15:20 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/09/03 17:46:07 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,19 @@
 static void		normal_to_face(t_vertex_basic const *vertices
 							   , t_face_basic face[1])
 {
-	t_vec3 const	p0pos = *((t_vec3*)&(vertices + face->indices[0])->pos);
-	t_vec3 const	p1pos = *((t_vec3*)&(vertices + face->indices[1])->pos);
-	t_vec3 const	p2pos = *((t_vec3*)&(vertices + face->indices[2])->pos);
-	t_vec3 const	va = v3_normalize(v3_sub(p1pos, p0pos));
-	t_vec3 const	vb = v3_normalize(v3_sub(p2pos, p0pos));
+	t_vec3 const	p0pos = *((t_vec3*)&vertices[face->indices[0]].pos);
+	t_vec3 const	p1pos = *((t_vec3*)&vertices[face->indices[1]].pos);
+	t_vec3 const	p2pos = *((t_vec3*)&vertices[face->indices[2]].pos);
 
-	face->nor = v3_cross(va, vb);
+	face->vec[0] = v3_normalize(v3_sub(p0pos, p1pos));
+	face->vec[1] = v3_normalize(v3_sub(p1pos, p2pos));
+	face->vec[2] = v3_normalize(v3_sub(p2pos, p0pos));
+	face->nor = v3_cross(v3_inv(face->vec[0]), face->vec[2]);
 	return ;
 }
 
 void			sp_build_ebo_normals(t_vao_basic *vao)
 {
-	ftv_foreach(&vao->ebo.faces, &normal_to_face, &vao->vbo);
-	(void)vao;
+	ftv_foreach(&vao->ebo.faces, &normal_to_face, vao->vbo.vertices.data);
 	return ;
 }
