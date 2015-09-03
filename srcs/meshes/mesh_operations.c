@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/18 12:01:22 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/24 14:13:09 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/09/03 16:12:21 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ void					sp_delete_meshes(t_env *e)
 	me = e->meshes;
 	while (me < end)
 	{
-		ftv_release(&me->vertices, NULL);
-		ftv_release(&me->faces, NULL);
+		/* ftv_release(&me->vertices, NULL); */
+		/* ftv_release(&me->faces, NULL); */
 		glDeleteBuffers(1, me->handles + 1);
 		glDeleteBuffers(1, me->handles + 2);
 		glDeleteVertexArrays(1, me->handles + 3);

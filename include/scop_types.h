@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 10:07:19 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/09/03 14:19:23 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/09/03 16:19:39 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,7 +138,8 @@ typedef struct					s_mesh
 	int							(*set_textures)();
 	t_bool						vertices_normals_before_split;
 	t_bool						recenter_positions;
-	float						tex_scale[2];	
+	float						tex_scale[2];
+	size_t						faces3;
 	GLuint						handles[3];
 	t_bool						generated;
 }								t_mesh;

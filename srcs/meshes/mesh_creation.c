@@ -6,11 +6,11 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/09/03 14:25:20 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/09/03 15:24:22 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/09/03 16:21:06 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#incude "scop.h"
+#include "scop.h"
 
 t_byte const		g_vbo_offsets[][2] = {
 	{offsetof(t_vertex_basic, pos), offsetof(t_vbo_basic, npos)},
@@ -38,7 +38,7 @@ static int	validate_vbo(t_vbo_basic const *vbo, t_vshader const *vs)
 	while (i < SIZE_ARRAY(g_vbo_offsets))
 	{
 		num_elt_vbo = *REACH_OFFSET(t_byte, vbo, g_vbo_offsets[i][1]);
-		num_elt_vs = vs[i];//get_num_elt_vs(vs, i);
+		num_elt_vs = vs->locations[i].size;//get_num_elt_vs(vs, i);
 		if (num_elt_vbo != num_elt_vs)
 		{
 			ERRORF("%s(%hhu/%hhu)"
@@ -57,7 +57,7 @@ int		sp_new_mesh(t_env const *e, t_mesh *me)
 	t_ftvector				vbo_final[1];
 	t_ftvector				ebo_final[1];
 
-	if (sp_build_vao_primary(vao, vs))
+	if (sp_build_vao_primary(me, vao, vs))
 		return (ERROR("sp_build_vao_primary(vao, vs)"), 1);
 	if (validate_vbo(&vao->vbo, vs))
 		return (ERROR("validate_vbo(...)"), 1);

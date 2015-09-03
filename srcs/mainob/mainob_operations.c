@@ -6,13 +6,13 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/08/16 11:57:44 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/24 17:23:09 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/09/03 16:10:59 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
 #include <string.h>
-
+/*
 void		sp_mainob_model_remapuv(t_env *e, t_uvwrapping_type t)
 {
 	t_mesh					*me;
@@ -31,7 +31,7 @@ void		sp_mainob_model_remapuv(t_env *e, t_uvwrapping_type t)
 	sp_refresh_vbo(e, me);
 	return ;
 }
-
+*/
 void		sp_mainob_resetpos(t_env *e)
 {
 	t_ob		*ob;

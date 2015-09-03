@@ -6,12 +6,14 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/09/03 13:55:22 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/09/03 13:58:31 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/09/03 16:17:40 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef VAO_H
 # define VAO_H
+
+# include "ftmath.h"
 
 enum							e_location_type
 {

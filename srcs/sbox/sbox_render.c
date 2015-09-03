@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/08/22 12:21:49 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/24 17:32:50 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/09/03 16:19:49 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	render_ob(t_env const *const e, t_ob const *const ob)
 
 	UNIF(p, mMatrix4fv, "model", 1, GL_TRUE, (float*)&ob->mat);
 	glBindVertexArray(me->handles[0]);
-	glDrawElements(GL_TRIANGLES, 3 * me->faces.size, GL_UNSIGNED_INT, 0);
+	glDrawElements(GL_TRIANGLES, me->faces3, GL_UNSIGNED_INT, 0);
 	return ;
 }
 

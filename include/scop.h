@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 12:07:31 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/09/03 11:12:00 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/09/03 16:23:02 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,18 @@ int			sp_meshfillbumb_objmodel(t_env const *e, t_mesh *me
 										, char const *filename);
 void		sp_transpose_ebo(t_ftvector *dst, t_ftvector const *faces);
 void        sp_split_ebo(t_vbo_basic *vbo, t_ftvector *faces, int (*fun)());
+
+//new:
+int                 sp_build_vao_primary(t_mesh const *me, t_vao_basic *vao, t_vshader const *vs);
+void        sp_build_vao_final(t_ftvector vbo_final[1], t_ftvector ebo_final[1]
+							   , t_vao_basic const vao[1]);
+void        sp_push_vao(t_mesh *me, t_vshader const *vs
+						, t_ftvector const vbo_final[1]
+						, t_ftvector const ebo_final[1]);
+void    sp_rebuild_vbo_from_groups(t_vao_basic *vao);
+void    sp_build_ebo_normals(t_vao_basic *vao);
+void    sp_build_vbo_normals(t_vao_basic *vao);
+
 
 /*
 ** MAIN OB HANDLING

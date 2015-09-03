@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/08/24 15:53:38 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/24 15:53:38 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/09/03 16:10:26 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 **  cog.out("/" "*")
 **  ]]]
 */
-
+/*
 int			sp_meshfill_teapot1(t_env const *e, t_mesh *me, t_vbo_basic *vbo)
 {
 	return (sp_meshfillbumb_objmodel(e, me, vbo, "res/teapot.obj"));
@@ -49,7 +49,7 @@ int			sp_meshfill_alpha(t_env const *e, t_mesh *me, t_vbo_basic *vbo)
 {
 	return (sp_meshfillbumb_objmodel(e, me, vbo, "res/alfa147.obj"));
 }
-
+*/
 /*
 **  [[[end]]]
 */

@@ -6,12 +6,12 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/08/17 14:36:32 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/09/03 15:13:25 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/09/03 16:12:06 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
-
+/*
 int			sp_meshfillbumb_objmodel(t_mesh *me, t_vao_basic *vao)
 {
 	t_objmodel				m[1];
@@ -27,3 +27,4 @@ int			sp_meshfillbumb_objmodel(t_mesh *me, t_vao_basic *vao)
 					, uvwrap_spherical);
 	return (0);
 }
+*/
