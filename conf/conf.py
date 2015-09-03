@@ -6,7 +6,7 @@
 #    By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/08/10 13:13:01 by ngoguey           #+#    #+#              #
-#    Updated: 2015/09/03 18:45:15 by ngoguey          ###   ########.fr        #
+#    Updated: 2015/09/03 19:11:06 by ngoguey          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,22 +70,29 @@ textures = [
 ]
 meshes = [
 	Mesh("teapot1", "ptn", "GL_DYNAMIC_DRAW"
-		 , "", "", "", "true", "true", (1., 1.), """{
+		 , "res/teapot.obj", "", "", "true", "true", (1., 1.), """{
 	return (sp_meshfillbumb_objmodel(me, vao));\n}"""),
-	# Mesh("teapot2", "ptn", "GL_DYNAMIC_DRAW","""{
-	# return (sp_meshfillbumb_objmodel(me, vao, "res/teapot2.obj"));\n}"""),
-	# Mesh("ft", "ptn", "GL_DYNAMIC_DRAW","""{
-	# return (sp_meshfillbumb_objmodel(me, vao, "res/42.obj"));\n}"""),
-	# Mesh("csie", "ptn", "GL_DYNAMIC_DRAW","""{
-	# return (sp_meshfillbumb_objmodel(me, vao, "res/new_csie_b1.obj"));\n}"""),
-	# Mesh("alpha", "ptn", "GL_STATIC_DRAW","""{
-	# return (sp_meshfillbumb_objmodel(me, vao, "res/alfa147.obj"));\n}"""),
-	# Mesh("plane", "ptn", "GL_STATIC_DRAW","""{
-	# return (sp_meshfillbumb_objmodel(me, vao, "res/cessna.obj"));\n}"""),
+	Mesh("teapot2", "ptn", "GL_DYNAMIC_DRAW"
+		 , "res/teapot2.obj", "", "", "true", "true", (1., 1.), """{
+	return (sp_meshfillbumb_objmodel(me, vao));\n}"""),
+	Mesh("ft", "ptn", "GL_STATIC_DRAW"
+		 , "res/42.obj", "", "", "true", "true", (1., 1.), """{
+	return (sp_meshfillbumb_objmodel(me, vao));\n}"""),
+	Mesh("csie", "ptn", "GL_STATIC_DRAW"
+		 , "res/new_csie_b1.obj", "", "", "true", "true", (1., 1.), """{
+	return (sp_meshfillbumb_objmodel(me, vao));\n}"""),
+	Mesh("alpha", "ptn", "GL_STATIC_DRAW"
+		 , "res/alfa147.obj", "", "", "true", "true", (1., 1.), """{
+	return (sp_meshfillbumb_objmodel(me, vao));\n}"""),
+	Mesh("plane", "ptn", "GL_STATIC_DRAW"
+		 , "res/cessna.obj", "", "", "true", "true", (1., 1.), """{
+	return (sp_meshfillbumb_objmodel(me, vao));\n}"""),
 
 	# land fait ceci cela
-	Mesh("land", "land", "GL_STATIC_DRAW","""{
-	t_ftvector		lines[1];
+	Mesh("land", "ptn", "GL_STATIC_DRAW"
+		 , "", "", "", "true", "true", (1., 1.), """{
+		 (void)vao;
+/*	t_ftvector		lines[1];
 	size_t const	line_points = (int)pow(2., (double)POINTS_DEPTHI);
 	float			bounds[2];
 
@@ -102,17 +109,13 @@ meshes = [
 	sp_fill_landfaces(lines, &me->faces);
 	sp_fill_landrgb(vbo, bounds);
 	ftv_release(lines, NULL);
-	sp_calc_normals(e, me, vbo);
-	return (0);\n\t(void)e;\n\t(void)me;\n}"""),
+	sp_calc_normals(e, me, vbo);*/
+	return (0);\n\t(void)me;\n}"""),
 
 	# sun fait ceci cela
-	Mesh("sun", "sun", "GL_STATIC_DRAW","""{
-	t_objmodel		m[1];
-
-	if (op_parse_obj(m, "res/dodecahedron.obj"))
-		return (ERROR("op_parse_obj(m)"), 1);
-	op_retreive_data(m, vbo, &me->faces);
-	return (0);\n\t(void)e;\n\t(void)me;\n}"""),
+	Mesh("sun", "ptn", "GL_STATIC_DRAW"
+		 , "res/dodecahedron.obj", "", "", "true", "true", (1., 1.), """{
+	return (sp_meshfillbumb_objmodel(me, vao));\n}"""),
 ]
 models = [
 	Model("teapot1", "teapot1", "porcelain", "model_mix"),

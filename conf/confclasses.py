@@ -6,7 +6,7 @@
 #    By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/08/10 13:13:13 by ngoguey           #+#    #+#              #
-#    Updated: 2015/09/03 18:56:31 by ngoguey          ###   ########.fr        #
+#    Updated: 2015/09/03 19:08:12 by ngoguey          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -218,21 +218,22 @@ class Mesh(Cstruct):
 	def output_cconf_entry(self):
 		self.col = 3
 		self.printstr("\tMESH(")
-		self.printstr(", " + self.usage)
-		self.printstr("sp_" + self.program + "_program")
+		self.printstr(self.usage)
+		self.printstr(", " + "sp_" + self.program + "_program")
 		self.printstr(", " + "\"" + self.filename + "\"")
 		self.printstr(", " + "&sp_meshfill_" + self.name)
 		self.printstr(", " + "NULL" if self.grp_fun == "" else "&" + self.grp_fun)
 		self.printstr(", " + "NULL" if self.tex_fun == "" else "&" + self.tex_fun)
 		self.printstr(", " + self.vert_before)
 		self.printstr(", " + self.recenter)
-		self.printstr(", " + "{" + self.scale[0] + ", " + self.scale[1] + "}")
-		cog.outl(');')
+		self.printstr(", " + "{" + str(self.scale[0]) + "f, "
+					  + str(self.scale[1]) + "f}")
+		cog.outl('),')
 		
 	def output_meshfill(self, index_first):
 		if self.index >= index_first and self.index < index_first + 5:
 			output_dotc_indent_2str("int", "sp_meshfill_" + self.name
-			+ "(t_env const *e, t_mesh *me, t_vbo_basic *vbo)")
+			+ "(t_mesh *me, t_vao_basic *vao)")
 			cog.outl(self.fill_funbody + "\n")
 
 class Model(Cstruct):

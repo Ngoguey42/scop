@@ -22,14 +22,14 @@
 **  cog.out("/" "*")
 **  ]]]
 */
-int		sp_meshfill_teapot1(t_env const *e, t_mesh *me, t_vbo_basic *vbo);
-int		sp_meshfill_teapot2(t_env const *e, t_mesh *me, t_vbo_basic *vbo);
-int		sp_meshfill_ft(t_env const *e, t_mesh *me, t_vbo_basic *vbo);
-int		sp_meshfill_csie(t_env const *e, t_mesh *me, t_vbo_basic *vbo);
-int		sp_meshfill_alpha(t_env const *e, t_mesh *me, t_vbo_basic *vbo);
-int		sp_meshfill_plane(t_env const *e, t_mesh *me, t_vbo_basic *vbo);
-int		sp_meshfill_land(t_env const *e, t_mesh *me, t_vbo_basic *vbo);
-int		sp_meshfill_sun(t_env const *e, t_mesh *me, t_vbo_basic *vbo);
+int		sp_meshfill_teapot1(t_mesh *me, t_vao_basic *vao);
+int		sp_meshfill_teapot2(t_mesh *me, t_vao_basic *vao);
+int		sp_meshfill_ft(t_mesh *me, t_vao_basic *vao);
+int		sp_meshfill_csie(t_mesh *me, t_vao_basic *vao);
+int		sp_meshfill_alpha(t_mesh *me, t_vao_basic *vao);
+int		sp_meshfill_plane(t_mesh *me, t_vao_basic *vao);
+int		sp_meshfill_land(t_mesh *me, t_vao_basic *vao);
+int		sp_meshfill_sun(t_mesh *me, t_vao_basic *vao);
 /*
 **  [[[end]]]
 */

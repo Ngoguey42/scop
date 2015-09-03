@@ -24,15 +24,16 @@
 **  cog.out("/" "*")
 **  ]]]
 */
-/*
-int			sp_meshfill_plane(t_env const *e, t_mesh *me, t_vbo_basic *vbo)
+
+int			sp_meshfill_plane(t_mesh *me, t_vao_basic *vao)
 {
-	return (sp_meshfillbumb_objmodel(e, me, vbo, "res/cessna.obj"));
+	return (sp_meshfillbumb_objmodel(me, vao));
 }
 
-int			sp_meshfill_land(t_env const *e, t_mesh *me, t_vbo_basic *vbo)
+int			sp_meshfill_land(t_mesh *me, t_vao_basic *vao)
 {
-	t_ftvector		lines[1];
+		 (void)vao;
+/*	t_ftvector		lines[1];
 	size_t const	line_points = (int)pow(2., (double)POINTS_DEPTHI);
 	float			bounds[2];
 
@@ -49,24 +50,16 @@ int			sp_meshfill_land(t_env const *e, t_mesh *me, t_vbo_basic *vbo)
 	sp_fill_landfaces(lines, &me->faces);
 	sp_fill_landrgb(vbo, bounds);
 	ftv_release(lines, NULL);
-	sp_calc_normals(e, me, vbo);
+	sp_calc_normals(e, me, vbo);*/
 	return (0);
-	(void)e;
 	(void)me;
 }
 
-int			sp_meshfill_sun(t_env const *e, t_mesh *me, t_vbo_basic *vbo)
+int			sp_meshfill_sun(t_mesh *me, t_vao_basic *vao)
 {
-	t_objmodel		m[1];
-
-	if (op_parse_obj(m, "res/dodecahedron.obj"))
-		return (ERROR("op_parse_obj(m)"), 1);
-	op_retreive_data(m, vbo, &me->faces);
-	return (0);
-	(void)e;
-	(void)me;
+	return (sp_meshfillbumb_objmodel(me, vao));
 }
-*/
+
 /*
 **  [[[end]]]
 */

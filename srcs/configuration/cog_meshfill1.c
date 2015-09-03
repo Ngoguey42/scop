@@ -24,32 +24,32 @@
 **  cog.out("/" "*")
 **  ]]]
 */
-/*
-int			sp_meshfill_teapot1(t_env const *e, t_mesh *me, t_vbo_basic *vbo)
+
+int			sp_meshfill_teapot1(t_mesh *me, t_vao_basic *vao)
 {
-	return (sp_meshfillbumb_objmodel(e, me, vbo, "res/teapot.obj"));
+	return (sp_meshfillbumb_objmodel(me, vao));
 }
 
-int			sp_meshfill_teapot2(t_env const *e, t_mesh *me, t_vbo_basic *vbo)
+int			sp_meshfill_teapot2(t_mesh *me, t_vao_basic *vao)
 {
-	return (sp_meshfillbumb_objmodel(e, me, vbo, "res/teapot2.obj"));
+	return (sp_meshfillbumb_objmodel(me, vao));
 }
 
-int			sp_meshfill_ft(t_env const *e, t_mesh *me, t_vbo_basic *vbo)
+int			sp_meshfill_ft(t_mesh *me, t_vao_basic *vao)
 {
-	return (sp_meshfillbumb_objmodel(e, me, vbo, "res/42.obj"));
+	return (sp_meshfillbumb_objmodel(me, vao));
 }
 
-int			sp_meshfill_csie(t_env const *e, t_mesh *me, t_vbo_basic *vbo)
+int			sp_meshfill_csie(t_mesh *me, t_vao_basic *vao)
 {
-	return (sp_meshfillbumb_objmodel(e, me, vbo, "res/new_csie_b1.obj"));
+	return (sp_meshfillbumb_objmodel(me, vao));
 }
 
-int			sp_meshfill_alpha(t_env const *e, t_mesh *me, t_vbo_basic *vbo)
+int			sp_meshfill_alpha(t_mesh *me, t_vao_basic *vao)
 {
-	return (sp_meshfillbumb_objmodel(e, me, vbo, "res/alfa147.obj"));
+	return (sp_meshfillbumb_objmodel(me, vao));
 }
-*/
+
 /*
 **  [[[end]]]
 */
