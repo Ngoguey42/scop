@@ -6,13 +6,13 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/09/03 14:25:20 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/09/03 16:21:06 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/09/03 16:55:09 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
 
-t_byte const		g_vbo_offsets[][2] = {
+t_byte const		g_vbo_offsets[4][2] = {
 	{offsetof(t_vertex_basic, pos), offsetof(t_vbo_basic, npos)},
 	{offsetof(t_vertex_basic, col), offsetof(t_vbo_basic, ncol)},
 	{offsetof(t_vertex_basic, tex), offsetof(t_vbo_basic, ntex)},
@@ -50,7 +50,7 @@ static int	validate_vbo(t_vbo_basic const *vbo, t_vshader const *vs)
 	return (error);
 }
 
-int		sp_new_mesh(t_env const *e, t_mesh *me)
+int			sp_new_mesh(t_env const *e, t_mesh *me)
 {
 	t_vao_basic				vao[1];
 	t_vshader const *const	vs = VSOFME(e, me);
@@ -63,6 +63,7 @@ int		sp_new_mesh(t_env const *e, t_mesh *me)
 		return (ERROR("validate_vbo(...)"), 1);
 	sp_build_vao_final(vbo_final, ebo_final, vao);
 	sp_push_vao(me, vs, vbo_final, ebo_final);
+	me->faces3 = ebo_final->size * 3;
 	ftv_release(&vao->vbo.vertices, NULL);
 	ftv_release(&vao->ebo.faces, NULL);
 	ftv_release(vbo_final, NULL);

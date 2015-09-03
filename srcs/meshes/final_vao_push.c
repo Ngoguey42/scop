@@ -6,11 +6,13 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/09/03 15:34:57 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/09/03 16:06:14 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/09/03 16:31:24 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
+
+extern char const        *g_locations_str[];
 
 static void	push_attributes(t_vshader const *vs, size_t vert_width)
 {
@@ -32,18 +34,18 @@ static void	push_attributes(t_vshader const *vs, size_t vert_width)
 		glEnableVertexAttribArray(i);
 		delta += vs->locations[i].size * sizeof(GLfloat);
 	}
-	return (0);
+	return ;
 }
 
 static void	push_buffers(t_mesh *me, t_ftvector const vbo_final[1]
 						 , t_ftvector const ebo_final[1])
 {
-	if (!me->buff_generated)
+	if (!me->generated)
 		glGenBuffers(1, me->handles + 1);
 	glBindBuffer(GL_ARRAY_BUFFER, me->handles[1]);
 	glBufferData(GL_ARRAY_BUFFER, vbo_final->size * vbo_final->chunk_size
 				 , vbo_final->data, me->usage);
-	if (!me->buff_generated)
+	if (!me->generated)
 		glGenBuffers(1, me->handles + 2);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, me->handles[2]);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, ebo_final->size * ebo_final->chunk_size
@@ -54,11 +56,12 @@ void		sp_push_vao(t_mesh *me, t_vshader const *vs
 						, t_ftvector const vbo_final[1]
 						, t_ftvector const ebo_final[1])
 {
-	if (!me->buff_generated)
+	if (!me->generated)
 		glGenVertexArrays(1, me->handles + 0);
 	glBindVertexArray(me->handles[0]);
 	push_buffers(me, vbo_final, ebo_final);
-	push_attributes(vs, vbo->npos, vbo_final->chunk_size);
+	push_attributes(vs, vbo_final->chunk_size);
 	glBindVertexArray(0);
+	me->generated = true;
 	return ;
 }
