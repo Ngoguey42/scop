@@ -99,7 +99,7 @@ int			sp_fill_obs(t_env *e)
 	OBMN(sp_teapot2_model, ob_pos, D_MAINOBPOS_V3, ob_rot, D_MAINOBANGLES_V3
 	, ob_up, &sp_obupdate_mainob, ob_vi, ((int[1]){1}));
 	OB(sp_land_model);
-//	OB(sp_sun_model, ob_up, &sp_obupdate_sun, ob_mov, false);
+	OB(sp_sun_model, ob_up, &sp_obupdate_sun, ob_mov, false);
 	rad = 45.f;
 	while (rad < 500.f)
 	{

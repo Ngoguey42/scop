@@ -52,17 +52,13 @@ int			sp_new_mesh(t_env const *e, t_mesh *me)
 	t_ftvector				ebo_final[1];
 
 	bzero(vao, sizeof(vao));
-	T;
 	if (sp_vao_primary_build(me, vao))
 		return (ERROR("sp_build_vao_primary(vao, vs)"), 1);
 	sp_vao_secondary_build(me, vao, vs);
 	if (validate_vbo(&vao->vbo, vs))
 		return (ERROR("validate_vbo(...)"), 1);
-	T;
 	sp_vao_final_build(vbo_final, ebo_final, vao);
-	T;
 	sp_vao_final_push(me, vs, vbo_final, ebo_final);
-	T;
 	me->faces3 = ebo_final->size * 3;
 	ftv_release(&vao->vbo.vertices, NULL);
 	ftv_release(&vao->ebo.faces, NULL);
