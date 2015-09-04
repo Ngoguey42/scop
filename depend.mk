@@ -16,14 +16,16 @@ O_FILES :=	o/srcs/configuration/cog_loadconf1.o \
 			o/srcs/ftmath/vector3_scalarop.o o/srcs/glfw_operations.o \
 			o/srcs/land/generate_land_rgb.o o/srcs/land/generate_land_xyz.o \
 			o/srcs/land/generate_land_y.o o/srcs/main.o \
-			o/srcs/mainob/mainob_operations.o o/srcs/meshes/final_vao.o \
-			o/srcs/meshes/final_vao_push.o o/srcs/meshes/mesh_creation.o \
-			o/srcs/meshes/mesh_dumb_fill.o o/srcs/meshes/mesh_operations.o \
-			o/srcs/meshes/mesh_refresh.o o/srcs/meshes/primary_vao.o \
-			o/srcs/meshes/processings/normals_calculations_ebo.o \
-			o/srcs/meshes/processings/normals_calculations_vbo.o \
-			o/srcs/meshes/processings/positions_recentering.o \
-			o/srcs/meshes/processings/vbo_rebuilding.o \
+			o/srcs/mainob/mainob_operations.o \
+			o/srcs/meshes/custom_processing/groups_to_vbo_box.o \
+			o/srcs/meshes/fixed_processing/normals_to_ebo.o \
+			o/srcs/meshes/fixed_processing/normals_to_vbo.o \
+			o/srcs/meshes/fixed_processing/positions_recentering.o \
+			o/srcs/meshes/fixed_processing/vbo_rebuilding.o \
+			o/srcs/meshes/mesh_creation.o o/srcs/meshes/mesh_dumb_fill.o \
+			o/srcs/meshes/mesh_operations.o o/srcs/meshes/mesh_refresh.o \
+			o/srcs/meshes/vao_final.o o/srcs/meshes/vao_final_push.o \
+			o/srcs/meshes/vao_primary.o o/srcs/meshes/vao_secondary.o \
 			o/srcs/objmodel/obj_faces_operations.o \
 			o/srcs/objmodel/obj_insert_face.o o/srcs/objmodel/obj_parsing.o \
 			o/srcs/objmodel/obj_parsing_faces.o \
@@ -35,6 +37,7 @@ O_FILES :=	o/srcs/configuration/cog_loadconf1.o \
 			o/srcs/obs/obs_operations.o o/srcs/obs/obs_render.o \
 			o/srcs/obs/obs_update.o o/srcs/program_operations.o \
 			o/srcs/sbox/sbox_operations.o o/srcs/sbox/sbox_render.o \
+			o/srcs/shaders/location_operations.o \
 			o/srcs/shaders/shader_operations.o o/srcs/textures/parse_tga.o \
 			o/srcs/textures/textures_operations.o
 
@@ -200,20 +203,41 @@ o/srcs/mainob/mainob_operations.o: srcs/mainob/mainob_operations.c \
 	include/configuration/cog_enums.h include/meshes/vao.h include/ftmath.h \
 	include/configuration/cog_meshfill.h include/objmodel/objmodel.h \
 	include/meshes/vao.h include/ftmath.h | o/srcs/mainob
-o/srcs/meshes/final_vao.o: srcs/meshes/final_vao.c include/scop.h \
+o/srcs/meshes/custom_processing/groups_to_vbo_box.o: \
+	srcs/meshes/custom_processing/groups_to_vbo_box.c \
+	| o/srcs/meshes/custom_processing
+o/srcs/meshes/fixed_processing/normals_to_ebo.o: \
+	srcs/meshes/fixed_processing/normals_to_ebo.c include/scop.h \
 	include/ftmath.h include/configuration/scop_conf.h include/ftmath.h \
 	include/configuration/cog_enums.h include/scop_types.h \
 	include/configuration/scop_conf.h include/ftmath.h \
 	include/configuration/cog_enums.h include/meshes/vao.h include/ftmath.h \
 	include/configuration/cog_meshfill.h include/objmodel/objmodel.h \
-	include/meshes/vao.h include/ftmath.h | o/srcs/meshes
-o/srcs/meshes/final_vao_push.o: srcs/meshes/final_vao_push.c include/scop.h \
+	include/meshes/vao.h include/ftmath.h | o/srcs/meshes/fixed_processing
+o/srcs/meshes/fixed_processing/normals_to_vbo.o: \
+	srcs/meshes/fixed_processing/normals_to_vbo.c include/scop.h \
 	include/ftmath.h include/configuration/scop_conf.h include/ftmath.h \
 	include/configuration/cog_enums.h include/scop_types.h \
 	include/configuration/scop_conf.h include/ftmath.h \
 	include/configuration/cog_enums.h include/meshes/vao.h include/ftmath.h \
 	include/configuration/cog_meshfill.h include/objmodel/objmodel.h \
-	include/meshes/vao.h include/ftmath.h | o/srcs/meshes
+	include/meshes/vao.h include/ftmath.h | o/srcs/meshes/fixed_processing
+o/srcs/meshes/fixed_processing/positions_recentering.o: \
+	srcs/meshes/fixed_processing/positions_recentering.c include/scop.h \
+	include/ftmath.h include/configuration/scop_conf.h include/ftmath.h \
+	include/configuration/cog_enums.h include/scop_types.h \
+	include/configuration/scop_conf.h include/ftmath.h \
+	include/configuration/cog_enums.h include/meshes/vao.h include/ftmath.h \
+	include/configuration/cog_meshfill.h include/objmodel/objmodel.h \
+	include/meshes/vao.h include/ftmath.h | o/srcs/meshes/fixed_processing
+o/srcs/meshes/fixed_processing/vbo_rebuilding.o: \
+	srcs/meshes/fixed_processing/vbo_rebuilding.c include/scop.h \
+	include/ftmath.h include/configuration/scop_conf.h include/ftmath.h \
+	include/configuration/cog_enums.h include/scop_types.h \
+	include/configuration/scop_conf.h include/ftmath.h \
+	include/configuration/cog_enums.h include/meshes/vao.h include/ftmath.h \
+	include/configuration/cog_meshfill.h include/objmodel/objmodel.h \
+	include/meshes/vao.h include/ftmath.h | o/srcs/meshes/fixed_processing
 o/srcs/meshes/mesh_creation.o: srcs/meshes/mesh_creation.c include/scop.h \
 	include/ftmath.h include/configuration/scop_conf.h include/ftmath.h \
 	include/configuration/cog_enums.h include/scop_types.h \
@@ -242,45 +266,34 @@ o/srcs/meshes/mesh_refresh.o: srcs/meshes/mesh_refresh.c include/scop.h \
 	include/configuration/cog_enums.h include/meshes/vao.h include/ftmath.h \
 	include/configuration/cog_meshfill.h include/objmodel/objmodel.h \
 	include/meshes/vao.h include/ftmath.h | o/srcs/meshes
-o/srcs/meshes/primary_vao.o: srcs/meshes/primary_vao.c include/scop.h \
+o/srcs/meshes/vao_final.o: srcs/meshes/vao_final.c include/scop.h \
 	include/ftmath.h include/configuration/scop_conf.h include/ftmath.h \
 	include/configuration/cog_enums.h include/scop_types.h \
 	include/configuration/scop_conf.h include/ftmath.h \
 	include/configuration/cog_enums.h include/meshes/vao.h include/ftmath.h \
 	include/configuration/cog_meshfill.h include/objmodel/objmodel.h \
 	include/meshes/vao.h include/ftmath.h | o/srcs/meshes
-o/srcs/meshes/processings/normals_calculations_ebo.o: \
-	srcs/meshes/processings/normals_calculations_ebo.c include/scop.h \
+o/srcs/meshes/vao_final_push.o: srcs/meshes/vao_final_push.c include/scop.h \
 	include/ftmath.h include/configuration/scop_conf.h include/ftmath.h \
 	include/configuration/cog_enums.h include/scop_types.h \
 	include/configuration/scop_conf.h include/ftmath.h \
 	include/configuration/cog_enums.h include/meshes/vao.h include/ftmath.h \
 	include/configuration/cog_meshfill.h include/objmodel/objmodel.h \
-	include/meshes/vao.h include/ftmath.h | o/srcs/meshes/processings
-o/srcs/meshes/processings/normals_calculations_vbo.o: \
-	srcs/meshes/processings/normals_calculations_vbo.c include/scop.h \
+	include/meshes/vao.h include/ftmath.h | o/srcs/meshes
+o/srcs/meshes/vao_primary.o: srcs/meshes/vao_primary.c include/scop.h \
 	include/ftmath.h include/configuration/scop_conf.h include/ftmath.h \
 	include/configuration/cog_enums.h include/scop_types.h \
 	include/configuration/scop_conf.h include/ftmath.h \
 	include/configuration/cog_enums.h include/meshes/vao.h include/ftmath.h \
 	include/configuration/cog_meshfill.h include/objmodel/objmodel.h \
-	include/meshes/vao.h include/ftmath.h | o/srcs/meshes/processings
-o/srcs/meshes/processings/positions_recentering.o: \
-	srcs/meshes/processings/positions_recentering.c include/scop.h \
+	include/meshes/vao.h include/ftmath.h | o/srcs/meshes
+o/srcs/meshes/vao_secondary.o: srcs/meshes/vao_secondary.c include/scop.h \
 	include/ftmath.h include/configuration/scop_conf.h include/ftmath.h \
 	include/configuration/cog_enums.h include/scop_types.h \
 	include/configuration/scop_conf.h include/ftmath.h \
 	include/configuration/cog_enums.h include/meshes/vao.h include/ftmath.h \
 	include/configuration/cog_meshfill.h include/objmodel/objmodel.h \
-	include/meshes/vao.h include/ftmath.h | o/srcs/meshes/processings
-o/srcs/meshes/processings/vbo_rebuilding.o: \
-	srcs/meshes/processings/vbo_rebuilding.c include/scop.h include/ftmath.h \
-	include/configuration/scop_conf.h include/ftmath.h \
-	include/configuration/cog_enums.h include/scop_types.h \
-	include/configuration/scop_conf.h include/ftmath.h \
-	include/configuration/cog_enums.h include/meshes/vao.h include/ftmath.h \
-	include/configuration/cog_meshfill.h include/objmodel/objmodel.h \
-	include/meshes/vao.h include/ftmath.h | o/srcs/meshes/processings
+	include/meshes/vao.h include/ftmath.h | o/srcs/meshes
 o/srcs/objmodel/obj_faces_operations.o: srcs/objmodel/obj_faces_operations.c \
 	include/objmodel/objmodel_parsing.h include/objmodel/objmodel.h \
 	include/meshes/vao.h include/ftmath.h | o/srcs/objmodel
@@ -369,6 +382,8 @@ o/srcs/sbox/sbox_render.o: srcs/sbox/sbox_render.c include/scop.h \
 	include/configuration/cog_enums.h include/meshes/vao.h include/ftmath.h \
 	include/configuration/cog_meshfill.h include/objmodel/objmodel.h \
 	include/meshes/vao.h include/ftmath.h | o/srcs/sbox
+o/srcs/shaders/location_operations.o: srcs/shaders/location_operations.c \
+	| o/srcs/shaders
 o/srcs/shaders/shader_operations.o: srcs/shaders/shader_operations.c \
 	include/scop.h include/ftmath.h include/configuration/scop_conf.h \
 	include/ftmath.h include/configuration/cog_enums.h include/scop_types.h \

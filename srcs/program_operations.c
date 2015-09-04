@@ -12,7 +12,7 @@
 
 #include "scop.h"
 
-extern char const	*g_locations_str[];
+extern t_location_info const    g_locinfo[sp_num_locs];
 
 static int		check_program_error(GLuint program, GLuint flag)
 {
@@ -43,7 +43,7 @@ static int		new_program(t_env const *e, t_program *p)
 	while (i < vs->n_locations)
 	{
 		glBindAttribLocation(p->handle
-								, i, g_locations_str[vs->locations[i].type]);
+								, i, g_locinfo[vs->locations[i].type].str);
 		i++;
 	}
 	glLinkProgram(p->handle);

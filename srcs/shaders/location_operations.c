@@ -1,4 +1,6 @@
 
+#include "scop.h"
+
 t_byte		sp_location_size(t_vshader const *vs, enum e_location_type type)
 {
 	t_location const		*loc;

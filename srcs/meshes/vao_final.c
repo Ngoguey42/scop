@@ -7,10 +7,10 @@ extern t_location_info const	g_locinfo[sp_num_locs];
 static void	build_vertex(float tmp[], t_vbo_basic const vbo[1]
 						 , t_vertex_basic const vert[1])
 {
-	t_location_info const	*loc;
-	t_byte const *const		end = END_ARRAY(g_locinfo);
-	float					*tmpptr;
-	t_byte					num_elt;
+	t_location_info const			*loc;
+	t_location_info const *const	end = END_ARRAY(g_locinfo);
+	float							*tmpptr;
+	t_byte							num_elt;
 
 	loc = g_locinfo;
 	tmpptr = tmp;
@@ -47,14 +47,16 @@ static void	ebo_final_build(t_ftvector ebo_final[1], t_face_basic const face[1])
 void		sp_vao_final_build(t_ftvector vbo_final[1], t_ftvector ebo_final[1]
 							   , t_vao_basic const vao[1])
 {
-	size_t const	vbo_width = vbo->npos + vbo->ncol + vbo->ntex + vbo->nnor;
+	t_vbo_basic const *const	vbo = &vao->vbo;
+	size_t const				vbo_width = vbo->npos + vbo->ncol
+		+ vbo->ntex + vbo->nnor;
 
 	if (ftv_init_instance(vbo_final, vbo_width)
-		|| ftv_reserve(vbo_final, vao->vbo.vertices.size)
+		|| ftv_reserve(vbo_final, vbo->vertices.size)
 		|| ftv_init_instance(ebo_final, 3 * sizeof(t_ui))
 		|| ftv_reserve(ebo_final, vao->ebo.faces.size))
 		ft_enomem();
-	ftv_foreach2(&vao->vbo.vertices, &vbo_final_build, vbo_final
+	ftv_foreach2(&vbo->vertices, &vbo_final_build, vbo_final
 				 , (void*)&vao->vbo);
 	ftv_foreach(&vao->ebo.faces, &ebo_final_build, ebo_final);
 	return ;
