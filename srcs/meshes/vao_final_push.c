@@ -1,18 +1,7 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   final_vao_push.c                                   :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/09/03 15:34:57 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/09/03 16:31:24 by ngoguey          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #include "scop.h"
 
-extern char const        *g_locations_str[];
+extern t_location_info const	g_locinfo[sp_num_locs];
 
 static void	push_attributes(t_vshader const *vs, size_t vert_width)
 {
@@ -24,11 +13,10 @@ static void	push_attributes(t_vshader const *vs, size_t vert_width)
 	i = -1;
 	while (++i < vs->n_locations)
 	{
-		if (vs->locations[i].size == 0)
-			continue ;
-		qprintf("\"%-3s\":%u,%u,%02u,%02u   ",
-				g_locations_str[vs->locations[i].type], i,
-				vs->locations[i].size, vert_width, delta);
+		qprintf("\"%s\":%u,%u,%02u,%02u  ",
+				g_locinfo[vs->locations[i].type].str
+				, i, vs->locations[i].size
+				, vert_width, delta);
 		glVertexAttribPointer(i, vs->locations[i].size, GL_FLOAT, GL_FALSE
 							  , vert_width, delta);
 		glEnableVertexAttribArray(i);
@@ -52,7 +40,7 @@ static void	push_buffers(t_mesh *me, t_ftvector const vbo_final[1]
 				 , ebo_final->data, me->usage);
 }
 
-void		sp_push_vao(t_mesh *me, t_vshader const *vs
+void		sp_vao_final_push(t_mesh *me, t_vshader const *vs
 						, t_ftvector const vbo_final[1]
 						, t_ftvector const ebo_final[1])
 {

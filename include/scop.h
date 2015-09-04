@@ -91,6 +91,8 @@ int			sp_init_glfw(t_env *e);
 */
 void		sp_delete_shaders(t_env *e);
 int			sp_init_shaders(t_env *e);
+t_byte		sp_location_size(t_vshader const *vs, enum e_location_type type);
+t_byte		sp_locations_nbytes(t_vshader const *vs);
 
 /*
 ** PROGRAMS
@@ -110,10 +112,8 @@ void		sp_activate_texture(t_program const *p, t_texslot texslot
 /*
 ** MESHES
 */
-int			sp_init_meshes(t_env *e);
 
 void		sp_delete_meshes(t_env *e);
-int			sp_new_mesh(t_env const *e, t_mesh *me);
 int			sp_refresh_vbo(t_env const *e, t_mesh const *me);
 int			sp_fill_mesh(t_env const *e, t_mesh *me);
 
@@ -121,22 +121,36 @@ void		sp_calc_normals(t_env const *e, t_mesh const *me
 							, t_vbo_basic *vbo);
 void		sp_calc_uv(t_env const *e, t_vbo_basic *vbo, float d[2]
 							, t_uvwrapping_type t);
-void		sp_recenter_positions(t_vbo_basic *vbo);
 void		sp_shrink_vbo(t_ftvector *const dst, t_vbo_basic const *const vbo);
 int			sp_meshfillbumb_objmodel(t_mesh *me, t_vao_basic *vao);
 void		sp_transpose_ebo(t_ftvector *dst, t_ftvector const *faces);
 void        sp_split_ebo(t_vbo_basic *vbo, t_ftvector *faces, int (*fun)());
 
 //new:
-int                 sp_build_vao_primary(t_mesh const *me, t_vao_basic *vao, t_vshader const *vs);
-void        sp_build_vao_final(t_ftvector vbo_final[1], t_ftvector ebo_final[1]
-							   , t_vao_basic const vao[1]);
-void        sp_push_vao(t_mesh *me, t_vshader const *vs
-						, t_ftvector const vbo_final[1]
-						, t_ftvector const ebo_final[1]);
-void    sp_rebuild_vbo_from_groups(t_vao_basic *vao);
-void    sp_build_ebo_normals(t_vao_basic *vao);
-void    sp_build_vbo_normals(t_vao_basic *vao);
+/*
+** MESHES CREATION
+*/
+int			sp_init_meshes(t_env *e);
+int			sp_new_mesh(t_env const *e, t_mesh *me);
+int			sp_vao_primary_build(t_mesh const *me, t_vao_basic *vao);
+void		sp_vao_secondary_build(t_mesh const *me, t_vao_basic *vao
+									, t_vshader const *vs);
+void		sp_vao_final_build(t_ftvector vbo_final[1], t_ftvector ebo_final[1]
+								, t_vao_basic const vao[1]);
+void		sp_vao_final_push(t_mesh *me, t_vshader const *vs
+								, t_ftvector const vbo_final[1]
+								, t_ftvector const ebo_final[1]);
+/*
+** MESHES CREATION PROCESSING FIXED
+*/
+void		sp_recenter_positions(t_vbo_basic *vbo);
+void		sp_rebuild_vbo_from_groups(t_vao_basic *vao);
+void		sp_normals_to_ebo(t_vao_basic *vao);
+void		sp_normals_to_vbo(t_vao_basic *vao);
+/*
+** MESHES CREATION PROCESSING CUSTOM
+*/
+
 
 
 /*

@@ -14,11 +14,10 @@
 #include <string.h>
 #include <math.h>
 
-static void	bzero_normals(void *ignore, t_vertex_basic *vert)
+static void	bzero_normals(t_vertex_basic *vert)
 {
 	bzero(&vert->nor, sizeof(vert->nor));
 	return ;
-	(void)ignore;
 }
 
 static void	sum_normals(t_vertex_basic *verts, t_face_basic const *f)
@@ -41,17 +40,16 @@ static void	sum_normals(t_vertex_basic *verts, t_face_basic const *f)
 	return ;
 }
 
-static void	normalize_normals(void *ignore, t_vertex_basic *vert)
+static void	normalize_normals(t_vertex_basic *vert)
 {
 	*(t_vec3*)&vert->nor = v3_normalize(*(t_vec3*)&vert->nor);
 	return ;
-	(void)ignore;
 }
 
-void    sp_build_vbo_normals(t_vao_basic *vao)
+void		sp_normals_to_vbo(t_vao_basic *vao)
 {
-	ftv_foreach(&vao->vbo.vertices, &bzero_normals, NULL);
+	ftv_foreach0(&vao->vbo.vertices, &bzero_normals);
 	ftv_foreach(&vao->ebo.faces, &sum_normals, vao->vbo.vertices.data);
-	ftv_foreach(&vao->vbo.vertices, &normalize_normals, NULL);
+	ftv_foreach0(&vao->vbo.vertices, &normalize_normals);
 	return ;
 }

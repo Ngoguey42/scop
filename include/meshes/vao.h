@@ -34,6 +34,13 @@ typedef struct					s_locations_backup_fill
 	void						(*fun)();
 }								t_locations_backup_fill;
 
+typedef struct					s_location_info
+{
+	char						*str;
+	t_byte						vertex_basic_offset;
+	t_byte						vbo_basic_offset;
+}								t_location_info;
+
 # define V4Z {0.f, 0.f, 0.f, 0.f}
 # define V3Z {0.f, 0.f, 0.f}
 # define V2Z {0.f, 0.f}

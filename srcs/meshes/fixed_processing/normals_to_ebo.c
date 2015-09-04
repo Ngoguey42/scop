@@ -26,7 +26,7 @@ static void		normal_to_face(t_vertex_basic const *vertices
 	return ;
 }
 
-void			sp_build_ebo_normals(t_vao_basic *vao)
+void			sp_normals_to_ebo(t_vao_basic *vao)
 {
 	ftv_foreach(&vao->ebo.faces, &normal_to_face, vao->vbo.vertices.data);
 	return ;

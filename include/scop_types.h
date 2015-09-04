@@ -133,13 +133,14 @@ typedef struct					s_mesh
 	GLenum const				usage;
 	t_program_index const		program;
 	char const *const			filename;
-	int							(*fill)();
-	int							(*set_groups)();
-	int							(*set_textures)();
+	int							(*primary_fill)();
+	int							(*groups_to_ebo)();
+	int							(*texs_to_vbo)();
 	t_bool						vertices_normals_before_split;
 	t_bool						recenter_positions;
 	float						tex_scale[2];
 	size_t						faces3;
+
 	GLuint						handles[3];
 	t_bool						generated;
 }								t_mesh;
