@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "scop.h"
+#include <string.h>
 
 t_location_info const	g_locinfo[sp_num_locs] = {
 	{"pos", offsetof(t_vertex_basic, pos), offsetof(t_vbo_basic, npos)},
@@ -35,7 +36,8 @@ static int	validate_vbo(t_vbo_basic const *vbo, t_vshader const *vs)
 		if (num_elt_vbo != num_elt_vs)
 		{
 			ERRORF("%s(%hhu/%hhu)" , g_locinfo[i].str, num_elt_vbo, num_elt_vs);
-			error = 1;
+//			error = 1;
+			*REACH_OFFSET(t_byte, vbo, g_locinfo[i].vbo_basic_offset) = num_elt_vs;
 		}
 		i++;
 	}
@@ -49,13 +51,18 @@ int			sp_new_mesh(t_env const *e, t_mesh *me)
 	t_ftvector				vbo_final[1];
 	t_ftvector				ebo_final[1];
 
+	bzero(vao, sizeof(vao));
+	T;
 	if (sp_vao_primary_build(me, vao))
 		return (ERROR("sp_build_vao_primary(vao, vs)"), 1);
 	sp_vao_secondary_build(me, vao, vs);
 	if (validate_vbo(&vao->vbo, vs))
 		return (ERROR("validate_vbo(...)"), 1);
+	T;
 	sp_vao_final_build(vbo_final, ebo_final, vao);
+	T;
 	sp_vao_final_push(me, vs, vbo_final, ebo_final);
+	T;
 	me->faces3 = ebo_final->size * 3;
 	ftv_release(&vao->vbo.vertices, NULL);
 	ftv_release(&vao->ebo.faces, NULL);
