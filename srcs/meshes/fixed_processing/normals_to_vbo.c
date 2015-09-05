@@ -51,5 +51,6 @@ void		sp_normals_to_vbo(t_vao_basic *vao)
 	ftv_foreach0(&vao->vbo.vertices, &bzero_normals);
 	ftv_foreach(&vao->ebo.faces, &sum_normals, vao->vbo.vertices.data);
 	ftv_foreach0(&vao->vbo.vertices, &normalize_normals);
+	vao->vbo.nnor = 3;
 	return ;
 }

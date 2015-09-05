@@ -51,15 +51,8 @@ void		sp_vao_final_build(t_ftvector vbo_final[1], t_ftvector ebo_final[1]
 	size_t const				vbo_width = (vbo->npos + vbo->ncol
 		+ vbo->ntex + vbo->nnor) * sizeof(float);
 
-/*	if (ftv_init_instance(vbo_final, vbo_width)
-		|| ftv_reserve(vbo_final, vbo->vertices.size)
-		|| ftv_init_instance(ebo_final, 3 * sizeof(t_ui))
-		|| ftv_reserve(ebo_final, vao->ebo.faces.size))
-		ft_enomem();*/
 	if (ftv_init_instance(vbo_final, vbo_width))
 		ft_enomem();
-	ftv_summarize(&vbo->vertices);
-	ftv_summarize(vbo_final);
 	if (ftv_reserve(vbo_final, vbo->vertices.size))
 		ft_enomem();
 	if (ftv_init_instance(ebo_final, 3 * sizeof(t_ui)))
