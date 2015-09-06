@@ -119,8 +119,9 @@ int			sp_fill_mesh(t_env const *e, t_mesh *me);
 
 void		sp_calc_normals(t_env const *e, t_mesh const *me
 							, t_vbo_basic *vbo);
-void		sp_calc_uv(t_env const *e, t_vbo_basic *vbo, float d[2]
-							, t_uvwrapping_type t);
+void		sp_calc_uv_spherical(t_mesh const *me, t_vertex_basic *vertex);
+void		sp_calc_uv_planaroxy(t_mesh const *me, t_vertex_basic *vertex);
+void		sp_calc_uv_box(t_mesh const *me, t_vertex_basic *vertex);
 void		sp_shrink_vbo(t_ftvector *const dst, t_vbo_basic const *const vbo);
 int			sp_meshfillbumb_objmodel(t_mesh *me, t_vao_basic *vao);
 void		sp_transpose_ebo(t_ftvector *dst, t_ftvector const *faces);
@@ -152,11 +153,9 @@ void		sp_normals_to_vbo(t_vao_basic *vao);
 */
 
 
-
 /*
 ** MAIN OB HANDLING
 */
-void		sp_mainob_model_remapuv(t_env *e, t_uvwrapping_type t);
 void		sp_mainob_changemodel(t_env *e, t_model_index moi);
 void		sp_mainob_resetpos(t_env *e);
 

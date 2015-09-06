@@ -114,6 +114,7 @@ void			sp_fill_landrgb(t_vbo_basic *vbo, float const bounds[2])
 		input_color(vert, get_rand((vert->pos.y - bounds[0]) / delta));
 		vert++;
 	}
+	qprintf("    Generated \033[33mLand\033[0m\n");
 	vbo->ncol = 3;
 	return ;
 }

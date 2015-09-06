@@ -70,13 +70,13 @@ textures = [
 ]
 meshes = [
 	Mesh("teapot1", "ptn", "GL_DYNAMIC_DRAW"
-		 , "res/teapot.obj", "", "", "true", "true", (1., 1.), """{
+		 , "res/teapot.obj", "", "sp_calc_uv_box", "true", "true", (0.5, 0.5), """{
 	return (sp_meshfillbumb_objmodel(me, vao));\n}"""),
 	Mesh("teapot2", "ptn", "GL_DYNAMIC_DRAW"
-		 , "res/teapot2.obj", "", "", "true", "true", (1., 1.), """{
+		 , "res/teapot2.obj", "", "sp_calc_uv_spherical", "true", "true", (1., 1.), """{
 	return (sp_meshfillbumb_objmodel(me, vao));\n}"""),
 	Mesh("ft", "ptn", "GL_STATIC_DRAW"
-		 , "res/42.obj", "", "", "true", "true", (1., 1.), """{
+		 , "res/42.obj", "", "sp_calc_uv_spherical", "true", "true", (1., 1.), """{
 	return (sp_meshfillbumb_objmodel(me, vao));\n}"""),
 	Mesh("csie", "ptn", "GL_STATIC_DRAW"
 		 , "res/new_csie_b1.obj", "", "", "true", "true", (1., 1.), """{
@@ -89,7 +89,7 @@ meshes = [
 	return (sp_meshfillbumb_objmodel(me, vao));\n}"""),
 
 	# land fait ceci cela
-	Mesh("land", "ptn", "GL_STATIC_DRAW"
+	Mesh("land", "land", "GL_STATIC_DRAW"
 		 , "", "", "", "true", "true", (1., 1.), """{
 	t_vbo_basic		*vbo;
 	t_ftvector		lines[1];
@@ -113,7 +113,7 @@ meshes = [
 	return (0);\n\t(void)me;\n}"""),
 
 	# sun fait ceci cela
-	Mesh("sun", "ptn", "GL_STATIC_DRAW"
+	Mesh("sun", "sun", "GL_STATIC_DRAW"
 		 , "res/dodecahedron.obj", "", "", "true", "true", (1., 1.), """{
 	return (sp_meshfillbumb_objmodel(me, vao));\n}"""),
 ]

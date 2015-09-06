@@ -45,20 +45,21 @@ int			sp_loadconf_meshes(t_env *e)
 	t_mesh const		tmp[sp_num_meshes] = {
 
 	MESH(GL_DYNAMIC_DRAW, sp_ptn_program, "res/teapot.obj"
-	, &sp_meshfill_teapot1, NULL, NULL, true, true, {1.0f, 1.0f}),
+	, &sp_meshfill_teapot1, NULL, &sp_calc_uv_box, true, true, {0.5f, 0.5f}),
 	MESH(GL_DYNAMIC_DRAW, sp_ptn_program, "res/teapot2.obj"
-	, &sp_meshfill_teapot2, NULL, NULL, true, true, {1.0f, 1.0f}),
+	, &sp_meshfill_teapot2, NULL, &sp_calc_uv_spherical, true, true
+	, {1.0f, 1.0f}),
 	MESH(GL_STATIC_DRAW, sp_ptn_program, "res/42.obj", &sp_meshfill_ft, NULL
-	, NULL, true, true, {1.0f, 1.0f}),
+	, &sp_calc_uv_spherical, true, true, {1.0f, 1.0f}),
 	MESH(GL_STATIC_DRAW, sp_ptn_program, "res/new_csie_b1.obj"
 	, &sp_meshfill_csie, NULL, NULL, true, true, {1.0f, 1.0f}),
 	MESH(GL_STATIC_DRAW, sp_ptn_program, "res/alfa147.obj", &sp_meshfill_alpha
 	, NULL, NULL, true, true, {1.0f, 1.0f}),
 	MESH(GL_STATIC_DRAW, sp_ptn_program, "res/cessna.obj", &sp_meshfill_plane
 	, NULL, NULL, true, true, {1.0f, 1.0f}),
-	MESH(GL_STATIC_DRAW, sp_ptn_program, "", &sp_meshfill_land, NULL, NULL
+	MESH(GL_STATIC_DRAW, sp_land_program, "", &sp_meshfill_land, NULL, NULL
 	, true, true, {1.0f, 1.0f}),
-	MESH(GL_STATIC_DRAW, sp_ptn_program, "res/dodecahedron.obj"
+	MESH(GL_STATIC_DRAW, sp_sun_program, "res/dodecahedron.obj"
 	, &sp_meshfill_sun, NULL, NULL, true, true, {1.0f, 1.0f}),
 	};
 	memcpy(&e->meshes, &tmp, sizeof(tmp));

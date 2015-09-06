@@ -222,8 +222,8 @@ class Mesh(Cstruct):
 		self.printstr(", " + "sp_" + self.program + "_program")
 		self.printstr(", " + "\"" + self.filename + "\"")
 		self.printstr(", " + "&sp_meshfill_" + self.name)
-		self.printstr(", " + "NULL" if self.grp_fun == "" else "&" + self.grp_fun)
-		self.printstr(", " + "NULL" if self.tex_fun == "" else "&" + self.tex_fun)
+		self.printstr(", " + ("NULL" if self.grp_fun == "" else "&" + self.grp_fun))
+		self.printstr(", " + ("NULL" if self.tex_fun == "" else "&" + self.tex_fun))
 		self.printstr(", " + self.vert_before)
 		self.printstr(", " + self.recenter)
 		self.printstr(", " + "{" + str(self.scale[0]) + "f, "

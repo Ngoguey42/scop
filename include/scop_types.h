@@ -135,7 +135,7 @@ typedef struct					s_mesh
 	char const *const			filename;
 	int							(*primary_fill)();
 	int							(*groups_to_ebo)();
-	int							(*texs_to_vbo)();
+	void						(*texs_to_vbo)();
 	t_bool						vertices_normals_before_split;
 	t_bool						recenter_positions;
 	float						tex_scale[2];
@@ -144,13 +144,6 @@ typedef struct					s_mesh
 	GLuint						handles[3];
 	t_bool						generated;
 }								t_mesh;
-typedef enum					e_uvwrapping_type
-{
-	uvwrap_oxy,
-	uvwrap_spherical,
-	uvwrap_box,
-	num_uvwraps
-}								t_uvwrapping_type;
 
 /*
 ** TEXTURE

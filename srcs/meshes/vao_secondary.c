@@ -23,6 +23,7 @@ void		sp_vao_secondary_build(t_mesh const *me, t_vao_basic *vao
 	if (nnor_req != vao->vbo.nnor)
 		sp_normals_to_vbo(vao);
 	if (ntex_req != vao->vbo.ntex && me->texs_to_vbo != NULL)
-		me->texs_to_vbo(vao);
+		ftv_foreach(&vao->vbo.vertices, me->texs_to_vbo, (void*)me);
+//		me->texs_to_vbo(me, vao);
 	return ;
 }
