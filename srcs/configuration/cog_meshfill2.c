@@ -51,7 +51,6 @@ int			sp_meshfill_land(t_mesh *me, t_vao_basic *vao)
 	sp_fill_landfaces(lines, &vao->ebo.faces);
 	sp_fill_landrgb(vbo, bounds);
 	ftv_release(lines, NULL);
-//	sp_calc_normals(e, me, vbo);
 	return (0);
 	(void)me;
 }
