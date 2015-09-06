@@ -50,7 +50,7 @@ int			sp_loadconf_meshes(t_env *e)
 	, &sp_meshfill_teapot2, NULL, &sp_calc_uv_spherical, true, true
 	, {1.0f, 1.0f}),
 	MESH(GL_STATIC_DRAW, sp_ptn_program, "res/42.obj", &sp_meshfill_ft
-	, &sp_groups_to_ebo_box, &sp_calc_uv_spherical, true, true, {1.0f, 1.0f}),
+	, &sp_groups_to_ebo_box, &sp_calc_uv_box, false, true, {1.0f, 1.0f}),
 	MESH(GL_STATIC_DRAW, sp_ptn_program, "res/new_csie_b1.obj"
 	, &sp_meshfill_csie, NULL, NULL, true, true, {1.0f, 1.0f}),
 	MESH(GL_STATIC_DRAW, sp_ptn_program, "res/alfa147.obj", &sp_meshfill_alpha
