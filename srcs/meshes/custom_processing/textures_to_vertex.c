@@ -29,26 +29,36 @@ void	sp_calc_uv_planaroxy(t_mesh const *me, t_vertex_basic *vertex)
 	return ;
 }
 
+#define VALID(v) (v < 10.f && v > -10.f && !isnan(v))
+
 void	sp_calc_uv_box(t_mesh const *me, t_vertex_basic *vertex)
 {
 	float const		nx = ABS(vertex->nor.x);
 	float const		ny = ABS(vertex->nor.y);
 	float const		nz = ABS(vertex->nor.z);
 
+/*	t_vec3 v3 = *(t_vec3*)&vertex->nor;
+	if (!VALID(v3.x)
+		|| !VALID(v3.y)
+		|| !VALID(v3.z)
+		)
+	{
+		v3_print(*(t_vec3*)&vertex->pos);
+		}	*/
 	if (nz > nx && nz > ny)
 	{
-		vertex->tex.u = ABS(vertex->pos.x) * me->tex_scale[0];
-		vertex->tex.v = ABS(vertex->pos.y) * me->tex_scale[1];
+		vertex->tex.u = vertex->pos.x * me->tex_scale[0];
+		vertex->tex.v = vertex->pos.y * me->tex_scale[1];
 	}
 	else if (ny > nx)
 	{
-		vertex->tex.u = ABS(vertex->pos.x) * me->tex_scale[0];
-		vertex->tex.v = -ABS(vertex->pos.z) * me->tex_scale[1];
+		vertex->tex.u = vertex->pos.x * me->tex_scale[0];
+		vertex->tex.v = -vertex->pos.z * me->tex_scale[1];
 	}
 	else
 	{
-		vertex->tex.u = -ABS(vertex->pos.z) * me->tex_scale[0];
-		vertex->tex.v = ABS(vertex->pos.y) * me->tex_scale[1];
+		vertex->tex.u = -vertex->pos.z * me->tex_scale[0];
+		vertex->tex.v = vertex->pos.y * me->tex_scale[1];
 	}
 	return ;
 }

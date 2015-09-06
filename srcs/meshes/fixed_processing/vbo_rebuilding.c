@@ -66,7 +66,7 @@ static void		duplicate_vertex(t_vao_basic vao[1]
 	int							group;
 	t_ui						i;
 
-	i = 0;
+	i = 1;
 	while (i < tvertex->nfaces)
 	{
 		group = faces[tvertex->faces[i]].group;

@@ -11,6 +11,8 @@
 /* ************************************************************************** */
 
 #include "scop.h"
+#include <assert.h>
+#include <math.h>
 
 static void		normal_to_face(t_vertex_basic const *vertices
 							   , t_face_basic face[1])
@@ -23,6 +25,9 @@ static void		normal_to_face(t_vertex_basic const *vertices
 	face->vec[1] = v3_normalize(v3_sub(p1pos, p2pos));
 	face->vec[2] = v3_normalize(v3_sub(p2pos, p0pos));
 	face->nor = v3_cross(v3_inv(face->vec[0]), face->vec[2]);
+	assert(!isnan(face->nor.x));
+	assert(!isnan(face->nor.y));
+	assert(!isnan(face->nor.z));
 	return ;
 }
 

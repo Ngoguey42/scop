@@ -34,6 +34,23 @@ static void	sum_normals(t_vertex_basic *verts, t_face_basic const *f)
 		*(t_vec3*)&verts[f->indices[i]].nor =
 			v3_add(*(t_vec3*)&verts[f->indices[i]].nor
 				   , v3_mul_scalar(f->nor, angle));
+/*
+		t_vec3 v3 = *(t_vec3*)&verts[f->indices[i]].nor; //d
+
+#define VALID(v) (v < 10.f && v > -10.f && !isnan(v))
+		if (!VALID(v3.x)
+			|| !VALID(v3.y)
+			|| !VALID(v3.z)
+			|| !VALID(angle)
+			)
+		{
+			qprintf("angle: %-10.2f\n", angle);
+			qprintf("face normal: "); v3_print(f->nor);
+			
+//			v3_print(v3); //d
+			qprintf("\n");
+		}
+*/		
 		i++;
 		j++;
 	}
@@ -42,7 +59,23 @@ static void	sum_normals(t_vertex_basic *verts, t_face_basic const *f)
 
 static void	normalize_normals(t_vertex_basic *vert)
 {
+
+//	t_vec3 v3prev = *(t_vec3*)&vert->nor;
+	
 	*(t_vec3*)&vert->nor = v3_normalize(*(t_vec3*)&vert->nor);
+/*
+	t_vec3 v3 = *(t_vec3*)&vert->nor;
+	if (!VALID(v3.x)
+		|| !VALID(v3.y)
+		|| !VALID(v3.z)
+		)
+	{
+		v3_print(v3prev);
+		v3_print(v3);
+		qprintf("\n");
+
+	}
+*/	
 	return ;
 }
 
