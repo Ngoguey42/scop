@@ -13,7 +13,7 @@ static void	push_attributes(t_vshader const *vs, size_t vert_width)
 	i = -1;
 	while (++i < vs->n_locations)
 	{
-		qprintf("\"%s\":%u,%u,%02u,%02u  ",
+		qprintf("\"\033[31m%s\033[0m\":%u,%u,%02u,%02u  ",
 				g_locinfo[vs->locations[i].type].str
 				, i, vs->locations[i].size
 				, vert_width, delta);

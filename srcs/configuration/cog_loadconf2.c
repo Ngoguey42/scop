@@ -56,9 +56,9 @@ int			sp_loadconf_meshes(t_env *e)
 	MESH(GL_STATIC_DRAW, sp_ptn_program, "res/alfa147.obj", &sp_meshfill_alpha
 	, NULL, NULL, true, true, {1.0f, 1.0f}),
 	MESH(GL_STATIC_DRAW, sp_ptn_program, "res/cessna.obj", &sp_meshfill_plane
-	, NULL, NULL, true, true, {1.0f, 1.0f}),
+	, NULL, &sp_calc_uv_planaroxy, true, true, {1.0f, 1.0f}),
 	MESH(GL_STATIC_DRAW, sp_land_program, "", &sp_meshfill_land, NULL, NULL
-	, true, true, {1.0f, 1.0f}),
+	, false, false, {1.0f, 1.0f}),
 	MESH(GL_STATIC_DRAW, sp_sun_program, "res/dodecahedron.obj"
 	, &sp_meshfill_sun, NULL, NULL, true, true, {1.0f, 1.0f}),
 	};

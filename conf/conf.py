@@ -85,12 +85,12 @@ meshes = [
 		 , "res/alfa147.obj", "", "", "true", "true", (1., 1.), """{
 	return (sp_meshfillbumb_objmodel(me, vao));\n}"""),
 	Mesh("plane", "ptn", "GL_STATIC_DRAW"
-		 , "res/cessna.obj", "", "", "true", "true", (1., 1.), """{
+		 , "res/cessna.obj", "", "sp_calc_uv_planaroxy", "true", "true", (1., 1.), """{
 	return (sp_meshfillbumb_objmodel(me, vao));\n}"""),
 
 	# land fait ceci cela
 	Mesh("land", "land", "GL_STATIC_DRAW"
-		 , "", "", "", "true", "true", (1., 1.), """{
+		 , "", "", "", "false", "false", (1., 1.), """{
 	t_vbo_basic		*vbo;
 	t_ftvector		lines[1];
 	size_t const	line_points = (int)pow(2., (double)POINTS_DEPTHI);

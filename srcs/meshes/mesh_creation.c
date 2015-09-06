@@ -36,8 +36,7 @@ static int	validate_vbo(t_vbo_basic const *vbo, t_vshader const *vs)
 		if (num_elt_vbo != num_elt_vs)
 		{
 			ERRORF("%s(%hhu/%hhu)" , g_locinfo[i].str, num_elt_vbo, num_elt_vs);
-//			error = 1;
-			*REACH_OFFSET(t_byte, vbo, g_locinfo[i].vbo_basic_offset) = num_elt_vs;
+			error = 1;
 		}
 		i++;
 	}
