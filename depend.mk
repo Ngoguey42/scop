@@ -22,6 +22,7 @@ O_FILES :=	o/srcs/configuration/cog_loadconf1.o \
 			o/srcs/meshes/fixed_processing/normals_to_ebo.o \
 			o/srcs/meshes/fixed_processing/normals_to_vbo.o \
 			o/srcs/meshes/fixed_processing/positions_recentering.o \
+			o/srcs/meshes/fixed_processing/transposed_ebo.o \
 			o/srcs/meshes/fixed_processing/vbo_rebuilding.o \
 			o/srcs/meshes/mesh_creation.o o/srcs/meshes/mesh_dumb_fill.o \
 			o/srcs/meshes/mesh_operations.o o/srcs/meshes/mesh_refresh.o \
@@ -205,8 +206,13 @@ o/srcs/mainob/mainob_operations.o: srcs/mainob/mainob_operations.c \
 	include/configuration/cog_meshfill.h include/objmodel/objmodel.h \
 	include/meshes/vao.h include/ftmath.h | o/srcs/mainob
 o/srcs/meshes/custom_processing/groups_to_vbo_box.o: \
-	srcs/meshes/custom_processing/groups_to_vbo_box.c \
-	| o/srcs/meshes/custom_processing
+	srcs/meshes/custom_processing/groups_to_vbo_box.c include/scop.h \
+	include/ftmath.h include/configuration/scop_conf.h include/ftmath.h \
+	include/configuration/cog_enums.h include/scop_types.h \
+	include/configuration/scop_conf.h include/ftmath.h \
+	include/configuration/cog_enums.h include/meshes/vao.h include/ftmath.h \
+	include/configuration/cog_meshfill.h include/objmodel/objmodel.h \
+	include/meshes/vao.h include/ftmath.h | o/srcs/meshes/custom_processing
 o/srcs/meshes/custom_processing/textures_to_vertex.o: \
 	srcs/meshes/custom_processing/textures_to_vertex.c include/scop.h \
 	include/ftmath.h include/configuration/scop_conf.h include/ftmath.h \
@@ -233,6 +239,14 @@ o/srcs/meshes/fixed_processing/normals_to_vbo.o: \
 	include/meshes/vao.h include/ftmath.h | o/srcs/meshes/fixed_processing
 o/srcs/meshes/fixed_processing/positions_recentering.o: \
 	srcs/meshes/fixed_processing/positions_recentering.c include/scop.h \
+	include/ftmath.h include/configuration/scop_conf.h include/ftmath.h \
+	include/configuration/cog_enums.h include/scop_types.h \
+	include/configuration/scop_conf.h include/ftmath.h \
+	include/configuration/cog_enums.h include/meshes/vao.h include/ftmath.h \
+	include/configuration/cog_meshfill.h include/objmodel/objmodel.h \
+	include/meshes/vao.h include/ftmath.h | o/srcs/meshes/fixed_processing
+o/srcs/meshes/fixed_processing/transposed_ebo.o: \
+	srcs/meshes/fixed_processing/transposed_ebo.c include/scop.h \
 	include/ftmath.h include/configuration/scop_conf.h include/ftmath.h \
 	include/configuration/cog_enums.h include/scop_types.h \
 	include/configuration/scop_conf.h include/ftmath.h \

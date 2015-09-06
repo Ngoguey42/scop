@@ -107,4 +107,16 @@ typedef struct					s_vao_basic
 	t_ebo_basic					ebo;
 }								t_vao_basic;
 
+typedef struct					s_vertex_transp
+{
+	t_ui						nfaces;
+	t_ui						*faces;
+}								t_vertex_transp;
+
+typedef struct					s_transp_ebo
+{
+	t_ftvector					tvertices;
+	t_ui						*field;
+}								t_transp_ebo;
+
 #endif

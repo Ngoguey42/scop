@@ -119,12 +119,8 @@ int			sp_fill_mesh(t_env const *e, t_mesh *me);
 
 void		sp_calc_normals(t_env const *e, t_mesh const *me
 							, t_vbo_basic *vbo);
-void		sp_calc_uv_spherical(t_mesh const *me, t_vertex_basic *vertex);
-void		sp_calc_uv_planaroxy(t_mesh const *me, t_vertex_basic *vertex);
-void		sp_calc_uv_box(t_mesh const *me, t_vertex_basic *vertex);
 void		sp_shrink_vbo(t_ftvector *const dst, t_vbo_basic const *const vbo);
 int			sp_meshfillbumb_objmodel(t_mesh *me, t_vao_basic *vao);
-void		sp_transpose_ebo(t_ftvector *dst, t_ftvector const *faces);
 void        sp_split_ebo(t_vbo_basic *vbo, t_ftvector *faces, int (*fun)());
 
 //new:
@@ -148,10 +144,14 @@ void		sp_recenter_positions(t_vbo_basic *vbo);
 void		sp_rebuild_vbo_from_groups(t_vao_basic *vao);
 void		sp_normals_to_ebo(t_vao_basic *vao);
 void		sp_normals_to_vbo(t_vao_basic *vao);
+void        sp_transpose_ebo(t_transp_ebo tebo[1], t_vao_basic const vao[1]);
 /*
 ** MESHES CREATION PROCESSING CUSTOM
 */
-
+void		sp_calc_uv_spherical(t_mesh const *me, t_vertex_basic *vertex);
+void		sp_calc_uv_planaroxy(t_mesh const *me, t_vertex_basic *vertex);
+void		sp_calc_uv_box(t_mesh const *me, t_vertex_basic *vertex);
+void		sp_groups_to_ebo_box(t_vao_basic *vao);
 
 /*
 ** MAIN OB HANDLING

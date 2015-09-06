@@ -134,7 +134,7 @@ typedef struct					s_mesh
 	t_program_index const		program;
 	char const *const			filename;
 	int							(*primary_fill)();
-	int							(*groups_to_ebo)();
+	void						(*groups_to_ebo)();
 	void						(*texs_to_vbo)();
 	t_bool						vertices_normals_before_split;
 	t_bool						recenter_positions;

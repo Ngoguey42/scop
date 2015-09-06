@@ -58,6 +58,8 @@ int			sp_new_mesh(t_env const *e, t_mesh *me)
 		return (ERROR("validate_vbo(...)"), 1);
 	sp_vao_final_build(vbo_final, ebo_final, vao);
 	sp_vao_final_push(me, vs, vbo_final, ebo_final);
+	qprintf("\033[32m%-7zu\033[0mVerts, \033[32m%-7zu\033[0mFaces "
+			, vbo_final->size, ebo_final->size);
 	me->faces3 = ebo_final->size * 3;
 	ftv_release(&vao->vbo.vertices, NULL);
 	ftv_release(&vao->ebo.faces, NULL);

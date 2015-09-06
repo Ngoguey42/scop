@@ -15,7 +15,7 @@ void		sp_vao_secondary_build(t_mesh const *me, t_vao_basic *vao
 		if (me->vertices_normals_before_split)
 			sp_normals_to_vbo(vao);
 	}
-	if (0 && me->groups_to_ebo != NULL)
+	if (me->groups_to_ebo != NULL)
 	{
 		me->groups_to_ebo(vao);
 		sp_rebuild_vbo_from_groups(vao);

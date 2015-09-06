@@ -76,7 +76,7 @@ meshes = [
 		 , "res/teapot2.obj", "", "sp_calc_uv_spherical", "true", "true", (1., 1.), """{
 	return (sp_meshfillbumb_objmodel(me, vao));\n}"""),
 	Mesh("ft", "ptn", "GL_STATIC_DRAW"
-		 , "res/42.obj", "", "sp_calc_uv_spherical", "true", "true", (1., 1.), """{
+		 , "res/42.obj", "sp_groups_to_ebo_box", "sp_calc_uv_spherical", "true", "true", (1., 1.), """{
 	return (sp_meshfillbumb_objmodel(me, vao));\n}"""),
 	Mesh("csie", "ptn", "GL_STATIC_DRAW"
 		 , "res/new_csie_b1.obj", "", "", "true", "true", (1., 1.), """{

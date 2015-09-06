@@ -49,8 +49,8 @@ int			sp_loadconf_meshes(t_env *e)
 	MESH(GL_DYNAMIC_DRAW, sp_ptn_program, "res/teapot2.obj"
 	, &sp_meshfill_teapot2, NULL, &sp_calc_uv_spherical, true, true
 	, {1.0f, 1.0f}),
-	MESH(GL_STATIC_DRAW, sp_ptn_program, "res/42.obj", &sp_meshfill_ft, NULL
-	, &sp_calc_uv_spherical, true, true, {1.0f, 1.0f}),
+	MESH(GL_STATIC_DRAW, sp_ptn_program, "res/42.obj", &sp_meshfill_ft
+	, &sp_groups_to_ebo_box, &sp_calc_uv_spherical, true, true, {1.0f, 1.0f}),
 	MESH(GL_STATIC_DRAW, sp_ptn_program, "res/new_csie_b1.obj"
 	, &sp_meshfill_csie, NULL, NULL, true, true, {1.0f, 1.0f}),
 	MESH(GL_STATIC_DRAW, sp_ptn_program, "res/alfa147.obj", &sp_meshfill_alpha

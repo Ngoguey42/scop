@@ -14,6 +14,11 @@
 
 void    sp_rebuild_vbo_from_groups(t_vao_basic *vao)
 {
-	(void)vao;
+	t_transp_ebo	tebo[1];
+
+	sp_transpose_ebo(tebo, vao);
+	
+	ftv_release(&tebo->tvertices, NULL);
+	free(tebo->field);
 	return ;
 }

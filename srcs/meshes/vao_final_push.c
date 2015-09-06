@@ -22,6 +22,7 @@ static void	push_attributes(t_vshader const *vs, size_t vert_width)
 		glEnableVertexAttribArray(i);
 		delta += vs->locations[i].size * sizeof(GLfloat);
 	}
+	qprintf("\n");
 	return ;
 }
 
