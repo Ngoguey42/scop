@@ -145,6 +145,7 @@ void		sp_rebuild_vbo_from_groups(t_vao_basic *vao);
 void		sp_normals_to_ebo(t_vao_basic *vao);
 void		sp_normals_to_vbo(t_vao_basic *vao);
 void        sp_transpose_ebo(t_transp_ebo tebo[1], t_vao_basic const vao[1]);
+void		sp_vbo_normals_restore(t_ftvector *dst, t_ftvector const *src);
 /*
 ** MESHES CREATION PROCESSING CUSTOM
 */

@@ -70,11 +70,11 @@ textures = [
 ]
 meshes = [
 	Mesh("teapot1", "ptn", "GL_DYNAMIC_DRAW"
-		 , "res/teapot.obj", "sp_groups_to_ebo_box", "sp_calc_uv_box", "false", "true", (0.5, 0.5), """{
+		 , "res/teapot.obj", "", "sp_calc_uv_box", "false", "true", (0.5, 0.5), """{
 	return (sp_meshfillbumb_objmodel(me, vao));\n}"""),
 
 	Mesh("teapot2", "ptn", "GL_DYNAMIC_DRAW"
-		 , "res/teapot2.obj", "", "sp_calc_uv_spherical", "true", "true", (1., 1.), """{
+		 , "res/teapot2.obj", "sp_groups_to_ebo_box", "sp_calc_uv_box", "true", "true", (0.5, 0.5), """{
 	return (sp_meshfillbumb_objmodel(me, vao));\n}"""),
 
 	Mesh("ft", "ptn", "GL_STATIC_DRAW"

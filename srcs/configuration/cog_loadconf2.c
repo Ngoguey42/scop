@@ -45,11 +45,10 @@ int			sp_loadconf_meshes(t_env *e)
 	t_mesh const		tmp[sp_num_meshes] = {
 
 	MESH(GL_DYNAMIC_DRAW, sp_ptn_program, "res/teapot.obj"
-	, &sp_meshfill_teapot1, &sp_groups_to_ebo_box, &sp_calc_uv_box, false
-	, true, {0.5f, 0.5f}),
+	, &sp_meshfill_teapot1, NULL, &sp_calc_uv_box, false, true, {0.5f, 0.5f}),
 	MESH(GL_DYNAMIC_DRAW, sp_ptn_program, "res/teapot2.obj"
-	, &sp_meshfill_teapot2, NULL, &sp_calc_uv_spherical, true, true
-	, {1.0f, 1.0f}),
+	, &sp_meshfill_teapot2, &sp_groups_to_ebo_box, &sp_calc_uv_box, true, true
+	, {0.5f, 0.5f}),
 	MESH(GL_STATIC_DRAW, sp_ptn_program, "res/42.obj", &sp_meshfill_ft
 	, &sp_groups_to_ebo_box, &sp_calc_uv_box, false, true, {1.0f, 1.0f}),
 	MESH(GL_STATIC_DRAW, sp_ptn_program, "res/new_csie_b1.obj"

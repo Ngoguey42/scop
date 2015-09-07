@@ -1,10 +1,6 @@
 
 #include "scop.h"
 
-void ft_assert(t_bool pred, char const *body, char const *loc[3]);
-#define LINE_LOC (char*[3]){__FILE__, __FUNCTION__, __LINE__}
-#define FT_ASSERT(BODY) ft_assert(BODY, #BODY, LINE_LOC)
-
 /*
 ** Three ways of building secondary vao:
 **		1. No split.
@@ -70,14 +66,16 @@ static void	with_split_nor_before(t_mesh const *me, t_vao_basic *vao
 	if (me->recenter_positions)
 		sp_recenter_positions(&vao->vbo);
 	sp_normals_to_ebo(vao);
-	sp_normals_to_vbo(vao); //before
+	sp_normals_to_vbo(vao);
 	me->groups_to_ebo(vao);
 	sp_rebuild_vbo_from_groups(vao);
-	sp_vbo_normals_save(&vao->vbo, vbo_save); //before
+	if (ftv_copy(vbo_save, &vao->vbo.vertices))
+		ft_enomem();
 	sp_normals_to_vbo(vao);
 	ftv_foreach(&vao->vbo.vertices, me->texs_to_vbo, (void*)me);
 	vao->vbo.ntex = 2;
-	sp_vbo_normals_restore(&vao->vbo, vbo_save); //before
+	sp_vbo_normals_restore(&vao->vbo.vertices, vbo_save);
+	ftv_release(vbo_save, NULL);
 	return ;
 	(void)vs;
 }
