@@ -130,17 +130,17 @@ typedef struct					s_program
 */
 typedef struct					s_mesh
 {
-	GLenum const				usage;
+	GLenum const				usage; //dynamic
 	t_program_index const		program;
-	char const *const			filename;
-	int							(*primary_fill)();
-	void						(*groups_to_ebo)();
-	void						(*texs_to_vbo)();
-	t_bool						vertices_normals_before_split;
-	t_bool						recenter_positions;
-	float						tex_scale[2];
-	size_t						faces3;
+	char const					*filename; //tab of strings
+	int							(*primary_fill)(); //fixed, dumb
+	void						(*groups_to_ebo)(); //tab of fun
+	void						(*texs_to_vbo)(); //tab of fun
+	t_bool						vertices_normals_before_split; //bool
+	t_bool						recenter_positions; //bool
+	float						tex_scale[2]; //2 floats
 
+	size_t						faces3;
 	GLuint						handles[3];
 	t_bool						generated;
 }								t_mesh;

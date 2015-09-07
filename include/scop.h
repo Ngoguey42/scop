@@ -112,18 +112,10 @@ void		sp_activate_texture(t_program const *p, t_texslot texslot
 /*
 ** MESHES
 */
-
 void		sp_delete_meshes(t_env *e);
 int			sp_refresh_vbo(t_env const *e, t_mesh const *me);
-int			sp_fill_mesh(t_env const *e, t_mesh *me);
-
-void		sp_calc_normals(t_env const *e, t_mesh const *me
-							, t_vbo_basic *vbo);
-void		sp_shrink_vbo(t_ftvector *const dst, t_vbo_basic const *const vbo);
 int			sp_meshfillbumb_objmodel(t_mesh *me, t_vao_basic *vao);
-void        sp_split_ebo(t_vbo_basic *vbo, t_ftvector *faces, int (*fun)());
 
-//new:
 /*
 ** MESHES CREATION
 */

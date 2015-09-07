@@ -21,8 +21,6 @@ void					sp_delete_meshes(t_env *e)
 	me = e->meshes;
 	while (me < end)
 	{
-		/* ftv_release(&me->vertices, NULL); */
-		/* ftv_release(&me->faces, NULL); */
 		glDeleteBuffers(1, me->handles + 1);
 		glDeleteBuffers(1, me->handles + 2);
 		glDeleteVertexArrays(1, me->handles + 3);
