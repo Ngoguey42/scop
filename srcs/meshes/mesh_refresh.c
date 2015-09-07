@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "scop.h"
+
 /*
 int				sp_refresh_vbo(t_env const *e, t_mesh const *me)
 {

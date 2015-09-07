@@ -86,7 +86,7 @@ typedef struct					s_keyevents
 typedef struct					s_vshader
 {
 	char const					*filepath;
-	void (*const				unif_update)();
+	void						(*const unif_update)();
 	size_t const				n_locations;
 	t_location const			locations[4];
 	GLuint						handle;
@@ -94,56 +94,15 @@ typedef struct					s_vshader
 typedef struct					s_fshader
 {
 	char const					*filepath;
-	void (*const				unif_update)();
+	void						(*const unif_update)();
 	GLuint						handle;
 }								t_fshader;
 typedef struct					s_gshader
 {
 	char const					*filepath;
-	void (*const				unif_update)();
+	void						(*const unif_update)();
 	GLuint						handle;
 }								t_gshader;
-
-/*
-** PROGRAMS
-** A program is tied to several <mesh>
-*/
-typedef enum					e_texslot
-{
-	sp_image1_texslot,
-	sp_sbox_texslot,
-	sp_num_texslots,
-}								t_texslot;
-typedef struct					s_program
-{
-	t_vshader_index const		vshader;
-	t_fshader_index const		fshader;
-	t_gshader_index const		gshader;
-	int const					gltexi[sp_num_texslots];
-	GLuint						handle;
-}								t_program;
-
-/*
-** MESH
-** A mesh is tied to several <model>
-** Pos.x, Pos.y, Pos.z[, Co.r, Co.g, Co.b][, Tex.u, , Tex.v][, No.x, No.y, No.z]
-*/
-typedef struct					s_mesh
-{
-	GLenum const				usage; //dynamic
-	t_program_index const		program;
-	char const					*filename; //tab of strings
-	int							(*primary_fill)(); //fixed, dumb
-	void						(*groups_to_ebo)(); //tab of fun
-	void						(*texs_to_vbo)(); //tab of fun
-	t_bool						vertices_normals_before_split; //bool
-	t_bool						recenter_positions; //bool
-	float						tex_scale[2]; //2 floats
-
-	size_t						faces3;
-	GLuint						handles[3];
-	t_bool						generated;
-}								t_mesh;
 
 /*
 ** TEXTURE
@@ -156,6 +115,46 @@ typedef struct					s_texture
 	t_ui						dim[2];
 	GLuint						handle;
 }								t_texture;
+typedef enum					e_texslot
+{
+	sp_image1_texslot,
+	sp_sbox_texslot,
+	sp_num_texslots,
+}								t_texslot;
+
+/*
+** PROGRAMS
+** A program is tied to several <mesh>
+*/
+typedef struct					s_program
+{
+	t_vshader_index const		vshader;
+	t_fshader_index const		fshader;
+	t_gshader_index const		gshader;
+	int const					gltexi[sp_num_texslots];
+	GLuint						handle;
+}								t_program;
+
+/*
+** MESH
+** A mesh is tied to several <model>
+*/
+typedef struct					s_mesh
+{
+	GLenum const				usage;
+	t_program_index const		program;
+	char const					*filename; //tab of strings
+	int							(*primary_fill)();
+	t_bool						recenter_positions; //bool
+	void						(*groups_to_ebo)(); //tab of fun OK NULL
+	t_bool						vertices_normals_before_split; //bool
+	void						(*texs_to_vbo)(); //tab of fun NO NULL
+	float						tex_scale[2]; //2 floats
+
+	size_t						faces3;
+	GLuint						handles[3];
+	t_bool						generated;
+}								t_mesh;
 
 /*
 ** MODEL
@@ -179,10 +178,10 @@ typedef struct					s_ob
 	t_bool						shadow;
 	t_bool						delete;
 	t_model_index				model;
-	t_vec3					position;
-	t_vec3					rotation;
-	t_vec3					scale;
-	t_mat4					mat;
+	t_vec3						position;
+	t_vec3						rotation;
+	t_vec3						scale;
+	t_mat4						mat;
 	void						(*update)();
 	float						valf[3];
 	int							vali[1];
@@ -225,23 +224,23 @@ typedef struct					s_env
 	double						mpos[2];
 
 	float						cangles[2];
-	t_vec3					cpos;
-	t_mat4					view;
+	t_vec3						cpos;
+	t_mat4						view;
 
-	t_mat4					projection;
-	t_mat4					viewproj;
+	t_mat4						projection;
+	t_mat4						viewproj;
 
-	t_vec3					sunpos_spherical;
-	t_vec3					sunpos_cartesian;
-	t_vec3					sunka;
-	t_vec3					sunkd;
-	t_vec3					sunks;
+	t_vec3						sunpos_spherical;
+	t_vec3						sunpos_cartesian;
+	t_vec3						sunka;
+	t_vec3						sunkd;
+	t_vec3						sunks;
 	float						sundat[2];
 	t_texture					sbox_texture;
 	GLuint						sbox_fbo;
 	float						sbox_farplane;
-	t_mat4					sbox_proj;
-	t_mat4					sbox_viewproj[6];
+	t_mat4						sbox_proj;
+	t_mat4						sbox_viewproj[6];
 
 	double						time_start;
 	double						time_cur;
