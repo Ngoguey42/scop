@@ -53,14 +53,15 @@ t_mat4	m4_lookat(t_vec3 eye, t_vec3 at, t_vec3 up)
 
 t_mat4	m4_fovprojection(float fov, float ratio, float near, float far)
 {
-	float const		one_over_depth = 1.f / (far - near);
+	float const		tmp1 = 1.f / tan(0.5f * fov);
+	float const		tmp2 = -far / (far - near);
 	t_mat4			result;
 
 	result = M4_IDENTITY;
-	result.i[1].j[1] = 1.f / tan(0.5f * fov);
-	result.i[0].j[0] = 1.f * result.i[1].j[1] / ratio;
-	result.i[2].j[2] = -far * one_over_depth;
-	result.i[2].j[3] = (-far * near) * one_over_depth * 2.f;
+	result.i[0].j[0] = tmp1 / ratio;
+	result.i[1].j[1] = tmp1;
+	result.i[2].j[2] = tmp2;
+	result.i[2].j[3] = tmp2 * near * 2.f;
 	result.i[3].j[2] = -1.f;
 	result.i[3].j[3] = 0;
 	return (result);
