@@ -22,11 +22,7 @@
 **  cog.out("/" "*")
 **  ]]]
 */
-int		sp_meshfill_teapot1(t_mesh *me, t_vao_basic *vao);
-int		sp_meshfill_teapot2(t_mesh *me, t_vao_basic *vao);
-int		sp_meshfill_ft(t_mesh *me, t_vao_basic *vao);
-int		sp_meshfill_csie(t_mesh *me, t_vao_basic *vao);
-int		sp_meshfill_alpha(t_mesh *me, t_vao_basic *vao);
+int		sp_meshfill_main(t_mesh *me, t_vao_basic *vao);
 int		sp_meshfill_plane(t_mesh *me, t_vao_basic *vao);
 int		sp_meshfill_sun(t_mesh *me, t_vao_basic *vao);
 int		sp_meshfill_land(t_mesh *me, t_vao_basic *vao);

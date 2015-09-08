@@ -37,9 +37,16 @@ static int const		g_keystates[] =
 
 static t_keyevents const	g_keyevents[] =
 {
-	/* CONV(&sp_mainob_model_remapuv, uvwrap_oxy, GLFW_KEY_8, sp_is_held, 0), */
-	/* CONV(&sp_mainob_model_remapuv, uvwrap_spherical, GLFW_KEY_9, sp_is_held, 0), */
-	/* CONV(&sp_mainob_model_remapuv, uvwrap_box, GLFW_KEY_0, sp_is_held, 0), */
+	CONV(&sp_mainme_scroll_objfile, -1, GLFW_KEY_F1, sp_is_held, 0),
+	CONV(&sp_mainme_scroll_objfile, +1, GLFW_KEY_F2, sp_is_held, 0),
+	CONV(&sp_mainme_toggle_recenter, 42, GLFW_KEY_F3, sp_is_held, 0),
+	CONV(&sp_mainme_scroll_ebogrouping, -1, GLFW_KEY_F5, sp_is_held, 0),
+	CONV(&sp_mainme_scroll_ebogrouping, +1, GLFW_KEY_F6, sp_is_held, 0),
+	CONV(&sp_mainme_toggle_ebogroupingbefore, 42, GLFW_KEY_F7, sp_is_held, 0),
+	CONV(&sp_mainme_scroll_texwrapping, -1, GLFW_KEY_F9, sp_is_held, 0),
+	CONV(&sp_mainme_scroll_texwrapping, +1, GLFW_KEY_F10, sp_is_held, 0),
+	CONV(&sp_mainme_change_texscale, -1, GLFW_KEY_F11, sp_is_held, 0),
+	CONV(&sp_mainme_change_texscale, +1, GLFW_KEY_F12, sp_is_held, 0),
 	CONV(&sp_kevent_toggle_mouse_state, 42, GLFW_KEY_TAB, sp_is_held, 0),
 	CONV(&sp_kevent_reset_campos, 42, GLFW_KEY_R, sp_is_held, sp_control_held),
 	CONV(&sp_mainob_resetpos, 42, GLFW_KEY_R, sp_is_held | sp_control_held, 0),
@@ -52,21 +59,16 @@ void		sp_keyevent(t_env *e, int a, t_keystate ks)
 	t_keyevents const			*ke;
 	t_keyevents const *const	end = END_ARRAY(g_keyevents);
 
-	if (a >= GLFW_KEY_F1 && a < GLFW_KEY_F1 + sp_num_models)
-		sp_mainob_changemodel(e, a - GLFW_KEY_F1);
-	else
+	ke = g_keyevents;
+	while (ke < end)
 	{
-		ke = g_keyevents;
-		while (ke < end)
+		if (ke->key == a
+			&& !(ks & ke->noheld) && ((ks & ke->held) == ke->held))
 		{
-			if (ke->key == a
-				&& !(ks & ke->noheld) && ((ks & ke->held) == ke->held))
-			{
-				NORM_AT_42_IS_WTF(e, ke->dat);
-				return ;
-			}
-			ke++;
+			NORM_AT_42_IS_WTF(e, ke->dat);
+			return ;
 		}
+		ke++;
 	}
 	return ;
 }

@@ -69,22 +69,10 @@ textures = [
 	Texture("metal", "metal.tga"),
 ]
 meshes = [
-	Mesh("teapot1", "ptn", usage="GL_DYNAMIC_DRAW"
+	Mesh("main", "ptn", usage="GL_DYNAMIC_DRAW"
 		 , objfile_enum="teapot1", recenter="true"
 		 , tex_enum="box", texscale=(0.5, 0.5)
 	 ),
-	Mesh("teapot2", "ptn", usage="GL_DYNAMIC_DRAW"
-		 , objfile_enum="teapot2", recenter="true"
-		 , grp_enum="box", vert_before="true"
-		 , tex_enum="box", texscale=(0.5, 0.5)
-	 ),
-	Mesh("ft", "ptn"
-		 , objfile_enum="ft", recenter="true"
-		 , grp_enum="box"
-		 , tex_enum="box"
-	 ),
-	Mesh("csie", "ptn", objfile_enum="csie"),
-	Mesh("alpha", "ptn", objfile_enum="alfa"),
 	Mesh("plane", "ptn", objfile_enum="cessna"),
 	Mesh("sun", "sun", objfile_enum="dodecahedron", recenter="true"),
 
@@ -113,13 +101,8 @@ meshes = [
 ]
 
 models = [
-	Model("teapot1", "teapot1", "porcelain", "model_mix"),
-	Model("teapot2", "teapot2", "porcelain", "model_mix"),
-	Model("ft", "ft", "wall", "model_mix"),
-	Model("csie", "csie", "wall", "model"),
-	Model("alpha", "alpha", "metal", "model"),
+	Model("main", "main", "porcelain", "model_mix"),
 	Model("plane", "plane", "wall", "model"),
-
 	Model("land", "land", "no", ""),
 	Model("sun", "sun", "no", "model"),
 ]

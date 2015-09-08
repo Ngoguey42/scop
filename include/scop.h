@@ -152,6 +152,12 @@ void		sp_groups_to_ebo_box(t_vao_basic *vao);
 */
 void		sp_mainob_changemodel(t_env *e, t_model_index moi);
 void		sp_mainob_resetpos(t_env *e);
+void        sp_mainme_scroll_objfile(t_env *e, int v); //ranger
+void    sp_mainme_toggle_recenter(t_env *e, int v);
+void    sp_mainme_scroll_ebogrouping(t_env *e, int v);
+void    sp_mainme_toggle_ebogroupingbefore(t_env *e, int v);//ranger aussi jusquici
+void    sp_mainme_scroll_texwrapping(t_env *e, int v);
+void    sp_mainme_change_texscale(t_env *e, int v);
 
 /*
 ** LAND GENERATION

@@ -44,18 +44,8 @@ int			sp_loadconf_meshes(t_env *e)
 {
 	t_mesh const		tmp[sp_num_meshes] = {
 
-	MESH(GL_DYNAMIC_DRAW, sp_ptn_program, sp_teapot1_objfile
-	, &sp_meshfill_teapot1, true, sp_no_ebogrouping, false, sp_box_texwrapping
-	, {0.5f, 0.5f}),
-	MESH(GL_DYNAMIC_DRAW, sp_ptn_program, sp_teapot2_objfile
-	, &sp_meshfill_teapot2, true, sp_box_ebogrouping, true, sp_box_texwrapping
-	, {0.5f, 0.5f}),
-	MESH(GL_STATIC_DRAW, sp_ptn_program, sp_ft_objfile, &sp_meshfill_ft, true
-	, sp_box_ebogrouping, false, sp_box_texwrapping, {1.0f, 1.0f}),
-	MESH(GL_STATIC_DRAW, sp_ptn_program, sp_csie_objfile, &sp_meshfill_csie
-	, false, sp_no_ebogrouping, false, sp_spherical_texwrapping, {1.0f, 1.0f}),
-	MESH(GL_STATIC_DRAW, sp_ptn_program, sp_alfa_objfile, &sp_meshfill_alpha
-	, false, sp_no_ebogrouping, false, sp_spherical_texwrapping, {1.0f, 1.0f}),
+	MESH(GL_DYNAMIC_DRAW, sp_ptn_program, sp_teapot1_objfile, &sp_meshfill_main
+	, true, sp_no_ebogrouping, false, sp_box_texwrapping, {0.5f, 0.5f}),
 	MESH(GL_STATIC_DRAW, sp_ptn_program, sp_cessna_objfile, &sp_meshfill_plane
 	, false, sp_no_ebogrouping, false, sp_spherical_texwrapping, {1.0f, 1.0f}),
 	MESH(GL_STATIC_DRAW, sp_sun_program, sp_dodecahedron_objfile
@@ -72,11 +62,7 @@ int			sp_loadconf_models(t_env *e)
 {
 	t_model const		tmp[sp_num_models] = {
 
-	MODEL(sp_teapot1_mesh, sp_porcelain_texture, &sp_unif_model_mix),
-	MODEL(sp_teapot2_mesh, sp_porcelain_texture, &sp_unif_model_mix),
-	MODEL(sp_ft_mesh, sp_wall_texture, &sp_unif_model_mix),
-	MODEL(sp_csie_mesh, sp_wall_texture, &sp_unif_model),
-	MODEL(sp_alpha_mesh, sp_metal_texture, &sp_unif_model),
+	MODEL(sp_main_mesh, sp_porcelain_texture, &sp_unif_model_mix),
 	MODEL(sp_plane_mesh, sp_wall_texture, &sp_unif_model),
 	MODEL(sp_land_mesh, sp_no_texture, NULL),
 	MODEL(sp_sun_mesh, sp_no_texture, &sp_unif_model),

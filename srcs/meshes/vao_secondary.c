@@ -81,9 +81,9 @@ static void	with_split_nor_before(t_env const *e, t_mesh const *me
 void		sp_vao_secondary_build(t_env const *e, t_mesh const *me
 								   , t_vao_basic *vao, t_vshader const *vs)
 {
-	if (me->ebogrouping != sp_no_ebogrouping)
+	if (me->ebogrouping != sp_no_ebogrouping &&
+		sp_location_size(vs, sp_nor_loc) != vao->vbo.nnor)
 	{
-		FT_ASSERT(sp_location_size(vs, sp_nor_loc) != vao->vbo.nnor);
 		if (me->vertices_normals_before_split)
 			with_split_nor_before(e, me, vao, vs);
 		else
