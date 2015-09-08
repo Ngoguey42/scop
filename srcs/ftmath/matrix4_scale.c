@@ -12,13 +12,11 @@
 
 #include "ftmath.h"
 
-extern t_mat4	g_identitym4;
-
 t_mat4			m4_scale_uniform(float fact)
 {
 	t_mat4		ret;
 
-	ret = g_identitym4;
+	ret = M4_IDENTITY;
 	ret.i[0].j[0] = fact;
 	ret.i[1].j[1] = fact;
 	ret.i[2].j[2] = fact;
@@ -29,7 +27,7 @@ t_mat4			m4_scale_nonuniform(t_vec3 vect)
 {
 	t_mat4		ret;
 
-	ret = g_identitym4;
+	ret = M4_IDENTITY;
 	ret.i[0].j[0] = vect.x;
 	ret.i[1].j[1] = vect.y;
 	ret.i[2].j[2] = vect.z;

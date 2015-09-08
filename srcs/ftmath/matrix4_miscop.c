@@ -13,14 +13,7 @@
 #include "ftmath.h"
 #include <math.h>
 
-extern t_mat4	g_identitym4;
-
 #define MULT(A,B,F,G,H,I,M,N,O,P) A[F]*B[M]+A[G]*B[N]+A[H]*B[O]+A[I]*B[P]
-
-#define LAI0 x.x, x.y, x.z, -(x.x * eye.x + x.y * eye.y + x.z * eye.z)
-#define LAI1 y.x, y.y, y.z, -(y.x * eye.x + y.y * eye.y + y.z * eye.z)
-#define LAI2 z.x, z.y, z.z, -(z.x * eye.x + z.y * eye.y + z.z * eye.z)
-#define LAI3 0, 0, 0, 1
 
 t_mat4	m4_dotprod(t_mat4 const *mata, t_mat4 const *matb)
 {
@@ -51,15 +44,19 @@ t_mat4	m4_lookat(t_vec3 eye, t_vec3 at, t_vec3 up)
 	t_vec3 const		x = v3_normalize(v3_cross(up, z));
 	t_vec3 const		y = v3_cross(z, x);
 
-	return (ATOM4(LAI0, LAI1, LAI2, LAI3));
+	return (ATOM4(
+	x.x, x.y, x.z, -(x.x * eye.x + x.y * eye.y + x.z * eye.z)
+	, y.x, y.y, y.z, -(y.x * eye.x + y.y * eye.y + y.z * eye.z)
+	, z.x, z.y, z.z, -(z.x * eye.x + z.y * eye.y + z.z * eye.z)
+	, 0.f, 0.f, 0.f, 1.f));
 }
 
 t_mat4	m4_fovprojection(float fov, float ratio, float near, float far)
 {
 	float const		one_over_depth = 1.f / (far - near);
-	t_mat4		result;
+	t_mat4			result;
 
-	result = g_identitym4;
+	result = M4_IDENTITY;
 	result.i[1].j[1] = 1.f / tan(0.5f * fov);
 	result.i[0].j[0] = 1.f * result.i[1].j[1] / ratio;
 	result.i[2].j[2] = -far * one_over_depth;

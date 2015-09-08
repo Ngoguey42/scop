@@ -27,8 +27,9 @@
 ** ATOM4		Absolute to matrix4
 */
 # define ATOV3(...) ((t_vec3){__VA_ARGS__})
-# define ATOV3SCAL(VAL) ((t_vec3){(VAL), (VAL), (VAL)})
+# define OTOV3(VAL) ((t_vec3){(VAL), (VAL), (VAL)})
 # define ATOM4(...) ((t_mat4){{__VA_ARGS__}})
+# define M4_IDENTITY ATOM4([0] = 1.f, [5] = 1.f, [10] = 1.f, [15] = 1.f)
 
 typedef enum	e_axis
 {
@@ -36,11 +37,9 @@ typedef enum	e_axis
 	y_axis,
 	z_axis
 }				t_axis;
-
 /*
 ** VECTOR3
 */
-
 typedef struct	s_vec3
 {
 	float		x;
@@ -49,15 +48,15 @@ typedef struct	s_vec3
 }				t_vec3;
 
 void			v3_print(t_vec3 v);
-t_vec3		v3_normalize(t_vec3 v);
-t_vec3		v3_frontnormed(float const angles[2]);
-t_vec3		v3_cross(t_vec3 a, t_vec3 b);
+t_vec3			v3_normalize(t_vec3 v);
+t_vec3			v3_frontnormed(float const angles[2]);
+t_vec3			v3_cross(t_vec3 a, t_vec3 b);
 float			v3_dot_normed(t_vec3 a, t_vec3 b);
-t_vec3		v3_sub(t_vec3 a, t_vec3 b);
-t_vec3		v3_add(t_vec3 a, t_vec3 b);
-t_vec3		v3_inv(t_vec3 a);
-t_vec3		v3_div_scalar(t_vec3 a, float q);
-t_vec3		v3_mul_scalar(t_vec3 a, float q);
+t_vec3			v3_sub(t_vec3 a, t_vec3 b);
+t_vec3			v3_add(t_vec3 a, t_vec3 b);
+t_vec3			v3_inv(t_vec3 a);
+t_vec3			v3_div_scalar(t_vec3 a, float q);
+t_vec3			v3_mul_scalar(t_vec3 a, float q);
 
 /*
 ** MATRIX4
