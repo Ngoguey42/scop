@@ -79,6 +79,7 @@ int			sp_loadconf_programs(t_env *e);
 int			sp_loadconf_textures(t_env *e);
 int			sp_loadconf_meshes(t_env *e);
 int			sp_loadconf_models(t_env *e);
+int			sp_loadconf_options_mesh(t_env *e);
 
 /*
 ** GLFW

@@ -58,7 +58,7 @@ int				sp_init_env(t_env *e)
 	sp_update_campos(e, true);
 	e->states[sp_window_focused_state] = 1;
 	if (L(vshaders, e) || L(fshaders, e) || L(gshaders, e) || L(programs, e)
-		|| L(textures, e) || L(meshes, e) || L(models, e))
-		return (1);
+		|| L(textures, e) || L(meshes, e) || L(models, e) || L(options_mesh, e))
+		return (1); //virer ce if affreux
 	return (0);
 }

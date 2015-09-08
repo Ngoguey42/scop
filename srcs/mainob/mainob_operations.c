@@ -22,31 +22,6 @@
 ** F11-F12	Texture scale
 */
 
-static char const		*g_filenames[] =
-{
-	"res/teapot.obj",
-	"res/teapot2.obj",
-	"res/42.obj",
-	"res/alfa147.obj",
-	"res/cessna.obj",
-	"res/dodecahedron.obj",
-	"res/new_csie_b1.obj",
-	// "res/shuttle.obj",
-};
-
-static void				(*const g_groupsfuncs[])() =
-{
-	NULL,
-	&sp_groups_to_ebo_box,
-};
-
-static void				(*const g_texturesfuncs[])() =
-{
-	&sp_calc_uv_planaroxy,
-	&sp_calc_uv_spherical,
-	&sp_calc_uv_box,
-};
-
 /*
 void		sp_mainob_model_remapuv(t_env *e, t_uvwrapping_type t)
 {

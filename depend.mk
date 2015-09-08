@@ -1,5 +1,6 @@
 O_FILES :=	o/srcs/configuration/cog_loadconf1.o \
 			o/srcs/configuration/cog_loadconf2.o \
+			o/srcs/configuration/cog_loadconf3.o \
 			o/srcs/configuration/cog_meshfill1.o \
 			o/srcs/configuration/cog_meshfill2.o \
 			o/srcs/configuration/obs_fill.o o/srcs/configuration/obs_update.o \
@@ -52,6 +53,13 @@ o/srcs/configuration/cog_loadconf1.o: srcs/configuration/cog_loadconf1.c \
 	include/configuration/cog_meshfill.h include/objmodel/objmodel.h \
 	include/meshes/vao.h include/ftmath.h | o/srcs/configuration
 o/srcs/configuration/cog_loadconf2.o: srcs/configuration/cog_loadconf2.c \
+	include/scop.h include/ftmath.h include/configuration/scop_conf.h \
+	include/ftmath.h include/configuration/cog_enums.h include/scop_types.h \
+	include/configuration/scop_conf.h include/ftmath.h \
+	include/configuration/cog_enums.h include/meshes/vao.h include/ftmath.h \
+	include/configuration/cog_meshfill.h include/objmodel/objmodel.h \
+	include/meshes/vao.h include/ftmath.h | o/srcs/configuration
+o/srcs/configuration/cog_loadconf3.o: srcs/configuration/cog_loadconf3.c \
 	include/scop.h include/ftmath.h include/configuration/scop_conf.h \
 	include/ftmath.h include/configuration/cog_enums.h include/scop_types.h \
 	include/configuration/scop_conf.h include/ftmath.h \

@@ -187,7 +187,7 @@ class Mesh(Cstruct):
 	g_index = 0
 	def __init__(self, name, program, usage
 				 , filename, grp_fun, tex_fun, vert_before, recenter, scale
-				 , fill_funbody):
+			, fill_funbody = """{\n\treturn (sp_meshfillbumb_objmodel(me, vao));\n}"""):
 		self.name = name
 		self.program = program
 		self.usage = usage

@@ -72,7 +72,6 @@ typedef struct					s_keyevents
 	t_keystate					held;
 	t_keystate					noheld;
 }								t_keyevents;
-
 /*
 ** Updating uniforms:
 ** 	A shader defines some updates from scop's env.
@@ -139,6 +138,47 @@ typedef struct					s_program
 ** MESH
 ** A mesh is tied to several <model>
 */
+enum							e_objfile
+{
+	sp_teapot1_objfile,
+	sp_teapot2_objfile,
+	sp_ft_objfile,
+	sp_alpha_objfile,
+	sp_cessna_objfile,
+	sp_dodecahedron_objfile,
+	sp_csie_objfile,
+	sp_num_objfiles,
+};
+enum							e_ebogrouping
+{
+	sp_no_ebogrouping,
+	sp_box_ebogrouping,
+	sp_num_ebogroupings,
+};
+enum							e_texwrapping
+{
+	sp_oxy_texwrapping,
+	sp_spherical_texwrapping,
+	sp_box_texwrapping,
+	sp_num_texwrappings,
+};
+
+typedef struct					s_option_mesh_ebogrouping
+{
+	void						(*const fun)();
+	char const *const			str;
+}								t_option_mesh_ebogrouping;
+typedef struct					s_option_mesh_texwrapping
+{
+	void						(*const fun)();
+	char const *const			str;
+}								t_option_mesh_texwrapping;
+typedef struct					s_options_mesh
+{
+	char const					*objfiles[sp_num_objfiles];
+	t_option_mesh_ebogrouping	ebogroupings[sp_num_ebogroupings];
+	t_option_mesh_texwrapping	texwrappings[sp_num_texwrappings];
+}								t_options_mesh;
 typedef struct					s_mesh
 {
 	GLenum const				usage;
@@ -146,9 +186,9 @@ typedef struct					s_mesh
 	char const					*filename; //tab of strings
 	int							(*primary_fill)();
 	t_bool						recenter_positions; //bool
-	void						(*groups_to_ebo)(); //tab of fun OK NULL
+	enum e_ebogrouping			ebogrouping;
 	t_bool						vertices_normals_before_split; //bool
-	void						(*texs_to_vbo)(); //tab of fun NO NULL
+	enum e_texwrapping			texwrapping;
 	float						tex_scale[2]; //2 floats
 
 	size_t						faces3;
@@ -205,7 +245,7 @@ typedef enum					e_ob_param
 ** ENV
 */
 typedef struct					s_env
-{
+{ //todo, mettre des const partout
 	GLFWwindow					*win;
 
 	t_vshader					vshaders[sp_num_vshaders];
@@ -217,6 +257,7 @@ typedef struct					s_env
 	t_model						models[sp_num_models];
 	t_ftlist					obs[sp_num_programs];
 
+	t_options_mesh				options_mesh;
 	t_ob						*mainob;
 
 	t_keystate					keystates[sp_num_keys];
