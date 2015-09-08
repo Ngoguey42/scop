@@ -86,8 +86,8 @@ typedef enum				e_mesh_index
 	sp_csie_mesh,
 	sp_alpha_mesh,
 	sp_plane_mesh,
-	sp_land_mesh,
 	sp_sun_mesh,
+	sp_land_mesh,
 	sp_num_meshes
 }							t_mesh_index;
 

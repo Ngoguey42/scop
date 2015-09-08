@@ -143,7 +143,7 @@ enum							e_objfile
 	sp_teapot1_objfile,
 	sp_teapot2_objfile,
 	sp_ft_objfile,
-	sp_alpha_objfile,
+	sp_alfa_objfile,
 	sp_cessna_objfile,
 	sp_dodecahedron_objfile,
 	sp_csie_objfile,
@@ -179,11 +179,16 @@ typedef struct					s_options_mesh
 	t_option_mesh_ebogrouping	ebogroupings[sp_num_ebogroupings];
 	t_option_mesh_texwrapping	texwrappings[sp_num_texwrappings];
 }								t_options_mesh;
+# define ME_TEXWRAPFUN(E, ME) E->options_mesh.texwrappings[ME->texwrapping].fun
+# define ME_EBOGRPFUN(E, ME) E->options_mesh.ebogroupings[ME->ebogrouping].fun
+# define ME_OBJFILESTR(E, ME) E->options_mesh.objfiles[ME->objfile]
+
 typedef struct					s_mesh
 {
 	GLenum const				usage;
 	t_program_index const		program;
-	char const					*filename; //tab of strings
+	enum e_objfile				objfile;
+//	char const					*filename; //tab of strings
 	int							(*primary_fill)();
 	t_bool						recenter_positions; //bool
 	enum e_ebogrouping			ebogrouping;

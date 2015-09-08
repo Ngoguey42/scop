@@ -17,7 +17,7 @@ class Cstruct:
 	def __init__(self):
 		pass
 	def printstr(self, s):
-		if len(s) + self.col > 78:
+		if len(s) + self.col > self.maxcol:
 			cog.out('\n\t')
 			self.col = 4
 		cog.out(s)
@@ -154,9 +154,11 @@ class Program(Cstruct):
 		output_cconf_end("programs")
 	def output_cconf_entry(self):
 		self.col = 3
+		self.maxcol = 80
 		self.printstr("\tPROG(sp_" + self.vsname + "_vshader")
 		self.printstr(", sp_" + self.fsname + "_fshader")
 		self.printstr(", sp_" + self.gsname + "_gshader")
+		self.maxcol = 78
 		self.printstr(", TEXI(" + str(self.img1) + ", " + str(self.sbox) + ")")
 		cog.outl("),");
 
@@ -185,18 +187,24 @@ class Texture(Cstruct):
 
 class Mesh(Cstruct):
 	g_index = 0
-	def __init__(self, name, program, usage
-				 , filename, grp_fun, tex_fun, vert_before, recenter, scale
+	def __init__(self, name, program
+			, objfile_enum = "ft"
+			, usage="GL_STATIC_DRAW"
+			, grp_enum = "no"
+			, tex_enum = "spherical"
+			, vert_before="false"
+			, recenter="false"
+			, texscale = (1., 1.)
 			, fill_funbody = """{\n\treturn (sp_meshfillbumb_objmodel(me, vao));\n}"""):
 		self.name = name
 		self.program = program
 		self.usage = usage
-		self.filename = filename
-		self.grp_fun = grp_fun
-		self.tex_fun = tex_fun
+		self.objfile_enum = objfile_enum
+		self.grp_enum = grp_enum
+		self.tex_enum = tex_enum
 		self.vert_before = vert_before
 		self.recenter = recenter
-		self.scale = scale
+		self.texscale = texscale
 		self.fill_funbody = fill_funbody
 		self.index = Mesh.g_index
 		Mesh.g_index += 1
@@ -217,17 +225,19 @@ class Mesh(Cstruct):
 		output_cconf_end("meshes")
 	def output_cconf_entry(self):
 		self.col = 3
+		self.maxcol = 80
 		self.printstr("\tMESH(")
-		self.printstr(self.usage)
-		self.printstr(", " + "sp_" + self.program + "_program")
-		self.printstr(", " + "\"" + self.filename + "\"")
-		self.printstr(", " + "&sp_meshfill_" + self.name)
-		self.printstr(", " + ("NULL" if self.grp_fun == "" else "&" + self.grp_fun))
-		self.printstr(", " + ("NULL" if self.tex_fun == "" else "&" + self.tex_fun))
-		self.printstr(", " + self.vert_before)
+		self.printstr(self.usage) #usage
+		self.printstr(", " + "sp_" + self.program + "_program") #prog
+		self.printstr(", " + "sp_" + self.objfile_enum + "_objfile")
+		self.printstr(", " + "&sp_meshfill_" + self.name) #primary_fill
 		self.printstr(", " + self.recenter)
-		self.printstr(", " + "{" + str(self.scale[0]) + "f, "
-					  + str(self.scale[1]) + "f}")
+		self.printstr(", " + "sp_" + self.grp_enum + "_ebogrouping")
+		self.printstr(", " + self.vert_before)
+		self.printstr(", " + "sp_" + self.tex_enum + "_texwrapping")
+		self.maxcol = 78
+		self.printstr(", " + "{" + str(self.texscale[0]) + "f, "
+					  + str(self.texscale[1]) + "f}")
 		cog.outl('),')
 		
 	def output_meshfill(self, index_first):
@@ -276,6 +286,7 @@ class Ob(Cstruct):
 
 	def output_cconf_entry(self):
 		self.col = 3
+		self.maxcol = 78
 		self.printstr("\tOB(sp_" + self.model + "_model")
 		for k, v in self.kwargs:
 			if k == sca:

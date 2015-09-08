@@ -53,7 +53,7 @@ int			sp_new_mesh(t_env const *e, t_mesh *me)
 	bzero(vao, sizeof(vao));
 	if (sp_vao_primary_build(me, vao))
 		return (ERROR("sp_build_vao_primary(vao, vs)"), 1);
-	sp_vao_secondary_build(me, vao, vs);
+	sp_vao_secondary_build(e, me, vao, vs);
 	if (validate_vbo(&vao->vbo, vs))
 		return (ERROR("validate_vbo(...)"), 1);
 	sp_vao_final_build(vbo_final, ebo_final, vao);

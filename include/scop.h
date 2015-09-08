@@ -123,8 +123,8 @@ int			sp_meshfillbumb_objmodel(t_mesh *me, t_vao_basic *vao);
 int			sp_init_meshes(t_env *e);
 int			sp_new_mesh(t_env const *e, t_mesh *me);
 int			sp_vao_primary_build(t_mesh const *me, t_vao_basic *vao);
-void		sp_vao_secondary_build(t_mesh const *me, t_vao_basic *vao
-									, t_vshader const *vs);
+void		sp_vao_secondary_build(t_env const *e, t_mesh const *me
+								   , t_vao_basic *vao, t_vshader const *vs);
 void		sp_vao_final_build(t_ftvector vbo_final[1], t_ftvector ebo_final[1]
 								, t_vao_basic const vao[1]);
 void		sp_vao_final_push(t_mesh *me, t_vshader const *vs

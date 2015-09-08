@@ -30,6 +30,11 @@ int			sp_meshfill_plane(t_mesh *me, t_vao_basic *vao)
 	return (sp_meshfillbumb_objmodel(me, vao));
 }
 
+int			sp_meshfill_sun(t_mesh *me, t_vao_basic *vao)
+{
+	return (sp_meshfillbumb_objmodel(me, vao));
+}
+
 int			sp_meshfill_land(t_mesh *me, t_vao_basic *vao)
 {
 	t_vbo_basic		*vbo;
@@ -53,11 +58,6 @@ int			sp_meshfill_land(t_mesh *me, t_vao_basic *vao)
 	ftv_release(lines, NULL);
 	return (0);
 	(void)me;
-}
-
-int			sp_meshfill_sun(t_mesh *me, t_vao_basic *vao)
-{
-	return (sp_meshfillbumb_objmodel(me, vao));
 }
 
 /*

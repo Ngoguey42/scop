@@ -69,31 +69,27 @@ textures = [
 	Texture("metal", "metal.tga"),
 ]
 meshes = [
-	Mesh("teapot1", "ptn", "GL_DYNAMIC_DRAW"
-		 , "res/teapot.obj", "", "sp_calc_uv_box", "false", "true", (0.5, 0.5), """{
-	return (sp_meshfillbumb_objmodel(me, vao));\n}"""),
+	Mesh("teapot1", "ptn", usage="GL_DYNAMIC_DRAW"
+		 , objfile_enum="teapot1", recenter="true"
+		 , tex_enum="box", texscale=(0.5, 0.5)
+	 ),
+	Mesh("teapot2", "ptn", usage="GL_DYNAMIC_DRAW"
+		 , objfile_enum="teapot2", recenter="true"
+		 , grp_enum="box", vert_before="true"
+		 , tex_enum="box", texscale=(0.5, 0.5)
+	 ),
+	Mesh("ft", "ptn"
+		 , objfile_enum="ft", recenter="true"
+		 , grp_enum="box"
+		 , tex_enum="box"
+	 ),
+	Mesh("csie", "ptn", objfile_enum="csie"),
+	Mesh("alpha", "ptn", objfile_enum="alfa"),
+	Mesh("plane", "ptn", objfile_enum="cessna"),
+	Mesh("sun", "sun", objfile_enum="dodecahedron", recenter="true"),
 
-	Mesh("teapot2", "ptn", "GL_DYNAMIC_DRAW"
-		 , "res/teapot2.obj", "sp_groups_to_ebo_box", "sp_calc_uv_box", "true", "true", (0.5, 0.5), """{
-	return (sp_meshfillbumb_objmodel(me, vao));\n}"""),
-
-	Mesh("ft", "ptn", "GL_STATIC_DRAW"
-		 , "res/42.obj", "sp_groups_to_ebo_box", "sp_calc_uv_box", "false", "true", (1., 1.), """{
-	return (sp_meshfillbumb_objmodel(me, vao));\n}"""),
-
-	Mesh("csie", "ptn", "GL_STATIC_DRAW"
-		 , "res/new_csie_b1.obj", "", "", "true", "true", (1., 1.), """{
-	return (sp_meshfillbumb_objmodel(me, vao));\n}"""),
-	Mesh("alpha", "ptn", "GL_STATIC_DRAW"
-		 , "res/alfa147.obj", "", "", "true", "true", (1., 1.), """{
-	return (sp_meshfillbumb_objmodel(me, vao));\n}"""),
-	Mesh("plane", "ptn", "GL_STATIC_DRAW"
-		 , "res/cessna.obj", "", "sp_calc_uv_planaroxy", "true", "true", (1., 1.), """{
-	return (sp_meshfillbumb_objmodel(me, vao));\n}"""),
-
-	# land fait ceci cela
-	Mesh("land", "land", "GL_STATIC_DRAW"
-		 , "", "", "", "false", "false", (1., 1.), """{
+	Mesh("land", "land"
+		 , fill_funbody="""{
 	t_vbo_basic		*vbo;
 	t_ftvector		lines[1];
 	size_t const	line_points = (int)pow(2., (double)POINTS_DEPTHI);
@@ -114,12 +110,8 @@ meshes = [
 	sp_fill_landrgb(vbo, bounds);
 	ftv_release(lines, NULL);
 	return (0);\n\t(void)me;\n}"""),
-
-	# sun fait ceci cela
-	Mesh("sun", "sun", "GL_STATIC_DRAW"
-		 , "res/dodecahedron.obj", "", "", "true", "true", (1., 1.), """{
-	return (sp_meshfillbumb_objmodel(me, vao));\n}"""),
 ]
+
 models = [
 	Model("teapot1", "teapot1", "porcelain", "model_mix"),
 	Model("teapot2", "teapot2", "porcelain", "model_mix"),
