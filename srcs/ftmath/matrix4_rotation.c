@@ -13,13 +13,11 @@
 #include "ftmath.h"
 #include <math.h>
 
-extern t_mat4	g_identitym4;
-
 t_mat4		m4_rotation_axis(t_axis a, float fact)
 {
 	t_mat4		ret;
 
-	ret = g_identitym4;
+	ret = M4_IDENTITY;
 	if (a == x_axis)
 	{
 		ret.i[1].j[1] = cos(fact);

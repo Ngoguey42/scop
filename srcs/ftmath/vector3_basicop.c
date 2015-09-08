@@ -21,7 +21,7 @@ t_vec3	v3_cross(t_vec3 a, t_vec3 b)
 	return (ATOV3(CROSS_OP(y, z), CROSS_OP(z, x), CROSS_OP(x, y)));
 }
 
-float		v3_dot_normed(t_vec3 a, t_vec3 b)
+float	v3_dot_normed(t_vec3 a, t_vec3 b)
 {
 	return (DOT_OP(x) + DOT_OP(y) + DOT_OP(z));
 }

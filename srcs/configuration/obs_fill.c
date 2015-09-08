@@ -104,7 +104,7 @@ int			sp_fill_obs(t_env *e)
 	while (rad < 500.f)
 	{
 		dir = 1 - rand() % 2 * 2;
-		OB(sp_plane_model, ob_sca, ATOV3SCAL(0.5f), ob_up, &sp_obupdate_plane
+		OB(sp_plane_model, ob_sca, OTOV3(0.5f), ob_up, &sp_obupdate_plane
 		, ob_sha, false
 		, ob_vi, ((int[1]){dir})
 		, ob_vf

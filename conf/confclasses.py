@@ -291,7 +291,7 @@ class Ob(Cstruct):
 		for k, v in self.kwargs:
 			if k == sca:
 				s = str(float(v)) + 'f'
-				self.printstr(', ob_sca, ATOV3SCAL(' + s+', '+s+', '+s + ')')
+				self.printstr(', ob_sca, OTOV3(' + s+', '+s+', '+s + ')')
 			# printstr("ob_" + str(k) + ', ')
 		cog.outl(');')
 			

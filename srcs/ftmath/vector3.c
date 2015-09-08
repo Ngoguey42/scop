@@ -14,9 +14,7 @@
 #include "ft_debug.h"
 #include <math.h>
 
-#define ATOV3N(...) v3_normalize(ATOV3(__VA_ARGS__))
-
-void		v3_print(t_vec3 v)
+void	v3_print(t_vec3 v)
 {
 	qprintf("% 5.2f % 5.2f % 5.2f\n", v.x, v.y, v.z);
 	return ;
@@ -24,7 +22,7 @@ void		v3_print(t_vec3 v)
 
 t_vec3	v3_normalize(t_vec3 v)
 {
-	float const	coef = sqrt(v.x * v.x + v.y * v.y + v.z * v.z);
+	float const		coef = sqrt(v.x * v.x + v.y * v.y + v.z * v.z);
 
 	v.x /= coef;
 	v.y /= coef;
@@ -34,7 +32,10 @@ t_vec3	v3_normalize(t_vec3 v)
 
 t_vec3	v3_frontnormed(float const a[2])
 {
-	return (ATOV3N(cos(a[0]) * cos(a[1]), sin(a[1]), sin(a[0]) * cos(a[1])));
+	return (v3_normalize(ATOV3(
+		cos(a[0]) * cos(a[1])
+		, sin(a[1])
+		, sin(a[0]) * cos(a[1]))));
 }
 
 t_vec3	v3_inv(t_vec3 a)
