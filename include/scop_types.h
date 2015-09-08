@@ -188,13 +188,12 @@ typedef struct					s_mesh
 	GLenum const				usage;
 	t_program_index const		program;
 	enum e_objfile				objfile;
-//	char const					*filename; //tab of strings
 	int							(*primary_fill)();
-	t_bool						recenter_positions; //bool
+	t_bool						recenter_positions;
 	enum e_ebogrouping			ebogrouping;
-	t_bool						vertices_normals_before_split; //bool
+	t_bool						vertices_normals_before_split;
 	enum e_texwrapping			texwrapping;
-	float						tex_scale[2]; //2 floats
+	float						tex_scale[2];
 
 	size_t						faces3;
 	GLuint						handles[3];
