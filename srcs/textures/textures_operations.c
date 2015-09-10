@@ -26,7 +26,7 @@ static int		new_texture(t_texture *t)
 	if (ftv_init_instance(&v, sizeof(t_byte) * 4))
 		sp_enomem();
 	if (parse_tga(t->filepath, &v, t->dim))
-		return (ERRORF("parse_tga(%s, &v, dim)", t->filepath), 1);
+		return (ERRORF("parse_tga(%s, &v, dim)", t->filepath));
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, t->dim[0], t->dim[1], 0,
 				GL_BGRA, GL_UNSIGNED_BYTE, v.data);
 	glGenerateMipmap(GL_TEXTURE_2D);
@@ -69,7 +69,7 @@ int				sp_init_textures(t_env *e)
 	while (i < sp_num_textures)
 	{
 		if (new_texture(e->textures + i))
-			return (ERRORF("new_texture(%s, ...)", e->textures[i].filepath), 1);
+			return (ERRORF("new_texture(%s, ...)", e->textures[i].filepath));
 		i++;
 	}
 	return (0);

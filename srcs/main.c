@@ -20,21 +20,21 @@
 static int		begin(t_env *e)
 {
 	if (INIT(env))
-		return (ERROR("sp_init_env(e)"), 1);
+		return (ERROR("sp_init_env(e)"));
 	if (INIT(glfw))
-		return (ERROR("sp_init_glfw(e)"), 1);
+		return (ERROR("sp_init_glfw(e)"));
 	if (INIT(shaders))
-		return (ERROR("sp_init_shaders(e)"), 1);
+		return (ERROR("sp_init_shaders(e)"));
 	if (INIT(programs))
-		return (ERROR("sp_init_programs(e)"), 1);
+		return (ERROR("sp_init_programs(e)"));
 	if (INIT(textures))
-		return (ERROR("sp_init_textures(e)"), 1);
+		return (ERROR("sp_init_textures(e)"));
 	if (INIT(meshes))
-		return (ERROR("sp_init_meshes(e)"), 1);
+		return (ERROR("sp_init_meshes(e)"));
 	if (INIT(obs))
-		return (ERROR("sp_init_obs(e)"), 1);
+		return (ERROR("sp_init_obs(e)"));
 	if (INIT(sbox))
-		return (ERROR("sp_init_sbox(e)"), 1);
+		return (ERROR("sp_init_sbox(e)"));
 	sp_timings_init(e);
 	return (0);
 }
@@ -77,7 +77,7 @@ int				main(void)
 	PRINTSIZEOF(t_ob);
 	e = malloc(sizeof(*e));
 	if (e == NULL)
-		return (ERROR("Env allocation failed"), 1);
+		return (ERROR("Env allocation failed"));
 	if (begin(e))
 		return (1);
 	loop(e);

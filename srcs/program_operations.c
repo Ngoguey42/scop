@@ -48,10 +48,10 @@ static int		new_program(t_env const *e, t_program *p)
 	}
 	glLinkProgram(p->handle);
 	if (check_program_error(p->handle, GL_LINK_STATUS))
-		return (ERROR("glLinkProgram(...)"), 1);
+		return (ERROR("glLinkProgram(...)"));
 	glValidateProgram(p->handle);
 	if (check_program_error(p->handle, GL_LINK_STATUS))
-		return (ERROR("glValidateProgram(...)"), 1);
+		return (ERROR("glValidateProgram(...)"));
 	return (0);
 }
 
@@ -81,7 +81,7 @@ int				sp_init_programs(t_env *e)
 	while (i < sp_num_programs)
 	{
 		if (new_program(e, e->programs + i))
-			return (ERRORF("new_program(%d)", i), 1);
+			return (ERRORF("new_program(%d)", i));
 		i++;
 	}
 	return (0);

@@ -36,7 +36,7 @@ int				sp_init_sbox(t_env *e)
 	glDrawBuffer(GL_NONE);
 	glReadBuffer(GL_NONE);
 	if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
-		return (ERROR("Framebuffer not complete!\n"), 1);
+		return (ERROR("Framebuffer not complete!\n"));
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	return (0);
 }

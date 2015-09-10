@@ -52,10 +52,10 @@ int			sp_new_mesh(t_env const *e, t_mesh *me)
 
 	bzero(vao, sizeof(vao));
 	if (sp_vao_primary_build(me, vao))
-		return (ERROR("sp_build_vao_primary(vao, vs)"), 1);
+		return (ERROR("sp_build_vao_primary(vao, vs)"));
 	sp_vao_secondary_build(e, me, vao, vs);
 	if (validate_vbo(&vao->vbo, vs))
-		return (ERROR("validate_vbo(...)"), 1);
+		return (ERROR("validate_vbo(...)"));
 	sp_vao_final_build(vbo_final, ebo_final, vao);
 	sp_vao_final_push(me, vs, vbo_final, ebo_final);
 	qprintf("\033[32m%-7zu\033[0mVerts, \033[32m%-7zu\033[0mFaces "

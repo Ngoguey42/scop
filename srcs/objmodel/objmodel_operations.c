@@ -16,7 +16,6 @@
 #include "objmodel/objmodel_parsing.h"
 
 #define SKIP_NODEPART(P) (((void*)(P)) + sizeof(t_ftset_node))
-#define HATE_THIS_NORM s->chunk_size - sizeof(t_ui) - sizeof(t_ftset_node)
 
 void		sp_clean_objmodel(t_objmodel *m)
 {
@@ -33,7 +32,9 @@ void		sp_clean_objmodel(t_objmodel *m)
 
 static int	cmp_floats(float const *min, float const *max, t_ftset const *s)
 {
-	return (memcmp(SKIP_NODEPART(min), SKIP_NODEPART(max), HATE_THIS_NORM));
+	return (memcmp(SKIP_NODEPART(min)
+				   , SKIP_NODEPART(max)
+				   , s->chunk_size - sizeof(t_ui) - sizeof(t_ftset_node)));
 }
 
 void		op_init_meshvectors(t_objmodel *m)

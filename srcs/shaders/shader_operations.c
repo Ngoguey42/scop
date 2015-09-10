@@ -43,7 +43,7 @@ static int		sp_load_shader(char const *filepath, char **ptr)
 
 	fd = open(filepath, O_RDONLY);
 	if (fd < 0)
-		return (ERRORNOF("fopen(\"%s\")", filepath), 1);
+		return (ERRORNOF("fopen(\"%s\")", filepath));
 	*ptr = NULL;
 	while ((ret = read(fd, buffer, sizeof(buffer) - 1)) > 0)
 	{
@@ -57,7 +57,7 @@ static int		sp_load_shader(char const *filepath, char **ptr)
 	}
 	close(fd);
 	if (ret < 0 || *ptr == NULL)
-		return (ERRORF("Error while reading %s", filepath), 1);
+		return (ERRORF("Error while reading %s", filepath));
 	return (0);
 }
 
@@ -67,10 +67,13 @@ static int		sp_new_shader(char const *filepath, GLuint *handle, GLenum t)
 	GLint	len[1];
 
 	if (sp_load_shader(filepath, text))
-		return (ERROR("sp_load_shader(...)"), 1);
+		return (ERROR("sp_load_shader(...)"));
 	*handle = glCreateShader(t);
 	if (*handle == 0)
-		return (ERRORF(BADCREATE_FMT, *handle), free(*text), 1);
+	{
+		free(*text);
+		return (ERRORF(BADCREATE_FMT, *handle));
+	}
 	*len = strlen(*text);
 	glShaderSource(*handle, 1, (char const **)text, len);
 	free(*text);
@@ -99,16 +102,16 @@ int				sp_init_shaders(t_env *e)
 	while (++i < sp_num_vshaders)
 		if (sp_new_shader(e->vshaders[i].filepath, &e->vshaders[i].handle
 						, GL_VERTEX_SHADER))
-			return (ERRORF("sp_new_vshader(%d)", i), 1);
+			return (ERRORF("sp_new_vshader(%d)", i));
 	i = -1;
 	while (++i < sp_num_fshaders)
 		if (sp_new_shader(e->fshaders[i].filepath, &e->fshaders[i].handle
 							, GL_FRAGMENT_SHADER))
-			return (ERRORF("sp_new_fshader(%d)", i), 1);
+			return (ERRORF("sp_new_fshader(%d)", i));
 	i = -1;
 	while (++i < sp_num_gshaders)
 		if (sp_new_shader(e->gshaders[i].filepath, &e->gshaders[i].handle
 							, GL_GEOMETRY_SHADER))
-			return (ERRORF("sp_new_gshader(%d)", i), 1);
+			return (ERRORF("sp_new_gshader(%d)", i));
 	return (0);
 }

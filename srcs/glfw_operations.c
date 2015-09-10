@@ -90,12 +90,15 @@ int			sp_init_glfw(t_env *e)
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 	e->win = glfwCreateWindow(WIN_WIDTHI, WIN_HEIGHTI, "Scop", NULL, NULL);
 	if (!e->win)
-		return (glfwTerminate(), ERROR("glfwCreateWindow"), 1);
+	{
+		glfwTerminate();
+		return (ERROR("glfwCreateWindow"));
+	}
 	glfwSetWindowFocusCallback(e->win, &focus_callback);
 	glfwSetKeyCallback(e->win, key_callback);
 	glfwMakeContextCurrent(e->win);
 	if (!INIT_GLEW)
-	  return (ERROR("glewInit()"), 1);
+	  return (ERROR("glewInit()"));
 	glViewport(0, 0, WIN_WIDTHI, WIN_HEIGHTI);
 	glEnable(GL_DEPTH_TEST);
 	return (0);

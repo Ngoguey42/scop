@@ -33,7 +33,7 @@ int			op_match_v(t_objmodel *m, char const *buf)
 	{
 		fbuf[i++] = (float)strtod(buf, (char**)&buf);
 		if (buf == NULL)
-			return (ERROR("Error parsing v"), 1);
+			return (ERROR("Error parsing v"));
 	}
 	push_floats(&m->coords, fbuf);
 	return (0);
@@ -49,7 +49,7 @@ int			op_match_vt(t_objmodel *m, char const *buf)
 	{
 		fbuf[i++] = strtod(buf, (char**)&buf);
 		if (buf == NULL)
-			return (ERROR("Error parsing vt"), 1);
+			return (ERROR("Error parsing vt"));
 	}
 	push_floats(&m->textures, fbuf);
 	return (0);
@@ -65,7 +65,7 @@ int			op_match_vn(t_objmodel *m, char const *buf)
 	{
 		fbuf[i++] = strtod(buf, (char**)&buf);
 		if (buf == NULL)
-			return (ERROR("Error parsing vn"), 1);
+			return (ERROR("Error parsing vn"));
 	}
 	push_floats(&m->normals, fbuf);
 	return (0);

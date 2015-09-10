@@ -65,7 +65,21 @@ static int		get_index(char buf[BFSZ], char const *endptr)
 		i++;
 		j = (j + 1) % NTOKENS;
 	}
-	return (ERRORF("token not found '%s'", buf), -2);
+	ERRORF("token not found '%s'", buf);
+	return (-2);
+}
+
+static int		read_over(FILE *stream)
+{
+	if (feof(stream))
+		return (-1);
+	if (ferror(stream))
+	{
+		ERRORNO("fgets(...)");
+		return (-2);
+	}
+	ERROR("while reading");
+	return (-2);
 }
 
 static int		next_line_index(FILE *stream, char buf[BFSZ])
@@ -73,15 +87,12 @@ static int		next_line_index(FILE *stream, char buf[BFSZ])
 	char	*ptr;
 
 	if (fgets(buf, BFSZ, stream) == NULL)
-	{
-		if (feof(stream))
-			return (-1);
-		if (ferror(stream))
-			return (ERRORNO("fgets(...)"), -2);
-		return (ERROR("while reading"), -2);
-	}
+		return (read_over(stream));
 	if ((ptr = strchr(buf, '\n')) == NULL)
-		return (ERRORF("no eol '%s'", buf), -2);
+	{
+		ERRORF("no eol '%s'", buf);
+		return (-2);
+	}
 	if (buf == ptr)
 		return (EMPTY_LINE);
 	else if (ptr[-1] == '\r')
@@ -114,21 +125,22 @@ int				op_parse_obj(t_objmodel *m, char const *filepath)
 
 	init_instance(m);
 	if ((stream = fopen(filepath, "r")) == NULL)
-		return (ERRORNOF("fopen(\"%s\")", filepath), 1);
+		return (ERRORNOF("fopen(\"%s\")", filepath));
 	while ((i = next_line_index(stream, buf)) >= 0)
 	{
 		if (i == EMPTY_LINE)
 			continue ;
 		if (g_tokens[i].fun(m, buf))
-			return (ERRORF("g_tokens[i].fun(..., '%s')", buf), 1);
+			return (ERRORF("g_tokens[i].fun(..., '%s')", buf));
 	}
 	if (i != -1)
-		return (ERROR("parsing failed"), 1);
+		return (ERROR("parsing failed"));
 	qprintf("    Parsed \"\033[33m%s\033[0m\": ", filepath);
 	qprintf("%dposs, ", m->coords.size);
 	qprintf("%dtexs, ", m->textures.size);
 	qprintf("%dnors, ", m->normals.size);
 	qprintf("%dverts, ", m->vertices.size);
 	qprintf("%dfaces\n", m->faces.size);
-	return (fclose(stream), 0);
+	fclose(stream);
+	return (0);
 }
