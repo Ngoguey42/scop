@@ -290,6 +290,9 @@ typedef struct					s_env
 	double						time_start;
 	double						time_cur;
 	double						time_el;
+	double						fps;
+	double						fps_samples[FPS_NSAMPLESI];
+	int							fps_sample_index;
 }								t_env;
 
 # define ITEND_VSHADERS(E)	((E)->vshaders + sp_num_vshaders)

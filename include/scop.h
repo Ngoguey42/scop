@@ -81,6 +81,10 @@ int			sp_loadconf_meshes(t_env *e);
 int			sp_loadconf_models(t_env *e);
 int			sp_loadconf_options_mesh(t_env *e);
 
+void		sp_timings_init(t_env *e);
+void		sp_timings_update(t_env *e);
+void		sp_timings_handle_nofocus(t_env *e);
+
 /*
 ** GLFW
 */

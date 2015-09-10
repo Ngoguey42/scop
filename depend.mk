@@ -43,7 +43,7 @@ O_FILES :=	o/srcs/configuration/cog_loadconf1.o \
 			o/srcs/sbox/sbox_operations.o o/srcs/sbox/sbox_render.o \
 			o/srcs/shaders/location_operations.o \
 			o/srcs/shaders/shader_operations.o o/srcs/textures/parse_tga.o \
-			o/srcs/textures/textures_operations.o
+			o/srcs/textures/textures_operations.o o/srcs/timings.o
 
 o/srcs/configuration/cog_loadconf1.o: srcs/configuration/cog_loadconf1.c \
 	include/scop.h include/ftmath.h include/configuration/scop_conf.h \
@@ -451,3 +451,10 @@ o/srcs/textures/textures_operations.o: srcs/textures/textures_operations.c \
 	include/configuration/cog_enums.h include/meshes/vao.h include/ftmath.h \
 	include/configuration/cog_meshfill.h include/objmodel/objmodel.h \
 	include/meshes/vao.h include/ftmath.h | o/srcs/textures
+o/srcs/timings.o: srcs/timings.c include/scop.h include/ftmath.h \
+	include/configuration/scop_conf.h include/ftmath.h \
+	include/configuration/cog_enums.h include/scop_types.h \
+	include/configuration/scop_conf.h include/ftmath.h \
+	include/configuration/cog_enums.h include/meshes/vao.h include/ftmath.h \
+	include/configuration/cog_meshfill.h include/objmodel/objmodel.h \
+	include/meshes/vao.h include/ftmath.h | o/srcs
