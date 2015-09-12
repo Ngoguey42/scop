@@ -61,6 +61,20 @@ typedef enum				e_gshader_index
 	sp_no_gshader
 }							t_gshader_index;
 
+typedef enum				e_tcshader_index
+{
+	sp_test_tcshader,
+	sp_num_tcshaders,
+	sp_no_tcshader
+}							t_tcshader_index;
+
+typedef enum				e_teshader_index
+{
+	sp_test_teshader,
+	sp_num_teshaders,
+	sp_no_teshader
+}							t_teshader_index;
+
 typedef enum				e_program_index
 {
 	sp_land_program,

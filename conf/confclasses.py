@@ -6,7 +6,7 @@
 #    By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/08/10 13:13:13 by ngoguey           #+#    #+#              #
-#    Updated: 2015/09/03 19:08:12 by ngoguey          ###   ########.fr        #
+#    Updated: 2015/09/12 13:06:35 by ngoguey          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -128,13 +128,74 @@ class Gshader(Cstruct):
 		else:
 			cog.out("NULL" + "),\n")
 
+class Tcshader(Cstruct):
+	def __init__(self, name, filename, unif_funname):
+		self.name = name
+		self.filename = filename
+		self.unif_funname = unif_funname
+	@staticmethod
+	def output_enum_start():
+		output_enums_indent_2str("typedef enum", "e_tcshader_index\n{")
+	@staticmethod
+	def output_enum_end():
+		cog.outl("\t" + "sp_" + "num" + "_tcshaders,")
+		cog.outl("\t" + "sp_" + "no" + "_tcshader")
+		output_enums_indent_2str("}", "t_tcshader_index;")
+	def output_enum_line(self):
+		cog.outl("\t" + "sp_" + self.name + "_tcshader,")
+	@staticmethod
+	def output_cconf_start():
+		output_cconf_start("tcshader", "tcshaders")
+	@staticmethod
+	def output_cconf_end():
+		output_cconf_end("tcshaders")
+	def output_cconf_entry(self):
+		cog.out("\tTCSHADER(\"" + self.filename + "\", ")
+		if self.unif_funname != "":
+			cog.out("&sp_unif_" + self.unif_funname + "),\n")
+		else:
+			cog.out("NULL" + "),\n")
+
+class Teshader(Cstruct):
+	def __init__(self, name, filename, unif_funname):
+		self.name = name
+		self.filename = filename
+		self.unif_funname = unif_funname
+	@staticmethod
+	def output_enum_start():
+		output_enums_indent_2str("typedef enum", "e_teshader_index\n{")
+	@staticmethod
+	def output_enum_end():
+		cog.outl("\t" + "sp_" + "num" + "_teshaders,")
+		cog.outl("\t" + "sp_" + "no" + "_teshader")
+		output_enums_indent_2str("}", "t_teshader_index;")
+	def output_enum_line(self):
+		cog.outl("\t" + "sp_" + self.name + "_teshader,")
+	@staticmethod
+	def output_cconf_start():
+		output_cconf_start("teshader", "teshaders")
+	@staticmethod
+	def output_cconf_end():
+		output_cconf_end("teshaders")
+	def output_cconf_entry(self):
+		cog.out("\tTESHADER(\"" + self.filename + "\", ")
+		if self.unif_funname != "":
+			cog.out("&sp_unif_" + self.unif_funname + "),\n")
+		else:
+			cog.out("NULL" + "),\n")
+
 class Program(Cstruct):
-	def __init__(self, name, vsname, fsname, gsname
+	def __init__(self, name, vsname, fsname
+				 , gsname = "no"
+				 , tcsname = "no"
+				 , tesname = "no"
 				 , img1=-1, sbox=-1):
 		self.name = name
 		self.vsname = vsname
 		self.fsname = fsname
 		self.gsname = gsname
+		self.tcsname = tcsname
+		self.tesname = tesname
 		self.img1 = img1
 		self.sbox = sbox
 	@staticmethod
@@ -158,6 +219,8 @@ class Program(Cstruct):
 		self.printstr("\tPROG(sp_" + self.vsname + "_vshader")
 		self.printstr(", sp_" + self.fsname + "_fshader")
 		self.printstr(", sp_" + self.gsname + "_gshader")
+		self.printstr(", sp_" + self.tcsname + "_tcshader")
+		self.printstr(", sp_" + self.tesname + "_teshader")
 		self.maxcol = 78
 		self.printstr(", TEXI(" + str(self.img1) + ", " + str(self.sbox) + ")")
 		cog.outl("),");

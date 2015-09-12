@@ -6,7 +6,7 @@
 #    By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/08/10 13:13:01 by ngoguey           #+#    #+#              #
-#    Updated: 2015/09/12 07:46:25 by ngoguey          ###   ########.fr        #
+#    Updated: 2015/09/12 13:13:35 by ngoguey          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,19 +49,26 @@ fshaders = [
 gshaders = [
 	Gshader("face_rgb", "face_rgb.geom", ""),
 	Gshader("face_grey", "pouvno_facegrey.geom", ""),
-	Gshader("po_facegrey", "po_facegrey.geom", ""),
+	Gshader("po_facegrey", "po_facegrey.geom", "viewproj"),
 	Gshader("pos_to_cubemap", "pos_to_cubemap.geom", ""),
+]
+tcshaders = [
+	Tcshader("test", "test.tesc", "")
+]
+teshaders = [
+	Teshader("test", "test.tese", "")
 ]
 programs = [
 	# land fait ceci cela
-	Program("land", "pocono_to_co_nomodel", "cono_coli", "no", img1=0),
+	Program("land", "pocono_to_co_nomodel", "cono_coli", img1=0),
 	# ptn fait ceci cela
-	Program("ptn", "poteno_to_uv", "couvno_blendli", "face_grey", sbox=0, img1=1),
+	Program("ptn", "poteno_to_uv", "couvno_blendli", gsname="face_grey", sbox=0, img1=1),
 	# pcn fait ceci cela
-	Program("pcn", "pocono_to_co", "cono_coli", "no", sbox=0),
+	Program("pcn", "pocono_to_co", "cono_coli", sbox=0),
 	# sun fait ceci cela
-	Program("sun", "poin_poout_mvptrans", "co_sun", "po_facegrey"),
-	Program("pointshadow", "po_to_noop_noviewproj", "depth01", "pos_to_cubemap"),
+Program("sun", "poin_poout_mvptrans", "co_sun", gsname="po_facegrey"),
+# Program("sun", "poin_poout_mvptrans", "co_sun", gsname="po_facegrey", tcsname="test", tesname="test"),
+	Program("pointshadow", "po_to_noop_noviewproj", "depth01", gsname="pos_to_cubemap"),
 ]
 textures = [
 	# porcelain fait ceci cela

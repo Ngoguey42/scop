@@ -6,15 +6,15 @@
 #    By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/08/10 13:13:20 by ngoguey           #+#    #+#              #
-#    Updated: 2015/09/03 19:08:45 by ngoguey          ###   ########.fr        #
+#    Updated: 2015/09/12 13:08:16 by ngoguey          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 import cog
 from conf import *
 
-cstructs1 = [vshaders, fshaders, gshaders, programs]
-cstructs2 = [textures, meshes, models]
+cstructs1 = [vshaders, fshaders, gshaders, tcshaders, teshaders]
+cstructs2 = [programs, textures, meshes, models]
 cstructs = cstructs1 + cstructs2
 
 def output_enums():
