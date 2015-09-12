@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 10:33:54 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/09/12 06:49:47 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/09/12 09:38:45 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 # define VSHD_PATH(FILENAME) (SHD_PATH("vshaders/" FILENAME))
 # define FSHD_PATH(FILENAME) (SHD_PATH("fshaders/" FILENAME))
 # define GSHD_PATH(FILENAME) (SHD_PATH("gshaders/" FILENAME))
+# define TCSHD_PATH(FILENAME) (SHD_PATH("tcshaders/" FILENAME))
+# define TESHD_PATH(FILENAME) (SHD_PATH("teshaders/" FILENAME))
 
 /*
 ** RESSOURCES

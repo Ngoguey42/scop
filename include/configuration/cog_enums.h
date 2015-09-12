@@ -71,6 +71,20 @@ typedef enum				e_program_index
 	sp_num_programs
 }							t_program_index;
 
+typedef enum				e_tcshader_index
+{
+	sp_test_tcshader,
+	sp_num_tcshaders,
+	sp_no_tcshader
+}							t_tcshader_index;
+
+typedef enum				e_teshader_index
+{
+	sp_test_teshader,
+	sp_num_teshaders,
+	sp_no_teshader
+}							t_teshader_index;
+
 typedef enum				e_texture_index
 {
 	sp_porcelain_texture,

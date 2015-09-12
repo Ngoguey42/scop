@@ -6,7 +6,7 @@
 #    By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/08/10 13:13:20 by ngoguey           #+#    #+#              #
-#    Updated: 2015/09/03 19:08:45 by ngoguey          ###   ########.fr        #
+#    Updated: 2015/09/12 09:39:44 by ngoguey          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,8 +14,9 @@ import cog
 from conf import *
 
 cstructs1 = [vshaders, fshaders, gshaders, programs]
-cstructs2 = [textures, meshes, models]
-cstructs = cstructs1 + cstructs2
+cstructs2 = [tcshaders, teshaders]
+cstructs3 = [textures, meshes, models]
+cstructs = cstructs1 + cstructs2 + cstructs3
 
 def output_enums():
 	for cstruct in cstructs:
@@ -43,6 +44,15 @@ def output_cconf1():
 
 def output_cconf2():
 	for cstruct in cstructs2:
+		assert len(cstruct) > 0
+		cstruct[0].output_cconf_start()
+		for elt in cstruct:
+			elt.output_cconf_entry()
+		cstruct[0].output_cconf_end()
+		cog.outl("")
+
+def output_cconf3():
+	for cstruct in cstructs3:
 		assert len(cstruct) > 0
 		cstruct[0].output_cconf_start()
 		for elt in cstruct:

@@ -6,7 +6,7 @@
 #    By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/08/10 13:13:01 by ngoguey           #+#    #+#              #
-#    Updated: 2015/09/12 07:46:25 by ngoguey          ###   ########.fr        #
+#    Updated: 2015/09/12 09:39:06 by ngoguey          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,6 +51,12 @@ gshaders = [
 	Gshader("face_grey", "pouvno_facegrey.geom", ""),
 	Gshader("po_facegrey", "po_facegrey.geom", ""),
 	Gshader("pos_to_cubemap", "pos_to_cubemap.geom", ""),
+]
+tcshaders = [
+	Tcshader("test", "test.tesc", "")
+]
+teshaders = [
+	Teshader("test", "test.tese", "")
 ]
 programs = [
 	# land fait ceci cela

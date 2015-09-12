@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 10:07:19 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/09/12 09:03:25 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/09/12 09:39:57 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,18 @@ typedef struct					s_gshader
 	void						(*const unif_update)();
 	GLuint						handle;
 }								t_gshader;
+typedef struct					s_tcshader
+{
+	char const					*filepath;
+	void						(*const unif_update)();
+	GLuint						handle;
+}								t_tcshader;
+typedef struct					s_teshader
+{
+	char const					*filepath;
+	void						(*const unif_update)();
+	GLuint						handle;
+}								t_teshader;
 
 /*
 ** TEXTURE
@@ -265,6 +277,8 @@ typedef struct					s_env
 	t_vshader					vshaders[sp_num_vshaders];
 	t_fshader					fshaders[sp_num_fshaders];
 	t_gshader					gshaders[sp_num_gshaders];
+	t_tcshader					tcshaders[sp_num_tcshaders];
+	t_teshader					teshaders[sp_num_teshaders];
 	t_program					programs[sp_num_programs];
 	t_mesh						meshes[sp_num_meshes];
 	t_texture					textures[sp_num_textures];

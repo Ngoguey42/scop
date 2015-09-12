@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/01 12:15:52 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/09/12 09:21:50 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/09/12 09:40:18 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ static const struct s_env_shader_type	g_shaders_types[] = {
 	S(VERTEX, v, t_vshader),
 	S(FRAGMENT, f, t_fshader),
 	S(GEOMETRY, g, t_gshader),
+	S(TESS_CONTROL, tc, t_tcshader),
+	S(TESS_EVALUATION, te, t_teshader),
 };
 
 static int		check_shader_error(GLuint shader, GLuint flag)
@@ -56,7 +58,6 @@ static int		sp_load_shader(char const *filepath, char **ptr)
 	char	buffer[512];
 
 	fd = open(filepath, O_RDONLY);
-	qprintf("debug filepath: %p\n", filepath);
 	if (fd < 0)
 		return (ERRORNOF("fopen(\"%s\")", filepath));
 	*ptr = NULL;
