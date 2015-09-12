@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/01 12:15:52 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/09 18:32:05 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/09/12 09:21:50 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,20 @@
 
 #define BADLOAD_FMT "Could not open %s \"\033[35m%s\033[0m\""
 #define BADCREATE_FMT "Error in glCreateShader(%d)"
+
+#define GLTYPE(NAME) (GL_ ## NAME ## _SHADER)
+#define NUM(LETTER) (sp_num_ ## LETTER ## shaders)
+#define OF_E(LETTER) offsetof(t_env, LETTER ## shaders)
+#define OF_F(TYPE) offsetof(TYPE, filepath)
+#define OF_H(TYPE) offsetof(TYPE, handle)
+
+#define S(C, L, T) {GLTYPE(C), #C, NUM(L), OF_E(L), sizeof(T), OF_F(T), OF_H(T)}
+
+static const struct s_env_shader_type	g_shaders_types[] = {
+	S(VERTEX, v, t_vshader),
+	S(FRAGMENT, f, t_fshader),
+	S(GEOMETRY, g, t_gshader),
+};
 
 static int		check_shader_error(GLuint shader, GLuint flag)
 {
@@ -42,6 +56,7 @@ static int		sp_load_shader(char const *filepath, char **ptr)
 	char	buffer[512];
 
 	fd = open(filepath, O_RDONLY);
+	qprintf("debug filepath: %p\n", filepath);
 	if (fd < 0)
 		return (ERRORNOF("fopen(\"%s\")", filepath));
 	*ptr = NULL;
@@ -96,22 +111,26 @@ void			sp_delete_shaders(t_env *e)
 
 int				sp_init_shaders(t_env *e)
 {
-	int		i;
+	size_t									i;
+	struct s_env_shader_type const			*stype;
+	struct s_env_shader_type const *const	end = END_ARRAY(g_shaders_types);
+	void									*ptr;
 
-	i = -1;
-	while (++i < sp_num_vshaders)
-		if (sp_new_shader(e->vshaders[i].filepath, &e->vshaders[i].handle
-						, GL_VERTEX_SHADER))
-			return (ERRORF("sp_new_vshader(%d)", i));
-	i = -1;
-	while (++i < sp_num_fshaders)
-		if (sp_new_shader(e->fshaders[i].filepath, &e->fshaders[i].handle
-							, GL_FRAGMENT_SHADER))
-			return (ERRORF("sp_new_fshader(%d)", i));
-	i = -1;
-	while (++i < sp_num_gshaders)
-		if (sp_new_shader(e->gshaders[i].filepath, &e->gshaders[i].handle
-							, GL_GEOMETRY_SHADER))
-			return (ERRORF("sp_new_gshader(%d)", i));
+	stype = g_shaders_types;
+	while (stype < end)
+	{
+		i = 0;
+		ptr = (void*)e + stype->env_offset;
+		while (i < stype->num_shaders)
+		{
+			if (sp_new_shader(*(char const**)(ptr + stype->filepath_offset)
+								, ptr + stype->handle_offset
+								, stype->type))
+				return (ERRORF("sp_new_shader(%s:%d)", stype->name, i));
+			i++;
+			ptr += stype->struct_size;
+		}
+		stype++;
+	}
 	return (0);
 }

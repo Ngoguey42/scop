@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 10:07:19 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/09/03 16:19:39 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/09/12 09:03:25 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -248,6 +248,16 @@ typedef enum					e_ob_param
 /*
 ** ENV
 */
+struct							s_env_shader_type
+{
+	GLenum						type;
+	char						*name;
+	size_t						num_shaders;
+	size_t						env_offset;
+	size_t						struct_size;
+	size_t						filepath_offset;
+	size_t						handle_offset;
+};
 typedef struct					s_env
 { //todo, mettre des const partout
 	GLFWwindow					*win;
