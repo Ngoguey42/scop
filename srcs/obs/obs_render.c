@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/27 12:01:57 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/09/03 16:20:04 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/09/12 13:24:26 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,18 @@ void			render_prog_obs(t_env const *e, t_program_index i)
 	t_ftlist const *const	prl = e->obs + i;
 	void					(*vsunif_update)();
 	void					(*fsunif_update)();
+	void					(*gsunif_update)();
 
 	vsunif_update = VSOFP(e, p)->unif_update;
 	fsunif_update = FSOFP(e, p)->unif_update;
+	gsunif_update = GSOFP(e, p)->unif_update;
 	glUseProgram(p->handle);
 	if (vsunif_update != NULL)
 		vsunif_update(e, p);
 	if (fsunif_update != NULL)
 		fsunif_update(e, p);
+	if (gsunif_update != NULL)
+		gsunif_update(e, p);
 	ftl_foreach_if((void*)prl, &render_ob, (void*)e, &sp_ob_getnot_hidden);
 	return ;
 }

@@ -51,7 +51,7 @@ int			sp_loadconf_vshaders(t_env *e)
 	LOC(sp_pos_loc, 3)),
 	VSHADER("po_to_noop_noviewproj.vert", NULL,
 	LOC(sp_pos_loc, 3)),
-	VSHADER("poIn_poOut_mvpTrans.vert", &sp_unif_viewproj,
+	VSHADER("poIn_poOut_mvpTrans.vert", NULL,
 	LOC(sp_pos_loc, 3)),
 	};
 	memcpy(&e->vshaders, &tmp, sizeof(tmp));

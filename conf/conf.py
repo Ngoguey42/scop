@@ -6,7 +6,7 @@
 #    By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/08/10 13:13:01 by ngoguey           #+#    #+#              #
-#    Updated: 2015/09/12 13:13:35 by ngoguey          ###   ########.fr        #
+#    Updated: 2015/09/12 13:29:54 by ngoguey          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ vshaders = [
 	("pos", 3), ),
 	Vshader("po_to_noop_noviewproj", "po_to_noop_noviewproj.vert", "",
 	("pos", 3), ),
-	Vshader("poin_poout_mvptrans", "poIn_poOut_mvpTrans.vert", "viewproj",
+	Vshader("poin_poout_mvptrans", "poIn_poOut_mvpTrans.vert", "",
 	("pos", 3), ),
 ]
 fshaders = [
