@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/15 13:44:48 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/09/12 09:44:26 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/09/12 09:46:51 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,21 @@ void			sp_clean_env(t_env *e)
 	return ;
 }
 
+static void		load_cstructs(t_env *e)
+{
+	L(vshaders, e);
+	L(fshaders, e);
+	L(gshaders, e);
+	L(tcshaders, e);
+	L(teshaders, e);
+	L(programs, e);
+	L(textures, e);
+	L(meshes, e);
+	L(models, e);
+	L(options_mesh, e);
+	return ;
+}
+
 int				sp_init_env(t_env *e)
 {
 	sp_register_instance(e);
@@ -57,9 +72,6 @@ int				sp_init_env(t_env *e)
 	e->projection = m4_fovprojection(WIN_FOVF, WIN_RATIOF, WIN_NEARF, WIN_FARF);
 	sp_update_campos(e, true);
 	e->states[sp_window_focused_state] = 1;
-	if (L(vshaders, e) || L(fshaders, e) || L(gshaders, e)
-		|| L(tcshaders, e) || L(teshaders, e) || L(programs, e)
-		|| L(textures, e) || L(meshes, e) || L(models, e) || L(options_mesh, e))
-		return (1); //virer ce if affreux
+	load_cstructs(e);
 	return (0);
 }

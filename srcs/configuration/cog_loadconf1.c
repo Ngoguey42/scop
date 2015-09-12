@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/08/24 15:53:55 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/24 15:53:56 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/09/12 09:49:54 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 #define VSHADER(N,F,...) {VSHD_PATH(N), F, NARG(__VA_ARGS__), {__VA_ARGS__}, 0}
 #define FSHADER(N, F) {FSHD_PATH(N), (F), 0}
 #define GSHADER(N, F) {GSHD_PATH(N), (F), 0}
-#define PROG(VS,FS,GS,TEXI) {VS, FS, GS, TEXI, 0}
-#define TEXI(...) {__VA_ARGS__}
+#define TCSHADER(N, F) {TCSHD_PATH(N), (F), 0}
+#define TESHADER(N, F) {TESHD_PATH(N), (F), 0}
 
 /*
 **	[[[cog
@@ -89,22 +89,23 @@ int			sp_loadconf_gshaders(t_env *e)
 	return (0);
 }
 
-int			sp_loadconf_programs(t_env *e)
+int			sp_loadconf_tcshaders(t_env *e)
 {
-	t_program const		tmp[sp_num_programs] = {
+	t_tcshader const		tmp[sp_num_tcshaders] = {
 
-	PROG(sp_pocono_to_co_nomodel_vshader, sp_cono_coli_fshader, sp_no_gshader
-	, TEXI(0, -1)),
-	PROG(sp_poteno_to_uv_vshader, sp_couvno_blendli_fshader
-	, sp_face_grey_gshader, TEXI(1, 0)),
-	PROG(sp_pocono_to_co_vshader, sp_cono_coli_fshader, sp_no_gshader
-	, TEXI(-1, 0)),
-	PROG(sp_poin_poout_mvptrans_vshader, sp_co_sun_fshader
-	, sp_po_facegrey_gshader, TEXI(-1, -1)),
-	PROG(sp_po_to_noop_noviewproj_vshader, sp_depth01_fshader
-	, sp_pos_to_cubemap_gshader, TEXI(-1, -1)),
+	TCSHADER("test.tesc", NULL),
 	};
-	memcpy(&e->programs, &tmp, sizeof(tmp));
+	memcpy(&e->tcshaders, &tmp, sizeof(tmp));
+	return (0);
+}
+
+int			sp_loadconf_teshaders(t_env *e)
+{
+	t_teshader const		tmp[sp_num_teshaders] = {
+
+	TESHADER("test.tese", NULL),
+	};
+	memcpy(&e->teshaders, &tmp, sizeof(tmp));
 	return (0);
 }
 
