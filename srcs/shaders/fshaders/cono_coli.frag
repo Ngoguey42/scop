@@ -1,12 +1,12 @@
 // ************************************************************************** //
 //                                                                            //
 //                                                        :::      ::::::::   //
-//   couvno_blendli.frag                                :+:      :+:    :+:   //
+//   cono_coli.frag                                     :+:      :+:    :+:   //
 //                                                    +:+ +:+         +:+     //
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
-//   Created: 2015/07/30 10:07:14 by ngoguey           #+#    #+#             //
-//   Updated: 2015/08/27 17:07:09 by ngoguey          ###   ########.fr       //
+//   Created: 2015/09/12 08:25:34 by ngoguey           #+#    #+#             //
+//   Updated: 2015/09/12 08:30:04 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -14,25 +14,44 @@
 
 /*
 ** CONFIG MACROES
+** INITIAL_RADIUS		-> Initial sampling radius at max distance.
 */
 #define AMBIENT_STRENGTH 0.02f
 #define DIFFUSE_STRENGTH 2.00f
-#define SPECULAR_STRENGTH 0.50f
+#define SPECULAR_STRENGTH 2.00f
 #define SPECULAR_POWER 32.f
+#define GAMMA 2.2f
 
 #define NSAMPLESI 20
 #define BIAS 0.05f
 #define DECAY 1.5f
 #define NUM_SAMPLING_LOOPS 3
-#define INITIAL_RADIUS (300.f / 1024.f)
+#define SBOX_RESOLUTIONF 1024.f
+#define INITIAL_RADIUS (200.f / SBOX_RESOLUTIONF)
 
 /*
 ** CALCULATED MACROES
+** GN           ->  Gold Number
+** V0           ->  Base value for a normalized dodecahedron
 */
 #define NSAMPLESF float(NSAMPLESI)
-#define GN ((1 + sqrt(5.f)) / 2.f)
+#define GN ((1.f + sqrt(5.f)) / 2.f)
 #define GN2 (GN * GN)
 #define GN3 (GN2 * GN)
+#define NORMALIZE_FACT (1 / sqrt(GN2 * GN2 * 3))
+#define V0 (GN * NORMALIZE_FACT)
+#define V1 (GN2 * NORMALIZE_FACT)
+#define V2 (GN3 * NORMALIZE_FACT)
+
+vec3                        SAMPLES[NSAMPLESI] = vec3[](
+	vec3(-V1, -V1, V1), vec3(V2, V0, 0),    vec3(V2, -V0, 0),
+	vec3(-V2, V0, 0),   vec3(-V2, -V0, 0),  vec3(0, V2, V0),
+	vec3(0, V2, -V0),   vec3(V0, 0, -V2),   vec3(-V0, 0, -V2),
+	vec3(0, -V2, -V0),  vec3(0, -V2, V0),   vec3(V0, 0, V2),
+	vec3(-V0, 0, V2),   vec3(V1, V1, -V1),  vec3(V1, V1, V1),
+	vec3(-V1, V1, -V1), vec3(-V1, V1, V1),  vec3(V1, -V1, -V1),
+	vec3(V1, -V1, V1),  vec3(-V1, -V1, -V1)
+);
 
 /*
 ** IN / UNIFORMS
@@ -62,16 +81,6 @@ uniform struct Light {
 */
 out vec4					color;
 
-vec3						SAMPLES[NSAMPLESI] = vec3[](
-	vec3(-GN2, -GN2, GN2),	vec3(GN3, GN, 0),		vec3(GN3, -GN, 0),
-	vec3(-GN3, GN, 0),		vec3(-GN3, -GN, 0),		vec3(0, GN3, GN),
-	vec3(0, GN3, -GN),		vec3(GN, 0, -GN3),		vec3(-GN, 0, -GN3),
-	vec3(0, -GN3, -GN),		vec3(0, -GN3, GN),		vec3(GN, 0, GN3),
-	vec3(-GN, 0, GN3),		vec3(GN2, GN2, -GN2),	vec3(GN2, GN2, GN2),
-	vec3(-GN2, GN2, -GN2),	vec3(-GN2, GN2, GN2),	vec3(GN2, -GN2, -GN2),
-	vec3(GN2, -GN2, GN2),	vec3(-GN2, -GN2, -GN2)
-);
-
 float					sample_shadows(
 	float dFraLi, vec3 vLiToFra, float weight, float radius)
 {
@@ -100,7 +109,8 @@ float					compute_shadows(
 	shadow = 0.f;
 	samples = 0.f;
 	weight = 1.f;
-	radius = INITIAL_RADIUS * sqrt(dnFraLi);
+	radius = INITIAL_RADIUS;
+	// radius = INITIAL_RADIUS * sqrt(dnFraLi);
 	for (int i = 0; i < NUM_SAMPLING_LOOPS; i++)
 	{
 		shadow += sample_shadows(dFraLi, vLiToFra, weight, radius);
@@ -125,25 +135,25 @@ void					main()
 	float	attenuation = 1.f
 		- (dFraLi / far)
 		;
-	vec3	ambient = AMBIENT_STRENGTH * l.a;
+	vec3	ambient = AMBIENT_STRENGTH * pow(l.a, vec3(GAMMA));
 	vec3	diffuse = max(dot(vnFraNormal, vnFraToLi), 0.f)
-		* DIFFUSE_STRENGTH * l.d;
+		* DIFFUSE_STRENGTH * pow(l.d, vec3(GAMMA));
 	vec3    vnLiCamHalfway = normalize(vnFraToLi + vnFraToCam);
 	vec3	specular =
 		pow(max(dot(vnFraNormal, vnLiCamHalfway), 0.0), SPECULAR_POWER)
-		* SPECULAR_STRENGTH * l.s;
+		* SPECULAR_STRENGTH * pow(l.s, vec3(GAMMA));
 	float	shadow = compute_shadows(dnFraLi, dFraLi, vLiToFra);
 
 	color = vec4(fs_in.col, 1.f);
 
-#define GAMMA 2.2f
+
 	
 	color.rgb = pow(color.rgb, vec3(GAMMA));
 	// color = vec4(0.7, 0.7, 0.7, 1.);
 	color = vec4(
-		(ambient
+		pow((ambient
 		 + (diffuse + specular)
-		 * (1.f - shadow) * attenuation)
+			 * (1.f - shadow) * attenuation), vec3(1.f / GAMMA))
 		* color.xyz
 		, color.w);
 	color.rgb = pow(color.rgb, vec3(1.f / GAMMA));

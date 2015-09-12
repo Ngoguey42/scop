@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 12:08:19 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/27 14:41:56 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/09/12 07:15:57 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ static int		begin(t_env *e)
 
 static void		loop(t_env *e)
 {
+	glPatchParameteri(GL_PATCH_VERTICES, 3); //move
 	while (!glfwWindowShouldClose(e->win))
 	{
 		sp_timings_handle_nofocus(e);

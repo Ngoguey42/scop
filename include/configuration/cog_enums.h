@@ -33,6 +33,7 @@ typedef enum				e_vshader_index
 	sp_pocono_to_co_nomodel_vshader,
 	sp_po_to_noop_vshader,
 	sp_po_to_noop_noviewproj_vshader,
+	sp_poin_poout_mvptrans_vshader,
 	sp_num_vshaders
 }							t_vshader_index;
 
@@ -54,6 +55,7 @@ typedef enum				e_gshader_index
 {
 	sp_face_rgb_gshader,
 	sp_face_grey_gshader,
+	sp_po_facegrey_gshader,
 	sp_pos_to_cubemap_gshader,
 	sp_num_gshaders,
 	sp_no_gshader

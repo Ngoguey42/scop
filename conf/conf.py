@@ -6,7 +6,7 @@
 #    By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/08/10 13:13:01 by ngoguey           #+#    #+#              #
-#    Updated: 2015/09/03 19:11:06 by ngoguey          ###   ########.fr        #
+#    Updated: 2015/09/12 07:46:25 by ngoguey          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,8 @@ vshaders = [
 	("pos", 3), ),
 	Vshader("po_to_noop_noviewproj", "po_to_noop_noviewproj.vert", "",
 	("pos", 3), ),
+	Vshader("poin_poout_mvptrans", "poIn_poOut_mvpTrans.vert", "viewproj",
+	("pos", 3), ),
 ]
 fshaders = [
 	Fshader("co_identity", "co_identity.frag", ""),
@@ -41,12 +43,13 @@ fshaders = [
 	Fshader("uvno_uvli", "uvno_uvli.frag", "light"),
 	Fshader("cono_coli", "cono_coli.frag", "lightstruct"),
 	Fshader("couvno_blendli", "couvno_blendli.frag", "lightstruct"),
-	Fshader("co_sun", "co_sun.frag", "suncolor"),
+	Fshader("co_sun", "co_sun.frag", "sunfrag"),
 	Fshader("depth01", "depth01.frag", ""),
 ]
 gshaders = [
 	Gshader("face_rgb", "face_rgb.geom", ""),
-	Gshader("face_grey", "face_grey.geom", ""),
+	Gshader("face_grey", "pouvno_facegrey.geom", ""),
+	Gshader("po_facegrey", "po_facegrey.geom", ""),
 	Gshader("pos_to_cubemap", "pos_to_cubemap.geom", ""),
 ]
 programs = [
@@ -57,7 +60,7 @@ programs = [
 	# pcn fait ceci cela
 	Program("pcn", "pocono_to_co", "cono_coli", "no", sbox=0),
 	# sun fait ceci cela
-	Program("sun", "po_to_noop", "co_sun", "no"),
+	Program("sun", "poin_poout_mvptrans", "co_sun", "po_facegrey"),
 	Program("pointshadow", "po_to_noop_noviewproj", "depth01", "pos_to_cubemap"),
 ]
 textures = [

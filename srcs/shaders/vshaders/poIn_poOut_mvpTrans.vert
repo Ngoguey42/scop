@@ -1,32 +1,31 @@
 // ************************************************************************** //
 //                                                                            //
 //                                                        :::      ::::::::   //
-//   co_sun.frag                                        :+:      :+:    :+:   //
+//   poIn_poOut_mvpTrans.vert                           :+:      :+:    :+:   //
 //                                                    +:+ +:+         +:+     //
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
-//   Created: 2015/07/30 13:42:20 by ngoguey           #+#    #+#             //
-//   Updated: 2015/09/12 08:30:24 by ngoguey          ###   ########.fr       //
+//   Created: 2015/09/12 07:39:04 by ngoguey           #+#    #+#             //
+//   Updated: 2015/09/12 07:44:23 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
 #version 410 core
 
-uniform vec3				sunColor;
-uniform float				mixval;
+layout (location = 0) in vec3	pos;
 
-in Co
+out Po
 {
-	vec3					col;
-}							fs_in;
+	vec3						pos;
+}								vs_out;
 
-out vec4					color;
-
-#define GAMMA 2.2f
+uniform mat4					viewproj;
+uniform mat4					model;
 
 void main()
 {
-	color = vec4(fs_in.col, 1.0f);
-	// color = vec4(sunColor, 1.0f);
-	return ;
-} 
+	vec4		vWorldpos = model * vec4(pos, 1.f);
+
+	vs_out.pos = vec3(vWorldpos);
+	gl_Position = viewproj * vWorldpos;
+}

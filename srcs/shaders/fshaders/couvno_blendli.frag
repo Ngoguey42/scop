@@ -6,7 +6,7 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/07/30 10:07:14 by ngoguey           #+#    #+#             //
-//   Updated: 2015/09/12 06:52:50 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/09/12 08:20:16 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -25,8 +25,8 @@
 #define BIAS 0.05f
 #define DECAY 1.5f
 #define NUM_SAMPLING_LOOPS 3
-#define INITIAL_RADIUS (4.5f * 15.f / (1024.f * 4.5345679f))
-//default radius is 4.534567884
+#define SBOX_RESOLUTIONF 1024.f
+#define INITIAL_RADIUS (100.f / SBOX_RESOLUTIONF)
 
 /*
 ** CALCULATED MACROES
@@ -35,9 +35,12 @@
 */
 #define NSAMPLESF float(NSAMPLESI)
 #define GN ((1.f + sqrt(5.f)) / 2.f)
-#define V0 GN
-#define V1 (V0 * V0)
-#define V2 (V0 * V0 * V0)
+#define GN2 (GN * GN)
+#define GN3 (GN2 * GN)
+#define NORMALIZE_FACT (1 / sqrt(GN2 * GN2 * 3))
+#define V0 (GN * NORMALIZE_FACT)
+#define V1 (GN2 * NORMALIZE_FACT)
+#define V2 (GN3 * NORMALIZE_FACT)
 
 vec3						SAMPLES[NSAMPLESI] = vec3[](
 	vec3(-V1, -V1, V1),	vec3(V2, V0, 0),	vec3(V2, -V0, 0),
@@ -108,6 +111,7 @@ float					compute_shadows(
 	shadow = 0.f;
 	samples = 0.f;
 	weight = 1.f;
+	// radius = INITIAL_RADIUS;
 	radius = INITIAL_RADIUS * sqrt(dnFraLi);
 	for (int i = 0; i < NUM_SAMPLING_LOOPS; i++)
 	{
