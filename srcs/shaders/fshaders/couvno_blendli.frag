@@ -6,7 +6,7 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/07/30 10:07:14 by ngoguey           #+#    #+#             //
-//   Updated: 2015/08/27 17:07:02 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/09/12 06:52:50 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -133,14 +133,14 @@ void					main()
 	float   attenuation = 1.f
 		- (dFraLi / far)
 		;
-	vec3	ambient = AMBIENT_STRENGTH * l.a;
+	vec3	ambient = AMBIENT_STRENGTH * pow(l.a, vec3(GAMMA));
 	vec3	diffuse = max(dot(vnFraNormal, vnFraToLi), 0.f)
-		* DIFFUSE_STRENGTH * l.d;
+		* DIFFUSE_STRENGTH * pow(l.d, vec3(GAMMA));
 
 	vec3	vnLiCamHalfway = normalize(vnFraToLi + vnFraToCam);
 	vec3	specular =
 		pow(max(dot(vnFraNormal, vnLiCamHalfway), 0.0), SPECULAR_POWER)
-			* SPECULAR_STRENGTH * l.s;
+		* SPECULAR_STRENGTH * pow(l.s, vec3(GAMMA));
 	
 	float	shadow = compute_shadows(dnFraLi, dFraLi, vLiToFra);
 
@@ -149,9 +149,9 @@ void					main()
 	// color = vec4(fs_in.col, 1.f);
 	// color = vec4(0.7, 0.7, 0.7, 1.);
 	color = vec4(
-		(ambient
+		pow((ambient
 		 + (diffuse + specular)
-		 * (1.f - shadow) * attenuation)
+			 * (1.f - shadow) * attenuation), vec3(1.f / GAMMA))
 		* color.xyz
 		, color.w);
 	color.rgb = pow(color.rgb, vec3(1.f / GAMMA));
