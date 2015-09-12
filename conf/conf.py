@@ -6,7 +6,7 @@
 #    By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/08/10 13:13:01 by ngoguey           #+#    #+#              #
-#    Updated: 2015/09/12 13:29:54 by ngoguey          ###   ########.fr        #
+#    Updated: 2015/09/12 14:09:31 by ngoguey          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -66,8 +66,8 @@ programs = [
 	# pcn fait ceci cela
 	Program("pcn", "pocono_to_co", "cono_coli", sbox=0),
 	# sun fait ceci cela
-Program("sun", "poin_poout_mvptrans", "co_sun", gsname="po_facegrey"),
-# Program("sun", "poin_poout_mvptrans", "co_sun", gsname="po_facegrey", tcsname="test", tesname="test"),
+# Program("sun", "poin_poout_mvptrans", "co_sun", gsname="po_facegrey"),
+Program("sun", "poin_poout_mvptrans", "co_sun", gsname="po_facegrey", tcsname="test", tesname="test"),
 	Program("pointshadow", "po_to_noop_noviewproj", "depth01", gsname="pos_to_cubemap"),
 ]
 textures = [

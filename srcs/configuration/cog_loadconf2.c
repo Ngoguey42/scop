@@ -40,7 +40,7 @@ int			sp_loadconf_programs(t_env *e)
 	PROG(sp_pocono_to_co_vshader, sp_cono_coli_fshader, sp_no_gshader
 	, sp_no_tcshader, sp_no_teshader, TEXI(-1, 0)),
 	PROG(sp_poin_poout_mvptrans_vshader, sp_co_sun_fshader
-	, sp_po_facegrey_gshader, sp_no_tcshader, sp_no_teshader, TEXI(-1, -1)),
+	, sp_po_facegrey_gshader, sp_test_tcshader, sp_test_teshader, TEXI(-1, -1)),
 	PROG(sp_po_to_noop_noviewproj_vshader, sp_depth01_fshader
 	, sp_pos_to_cubemap_gshader, sp_no_tcshader, sp_no_teshader, TEXI(-1, -1)),
 	};
