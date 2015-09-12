@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/08/12 17:06:35 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/09/03 18:37:24 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/09/12 08:35:48 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,6 @@ void		op_retreive_data(t_objmodel *m, t_vao_basic *vao)
 	*nfloats = (m->vertices.chunk_size - sizeof(t_ui) - sizeof(t_ftset_node))
 				/ sizeof(float);
 	ft_set_to_vector(&m->vertices, &vao->vbo.vertices
-					 , &extract_vertices, nfloats);
+						, &extract_vertices, nfloats);
 	return ;
 }

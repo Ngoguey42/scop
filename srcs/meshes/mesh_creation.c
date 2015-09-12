@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/09/03 14:25:20 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/09/03 19:20:58 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/09/12 08:38:47 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int	validate_vbo(t_vbo_basic const *vbo, t_vshader const *vs)
 		num_elt_vs = sp_location_size(vs, i);
 		if (num_elt_vbo != num_elt_vs)
 		{
-			ERRORF("%s(%hhu/%hhu)" , g_locinfo[i].str, num_elt_vbo, num_elt_vs);
+			ERRORF("%s(%hhu/%hhu)", g_locinfo[i].str, num_elt_vbo, num_elt_vs);
 			error = 1;
 		}
 		i++;

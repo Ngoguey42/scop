@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   transposed_ebo.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/09/12 08:40:04 by ngoguey           #+#    #+#             */
+/*   Updated: 2015/09/12 08:40:04 by ngoguey          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "scop.h"
 #include <stdlib.h>
@@ -25,12 +36,12 @@ static void	set_faces_ptr(t_ui *tmp_field[1], t_vertex_transp tvertex[1])
 }
 
 static void	set_faces(t_transp_ebo tebo[1], t_face_basic const face[1]
-					   , size_t facei)
+					 	, size_t facei)
 {
 	size_t					i;
 	t_vertex_transp *const	tvertices = tebo->tvertices.data;
 	t_vertex_transp			*tvertex;
-	
+
 	i = 0;
 	while (i < 3)
 	{
@@ -48,8 +59,8 @@ void		sp_transpose_ebo(t_transp_ebo tebo[1], t_vao_basic const vao[1])
 	if (ftv_init_instance(&tebo->tvertices, sizeof(t_vertex_transp)))
 		ft_enomem();
 	if (ftv_insert_count(&tebo->tvertices
-						 , &(t_vertex_transp){0, NULL}
-						 , vao->vbo.vertices.size))
+							, &(t_vertex_transp){0, NULL}
+							, vao->vbo.vertices.size))
 		ft_enomem();
 	ftv_foreach(&vao->ebo.faces, &set_nfaces, tebo);
 	tebo->field = malloc(sizeof(t_ui) * 3 * vao->ebo.faces.size);

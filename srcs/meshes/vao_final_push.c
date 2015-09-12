@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   vao_final_push.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/09/12 08:37:26 by ngoguey           #+#    #+#             */
+/*   Updated: 2015/09/12 08:37:27 by ngoguey          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "scop.h"
 
@@ -18,7 +29,7 @@ static void	push_attributes(t_vshader const *vs, size_t vert_width)
 				, i, vs->locations[i].size
 				, vert_width, delta);
 		glVertexAttribPointer(i, vs->locations[i].size, GL_FLOAT, GL_FALSE
-							  , vert_width, delta);
+								, vert_width, delta);
 		glEnableVertexAttribArray(i);
 		delta += vs->locations[i].size * sizeof(GLfloat);
 	}
@@ -27,18 +38,19 @@ static void	push_attributes(t_vshader const *vs, size_t vert_width)
 }
 
 static void	push_buffers(t_mesh *me, t_ftvector const vbo_final[1]
-						 , t_ftvector const ebo_final[1])
+							, t_ftvector const ebo_final[1])
 {
 	if (!me->generated)
 		glGenBuffers(1, me->handles + 1);
 	glBindBuffer(GL_ARRAY_BUFFER, me->handles[1]);
 	glBufferData(GL_ARRAY_BUFFER, vbo_final->size * vbo_final->chunk_size
-				 , vbo_final->data, me->usage);
+					, vbo_final->data, me->usage);
 	if (!me->generated)
 		glGenBuffers(1, me->handles + 2);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, me->handles[2]);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, ebo_final->size * ebo_final->chunk_size
-				 , ebo_final->data, me->usage);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER
+					, ebo_final->size * ebo_final->chunk_size
+					, ebo_final->data, me->usage);
 }
 
 void		sp_vao_final_push(t_mesh *me, t_vshader const *vs

@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/09/03 16:26:04 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/09/03 17:46:07 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/09/12 08:41:11 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <math.h>
 
 static void		normal_to_face(t_vertex_basic const *vertices
-							   , t_face_basic face[1])
+								, t_face_basic face[1])
 {
 	t_vec3 const	p0pos = *((t_vec3*)&vertices[face->indices[0]].pos);
 	t_vec3 const	p1pos = *((t_vec3*)&vertices[face->indices[1]].pos);

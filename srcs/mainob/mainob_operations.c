@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/08/16 11:57:44 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/09/03 16:10:59 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/09/12 08:42:42 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,4 +23,3 @@ void		sp_mainob_resetpos(t_env *e)
 	ob->moved = true;
 	return ;
 }
-

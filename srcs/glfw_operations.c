@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/13 12:53:24 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/09/03 12:03:33 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/09/12 08:43:27 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int			sp_init_glfw(t_env *e)
 	glfwInit();
 	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 	glfwWindowHint(GLFW_SAMPLES, 2);
-//	glfwWindowHint(GLFW_DOUBLEBUFFER, GL_TRUE);
+	glfwWindowHint(GLFW_DOUBLEBUFFER, GL_TRUE);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, OPENGL_PROFILE);
@@ -98,7 +98,7 @@ int			sp_init_glfw(t_env *e)
 	glfwSetKeyCallback(e->win, key_callback);
 	glfwMakeContextCurrent(e->win);
 	if (!INIT_GLEW)
-	  return (ERROR("glewInit()"));
+		return (ERROR("glewInit()"));
 	glViewport(0, 0, WIN_WIDTHI, WIN_HEIGHTI);
 	glEnable(GL_DEPTH_TEST);
 	return (0);

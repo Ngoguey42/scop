@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   vao_final.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/09/12 08:38:29 by ngoguey           #+#    #+#             */
+/*   Updated: 2015/09/12 08:45:36 by ngoguey          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "scop.h"
 #include <string.h>
@@ -5,7 +16,7 @@
 extern t_location_info const	g_locinfo[sp_num_locs];
 
 static void	build_vertex(float tmp[], t_vbo_basic const vbo[1]
-						 , t_vertex_basic const vert[1])
+							, t_vertex_basic const vert[1])
 {
 	t_location_info const			*loc;
 	t_location_info const *const	end = END_ARRAY(g_locinfo);
@@ -20,7 +31,7 @@ static void	build_vertex(float tmp[], t_vbo_basic const vbo[1]
 		if (num_elt > 0)
 		{
 			memcpy(tmpptr, REACH_OFFSET(void, vert, loc->vertex_basic_offset)
-				   , num_elt * sizeof(float));
+					, num_elt * sizeof(float));
 			tmpptr += num_elt;
 		}
 		loc++;
@@ -29,7 +40,7 @@ static void	build_vertex(float tmp[], t_vbo_basic const vbo[1]
 }
 
 static void	vbo_final_build(t_ftvector vbo_final[1], t_vbo_basic const vbo[1]
-						   , t_vertex_basic const vert[1])
+							, t_vertex_basic const vert[1])
 {
 	t_byte		buf[vbo_final->chunk_size];
 
@@ -45,7 +56,7 @@ static void	ebo_final_build(t_ftvector ebo_final[1], t_face_basic const face[1])
 }
 
 void		sp_vao_final_build(t_ftvector vbo_final[1], t_ftvector ebo_final[1]
-							   , t_vao_basic const vao[1])
+								, t_vao_basic const vao[1])
 {
 	t_vbo_basic const *const	vbo = &vao->vbo;
 	size_t const				vbo_width = (vbo->npos + vbo->ncol
@@ -60,7 +71,7 @@ void		sp_vao_final_build(t_ftvector vbo_final[1], t_ftvector ebo_final[1]
 	if (ftv_reserve(ebo_final, vao->ebo.faces.size))
 		ft_enomem();
 	ftv_foreach2(&vbo->vertices, &vbo_final_build, vbo_final
-				 , (void*)&vao->vbo);
+					, (void*)&vao->vbo);
 	ftv_foreach(&vao->ebo.faces, &ebo_final_build, ebo_final);
 	return ;
 }

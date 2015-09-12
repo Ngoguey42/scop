@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   timings.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/09/12 08:34:08 by ngoguey           #+#    #+#             */
+/*   Updated: 2015/09/12 08:34:22 by ngoguey          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include <string.h>
 #include "scop.h"
@@ -16,7 +27,7 @@ void			sp_timings_init(t_env *e)
 void			sp_timings_update(t_env *e)
 {
 	double const		last_time = e->time_cur;
-	
+
 	e->time_cur = glfwGetTime();
 	e->fps = FPS_NSAMPLESF
 		/ (e->time_cur - e->fps_samples[e->fps_sample_index]);

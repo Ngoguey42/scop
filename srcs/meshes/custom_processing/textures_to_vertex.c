@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   textures_to_vertex.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/09/12 08:41:40 by ngoguey           #+#    #+#             */
+/*   Updated: 2015/09/12 08:41:40 by ngoguey          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "scop.h"
 #include <math.h>
@@ -16,9 +27,9 @@ void	sp_calc_uv_spherical(t_mesh const *me, t_vertex_basic *vertex)
 	}
 	vertex->tex.u = fabs(atan(tmp.x / tmp.z)) * me->tex_scale[0];
 	vertex->tex.v = acos(tmp.y / sqrt(tmp.x * tmp.x
-									  + tmp.y * tmp.y
-									  + tmp.z * tmp.z))
-		 * me->tex_scale[1];
+									+ tmp.y * tmp.y
+									+ tmp.z * tmp.z))
+		* me->tex_scale[1];
 	return ;
 }
 
@@ -37,14 +48,6 @@ void	sp_calc_uv_box(t_mesh const *me, t_vertex_basic *vertex)
 	float const		ny = ABS(vertex->nor.y);
 	float const		nz = ABS(vertex->nor.z);
 
-/*	t_vec3 v3 = *(t_vec3*)&vertex->nor;
-	if (!VALID(v3.x)
-		|| !VALID(v3.y)
-		|| !VALID(v3.z)
-		)
-	{
-		v3_print(*(t_vec3*)&vertex->pos);
-		}	*/
 	if (nz > nx && nz > ny)
 	{
 		vertex->tex.u = vertex->pos.x * me->tex_scale[0];

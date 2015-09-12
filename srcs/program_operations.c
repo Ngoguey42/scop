@@ -6,13 +6,13 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/01 12:32:53 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/09 13:47:29 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/09/12 08:35:36 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
 
-extern t_location_info const    g_locinfo[sp_num_locs];
+extern t_location_info const	g_locinfo[sp_num_locs];
 
 static int		check_program_error(GLuint program, GLuint flag)
 {
