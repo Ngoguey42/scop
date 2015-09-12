@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/01 12:32:53 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/09/12 08:35:36 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/09/12 10:36:39 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,10 @@ static int		new_program(t_env const *e, t_program *p)
 	glAttachShader(p->handle, FSOFP(e, p)->handle);
 	if (p->gshader != sp_no_gshader)
 		glAttachShader(p->handle, GSOFP(e, p)->handle);
+	if (p->tcshader != sp_no_tcshader)
+		glAttachShader(p->handle, TCSOFP(e, p)->handle);
+	if (p->teshader != sp_no_teshader)
+		glAttachShader(p->handle, TESOFP(e, p)->handle);
 	i = 0;
 	while (i < vs->n_locations)
 	{

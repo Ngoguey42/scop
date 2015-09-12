@@ -51,7 +51,7 @@ int			sp_loadconf_vshaders(t_env *e)
 	LOC(sp_pos_loc, 3)),
 	VSHADER("po_to_noop_noviewproj.vert", NULL,
 	LOC(sp_pos_loc, 3)),
-	VSHADER("poIn_poOut_mvpTrans.vert", &sp_unif_viewproj,
+	VSHADER("poIn_poOut_mvpTrans.vert", NULL,
 	LOC(sp_pos_loc, 3)),
 	};
 	memcpy(&e->vshaders, &tmp, sizeof(tmp));
@@ -82,7 +82,7 @@ int			sp_loadconf_gshaders(t_env *e)
 
 	GSHADER("face_rgb.geom", NULL),
 	GSHADER("pouvno_facegrey.geom", NULL),
-	GSHADER("po_facegrey.geom", NULL),
+	GSHADER("po_facegrey.geom", &sp_unif_viewproj),
 	GSHADER("pos_to_cubemap.geom", NULL),
 	};
 	memcpy(&e->gshaders, &tmp, sizeof(tmp));
@@ -93,7 +93,7 @@ int			sp_loadconf_tcshaders(t_env *e)
 {
 	t_tcshader const		tmp[sp_num_tcshaders] = {
 
-	TCSHADER("test.tesc", NULL),
+	TCSHADER("test.tesc", &sp_unif_tesc),
 	};
 	memcpy(&e->tcshaders, &tmp, sizeof(tmp));
 	return (0);

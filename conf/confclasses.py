@@ -6,7 +6,7 @@
 #    By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/08/10 13:13:13 by ngoguey           #+#    #+#              #
-#    Updated: 2015/09/12 09:39:33 by ngoguey          ###   ########.fr        #
+#    Updated: 2015/09/12 10:33:19 by ngoguey          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -185,12 +185,17 @@ class Teshader(Cstruct):
 			cog.out("NULL" + "),\n")
 
 class Program(Cstruct):
-	def __init__(self, name, vsname, fsname, gsname
+	def __init__(self, name, vsname, fsname
+				 , gsname = "no"
+				 , tcsname = "no"
+				 , tesname = "no"
 				 , img1=-1, sbox=-1):
 		self.name = name
 		self.vsname = vsname
 		self.fsname = fsname
 		self.gsname = gsname
+		self.tcsname = tcsname
+		self.tesname = tesname
 		self.img1 = img1
 		self.sbox = sbox
 	@staticmethod
@@ -214,6 +219,8 @@ class Program(Cstruct):
 		self.printstr("\tPROG(sp_" + self.vsname + "_vshader")
 		self.printstr(", sp_" + self.fsname + "_fshader")
 		self.printstr(", sp_" + self.gsname + "_gshader")
+		self.printstr(", sp_" + self.tcsname + "_tcshader")
+		self.printstr(", sp_" + self.tesname + "_teshader")
 		self.maxcol = 78
 		self.printstr(", TEXI(" + str(self.img1) + ", " + str(self.sbox) + ")")
 		cog.outl("),");

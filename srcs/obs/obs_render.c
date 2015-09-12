@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/27 12:01:57 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/09/03 16:20:04 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/09/12 10:39:46 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,10 @@ static void		render_ob(t_env const *e, t_ob *ob)
 	if (p->gltexi[sp_sbox_texslot] >= 0)
 		sp_activate_texture(p, sp_sbox_texslot, &e->sbox_texture, "depthMap");
 	glBindVertexArray(me->handles[0]);
-	glDrawElements(GL_TRIANGLES, me->faces3, GL_UNSIGNED_INT, 0);
+	if (p->tcshader != sp_no_tcshader)
+		glDrawElements(GL_PATCHES, me->faces3, GL_UNSIGNED_INT, 0);
+	else
+		glDrawElements(GL_TRIANGLES, me->faces3, GL_UNSIGNED_INT, 0);
 	glBindVertexArray(0);
 	return ;
 }

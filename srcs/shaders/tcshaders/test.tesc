@@ -1,30 +1,39 @@
 // ************************************************************************** //
 //                                                                            //
 //                                                        :::      ::::::::   //
-//   poIn_poOut_mvpTrans.vert                           :+:      :+:    :+:   //
+//   test.tesc                                          :+:      :+:    :+:   //
 //                                                    +:+ +:+         +:+     //
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
-//   Created: 2015/09/12 07:39:04 by ngoguey           #+#    #+#             //
-//   Updated: 2015/09/12 10:54:48 by ngoguey          ###   ########.fr       //
+//   Created: 2015/09/12 09:58:17 by ngoguey           #+#    #+#             //
+//   Updated: 2015/09/12 10:51:18 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
 #version 410 core
 
-layout (location = 0) in vec3	pos;
+layout						(vertices = 3) out;
+uniform vec3				cpos;
+
+in Po
+{
+	vec3					pos;
+}							tec_in[];
 
 out Po
 {
-	vec3						pos;
-}								vs_out;
+	vec3					pos;
+}							tec_out[];
 
-uniform mat4					model;
-
-void main()
+void	main()
 {
-	vec4		vWpos = model * vec4(pos, 1.f);
-
-	vs_out.pos = vec3(vWpos);
-	gl_Position = vWpos;
+	tec_out[gl_InvocationID].pos = tec_in[gl_InvocationID].pos;
+	// if (gl_InvocationID == 0) //lol?
+	{
+		gl_TessLevelOuter[0] = 7.f;
+		gl_TessLevelOuter[1] = 7.f;
+		gl_TessLevelOuter[2] = 7.f;
+		gl_TessLevelInner[0] = gl_TessLevelOuter[2];
+	}
+	return ;
 }

@@ -6,7 +6,7 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/07/30 10:07:14 by ngoguey           #+#    #+#             //
-//   Updated: 2015/09/12 08:20:16 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/09/12 11:42:09 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -153,9 +153,12 @@ void					main()
 	// color = vec4(fs_in.col, 1.f);
 	// color = vec4(0.7, 0.7, 0.7, 1.);
 	color = vec4(
-		pow((ambient
+		pow //pow
+		(ambient
 		 + (diffuse + specular)
-			 * (1.f - shadow) * attenuation), vec3(1.f / GAMMA))
+		 * (1.f - shadow) * attenuation
+		, vec3(1.f / GAMMA) //pow
+			)
 		* color.xyz
 		, color.w);
 	color.rgb = pow(color.rgb, vec3(1.f / GAMMA));

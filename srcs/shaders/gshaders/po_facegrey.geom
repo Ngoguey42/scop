@@ -6,7 +6,7 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/09/12 07:32:38 by ngoguey           #+#    #+#             //
-//   Updated: 2015/09/12 08:00:29 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/09/12 11:04:13 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -14,6 +14,8 @@
 
 layout					(triangles) in;
 layout					(triangle_strip, max_vertices = 3) out;
+
+uniform vec4			viewproj;
 
 in Po
 {
@@ -50,7 +52,7 @@ void main()
 		gs_out.col = vec3(0.f, 0.f, val);
 	for (i = 0; i < 3; i++)
 	{
-		gl_Position = gl_in[i].gl_Position;
+		gl_Position = viewproj * gl_in[i].gl_Position;
 		EmitVertex();
 	}
 	EndPrimitive();

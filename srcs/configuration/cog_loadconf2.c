@@ -6,14 +6,14 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/09/12 09:34:39 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/09/12 09:49:56 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/09/12 10:31:47 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
 #include <string.h>
 
-#define PROG(VS,FS,GS,TEXI) {VS, FS, GS, TEXI, 0}
+#define PROG(VS,FS,GS,TCS,TES,TEXI) {VS, FS, GS, TCS, TES, TEXI, 0}
 #define TEXI(...) {__VA_ARGS__}
 #define FTVU ftv_uninitialized()
 #define MESH(...) {__VA_ARGS__, 0, {0, 0, 0}, false}
@@ -35,15 +35,15 @@ int			sp_loadconf_programs(t_env *e)
 	t_program const		tmp[sp_num_programs] = {
 
 	PROG(sp_pocono_to_co_nomodel_vshader, sp_cono_coli_fshader, sp_no_gshader
-	, TEXI(0, -1)),
+	, sp_no_tcshader, sp_no_teshader, TEXI(0, -1)),
 	PROG(sp_poteno_to_uv_vshader, sp_couvno_blendli_fshader
-	, sp_face_grey_gshader, TEXI(1, 0)),
+	, sp_face_grey_gshader, sp_no_tcshader, sp_no_teshader, TEXI(1, 0)),
 	PROG(sp_pocono_to_co_vshader, sp_cono_coli_fshader, sp_no_gshader
-	, TEXI(-1, 0)),
+	, sp_no_tcshader, sp_no_teshader, TEXI(-1, 0)),
 	PROG(sp_poin_poout_mvptrans_vshader, sp_co_sun_fshader
-	, sp_po_facegrey_gshader, TEXI(-1, -1)),
+	, sp_po_facegrey_gshader, sp_no_tcshader, sp_no_teshader, TEXI(-1, -1)),
 	PROG(sp_po_to_noop_noviewproj_vshader, sp_depth01_fshader
-	, sp_pos_to_cubemap_gshader, TEXI(-1, -1)),
+	, sp_pos_to_cubemap_gshader, sp_no_tcshader, sp_no_teshader, TEXI(-1, -1)),
 	};
 	memcpy(&e->programs, &tmp, sizeof(tmp));
 	return (0);

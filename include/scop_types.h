@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 10:07:19 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/09/12 09:39:57 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/09/12 10:37:08 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,6 +142,8 @@ typedef struct					s_program
 	t_vshader_index const		vshader;
 	t_fshader_index const		fshader;
 	t_gshader_index const		gshader;
+	t_tcshader_index const		tcshader;
+	t_teshader_index const		teshader;
 	int const					gltexi[sp_num_texslots];
 	GLuint						handle;
 }								t_program;
@@ -331,6 +333,8 @@ typedef struct					s_env
 # define VSOFP(E, P)		(&(E)->vshaders[(P)->vshader])
 # define FSOFP(E, P)		(&(E)->fshaders[(P)->fshader])
 # define GSOFP(E, P)		(&(E)->gshaders[(P)->gshader])
+# define TCSOFP(E, P)		(&(E)->tcshaders[(P)->tcshader])
+# define TESOFP(E, P)		(&(E)->teshaders[(P)->teshader])
 
 # define POFME(E, ME)		(&(E)->programs[(ME)->program])
 # define VSOFME(E, ME)		VSOFP((E), POFME((E), ME))

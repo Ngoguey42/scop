@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/21 09:01:30 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/09/12 07:47:08 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/09/12 10:11:29 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,11 @@ void			sp_unif_viewproj(t_env const *e, t_program const *p)
 void			sp_unif_sunfrag(t_env const *e, t_program const *p)
 {
 	UNIF(p, m3f, "sunColor", e->sunka.x, e->sunka.y, e->sunka.z);
+	return ;
+}
+
+void			sp_unif_tesc(t_env const *e, t_program const *p)
+{
+	UNIF(p, m3fv, "cpos", 1, (float*)&e->cpos);
 	return ;
 }
