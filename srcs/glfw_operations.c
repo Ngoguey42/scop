@@ -83,7 +83,9 @@ int			sp_init_glfw(t_env *e)
 	glfwInit();
 	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 	glfwWindowHint(GLFW_SAMPLES, 2);
-//	glfwWindowHint(GLFW_DOUBLEBUFFER, GL_TRUE);
+#ifdef MAC_OS_MODE
+		glfwWindowHint(GLFW_DOUBLEBUFFER, GL_TRUE);
+#endif
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, OPENGL_PROFILE);
@@ -94,6 +96,9 @@ int			sp_init_glfw(t_env *e)
 		glfwTerminate();
 		return (ERROR("glfwCreateWindow"));
 	}
+#ifndef MAC_OS_MODE
+	glfwSetWindowPos(e->win, 1000, 0);
+#endif
 	glfwSetWindowFocusCallback(e->win, &focus_callback);
 	glfwSetKeyCallback(e->win, key_callback);
 	glfwMakeContextCurrent(e->win);
