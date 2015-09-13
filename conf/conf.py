@@ -32,7 +32,7 @@ vshaders = [
 	("pos", 3), ),
 	Vshader("po_to_noop_noviewproj", "po_to_noop_noviewproj.vert", "",
 	("pos", 3), ),
-	Vshader("poin_poout_mvptrans", "poIn_poOut_mvpTrans.vert", "",
+	Vshader("poin_poout_mvptrans", "poIn_poOut_mvpTrans.vert", "viewproj",
 	("pos", 3), ),
 ]
 fshaders = [

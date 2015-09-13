@@ -30,8 +30,8 @@ void	main()
 	if (gl_InvocationID == 0) //lol?
 	{
 		gl_TessLevelOuter[0] = 4;
-		gl_TessLevelOuter[1] = 1;
-		gl_TessLevelOuter[2] = 2;
+		gl_TessLevelOuter[1] = 4;
+		gl_TessLevelOuter[2] = 4;
 		gl_TessLevelInner[0] = 3;
 	}
 	return ;

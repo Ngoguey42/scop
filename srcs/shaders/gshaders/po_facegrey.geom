@@ -21,6 +21,7 @@ uniform mat4                    model;
 in Po
 {
 	vec3				pos;
+	vec3				bpos;
 }						gs_in[];
 
 out Co
@@ -51,10 +52,11 @@ void main()
 		gs_out.col = vec3(0.f, val, 0.f);
 	else
 		gs_out.col = vec3(0.f, 0.f, val);
+	gs_out.col += (gs_in[0].bpos + gs_in[1].bpos + gs_in[2].bpos) / 3.f;
 	for (i = 0; i < 3; i++)
 	{
 		gl_Position = viewproj * model * vec4(gs_in[i].pos, 1.f);
-		// gl_Position = gl_in[i].gl_Position;
+//		gl_Position = vec4(gs_in[i].pos, 1.f);
 		EmitVertex();
 	}
 	EndPrimitive();
