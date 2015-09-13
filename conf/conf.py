@@ -85,6 +85,7 @@ meshes = [
 	 ),
 	Mesh("plane", "ptn", objfile_enum="cessna"),
 	Mesh("sun", "sun", objfile_enum="dodecahedron", recenter="true"),
+#	Mesh("sun", "sun", objfile_enum="tetrahedron", recenter="true"),
 
 	Mesh("land", "land"
 		 , fill_funbody="""{

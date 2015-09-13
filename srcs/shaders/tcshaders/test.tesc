@@ -29,10 +29,10 @@ void	main()
 	tec_out[gl_InvocationID].pos = tec_in[gl_InvocationID].pos;
 	if (gl_InvocationID == 0) //lol?
 	{
-		gl_TessLevelOuter[0] = 4;
-		gl_TessLevelOuter[1] = 4;
-		gl_TessLevelOuter[2] = 4;
-		gl_TessLevelInner[0] = 3;
+		gl_TessLevelOuter[0] = 1;
+		gl_TessLevelOuter[1] = 1;
+		gl_TessLevelOuter[2] = 1;
+		gl_TessLevelInner[0] = 1;
 	}
 	return ;
 }

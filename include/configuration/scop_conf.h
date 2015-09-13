@@ -42,7 +42,7 @@
 # define LAND_SIDEF 50.f
 # define LAND_RANGEF (14.f)
 # define LAND_COLORRAND 0.05f
-# define POINTS_DEPTHI 7
+# define POINTS_DEPTHI 9
 # define LAND_YF -10.f
 
 # define MOUSE_SENSITIVITYF 0.005f

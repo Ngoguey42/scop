@@ -30,7 +30,7 @@ out Co
 }						gs_out;
 
 #define NSHADESI int(36)
-#define FIRST_COLORF 25.f
+#define FIRST_COLORF 0.f
 #define LAST_COLORF 230.f
 
 

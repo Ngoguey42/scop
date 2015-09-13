@@ -43,7 +43,7 @@ void	main()
 	vec3	vLpos = interpolate3D(tec_in[0].pos, tec_in[1].pos, tec_in[2].pos);
 	float	radius = length(vLpos);
 //		viewproj * model *
-	vLpos /= radius;
+	vLpos /= radius * 2.f;
 	
 	tec_out.pos = vLpos;
 	tec_out.bpos = gl_TessCoord;
