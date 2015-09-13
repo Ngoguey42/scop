@@ -185,6 +185,8 @@ void		sp_unif_viewproj2(t_env const *e, t_program const *p);
 void		sp_unif_light(t_env const *e, t_program const *p);
 void		sp_unif_lightstruct(t_env const *e, t_program const *p);
 void		sp_unif_sunfrag(t_env const *e, t_program const *p);
+void		sp_unif_suntesc(t_env const *e, t_program const *p);
+void		sp_unif_sungeom(t_env const *e, t_program const *p);
 
 /*
 ** OBS (OBJECTS)

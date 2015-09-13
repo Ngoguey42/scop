@@ -14,6 +14,11 @@
 
 layout						(vertices = 3) out;
 
+uniform float				tessLevelOut0;
+uniform float				tessLevelOut1;
+uniform float				tessLevelOut2;
+uniform float				tessLevelIn;
+
 in Po
 {
 	vec3					pos;
@@ -23,16 +28,13 @@ out Po
 {
 	vec3					pos;
 }							tec_out[];
-#define LOL 4
+
 void	main()
 {
 	tec_out[gl_InvocationID].pos = tec_in[gl_InvocationID].pos;
-	if (gl_InvocationID == 0) //lol?
-	{
-		gl_TessLevelOuter[0] = 1;
-		gl_TessLevelOuter[1] = 2;
-		gl_TessLevelOuter[2] = 1;
-		gl_TessLevelInner[0] = 2;
-	}
+	gl_TessLevelOuter[0] = tessLevelOut0;
+	gl_TessLevelOuter[1] = tessLevelOut1;
+	gl_TessLevelOuter[2] = tessLevelOut2;
+	gl_TessLevelInner[0] = tessLevelIn;
 	return ;
 }

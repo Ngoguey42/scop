@@ -46,20 +46,23 @@ void			render_prog_obs(t_env const *e, t_program_index i)
 {
 	t_program const	*const	p = e->programs + i;
 	t_ftlist const *const	prl = e->obs + i;
-	void					(*vsunif_update)();
-	void					(*fsunif_update)();
-	void					(*gsunif_update)();
+	void					(*const vsunif_update)() = VSOFP(e, p)->unif_update;
+	void					(*const fsunif_update)() = FSOFP(e, p)->unif_update;
+	void					(*const gsunif_update)() = GSOFP(e, p)->unif_update;
+	void					(*const tcsunif_update)() = TCSOFP(e, p)->unif_update;
+	void					(*const tesunif_update)() = TESOFP(e, p)->unif_update;
 
-	vsunif_update = VSOFP(e, p)->unif_update;
-	fsunif_update = FSOFP(e, p)->unif_update;
-	gsunif_update = GSOFP(e, p)->unif_update;
 	glUseProgram(p->handle);
 	if (vsunif_update != NULL)
 		vsunif_update(e, p);
 	if (fsunif_update != NULL)
 		fsunif_update(e, p);
-	if (gsunif_update != NULL)
+	if (p->gshader != sp_no_gshader && gsunif_update != NULL)
 		gsunif_update(e, p);
+	if (p->tcshader != sp_no_tcshader && tcsunif_update != NULL)
+		tcsunif_update(e, p);
+	if (p->teshader != sp_no_teshader && tesunif_update != NULL)
+		tesunif_update(e, p);
 	ftl_foreach_if((void*)prl, &render_ob, (void*)e, &sp_ob_getnot_hidden);
 	return ;
 }

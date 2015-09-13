@@ -32,7 +32,7 @@ vshaders = [
 	("pos", 3), ),
 	Vshader("po_to_noop_noviewproj", "po_to_noop_noviewproj.vert", "",
 	("pos", 3), ),
-	Vshader("poin_poout_mvptrans", "poIn_poOut_mvpTrans.vert", "viewproj",
+	Vshader("poin_poout_mvptrans", "poIn_poOut_mvpTrans.vert", "",
 	("pos", 3), ),
 ]
 fshaders = [
@@ -49,11 +49,11 @@ fshaders = [
 gshaders = [
 	Gshader("face_rgb", "face_rgb.geom", ""),
 	Gshader("face_grey", "pouvno_facegrey.geom", ""),
-	Gshader("po_facegrey", "po_facegrey.geom", "viewproj"),
+	Gshader("po_facegrey", "po_facegrey.geom", "sungeom"),
 	Gshader("pos_to_cubemap", "pos_to_cubemap.geom", ""),
 ]
 tcshaders = [
-	Tcshader("test", "test.tesc", "")
+	Tcshader("test", "test.tesc", "suntesc")
 ]
 teshaders = [
 	Teshader("test", "test.tese", "")

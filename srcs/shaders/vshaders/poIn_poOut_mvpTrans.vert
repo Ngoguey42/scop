@@ -19,13 +19,7 @@ out Po
 	vec3						pos;
 }								vs_out;
 
-// uniform mat4					model;
-
 void main()
 {
-	vec4		vWorldpos = vec4(pos, 1.f);
-	// vec4		vWorldpos = model * vec4(pos, 1.f);
-
-	vs_out.pos = vec3(vWorldpos);
-	// gl_Position = vWorldpos;
+	vs_out.pos = pos;
 }
