@@ -67,5 +67,6 @@ void		sp_obupdate_mainob(t_env const *e, t_ob *ob)
 void		sp_obupdate_sun(t_env const *e, t_ob *ob)
 {
 	ob->mat = m4_translate_nonuniform(e->sunpos_cartesian);
+	ob->mat = m4_rotationref_axis(&ob->mat, y_axis, e->sunskin_rot);
 	return ;
 }

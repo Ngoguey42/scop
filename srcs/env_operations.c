@@ -66,6 +66,9 @@ int				sp_init_env(t_env *e)
 	memcpy(&e->sbox_texture, &(FUCK_NORM), sizeof(t_texture));
 	e->sbox_farplane = 150.f;
 	e->sbox_proj = m4_fovprojection(M_PI / 2.f, 1.f, 1.f, e->sbox_farplane);
+	memcpy(&e->sunskin_tessout, ((float[3]){1.f, 1.f, 1.f}), sizeof(float[3]));
+	e->sunskin_tessin = 1.f;
+	e->sunskin_rot = 0.f;
 	sp_update_sunpos(e, true);
 	e->cpos = DEFAULT_CPOS_V3;
 	memcpy(&e->cangles, DEFAULT_CANGLES, sizeof(DEFAULT_CANGLES));

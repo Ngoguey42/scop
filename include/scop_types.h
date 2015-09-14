@@ -48,6 +48,8 @@ typedef enum					e_keyindex
 	sp_apos_key,
 	sp_minus_key,
 	sp_equal_key,
+	sp_i_key,
+	sp_o_key,
 	sp_num_keys
 }								t_keyindex;
 typedef enum					e_keystate
@@ -313,6 +315,10 @@ typedef struct					s_env
 	t_mat4						sbox_proj;
 	t_mat4						sbox_viewproj[6];
 
+	float						sunskin_tessout[3];
+	float						sunskin_tessin;
+	float						sunskin_rot;
+	
 	double						time_start;
 	double						time_cur;
 	double						time_el;

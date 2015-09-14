@@ -42,7 +42,7 @@
 # define LAND_SIDEF 50.f
 # define LAND_RANGEF (14.f)
 # define LAND_COLORRAND 0.05f
-# define POINTS_DEPTHI 9
+# define POINTS_DEPTHI 7
 # define LAND_YF -10.f
 
 # define MOUSE_SENSITIVITYF 0.005f
@@ -56,6 +56,8 @@
 # define PLANES_CENTER_V3 ATOV3(0.f, 250.f, 0.f)
 
 # define FPS_NSAMPLESI 10
+
+# define SUN_ROTSPEED 3.f
 
 /*
 ** CALCULATED MACROES

@@ -18,6 +18,7 @@ void			sp_update_states(t_env *e)
 {
 	sp_update_campos(e, false);
 	sp_update_sunpos(e, false);
+	sp_update_sunrot(e, false);
 	sp_update_mainobpos(e);
 	return ;
 }

@@ -60,6 +60,7 @@ void		sp_keymodrelease(t_env *e, t_keystate keystate);
 void		sp_update_states(t_env *e);
 void		sp_update_campos(t_env *e, t_bool force);
 void		sp_update_sunpos(t_env *e, t_bool force);
+void		sp_update_sunrot(t_env *e, t_bool force);
 void		sp_update_mainobpos(t_env *e);
 void		sp_kevent_toggle_mouse_state(t_env *e);
 void		sp_kevent_mix_item(t_env *e, int direction);
@@ -164,6 +165,12 @@ void    sp_mainme_scroll_ebogrouping(t_env *e, int v);
 void    sp_mainme_toggle_ebogroupingbefore(t_env *e, int v);//ranger aussi jusquici
 void    sp_mainme_scroll_texwrapping(t_env *e, int v);
 void    sp_mainme_change_texscale(t_env *e, int v);
+
+/*
+** SUNSKIN
+*/
+void            sp_sunskin_tessout(t_env *e, int action);
+void            sp_sunskin_tessin(t_env *e, int way);
 
 /*
 ** LAND GENERATION
