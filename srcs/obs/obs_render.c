@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/27 12:01:57 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/09/12 10:39:46 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/09/12 13:46:17 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,10 @@ static void		render_ob(t_env const *e, t_ob *ob)
 		sp_activate_texture(p, sp_sbox_texslot, &e->sbox_texture, "depthMap");
 	glBindVertexArray(me->handles[0]);
 	if (p->tcshader != sp_no_tcshader)
+	{
+		glPatchParameteri(GL_PATCH_VERTICES, 3);
 		glDrawElements(GL_PATCHES, me->faces3, GL_UNSIGNED_INT, 0);
+	}
 	else
 		glDrawElements(GL_TRIANGLES, me->faces3, GL_UNSIGNED_INT, 0);
 	glBindVertexArray(0);
@@ -43,16 +46,23 @@ void			render_prog_obs(t_env const *e, t_program_index i)
 {
 	t_program const	*const	p = e->programs + i;
 	t_ftlist const *const	prl = e->obs + i;
-	void					(*vsunif_update)();
-	void					(*fsunif_update)();
+	void					(*const vsunif_update)() = VSOFP(e, p)->unif_update;
+	void					(*const fsunif_update)() = FSOFP(e, p)->unif_update;
+	void					(*const gsunif_update)() = GSOFP(e, p)->unif_update;
+	void					(*const tcsunif_update)() = TCSOFP(e, p)->unif_update;
+	void					(*const tesunif_update)() = TESOFP(e, p)->unif_update;
 
-	vsunif_update = VSOFP(e, p)->unif_update;
-	fsunif_update = FSOFP(e, p)->unif_update;
 	glUseProgram(p->handle);
 	if (vsunif_update != NULL)
 		vsunif_update(e, p);
 	if (fsunif_update != NULL)
 		fsunif_update(e, p);
+	if (p->gshader != sp_no_gshader && gsunif_update != NULL)
+		gsunif_update(e, p);
+	if (p->tcshader != sp_no_tcshader && tcsunif_update != NULL)
+		tcsunif_update(e, p);
+	if (p->teshader != sp_no_teshader && tesunif_update != NULL)
+		tesunif_update(e, p);
 	ftl_foreach_if((void*)prl, &render_ob, (void*)e, &sp_ob_getnot_hidden);
 	return ;
 }

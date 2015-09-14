@@ -6,7 +6,7 @@
 #    By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/08/10 13:13:01 by ngoguey           #+#    #+#              #
-#    Updated: 2015/09/12 11:08:39 by ngoguey          ###   ########.fr        #
+#    Updated: 2015/09/12 14:09:31 by ngoguey          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,11 +49,11 @@ fshaders = [
 gshaders = [
 	Gshader("face_rgb", "face_rgb.geom", ""),
 	Gshader("face_grey", "pouvno_facegrey.geom", ""),
-	Gshader("po_facegrey", "po_facegrey.geom", "viewproj"),
+	Gshader("po_facegrey", "po_facegrey.geom", "sungeom"),
 	Gshader("pos_to_cubemap", "pos_to_cubemap.geom", ""),
 ]
 tcshaders = [
-	Tcshader("test", "test.tesc", "tesc")
+	Tcshader("test", "test.tesc", "suntesc")
 ]
 teshaders = [
 	Teshader("test", "test.tese", "")
@@ -66,8 +66,8 @@ programs = [
 	# pcn fait ceci cela
 	Program("pcn", "pocono_to_co", "cono_coli", sbox=0),
 	# sun fait ceci cela
-Program("sun", "poin_poout_mvptrans", "co_sun", gsname="po_facegrey"),
-# Program("sun", "poin_poout_mvptrans", "co_sun", gsname="po_facegrey", tcsname="test", tesname="test"),
+# Program("sun", "poin_poout_mvptrans", "co_sun", gsname="po_facegrey"),
+Program("sun", "poin_poout_mvptrans", "co_sun", gsname="po_facegrey", tcsname="test", tesname="test"),
 	Program("pointshadow", "po_to_noop_noviewproj", "depth01", gsname="pos_to_cubemap"),
 ]
 textures = [
@@ -85,6 +85,7 @@ meshes = [
 	 ),
 	Mesh("plane", "ptn", objfile_enum="cessna"),
 	Mesh("sun", "sun", objfile_enum="dodecahedron", recenter="true"),
+#	Mesh("sun", "sun", objfile_enum="tetrahedron", recenter="true"),
 
 	Mesh("land", "land"
 		 , fill_funbody="""{

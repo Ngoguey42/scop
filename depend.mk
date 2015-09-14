@@ -8,7 +8,8 @@ O_FILES :=	o/srcs/configuration/cog_loadconf1.o \
 			o/srcs/configuration/unif_update_light.o \
 			o/srcs/controls/controls_apply.o o/srcs/controls/controls_events.o \
 			o/srcs/controls/controls_inputs.o o/srcs/controls/update_campos.o \
-			o/srcs/controls/update_mainobpos.o o/srcs/controls/update_sunpos.o \
+			o/srcs/controls/update_mainobpos.o \
+			o/srcs/controls/update_sunangles.o o/srcs/controls/update_sunpos.o \
 			o/srcs/env_operations.o o/srcs/ftmath/matrix4.o \
 			o/srcs/ftmath/matrix4_invtranslate.o \
 			o/srcs/ftmath/matrix4_miscop.o o/srcs/ftmath/matrix4_rotation.o \
@@ -42,8 +43,9 @@ O_FILES :=	o/srcs/configuration/cog_loadconf1.o \
 			o/srcs/obs/obs_update.o o/srcs/program_operations.o \
 			o/srcs/sbox/sbox_operations.o o/srcs/sbox/sbox_render.o \
 			o/srcs/shaders/location_operations.o \
-			o/srcs/shaders/shader_operations.o o/srcs/textures/parse_tga.o \
-			o/srcs/textures/textures_operations.o o/srcs/timings.o
+			o/srcs/shaders/shader_operations.o o/srcs/sun.o \
+			o/srcs/textures/parse_tga.o o/srcs/textures/textures_operations.o \
+			o/srcs/timings.o
 
 o/srcs/configuration/cog_loadconf1.o: srcs/configuration/cog_loadconf1.c \
 	include/scop.h include/ftmath.h include/configuration/scop_conf.h \
@@ -140,6 +142,13 @@ o/srcs/controls/update_campos.o: srcs/controls/update_campos.c include/scop.h \
 	include/configuration/cog_meshfill.h include/objmodel/objmodel.h \
 	include/meshes/vao.h include/ftmath.h | o/srcs/controls
 o/srcs/controls/update_mainobpos.o: srcs/controls/update_mainobpos.c \
+	include/scop.h include/ftmath.h include/configuration/scop_conf.h \
+	include/ftmath.h include/configuration/cog_enums.h include/scop_types.h \
+	include/configuration/scop_conf.h include/ftmath.h \
+	include/configuration/cog_enums.h include/meshes/vao.h include/ftmath.h \
+	include/configuration/cog_meshfill.h include/objmodel/objmodel.h \
+	include/meshes/vao.h include/ftmath.h | o/srcs/controls
+o/srcs/controls/update_sunangles.o: srcs/controls/update_sunangles.c \
 	include/scop.h include/ftmath.h include/configuration/scop_conf.h \
 	include/ftmath.h include/configuration/cog_enums.h include/scop_types.h \
 	include/configuration/scop_conf.h include/ftmath.h \
@@ -443,6 +452,13 @@ o/srcs/shaders/shader_operations.o: srcs/shaders/shader_operations.c \
 	include/configuration/cog_enums.h include/meshes/vao.h include/ftmath.h \
 	include/configuration/cog_meshfill.h include/objmodel/objmodel.h \
 	include/meshes/vao.h include/ftmath.h | o/srcs/shaders
+o/srcs/sun.o: srcs/sun.c include/scop.h include/ftmath.h \
+	include/configuration/scop_conf.h include/ftmath.h \
+	include/configuration/cog_enums.h include/scop_types.h \
+	include/configuration/scop_conf.h include/ftmath.h \
+	include/configuration/cog_enums.h include/meshes/vao.h include/ftmath.h \
+	include/configuration/cog_meshfill.h include/objmodel/objmodel.h \
+	include/meshes/vao.h include/ftmath.h | o/srcs
 o/srcs/textures/parse_tga.o: srcs/textures/parse_tga.c | o/srcs/textures
 o/srcs/textures/textures_operations.o: srcs/textures/textures_operations.c \
 	include/scop.h include/ftmath.h include/configuration/scop_conf.h \

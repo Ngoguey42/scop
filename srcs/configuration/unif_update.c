@@ -45,6 +45,23 @@ void			sp_unif_viewproj(t_env const *e, t_program const *p)
 void			sp_unif_sunfrag(t_env const *e, t_program const *p)
 {
 	UNIF(p, m3f, "sunColor", e->sunka.x, e->sunka.y, e->sunka.z);
+	UNIF(p, m1i, "colorUsing", 3); //color using
+	return ;
+}
+
+void			sp_unif_suntesc(t_env const *e, t_program const *p)
+{
+	UNIF(p, m1f, "tessLevelOut0", e->sunskin_tessout[0]);
+	UNIF(p, m1f, "tessLevelOut1", e->sunskin_tessout[1]);
+	UNIF(p, m1f, "tessLevelOut2", e->sunskin_tessout[2]);
+	UNIF(p, m1f, "tessLevelIn", e->sunskin_tessin);
+	return ;
+}
+
+void			sp_unif_sungeom(t_env const *e, t_program const *p)
+{
+	UNIF(p, mMatrix4fv, "viewproj", 1, GL_TRUE, (float*)&e->viewproj);
+	UNIF(p, m1i, "colorUsing", 3); //color using
 	return ;
 }
 

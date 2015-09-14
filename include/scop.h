@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 12:07:31 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/09/12 10:10:23 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/09/12 13:27:46 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void		sp_keymodrelease(t_env *e, t_keystate keystate);
 void		sp_update_states(t_env *e);
 void		sp_update_campos(t_env *e, t_bool force);
 void		sp_update_sunpos(t_env *e, t_bool force);
+void		sp_update_sunrot(t_env *e, t_bool force);
 void		sp_update_mainobpos(t_env *e);
 void		sp_kevent_toggle_mouse_state(t_env *e);
 void		sp_kevent_mix_item(t_env *e, int direction);
@@ -166,6 +167,12 @@ void    sp_mainme_scroll_texwrapping(t_env *e, int v);
 void    sp_mainme_change_texscale(t_env *e, int v);
 
 /*
+** SUNSKIN
+*/
+void            sp_sunskin_tessout(t_env *e, int action);
+void            sp_sunskin_tessin(t_env *e, int way);
+
+/*
 ** LAND GENERATION
 */
 void		sp_fill_landgrid(t_ftvector *lines);
@@ -185,7 +192,8 @@ void		sp_unif_viewproj2(t_env const *e, t_program const *p);
 void		sp_unif_light(t_env const *e, t_program const *p);
 void		sp_unif_lightstruct(t_env const *e, t_program const *p);
 void		sp_unif_sunfrag(t_env const *e, t_program const *p);
-void		sp_unif_tesc(t_env const *e, t_program const *p);
+void		sp_unif_suntesc(t_env const *e, t_program const *p);
+void		sp_unif_sungeom(t_env const *e, t_program const *p);
 
 /*
 ** OBS (OBJECTS)

@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/08/24 15:53:55 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/09/12 09:49:54 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/09/12 13:09:42 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ int			sp_loadconf_gshaders(t_env *e)
 
 	GSHADER("face_rgb.geom", NULL),
 	GSHADER("pouvno_facegrey.geom", NULL),
-	GSHADER("po_facegrey.geom", &sp_unif_viewproj),
+	GSHADER("po_facegrey.geom", &sp_unif_sungeom),
 	GSHADER("pos_to_cubemap.geom", NULL),
 	};
 	memcpy(&e->gshaders, &tmp, sizeof(tmp));
@@ -93,7 +93,7 @@ int			sp_loadconf_tcshaders(t_env *e)
 {
 	t_tcshader const		tmp[sp_num_tcshaders] = {
 
-	TCSHADER("test.tesc", &sp_unif_tesc),
+	TCSHADER("test.tesc", &sp_unif_suntesc),
 	};
 	memcpy(&e->tcshaders, &tmp, sizeof(tmp));
 	return (0);

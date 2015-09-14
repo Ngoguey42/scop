@@ -5,21 +5,20 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/09/12 09:34:39 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/09/12 10:31:47 by ngoguey          ###   ########.fr       */
+/*   Created: 2015/08/24 15:54:06 by ngoguey           #+#    #+#             */
+/*   Updated: 2015/09/12 13:11:12 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
 #include <string.h>
 
-#define PROG(VS,FS,GS,TCS,TES,TEXI) {VS, FS, GS, TCS, TES, TEXI, 0}
-#define TEXI(...) {__VA_ARGS__}
 #define FTVU ftv_uninitialized()
 #define MESH(...) {__VA_ARGS__, 0, {0, 0, 0}, false}
 #define TEXTURE(FN) {TEXTURE_PATH(FN), GL_TEXTURE_2D, {0, 0}, 0}
 #define MODEL(ME, TE, F) {(ME), (TE), (F)}
-
+#define PROG(VS,FS,GS,TCS,TES,TEXI) {VS, FS, GS, TCS, TES, TEXI, 0}
+#define TEXI(...) {__VA_ARGS__}
 
 /*
 **	[[[cog
@@ -41,7 +40,7 @@ int			sp_loadconf_programs(t_env *e)
 	PROG(sp_pocono_to_co_vshader, sp_cono_coli_fshader, sp_no_gshader
 	, sp_no_tcshader, sp_no_teshader, TEXI(-1, 0)),
 	PROG(sp_poin_poout_mvptrans_vshader, sp_co_sun_fshader
-	, sp_po_facegrey_gshader, sp_no_tcshader, sp_no_teshader, TEXI(-1, -1)),
+	, sp_po_facegrey_gshader, sp_test_tcshader, sp_test_teshader, TEXI(-1, -1)),
 	PROG(sp_po_to_noop_noviewproj_vshader, sp_depth01_fshader
 	, sp_pos_to_cubemap_gshader, sp_no_tcshader, sp_no_teshader, TEXI(-1, -1)),
 	};

@@ -6,14 +6,18 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/09/12 09:58:17 by ngoguey           #+#    #+#             //
-//   Updated: 2015/09/12 10:51:18 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/09/12 14:30:50 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
 #version 410 core
 
 layout						(vertices = 3) out;
-uniform vec3				cpos;
+
+uniform float				tessLevelOut0;
+uniform float				tessLevelOut1;
+uniform float				tessLevelOut2;
+uniform float				tessLevelIn;
 
 in Po
 {
@@ -28,12 +32,9 @@ out Po
 void	main()
 {
 	tec_out[gl_InvocationID].pos = tec_in[gl_InvocationID].pos;
-	// if (gl_InvocationID == 0) //lol?
-	{
-		gl_TessLevelOuter[0] = 7.f;
-		gl_TessLevelOuter[1] = 7.f;
-		gl_TessLevelOuter[2] = 7.f;
-		gl_TessLevelInner[0] = gl_TessLevelOuter[2];
-	}
+	gl_TessLevelOuter[0] = tessLevelOut0;
+	gl_TessLevelOuter[1] = tessLevelOut1;
+	gl_TessLevelOuter[2] = tessLevelOut2;
+	gl_TessLevelInner[0] = tessLevelIn;
 	return ;
 }

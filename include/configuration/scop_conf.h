@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 10:33:54 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/09/12 09:38:45 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/09/12 13:10:13 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@
 # define PLANES_CENTER_V3 ATOV3(0.f, 250.f, 0.f)
 
 # define FPS_NSAMPLESI 10
+
+# define SUN_ROTSPEED 3.f
 
 /*
 ** CALCULATED MACROES

@@ -61,7 +61,7 @@ static void		duplicate_vertex(t_vao_basic vao[1]
 									, size_t vi)
 {
 	t_ftvector *const			vertices = &vao->vbo.vertices;
-	t_vertex_basic const *const	vertex = (t_vertex_basic*)vertices->data + vi;
+	t_vertex_basic const		vertex = ((t_vertex_basic*)vertices->data)[vi];
 	t_face_basic *const			faces = vao->ebo.faces.data;
 	int							group;
 	t_ui						i;
@@ -72,7 +72,7 @@ static void		duplicate_vertex(t_vao_basic vao[1]
 		group = faces[tvertex->faces[i]].group;
 		if (!is_pushed_for_group(tvertex, faces, i, group))
 		{
-			if (ftv_push_back(vertices, vertex))
+			if (ftv_push_back(vertices, &vertex))
 				ft_enomem();
 			update_indices_for_group(tvertex, faces, i
 										, (size_t[2]){vi, vertices->size - 1});
@@ -90,6 +90,5 @@ void			sp_rebuild_vbo_from_groups(t_vao_basic *vao)
 	ftv_foreachi(&tebo->tvertices, &duplicate_vertex, vao);
 	ftv_release(&tebo->tvertices, NULL);
 	free(tebo->field);
-	qprintf("    Rebuilt vbo from groups\n");
 	return ;
 }

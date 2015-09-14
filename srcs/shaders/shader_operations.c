@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/01 12:15:52 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/09/12 09:40:18 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/09/12 13:05:17 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static const struct s_env_shader_type	g_shaders_types[] = {
 	S(FRAGMENT, f, t_fshader),
 	S(GEOMETRY, g, t_gshader),
 	S(TESS_CONTROL, tc, t_tcshader),
-	S(TESS_EVALUATION, te, t_teshader),
+	S(TESS_EVALUATION, te, t_teshader)
 };
 
 static int		check_shader_error(GLuint shader, GLuint flag)

@@ -33,7 +33,14 @@ static int const		g_keystates[] =
 	GLFW_KEY_APOSTROPHE,
 	GLFW_KEY_EQUAL,
 	GLFW_KEY_MINUS,
+	GLFW_KEY_I,
+	GLFW_KEY_O,
 };
+
+#define ALL_MOD (sp_shift_held | sp_control_held | sp_alt_held | sp_super_held)
+#define HELD_AND_SHIFT (sp_is_held | sp_shift_held)
+#define HELD_AND_CONTROL (sp_is_held | sp_control_held)
+#define HELD_AND_ALT (sp_is_held | sp_alt_held)
 
 static t_keyevents const	g_keyevents[] =
 {
@@ -52,6 +59,17 @@ static t_keyevents const	g_keyevents[] =
 	CONV(&sp_mainob_resetpos, 42, GLFW_KEY_R, sp_is_held | sp_control_held, 0),
 	CONV(&sp_kevent_mix_item, +1, GLFW_KEY_PAGE_UP, sp_is_held, 0),
 	CONV(&sp_kevent_mix_item, -1, GLFW_KEY_PAGE_DOWN, sp_is_held, 0),
+
+	CONV(&sp_sunskin_tessout, 0x7, GLFW_KEY_0, sp_is_held, ALL_MOD),
+	CONV(&sp_sunskin_tessout, 0x7 | 0x8, GLFW_KEY_9, sp_is_held, ALL_MOD),
+	CONV(&sp_sunskin_tessout, 0x1, GLFW_KEY_0, HELD_AND_SHIFT, 0),
+	CONV(&sp_sunskin_tessout, 0x1 | 0x8, GLFW_KEY_9, HELD_AND_SHIFT, 0),
+	CONV(&sp_sunskin_tessout, 0x2, GLFW_KEY_0, HELD_AND_CONTROL, 0),
+	CONV(&sp_sunskin_tessout, 0x2 | 0x8, GLFW_KEY_9, HELD_AND_CONTROL, 0),
+	CONV(&sp_sunskin_tessout, 0x4, GLFW_KEY_0, HELD_AND_ALT, 0),
+	CONV(&sp_sunskin_tessout, 0x4 | 0x8, GLFW_KEY_9, HELD_AND_ALT, 0),
+	CONV(&sp_sunskin_tessin, 1, GLFW_KEY_8, sp_is_held, 0),
+	CONV(&sp_sunskin_tessin, -1, GLFW_KEY_7, sp_is_held, 0),
 };
 
 void		sp_keyevent(t_env *e, int a, t_keystate ks)
