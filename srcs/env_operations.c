@@ -59,9 +59,8 @@ int				sp_init_env(t_env *e)
 	sp_register_instance(e);
 	bzero(e, sizeof(*e));
 	e->sunpos_spherical = ATOV3(30.f, M_PI / 4.f, M_PI / 4.f);
-e->sunka = e->sunkd = e->sunks = ATOV3(255.f/255.f, 216.f/255.f, 133.f/255.f);
-/* e->sunka = e->sunkd = e->sunks = ATOV3(255.f/255.f, 255.f/255.f, 255.f/255.f); */
-	memcpy(&e->sundat, ((float[2]){0.007, 0.0002}), sizeof(float[2]));
+	e->suncolor = ATOV3(255.f/255.f, 216.f/255.f, 133.f/255.f);
+	/* e->suncolor = ATOV3(255.f/255.f, 255.f/255.f, 255.f/255.f); */
 	memcpy(&e->sbox_texture, &(FUCK_NORM), sizeof(t_texture));
 	e->sbox_farplane = 150.f;
 	e->sbox_proj = m4_fovprojection(M_PI / 2.f, 1.f, 1.f, e->sbox_farplane);

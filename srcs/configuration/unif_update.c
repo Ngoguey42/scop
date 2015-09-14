@@ -44,7 +44,7 @@ void			sp_unif_viewproj(t_env const *e, t_program const *p)
 
 void			sp_unif_sunfrag(t_env const *e, t_program const *p)
 {
-	UNIF(p, m3f, "sunColor", e->sunka.x, e->sunka.y, e->sunka.z);
+	UNIF(p, m3fv, "sunColor", 1, (float*)&e->suncolor);
 	UNIF(p, m1i, "colorUsing", 3); //color using
 	return ;
 }

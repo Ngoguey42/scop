@@ -305,10 +305,7 @@ typedef struct					s_env
 
 	t_vec3						sunpos_spherical;
 	t_vec3						sunpos_cartesian;
-	t_vec3						sunka;
-	t_vec3						sunkd;
-	t_vec3						sunks;
-	float						sundat[2];
+	t_vec3						suncolor;
 	t_texture					sbox_texture;
 	GLuint						sbox_fbo;
 	float						sbox_farplane;

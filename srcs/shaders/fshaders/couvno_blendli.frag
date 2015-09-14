@@ -26,7 +26,7 @@
 #define DECAY 1.5f
 #define NUM_SAMPLING_LOOPS 3
 #define SBOX_RESOLUTIONF 1024.f
-#define INITIAL_RADIUS (100.f / SBOX_RESOLUTIONF)
+#define INITIAL_RADIUS (200.f / SBOX_RESOLUTIONF)
 
 /*
 ** CALCULATED MACROES
@@ -69,13 +69,7 @@ uniform vec3				viewPos;
 uniform float				mixval;
 uniform struct Light {
 	vec3					pos;
-
-	vec3					a;
-	// vec3					d;
-	// vec3					s;
-
-	float					linear;
-	float					quadratic;
+	vec3					col;
 }							l;
 
 /*
@@ -111,7 +105,6 @@ float					compute_shadows(
 	shadow = 0.f;
 	samples = 0.f;
 	weight = 1.f;
-	// radius = INITIAL_RADIUS;
 	radius = INITIAL_RADIUS * sqrt(dnFraLi);
 	for (int i = 0; i < NUM_SAMPLING_LOOPS; i++)
 	{
@@ -127,7 +120,7 @@ void					main()
 {
 	color = mix(vec4(fs_in.col, 1.f), texture(ourTexture, fs_in.tex), mixval);
 	color.rgb = pow(color.rgb, vec3(GAMMA)); //to sRGB space
-	vec3    cLight = l.a;
+	vec3    cLight = l.col;
 	cLight = pow(cLight, vec3(GAMMA)); //to sRGB space
 
 	vec3	vLiToFra = fs_in.pos - l.pos;

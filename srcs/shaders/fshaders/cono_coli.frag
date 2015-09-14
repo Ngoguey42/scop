@@ -67,13 +67,7 @@ uniform float				far;
 uniform vec3				viewPos;
 uniform struct Light {
 	vec3 pos;
-
-	vec3 a;
-	// vec3 d;
-	// vec3 s;
-
-	float linear;
-	float quadratic;
+	vec3 col;
 }							l;
 
 /*
@@ -109,8 +103,7 @@ float					compute_shadows(
 	shadow = 0.f;
 	samples = 0.f;
 	weight = 1.f;
-	radius = INITIAL_RADIUS;
-	// radius = INITIAL_RADIUS * sqrt(dnFraLi);
+	radius = INITIAL_RADIUS * sqrt(dnFraLi);
 	for (int i = 0; i < NUM_SAMPLING_LOOPS; i++)
 	{
 		shadow += sample_shadows(dFraLi, vLiToFra, weight, radius);
@@ -125,7 +118,7 @@ void					main()
 {
 	color = vec4(fs_in.col, 1.f);
 	color.rgb = pow(color.rgb, vec3(GAMMA)); //to sRGB space
-	vec3	cLight = l.a;
+	vec3	cLight = l.col;
 	cLight = pow(cLight, vec3(GAMMA)); //to sRGB space
 
 	vec3	vLiToFra = fs_in.pos - l.pos;
