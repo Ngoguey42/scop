@@ -57,6 +57,8 @@ t_vec3			v3_add(t_vec3 a, t_vec3 b);
 t_vec3			v3_inv(t_vec3 a);
 t_vec3			v3_div_scalar(t_vec3 a, float q);
 t_vec3			v3_mul_scalar(t_vec3 a, float q);
+float			v3_sqrdist(t_vec3 a, t_vec3 b);
+float			v3_dist(t_vec3 a, t_vec3 b);
 
 /*
 ** MATRIX4

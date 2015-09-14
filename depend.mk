@@ -15,10 +15,11 @@ O_FILES :=	o/srcs/configuration/cog_loadconf1.o \
 			o/srcs/ftmath/matrix4_miscop.o o/srcs/ftmath/matrix4_rotation.o \
 			o/srcs/ftmath/matrix4_scale.o o/srcs/ftmath/matrix4_translate.o \
 			o/srcs/ftmath/vector3.o o/srcs/ftmath/vector3_basicop.o \
-			o/srcs/ftmath/vector3_scalarop.o o/srcs/glfw_operations.o \
-			o/srcs/land/generate_land_rgb.o o/srcs/land/generate_land_xyz.o \
-			o/srcs/land/generate_land_y.o o/srcs/main.o \
-			o/srcs/mainme_operations.o o/srcs/mainob/mainob_operations.o \
+			o/srcs/ftmath/vector3_dist.o o/srcs/ftmath/vector3_scalarop.o \
+			o/srcs/glfw_operations.o o/srcs/land/generate_land_rgb.o \
+			o/srcs/land/generate_land_xyz.o o/srcs/land/generate_land_y.o \
+			o/srcs/main.o o/srcs/mainme_operations.o \
+			o/srcs/mainob/mainob_operations.o \
 			o/srcs/meshes/custom_processing/groups_to_vbo_box.o \
 			o/srcs/meshes/custom_processing/textures_to_vertex.o \
 			o/srcs/meshes/fixed_processing/normals_to_ebo.o \
@@ -183,6 +184,8 @@ o/srcs/ftmath/matrix4_translate.o: srcs/ftmath/matrix4_translate.c \
 o/srcs/ftmath/vector3.o: srcs/ftmath/vector3.c include/ftmath.h | o/srcs/ftmath
 o/srcs/ftmath/vector3_basicop.o: srcs/ftmath/vector3_basicop.c \
 	include/ftmath.h | o/srcs/ftmath
+o/srcs/ftmath/vector3_dist.o: srcs/ftmath/vector3_dist.c include/ftmath.h \
+	| o/srcs/ftmath
 o/srcs/ftmath/vector3_scalarop.o: srcs/ftmath/vector3_scalarop.c \
 	include/ftmath.h | o/srcs/ftmath
 o/srcs/glfw_operations.o: srcs/glfw_operations.c include/scop.h \

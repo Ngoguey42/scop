@@ -50,6 +50,11 @@ static void		loop(t_env *e)
 		sp_update_obs(e);
 		sp_render_sbox(e);
 		sp_render_obs(e);
+		qprintf("in(%.0f)  out(%.0f) dist(%.1f)\n"
+				, e->sunskin_tessin
+				, e->sunskin_tessout[0]
+				, v3_dist(e->sunpos_cartesian, e->cpos)
+			);
 		glfwSwapBuffers(e->win);
 		glfwPollEvents();
 	}

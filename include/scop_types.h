@@ -315,6 +315,7 @@ typedef struct					s_env
 	t_mat4						sbox_proj;
 	t_mat4						sbox_viewproj[6];
 
+	t_bool						sunskin_autotess;
 	float						sunskin_tessout[3];
 	float						sunskin_tessin;
 	float						sunskin_rot;

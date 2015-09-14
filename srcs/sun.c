@@ -34,3 +34,37 @@ void			sp_sunskin_tessin(t_env *e, int way)
 		e->sunskin_tessin = 1.f;
 	return ;
 }
+
+static float const		g_sun_tess[][3] = {
+	{10.00000f, 14.f, 7.f},
+	{16.50000f, 12.f, 6.f},
+	{25.00000f, 10.f, 5.f},
+	{50.00000f, 8.0f, 4.f},
+	{100.0000f, 6.0f, 3.f},
+	{200.0000f, 4.0f, 2.f},
+	{400.0000f, 2.0f, 2.f},
+	{500.0000f, 2.0f, 1.f},
+	{1.f / 0.f, 1.0f, 1.f}
+};
+
+void			sp_sunskin_update_autotess(t_env *e)
+{
+	int		i;
+	float	dist;
+
+	dist = v3_dist(e->sunpos_cartesian, e->cpos);
+	i = 0;
+	while (1)
+	{
+		if (dist < g_sun_tess[i][0])
+		{
+			e->sunskin_tessin = g_sun_tess[i][1];
+			e->sunskin_tessout[0] = g_sun_tess[i][2];
+			e->sunskin_tessout[1] = g_sun_tess[i][2];
+			e->sunskin_tessout[2] = g_sun_tess[i][2];
+			return ;
+		}
+		i++;
+	}
+	return ;
+}

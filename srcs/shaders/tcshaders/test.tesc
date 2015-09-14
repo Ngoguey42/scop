@@ -14,6 +14,8 @@
 
 layout						(vertices = 3) out;
 
+uniform vec3				camPos;
+uniform vec3				sunPos;
 uniform float				tessLevelOut0;
 uniform float				tessLevelOut1;
 uniform float				tessLevelOut2;
@@ -31,7 +33,11 @@ out Po
 
 void	main()
 {
+	float		dist;
+
 	tec_out[gl_InvocationID].pos = tec_in[gl_InvocationID].pos;
+	if (gl_InvocationID != 0)
+		return ;
 	gl_TessLevelOuter[0] = tessLevelOut0;
 	gl_TessLevelOuter[1] = tessLevelOut1;
 	gl_TessLevelOuter[2] = tessLevelOut2;

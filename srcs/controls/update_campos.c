@@ -112,6 +112,8 @@ void			sp_update_campos(t_env *e, t_bool force)
 		e->view = m4_lookat(e->cpos,
 		v3_add(e->cpos, v3_frontnormed(e->cangles)), ATOV3(0.f, 1.f, 0.f));
 		e->viewproj = m4_dotprod(&e->projection, &e->view);
+		if (e->sunskin_autotess)
+			sp_sunskin_update_autotess(e);
 	}
 	return ;
 }

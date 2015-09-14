@@ -93,6 +93,8 @@ void					sp_update_sunpos(t_env *e, t_bool force)
 			shadow_viewproj(e, ATOV3(0.0, 0.0, +1.0), ATOV3(0.0, -1.0, 0.0)),
 			shadow_viewproj(e, ATOV3(0.0, 0.0, -1.0), ATOV3(0.0, -1.0, 0.0))
 		}), sizeof(e->sbox_viewproj));
+		if (e->sunskin_autotess)
+			sp_sunskin_update_autotess(e);
 	}
 	return ;
 }

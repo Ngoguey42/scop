@@ -51,10 +51,10 @@ void			sp_unif_sunfrag(t_env const *e, t_program const *p)
 
 void			sp_unif_suntesc(t_env const *e, t_program const *p)
 {
+	UNIF(p, m1f, "tessLevelIn", e->sunskin_tessin);
 	UNIF(p, m1f, "tessLevelOut0", e->sunskin_tessout[0]);
 	UNIF(p, m1f, "tessLevelOut1", e->sunskin_tessout[1]);
 	UNIF(p, m1f, "tessLevelOut2", e->sunskin_tessout[2]);
-	UNIF(p, m1f, "tessLevelIn", e->sunskin_tessin);
 	return ;
 }
 
