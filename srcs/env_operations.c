@@ -69,6 +69,7 @@ int				sp_init_env(t_env *e)
 	memcpy(&e->sunskin_tessout, ((float[3]){1.f, 1.f, 1.f}), sizeof(float[3]));
 	e->sunskin_tessin = 1.f;
 	e->sunskin_autotess = true;
+	e->sunskin_colormode = 1;
 	e->sunskin_rot = 0.f;
 	sp_update_sunpos(e, true);
 	e->cpos = DEFAULT_CPOS_V3;

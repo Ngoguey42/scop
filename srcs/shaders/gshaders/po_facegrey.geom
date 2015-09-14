@@ -12,8 +12,8 @@
 
 #version 410 core
 
-#define NSHADESI int(36)
-#define FIRST_COLORF float(0.f)
+#define NSHADESI int(6)
+#define FIRST_COLORF float(50.f)
 #define LAST_COLORF float(230.f)
 #define USE_SUN_COLOR 1
 #define USE_PATCH_COLOR 2

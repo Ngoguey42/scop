@@ -61,7 +61,7 @@ void			sp_unif_suntesc(t_env const *e, t_program const *p)
 void			sp_unif_sungeom(t_env const *e, t_program const *p)
 {
 	UNIF(p, mMatrix4fv, "viewproj", 1, GL_TRUE, (float*)&e->viewproj);
-	UNIF(p, m1i, "colorUsing", 3); //color using
+	UNIF(p, m1i, "colorUsing", e->sunskin_colormode);
 	return ;
 }
 

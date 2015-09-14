@@ -172,6 +172,8 @@ void    sp_mainme_change_texscale(t_env *e, int v);
 void            sp_sunskin_tessout(t_env *e, int action);
 void            sp_sunskin_tessin(t_env *e, int way);
 void			sp_sunskin_update_autotess(t_env *e);
+void			sp_sunskin_toggle_autotess(t_env *e);
+void			sp_sunskin_scoll_colormode(t_env *e);
 
 /*
 ** LAND GENERATION

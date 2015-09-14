@@ -70,6 +70,8 @@ static t_keyevents const	g_keyevents[] =
 	CONV(&sp_sunskin_tessout, 0x4 | 0x8, GLFW_KEY_9, HELD_AND_ALT, 0),
 	CONV(&sp_sunskin_tessin, 1, GLFW_KEY_8, sp_is_held, 0),
 	CONV(&sp_sunskin_tessin, -1, GLFW_KEY_7, sp_is_held, 0),
+	CONV(&sp_sunskin_toggle_autotess, 42, GLFW_KEY_6, sp_is_held, 0),
+	CONV(&sp_sunskin_scoll_colormode, 42, GLFW_KEY_K, sp_is_held, 0),
 };
 
 void		sp_keyevent(t_env *e, int a, t_keystate ks)
