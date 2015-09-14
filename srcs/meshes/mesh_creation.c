@@ -61,6 +61,11 @@ int			sp_new_mesh(t_env const *e, t_mesh *me)
 	qprintf("\033[32m%-7zu\033[0mVerts, \033[32m%-7zu\033[0mFaces "
 			, vbo_final->size, ebo_final->size);
 	me->faces3 = ebo_final->size * 3;
+	qprintf("\n");
+	qprintf("vbo: ");
+	ftv_summarize(vbo_final);
+	qprintf("ebo: ");
+	ftv_summarize(ebo_final);
 	ftv_release(&vao->vbo.vertices, NULL);
 	ftv_release(&vao->ebo.faces, NULL);
 	ftv_release(vbo_final, NULL);

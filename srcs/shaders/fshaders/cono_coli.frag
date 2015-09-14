@@ -16,9 +16,9 @@
 ** CONFIG MACROES
 ** INITIAL_RADIUS		-> Initial sampling radius at max distance.
 */
-#define AMBIENT_STRENGTH 0.02f
-#define DIFFUSE_STRENGTH 2.00f
-#define SPECULAR_STRENGTH 2.00f
+#define AMBIENT_STRENGTH 0.05f
+#define DIFFUSE_STRENGTH 2.f
+#define SPECULAR_STRENGTH 0.99f
 #define SPECULAR_POWER 32.f
 #define GAMMA 2.2f
 
@@ -69,8 +69,8 @@ uniform struct Light {
 	vec3 pos;
 
 	vec3 a;
-	vec3 d;
-	vec3 s;
+	// vec3 d;
+	// vec3 s;
 
 	float linear;
 	float quadratic;
@@ -123,6 +123,11 @@ float					compute_shadows(
 
 void					main()
 {
+	color = vec4(fs_in.col, 1.f);
+	color.rgb = pow(color.rgb, vec3(GAMMA)); //to sRGB space
+	vec3	cLight = l.a;
+	cLight = pow(cLight, vec3(GAMMA)); //to sRGB space
+
 	vec3	vLiToFra = fs_in.pos - l.pos;
 	vec3	vFraToLi = -vLiToFra;
 	vec3	vnFraToLi = normalize(vFraToLi);
@@ -132,29 +137,19 @@ void					main()
 	float	dFraLi = length(vLiToFra);
 	float	dnFraLi = dFraLi / far;
 	float	dFraCam = length(vFraToCam);
-	float	attenuation = 1.f
-		- (dFraLi / far)
-		;
-	vec3	ambient = AMBIENT_STRENGTH * pow(l.a, vec3(GAMMA));
-	vec3	diffuse = max(dot(vnFraNormal, vnFraToLi), 0.f)
-		* DIFFUSE_STRENGTH * pow(l.d, vec3(GAMMA));
+	float	attenuation = 1.f - (dFraLi / far);
+	float	ambient = AMBIENT_STRENGTH;
+	float	diffuse = max(dot(vnFraNormal, vnFraToLi), 0.f)
+		* DIFFUSE_STRENGTH;
 	vec3    vnLiCamHalfway = normalize(vnFraToLi + vnFraToCam);
-	vec3	specular =
+	float	specular =
 		pow(max(dot(vnFraNormal, vnLiCamHalfway), 0.0), SPECULAR_POWER)
-		* SPECULAR_STRENGTH * pow(l.s, vec3(GAMMA));
+		* SPECULAR_STRENGTH;
 	float	shadow = compute_shadows(dnFraLi, dFraLi, vLiToFra);
 
-	color = vec4(fs_in.col, 1.f);
-
-
-	
-	color.rgb = pow(color.rgb, vec3(GAMMA));
-	// color = vec4(0.7, 0.7, 0.7, 1.);
 	color = vec4(
-		pow((ambient
-		 + (diffuse + specular)
-			 * (1.f - shadow) * attenuation), vec3(1.f / GAMMA))
-		* color.xyz
+		(ambient + (diffuse + specular) * (1.f - shadow) * attenuation)
+		* cLight * color.xyz
 		, color.w);
-	color.rgb = pow(color.rgb, vec3(1.f / GAMMA));
+	color.rgb = pow(color.rgb, vec3(1.f / GAMMA)); //to linear space
 }
