@@ -6,7 +6,7 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/09/12 07:01:40 by ngoguey           #+#    #+#             //
-//   Updated: 2015/09/15 10:40:43 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/09/15 14:10:59 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -36,7 +36,7 @@ void main()
 	int			i;
 	float		val = (50.f + (gl_PrimitiveIDIn % NSHADES) * DELTA) / 255.f;
 
-	gs_out.col = vec3(val, val, val);
+	gs_out.col = vec3(val);
 	for (i = 0; i < 3; i++)
 	{
 		gs_out.tex = gs_in[i].tex;

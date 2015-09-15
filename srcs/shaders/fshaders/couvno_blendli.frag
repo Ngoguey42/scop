@@ -6,31 +6,17 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/07/30 10:07:14 by ngoguey           #+#    #+#             //
-//   Updated: 2015/09/15 10:43:43 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/09/15 14:21:04 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
-
-/*
-** CONFIG MACROES
-*/
-#define AMBIENT_STRENGTH 0.05f
-#define DIFFUSE_STRENGTH 2.f
-#define SPECULAR_STRENGTH 0.99f
-#define SPECULAR_POWER 32.f
-#define GAMMA 2.2f
-
-#define NSAMPLESI 20
-#define BIAS 0.05f
-#define DECAY 1.5f
-#define NUM_SAMPLING_LOOPS 3
-#define SBOX_RESOLUTIONF 1024.f
-#define INITIAL_RADIUS (200.f / SBOX_RESOLUTIONF)
 
 /*
 ** CALCULATED MACROES
 ** GN			->	Gold Number
 ** V0			->	Base value for a normalized dodecahedron
 */
+
+#define NSAMPLESI 20
 #define NSAMPLESF float(NSAMPLESI)
 #define GN ((1.f + sqrt(5.f)) / 2.f)
 #define GN2 (GN * GN)
@@ -83,7 +69,7 @@ float					sample_shadows(
 	shadow = 0.f;
 	for (int i = 0; i < NSAMPLESI; ++i)
 	{
-		if (dFraLi - BIAS
+		if (dFraLi - G_SHADOW_BIAS
 			> texture(depthMap, vLiToFra + SAMPLES[i] * radius).r * far)
 		{
 			shadow += weight;
@@ -103,24 +89,19 @@ float					compute_shadows(
 	shadow = 0.f;
 	samples = 0.f;
 	weight = 1.f;
-	radius = INITIAL_RADIUS * sqrt(dnFraLi);
-	for (int i = 0; i < NUM_SAMPLING_LOOPS; i++)
+	radius = G_SHADOW_INITIAL_RADIUS * sqrt(dnFraLi);
+	for (int i = 0; i < G_SHADOW_NUM_SAMPLING_LOOPS; i++)
 	{
 		shadow += sample_shadows(dFraLi, vLiToFra, weight, radius);
 		samples += NSAMPLESF * weight;
-		weight /= DECAY * DECAY;
-		radius *= DECAY;
+		weight /= G_SHADOW_DECAY * G_SHADOW_DECAY;
+		radius *= G_SHADOW_DECAY;
 	}
 	return (shadow / samples);
 }
 
 void					main()
 {
-	color = mix(vec4(fs_in.col, 1.f), texture(ourTexture, fs_in.tex), mixval);
-	color.rgb = pow(color.rgb, vec3(GAMMA)); //to sRGB space
-	vec3    cLight = l.col;
-	cLight = pow(cLight, vec3(GAMMA)); //to sRGB space
-
 	vec3	vLiToFra = fs_in.pos - l.pos;
 	vec3	vFraToLi = -vLiToFra;
 	vec3	vnFraToLi = normalize(vFraToLi);
@@ -131,16 +112,20 @@ void					main()
 	float	dnFraLi = dFraLi / far;
 	float	dFraCam = length(vFraToCam);
 	float   attenuation = 1.f - (dFraLi / far);
-	float	ambient = AMBIENT_STRENGTH;
-	float	diffuse = max(dot(vnFraNormal, vnFraToLi), 0.f) * DIFFUSE_STRENGTH;
+	float	ambient = G_AMBIENT_STRENGTH;
+	float	diffuse = max(dot(vnFraNormal, vnFraToLi), 0.f) * G_DIFFUSE_STRENGTH;
 	vec3	vnLiCamHalfway = normalize(vnFraToLi + vnFraToCam);
 	float	specular =
-		pow(max(dot(vnFraNormal, vnLiCamHalfway), 0.0), SPECULAR_POWER)
-		* SPECULAR_STRENGTH;	
+		pow(max(dot(vnFraNormal, vnLiCamHalfway), 0.0), G_SPECULAR_POWER)
+		* G_SPECULAR_STRENGTH;
 	float	shadow = compute_shadows(dnFraLi, dFraLi, vLiToFra);
-	
+	vec3    cLight = G_COL_TO_SRGB(l.col);
+
+	color = mix(vec4(fs_in.col, 1.f), texture(ourTexture, fs_in.tex), mixval);
+	color.rgb = G_COL_TO_SRGB(color.rgb);
 	color = vec4(
 		(ambient + (diffuse + specular) * (1.f - shadow) * attenuation)
 		* cLight * color.xyz, color.w);
-	color.rgb = pow(color.rgb, vec3(1.f / GAMMA)); // to linear space
+	color.rgb = pow(color.rgb, vec3(1.f / G_GAMMA)); // to linear space
+
 }

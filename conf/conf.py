@@ -6,7 +6,7 @@
 #    By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/08/10 13:13:01 by ngoguey           #+#    #+#              #
-#    Updated: 2015/09/15 11:37:37 by ngoguey          ###   ########.fr        #
+#    Updated: 2015/09/15 13:50:43 by ngoguey          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,7 +44,9 @@ programs = [
 	Program("land", "pocono_to_co_nomodel", "cono_coli", img1=0),
 	Program("sun", "poin_poout_mvptrans", "co_sun", gsname="po_facegrey", tcsname="test", tesname="test"),
 	Program("pointshadow", "po_to_noop_noviewproj", "depth01", gsname="pos_to_cubemap"),
-	Program("ptn", "poteno_to_uv", "couvno_blendli", gsname="face_grey", sbox=0, img1=1),
+	Program("ptn", "poteno_to_uv", "couvno_blendli"
+			, gsname="face_grey"
+			, sbox=0, img1=1),
 ]
 textures = [
 	# porcelain fait ceci cela

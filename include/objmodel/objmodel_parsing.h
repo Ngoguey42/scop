@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/15 08:49:22 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/12 17:11:58 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/09/15 12:59:03 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 
 # define sp_enomem ft_enomem //tofix
 
-# define BFSZ 256
+# define BFSZ 1024
 
 typedef struct	s_token
 {

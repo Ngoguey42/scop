@@ -6,16 +6,13 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/09/12 07:32:38 by ngoguey           #+#    #+#             //
-//   Updated: 2015/09/15 11:30:50 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/09/15 11:42:44 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
 #define NSHADESI int(6)
 #define FIRST_COLORF float(50.f)
 #define LAST_COLORF float(230.f)
-#define USE_SUN_COLOR 1
-#define USE_PATCH_COLOR 2
-#define USE_TRIANGLE_COLOR 3
 
 #define NSHADES_THIRDI int(NSHADESI / 3)
 #define NSHADESF float(NSHADESI)
@@ -53,7 +50,7 @@ void main()
 		gs_out.col = vec3(0.f, val, 0.f);
 	else
 		gs_out.col = vec3(0.f, 0.f, val);
-	if (colorUsing == USE_TRIANGLE_COLOR)
+	if (colorUsing == G_USE_TRIANGLE_COLOR)
 		gs_out.col += (gs_in[0].bpos + gs_in[1].bpos + gs_in[2].bpos) / 3.f;
 	for (i = 0; i < 3; i++)
 	{
