@@ -6,11 +6,9 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/07/30 09:09:23 by ngoguey           #+#    #+#             //
-//   Updated: 2015/08/17 13:13:44 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/09/15 10:32:46 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
-
-#version 410 core
 
 layout (location = 0) in vec3	pos;
 layout (location = 1) in vec2	tex;

@@ -24,26 +24,15 @@
 */
 typedef enum				e_vshader_index
 {
-	sp_po_to_co_vshader,
-	sp_pocote_to_couv_vshader,
-	sp_pote_to_couv_vshader,
-	sp_poco_to_co_vshader,
-	sp_poteno_to_uv_vshader,
-	sp_pocono_to_co_vshader,
 	sp_pocono_to_co_nomodel_vshader,
-	sp_po_to_noop_vshader,
-	sp_po_to_noop_noviewproj_vshader,
+	sp_poteno_to_uv_vshader,
 	sp_poin_poout_mvptrans_vshader,
+	sp_po_to_noop_noviewproj_vshader,
 	sp_num_vshaders
 }							t_vshader_index;
 
 typedef enum				e_fshader_index
 {
-	sp_co_identity_fshader,
-	sp_uv_identity_fshader,
-	sp_couv_blend_fshader,
-	sp_couv_uv_fshader,
-	sp_uvno_uvli_fshader,
 	sp_cono_coli_fshader,
 	sp_couvno_blendli_fshader,
 	sp_co_sun_fshader,
@@ -53,7 +42,6 @@ typedef enum				e_fshader_index
 
 typedef enum				e_gshader_index
 {
-	sp_face_rgb_gshader,
 	sp_face_grey_gshader,
 	sp_po_facegrey_gshader,
 	sp_pos_to_cubemap_gshader,
@@ -78,10 +66,9 @@ typedef enum				e_teshader_index
 typedef enum				e_program_index
 {
 	sp_land_program,
-	sp_ptn_program,
-	sp_pcn_program,
 	sp_sun_program,
 	sp_pointshadow_program,
+	sp_ptn_program,
 	sp_num_programs
 }							t_program_index;
 

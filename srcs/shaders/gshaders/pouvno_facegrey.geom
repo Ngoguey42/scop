@@ -6,11 +6,9 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/09/12 07:01:40 by ngoguey           #+#    #+#             //
-//   Updated: 2015/09/12 07:01:40 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/09/15 10:40:43 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
-
-#version 410 core
 
 layout					(triangles) in;
 layout					(triangle_strip, max_vertices = 3) out;

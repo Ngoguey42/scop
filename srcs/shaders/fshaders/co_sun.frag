@@ -6,11 +6,9 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/07/30 13:42:20 by ngoguey           #+#    #+#             //
-//   Updated: 2015/09/12 08:30:24 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/09/15 10:34:29 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
-
-#version 410 core
 
 uniform vec3				sunColor;
 uniform int					colorUsing;

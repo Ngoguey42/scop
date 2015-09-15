@@ -6,7 +6,7 @@
 #    By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/08/10 13:13:01 by ngoguey           #+#    #+#              #
-#    Updated: 2015/09/12 14:09:31 by ngoguey          ###   ########.fr        #
+#    Updated: 2015/09/15 11:37:37 by ngoguey          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,40 +14,22 @@ from confclasses import *
 import math
 
 vshaders = [
-	Vshader("po_to_co", "po_to_co.vert", "viewproj2",
-	("pos", 3), ),
-	Vshader("pocote_to_couv", "pocote_to_couv.vert", "viewproj2",
-	("pos", 3), ("col", 3), ("tex", 2), ),
-	Vshader("pote_to_couv", "pote_to_couv.vert", "viewproj2",
-	("pos", 3), ("tex", 2), ),
-	Vshader("poco_to_co", "poco_to_co.vert", "viewproj",
-	("pos", 3), ("col", 3), ),
-	Vshader("poteno_to_uv", "poteno_to_uv.vert", "viewproj",
-	("pos", 3), ("tex", 2), ("nor", 3), ),
-	Vshader("pocono_to_co", "pocono_to_co.vert", "viewproj",
-	("pos", 3), ("col", 3), ("nor", 3), ),
 	Vshader("pocono_to_co_nomodel", "pocono_to_co_nomodel.vert", "viewproj",
-	("pos", 3), ("col", 3), ("nor", 3), ),
-	Vshader("po_to_noop", "po_to_noop.vert", "viewproj",
-	("pos", 3), ),
-	Vshader("po_to_noop_noviewproj", "po_to_noop_noviewproj.vert", "",
-	("pos", 3), ),
+	("pos", 3), ("col", 3), ("nor", 3), ), #land
+	Vshader("poteno_to_uv", "poteno_to_uv.vert", "viewproj",
+	("pos", 3), ("tex", 2), ("nor", 3), ), #ptn
 	Vshader("poin_poout_mvptrans", "poIn_poOut_mvpTrans.vert", "",
-	("pos", 3), ),
+	("pos", 3), ), #sun
+	Vshader("po_to_noop_noviewproj", "po_to_noop_noviewproj.vert", "",
+	("pos", 3), ), #sbox
 ]
 fshaders = [
-	Fshader("co_identity", "co_identity.frag", ""),
-	Fshader("uv_identity", "uv_identity.frag", ""),
-	Fshader("couv_blend", "couv_blend.frag", ""),
-	Fshader("couv_uv", "couv_uv.frag", ""),
-	Fshader("uvno_uvli", "uvno_uvli.frag", "light"),
-	Fshader("cono_coli", "cono_coli.frag", "lightstruct"),
-	Fshader("couvno_blendli", "couvno_blendli.frag", "lightstruct"),
-	Fshader("co_sun", "co_sun.frag", "sunfrag"),
-	Fshader("depth01", "depth01.frag", ""),
+	Fshader("cono_coli", "cono_coli.frag", "lightstruct"), #land
+	Fshader("couvno_blendli", "couvno_blendli.frag", "lightstruct"), #ptn
+	Fshader("co_sun", "co_sun.frag", "sunfrag"), #sun
+	Fshader("depth01", "depth01.frag", ""), #sbox
 ]
 gshaders = [
-	Gshader("face_rgb", "face_rgb.geom", ""),
 	Gshader("face_grey", "pouvno_facegrey.geom", ""),
 	Gshader("po_facegrey", "po_facegrey.geom", "sungeom"),
 	Gshader("pos_to_cubemap", "pos_to_cubemap.geom", ""),
@@ -59,16 +41,10 @@ teshaders = [
 	Teshader("test", "test.tese", "")
 ]
 programs = [
-	# land fait ceci cela
 	Program("land", "pocono_to_co_nomodel", "cono_coli", img1=0),
-	# ptn fait ceci cela
-	Program("ptn", "poteno_to_uv", "couvno_blendli", gsname="face_grey", sbox=0, img1=1),
-	# pcn fait ceci cela
-	Program("pcn", "pocono_to_co", "cono_coli", sbox=0),
-	# sun fait ceci cela
-# Program("sun", "poin_poout_mvptrans", "co_sun", gsname="po_facegrey"),
-Program("sun", "poin_poout_mvptrans", "co_sun", gsname="po_facegrey", tcsname="test", tesname="test"),
+	Program("sun", "poin_poout_mvptrans", "co_sun", gsname="po_facegrey", tcsname="test", tesname="test"),
 	Program("pointshadow", "po_to_noop_noviewproj", "depth01", gsname="pos_to_cubemap"),
+	Program("ptn", "poteno_to_uv", "couvno_blendli", gsname="face_grey", sbox=0, img1=1),
 ]
 textures = [
 	# porcelain fait ceci cela

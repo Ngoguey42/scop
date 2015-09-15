@@ -6,11 +6,9 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/09/12 07:32:38 by ngoguey           #+#    #+#             //
-//   Updated: 2015/09/12 14:01:48 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/09/15 11:30:50 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
-
-#version 410 core
 
 #define NSHADESI int(6)
 #define FIRST_COLORF float(50.f)

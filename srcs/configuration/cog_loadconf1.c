@@ -33,25 +33,13 @@ int			sp_loadconf_vshaders(t_env *e)
 {
 	t_vshader const		tmp[sp_num_vshaders] = {
 
-	VSHADER("po_to_co.vert", &sp_unif_viewproj2,
-	LOC(sp_pos_loc, 3)),
-	VSHADER("pocote_to_couv.vert", &sp_unif_viewproj2,
-	LOC(sp_pos_loc, 3), LOC(sp_col_loc, 3), LOC(sp_tex_loc, 2)),
-	VSHADER("pote_to_couv.vert", &sp_unif_viewproj2,
-	LOC(sp_pos_loc, 3), LOC(sp_tex_loc, 2)),
-	VSHADER("poco_to_co.vert", &sp_unif_viewproj,
-	LOC(sp_pos_loc, 3), LOC(sp_col_loc, 3)),
-	VSHADER("poteno_to_uv.vert", &sp_unif_viewproj,
-	LOC(sp_pos_loc, 3), LOC(sp_tex_loc, 2), LOC(sp_nor_loc, 3)),
-	VSHADER("pocono_to_co.vert", &sp_unif_viewproj,
-	LOC(sp_pos_loc, 3), LOC(sp_col_loc, 3), LOC(sp_nor_loc, 3)),
 	VSHADER("pocono_to_co_nomodel.vert", &sp_unif_viewproj,
 	LOC(sp_pos_loc, 3), LOC(sp_col_loc, 3), LOC(sp_nor_loc, 3)),
-	VSHADER("po_to_noop.vert", &sp_unif_viewproj,
+	VSHADER("poteno_to_uv.vert", &sp_unif_viewproj,
+	LOC(sp_pos_loc, 3), LOC(sp_tex_loc, 2), LOC(sp_nor_loc, 3)),
+	VSHADER("poIn_poOut_mvpTrans.vert", NULL,
 	LOC(sp_pos_loc, 3)),
 	VSHADER("po_to_noop_noviewproj.vert", NULL,
-	LOC(sp_pos_loc, 3)),
-	VSHADER("poIn_poOut_mvpTrans.vert", NULL,
 	LOC(sp_pos_loc, 3)),
 	};
 	memcpy(&e->vshaders, &tmp, sizeof(tmp));
@@ -62,11 +50,6 @@ int			sp_loadconf_fshaders(t_env *e)
 {
 	t_fshader const		tmp[sp_num_fshaders] = {
 
-	FSHADER("co_identity.frag", NULL),
-	FSHADER("uv_identity.frag", NULL),
-	FSHADER("couv_blend.frag", NULL),
-	FSHADER("couv_uv.frag", NULL),
-	FSHADER("uvno_uvli.frag", &sp_unif_light),
 	FSHADER("cono_coli.frag", &sp_unif_lightstruct),
 	FSHADER("couvno_blendli.frag", &sp_unif_lightstruct),
 	FSHADER("co_sun.frag", &sp_unif_sunfrag),
@@ -80,7 +63,6 @@ int			sp_loadconf_gshaders(t_env *e)
 {
 	t_gshader const		tmp[sp_num_gshaders] = {
 
-	GSHADER("face_rgb.geom", NULL),
 	GSHADER("pouvno_facegrey.geom", NULL),
 	GSHADER("po_facegrey.geom", &sp_unif_sungeom),
 	GSHADER("pos_to_cubemap.geom", NULL),

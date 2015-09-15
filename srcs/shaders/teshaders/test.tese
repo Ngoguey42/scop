@@ -6,11 +6,9 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/09/12 09:58:28 by ngoguey           #+#    #+#             //
-//   Updated: 2015/09/12 14:32:33 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/09/15 10:41:03 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
-
-#version 410 core
 
 layout						(triangles, equal_spacing, cw) in;
 

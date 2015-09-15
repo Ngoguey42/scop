@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/01 12:15:52 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/09/12 13:05:17 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/09/15 09:43:24 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,17 +55,16 @@ static int		sp_load_shader(char const *filepath, char **ptr)
 {
 	int		fd;
 	int		ret;
-	char	buffer[512];
+	char	buffer[1024];
 
 	fd = open(filepath, O_RDONLY);
 	if (fd < 0)
 		return (ERRORNOF("fopen(\"%s\")", filepath));
-	*ptr = NULL;
 	while ((ret = read(fd, buffer, sizeof(buffer) - 1)) > 0)
 	{
 		buffer[ret] = '\0';
 		if (*ptr == NULL)
-			*ptr = ft_strdup(buffer);
+			*ptr = strdup(buffer);
 		else
 			*ptr = ft_strjoinfree(*ptr, buffer, 1, 0);
 		if (*ptr == NULL)
@@ -77,11 +76,15 @@ static int		sp_load_shader(char const *filepath, char **ptr)
 	return (0);
 }
 
-static int		sp_new_shader(char const *filepath, GLuint *handle, GLenum t)
+static int		sp_new_shader(char const *filepath, GLuint *handle, GLenum t
+							  , char const *global)
 {
 	char	*text[1];
 	GLint	len[1];
 
+	*text = strdup(global);
+	if (*text == NULL)
+		ft_enomem();
 	if (sp_load_shader(filepath, text))
 		return (ERROR("sp_load_shader(...)"));
 	*handle = glCreateShader(t);
@@ -110,28 +113,31 @@ void			sp_delete_shaders(t_env *e)
 	return ;
 }
 
+
 int				sp_init_shaders(t_env *e)
 {
 	size_t									i;
 	struct s_env_shader_type const			*stype;
 	struct s_env_shader_type const *const	end = END_ARRAY(g_shaders_types);
 	void									*ptr;
+	char									*global;
 
-	stype = g_shaders_types;
-	while (stype < end)
+	global = NULL;
+	if (sp_load_shader("srcs/shaders/global.glsl", &global))
+		return (ERROR("Parsing global.glsl"));
+	stype = g_shaders_types - 1;
+	while (++stype < end)
 	{
-		i = 0;
+		i = -1;
 		ptr = (void*)e + stype->env_offset;
-		while (i < stype->num_shaders)
+		while (++i < stype->num_shaders)
 		{
 			if (sp_new_shader(*(char const**)(ptr + stype->filepath_offset)
 								, ptr + stype->handle_offset
-								, stype->type))
+							  , stype->type, global))
 				return (ERRORF("sp_new_shader(%s:%d)", stype->name, i));
-			i++;
 			ptr += stype->struct_size;
 		}
-		stype++;
 	}
 	return (0);
 }
