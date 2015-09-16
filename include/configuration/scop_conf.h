@@ -76,9 +76,9 @@
 ** phase 4 -> 16 values, samples on 0123                                      **
 ** phase 5 -> 16 values, samples on 01234                                     **
 ** phase 6 -> 16 values, samples on 01234                                     **
-** phase 7 -> 32 values, samples on 0123456                                   **
-** phase 8 -> 32 values, samples on 01234567                                  **
-** phase 9 -> 32 values, samples on 01234567                                  **
+** phase 7 -> 64 values, samples on 0123456                                   **
+** phase 8 -> 64 values, samples on 01234567                                  **
+** phase 9 -> 64 values, samples on 01234567                                  **
 **                                                                            **
 ** phase  0     -> level 0                                                    **
 ** phases 1,2,3 -> level 1                                                    **
