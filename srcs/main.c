@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 12:08:19 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/09/15 13:44:59 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/09/16 08:27:14 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ static int		begin(t_env *e)
 		return (ERROR("sp_init_obs(e)"));
 	if (INIT(sbox))
 		return (ERROR("sp_init_sbox(e)"));
+	/* if (INIT(land)) */
+		/* return (ERROR("sp_init_land(e)")); */
 	sp_timings_init(e);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 10:33:54 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/09/15 14:07:54 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/09/16 09:25:20 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,37 @@
 
 /*
 ** CONFIG MACROES
+** ************************************************************************** **
+** Land Generation Doc
+** LAND_NDEPTHLOOPSI		-> num loops after pass 0
+**	pass0					-> 4points				* 1 phase, mandatory
+**	loop1					-> (4) points			* 3 phases
+**	loop2					-> (4 * 4) points		* 3 phases
+**	loop3					-> (4 * 4 * 4) points	* 3 phases
+**	loop4					-> ...
+** ************************************************************************** **
+** num levels				= LAND_NDEPTHLOOPSI + 1
+** grid_npoints				= 4 ^ (LAND_NDEPTHLOOPSI + 1)
+** grid_width(height too)	= 2 ^ (LAND_NDEPTHLOOPSI + 1)
+** **
+** level_npoints(0)			= 4
+** level_npoints(1+)		= 4 ^ level * 3
+** **
+** level_nphases(0)			= 1 (custom; glFinish)
+** level_nphases(1+)		= 3 (diagonal*1; glFinish; horizontal*2; glFinish)
+** **
+** level_stride(0)				= grid_width / 2
+** phase_startoffset_row(0)		= 0
+** phase_startoffset_col(0)		= 0
+** level_stride(1+)				= 2 ^ (LAND_NDEPTHLOOPSI - level + 1)
+** phase_startoffset_row(1+)(1)	= level_stride / 2
+** phase_startoffset_col(1+)(1)	= level_stride / 2
+** phase_startoffset_row(1+)(2)	= 0
+** phase_startoffset_col(1+)(2)	= level_stride / 2
+** phase_startoffset_row(1+)(3)	= level_stride / 2
+** phase_startoffset_col(1+)(3)	= 0
 */
+
 # define WIN_WIDTHI 1600
 # define WIN_RATIOF (4.f / 3.f)
 # define WIN_FOVF 45.f
@@ -42,8 +72,10 @@
 # define LAND_SIDEF 50.f
 # define LAND_RANGEF (14.f)
 # define LAND_COLORRAND 0.05f
-# define POINTS_DEPTHI 7
+# define LAND_NDEPTHLOOPSI 7
 # define LAND_YF -10.f
+
+# define POINTS_DEPTHI LAND_NDEPTHLOOPSI //deprecated
 
 # define MOUSE_SENSITIVITYF 0.005f
 # define MOVEMENT_SPEEDF 10.f

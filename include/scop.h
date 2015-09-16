@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 12:07:31 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/09/12 13:27:46 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/09/16 08:07:58 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,6 +178,7 @@ void			sp_sunskin_scoll_colormode(t_env *e);
 /*
 ** LAND GENERATION
 */
+int			sp_init_land(t_env *e);
 void		sp_fill_landgrid(t_ftvector *lines);
 void		sp_fill_landvertices(t_ftvector const *lines, t_vbo_basic *vbo,
 	float bounds[2]);
