@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 10:07:19 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/09/16 11:39:02 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/09/16 13:58:56 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,9 @@ typedef struct					s_land_tmp
 {
 	int							grid_npoints;
 	int							grid_width;
+	GLuint						fbo_handle;
+	GLuint						vao_handle;
+	GLuint						vbo_handle;
 }								t_land_tmp;
 
 /*
@@ -327,7 +330,7 @@ typedef struct					s_env
 	float						sunskin_tessin;
 	float						sunskin_rot;
 
-	GLuint						land_handles[2];
+	GLuint						land_handles[3];
 	
 	double						time_start;
 	double						time_cur;
