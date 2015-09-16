@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 12:08:19 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/09/16 08:27:14 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/09/16 11:45:13 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,15 +35,39 @@ static int		begin(t_env *e)
 		return (ERROR("sp_init_obs(e)"));
 	if (INIT(sbox))
 		return (ERROR("sp_init_sbox(e)"));
-	/* if (INIT(land)) */
-		/* return (ERROR("sp_init_land(e)")); */
+	if (INIT(land))
+		return (ERROR("sp_init_land(e)"));
 	sp_timings_init(e);
 	return (0);
 }
 
+
+
 static void		loop(t_env *e)
 {
 	/* glPatchParameteri(GL_PATCH_VERTICES, 3); //move */
+
+	GLuint quad_vao;
+	GLuint quad_vbo;
+	
+	glGenVertexArrays(1, &quad_vao);
+	glBindVertexArray(quad_vao);
+
+	const GLfloat vertices[] = {
+		-1.0f, 1.0f, -1.0f, -1.0f, 1.0f, 1.0f, 1.0f, -1.0f };
+	glGenBuffers(1, &quad_vbo);
+	glBindBuffer(GL_ARRAY_BUFFER, quad_vbo);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+
+	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, NULL);
+	glEnableVertexAttribArray(0);
+
+	glBindVertexArray(0);
+	/* glDeleteBuffers(1, &quad_vbo); //a faire ?! */
+
+
+
+	
 	while (!glfwWindowShouldClose(e->win))
 	{
 		sp_timings_handle_nofocus(e);
@@ -58,6 +82,20 @@ static void		loop(t_env *e)
 				, v3_dist(e->sunpos_cartesian, e->cpos)
 				, e->fps
 				);*/
+
+		t_program *p = e->programs + sp_landgen_notrel_program;
+		int phase_startoffset[2] = {10, 10};
+		float random_seeds[2] = {ft_randf01(), ft_randf01()};
+
+		glViewport(0, 0, WIN_WIDTHI, WIN_HEIGHTI);
+		glUseProgram(p->handle);
+		UNIF(p, m1i, "level_stride", 500);
+		UNIF(p, m1iv, "phase_startoffset", 2, phase_startoffset);
+		UNIF(p, m2fv, "random_seeds", 1, (float*)random_seeds);
+		glBindVertexArray(quad_vao);
+		glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+		
+		
 		glfwSwapBuffers(e->win);
 		glfwPollEvents();
 	}

@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 10:07:19 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/09/16 08:38:16 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/09/16 11:39:02 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,15 @@
 # include "ft_list.h"
 # include "configuration/scop_conf.h"
 # include "meshes/vao.h"
+
+/*
+** LAND
+*/
+typedef struct					s_land_tmp
+{
+	int							grid_npoints;
+	int							grid_width;
+}								t_land_tmp;
 
 /*
 ** KEYS

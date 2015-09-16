@@ -6,7 +6,7 @@
 #    By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/08/10 13:13:01 by ngoguey           #+#    #+#              #
-#    Updated: 2015/09/15 13:50:43 by ngoguey          ###   ########.fr        #
+#    Updated: 2015/09/16 11:32:27 by ngoguey          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,12 +22,15 @@ vshaders = [
 	("pos", 3), ), #sun
 	Vshader("po_to_noop_noviewproj", "po_to_noop_noviewproj.vert", "",
 	("pos", 3), ), #sbox
+	Vshader("po2_noop", "po2_noop.vert", "",
+	("pos", 2), ), #
 ]
 fshaders = [
 	Fshader("cono_coli", "cono_coli.frag", "lightstruct"), #land
 	Fshader("couvno_blendli", "couvno_blendli.frag", "lightstruct"), #ptn
 	Fshader("co_sun", "co_sun.frag", "sunfrag"), #sun
 	Fshader("depth01", "depth01.frag", ""), #sbox
+	Fshader("landgen_notrel", "landgen_notrel.frag", ""), #landgen_notrel
 ]
 gshaders = [
 	Gshader("face_grey", "pouvno_facegrey.geom", ""),
@@ -47,6 +50,7 @@ programs = [
 	Program("ptn", "poteno_to_uv", "couvno_blendli"
 			, gsname="face_grey"
 			, sbox=0, img1=1),
+	Program("landgen_notrel", "po2_noop", "landgen_notrel"),
 ]
 textures = [
 	# porcelain fait ceci cela

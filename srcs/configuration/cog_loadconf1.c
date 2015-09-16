@@ -41,6 +41,8 @@ int			sp_loadconf_vshaders(t_env *e)
 	LOC(sp_pos_loc, 3)),
 	VSHADER("po_to_noop_noviewproj.vert", NULL,
 	LOC(sp_pos_loc, 3)),
+	VSHADER("po2_noop.vert", NULL,
+	LOC(sp_pos_loc, 2)),
 	};
 	memcpy(&e->vshaders, &tmp, sizeof(tmp));
 	return (0);
@@ -54,6 +56,7 @@ int			sp_loadconf_fshaders(t_env *e)
 	FSHADER("couvno_blendli.frag", &sp_unif_lightstruct),
 	FSHADER("co_sun.frag", &sp_unif_sunfrag),
 	FSHADER("depth01.frag", NULL),
+	FSHADER("landgen_notrel.frag", NULL),
 	};
 	memcpy(&e->fshaders, &tmp, sizeof(tmp));
 	return (0);

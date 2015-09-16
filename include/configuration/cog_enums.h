@@ -28,6 +28,7 @@ typedef enum				e_vshader_index
 	sp_poteno_to_uv_vshader,
 	sp_poin_poout_mvptrans_vshader,
 	sp_po_to_noop_noviewproj_vshader,
+	sp_po2_noop_vshader,
 	sp_num_vshaders
 }							t_vshader_index;
 
@@ -37,6 +38,7 @@ typedef enum				e_fshader_index
 	sp_couvno_blendli_fshader,
 	sp_co_sun_fshader,
 	sp_depth01_fshader,
+	sp_landgen_notrel_fshader,
 	sp_num_fshaders
 }							t_fshader_index;
 
@@ -69,6 +71,7 @@ typedef enum				e_program_index
 	sp_sun_program,
 	sp_pointshadow_program,
 	sp_ptn_program,
+	sp_landgen_notrel_program,
 	sp_num_programs
 }							t_program_index;
 
