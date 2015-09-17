@@ -15,13 +15,13 @@ LIBS := libft
 FLAGS := -Wall -Wextra -O2
 # Compilation flags
 HEADS := $(addprefix -I,$(DIRS)) -I libft/includes
-
 # Linking flags
+LINKS :=
 ifeq ($(shell uname),Darwin)
-	FLAGS += -D MAC_OS_MODE=1 -I ~/.brew/include
-	LINKS := -Llibft -lft -L ~/.brew/lib -lglfw3 -lm -framework OpenGL
+    FLAGS += -D MAC_OS_MODE=1 -I ~/.brew/include
+    LINKS := -Llibft -lft -L ~/.brew/lib -lglfw3 -lm -framework OpenGL
 else
-	LINKS := -Llibft -lft -lglfw -lGL -lGLEW -lm
+    LINKS := -Llibft -lft -lglfw -lGL -lGLEW -lm
 endif
 
 # Objects directory
@@ -34,13 +34,21 @@ DEPEND := depend.mk
 MODULE_RULES := $(addsuffix /.git,$(MODULES))
 
 # Default rule (need to be before any include)
-all: $(MODULE_RULES) $(LIBS) $(NAME)
+all: $(MODULE_RULES) cog libs $(NAME)
+
+cog:
+	cog.py -I conf -rU include/configuration/cog_enums.h
+	cog.py -I conf -rU include/configuration/cog_meshfill.h
+	cog.py -I conf -rU srcs/configuration/cog_loadconf1.c
+	cog.py -I conf -rU srcs/configuration/cog_loadconf2.c
+	cog.py -I conf -rU srcs/configuration/cog_meshfill1.c
+	cog.py -I conf -rU srcs/configuration/cog_meshfill2.c
 
 # Include $(O_FILES) and dependencies
 -include $(DEPEND)
 
 # Linking
-$(NAME): $(O_FILES)
+$(NAME): $(LIBS_DEPEND) $(O_FILES)
 	clang $(FLAGS) -o $@ $(O_FILES) $(LINKS) && printf '\033[32m$@\033[0m\n'
 
 # Compiling
@@ -52,12 +60,8 @@ $(MODULE_RULES):
 	git submodule init $(@:.git=)
 	git submodule update $(@:.git=)
 
-# Call sub Makefiles
-$(LIBS):
-	make -C $@
-
 # Create obj directories
-$(O_DIR)/%:
+$(O_DIR)/%/:
 	mkdir -p $@
 
 # Set debug mode and make
@@ -86,4 +90,4 @@ _debug:
 	$(eval FLAGS := $(DEBUG_FLAGS))
 
 .SILENT:
-.PHONY: all $(LIBS) clean fclean re debug rebug _debug
+.PHONY: all $(LIBS) clean fclean re debug rebug _debug cog
