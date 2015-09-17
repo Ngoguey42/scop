@@ -6,7 +6,7 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/09/16 11:32:06 by ngoguey           #+#    #+#             //
-//   Updated: 2015/09/17 16:50:56 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/09/17 17:07:41 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -23,15 +23,16 @@ float	rand(vec2 co)
 
 void	main()
 {
-	// if ((int(gl_FragCoord.x) - phase_startoffset[0]) % level_stride != 0
-	// 	|| (int(gl_FragCoord.y) - phase_startoffset[1]) % level_stride != 0)
-	// {
-	// 	discard;
+	if ((int(gl_FragCoord.x) - phase_startoffset[0]) % level_stride != 0
+		|| (int(gl_FragCoord.y) - phase_startoffset[1]) % level_stride != 0)
+	{
+		discard;
 		// color = vec4(0.f, 1.f, 0.f, 1.f); //debug
 		// return ; //debug
-	// }
+	}
 	// color = vec4(gl_SamplePosition.y, 0.f, 0.f, 1.f);
-	color = vec4(1.f, 0.f, 0.f, 1.f);
-	// color = vec4(rand(gl_FragCoord.xy + random_seeds), 0.f, 0.f, 1.f);
+	// color = vec4(0.f, 1.f, 0.f, 1.f);
+	// color = vec4(1.f, 0.f, 0.f, 1.f);
+	color = vec4(rand(gl_FragCoord.xy + random_seeds), 0.f, 0.f, 1.f);
 	return ;
 }
