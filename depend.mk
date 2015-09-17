@@ -10,8 +10,8 @@ O_FILES :=	o/srcs/configuration/cog_loadconf1.o \
 			o/srcs/controls/controls_inputs.o o/srcs/controls/update_campos.o \
 			o/srcs/controls/update_mainobpos.o \
 			o/srcs/controls/update_sunangles.o o/srcs/controls/update_sunpos.o \
-			o/srcs/env_operations.o o/srcs/ftmath/matrix4.o \
-			o/srcs/ftmath/matrix4_invtranslate.o \
+			o/srcs/debug/output_quad.o o/srcs/env_operations.o \
+			o/srcs/ftmath/matrix4.o o/srcs/ftmath/matrix4_invtranslate.o \
 			o/srcs/ftmath/matrix4_miscop.o o/srcs/ftmath/matrix4_rotation.o \
 			o/srcs/ftmath/matrix4_scale.o o/srcs/ftmath/matrix4_translate.o \
 			o/srcs/ftmath/vector3.o o/srcs/ftmath/vector3_basicop.o \
@@ -169,6 +169,13 @@ o/srcs/controls/update_sunpos.o: srcs/controls/update_sunpos.c include/scop.h \
 	include/configuration/cog_enums.h include/meshes/vao.h include/ftmath.h \
 	include/configuration/cog_meshfill.h include/objmodel/objmodel.h \
 	include/meshes/vao.h include/ftmath.h | o/srcs/controls/
+o/srcs/debug/output_quad.o: srcs/debug/output_quad.c include/scop.h \
+	include/ftmath.h include/configuration/scop_conf.h include/ftmath.h \
+	include/configuration/cog_enums.h include/scop_types.h \
+	include/configuration/scop_conf.h include/ftmath.h \
+	include/configuration/cog_enums.h include/meshes/vao.h include/ftmath.h \
+	include/configuration/cog_meshfill.h include/objmodel/objmodel.h \
+	include/meshes/vao.h include/ftmath.h | o/srcs/debug/
 o/srcs/env_operations.o: srcs/env_operations.c include/scop.h include/ftmath.h \
 	include/configuration/scop_conf.h include/ftmath.h \
 	include/configuration/cog_enums.h include/scop_types.h \

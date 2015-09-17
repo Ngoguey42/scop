@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 12:16:50 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/08/18 17:00:03 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/09/17 15:35:28 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 ** ATOV3		Absolute to vector3
 ** ATOM4		Absolute to matrix4
 */
+# define ATOV2I(...) ((t_vec2i){__VA_ARGS__})
 # define ATOV3(...) ((t_vec3){__VA_ARGS__})
 # define OTOV3(VAL) ((t_vec3){(VAL), (VAL), (VAL)})
 # define ATOM4(...) ((t_mat4){{__VA_ARGS__}})
@@ -37,6 +38,20 @@ typedef enum	e_axis
 	y_axis,
 	z_axis
 }				t_axis;
+/*
+** VECTOR2
+*/
+typedef struct	t_vec2i
+{
+	int			x;
+	int			y;
+}				t_vec2i;
+typedef struct	t_vec2
+{
+	float		x;
+	float		y;
+}				t_vec2;
+
 /*
 ** VECTOR3
 */

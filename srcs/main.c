@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 12:08:19 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/09/16 14:27:27 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/09/17 16:00:32 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,15 @@ static void		loop(t_env *e)
 		/* 		, v3_dist(e->sunpos_cartesian, e->cpos) */
 		/* 		, e->fps */
 		/* 		); */
+/*		t_program const     *p;
 
+		p = e->programs + sp_landgen_notrel_program;
+		glUseProgram(p->handle);
+		UNIF(p, m1i, "level_stride", 3);
+		UNIF(p, m1iv, "phase_startoffset", 2, (int[]){0, 0});
+		UNIF(p, m2fv, "random_seeds", 1, (float[]){ft_randf01(), ft_randf01()});
+		sp_debug_putquad_screencoord(ATOV2I(100, 1000));*/
+		/* sp_debug_putquad_screencoord(ATOV2I(50, 500)); */
 		glfwSwapBuffers(e->win);
 		glfwPollEvents();
 	}

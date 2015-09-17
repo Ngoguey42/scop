@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 10:33:54 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/09/16 14:32:38 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/09/17 15:26:41 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,8 +146,11 @@
 ** CALCULATED MACROES
 */
 # define WIN_WIDTHF ((float)WIN_WIDTHI)
+# define WIN_HALFWIDTHF (WIN_WIDTHF / 2.f)
 # define WIN_HEIGHTF (WIN_WIDTHF / WIN_RATIOF)
 # define WIN_HEIGHTI ROUND_FTOI(WIN_HEIGHTF)
+# define WIN_HALFHEIGHTF (WIN_HEIGHTF / 2.f)
+
 
 # define CAMERA_POSBOUNDF (M_PI / 2 * 0.98)
 # define SUN_THETABOUNDF (M_PI / 2 * 0.98)
