@@ -39,6 +39,7 @@ typedef enum				e_fshader_index
 	sp_co_sun_fshader,
 	sp_depth01_fshader,
 	sp_landgen_notrel_fshader,
+	sp_debug_print_sampler_fshader,
 	sp_num_fshaders
 }							t_fshader_index;
 
@@ -72,6 +73,7 @@ typedef enum				e_program_index
 	sp_pointshadow_program,
 	sp_ptn_program,
 	sp_landgen_notrel_program,
+	sp_debug_print_sampler_program,
 	sp_num_programs
 }							t_program_index;
 

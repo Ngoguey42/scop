@@ -6,7 +6,7 @@
 #    By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/08/10 13:13:01 by ngoguey           #+#    #+#              #
-#    Updated: 2015/09/16 11:32:27 by ngoguey          ###   ########.fr        #
+#    Updated: 2015/09/17 16:26:09 by ngoguey          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,7 @@ fshaders = [
 	Fshader("co_sun", "co_sun.frag", "sunfrag"), #sun
 	Fshader("depth01", "depth01.frag", ""), #sbox
 	Fshader("landgen_notrel", "landgen_notrel.frag", ""), #landgen_notrel
+	Fshader("debug_print_sampler", "debug_print_sampler.frag", ""), #ampler
 ]
 gshaders = [
 	Gshader("face_grey", "pouvno_facegrey.geom", ""),
@@ -51,6 +52,7 @@ programs = [
 			, gsname="face_grey"
 			, sbox=0, img1=1),
 	Program("landgen_notrel", "po2_noop", "landgen_notrel"),
+	Program("debug_print_sampler", "po2_noop", "debug_print_sampler"),
 ]
 textures = [
 	# porcelain fait ceci cela

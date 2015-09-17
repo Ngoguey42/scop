@@ -57,6 +57,7 @@ int			sp_loadconf_fshaders(t_env *e)
 	FSHADER("co_sun.frag", &sp_unif_sunfrag),
 	FSHADER("depth01.frag", NULL),
 	FSHADER("landgen_notrel.frag", NULL),
+	FSHADER("debug_print_sampler.frag", NULL),
 	};
 	memcpy(&e->fshaders, &tmp, sizeof(tmp));
 	return (0);

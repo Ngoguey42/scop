@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 10:07:19 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/09/16 13:58:56 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/09/17 16:34:54 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -331,6 +331,7 @@ typedef struct					s_env
 	float						sunskin_rot;
 
 	GLuint						land_handles[3];
+	t_texture					land_tex1;
 	
 	double						time_start;
 	double						time_cur;

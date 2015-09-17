@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 12:08:19 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/09/17 16:00:32 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/09/17 16:44:53 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static int		begin(t_env *e)
 
 
 static void		loop(t_env *e)
-{	
+{
 	while (!glfwWindowShouldClose(e->win))
 	{
 		sp_timings_handle_nofocus(e);
@@ -59,15 +59,24 @@ static void		loop(t_env *e)
 		/* 		, v3_dist(e->sunpos_cartesian, e->cpos) */
 		/* 		, e->fps */
 		/* 		); */
-/*		t_program const     *p;
+		/* t_program const     *p; */
 
-		p = e->programs + sp_landgen_notrel_program;
-		glUseProgram(p->handle);
-		UNIF(p, m1i, "level_stride", 3);
-		UNIF(p, m1iv, "phase_startoffset", 2, (int[]){0, 0});
-		UNIF(p, m2fv, "random_seeds", 1, (float[]){ft_randf01(), ft_randf01()});
-		sp_debug_putquad_screencoord(ATOV2I(100, 1000));*/
-		/* sp_debug_putquad_screencoord(ATOV2I(50, 500)); */
+		/* p = e->programs + sp_debug_print_sampler_program; */
+		/* p = e->programs + sp_landgen_notrel_program; */
+		/* glUseProgram(p->handle); */
+		/* UNIF(p, m1i, "level_stride", 3); */
+		/* UNIF(p, m1iv, "phase_startoffset", 2, (int[]){0, 0}); */
+		/* UNIF(p, m2fv, "random_seeds", 1, (float[]){ft_randf01(), ft_randf01()}); */
+		/* UNIF(p, m2fv, "viewport", 1, (float[]){WIN_WIDTHF, WIN_HEIGHTF}); */
+		/* UNIF(p, m1i, "tex", 0); */
+		/* glActiveTexture(GL_TEXTURE0 + 0); */
+		/* glBindTexture(GL_TEXTURE_2D, e->land_handles[0]); */
+		/* int const width = (int)pow(2.f, (float)(LAND_NDEPTHLOOPSI + 1)); */
+		/* glClear(GL_DEPTH_BUFFER_BIT); */
+		/* sp_debug_putquad_screencoord(ATOV2I(width, width)); */
+
+		/* sp_debug_puttexture2d(e, e->textures + 0); */
+		sp_debug_puttexture2d(e, &e->land_tex1);
 		glfwSwapBuffers(e->win);
 		glfwPollEvents();
 	}

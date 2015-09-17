@@ -43,6 +43,8 @@ int			sp_loadconf_programs(t_env *e)
 	, sp_face_grey_gshader, sp_no_tcshader, sp_no_teshader, TEXI(1, 0)),
 	PROG(sp_po2_noop_vshader, sp_landgen_notrel_fshader, sp_no_gshader
 	, sp_no_tcshader, sp_no_teshader, TEXI(-1, -1)),
+	PROG(sp_po2_noop_vshader, sp_debug_print_sampler_fshader, sp_no_gshader
+	, sp_no_tcshader, sp_no_teshader, TEXI(-1, -1)),
 	};
 	memcpy(&e->programs, &tmp, sizeof(tmp));
 	return (0);
