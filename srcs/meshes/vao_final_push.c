@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "scop.h"
+#include <fcntl.h>
 
 extern t_location_info const	g_locinfo[sp_num_locs];
 
@@ -57,9 +58,18 @@ void		sp_vao_final_push(t_mesh *me, t_vshader const *vs
 						, t_ftvector const vbo_final[1]
 						, t_ftvector const ebo_final[1])
 {
+	size_t const	vao_size = vbo_final->size * vbo_final->chunk_size
+		+ ebo_final->size * ebo_final->chunk_size;
+
 	if (!me->generated)
 		glGenVertexArrays(1, me->handles + 0);
 	glBindVertexArray(me->handles[0]);
+	if (vao_size > 100000000)
+	{
+		qprintf("Vao's size is %zu(%.2f MB), continue ?\n"
+				, vao_size, (float)vao_size / 1000000.f);
+		read(0, NULL, 1);
+	}
 	push_buffers(me, vbo_final, ebo_final);
 	push_attributes(vs, vbo_final->chunk_size);
 	glBindVertexArray(0);

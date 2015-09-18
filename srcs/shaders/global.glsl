@@ -32,6 +32,7 @@
 ** CONFIG MACROES
 ** INITIAL_RADIUS       -> Initial sampling radius at max distance.
 */
+
 #define G_SHADOW_INITIAL_RADIUS (200.f / G_SBOX_RESOLUTIONF)
 
 #define G_SHADOW_NSAMPLESF float(NSAMPLESI)

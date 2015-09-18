@@ -25,5 +25,6 @@ void	main()
 		tex, vec2(
 			(gl_FragCoord.x / viewport.x) / (tex_size.x / viewport.x)
 			, (gl_FragCoord.y / viewport.y) / (tex_size.y / viewport.y)));
+	color = vec4(-color.w, 0.f, 0.f, 1.f);
 	return ;
 }

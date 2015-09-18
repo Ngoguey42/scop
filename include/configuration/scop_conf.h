@@ -114,7 +114,7 @@
 ** phase_startoffset_col(1+)(3)	= 0
 */
 
-# define WIN_WIDTHI 1600
+# define WIN_WIDTHI 1350
 # define WIN_RATIOF (4.f / 3.f)
 # define WIN_FOVF 45.f
 # define WIN_NEARF 0.2f

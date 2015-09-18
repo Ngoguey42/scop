@@ -37,6 +37,8 @@ static void	generate_land(t_env *e, t_land_tmp ld[1])
 	UNIF(p, m1i, "level_stride", ld->grid_width / 2);
 	UNIF(p, m1iv, "phase_startoffset", 2, (int[]){0, 0});
 	UNIF(p, m2fv, "random_seeds", 1, (float[]){ft_randf01(), ft_randf01()});
+	UNIF(p, m1f, "land_lowest_y", LAND_YF);
+	UNIF(p, m1f, "land_range_y", LAND_RANGEF);
 	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 
 	glBindVertexArray(0);
@@ -68,7 +70,7 @@ static int	setup_textures_fbo(t_env e[1], t_land_tmp ld[1])
 	glBindTexture(GL_TEXTURE_2D, e->land_handles[0]);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA32F, ld->grid_width
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA32F, ld->grid_width // quand tout est fini, tester des rgba16f
 				 , ld->grid_width, 0, GL_RGBA, GL_FLOAT, NULL);
 	glGenFramebuffers(1, &ld->fbo_handle);
 	glBindFramebuffer(GL_FRAMEBUFFER, ld->fbo_handle);
