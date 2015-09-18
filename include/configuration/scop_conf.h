@@ -108,10 +108,10 @@
 ** level_stride(1+)				= 2 ^ (LAND_NDEPTHLOOPSI - level + 1)
 ** phase_startoffset_row(1+)(1)	= level_stride / 2
 ** phase_startoffset_col(1+)(1)	= level_stride / 2
-** phase_startoffset_row(1+)(2)	= 0
-** phase_startoffset_col(1+)(2)	= level_stride / 2
-** phase_startoffset_row(1+)(3)	= level_stride / 2
-** phase_startoffset_col(1+)(3)	= 0
+** phase_startoffset_row(1+)(2)	= level_stride / 2
+** phase_startoffset_col(1+)(2)	= 0
+** phase_startoffset_row(1+)(3)	= 0
+** phase_startoffset_col(1+)(3)	= level_stride / 2
 */
 
 # define WIN_WIDTHI 1350

@@ -30,6 +30,8 @@ fshaders = [
 	Fshader("couvno_blendli", "couvno_blendli.frag", "lightstruct"), #ptn
 	Fshader("co_sun", "co_sun.frag", "sunfrag"), #sun
 	Fshader("depth01", "depth01.frag", ""), #sbox
+	Fshader("landgen_diag", "landgen_diag.frag", ""), #landgen_diag
+	Fshader("landgen_horiz", "landgen_horiz.frag", ""), #landgen_horiz
 	Fshader("landgen_notrel", "landgen_notrel.frag", ""), #landgen_notrel
 	Fshader("debug_print_sampler", "debug_print_sampler.frag", ""), #ampler
 ]
@@ -51,7 +53,10 @@ programs = [
 	Program("ptn", "poteno_to_uv", "couvno_blendli"
 			, gsname="face_grey"
 			, sbox=0, img1=1),
+	Program("landgen_diag", "po2_noop", "landgen_diag"),
+	Program("landgen_horiz", "po2_noop", "landgen_horiz"),
 	Program("landgen_notrel", "po2_noop", "landgen_notrel"),
+
 	Program("debug_print_sampler", "po2_noop", "debug_print_sampler"),
 ]
 textures = [

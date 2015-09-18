@@ -177,7 +177,13 @@ o/srcs/debug/output_quad.o: srcs/debug/output_quad.c include/scop.h \
 	include/configuration/cog_enums.h include/meshes/vao.h include/ftmath.h \
 	include/configuration/cog_meshfill.h include/objmodel/objmodel.h \
 	include/meshes/vao.h include/ftmath.h | o/srcs/debug/
-o/srcs/debug/output_texture.o: srcs/debug/output_texture.c | o/srcs/debug/
+o/srcs/debug/output_texture.o: srcs/debug/output_texture.c include/scop.h \
+	include/ftmath.h include/configuration/scop_conf.h include/ftmath.h \
+	include/configuration/cog_enums.h include/scop_types.h \
+	include/configuration/scop_conf.h include/ftmath.h \
+	include/configuration/cog_enums.h include/meshes/vao.h include/ftmath.h \
+	include/configuration/cog_meshfill.h include/objmodel/objmodel.h \
+	include/meshes/vao.h include/ftmath.h | o/srcs/debug/
 o/srcs/env_operations.o: srcs/env_operations.c include/scop.h include/ftmath.h \
 	include/configuration/scop_conf.h include/ftmath.h \
 	include/configuration/cog_enums.h include/scop_types.h \

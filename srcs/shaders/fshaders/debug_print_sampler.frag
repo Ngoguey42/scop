@@ -11,7 +11,7 @@
 // ************************************************************************** //
 
 uniform sampler2D			tex;
-uniform vec2				viewport;
+//uniform vec2				viewport;
 
 out vec4                    color;
 
@@ -23,8 +23,8 @@ void	main()
 //		discard;
 	color.w = texture(
 		tex, vec2(
-			(gl_FragCoord.x / viewport.x) / (tex_size.x / viewport.x)
-			, (gl_FragCoord.y / viewport.y) / (tex_size.y / viewport.y)));
+			(gl_FragCoord.x) / (tex_size.x)
+			, (gl_FragCoord.y) / (tex_size.y)));
 	color = vec4(color.w, 0.f, 0.f, 1.f);
 //	color = vec4(1.f, 0.f, 0.f, 1.f);
 	return ;

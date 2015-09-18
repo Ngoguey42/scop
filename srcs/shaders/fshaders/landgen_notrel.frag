@@ -37,6 +37,6 @@ void	main()
   	color =
 		ft_rand0(gl_FragCoord.xy + random_seeds) * land_range_y
 		+ land_average_y;
-	color = 0.85f;
+	color = 0.4f;
 	return ;
 }

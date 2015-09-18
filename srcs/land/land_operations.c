@@ -27,20 +27,60 @@ static void	setup_ld(t_land_tmp ld[1])
 static void	generate_land(t_env e[1], t_land_tmp ld[1])
 {
 	t_program const		*p;
+	int					stride;
+	float				land_range;
+	int					depth_loop;
 
-	p = e->programs + sp_landgen_notrel_program;
 	glBindFramebuffer(GL_FRAMEBUFFER, *ld->fbo_handle);
 	glViewport(0, 0, ld->grid_width, ld->grid_width);
 	glBindVertexArray(*ld->vao_handle);
 
+	p = e->programs + sp_landgen_notrel_program;
 	glUseProgram(p->handle);
 	UNIF(p, m1i, "level_stride", ld->grid_width / 2);
 	UNIF(p, m1iv, "phase_startoffset", 2, (int[]){0, 0});
 	UNIF(p, m2fv, "random_seeds", 1, (float[]){ft_randf01(), ft_randf01()});
-	UNIF(p, m1f, "land_lowest_y", LAND_YF);
+	UNIF(p, m1f, "land_average_y", LAND_YF);
 	UNIF(p, m1f, "land_range_y", LAND_RANGEF);
 	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-
+	glFlush();//flush!!
+	
+	stride = ld->grid_width;
+	land_range = LAND_RANGEF;
+	depth_loop = 0;
+	while (++depth_loop <= LAND_NDEPTHLOOPSI)
+	{
+		land_range *= 0.55f;
+		stride /= 2;
+		qprintf("stride %d  range %.2f\n", stride, land_range);
+		p = e->programs + sp_landgen_diag_program;
+		glUseProgram(p->handle);
+		UNIF(p, m1i, "level_stride", stride);
+		UNIF(p, m1iv, "phase_startoffset", 2, (int[]){stride / 2, stride / 2});
+		UNIF(p, m2fv, "random_seeds", 1, (float[]){ft_randf01(), ft_randf01()});
+		UNIF(p, m1f, "land_average_y", LAND_YF);
+		UNIF(p, m1f, "land_range_y", land_range);
+		UNIF(p, m1i, "tex", 0);
+		glActiveTexture(GL_TEXTURE0 + 0);
+		glBindTexture(GL_TEXTURE_2D, *ld->ytex_handle);
+		glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+		glFlush();//flush!!
+		p = e->programs + sp_landgen_horiz_program;
+		glUseProgram(p->handle);
+		UNIF(p, m1i, "level_stride", stride);
+		UNIF(p, m2fv, "random_seeds", 1, (float[]){ft_randf01(), ft_randf01()});
+		UNIF(p, m1f, "land_average_y", LAND_YF);
+		UNIF(p, m1f, "land_range_y", land_range);
+		UNIF(p, m1i, "tex", 0);
+		glActiveTexture(GL_TEXTURE0 + 0);
+		glBindTexture(GL_TEXTURE_2D, *ld->ytex_handle);
+		UNIF(p, m1iv, "phase_startoffset", 2, (int[]){stride / 2, 0});
+		glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+		UNIF(p, m1iv, "phase_startoffset", 2, (int[]){0, stride / 2});
+		glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+		glFlush();//flush!!
+	}
+	
 	glBindVertexArray(0);
 	glUseProgram(0);
 	return ;
@@ -70,6 +110,8 @@ static int	setup_textures_fbo(t_land_tmp ld[1])
 	glBindTexture(GL_TEXTURE_2D, *ld->ytex_handle);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	glTexImage2D(GL_TEXTURE_2D, 0
 				 , GL_R32F
 				 , ld->grid_width , ld->grid_width, 0

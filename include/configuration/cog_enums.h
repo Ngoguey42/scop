@@ -38,6 +38,8 @@ typedef enum				e_fshader_index
 	sp_couvno_blendli_fshader,
 	sp_co_sun_fshader,
 	sp_depth01_fshader,
+	sp_landgen_diag_fshader,
+	sp_landgen_horiz_fshader,
 	sp_landgen_notrel_fshader,
 	sp_debug_print_sampler_fshader,
 	sp_num_fshaders
@@ -72,6 +74,8 @@ typedef enum				e_program_index
 	sp_sun_program,
 	sp_pointshadow_program,
 	sp_ptn_program,
+	sp_landgen_diag_program,
+	sp_landgen_horiz_program,
 	sp_landgen_notrel_program,
 	sp_debug_print_sampler_program,
 	sp_num_programs
