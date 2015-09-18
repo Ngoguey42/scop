@@ -39,6 +39,7 @@ typedef struct					s_land_tmp
 	GLuint						vbo_handle[1];
 	GLuint						ytex_handle[1];
 	GLuint						coltex_handle[1];
+	GLuint						fbo2_handle[1];
 	GLuint						nortex_handle[1];
 }								t_land_tmp;
 

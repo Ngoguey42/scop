@@ -27,7 +27,7 @@ void	main()
 	}
 //	 color = vec4(0.f, 0.f, 0.f, 150.f);
 //	color = 1.f;
-	vec2    tex_size = textureSize(tex, 0);
+	vec2    tex_size = textureSize(tex, 0); //c'est un square noob
 	
 
 	int		stridehalf = level_stride / 2;

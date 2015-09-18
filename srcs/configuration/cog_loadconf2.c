@@ -41,6 +41,8 @@ int			sp_loadconf_programs(t_env *e)
 	, sp_pos_to_cubemap_gshader, sp_no_tcshader, sp_no_teshader, TEXI(-1, -1)),
 	PROG(sp_poteno_to_uv_vshader, sp_couvno_blendli_fshader
 	, sp_face_grey_gshader, sp_no_tcshader, sp_no_teshader, TEXI(1, 0)),
+	PROG(sp_po2_noop_vshader, sp_landgen_normals_fshader, sp_no_gshader
+	, sp_no_tcshader, sp_no_teshader, TEXI(-1, -1)),
 	PROG(sp_po2_noop_vshader, sp_landgen_diag_fshader, sp_no_gshader
 	, sp_no_tcshader, sp_no_teshader, TEXI(-1, -1)),
 	PROG(sp_po2_noop_vshader, sp_landgen_horiz_fshader, sp_no_gshader

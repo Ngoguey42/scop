@@ -72,7 +72,32 @@ static void	generate_land(t_env e[1], t_land_tmp ld[1])
 		glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 		glFlush();
 	}
+	glFinish();
+	glBindVertexArray(0);
+	glUseProgram(0);
+	return ;
+}
+
+static void	generate_normals(t_env e[1], t_land_tmp ld[1])
+{
+	t_program const		*p;
+
+	glBindFramebuffer(GL_FRAMEBUFFER, *ld->fbo2_handle);
+	glViewport(0, 0, ld->grid_width, ld->grid_width);
+	glBindVertexArray(*ld->vao_handle);
+	p = e->programs + sp_landgen_diag_program;
+	glUseProgram(p->handle);
+/*	UNIF(p, m1i, "level_stride", stride);
+	UNIF(p, m2fv, "random_seeds", 1, (float[]){ft_randf01(), ft_randf01()});
+	UNIF(p, m1f, "land_average_y", LAND_YF);
+	UNIF(p, m1f, "land_range_y", land_range);
+	UNIF(p, m1i, "tex", 0);*/
+	glActiveTexture(GL_TEXTURE0 + 0);
+	glBindTexture(GL_TEXTURE_2D, *ld->ytex_handle);
+
 	
+	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+	glFlush();		
 	glBindVertexArray(0);
 	glUseProgram(0);
 	return ;
@@ -106,6 +131,14 @@ static int	setup_textures(t_land_tmp ld[1])
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, ld->grid_width , ld->grid_width, 0
 				 , GL_RGBA, GL_UNSIGNED_BYTE, NULL);
+	glGenTextures(1, ld->nortex_handle);
+	glBindTexture(GL_TEXTURE_2D, *ld->nortex_handle);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, ld->grid_width , ld->grid_width, 0
+				 , GL_RGB, GL_FLOAT, NULL);
 	return (0);
 }
 
@@ -118,6 +151,14 @@ static int	setup_fbo(t_land_tmp ld[1])
 	glFramebufferTexture(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT1
 						 , *ld->coltex_handle, 0);
 	glDrawBuffers(2, (GLenum[]){GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1});
+	glReadBuffer(GL_NONE);
+	if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
+		return (ERROR("Framebuffer not complete!"));
+	glGenFramebuffers(1, ld->fbo2_handle);
+	glBindFramebuffer(GL_FRAMEBUFFER, *ld->fbo2_handle);
+	glFramebufferTexture(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0
+						 , *ld->nortex_handle, 0);
+	glDrawBuffers(1, (GLenum[]){GL_COLOR_ATTACHMENT0});
 	glReadBuffer(GL_NONE);
 	if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
 		return (ERROR("Framebuffer not complete!"));
