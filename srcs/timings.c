@@ -43,8 +43,8 @@ void			sp_timings_handle_nofocus(t_env *e)
 
 	if (e->states[sp_window_focused_state] == 0)
 	{
-		sleep_time = 0.5 - (glfwGetTime() - e->time_cur);
-		if (sleep_time < 0.5)
+		sleep_time = 0.5f - (glfwGetTime() - e->time_cur);
+		if (sleep_time > 0.f && sleep_time < 0.5)
 			usleep(sleep_time * 1000000.);
 	}
 	return ;

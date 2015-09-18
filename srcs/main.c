@@ -54,6 +54,12 @@ static void		loop(t_env *e)
 		sp_render_sbox(e);
 		sp_render_obs(e);
 		sp_debug_puttexture2d(e, &e->land_tex1);
+/*		qprintf("in(%.0f)  out(%.0f) dist(%.1f) fps(%.1f)\n"
+		, e->sunskin_tessin
+		, e->sunskin_tessout[0]
+		, v3_dist(e->sunpos_cartesian, e->cpos)
+		, e->fps
+		);*/
 		glfwSwapBuffers(e->win);
 		glfwPollEvents();
 	}

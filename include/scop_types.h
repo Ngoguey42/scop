@@ -34,9 +34,12 @@ typedef struct					s_land_tmp
 {
 	int							grid_npoints;
 	int							grid_width;
-	GLuint						fbo_handle;
-	GLuint						vao_handle;
-	GLuint						vbo_handle;
+	GLuint						fbo_handle[1];
+	GLuint						vao_handle[1];
+	GLuint						vbo_handle[1];
+	GLuint						ytex_handle[1];
+	GLuint						coltex_handle[1];
+	GLuint						nortex_handle[1];
 }								t_land_tmp;
 
 /*
