@@ -30,12 +30,12 @@ void	main()
 	if ((int(gl_FragCoord.x) - phase_startoffset[0]) % level_stride != 0
 		|| (int(gl_FragCoord.y) - phase_startoffset[1]) % level_stride != 0)
 	{
-		// discard;
+		discard;
 		//color = vec4(0.f, 1.f, 1.f, 0.f); //debug
-		color = vec4(0.f, 0.f, 1.f, 1.f);
+/*		color = vec4(0.f, 0.f, 1.f, 1.f);
 		point_y = 0.05f;
 
-		return ; //debug
+		return ; //debug*/
 		
 	}
 //	color = vec4(0.f, 0.f, 0.f, 150.f);

@@ -24,17 +24,17 @@ void	main()
 
 
 
-	color = texture(tex, vec2(
+/*	color = texture(tex, vec2(
 						(gl_FragCoord.x) / (tex_size.x)
 						, (gl_FragCoord.y) / (tex_size.y)));
+*/
 
-/*
   	  color.w = texture(
 	  tex, vec2(
 	  (gl_FragCoord.x) / (tex_size.x)
 	  , (gl_FragCoord.y) / (tex_size.y)));
 
 	  color = vec4((-color.w - 3.f) / 25.f, 0.f, 0.f, 1.f);
-*/
+
 	return ;
 }

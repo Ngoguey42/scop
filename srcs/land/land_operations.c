@@ -14,13 +14,30 @@
 #include <string.h>
 #include <math.h>
 
-static void	setup_ld(t_land_tmp ld[1])
+static void	first_pass(t_program const p[1], t_land_tmp const ld[1])
 {
-	bzero(ld, sizeof(*ld));
-	ld->grid_npoints = (int)pow(4.f, (float)(LAND_NDEPTHLOOPSI + 1));
-	ld->grid_width = (int)pow(2.f, (float)(LAND_NDEPTHLOOPSI + 1));
-	qprintf("grid_npoints:%d grid_width:%d\n", ld->grid_npoints
-			, ld->grid_width);
+	glUseProgram(p->handle);
+	UNIF(p, m1i, "level_stride", ld->grid_width / 2);
+	UNIF(p, m1iv, "phase_startoffset", 2, (int[]){0, 0});
+	UNIF(p, m2fv, "random_seeds", 1, (float[]){ft_randf01(), ft_randf01()});
+	UNIF(p, m1f, "land_average_y", LAND_YF);
+	UNIF(p, m1f, "land_range_y", LAND_RANGEF);
+	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+	glFlush();//flush!!
+	return ;
+}
+
+static void	push_tex_and_unif(t_program const p[1], t_land_tmp const ld[1]
+							  , int stride, float land_range)
+{
+	glUseProgram(p->handle);
+	UNIF(p, m1i, "level_stride", stride);
+	UNIF(p, m2fv, "random_seeds", 1, (float[]){ft_randf01(), ft_randf01()});
+	UNIF(p, m1f, "land_average_y", LAND_YF);
+	UNIF(p, m1f, "land_range_y", land_range);
+	UNIF(p, m1i, "tex", 0);
+	glActiveTexture(GL_TEXTURE0 + 0);
+	glBindTexture(GL_TEXTURE_2D, *ld->ytex_handle);
 	return ;
 }
 
@@ -34,17 +51,7 @@ static void	generate_land(t_env e[1], t_land_tmp ld[1])
 	glBindFramebuffer(GL_FRAMEBUFFER, *ld->fbo_handle);
 	glViewport(0, 0, ld->grid_width, ld->grid_width);
 	glBindVertexArray(*ld->vao_handle);
-
-	p = e->programs + sp_landgen_notrel_program;
-	glUseProgram(p->handle);
-	UNIF(p, m1i, "level_stride", ld->grid_width / 2);
-	UNIF(p, m1iv, "phase_startoffset", 2, (int[]){0, 0});
-	UNIF(p, m2fv, "random_seeds", 1, (float[]){ft_randf01(), ft_randf01()});
-	UNIF(p, m1f, "land_average_y", LAND_YF);
-	UNIF(p, m1f, "land_range_y", LAND_RANGEF);
-	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-	glFlush();//flush!!
-	
+	first_pass(e->programs + sp_landgen_notrel_program, ld);	
 	stride = ld->grid_width;
 	land_range = LAND_RANGEF;
 	depth_loop = 0;
@@ -52,33 +59,18 @@ static void	generate_land(t_env e[1], t_land_tmp ld[1])
 	{
 		land_range *= 0.55f;
 		stride /= 2;
-		qprintf("stride %d  range %.2f\n", stride, land_range);
 		p = e->programs + sp_landgen_diag_program;
-		glUseProgram(p->handle);
-		UNIF(p, m1i, "level_stride", stride);
+		push_tex_and_unif(p, ld, stride, land_range);
 		UNIF(p, m1iv, "phase_startoffset", 2, (int[]){stride / 2, stride / 2});
-		UNIF(p, m2fv, "random_seeds", 1, (float[]){ft_randf01(), ft_randf01()});
-		UNIF(p, m1f, "land_average_y", LAND_YF);
-		UNIF(p, m1f, "land_range_y", land_range);
-		UNIF(p, m1i, "tex", 0);
-		glActiveTexture(GL_TEXTURE0 + 0);
-		glBindTexture(GL_TEXTURE_2D, *ld->ytex_handle);
 		glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-		glFlush();//flush!!
+		glFlush();		
 		p = e->programs + sp_landgen_horiz_program;
-		glUseProgram(p->handle);
-		UNIF(p, m1i, "level_stride", stride);
-		UNIF(p, m2fv, "random_seeds", 1, (float[]){ft_randf01(), ft_randf01()});
-		UNIF(p, m1f, "land_average_y", LAND_YF);
-		UNIF(p, m1f, "land_range_y", land_range);
-		UNIF(p, m1i, "tex", 0);
-		glActiveTexture(GL_TEXTURE0 + 0);
-		glBindTexture(GL_TEXTURE_2D, *ld->ytex_handle);
+		push_tex_and_unif(p, ld, stride, land_range);
 		UNIF(p, m1iv, "phase_startoffset", 2, (int[]){stride / 2, 0});
 		glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 		UNIF(p, m1iv, "phase_startoffset", 2, (int[]){0, stride / 2});
 		glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-		glFlush();//flush!!
+		glFlush();
 	}
 	
 	glBindVertexArray(0);
@@ -86,7 +78,54 @@ static void	generate_land(t_env e[1], t_land_tmp ld[1])
 	return ;
 }
 
-static void	setup_vao(t_env e[1], t_land_tmp ld[1])
+static void	setup_ld(t_land_tmp ld[1])
+{
+	bzero(ld, sizeof(*ld));
+	ld->grid_npoints = (int)pow(4.f, (float)(LAND_NDEPTHLOOPSI + 1));
+	ld->grid_width = (int)pow(2.f, (float)(LAND_NDEPTHLOOPSI + 1));
+	qprintf("grid_npoints:%d grid_width:%d\n", ld->grid_npoints
+			, ld->grid_width);
+	return ;
+}
+
+static int	setup_textures(t_land_tmp ld[1])
+{
+	glGenTextures(1, ld->ytex_handle);
+	glBindTexture(GL_TEXTURE_2D, *ld->ytex_handle);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexImage2D(GL_TEXTURE_2D, 0 , GL_R32F , ld->grid_width , ld->grid_width, 0
+				 , GL_RED, GL_FLOAT, NULL);
+	glGenTextures(1, ld->coltex_handle);
+	glBindTexture(GL_TEXTURE_2D, *ld->coltex_handle);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, ld->grid_width , ld->grid_width, 0
+				 , GL_RGBA, GL_UNSIGNED_BYTE, NULL);
+	return (0);
+}
+
+static int	setup_fbo(t_land_tmp ld[1])
+{	
+	glGenFramebuffers(1, ld->fbo_handle);
+	glBindFramebuffer(GL_FRAMEBUFFER, *ld->fbo_handle);
+	glFramebufferTexture(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0
+						 , *ld->ytex_handle, 0);
+	glFramebufferTexture(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT1
+						 , *ld->coltex_handle, 0);
+	glDrawBuffers(2, (GLenum[]){GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1});
+	glReadBuffer(GL_NONE);
+	if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
+		return (ERROR("Framebuffer not complete!"));
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	return (0);
+}
+
+static void	setup_vao(t_land_tmp ld[1])
 {
 	GLfloat const	 vertices[] = {
 	-1.0f, 1.0f, -1.0f, -1.0f, 1.0f, 1.0f, 1.0f, -1.0f};
@@ -100,54 +139,7 @@ static void	setup_vao(t_env e[1], t_land_tmp ld[1])
 	glEnableVertexAttribArray(0);
 	glBindVertexArray(0);
 	/* glDeleteBuffers(1, &quad_vbo); */
-	(void)e;
 	return ;
-}
-
-static int	setup_textures_fbo(t_land_tmp ld[1])
-{
-	glGenTextures(1, ld->ytex_handle);
-	glBindTexture(GL_TEXTURE_2D, *ld->ytex_handle);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	glTexImage2D(GL_TEXTURE_2D, 0
-				 , GL_R32F
-				 , ld->grid_width , ld->grid_width, 0
-				 , GL_RED
-				 , GL_FLOAT
-				 , NULL);
-
-	glGenTextures(1, ld->coltex_handle);
-	glBindTexture(GL_TEXTURE_2D, *ld->coltex_handle);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	glTexImage2D(GL_TEXTURE_2D, 0
-				 , GL_RGBA
-				 , ld->grid_width , ld->grid_width, 0
-				 , GL_RGBA
-				 , GL_UNSIGNED_BYTE
-				 , NULL);
-
-	
-	glGenFramebuffers(1, ld->fbo_handle);
-	glBindFramebuffer(GL_FRAMEBUFFER, *ld->fbo_handle);
-	glFramebufferTexture(GL_FRAMEBUFFER
-						 , GL_COLOR_ATTACHMENT0
-						 , *ld->ytex_handle, 0);
-	glFramebufferTexture(GL_FRAMEBUFFER
-						 , GL_COLOR_ATTACHMENT1
-						 , *ld->coltex_handle, 0);
-//	glDrawBuffers(1, (GLenum[]){GL_COLOR_ATTACHMENT0});
-	glDrawBuffers(2, (GLenum[]){GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1});
-	glReadBuffer(GL_NONE);
-	if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
-		return (ERROR("Framebuffer not complete!"));
-	glBindFramebuffer(GL_FRAMEBUFFER, 0);
-	return (0);
 }
 
 int			sp_init_land(t_env *e)
@@ -155,13 +147,15 @@ int			sp_init_land(t_env *e)
 	t_land_tmp		ld[1];
 
 	setup_ld(ld);
-	if (setup_textures_fbo(ld))
-		return (ERROR("setup_textures_fbo(...)"));
-	setup_vao(e, ld);
+	if (setup_textures(ld))
+		return (ERROR("setup_textures(...)"));
+	if (setup_fbo(ld))
+		return (ERROR("setup_fbo(...)"));
+	setup_vao(ld);
 	generate_land(e, ld);
-	e->land_tex1 = (t_texture){NULL, GL_TEXTURE_2D, {ld->grid_width, ld->grid_width}, *ld->ytex_handle};
-	e->land_tex2 = (t_texture){NULL, GL_TEXTURE_2D, {ld->grid_width, ld->grid_width}, *ld->coltex_handle};
-	/* e->land_handles[1] = ld->; */
-	/* glPointParameteri(GL_POINT_SPRITE_COORD_ORIGIN, GL_LOWER_LEFT); //TODO */
+	e->land_tex1 = (t_texture){NULL, GL_TEXTURE_2D
+		, {ld->grid_width, ld->grid_width}, *ld->ytex_handle};
+	e->land_tex2 = e->land_tex1;
+	e->land_tex2.handle = *ld->coltex_handle;
 	return (0);
 }
