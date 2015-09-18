@@ -118,12 +118,31 @@ static int	setup_textures_fbo(t_land_tmp ld[1])
 				 , GL_RED
 				 , GL_FLOAT
 				 , NULL);
+
+	glGenTextures(1, ld->coltex_handle);
+	glBindTexture(GL_TEXTURE_2D, *ld->coltex_handle);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexImage2D(GL_TEXTURE_2D, 0
+				 , GL_RGBA
+				 , ld->grid_width , ld->grid_width, 0
+				 , GL_RGBA
+				 , GL_UNSIGNED_BYTE
+				 , NULL);
+
+	
 	glGenFramebuffers(1, ld->fbo_handle);
 	glBindFramebuffer(GL_FRAMEBUFFER, *ld->fbo_handle);
 	glFramebufferTexture(GL_FRAMEBUFFER
 						 , GL_COLOR_ATTACHMENT0
 						 , *ld->ytex_handle, 0);
-	glDrawBuffers(1, (GLenum[]){GL_COLOR_ATTACHMENT0});
+	glFramebufferTexture(GL_FRAMEBUFFER
+						 , GL_COLOR_ATTACHMENT1
+						 , *ld->coltex_handle, 0);
+//	glDrawBuffers(1, (GLenum[]){GL_COLOR_ATTACHMENT0});
+	glDrawBuffers(2, (GLenum[]){GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1});
 	glReadBuffer(GL_NONE);
 	if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
 		return (ERROR("Framebuffer not complete!"));
@@ -140,8 +159,8 @@ int			sp_init_land(t_env *e)
 		return (ERROR("setup_textures_fbo(...)"));
 	setup_vao(e, ld);
 	generate_land(e, ld);
-	e->land_tex1 = (t_texture){NULL, GL_TEXTURE_2D
-			   , {ld->grid_width, ld->grid_width}, *ld->ytex_handle};
+	e->land_tex1 = (t_texture){NULL, GL_TEXTURE_2D, {ld->grid_width, ld->grid_width}, *ld->ytex_handle};
+	e->land_tex2 = (t_texture){NULL, GL_TEXTURE_2D, {ld->grid_width, ld->grid_width}, *ld->coltex_handle};
 	/* e->land_handles[1] = ld->; */
 	/* glPointParameteri(GL_POINT_SPRITE_COORD_ORIGIN, GL_LOWER_LEFT); //TODO */
 	return (0);

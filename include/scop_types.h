@@ -335,6 +335,7 @@ typedef struct					s_env
 
 	GLuint						land_handles[3];
 	t_texture					land_tex1;
+	t_texture					land_tex2;
 	
 	double						time_start;
 	double						time_cur;

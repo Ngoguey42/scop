@@ -16,7 +16,8 @@ uniform vec2				random_seeds;
 uniform float				land_average_y;
 uniform float				land_range_y;
 
-out float					color;
+out float					point_y;
+out vec4					color;
 
 float	ft_rand0(vec2 co)
 {
@@ -25,18 +26,23 @@ float	ft_rand0(vec2 co)
 
 void	main()
 {
+
 	if ((int(gl_FragCoord.x) - phase_startoffset[0]) % level_stride != 0
 		|| (int(gl_FragCoord.y) - phase_startoffset[1]) % level_stride != 0)
 	{
 		// discard;
 		//color = vec4(0.f, 1.f, 1.f, 0.f); //debug
-		color = 0.05f;
+		color = vec4(0.f, 0.f, 1.f, 1.f);
+		point_y = 0.05f;
+
 		return ; //debug
+		
 	}
-//	 color = vec4(0.f, 0.f, 0.f, 150.f);
-  	color =
+//	color = vec4(0.f, 0.f, 0.f, 150.f);
+  	point_y =
 		ft_rand0(gl_FragCoord.xy + random_seeds) * land_range_y
 		+ land_average_y;
-	color = 0.4f;
+	color = vec4(1.f, 1.f, 0.f, 1.f);
+//	color = 0.4f;
 	return ;
 }

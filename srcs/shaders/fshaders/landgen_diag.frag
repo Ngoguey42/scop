@@ -6,7 +6,9 @@ uniform float               land_average_y;
 uniform float				land_range_y;
 uniform sampler2D           tex;
 
-out float					color;
+out float					point_y;
+out vec4                    color;
+
 
 float	ft_rand0(vec2 co)
 {
@@ -29,8 +31,8 @@ void	main()
 	
 
 	int		stridehalf = level_stride / 2;
-
-	color =
+	color = vec4(0.f, 0.f, 1.f, 1.f);
+	point_y =
 		ft_rand0(gl_FragCoord.xy + random_seeds) * land_range_y
 		+ texture(tex, vec2((int(gl_FragCoord.x) - stridehalf) / tex_size.x
 							, (int(gl_FragCoord.y) - stridehalf) / tex_size.y))

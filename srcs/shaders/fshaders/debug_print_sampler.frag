@@ -21,11 +21,20 @@ void	main()
 
 //	if (gl_FragCoord.x > tex_size.x || gl_FragCoord.y > tex_size.y)
 //		discard;
-	color.w = texture(
-		tex, vec2(
-			(gl_FragCoord.x) / (tex_size.x)
-			, (gl_FragCoord.y) / (tex_size.y)));
-	color = vec4(color.w, 0.f, 0.f, 1.f);
-//	color = vec4(1.f, 0.f, 0.f, 1.f);
+
+
+
+	color = texture(tex, vec2(
+						(gl_FragCoord.x) / (tex_size.x)
+						, (gl_FragCoord.y) / (tex_size.y)));
+
+/*
+  	  color.w = texture(
+	  tex, vec2(
+	  (gl_FragCoord.x) / (tex_size.x)
+	  , (gl_FragCoord.y) / (tex_size.y)));
+
+	  color = vec4((-color.w - 3.f) / 25.f, 0.f, 0.f, 1.f);
+*/
 	return ;
 }
