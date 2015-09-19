@@ -6,11 +6,12 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/09/19 17:29:31 by ngoguey           #+#    #+#             //
-//   Updated: 2015/09/19 17:34:54 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/09/19 18:48:07 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
-layout						(triangles, equal_spacing, cw) in;
+layout						(triangles, fractional_odd_spacing, cw) in;
+// layout						(triangles, equal_spacing, cw) in;
 
 in St
 {

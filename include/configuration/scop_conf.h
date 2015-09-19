@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 10:33:54 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/09/19 18:30:18 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/09/19 18:35:05 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@
 /* # define LAND_SIDEF 50.f */
 # define LAND_YF -10.f
 # define LAND_RANGEF 10.f
-# define LAND_RANGEDECAYF 0.50
+# define LAND_RANGEDECAYF 0.47
 # define LAND_MINYF (LAND_YF - LAND_RANGEF + 5.f)
 # define LAND_MAGNITUDEYF (LAND_RANGEF * 2 - 10.f)
 /* # define LAND_COLORRAND 0.05f */
