@@ -6,17 +6,17 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/09/16 11:32:06 by ngoguey           #+#    #+#             //
-//   Updated: 2015/09/19 07:41:24 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/09/19 07:53:20 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
-uniform int					level_stride;
-uniform int					phase_startoffset[2];
-uniform vec2				random_seeds;
-uniform float				land_average_y;
-uniform float				land_range_y;
+uniform int						level_stride;
+uniform int						phase_startoffset[2];
+uniform vec2					random_seeds;
+uniform float					land_average_y;
+uniform float					land_range_y;
 
-layout(location = 0) out float point_y;
+layout(location = 0) out float	point_y;
 layout(location = 1) out vec4	color;
 
 // out float					point_y;

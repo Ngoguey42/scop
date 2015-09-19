@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/09/16 08:05:58 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/09/19 07:31:46 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/09/19 08:14:18 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ static void	generate_land(t_env e[1], t_land_tmp ld[1])
 
 	glBindFramebuffer(GL_FRAMEBUFFER, *ld->fbo_handle);
 	glViewport(0, 0, ld->grid_width, ld->grid_width);
+	glDisable(GL_DEPTH_TEST);
 	glBindVertexArray(*ld->vao_handle);
 	first_pass(e->programs + sp_landgen_notrel_program, ld);	
 	stride = ld->grid_width;
@@ -73,7 +74,7 @@ static void	generate_land(t_env e[1], t_land_tmp ld[1])
 		glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 		glFlush();
 	}
-	glFinish();
+	glFinish(); // ???
 	glBindVertexArray(0);
 	glUseProgram(0);
 	return ;
@@ -85,20 +86,20 @@ static void	generate_normals(t_env e[1], t_land_tmp ld[1])
 
 	glBindFramebuffer(GL_FRAMEBUFFER, *ld->fbo2_handle);
 	glViewport(0, 0, ld->grid_width, ld->grid_width);
+	glDisable(GL_DEPTH_TEST);
 	glBindVertexArray(*ld->vao_handle);
-	p = e->programs + sp_landgen_diag_program;
+	p = e->programs + sp_landgen_normals_program;
 	glUseProgram(p->handle);
-/*	UNIF(p, m1i, "level_stride", stride);
-	UNIF(p, m2fv, "random_seeds", 1, (float[]){ft_randf01(), ft_randf01()});
-	UNIF(p, m1f, "land_average_y", LAND_YF);
-	UNIF(p, m1f, "land_range_y", land_range);
-	UNIF(p, m1i, "tex", 0);*/
+	/* UNIF(p, m1i, "level_stride", stride); */
+	UNIF(p, m1f, "height_factor", 1.f);
+	/* UNIF(p, m1f, "land_range_y", land_range); */
+	UNIF(p, m1i, "ymap", 0);
 	glActiveTexture(GL_TEXTURE0 + 0);
 	glBindTexture(GL_TEXTURE_2D, *ld->ytex_handle);
-
 	
 	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-	glFlush();		
+	glFinish(); // ???
+	/* glFlush(); */
 	glBindVertexArray(0);
 	glUseProgram(0);
 	return ;
@@ -151,7 +152,6 @@ static int	setup_fbo(t_land_tmp ld[1])
 						 , *ld->ytex_handle, 0);
 	glFramebufferTexture(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT1
 						 , *ld->coltex_handle, 0);
-	/* glDrawBuffers(1, (GLenum[]){GL_COLOR_ATTACHMENT0}); */
 	glDrawBuffers(2, (GLenum[]){GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1});
 	glReadBuffer(GL_NONE);
 	if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
@@ -196,9 +196,12 @@ int			sp_init_land(t_env *e)
 		return (ERROR("setup_fbo(...)"));
 	setup_vao(ld);
 	generate_land(e, ld);
+	generate_normals(e, ld);
 	e->land_tex1 = (t_texture){NULL, GL_TEXTURE_2D
 		, {ld->grid_width, ld->grid_width}, *ld->ytex_handle};
 	e->land_tex2 = e->land_tex1;
 	e->land_tex2.handle = *ld->coltex_handle;
+	e->land_tex3 = e->land_tex1;
+	e->land_tex3.handle = *ld->nortex_handle;
 	return (0);
 }

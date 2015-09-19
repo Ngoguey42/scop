@@ -6,12 +6,12 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/09/12 08:37:26 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/09/12 08:37:27 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/09/19 07:49:28 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "scop.h"
-#include <fcntl.h>
+#include <unistd.h>
 
 extern t_location_info const	g_locinfo[sp_num_locs];
 

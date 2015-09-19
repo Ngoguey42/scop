@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 12:07:31 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/09/17 15:35:02 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/09/19 07:49:51 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@
 # define DEBUG(ARG) qprintf("%s\n", (ARG))
 # define DEBUGF(...) qprintf(__VA_ARGS__), ft_putchar_fd('\n', 2)
 void        sp_debug_putquad_screencoord(t_vec2i topright);
+void        sp_debug_puttexture2d(t_env const *e, t_texture const *t);
 
 /*
 ** REDUNDANT MACROES

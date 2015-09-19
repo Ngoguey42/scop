@@ -1,14 +1,25 @@
+// ************************************************************************** //
+//                                                                            //
+//                                                        :::      ::::::::   //
+//   landgen_horiz.frag                                 :+:      :+:    :+:   //
+//                                                    +:+ +:+         +:+     //
+//   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
+//                                                +#+#+#+#+#+   +#+           //
+//   Created: 2015/09/19 07:51:36 by ngoguey           #+#    #+#             //
+//   Updated: 2015/09/19 07:53:35 by ngoguey          ###   ########.fr       //
+//                                                                            //
+// ************************************************************************** //
 
-uniform int					level_stride;
-uniform int					phase_startoffset[2];
-uniform vec2				random_seeds;
-uniform float               land_average_y;
-uniform float				land_range_y;
-uniform sampler2D           tex;
+uniform int						level_stride;
+uniform int						phase_startoffset[2];
+uniform vec2					random_seeds;
+uniform float           	    land_average_y;
+uniform float					land_range_y;
+uniform sampler2D				tex;
 
 
-layout(location = 0) out float point_y;
-layout(location = 1) out vec4   color;
+layout(location = 0) out float	point_y;
+layout(location = 1) out vec4	color;
 // out float					point_y;
 // out vec4                    color;
 

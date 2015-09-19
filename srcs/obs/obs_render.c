@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/27 12:01:57 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/09/12 13:46:17 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/09/19 07:47:19 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ void			sp_render_obs(t_env const *e)
 
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	glViewport(0, 0, WIN_WIDTHI, WIN_HEIGHTI);
+	glEnable(GL_DEPTH_TEST);
 	glClearColor(155. / 256., 216. / 256., 220. / 256., 1.f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	i = -1;

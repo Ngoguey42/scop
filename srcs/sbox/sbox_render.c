@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/08/22 12:21:49 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/09/12 08:35:09 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/09/19 07:47:35 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void		sp_render_sbox(t_env const *e)
 
 	glBindFramebuffer(GL_FRAMEBUFFER, e->sbox_fbo);
 	glViewport(0, 0, e->sbox_texture.dim[0], e->sbox_texture.dim[1]);
+	glEnable(GL_DEPTH_TEST);
 	glClear(GL_DEPTH_BUFFER_BIT);
 	glUseProgram(p->handle);
 	update_uniforms(e, p);
