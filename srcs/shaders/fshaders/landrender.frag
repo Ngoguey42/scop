@@ -6,7 +6,7 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/09/19 08:51:15 by ngoguey           #+#    #+#             //
-//   Updated: 2015/09/19 13:59:28 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/09/19 15:27:31 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -66,8 +66,10 @@ void	main()
 	
 	color.rgb = G_COL_TO_SRGB(color.rgb);
 	color = vec4(
-		(ambient + (diffuse
-					// + specular
+		(ambient + (
+			// vec3(0.f)
+			diffuse
+					+ specular
 			) * (1.f - shadow) * attenuation)
 			        * cLight * color.xyz
 		, color.w);

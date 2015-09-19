@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/09/16 08:05:58 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/09/19 14:45:45 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/09/19 15:24:14 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ static void	first_pass(t_program const p[1], t_land_tmp const ld[1])
 	UNIF(p, m2fv, "random_seeds", 1, (float[]){ft_randf01(), ft_randf01()});
 	UNIF(p, m1f, "land_average_y", LAND_YF);
 	UNIF(p, m1f, "land_range_y", LAND_RANGEF);
+	UNIF(p, m1f, "land_min_y", LAND_MINYF);
+	UNIF(p, m1f, "land_magnitude_y", LAND_MAGNITUDEYF);
 	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 	glFlush();//flush!!
 	return ;
@@ -36,6 +38,8 @@ static void	push_tex_and_unif(t_program const p[1], t_land_tmp const ld[1]
 	UNIF(p, m1f, "land_average_y", LAND_YF);
 	UNIF(p, m1f, "land_range_y", land_range);
 	UNIF(p, m1i, "tex", 0);
+	UNIF(p, m1f, "land_min_y", LAND_MINYF);
+	UNIF(p, m1f, "land_magnitude_y", LAND_MAGNITUDEYF);
 	glActiveTexture(GL_TEXTURE0 + 0);
 	glBindTexture(GL_TEXTURE_2D, *ld->ytex_handle);
 	return ;

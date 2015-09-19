@@ -6,7 +6,7 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/09/15 09:28:17 by ngoguey           #+#    #+#             //
-//   Updated: 2015/09/15 14:18:42 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/09/19 15:29:17 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -27,6 +27,15 @@
 #define G_SHADOW_BIAS 0.05f
 #define G_SHADOW_DECAY 1.5f
 #define G_SHADOW_NUM_SAMPLING_LOOPS 3
+
+#define G_NLANDCOLORSI 8
+
+struct ColType
+{
+	vec4            color;
+	float           center;
+	float           halfrange;
+};
 
 /*
 ** CONFIG MACROES
