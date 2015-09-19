@@ -6,7 +6,7 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/09/19 17:26:06 by ngoguey           #+#    #+#             //
-//   Updated: 2015/09/19 18:45:22 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/09/19 19:29:06 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -18,7 +18,7 @@ uniform float				tessLevelInRange;
 
 #define	DNEARESTTESS		1.f
 #define MINTESSLEVELIN		1.f
-#define POWERTESS			4.f
+#define POWERTESS			2.f
 // uniform vec3                posfactor;
 // uniform sampler2D               ymap;
 // uniform sampler2D               normap;

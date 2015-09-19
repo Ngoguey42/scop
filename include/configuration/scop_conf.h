@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 10:33:54 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/09/19 18:35:05 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/09/19 19:29:08 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,7 @@
 # define LAND_MAGNITUDEYF (LAND_RANGEF * 2 - 10.f)
 /* # define LAND_COLORRAND 0.05f */
 # define LAND_NDEPTHLOOPSCPI 6
-# define LAND_NDEPTHLOOPSI 11
+# define LAND_NDEPTHLOOPSI 10
 # define LAND_COORDFACT ATOV3(25.f, 1.f, -25.f)
 
 # define POINTS_DEPTHI LAND_NDEPTHLOOPSI //deprecated

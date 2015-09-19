@@ -6,7 +6,7 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/09/15 09:28:17 by ngoguey           #+#    #+#             //
-//   Updated: 2015/09/19 16:11:20 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/09/19 19:03:10 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -18,9 +18,9 @@
 #define G_GAMMA 2.2f
 #define G_GAMMAV3 vec3(G_GAMMAF)
 
-#define G_AMBIENT_STRENGTH 0.05f
-#define G_DIFFUSE_STRENGTH 2.f
-#define G_SPECULAR_STRENGTH 2.0f
+#define G_AMBIENT_STRENGTH 0.1f
+#define G_DIFFUSE_STRENGTH 1.75f
+#define G_SPECULAR_STRENGTH 1.0f
 #define G_SPECULAR_POWER 32.f
 
 #define G_SBOX_RESOLUTIONF 1024.f
