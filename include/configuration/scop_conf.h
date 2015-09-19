@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 10:33:54 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/09/19 07:18:26 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/09/19 12:25:36 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@
 # define LAND_SIDEF 50.f
 # define LAND_RANGEF (14.f)
 # define LAND_COLORRAND 0.05f
-# define LAND_NDEPTHLOOPSI 8
+# define LAND_NDEPTHLOOPSI 7
 # define LAND_YF -10.f
 
 # define POINTS_DEPTHI LAND_NDEPTHLOOPSI //deprecated

@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/09/16 08:05:58 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/09/19 08:14:18 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/09/19 12:27:05 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ static void	generate_normals(t_env e[1], t_land_tmp ld[1])
 	p = e->programs + sp_landgen_normals_program;
 	glUseProgram(p->handle);
 	/* UNIF(p, m1i, "level_stride", stride); */
-	UNIF(p, m1f, "height_factor", 1.f);
+	UNIF(p, m1f, "height_factor", 1.f / 25.f);
 	/* UNIF(p, m1f, "land_range_y", land_range); */
 	UNIF(p, m1i, "ymap", 0);
 	glActiveTexture(GL_TEXTURE0 + 0);

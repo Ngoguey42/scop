@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/09/19 08:40:36 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/09/19 12:04:50 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/09/19 12:21:14 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void		push_vertex(t_ftvector vec[1]
 
 	*(t_vec2*)&vert->tex = ATOV2(
 		(float)mapcoords[0] / (float)mapwidth
-		, 1.f - (float)mapcoords[1] / (float)mapwidth
+		, (float)mapcoords[1] / (float)mapwidth
 		);
 	ftv_push_back_unsafe(vec, vert);
 	return ;
