@@ -6,7 +6,7 @@
 #    By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/08/10 13:13:01 by ngoguey           #+#    #+#              #
-#    Updated: 2015/09/19 08:48:12 by ngoguey          ###   ########.fr        #
+#    Updated: 2015/09/19 09:57:38 by ngoguey          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,6 +43,7 @@ gshaders = [
 	Gshader("face_grey", "pouvno_facegrey.geom", ""),
 	Gshader("po_facegrey", "po_facegrey.geom", "sungeom"),
 	Gshader("pos_to_cubemap", "pos_to_cubemap.geom", ""),
+	Gshader("landrender", "landrender.geom", "viewproj"),
 ]
 tcshaders = [
 	Tcshader("test", "test.tesc", "suntesc"),
@@ -54,7 +55,8 @@ teshaders = [
 ]
 programs = [
 	# Program("land", "pocono_to_co_nomodel", "cono_coli", img1=0),
-	Program("landrender", "landrender", "landrender", img1=0),
+	Program("landrender", "landrender", "landrender", gsname="landrender"
+			, img1=0),
 	Program("sun", "poin_poout_mvptrans", "co_sun", gsname="po_facegrey", tcsname="test", tesname="test"),
 	Program("pointshadow", "po_to_noop_noviewproj", "depth01", gsname="pos_to_cubemap"),
 	Program("ptn", "poteno_to_uv", "couvno_blendli"
@@ -86,14 +88,7 @@ meshes = [
 
 	Mesh("land", "landrender"
 		 , fill_funbody="""{
-	t_env const		*e = sp_instance();
-	int const		width = (int)pow(2.f, (LAND_NDEPTHLOOPSI + 1 - 2));
-
-	if (ftv_reserve(&vao->vbo.vertices, width * width))
-		sp_enomem();
-	if (ftv_reserve(&vao->ebo.faces, width * width * 2))
-		sp_enomem();
-	sp_land_fill_mesh(e, vao);
+	sp_land_fill_mesh(sp_instance(), vao);
 	return (0);\n\t(void)me;\n}"""),
 ]
 

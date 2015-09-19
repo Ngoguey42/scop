@@ -51,6 +51,7 @@ typedef enum				e_gshader_index
 	sp_face_grey_gshader,
 	sp_po_facegrey_gshader,
 	sp_pos_to_cubemap_gshader,
+	sp_landrender_gshader,
 	sp_num_gshaders,
 	sp_no_gshader
 }							t_gshader_index;

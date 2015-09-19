@@ -42,14 +42,7 @@ int			sp_meshfill_sun(t_mesh *me, t_vao_basic *vao)
 
 int			sp_meshfill_land(t_mesh *me, t_vao_basic *vao)
 {
-	t_env const		*e = sp_instance();
-	int const		width = (int)pow(2.f, (LAND_NDEPTHLOOPSI + 1 - 2));
-
-	if (ftv_reserve(&vao->vbo.vertices, width * width))
-		sp_enomem();
-	if (ftv_reserve(&vao->ebo.faces, width * width * 2))
-		sp_enomem();
-	sp_land_fill_mesh(e, vao);
+	sp_land_fill_mesh(sp_instance(), vao);
 	return (0);
 	(void)me;
 }

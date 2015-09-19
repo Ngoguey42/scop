@@ -73,6 +73,7 @@ int			sp_loadconf_gshaders(t_env *e)
 	GSHADER("pouvno_facegrey.geom", NULL),
 	GSHADER("po_facegrey.geom", &sp_unif_sungeom),
 	GSHADER("pos_to_cubemap.geom", NULL),
+	GSHADER("landrender.geom", &sp_unif_viewproj),
 	};
 	memcpy(&e->gshaders, &tmp, sizeof(tmp));
 	return (0);
