@@ -6,7 +6,7 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/09/19 08:51:15 by ngoguey           #+#    #+#             //
-//   Updated: 2015/09/19 16:07:40 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/09/19 16:39:07 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -20,7 +20,7 @@ in StPoCoNo
 
 // uniform sampler2D                normap;
 uniform sampler2D                colmap;
-// uniform samplerCube         depthMap;
+uniform samplerCube         depthMap;
 uniform float               far;
 uniform vec3                viewPos;
 uniform struct Light {
@@ -30,6 +30,66 @@ uniform struct Light {
 
 out vec4						color;
 
+/*
+#define NSAMPLESI 20
+#define NSAMPLESF float(NSAMPLESI)
+#define GN ((1.f + sqrt(5.f)) / 2.f)
+#define GN2 (GN * GN)
+#define GN3 (GN2 * GN)
+#define NORMALIZE_FACT (1 / sqrt(GN2 * GN2 * 3))
+#define V0 (GN * NORMALIZE_FACT)
+#define V1 (GN2 * NORMALIZE_FACT)
+#define V2 (GN3 * NORMALIZE_FACT)
+
+vec3                        SAMPLES[NSAMPLESI] = vec3[](
+	vec3(-V1, -V1, V1), vec3(V2, V0, 0),    vec3(V2, -V0, 0),
+	vec3(-V2, V0, 0),   vec3(-V2, -V0, 0),  vec3(0, V2, V0),
+	vec3(0, V2, -V0),   vec3(V0, 0, -V2),   vec3(-V0, 0, -V2),
+	vec3(0, -V2, -V0),  vec3(0, -V2, V0),   vec3(V0, 0, V2),
+	vec3(-V0, 0, V2),   vec3(V1, V1, -V1),  vec3(V1, V1, V1),
+	vec3(-V1, V1, -V1), vec3(-V1, V1, V1),  vec3(V1, -V1, -V1),
+	vec3(V1, -V1, V1),  vec3(-V1, -V1, -V1)
+	);
+
+float                   sample_shadows(
+	float dFraLi, vec3 vLiToFra, float weight, float radius)
+{
+	float   shadow;
+
+	shadow = 0.f;
+	for (int i = 0; i < NSAMPLESI; ++i)
+	{
+		if (dFraLi - G_SHADOW_BIAS
+			> texture(depthMap, vLiToFra + SAMPLES[i] * radius).r * far)
+		{
+			shadow += weight;
+		}
+	}
+	return (shadow);
+}
+
+float                   compute_shadows(
+	float dnFraLi, float dFraLi, vec3 vLiToFra)
+{
+	float   shadow;
+	float   samples;
+	float   weight;
+	float   radius;
+
+	shadow = 0.f;
+	samples = 0.f;
+	weight = 1.f;
+	radius = G_SHADOW_INITIAL_RADIUS * sqrt(dnFraLi);
+	for (int i = 0; i < G_SHADOW_NUM_SAMPLING_LOOPS; i++)
+	{
+		shadow += sample_shadows(dFraLi, vLiToFra, weight, radius);
+		samples += NSAMPLESF * weight;
+		weight /= G_SHADOW_DECAY * G_SHADOW_DECAY;
+		radius *= G_SHADOW_DECAY;
+	}
+	return (shadow / samples);
+}
+*/
 void	main()
 {
 	color = texture(colmap, fs_in.st);
@@ -57,6 +117,7 @@ void	main()
 			pow(max(dot(vnFraNormal, vnLiCamHalfway), 0.0), color.a)
 		* G_SPECULAR_STRENGTH;
 	// float   shadow = compute_shadows(dnFraLi, dFraLi, vLiToFra);
+
 	float   shadow = 0.f;
 	vec3    cLight = G_COL_TO_SRGB(l.col);
 

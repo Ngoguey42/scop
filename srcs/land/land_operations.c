@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/09/16 08:05:58 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/09/19 15:24:14 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/09/19 18:30:22 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ static void	generate_land(t_env e[1], t_land_tmp ld[1])
 	depth_loop = 0;
 	while (++depth_loop <= LAND_NDEPTHLOOPSI)
 	{
-		T;
 		land_range *= LAND_RANGEDECAYF;
 		stride /= 2;
 		p = e->programs + sp_landgen_diag_program;
@@ -208,9 +207,11 @@ int			sp_init_land(t_env *e)
 	e->land_tex2.handle = *ld->coltex_handle;
 	e->land_tex3 = e->land_tex1;
 	e->land_tex3.handle = *ld->nortex_handle;
+	e->land_d_range_tess = sqrt(2.f) * LAND_COORDFACT.x;
+	e->land_tesslevelin_range = 32;
 	glBindTexture(GL_TEXTURE_2D, *ld->coltex_handle);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	/* glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR); */
 	glBindTexture(GL_TEXTURE_2D, 0);
 	return (0);
 }

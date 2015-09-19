@@ -33,7 +33,7 @@ int			sp_loadconf_vshaders(t_env *e)
 {
 	t_vshader const		tmp[sp_num_vshaders] = {
 
-	VSHADER("landrender.vert", NULL,
+	VSHADER("landrender.vert", &sp_unif_landvs,
 	LOC(sp_tex_loc, 2)),
 	VSHADER("poteno_to_uv.vert", &sp_unif_viewproj,
 	LOC(sp_pos_loc, 3), LOC(sp_tex_loc, 2), LOC(sp_nor_loc, 3)),

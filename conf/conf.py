@@ -6,7 +6,7 @@
 #    By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/08/10 13:13:01 by ngoguey           #+#    #+#              #
-#    Updated: 2015/09/19 11:42:51 by ngoguey          ###   ########.fr        #
+#    Updated: 2015/09/19 17:51:28 by ngoguey          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ import math
 vshaders = [
 	# Vshader("pocono_to_co_nomodel", "pocono_to_co_nomodel.vert", "viewproj",
 	# ("pos", 3), ("col", 3), ("nor", 3), ), #land
-	Vshader("landrender", "landrender.vert", "",
+	Vshader("landrender", "landrender.vert", "landvs",
 	("tex", 2), ), #land
 	Vshader("poteno_to_uv", "poteno_to_uv.vert", "viewproj",
 	("pos", 3), ("tex", 2), ("nor", 3), ), #ptn
@@ -56,6 +56,7 @@ teshaders = [
 programs = [
 	# Program("land", "pocono_to_co_nomodel", "cono_coli", img1=0),
 	Program("landrender", "landrender", "landrender", gsname="landrender"
+			, tcsname="landrender", tesname="landrender"
 			, img1=0, img2=1, img3=2),
 	Program("sun", "poin_poout_mvptrans", "co_sun", gsname="po_facegrey", tcsname="test", tesname="test"),
 	Program("pointshadow", "po_to_noop_noviewproj", "depth01", gsname="pos_to_cubemap"),

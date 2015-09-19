@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/21 09:01:30 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/09/19 14:41:34 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/09/19 18:16:05 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,18 @@ void			sp_unif_landfs(t_env const *e, t_program const *p)
 	return ;
 }
 
+void			sp_unif_landvs(t_env const *e, t_program const *p)
+{
+	(void)e;
+	(void)p;
+	return ;
+}
+
 void			sp_unif_landtesc(t_env const *e, t_program const *p)
 {
+	UNIF(p, m3fv, "vCamPos", 1, (float*)&e->cpos);
+	UNIF(p, m1f, "dRangeTess", e->land_d_range_tess);
+	UNIF(p, m1f, "tessLevelInRange", e->land_tesslevelin_range);
 	(void)e;
 	(void)p;
 	return ;

@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 12:07:31 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/09/19 11:44:38 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/09/19 17:51:51 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,6 +203,7 @@ void		sp_unif_suntesc(t_env const *e, t_program const *p);
 void		sp_unif_sungeom(t_env const *e, t_program const *p);
 
 void		sp_unif_landfs(t_env const *e, t_program const *p);
+void		sp_unif_landvs(t_env const *e, t_program const *p);
 void		sp_unif_landgeom(t_env const *e, t_program const *p);
 void		sp_unif_landtesc(t_env const *e, t_program const *p);
 

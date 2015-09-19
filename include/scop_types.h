@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 10:07:19 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/09/19 11:34:26 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/09/19 18:16:08 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -339,6 +339,8 @@ typedef struct					s_env
 	t_texture					land_tex1;
 	t_texture					land_tex2;
 	t_texture					land_tex3;
+	float						land_d_range_tess;
+	float						land_tesslevelin_range;
 	
 	double						time_start;
 	double						time_cur;

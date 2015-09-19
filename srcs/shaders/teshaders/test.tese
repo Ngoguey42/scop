@@ -6,7 +6,7 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/09/12 09:58:28 by ngoguey           #+#    #+#             //
-//   Updated: 2015/09/15 10:41:03 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/09/19 18:18:45 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -15,7 +15,7 @@ layout						(triangles, equal_spacing, cw) in;
 in Po
 {
 	vec3					pos;
-}							tec_in[];
+}							tec_in[]; //rename tec to te
 
 out Po
 {

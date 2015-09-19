@@ -34,7 +34,7 @@ int			sp_loadconf_programs(t_env *e)
 	t_program const		tmp[sp_num_programs] = {
 
 	PROG(sp_landrender_vshader, sp_landrender_fshader, sp_landrender_gshader
-	, sp_no_tcshader, sp_no_teshader, TEXI(0, 1, 2, -1)),
+	, sp_landrender_tcshader, sp_landrender_teshader, TEXI(0, 1, 2, -1)),
 	PROG(sp_poin_poout_mvptrans_vshader, sp_co_sun_fshader
 	, sp_po_facegrey_gshader, sp_test_tcshader, sp_test_teshader, TEXI(-1, -1
 	, -1, -1)),
