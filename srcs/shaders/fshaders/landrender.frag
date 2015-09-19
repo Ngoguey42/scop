@@ -6,17 +6,19 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/09/19 08:51:15 by ngoguey           #+#    #+#             //
-//   Updated: 2015/09/19 10:17:51 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/09/19 11:29:25 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
-in CoNo
+in StPoCo
 {
+	vec2						st;
 	vec3						pos;
 	vec3						col;
-	vec3                        nor;
 }                               fs_in;
 
+uniform sampler2D                normap;
+uniform sampler2D                colmap;
 // uniform samplerCube         depthMap;
 uniform float               far;
 uniform vec3                viewPos;
@@ -36,7 +38,8 @@ void	main()
 	vec3    vnFraToLi = normalize(vFraToLi);
 	vec3    vFraToCam = viewPos - fs_in.pos;
 	vec3    vnFraToCam = normalize(vFraToCam);
-	vec3    vnFraNormal = normalize(fs_in.nor);
+	vec3    vFraNormal = texture(normap, fs_in.st).xyz;
+	vec3    vnFraNormal = normalize(vFraNormal);
 	float   dFraLi = length(vLiToFra);
 	float   dnFraLi = dFraLi / far;
 	float   dFraCam = length(vFraToCam);

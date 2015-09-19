@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 10:07:19 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/09/19 08:17:27 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/09/19 11:34:26 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,6 +147,8 @@ typedef struct					s_texture
 typedef enum					e_texslot
 {
 	sp_image1_texslot,
+	sp_image2_texslot,
+	sp_image3_texslot,
 	sp_sbox_texslot,
 	sp_num_texslots,
 }								t_texslot;

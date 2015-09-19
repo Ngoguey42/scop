@@ -6,7 +6,7 @@
 #    By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/08/10 13:13:01 by ngoguey           #+#    #+#              #
-#    Updated: 2015/09/19 10:14:22 by ngoguey          ###   ########.fr        #
+#    Updated: 2015/09/19 11:42:51 by ngoguey          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ vshaders = [
 	# Vshader("pocono_to_co_nomodel", "pocono_to_co_nomodel.vert", "viewproj",
 	# ("pos", 3), ("col", 3), ("nor", 3), ), #land
 	Vshader("landrender", "landrender.vert", "",
-	("pos", 3), ("nor", 3), ), #land
+	("tex", 2), ), #land
 	Vshader("poteno_to_uv", "poteno_to_uv.vert", "viewproj",
 	("pos", 3), ("tex", 2), ("nor", 3), ), #ptn
 	Vshader("poin_poout_mvptrans", "poIn_poOut_mvpTrans.vert", "",
@@ -43,7 +43,7 @@ gshaders = [
 	Gshader("face_grey", "pouvno_facegrey.geom", ""),
 	Gshader("po_facegrey", "po_facegrey.geom", "sungeom"),
 	Gshader("pos_to_cubemap", "pos_to_cubemap.geom", ""),
-	Gshader("landrender", "landrender.geom", "viewproj"),
+	Gshader("landrender", "landrender.geom", "landgeom"),
 ]
 tcshaders = [
 	Tcshader("test", "test.tesc", "suntesc"),
@@ -56,7 +56,7 @@ teshaders = [
 programs = [
 	# Program("land", "pocono_to_co_nomodel", "cono_coli", img1=0),
 	Program("landrender", "landrender", "landrender", gsname="landrender"
-			, img1=0),
+			, img1=0, img2=1, img3=2),
 	Program("sun", "poin_poout_mvptrans", "co_sun", gsname="po_facegrey", tcsname="test", tesname="test"),
 	Program("pointshadow", "po_to_noop_noviewproj", "depth01", gsname="pos_to_cubemap"),
 	Program("ptn", "poteno_to_uv", "couvno_blendli"

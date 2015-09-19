@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/09/19 08:40:36 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/09/19 10:08:50 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/09/19 12:04:50 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,14 @@
 #include <assert.h>
 #include <math.h>
 
-static void		push_vertex(t_ftvector vec[1], float const *ymap
+static void		push_vertex(t_ftvector vec[1]
 							, int const mapcoords[2], int mapwidth)
 {
 	t_vertex_basic		vert[1];
 
-	*(t_vec3*)&vert->pos = ATOV3(
-		(float)mapcoords[0] / 15.f,
-		ymap[mapcoords[0] + mapcoords[1] * mapwidth],
-		(float)-mapcoords[1] / 15.f
+	*(t_vec2*)&vert->tex = ATOV2(
+		(float)mapcoords[0] / (float)mapwidth
+		, 1.f - (float)mapcoords[1] / (float)mapwidth
 		);
 	ftv_push_back_unsafe(vec, vert);
 	return ;
@@ -57,24 +56,24 @@ static void		push_faces(t_ftvector vec[1], int vbowidth)
 
 void			sp_land_fill_mesh(t_env const *e, t_vao_basic *vao)
 {
-	int const		vbowidth = (int)pow(2.f, (LAND_NDEPTHLOOPSI + 1 - 2));
+	int const		vbowidth = (int)pow(2.f, (LAND_NDEPTHLOOPSI + 1 - 0));
 	int const		mapwidth = (int)pow(2.f, (LAND_NDEPTHLOOPSI + 1));
 	int const		mappoints = mapwidth * mapwidth;
 	int const		stride = mapwidth / vbowidth;
 	int				i;
-	float			*ymap;
+	/* float			*ymap; */
 
 	assert(vbowidth > 0);
 	if (ftv_reserve(&vao->vbo.vertices, vbowidth * vbowidth))
 		sp_enomem();
 	if (ftv_reserve(&vao->ebo.faces, vbowidth * vbowidth * 2))
 		sp_enomem();
-	ymap = malloc(sizeof(float) * mappoints);
-	if (ymap == NULL)
-		sp_enomem();
+	/* ymap = malloc(sizeof(float) * mappoints); */
+	/* if (ymap == NULL) */
+	/* 	sp_enomem(); */
 	T;
-	glBindTexture(GL_TEXTURE_2D, e->land_tex1.handle);
-	glGetTexImage(GL_TEXTURE_2D, 0, GL_RED, GL_FLOAT, ymap);
+	/* glBindTexture(GL_TEXTURE_2D, e->land_tex1.handle); */
+	/* glGetTexImage(GL_TEXTURE_2D, 0, GL_RED, GL_FLOAT, ymap); */
 	i = 0;
 	qprintf("vbowidth: %d\n", vbowidth);
 	qprintf("mapwidth: %d\n", mapwidth);
@@ -84,15 +83,16 @@ void			sp_land_fill_mesh(t_env const *e, t_vao_basic *vao)
 	{
 		/* if (i < 10) */
 		/* 	qprintf("%.8f\n", ymap[i]); */
-		push_vertex(&vao->vbo.vertices, ymap
+		push_vertex(&vao->vbo.vertices
 			, (int[]){i % vbowidth * stride, i / vbowidth * stride}, mapwidth);
 		i++;
 	}
 	push_faces(&vao->ebo.faces, vbowidth);
-	ftv_printn(&vao->vbo.vertices, "fff", 10);
+	ftv_printn(&vao->vbo.vertices, "FFFFFFFff", 10);
 	ftv_printn(&vao->ebo.faces, "uuu", 5);
-	vao->vbo.npos = 3;
-	vao->vbo.nnor = 3;
-	free(ymap);
+	vao->vbo.ntex = 2;
+	/* vao->vbo.npos = 3; */
+	/* vao->vbo.nnor = 3; */
+	/* free(ymap); */
 	return ;
 }

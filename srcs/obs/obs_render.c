@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/27 12:01:57 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/09/19 07:47:19 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/09/19 12:03:39 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,12 @@ static void		render_ob(t_env const *e, t_ob *ob)
 		sp_activate_texture(p, sp_image1_texslot, TOFMO(e, mo), "ourTexture");
 	if (p->gltexi[sp_sbox_texslot] >= 0)
 		sp_activate_texture(p, sp_sbox_texslot, &e->sbox_texture, "depthMap");
+	if (me->program == sp_landrender_program)
+	{
+		sp_activate_texture(p, sp_image1_texslot, &e->land_tex1, "ymap");
+		sp_activate_texture(p, sp_image2_texslot, &e->land_tex2, "colmap");
+		sp_activate_texture(p, sp_image3_texslot, &e->land_tex3, "normap");
+	}
 	glBindVertexArray(me->handles[0]);
 	if (p->tcshader != sp_no_tcshader)
 	{

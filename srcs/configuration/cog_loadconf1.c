@@ -34,7 +34,7 @@ int			sp_loadconf_vshaders(t_env *e)
 	t_vshader const		tmp[sp_num_vshaders] = {
 
 	VSHADER("landrender.vert", NULL,
-	LOC(sp_pos_loc, 3), LOC(sp_nor_loc, 3)),
+	LOC(sp_tex_loc, 2)),
 	VSHADER("poteno_to_uv.vert", &sp_unif_viewproj,
 	LOC(sp_pos_loc, 3), LOC(sp_tex_loc, 2), LOC(sp_nor_loc, 3)),
 	VSHADER("poIn_poOut_mvpTrans.vert", NULL,
@@ -73,7 +73,7 @@ int			sp_loadconf_gshaders(t_env *e)
 	GSHADER("pouvno_facegrey.geom", NULL),
 	GSHADER("po_facegrey.geom", &sp_unif_sungeom),
 	GSHADER("pos_to_cubemap.geom", NULL),
-	GSHADER("landrender.geom", &sp_unif_viewproj),
+	GSHADER("landrender.geom", &sp_unif_landgeom),
 	};
 	memcpy(&e->gshaders, &tmp, sizeof(tmp));
 	return (0);

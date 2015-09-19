@@ -6,7 +6,7 @@
 #    By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/08/10 13:13:13 by ngoguey           #+#    #+#              #
-#    Updated: 2015/09/17 13:45:28 by ngoguey          ###   ########.fr        #
+#    Updated: 2015/09/19 11:39:59 by ngoguey          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -189,7 +189,10 @@ class Program(Cstruct):
 				 , gsname = "no"
 				 , tcsname = "no"
 				 , tesname = "no"
-				 , img1=-1, sbox=-1):
+				 , img1=-1
+				 , img2=-1
+				 , img3=-1
+				 , sbox=-1):
 		self.name = name
 		self.vsname = vsname
 		self.fsname = fsname
@@ -197,6 +200,8 @@ class Program(Cstruct):
 		self.tcsname = tcsname
 		self.tesname = tesname
 		self.img1 = img1
+		self.img2 = img2
+		self.img3 = img3
 		self.sbox = sbox
 	@staticmethod
 	def output_enum_start():
@@ -221,8 +226,12 @@ class Program(Cstruct):
 		self.printstr(", sp_" + self.gsname + "_gshader")
 		self.printstr(", sp_" + self.tcsname + "_tcshader")
 		self.printstr(", sp_" + self.tesname + "_teshader")
+		self.printstr(", TEXI(")
+		self.printstr(str(self.img1))
+		self.printstr(", " + str(self.img2))
+		self.printstr(", " + str(self.img3))
 		self.maxcol = 78
-		self.printstr(", TEXI(" + str(self.img1) + ", " + str(self.sbox) + ")")
+		self.printstr(", " + str(self.sbox) + ")")
 		cog.outl("),");
 
 class Texture(Cstruct):
