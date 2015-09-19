@@ -33,6 +33,9 @@ DEPEND := depend.mk
 # tmp
 MODULE_RULES := $(addsuffix /.git,$(MODULES))
 
+# thread:
+	# make -j4 all
+
 # Default rule (need to be before any include)
 all: $(MODULE_RULES) cog libs $(NAME)
 

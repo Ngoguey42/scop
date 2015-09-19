@@ -6,7 +6,7 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/09/19 08:51:15 by ngoguey           #+#    #+#             //
-//   Updated: 2015/09/19 15:27:31 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/09/19 16:07:40 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -32,6 +32,9 @@ out vec4						color;
 
 void	main()
 {
+	color = texture(colmap, fs_in.st);
+	
+	
 	// color = vec4(fs_in.col, 1.f);
 	// color = vec4(1.f, 1.f, 0.f, 1.f);
 	vec3    vLiToFra = fs_in.pos - l.pos;
@@ -51,13 +54,12 @@ void	main()
 		* G_DIFFUSE_STRENGTH;
 	vec3    vnLiCamHalfway = normalize(vnFraToLi + vnFraToCam);
 	float   specular =
-			pow(max(dot(vnFraNormal, vnLiCamHalfway), 0.0), G_SPECULAR_POWER)
+			pow(max(dot(vnFraNormal, vnLiCamHalfway), 0.0), color.a)
 		* G_SPECULAR_STRENGTH;
 	// float   shadow = compute_shadows(dnFraLi, dFraLi, vLiToFra);
 	float   shadow = 0.f;
 	vec3    cLight = G_COL_TO_SRGB(l.col);
 
-	color = texture(colmap, fs_in.st);
 	// color = vec4(fs_in.col, 1.f);
 	// color.rgb = vnFraNormal;
 	// color.r = abs(color.r);
