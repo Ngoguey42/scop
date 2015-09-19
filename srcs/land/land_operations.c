@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/09/16 08:05:58 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/09/19 12:27:05 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/09/19 14:12:12 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,8 @@ static void	generate_normals(t_env e[1], t_land_tmp ld[1])
 	p = e->programs + sp_landgen_normals_program;
 	glUseProgram(p->handle);
 	/* UNIF(p, m1i, "level_stride", stride); */
-	UNIF(p, m1f, "height_factor", 1.f / 25.f);
+	/* UNIF(p, m1f, "height_factor", 1.f / 25.f); */
+	UNIF(p, m3fv, "posfactors", 1, (float*)&(float[]){25.f, 1.f, -25.f});
 	/* UNIF(p, m1f, "land_range_y", land_range); */
 	UNIF(p, m1i, "ymap", 0);
 	glActiveTexture(GL_TEXTURE0 + 0);
@@ -203,5 +204,9 @@ int			sp_init_land(t_env *e)
 	e->land_tex2.handle = *ld->coltex_handle;
 	e->land_tex3 = e->land_tex1;
 	e->land_tex3.handle = *ld->nortex_handle;
+	glBindTexture(GL_TEXTURE_2D, *ld->coltex_handle);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glBindTexture(GL_TEXTURE_2D, 0);
 	return (0);
 }

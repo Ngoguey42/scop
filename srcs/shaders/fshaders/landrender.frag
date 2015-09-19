@@ -6,18 +6,19 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/09/19 08:51:15 by ngoguey           #+#    #+#             //
-//   Updated: 2015/09/19 11:29:25 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/09/19 13:59:28 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
-in StPoCo
+in StPoCoNo
 {
 	vec2						st;
 	vec3						pos;
 	vec3						col;
+	vec3						nor;
 }                               fs_in;
 
-uniform sampler2D                normap;
+// uniform sampler2D                normap;
 uniform sampler2D                colmap;
 // uniform samplerCube         depthMap;
 uniform float               far;
@@ -38,7 +39,8 @@ void	main()
 	vec3    vnFraToLi = normalize(vFraToLi);
 	vec3    vFraToCam = viewPos - fs_in.pos;
 	vec3    vnFraToCam = normalize(vFraToCam);
-	vec3    vFraNormal = texture(normap, fs_in.st).xyz;
+	vec3    vFraNormal = fs_in.nor;
+	// vFraNormal = texture(normap, fs_in.st, 10.1f).xyz;
 	vec3    vnFraNormal = normalize(vFraNormal);
 	float   dFraLi = length(vLiToFra);
 	float   dnFraLi = dFraLi / far;
@@ -54,15 +56,32 @@ void	main()
 	// float   shadow = compute_shadows(dnFraLi, dFraLi, vLiToFra);
 	float   shadow = 0.f;
 	vec3    cLight = G_COL_TO_SRGB(l.col);
+
+	color = texture(colmap, fs_in.st);
+	// color = vec4(fs_in.col, 1.f);
+	// color.rgb = vnFraNormal;
+	// color.r = abs(color.r);
+	// color.g = abs(color.g);
+	// color.b = abs(color.b);
 	
-	color = vec4(fs_in.col, 1.f);
 	color.rgb = G_COL_TO_SRGB(color.rgb);
 	color = vec4(
-		(ambient + (diffuse + specular) * (1.f - shadow) * attenuation)
+		(ambient + (diffuse
+					// + specular
+			) * (1.f - shadow) * attenuation)
 			        * cLight * color.xyz
 		, color.w);
 	color.rgb = G_COL_TO_LINEAR(color.rgb);
+
+
+
+
 	
+	// color.rgb = (-vnFraNormal);;
+	// color.rgb = vnFraNormal;
+	// color.r = abs(color.r);
+	// color.g = abs(color.g);
+	// color.b = abs(color.b);
 	
 	return ;
 }

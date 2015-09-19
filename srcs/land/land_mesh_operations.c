@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/09/19 08:40:36 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/09/19 12:21:14 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/09/19 14:06:52 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static void		push_faces(t_ftvector vec[1], int vbowidth)
 
 void			sp_land_fill_mesh(t_env const *e, t_vao_basic *vao)
 {
-	int const		vbowidth = (int)pow(2.f, (LAND_NDEPTHLOOPSI + 1 - 0));
+	int const		vbowidth = (int)pow(2.f, (LAND_NDEPTHLOOPSI + 1 - 4));
 	int const		mapwidth = (int)pow(2.f, (LAND_NDEPTHLOOPSI + 1));
 	int const		mappoints = mapwidth * mapwidth;
 	int const		stride = mapwidth / vbowidth;

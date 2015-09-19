@@ -6,7 +6,7 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/09/19 09:54:51 by ngoguey           #+#    #+#             //
-//   Updated: 2015/09/19 12:07:26 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/09/19 13:50:41 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -16,7 +16,7 @@ layout                  		(triangle_strip, max_vertices = 3) out;
 uniform mat4            		viewproj;
 uniform sampler2D               ymap;
 uniform vec3                    posfactors;
-// uniform sampler2D                normap;
+uniform sampler2D                normap;
 // uniform sampler2D                colmap;
 									
 in St
@@ -25,11 +25,12 @@ in St
 	// vec3                pos;
 }                       gs_in[];
 
-out StPoCo
+out StPoCoNo
 {
 	vec2				st;
 	vec3				pos;
 	vec3                col;
+	vec3                nor;
 }                       gs_out;
 
 #define NSHADES 24
@@ -44,11 +45,12 @@ void		main()
 	for (int i = 0; i < 3; i++)
 	{
 		gs_out.st = gs_in[i].st;
+		gs_out.nor = texture(normap, gs_in[i].st).xyz;
 		gs_out.pos = vec3(
-			gs_in[i].st.x * posfactors.x
+			gs_in[i].st.x
 			, texture(ymap, gs_in[i].st).x
-			, gs_in[i].st.y * posfactors.z
-			);
+			, gs_in[i].st.y
+			) * posfactors;
 		gl_Position = viewproj * vec4(gs_out.pos, 1.f);
 		EmitVertex();
 	}
