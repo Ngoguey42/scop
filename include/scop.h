@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/06/30 12:07:31 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/09/19 07:49:51 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/09/19 08:48:55 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,6 +186,7 @@ void		sp_fill_landvertices(t_ftvector const *lines, t_vbo_basic *vbo,
 	float bounds[2]);
 void		sp_fill_landfaces(t_ftvector const *lines, t_ftvector *vertices);
 void		sp_fill_landrgb(t_vbo_basic *vbo, float const bounds[2]);
+void		sp_land_fill_mesh(t_env const *e, t_vao_basic *vao);
 
 /*
 ** UNIFORMS
@@ -200,6 +201,9 @@ void		sp_unif_lightstruct(t_env const *e, t_program const *p);
 void		sp_unif_sunfrag(t_env const *e, t_program const *p);
 void		sp_unif_suntesc(t_env const *e, t_program const *p);
 void		sp_unif_sungeom(t_env const *e, t_program const *p);
+
+void		sp_unif_landfs(t_env const *e, t_program const *p);
+void		sp_unif_landtesc(t_env const *e, t_program const *p);
 
 /*
 ** OBS (OBJECTS)

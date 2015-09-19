@@ -6,7 +6,7 @@
 #    By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/08/10 13:13:01 by ngoguey           #+#    #+#              #
-#    Updated: 2015/09/17 16:26:09 by ngoguey          ###   ########.fr        #
+#    Updated: 2015/09/19 08:48:12 by ngoguey          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,8 +14,10 @@ from confclasses import *
 import math
 
 vshaders = [
-	Vshader("pocono_to_co_nomodel", "pocono_to_co_nomodel.vert", "viewproj",
-	("pos", 3), ("col", 3), ("nor", 3), ), #land
+	# Vshader("pocono_to_co_nomodel", "pocono_to_co_nomodel.vert", "viewproj",
+	# ("pos", 3), ("col", 3), ("nor", 3), ), #land
+	Vshader("landrender", "landrender.vert", "",
+	("pos", 3), ("nor", 3), ), #land
 	Vshader("poteno_to_uv", "poteno_to_uv.vert", "viewproj",
 	("pos", 3), ("tex", 2), ("nor", 3), ), #ptn
 	Vshader("poin_poout_mvptrans", "poIn_poOut_mvpTrans.vert", "",
@@ -26,7 +28,8 @@ vshaders = [
 	("pos", 2), ), #
 ]
 fshaders = [
-	Fshader("cono_coli", "cono_coli.frag", "lightstruct"), #land
+	# Fshader("cono_coli", "cono_coli.frag", "lightstruct"), #land
+	Fshader("landrender", "landrender.frag", "landfs"), #land
 	Fshader("couvno_blendli", "couvno_blendli.frag", "lightstruct"), #ptn
 	Fshader("co_sun", "co_sun.frag", "sunfrag"), #sun
 	Fshader("depth01", "depth01.frag", ""), #sbox
@@ -42,13 +45,16 @@ gshaders = [
 	Gshader("pos_to_cubemap", "pos_to_cubemap.geom", ""),
 ]
 tcshaders = [
-	Tcshader("test", "test.tesc", "suntesc")
+	Tcshader("test", "test.tesc", "suntesc"),
+	Tcshader("landrender", "landrender.tesc", "landtesc")
 ]
 teshaders = [
-	Teshader("test", "test.tese", "")
+	Teshader("test", "test.tese", ""),
+	Teshader("landrender", "landrender.tese", ""),
 ]
 programs = [
-	Program("land", "pocono_to_co_nomodel", "cono_coli", img1=0),
+	# Program("land", "pocono_to_co_nomodel", "cono_coli", img1=0),
+	Program("landrender", "landrender", "landrender", img1=0),
 	Program("sun", "poin_poout_mvptrans", "co_sun", gsname="po_facegrey", tcsname="test", tesname="test"),
 	Program("pointshadow", "po_to_noop_noviewproj", "depth01", gsname="pos_to_cubemap"),
 	Program("ptn", "poteno_to_uv", "couvno_blendli"
@@ -78,27 +84,16 @@ meshes = [
 	Mesh("sun", "sun", objfile_enum="dodecahedron", recenter="true"),
 #	Mesh("sun", "sun", objfile_enum="tetrahedron", recenter="true"),
 
-	Mesh("land", "land"
+	Mesh("land", "landrender"
 		 , fill_funbody="""{
-	t_vbo_basic		*vbo;
-	t_ftvector		lines[1];
-	size_t const	line_points = (int)pow(2., (double)POINTS_DEPTHI);
-	float			bounds[2];
+	t_env const		*e = sp_instance();
+	int const		width = (int)pow(2.f, (LAND_NDEPTHLOOPSI + 1 - 2));
 
-	vbo = &vao->vbo;
-	if (ftv_init_instance(lines, sizeof(float) * line_points))
+	if (ftv_reserve(&vao->vbo.vertices, width * width))
 		sp_enomem();
-	if (ftv_insert_count(lines, lines->data, line_points))
+	if (ftv_reserve(&vao->ebo.faces, width * width * 2))
 		sp_enomem();
-	sp_fill_landgrid(lines);
-	if (ftv_reserve(&vbo->vertices, lines->size * lines->size))
-		sp_enomem();
-	sp_fill_landvertices(lines, vbo, bounds);
-	if (ftv_reserve(&vao->ebo.faces, (lines->size - 1) * (lines->size - 1) * 2))
-		sp_enomem();
-	sp_fill_landfaces(lines, &vao->ebo.faces);
-	sp_fill_landrgb(vbo, bounds);
-	ftv_release(lines, NULL);
+	sp_land_fill_mesh(e, vao);
 	return (0);\n\t(void)me;\n}"""),
 ]
 

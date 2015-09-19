@@ -33,8 +33,8 @@ int			sp_loadconf_vshaders(t_env *e)
 {
 	t_vshader const		tmp[sp_num_vshaders] = {
 
-	VSHADER("pocono_to_co_nomodel.vert", &sp_unif_viewproj,
-	LOC(sp_pos_loc, 3), LOC(sp_col_loc, 3), LOC(sp_nor_loc, 3)),
+	VSHADER("landrender.vert", NULL,
+	LOC(sp_pos_loc, 3), LOC(sp_nor_loc, 3)),
 	VSHADER("poteno_to_uv.vert", &sp_unif_viewproj,
 	LOC(sp_pos_loc, 3), LOC(sp_tex_loc, 2), LOC(sp_nor_loc, 3)),
 	VSHADER("poIn_poOut_mvpTrans.vert", NULL,
@@ -52,7 +52,7 @@ int			sp_loadconf_fshaders(t_env *e)
 {
 	t_fshader const		tmp[sp_num_fshaders] = {
 
-	FSHADER("cono_coli.frag", &sp_unif_lightstruct),
+	FSHADER("landrender.frag", &sp_unif_landfs),
 	FSHADER("couvno_blendli.frag", &sp_unif_lightstruct),
 	FSHADER("co_sun.frag", &sp_unif_sunfrag),
 	FSHADER("depth01.frag", NULL),
@@ -83,6 +83,7 @@ int			sp_loadconf_tcshaders(t_env *e)
 	t_tcshader const		tmp[sp_num_tcshaders] = {
 
 	TCSHADER("test.tesc", &sp_unif_suntesc),
+	TCSHADER("landrender.tesc", &sp_unif_landtesc),
 	};
 	memcpy(&e->tcshaders, &tmp, sizeof(tmp));
 	return (0);
@@ -93,6 +94,7 @@ int			sp_loadconf_teshaders(t_env *e)
 	t_teshader const		tmp[sp_num_teshaders] = {
 
 	TESHADER("test.tese", NULL),
+	TESHADER("landrender.tese", NULL),
 	};
 	memcpy(&e->teshaders, &tmp, sizeof(tmp));
 	return (0);

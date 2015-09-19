@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 12:08:19 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/09/19 08:17:37 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/09/19 08:32:40 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,14 @@ static int		begin(t_env *e)
 		return (ERROR("sp_init_programs(e)"));
 	if (INIT(textures))
 		return (ERROR("sp_init_textures(e)"));
+	if (INIT(land))
+		return (ERROR("sp_init_land(e)"));
 	if (INIT(meshes))
 		return (ERROR("sp_init_meshes(e)"));
 	if (INIT(obs))
 		return (ERROR("sp_init_obs(e)"));
 	if (INIT(sbox))
 		return (ERROR("sp_init_sbox(e)"));
-	if (INIT(land))
-		return (ERROR("sp_init_land(e)"));
 	sp_timings_init(e);
 	return (0);
 }

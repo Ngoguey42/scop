@@ -42,25 +42,14 @@ int			sp_meshfill_sun(t_mesh *me, t_vao_basic *vao)
 
 int			sp_meshfill_land(t_mesh *me, t_vao_basic *vao)
 {
-	t_vbo_basic		*vbo;
-	t_ftvector		lines[1];
-	size_t const	line_points = (int)pow(2., (double)POINTS_DEPTHI);
-	float			bounds[2];
+	t_env const		*e = sp_instance();
+	int const		width = (int)pow(2.f, (LAND_NDEPTHLOOPSI + 1 - 2));
 
-	vbo = &vao->vbo;
-	if (ftv_init_instance(lines, sizeof(float) * line_points))
+	if (ftv_reserve(&vao->vbo.vertices, width * width))
 		sp_enomem();
-	if (ftv_insert_count(lines, lines->data, line_points))
+	if (ftv_reserve(&vao->ebo.faces, width * width * 2))
 		sp_enomem();
-	sp_fill_landgrid(lines);
-	if (ftv_reserve(&vbo->vertices, lines->size * lines->size))
-		sp_enomem();
-	sp_fill_landvertices(lines, vbo, bounds);
-	if (ftv_reserve(&vao->ebo.faces, (lines->size - 1) * (lines->size - 1) * 2))
-		sp_enomem();
-	sp_fill_landfaces(lines, &vao->ebo.faces);
-	sp_fill_landrgb(vbo, bounds);
-	ftv_release(lines, NULL);
+	sp_land_fill_mesh(e, vao);
 	return (0);
 	(void)me;
 }

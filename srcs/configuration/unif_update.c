@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/21 09:01:30 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/09/12 10:11:29 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/09/19 08:49:53 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,16 @@ void			sp_unif_sungeom(t_env const *e, t_program const *p)
 	return ;
 }
 
-void			sp_unif_tesc(t_env const *e, t_program const *p)
+void			sp_unif_landfs(t_env const *e, t_program const *p)
 {
-	UNIF(p, m3fv, "cpos", 1, (float*)&e->cpos);
+	(void)e;
+	(void)p;
+	return ;
+}
+
+void			sp_unif_landtesc(t_env const *e, t_program const *p)
+{
+	(void)e;
+	(void)p;
 	return ;
 }

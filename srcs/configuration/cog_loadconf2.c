@@ -33,7 +33,7 @@ int			sp_loadconf_programs(t_env *e)
 {
 	t_program const		tmp[sp_num_programs] = {
 
-	PROG(sp_pocono_to_co_nomodel_vshader, sp_cono_coli_fshader, sp_no_gshader
+	PROG(sp_landrender_vshader, sp_landrender_fshader, sp_no_gshader
 	, sp_no_tcshader, sp_no_teshader, TEXI(0, -1)),
 	PROG(sp_poin_poout_mvptrans_vshader, sp_co_sun_fshader
 	, sp_po_facegrey_gshader, sp_test_tcshader, sp_test_teshader, TEXI(-1, -1)),
@@ -79,7 +79,7 @@ int			sp_loadconf_meshes(t_env *e)
 	MESH(GL_STATIC_DRAW, sp_sun_program, sp_dodecahedron_objfile
 	, &sp_meshfill_sun, true, sp_no_ebogrouping, false, sp_spherical_texwrapping
 	, {1.0f, 1.0f}),
-	MESH(GL_STATIC_DRAW, sp_land_program, sp_ft_objfile, &sp_meshfill_land
+	MESH(GL_STATIC_DRAW, sp_landrender_program, sp_ft_objfile, &sp_meshfill_land
 	, false, sp_no_ebogrouping, false, sp_spherical_texwrapping, {1.0f, 1.0f}),
 	};
 	memcpy(&e->meshes, &tmp, sizeof(tmp));
