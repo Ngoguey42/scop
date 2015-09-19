@@ -6,7 +6,7 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/09/16 11:32:06 by ngoguey           #+#    #+#             //
-//   Updated: 2015/09/17 17:07:41 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/09/19 07:41:24 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -16,8 +16,11 @@ uniform vec2				random_seeds;
 uniform float				land_average_y;
 uniform float				land_range_y;
 
-out float					point_y;
-out vec4					color;
+layout(location = 0) out float point_y;
+layout(location = 1) out vec4	color;
+
+// out float					point_y;
+// out vec4					color;
 
 float	ft_rand0(vec2 co)
 {
@@ -38,11 +41,10 @@ void	main()
 		return ; //debug*/
 		
 	}
-//	color = vec4(0.f, 0.f, 0.f, 150.f);
-  	point_y =
-		ft_rand0(gl_FragCoord.xy + random_seeds) * land_range_y
+	color = vec4(1.f, 0.f, 0.f, 1.f);
+  	point_y = ft_rand0(gl_FragCoord.xy + random_seeds) * land_range_y
 		+ land_average_y;
-	color = vec4(1.f, 1.f, 0.f, 1.f);
-//	color = 0.4f;
+	// point_y = 0.0f;
+	// color = vec4(1.f, 1.f, 0.f, 1.f);
 	return ;
 }

@@ -6,8 +6,11 @@ uniform float               land_average_y;
 uniform float				land_range_y;
 uniform sampler2D           tex;
 
-out float					point_y;
-out vec4                    color;
+
+layout(location = 0) out float point_y;
+layout(location = 1) out vec4   color;
+// out float					point_y;
+// out vec4                    color;
 
 float	ft_rand0(vec2 co)
 {
@@ -30,21 +33,21 @@ void	main()
 	
 
 	int		stridehalf = level_stride / 2;
-	color = vec4(0.f, 0.f, 1.f, 1.f);
+	color = vec4(0.f, 1.f, 0.f, 1.f);
 	
 	point_y =
 		ft_rand0(gl_FragCoord.xy + random_seeds) * land_range_y
 		+ texture(tex, vec2((int(gl_FragCoord.x) - stridehalf) / tex_size.x
-							, (int(gl_FragCoord.y)) / tex_size.y))
+							, (int(gl_FragCoord.y)) / tex_size.y)).x
 		/ 4.f
 		+ texture(tex, vec2((int(gl_FragCoord.x) + stridehalf) / tex_size.x
-							, (int(gl_FragCoord.y)) / tex_size.y))
+							, (int(gl_FragCoord.y)) / tex_size.y)).x
 		/ 4.f
 		+ texture(tex, vec2((int(gl_FragCoord.x)) / tex_size.x
-							, (int(gl_FragCoord.y) + stridehalf) / tex_size.y))
+							, (int(gl_FragCoord.y) + stridehalf) / tex_size.y)).x
 		/ 4.f
 		+ texture(tex, vec2((int(gl_FragCoord.x)) / tex_size.x
-							, (int(gl_FragCoord.y) - stridehalf) / tex_size.y))
+							, (int(gl_FragCoord.y) - stridehalf) / tex_size.y)).x
 		/ 4.f
 		;
 //	color = 1.f;

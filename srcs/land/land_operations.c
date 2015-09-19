@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/09/16 08:05:58 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/09/17 17:07:56 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/09/19 07:31:46 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ static void	generate_land(t_env e[1], t_land_tmp ld[1])
 	depth_loop = 0;
 	while (++depth_loop <= LAND_NDEPTHLOOPSI)
 	{
+		T;
 		land_range *= 0.55f;
 		stride /= 2;
 		p = e->programs + sp_landgen_diag_program;
@@ -150,6 +151,7 @@ static int	setup_fbo(t_land_tmp ld[1])
 						 , *ld->ytex_handle, 0);
 	glFramebufferTexture(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT1
 						 , *ld->coltex_handle, 0);
+	/* glDrawBuffers(1, (GLenum[]){GL_COLOR_ATTACHMENT0}); */
 	glDrawBuffers(2, (GLenum[]){GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1});
 	glReadBuffer(GL_NONE);
 	if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)

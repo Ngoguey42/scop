@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 12:08:19 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/09/17 17:05:11 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/09/19 07:41:48 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ static void		loop(t_env *e)
 		sp_update_obs(e);
 		sp_render_sbox(e);
 		sp_render_obs(e);
-		sp_debug_puttexture2d(e, &e->land_tex1);
-//		sp_debug_puttexture2d(e, &e->land_tex2);
+		/* sp_debug_puttexture2d(e, &e->land_tex1); */
+		sp_debug_puttexture2d(e, &e->land_tex2);
 /*		qprintf("in(%.0f)  out(%.0f) dist(%.1f) fps(%.1f)\n"
 		, e->sunskin_tessin
 		, e->sunskin_tessout[0]

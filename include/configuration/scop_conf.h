@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 10:33:54 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/09/17 16:05:54 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/09/19 07:18:26 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@
 ** phase_startoffset_col(1+)(3)	= level_stride / 2
 */
 
-# define WIN_WIDTHI 1350
+# define WIN_WIDTHI 1600
 # define WIN_RATIOF (4.f / 3.f)
 # define WIN_FOVF 45.f
 # define WIN_NEARF 0.2f

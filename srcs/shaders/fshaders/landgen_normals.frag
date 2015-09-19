@@ -22,10 +22,10 @@ vec3	get_vertex(float map_width, vec2 offsets)
 
 	return (vec3(
 		frag.x - land_width_half_canonical
-		, float(texture(ymap, vec2(frag.x, frag.y) / map_width)
-				* height_factor)
+		, texture(ymap, vec2(frag.x, frag.y) / map_width).x
+		* height_factor
 		, frag.y - land_width_half_canonical
-	));
+				));
 }
 
 void	main()
