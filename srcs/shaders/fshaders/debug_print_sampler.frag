@@ -6,7 +6,7 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/09/17 16:07:08 by ngoguey           #+#    #+#             //
-//   Updated: 2015/09/19 09:25:32 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/09/19 10:09:41 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -33,7 +33,7 @@ void	main()
 	  (gl_FragCoord.x) / (tex_size.x)
 	  , (gl_FragCoord.y) / (tex_size.y))).x;
 
-	  color = vec4((-color.w - 3.f) / 25.f, 0.f, 0.f, 1.f);
+	  color = vec4(1.f - (-color.w - 3.f) / 25.f, 0.f, 0.f, 1.f);
 
 
 	// color = vec4(texture(tex, vec2((gl_FragCoord.x) / (tex_size.x)

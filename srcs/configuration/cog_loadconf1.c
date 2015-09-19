@@ -52,7 +52,7 @@ int			sp_loadconf_fshaders(t_env *e)
 {
 	t_fshader const		tmp[sp_num_fshaders] = {
 
-	FSHADER("landrender.frag", &sp_unif_landfs),
+	FSHADER("landrender.frag", &sp_unif_lightstruct),
 	FSHADER("couvno_blendli.frag", &sp_unif_lightstruct),
 	FSHADER("co_sun.frag", &sp_unif_sunfrag),
 	FSHADER("depth01.frag", NULL),

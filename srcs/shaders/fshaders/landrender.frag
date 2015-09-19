@@ -6,20 +6,60 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/09/19 08:51:15 by ngoguey           #+#    #+#             //
-//   Updated: 2015/09/19 09:55:01 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/09/19 10:17:51 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
-// in PoNo
-// {
-// 	vec3                        pos;
-// 	vec3                        nor;
-// }                               vs_out;
+in CoNo
+{
+	vec3						pos;
+	vec3						col;
+	vec3                        nor;
+}                               fs_in;
+
+// uniform samplerCube         depthMap;
+uniform float               far;
+uniform vec3                viewPos;
+uniform struct Light {
+	vec3 pos;
+	vec3 col;
+}                           l;
 
 out vec4						color;
 
 void	main()
 {
-	color = vec4(1.f, 1.f, 0.f, 1.f);
+	// color = vec4(fs_in.col, 1.f);
+	// color = vec4(1.f, 1.f, 0.f, 1.f);
+	vec3    vLiToFra = fs_in.pos - l.pos;
+	vec3    vFraToLi = -vLiToFra;
+	vec3    vnFraToLi = normalize(vFraToLi);
+	vec3    vFraToCam = viewPos - fs_in.pos;
+	vec3    vnFraToCam = normalize(vFraToCam);
+	vec3    vnFraNormal = normalize(fs_in.nor);
+	float   dFraLi = length(vLiToFra);
+	float   dnFraLi = dFraLi / far;
+	float   dFraCam = length(vFraToCam);
+	float   attenuation = 1.f - (dFraLi / far);
+	float   ambient = G_AMBIENT_STRENGTH;
+	float   diffuse = max(dot(vnFraNormal, vnFraToLi), 0.f)
+		* G_DIFFUSE_STRENGTH;
+	vec3    vnLiCamHalfway = normalize(vnFraToLi + vnFraToCam);
+	float   specular =
+			pow(max(dot(vnFraNormal, vnLiCamHalfway), 0.0), G_SPECULAR_POWER)
+		* G_SPECULAR_STRENGTH;
+	// float   shadow = compute_shadows(dnFraLi, dFraLi, vLiToFra);
+	float   shadow = 0.f;
+	vec3    cLight = G_COL_TO_SRGB(l.col);
+	
+	color = vec4(fs_in.col, 1.f);
+	color.rgb = G_COL_TO_SRGB(color.rgb);
+	color = vec4(
+		(ambient + (diffuse + specular) * (1.f - shadow) * attenuation)
+			        * cLight * color.xyz
+		, color.w);
+	color.rgb = G_COL_TO_LINEAR(color.rgb);
+	
+	
 	return ;
 }

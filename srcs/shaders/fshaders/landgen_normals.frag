@@ -6,7 +6,7 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/09/19 07:51:34 by ngoguey           #+#    #+#             //
-//   Updated: 2015/09/19 08:27:56 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/09/19 10:19:36 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -55,12 +55,12 @@ void	main()
 	// normap = vec3(0.f);
 	vecsave1 = normalize(center - get_vertex(map_width, vec2(+1.f, +0.f)));
 	vecsave3 = normalize(center - get_vertex(map_width, vec2(+0.f, +1.f)));
-	normap = calc_weighted_normal(vecsave3, vecsave1);
+	normap = calc_weighted_normal(vecsave1, vecsave3);
 	vecsave2 = normalize(center - get_vertex(map_width, vec2(-1.f, +0.f)));
-	normap += calc_weighted_normal(vecsave2, vecsave3);
-	vecsave3 = normalize(center - get_vertex(map_width, vec2(+0.f, -1.f)));
 	normap += calc_weighted_normal(vecsave3, vecsave2);
-	normap += calc_weighted_normal(vecsave1, vecsave3);
+	vecsave3 = normalize(center - get_vertex(map_width, vec2(+0.f, -1.f)));
+	normap += calc_weighted_normal(vecsave2, vecsave3);
+	normap += calc_weighted_normal(vecsave3, vecsave1);
 	normap = normalize(normap);
 	// normap = vec3(1.f, 1.f, 0.f);
 	return ;

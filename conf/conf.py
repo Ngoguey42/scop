@@ -6,7 +6,7 @@
 #    By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/08/10 13:13:01 by ngoguey           #+#    #+#              #
-#    Updated: 2015/09/19 09:57:38 by ngoguey          ###   ########.fr        #
+#    Updated: 2015/09/19 10:14:22 by ngoguey          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ vshaders = [
 ]
 fshaders = [
 	# Fshader("cono_coli", "cono_coli.frag", "lightstruct"), #land
-	Fshader("landrender", "landrender.frag", "landfs"), #land
+	Fshader("landrender", "landrender.frag", "lightstruct"), #land
 	Fshader("couvno_blendli", "couvno_blendli.frag", "lightstruct"), #ptn
 	Fshader("co_sun", "co_sun.frag", "sunfrag"), #sun
 	Fshader("depth01", "depth01.frag", ""), #sbox

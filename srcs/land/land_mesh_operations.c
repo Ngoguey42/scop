@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/09/19 08:40:36 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/09/19 09:52:07 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/09/19 10:08:50 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ static void		push_vertex(t_ftvector vec[1], float const *ymap
 	t_vertex_basic		vert[1];
 
 	*(t_vec3*)&vert->pos = ATOV3(
-		(float)mapcoords[0],
+		(float)mapcoords[0] / 15.f,
 		ymap[mapcoords[0] + mapcoords[1] * mapwidth],
-		(float)-mapcoords[1]
+		(float)-mapcoords[1] / 15.f
 		);
 	ftv_push_back_unsafe(vec, vert);
 	return ;
@@ -57,7 +57,7 @@ static void		push_faces(t_ftvector vec[1], int vbowidth)
 
 void			sp_land_fill_mesh(t_env const *e, t_vao_basic *vao)
 {
-	int const		vbowidth = (int)pow(2.f, (LAND_NDEPTHLOOPSI + 1 - 6));
+	int const		vbowidth = (int)pow(2.f, (LAND_NDEPTHLOOPSI + 1 - 2));
 	int const		mapwidth = (int)pow(2.f, (LAND_NDEPTHLOOPSI + 1));
 	int const		mappoints = mapwidth * mapwidth;
 	int const		stride = mapwidth / vbowidth;
