@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/21 09:01:30 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/09/19 13:22:32 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/09/19 14:41:34 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void			sp_unif_landtesc(t_env const *e, t_program const *p)
 void			sp_unif_landgeom(t_env const *e, t_program const *p)
 {
 	UNIF(p, mMatrix4fv, "viewproj", 1, GL_TRUE, (float*)&e->viewproj);
-	UNIF(p, m3fv, "posfactors", 1, (float*)&(float[]){25.f, 1.f, -25.f});
+	UNIF(p, m3fv, "posfactors", 1, (float*)&LAND_COORDFACT);
 	(void)e;
 	(void)p;
 	return ;

@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/09/19 08:40:36 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/09/19 14:06:52 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/09/19 14:40:48 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,8 @@ void			sp_land_fill_mesh(t_env const *e, t_vao_basic *vao)
 		i++;
 	}
 	push_faces(&vao->ebo.faces, vbowidth);
-	ftv_printn(&vao->vbo.vertices, "FFFFFFFff", 10);
-	ftv_printn(&vao->ebo.faces, "uuu", 5);
+	/* ftv_printn(&vao->vbo.vertices, "FFFFFFFff", 10); */
+	/* ftv_printn(&vao->ebo.faces, "uuu", 5); */
 	vao->vbo.ntex = 2;
 	/* vao->vbo.npos = 3; */
 	/* vao->vbo.nnor = 3; */

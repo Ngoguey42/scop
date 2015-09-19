@@ -6,7 +6,7 @@
 //   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        //
 //                                                +#+#+#+#+#+   +#+           //
 //   Created: 2015/09/19 09:54:51 by ngoguey           #+#    #+#             //
-//   Updated: 2015/09/19 13:50:41 by ngoguey          ###   ########.fr       //
+//   Updated: 2015/09/19 14:46:51 by ngoguey          ###   ########.fr       //
 //                                                                            //
 // ************************************************************************** //
 
@@ -47,9 +47,9 @@ void		main()
 		gs_out.st = gs_in[i].st;
 		gs_out.nor = texture(normap, gs_in[i].st).xyz;
 		gs_out.pos = vec3(
-			gs_in[i].st.x
+			gs_in[i].st.x - 0.5f
 			, texture(ymap, gs_in[i].st).x
-			, gs_in[i].st.y
+			, gs_in[i].st.y - 0.5f
 			) * posfactors;
 		gl_Position = viewproj * vec4(gs_out.pos, 1.f);
 		EmitVertex();

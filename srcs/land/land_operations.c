@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/09/16 08:05:58 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/09/19 14:12:12 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/09/19 14:45:45 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static void	generate_land(t_env e[1], t_land_tmp ld[1])
 	while (++depth_loop <= LAND_NDEPTHLOOPSI)
 	{
 		T;
-		land_range *= 0.55f;
+		land_range *= LAND_RANGEDECAYF;
 		stride /= 2;
 		p = e->programs + sp_landgen_diag_program;
 		push_tex_and_unif(p, ld, stride, land_range);
@@ -92,7 +92,7 @@ static void	generate_normals(t_env e[1], t_land_tmp ld[1])
 	glUseProgram(p->handle);
 	/* UNIF(p, m1i, "level_stride", stride); */
 	/* UNIF(p, m1f, "height_factor", 1.f / 25.f); */
-	UNIF(p, m3fv, "posfactors", 1, (float*)&(float[]){25.f, 1.f, -25.f});
+	UNIF(p, m3fv, "posfactors", 1, (float*)&LAND_COORDFACT);
 	/* UNIF(p, m1f, "land_range_y", land_range); */
 	UNIF(p, m1i, "ymap", 0);
 	glActiveTexture(GL_TEXTURE0 + 0);
@@ -105,7 +105,7 @@ static void	generate_normals(t_env e[1], t_land_tmp ld[1])
 	glUseProgram(0);
 	return ;
 }
-
+ 
 static void	setup_ld(t_land_tmp ld[1])
 {
 	bzero(ld, sizeof(*ld));
@@ -140,7 +140,7 @@ static int	setup_textures(t_land_tmp ld[1])
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, ld->grid_width , ld->grid_width, 0
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB32F, ld->grid_width , ld->grid_width, 0
 				 , GL_RGB, GL_FLOAT, NULL);
 	return (0);
 }

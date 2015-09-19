@@ -17,11 +17,9 @@ O_FILES :=	o/srcs/configuration/cog_loadconf1.o \
 			o/srcs/ftmath/matrix4_scale.o o/srcs/ftmath/matrix4_translate.o \
 			o/srcs/ftmath/vector3.o o/srcs/ftmath/vector3_basicop.o \
 			o/srcs/ftmath/vector3_dist.o o/srcs/ftmath/vector3_scalarop.o \
-			o/srcs/glfw_operations.o o/srcs/land/generate_land_rgb.o \
-			o/srcs/land/generate_land_xyz.o o/srcs/land/generate_land_y.o \
-			o/srcs/land/land_mesh_operations.o o/srcs/land/land_operations.o \
-			o/srcs/main.o o/srcs/mainme_operations.o \
-			o/srcs/mainob/mainob_operations.o \
+			o/srcs/glfw_operations.o o/srcs/land/land_mesh_operations.o \
+			o/srcs/land/land_operations.o o/srcs/main.o \
+			o/srcs/mainme_operations.o o/srcs/mainob/mainob_operations.o \
 			o/srcs/meshes/custom_processing/groups_to_vbo_box.o \
 			o/srcs/meshes/custom_processing/textures_to_vertex.o \
 			o/srcs/meshes/fixed_processing/normals_to_ebo.o \
@@ -217,23 +215,6 @@ o/srcs/glfw_operations.o: srcs/glfw_operations.c include/scop.h \
 	include/configuration/cog_enums.h include/meshes/vao.h include/ftmath.h \
 	include/configuration/cog_meshfill.h include/objmodel/objmodel.h \
 	include/meshes/vao.h include/ftmath.h | o/srcs/
-o/srcs/land/generate_land_rgb.o: srcs/land/generate_land_rgb.c include/scop.h \
-	include/ftmath.h include/configuration/scop_conf.h include/ftmath.h \
-	include/configuration/cog_enums.h include/scop_types.h \
-	include/configuration/scop_conf.h include/ftmath.h \
-	include/configuration/cog_enums.h include/meshes/vao.h include/ftmath.h \
-	include/configuration/cog_meshfill.h include/objmodel/objmodel.h \
-	include/meshes/vao.h include/ftmath.h | o/srcs/land/
-o/srcs/land/generate_land_xyz.o: srcs/land/generate_land_xyz.c include/scop.h \
-	include/ftmath.h include/configuration/scop_conf.h include/ftmath.h \
-	include/configuration/cog_enums.h include/scop_types.h \
-	include/configuration/scop_conf.h include/ftmath.h \
-	include/configuration/cog_enums.h include/meshes/vao.h include/ftmath.h \
-	include/configuration/cog_meshfill.h include/objmodel/objmodel.h \
-	include/meshes/vao.h include/ftmath.h | o/srcs/land/
-o/srcs/land/generate_land_y.o: srcs/land/generate_land_y.c \
-	include/configuration/scop_conf.h include/ftmath.h \
-	include/configuration/cog_enums.h | o/srcs/land/
 o/srcs/land/land_mesh_operations.o: srcs/land/land_mesh_operations.c \
 	include/scop.h include/ftmath.h include/configuration/scop_conf.h \
 	include/ftmath.h include/configuration/cog_enums.h include/scop_types.h \
