@@ -11,7 +11,7 @@
 // ************************************************************************** //
 
 layout						(triangles, fractional_odd_spacing, cw) in;
-// layout						(triangles, equal_spacing, cw) in;
+//layout						(triangles, equal_spacing, cw) in;
 
 in St
 {
@@ -21,6 +21,7 @@ in St
 out St
 {
 	vec2                    st;
+	vec3					bpos;
 }                           te_out;
 
 vec2    interpolate2D(vec2 v0, vec2 v1, vec2 v2)
@@ -33,5 +34,6 @@ vec2    interpolate2D(vec2 v0, vec2 v1, vec2 v2)
 void	main()
 {
 	te_out.st = interpolate2D(te_in[0].st, te_in[1].st, te_in[2].st);
+	te_out.bpos = gl_TessCoord;
 	return ;
 }

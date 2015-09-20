@@ -97,3 +97,12 @@ void			sp_unif_landgeom(t_env const *e, t_program const *p)
 	(void)p;
 	return ;
 }
+
+void			sp_unif_landsbox(t_env const *e, t_program const *p)
+{
+	UNIF(p, m3fv, "posfactors", 1, (float*)&LAND_COORDFACT);
+	sp_activate_texture(p, sp_image1_texslot, &e->land_tex1, "ymap");
+	(void)e;
+	(void)p;
+	return ;
+}

@@ -114,24 +114,26 @@
 ** phase_startoffset_col(1+)(3)	= level_stride / 2
 */
 
-# define WIN_WIDTHI 1600
+# define WIN_WIDTHI 1375
 # define WIN_RATIOF (4.f / 3.f)
 # define WIN_FOVF 45.f
 # define WIN_NEARF 0.2f
 # define WIN_FARF 2000.f
 
-/* # define LAND_SIDEF 50.f */
-# define LAND_YF -10.f
-# define LAND_RANGEF 10.f
-# define LAND_RANGEDECAYF 0.47
-# define LAND_MINYF (LAND_YF - LAND_RANGEF + 5.f)
-# define LAND_MAGNITUDEYF (LAND_RANGEF * 2 - 10.f)
 /* # define LAND_COLORRAND 0.05f */
-# define LAND_NDEPTHLOOPSCPI 6
-# define LAND_NDEPTHLOOPSI 10
-# define LAND_COORDFACT ATOV3(25.f, 1.f, -25.f)
+# define LAND_WIDTHF 10.f
+# define LAND_RANGEDECAYF 0.47
+# define LAND_NDEPTHLOOPSCPI 7
+# define LAND_NDEPTHLOOPSI 11 //no more than 4 diff
 
-# define POINTS_DEPTHI LAND_NDEPTHLOOPSI //deprecated
+# define LAND_RANGEF (LAND_WIDTHF * 0.4f)
+# define LAND_YF (-LAND_RANGEF / 2.f)
+
+# define LAND_MAGNITUDECORRECTION (LAND_RANGEF * 0.57f)
+# define LAND_MINYF (LAND_YF - LAND_RANGEF + LAND_MAGNITUDECORRECTION)
+# define LAND_MAGNITUDEYF (LAND_RANGEF * 2 - LAND_MAGNITUDECORRECTION * 2)
+# define LAND_COORDFACT ATOV3(LAND_WIDTHF, 1.f, -LAND_WIDTHF)
+
 
 # define MOUSE_SENSITIVITYF 0.005f
 # define MOVEMENT_SPEEDF 10.f

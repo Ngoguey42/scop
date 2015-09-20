@@ -203,6 +203,7 @@ void		sp_unif_suntesc(t_env const *e, t_program const *p);
 void		sp_unif_sungeom(t_env const *e, t_program const *p);
 
 void		sp_unif_landfs(t_env const *e, t_program const *p);
+void		sp_unif_landsbox(t_env const *e, t_program const *p);
 void		sp_unif_landvs(t_env const *e, t_program const *p);
 void		sp_unif_landgeom(t_env const *e, t_program const *p);
 void		sp_unif_landtesc(t_env const *e, t_program const *p);

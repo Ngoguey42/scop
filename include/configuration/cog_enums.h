@@ -28,6 +28,7 @@ typedef enum				e_vshader_index
 	sp_poteno_to_uv_vshader,
 	sp_poin_poout_mvptrans_vshader,
 	sp_po_to_noop_noviewproj_vshader,
+	sp_landsbox_vshader,
 	sp_po2_noop_vshader,
 	sp_num_vshaders
 }							t_vshader_index;
@@ -77,6 +78,7 @@ typedef enum				e_program_index
 	sp_landrender_program,
 	sp_sun_program,
 	sp_pointshadow_program,
+	sp_pointshadowland_program,
 	sp_ptn_program,
 	sp_landgen_normals_program,
 	sp_landgen_diag_program,

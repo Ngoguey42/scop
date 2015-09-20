@@ -22,7 +22,7 @@ uniform sampler2D                normap;
 in St
 {
 	vec2				st;
-	// vec3                pos;
+	vec3                bpos;
 }                       gs_in[];
 
 out StPoCoNo
@@ -40,7 +40,8 @@ void		main()
 {
 	float		val = (50.f + (gl_PrimitiveIDIn % NSHADES) * DELTA) / 255.f;
 
-	gs_out.col = vec3(val);
+//	gs_out.col = vec3(val);
+	gs_out.col = vec3(val) + (gs_in[0].bpos + gs_in[1].bpos + gs_in[2].bpos) / 3.f;
 	// gs_out.col = vec3(0.5f, 0.5f, 0.f);
 	for (int i = 0; i < 3; i++)
 	{

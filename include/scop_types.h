@@ -164,6 +164,7 @@ typedef struct					s_program
 	t_gshader_index const		gshader;
 	t_tcshader_index const		tcshader;
 	t_teshader_index const		teshader;
+	t_program_index const		sboxprogram;
 	int const					gltexi[sp_num_texslots];
 	GLuint						handle;
 }								t_program;

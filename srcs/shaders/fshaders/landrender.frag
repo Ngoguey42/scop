@@ -30,7 +30,7 @@ uniform struct Light {
 
 out vec4						color;
 
-/*
+
 #define NSAMPLESI 20
 #define NSAMPLESF float(NSAMPLESI)
 #define GN ((1.f + sqrt(5.f)) / 2.f)
@@ -49,7 +49,7 @@ vec3                        SAMPLES[NSAMPLESI] = vec3[](
 	vec3(-V0, 0, V2),   vec3(V1, V1, -V1),  vec3(V1, V1, V1),
 	vec3(-V1, V1, -V1), vec3(-V1, V1, V1),  vec3(V1, -V1, -V1),
 	vec3(V1, -V1, V1),  vec3(-V1, -V1, -V1)
-	);
+);
 
 float                   sample_shadows(
 	float dFraLi, vec3 vLiToFra, float weight, float radius)
@@ -89,7 +89,7 @@ float                   compute_shadows(
 	}
 	return (shadow / samples);
 }
-*/
+
 void	main()
 {
 	color = texture(colmap, fs_in.st);
@@ -116,9 +116,9 @@ void	main()
 	float   specular =
 			pow(max(dot(vnFraNormal, vnLiCamHalfway), 0.0), color.a)
 		* G_SPECULAR_STRENGTH;
-	// float   shadow = compute_shadows(dnFraLi, dFraLi, vLiToFra);
+	float   shadow = compute_shadows(dnFraLi, dFraLi, vLiToFra);
 
-	float   shadow = 0.f;
+	 //f loat   shadow = 0.f;
 	vec3    cLight = G_COL_TO_SRGB(l.col);
 
 	// color = vec4(fs_in.col, 1.f);

@@ -41,6 +41,8 @@ int			sp_loadconf_vshaders(t_env *e)
 	LOC(sp_pos_loc, 3)),
 	VSHADER("po_to_noop_noviewproj.vert", NULL,
 	LOC(sp_pos_loc, 3)),
+	VSHADER("landsbox.vert", &sp_unif_landsbox,
+	LOC(sp_tex_loc, 2)),
 	VSHADER("po2_noop.vert", NULL,
 	LOC(sp_pos_loc, 2)),
 	};

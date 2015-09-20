@@ -24,6 +24,8 @@ vshaders = [
 	("pos", 3), ), #sun
 	Vshader("po_to_noop_noviewproj", "po_to_noop_noviewproj.vert", "",
 	("pos", 3), ), #sbox
+	Vshader("landsbox", "landsbox.vert", "landsbox",
+	("tex", 2), ), #landsbox
 	Vshader("po2_noop", "po2_noop.vert", "",
 	("pos", 2), ), #
 ]
@@ -57,9 +59,11 @@ programs = [
 	# Program("land", "pocono_to_co_nomodel", "cono_coli", img1=0),
 	Program("landrender", "landrender", "landrender", gsname="landrender"
 			, tcsname="landrender", tesname="landrender"
-			, img1=0, img2=1, img3=2),
+			, sboxprog="pointshadowland"
+			, img1=0, img2=1, img3=2, sbox=3),
 	Program("sun", "poin_poout_mvptrans", "co_sun", gsname="po_facegrey", tcsname="test", tesname="test"),
 	Program("pointshadow", "po_to_noop_noviewproj", "depth01", gsname="pos_to_cubemap"),
+	Program("pointshadowland", "landsbox", "depth01", gsname="pos_to_cubemap", img1=0),
 	Program("ptn", "poteno_to_uv", "couvno_blendli"
 			, gsname="face_grey"
 			, sbox=0, img1=1),

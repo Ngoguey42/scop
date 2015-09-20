@@ -189,6 +189,7 @@ class Program(Cstruct):
 				 , gsname = "no"
 				 , tcsname = "no"
 				 , tesname = "no"
+				 , sboxprog = "pointshadow"
 				 , img1=-1
 				 , img2=-1
 				 , img3=-1
@@ -199,6 +200,7 @@ class Program(Cstruct):
 		self.gsname = gsname
 		self.tcsname = tcsname
 		self.tesname = tesname
+		self.sboxprog = sboxprog
 		self.img1 = img1
 		self.img2 = img2
 		self.img3 = img3
@@ -226,6 +228,7 @@ class Program(Cstruct):
 		self.printstr(", sp_" + self.gsname + "_gshader")
 		self.printstr(", sp_" + self.tcsname + "_tcshader")
 		self.printstr(", sp_" + self.tesname + "_teshader")
+		self.printstr(", sp_" + self.sboxprog + "_program")
 		self.printstr(", TEXI(")
 		self.printstr(str(self.img1))
 		self.printstr(", " + str(self.img2))
