@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/20 10:33:54 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/09/19 19:29:08 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/12/23 13:22:49 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,8 +123,8 @@
 /* # define LAND_COLORRAND 0.05f */
 # define LAND_WIDTHF 10.f
 # define LAND_RANGEDECAYF 0.47
-# define LAND_NDEPTHLOOPSCPI 7
-# define LAND_NDEPTHLOOPSI 11 //no more than 4 diff
+# define LAND_NDEPTHLOOPSCPI 6
+# define LAND_NDEPTHLOOPSI 10 //no more than 4 diff
 
 # define LAND_RANGEF (LAND_WIDTHF * 0.4f)
 # define LAND_YF (-LAND_RANGEF / 2.f)
