@@ -52,7 +52,7 @@
 > https://vine.co/u/1241053296954363904
 
 #####Live mesh processing
-!Live mesh processing](./images/etTTJpeqFzB.gif)
+![Live mesh processing](./images/etTTJpeqFzB.gif)
 
 #####Live lighting and shadows on land
 ![Lighting and shadows on land](./images/eI9ImE3uE5b.gif)
