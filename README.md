@@ -34,7 +34,7 @@
 <BR>
 <BR>
 
->###Useful links:
+###Useful links:
 ######Introduction to Graphics Architecture:
 - https://www.youtube.com/playlist?list=PL4A8BA1C3B38CFCA0
 
@@ -46,9 +46,18 @@
 
 <BR><BR>
 
-All vines videos: https://vine.co/u/1241053296954363904
-#### Mesh reordering
+###Videos:
+> https://vine.co/u/1241053296954363904
+
+#####Mesh reordering
 ![Mesh reordering](./images/etTTJpeqFzB.gif)
+
+#####Lighting and shadows on land
+![Lighting and shadows on land](./images/eI9ImE3uE5b.gif)
+
+#####Lighting and shadows in room
+![Lighting and shadows in room](./images/ejqKYmVdzgq.gif)
+
 
 <BR><BR>
 
