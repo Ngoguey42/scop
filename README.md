@@ -4,7 +4,6 @@
 #####Grade ``(TBD/100)`` ``(TBD/125)*``
 --------  -----------------------
 
-<BR>
 
 #####Goals:
 - [X] Code in `C`, observing 42's norm (see below)
@@ -44,7 +43,10 @@
 ######Light shading, Flat vs Gouraud vs Phong
 - https://cg2010studio.files.wordpress.com/2011/11/comparison-flat-gouraud-phong-shading.jpg
 
-<BR><BR>
+<BR>
+
+---
+<BR>
 
 ###Videos:
 > https://vine.co/u/1241053296954363904
