@@ -29,6 +29,7 @@
 - [X] Tesselation on sun from a tetrahedron to a sphere. (Automatic or controls with keyboard)
 - [X] Tesselation on land from {color,height,normal}maps generated at startup
 - [X] Advanced mesh processing
+- [X] Multiple texture projections
 - [X] Dynamic controls for object/textures/texture-projection-mode/mesh-processing/camera-potion/object-position/sun-position/sun-tesselation
 <BR>
 <BR>
@@ -50,13 +51,13 @@
 ###Videos:
 > https://vine.co/u/1241053296954363904
 
-#####Mesh reordering
-![Mesh reordering](./images/etTTJpeqFzB.gif)
+#####Live mesh processing
+!Live mesh processing](./images/etTTJpeqFzB.gif)
 
-#####Lighting and shadows on land
+#####Live lighting and shadows on land
 ![Lighting and shadows on land](./images/eI9ImE3uE5b.gif)
 
-#####Lighting and shadows in room
+#####Live lighting and shadows in room
 ![Lighting and shadows in room](./images/ejqKYmVdzgq.gif)
 
 
