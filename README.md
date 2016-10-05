@@ -20,14 +20,14 @@
 
 #####Our work:
 - [X] Watched a course from `UC Davis` on youtube (see below)
-- [X] Read Learn OpenGL website (see below)
+- [X] Read `Learn OpenGL` website (see below)
 - [X] Used `GLFW` for window handling
 - [X] Matrix operations
 - [X] Randomly generated land at startup. Built on GPU
-- [X] Blinn–Phong lighting, single source lighting. Represented with a movable yellow sun
+- [X] Blinn–Phong single source lighting. Represented with a movable yellow sun
 - [X] Shadows with depth cubemap
 - [X] Tesselation on sun from a tetrahedron to a sphere. (Automatic or controls with keyboard)
-- [X] Tesselation on land from (color, height, normal)maps generated at startup
+- [X] Tesselation on land from {color,height,normal}maps generated at startup
 - [X] Advanced mesh processing
 - [X] Dynamic controls for object/textures/texture-projection-mode/mesh-processing/camera-potion/object-position/sun-position/sun-tesselation
 <BR>
