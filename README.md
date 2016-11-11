@@ -18,7 +18,7 @@
 - [X] Handle any .obj
 - [X] Smart texture projection
 
-#####Our work:
+#####My work:
 - [X] Watched a course from `UC Davis` on youtube (see below)
 - [X] Read `Learn OpenGL` website (see below)
 - [X] Used `GLFW` for window handling
