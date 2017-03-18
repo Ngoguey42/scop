@@ -1,11 +1,11 @@
 # scop, Summer 2015
->>>>> #####.obj rendering with OpenGL 4.1
+>>>>> ##### .obj rendering with OpenGL 4.1
 
-#####Grade ``(TBD/100)`` ``(TBD/125)*``
+##### Grade ``(TBD/100)`` ``(TBD/125)*``
 --------  -----------------------
 
 
-#####Goals:
+##### Goals:
 - [X] Code in `C`, observing 42's norm (see below)
 - [X] Use modern OpenGL, >=4.0 with shaders
 - [X] Parse and render a `.obj` file
@@ -14,11 +14,11 @@
 - [X] Apply a texture on the object
 - [X] No math/3d library allowed
 
-#####Recommended bonus:
+##### Recommended bonus:
 - [X] Handle any .obj
 - [X] Smart texture projection
 
-#####My work:
+##### My work:
 - [X] Watched a course from `UC Davis` on youtube (see below)
 - [X] Read `Learn OpenGL` website (see below)
 - [X] Used `GLFW` for window handling
@@ -34,31 +34,31 @@
 <BR>
 <BR>
 
-###Useful links:
-######Introduction to Graphics Architecture:
+### Useful links:
+###### Introduction to Graphics Architecture:
 - https://www.youtube.com/playlist?list=PL4A8BA1C3B38CFCA0
 
-######Learn OpenGL:
+###### Learn OpenGL:
 - http://learnopengl.com/
 
-######Light shading, Flat vs Gouraud vs Phong
+###### Light shading, Flat vs Gouraud vs Phong
 - https://cg2010studio.files.wordpress.com/2011/11/comparison-flat-gouraud-phong-shading.jpg
 
 <BR>
 
 ---
 
-###Videos:
+### Videos:
 > https://vine.co/u/1241053296954363904
 
-#####Live mesh processing
-![Live mesh processing](./images/etTTJpeqFzB.gif)
+##### Live mesh processing
+![Live mesh processing](./images/etTTJpeqFzB.gif)<BR>
 
-#####Live lighting and shadows on land
-![Lighting and shadows on land](./images/eI9ImE3uE5b.gif)
+##### Live lighting and shadows on land
+![Lighting and shadows on land](./images/eI9ImE3uE5b.gif)<BR>
 
-#####Live lighting and shadows in room
-![Lighting and shadows in room](./images/ejqKYmVdzgq.gif)
+##### Live lighting and shadows in room
+![Lighting and shadows in room](./images/ejqKYmVdzgq.gif)<BR>
 
 
 <BR><BR>
